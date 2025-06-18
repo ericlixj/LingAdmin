@@ -42,31 +42,43 @@ For the backend and frontend, they use the same port that would be used by their
 
 This way, you could turn off a Docker Compose service and start its local development service, and everything would keep working, because it all uses the same ports.
 
-For example, you can stop that `frontend` service in the Docker Compose, in another terminal, run:
-
+start all service and then stop frontend and backend service
 ```bash
-docker compose stop frontend
+./develop_docker.sh
 ```
 
-And then start the local frontend development server:
+start frontend and backend service in local development enviroment
 
 ```bash
-cd frontend
+cd ${projectDir}/frontend
 npm run dev
+
+cd ${projectDir}/backend
+uvicorn app.main:app --reload
 ```
 
-Or you could stop the `backend` Docker Compose service:
-
-```bash
-docker compose stop backend
+how to import new lib in backend project
+```
+uv add colorlog
 ```
 
-And then you can run the local development server for the backend:
-
-```bash
-cd backend
-fastapi dev app/main.py
+## how to add new model crud
+### backend
+1. add model file： cac-dw-admin\backend\app\models\third_part_config.py
+2. sync model to db:
+    - alembic revision --autogenerate -m "Add column last_name to User model"
+    - alembic upgrade head 
+    - commit alembic version file
+3. add crud file：cac-dw-admin\backend\app\crud\third_party_config_crud.py
+4. add route file: cac-dw-admin\backend\app\api\routes\third_part_config.py
+### frontend
+1. keep backend service running
+2. generate client code
 ```
+./scripts/generate-client.sh
+```
+
+3. 
 
 ## Docker Compose in `localhost.tiangolo.com`
 

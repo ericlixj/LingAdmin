@@ -1,10 +1,17 @@
+import logging
+
 import sentry_sdk
+from app.api.main import api_router
+from app.core.config import settings
+from app.core.i18n import LocaleMiddleware
+from app.core.logger import init_logger
 from fastapi import FastAPI
 from fastapi.routing import APIRoute
 from starlette.middleware.cors import CORSMiddleware
 
-from app.api.main import api_router
-from app.core.config import settings
+init_logger()
+logger = logging.getLogger(__name__)
+logger.info("Starting FastAPI application")
 
 
 def custom_generate_unique_id(route: APIRoute) -> str:
@@ -29,5 +36,6 @@ if settings.all_cors_origins:
         allow_methods=["*"],
         allow_headers=["*"],
     )
+app.add_middleware(LocaleMiddleware)
 
 app.include_router(api_router, prefix=settings.API_V1_STR)

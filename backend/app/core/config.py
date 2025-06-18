@@ -36,11 +36,11 @@ class Settings(BaseSettings):
     # 60 minutes * 24 hours * 8 days = 8 days
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60 * 24 * 8
     FRONTEND_HOST: str = "http://localhost:5173"
-    ENVIRONMENT: Literal["local", "staging", "production"] = "local"
+    ENVIRONMENT: Literal["local", "test", "staging", "production"] = "local"
 
-    BACKEND_CORS_ORIGINS: Annotated[
-        list[AnyUrl] | str, BeforeValidator(parse_cors)
-    ] = []
+    BACKEND_CORS_ORIGINS: Annotated[list[AnyUrl] | str, BeforeValidator(parse_cors)] = (
+        []
+    )
 
     @computed_field  # type: ignore[prop-decorator]
     @property
@@ -93,6 +93,7 @@ class Settings(BaseSettings):
 
     EMAIL_TEST_USER: EmailStr = "test@example.com"
     FIRST_SUPERUSER: EmailStr
+    FIRST_SUPERUSER_FULL_NAME: str = "admin"
     FIRST_SUPERUSER_PASSWORD: str
 
     def _check_default_secret(self, var_name: str, value: str | None) -> None:

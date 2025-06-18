@@ -1,0 +1,76 @@
+# Chinese translations for PROJECT.
+# Copyright (C) 2025 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2025-06-12 10:18-0700\n"
+"PO-Revision-Date: 2025-06-12 10:19-0700\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: zh\n"
+"Language-Team: zh <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.17.0\n"
+
+msgid "Invalid credentials"
+msgstr "登录邮箱或密码输入错误"
+
+msgid "Inactive user"
+msgstr "用户未激活"
+
+msgid "Invalid refresh token"
+msgstr "刷新令牌无效"
+
+msgid "Refresh token expired"
+msgstr "刷新令牌已过期"
+
+msgid "Token payload invalid: missing subject"
+msgstr "令牌负载无效：缺少主体"
+
+msgid "Token payload invalid: subject is not integer"
+msgstr "令牌负载无效：主体不是整数"
+
+msgid "Token expired"
+msgstr "令牌过期"
+
+msgid "Invalid token"
+msgstr "令牌无效"
+
+msgid "User not found"
+msgstr "用户未找到"
+
+msgid "Permission name or code already exists"
+msgstr "权限名称或编码已存在"
+
+msgid "Permission not found"
+msgstr "权限未找到"
+
+msgid "Role name or code already exists"
+msgstr "角色名称或编码已存在"
+
+msgid "Role not found"
+msgstr "角色未找到"
+
+msgid "success"
+msgstr "成功"
+
+msgid "Email already registered"
+msgstr "邮箱已被注册"
+
+msgid "Invalid token: missing subject"
+msgstr "无效的令牌：缺少主体"
+
+msgid "Token has expired"
+msgstr "令牌已过期"
+
+msgid "Could not validate credentials"
+msgstr "无法验证凭证"
+
+msgid "Forbidden"
+msgstr "禁止访问"
