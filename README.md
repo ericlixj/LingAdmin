@@ -23,7 +23,7 @@ LingAdmin is a modern universal admin panel built on **FastAPI fullstack templat
 
 | Backend | Frontend | Database | Others |
 |----------|----------|----------|--------|
-| FastAPI | Refine + React | MySQL / SQLite | SQLModel / Alembic / JWT / Axios |
+| FastAPI | Refine + React | PostgreSQL | SQLModel / Alembic / JWT / Axios |
 
 ---
 
@@ -31,12 +31,15 @@ LingAdmin is a modern universal admin panel built on **FastAPI fullstack templat
 
 \`\`\`bash
 # Clone the repo
-git clone https://github.com/your-username/lingadmin.git
+git clone https://github.com/ericlixj/lingadmin.git
 cd lingadmin
+
+# Start Docker containers, it will start all containers, do build things. after that, it will stop the backend and frontend service just for development.
+./develop_docker.sh
 
 # Start backend
 cd backend
-uvicorn app.main:app --reload
+./start.sh
 
 # Start frontend
 cd ../frontend
