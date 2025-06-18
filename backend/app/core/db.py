@@ -33,7 +33,7 @@ def init_db(session: Session) -> None:
 
 
 def init_db_with_sql(session: Session) -> None:
-    logger.info("init db with sql")
+    logger.info("init db with sql 11")
     sql_statements = """
 INSERT INTO "app" ("name", "code", "api_base_url", "app_key", "app_secret", "description", "creator", "updater", "deleted", "create_time", "update_time") VALUES
 ('天猫对接应用',	'tm_app',	'https://tm.com',	'tm_app',	'tm_app',	NULL,	'1',	NULL,	'0',	'2025-06-16 17:31:02.629029',	'2025-06-16 17:31:02.629048'),
