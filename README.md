@@ -1,6 +1,7 @@
 
-# ![image](https://github.com/user-attachments/assets/c1c37d04-1b9a-469c-9070-eae39382a7ec)
- LingAdmin
+# LingAdmin
+![image](https://github.com/user-attachments/assets/c1d155d0-3f3d-44da-9393-d910246cfd1e)
+
 
 *Flexible · Efficient · Open-source universal admin panel*
 
