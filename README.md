@@ -108,8 +108,8 @@ MIT License — free to use, star ⭐ the repo, and contributions welcome!
 
 ## 📮 Contact
 
-- GitHub: [your-username](https://github.com/your-username)
-- Email: yourname@example.com
+- GitHub: [ericlixj](https://github.com/ericlixj)
+- Email: ericlixj@gmail..com
 
 ---
 
