@@ -19,9 +19,9 @@ STACK_NAME=CAC-DW-ADMIN-dev
 # Backend
 BACKEND_CORS_ORIGINS="http://localhost,http://localhost:5173,https://localhost:4173,https://localhost,https://localhost:5173,http://localhost.tiangolo.com"
 SECRET_KEY=dnBtOCOlgRb6KNi5KlETrqLaROKiEb8ZGJFM3y4L76Y
-FIRST_SUPERUSER=cacdw@cacnaturals.com
-FIRST_SUPERUSER_FULL_NAME=cac_dw_admin
-FIRST_SUPERUSER_PASSWORD=cacdw123
+FIRST_SUPERUSER=cacdw@test.com
+FIRST_SUPERUSER_FULL_NAME=test_admin
+FIRST_SUPERUSER_PASSWORD=test123
 
 # Emails
 SMTP_HOST=
@@ -35,9 +35,9 @@ SMTP_PORT=587
 # Postgres
 POSTGRES_SERVER=localhost
 POSTGRES_PORT=5432
-POSTGRES_DB=cacdw
+POSTGRES_DB=test
 POSTGRES_USER=postgres
-POSTGRES_PASSWORD=cacdw&db
+POSTGRES_PASSWORD=test&db
 
 SENTRY_DSN=
 
