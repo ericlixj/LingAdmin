@@ -7,6 +7,8 @@ LingAdmin is a modern universal admin panel built on **FastAPI fullstack templat
 
 ---
 
+
+
 ## ✨ Features
 
 - ⚡ High-performance backend powered by FastAPI
