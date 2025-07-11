@@ -6,19 +6,19 @@ from sqlmodel import Field, SQLModel
 
 
 class AppNew(SQLModel, table=True):
-    id: Optional[int] = Field(primary_key=True)
+    id: Optional[int] = Field(default=None, primary_key=True)
 
-    name: str = Field(max_length=100, index=True, description="应用名称")
+    name: str = Field(default=None, max_length=100, index=True, description="应用名称")
 
-    code: str = Field(max_length=50, unique=True, description="应用编码")
+    code: str = Field(default=None, max_length=50, unique=True, description="应用编码")
 
-    api_base_url: Optional[str] = Field(max_length=255, description="API基础URL")
+    api_base_url: Optional[str] = Field(default=None, max_length=255, description="API基础URL")
 
-    app_key: Optional[str] = Field(max_length=128, description="对接平台的 App Key")
+    app_key: Optional[str] = Field(default=None, max_length=128, description="对接平台的 App Key")
 
-    app_secret: Optional[str] = Field(max_length=128, description="对接平台的 App Secret")
+    app_secret: Optional[str] = Field(default=None, max_length=128, description="对接平台的 App Secret")
 
-    description: Optional[str] = Field(max_length=255, description="应用描述")
+    description: Optional[str] = Field(default=None, max_length=255, description="应用描述")
 
     # 默认加入通用字段
     creator: Optional[str] = Field(default=None, max_length=64, description="创建人")

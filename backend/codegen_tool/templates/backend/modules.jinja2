@@ -9,7 +9,7 @@ class {{ class_name }}(SQLModel, table=True):
 {% for field in fields %}
     {{ field.name }}: {{ field.type }} = Field({{
         [
-            'default=' ~ field.default if field.default is not none else None,
+            'default=None' if field.default is none else 'default=' ~ field.default,
             'primary_key=True' if field.primary_key else None,
             'max_length=' ~ field.max_length|string if field.max_length else None,
             'index=True' if field.index else None,
