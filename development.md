@@ -47,14 +47,34 @@ start all service and then stop frontend and backend service
 ./develop_docker.sh
 ```
 
-start frontend and backend service in local development enviroment
+start frontend service in local development enviroment
+
+
 
 ```bash
 cd ${projectDir}/frontend
+npm install
 npm run dev
 
-cd ${projectDir}/backend
-uvicorn app.main:app --reload
+```
+
+start backend service in local development enviroment,the dependencies are managed with [uv](https://docs.astral.sh/uv/), go there and install it.
+
+From `./backend/` you can install all the dependencies with:
+
+```console
+$ uv sync
+```
+
+Then you can activate the virtual environment with:
+
+```console
+$ source .venv/bin/activate
+```
+
+now, you can start backend service by 
+```cosole
+$ ./start.sh
 ```
 
 how to import new lib in backend project
