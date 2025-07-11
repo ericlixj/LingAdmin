@@ -7,6 +7,7 @@ from app.api.routes import (
     shop,
     shop_daily_stat,
     user,
+    appNew,
 )
 from fastapi import APIRouter
 
@@ -23,3 +24,4 @@ api_router.include_router(shop.router, prefix="/shop", tags=["shop"])
 api_router.include_router(
     shop_daily_stat.router, prefix="/shop-daily-stat", tags=["ShopDailyStat"]
 )
+api_router.include_router(appNew.router, prefix="/appNew", tags=["AppNew"])

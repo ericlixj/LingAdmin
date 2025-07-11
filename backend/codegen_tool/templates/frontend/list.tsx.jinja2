@@ -1,0 +1,60 @@
+import {
+  EditButton,
+  FilterDropdown,
+  List,
+  ShowButton,
+  useTable,
+} from "@refinedev/antd";
+import { Input, Space, Table } from "antd";
+
+export const {{ class_name }}List = () => {
+  const { tableProps, filters } = useTable({
+    syncWithLocation: true,
+    filters: {
+      mode: "server",
+    },
+  });
+
+  return (
+    <List>
+      <Table {...tableProps} rowKey="id">
+        <Table.Column dataIndex="id" title="ID" sorter />
+
+{% for field in fields if not field.common and field.name != "id" %}
+{% if field.name in ["code", "name"] %}
+        <Table.Column
+          dataIndex="{{ field.name }}"
+          title="{{ field.description or field.name.capitalize() }}"
+          sorter
+          filterDropdown={(props) => (
+            <FilterDropdown {...props}>
+              <Input
+                placeholder="搜索{{ field.description or field.name }}"
+                value={(props.selectedKeys[0] as string) || ""}
+                onChange={(e) =>
+                  props.setSelectedKeys(e.target.value ? [e.target.value] : [])
+                }
+                onPressEnter={() => props.confirm()}
+                onBlur={() => props.confirm()}
+              />
+            </FilterDropdown>
+          )}
+          filteredValue={
+            (filters.find((f) => f.field === "{{ field.name }}")?.value as string[]) || null
+          }
+        />
+{% else %}
+        <Table.Column dataIndex="{{ field.name }}" title="{{ field.description or field.name.capitalize() }}" />
+{% endif %}
+{% endfor %}
+
+        <Table.Column title="操作" render={(_, record) => (
+          <Space>
+            <EditButton recordItemId={record.id} />
+            <ShowButton recordItemId={record.id} />
+          </Space>
+        )} />
+      </Table>
+    </List>
+  );
+};

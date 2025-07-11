@@ -73,6 +73,12 @@ import {
   UserList,
   UserShow,
 } from "./pages/users";
+import {
+  AppNewCreate,
+  AppNewEdit,
+  AppNewList,
+  AppNewShow,
+} from "./pages/appNew";
 
 function App() {
   return (
@@ -170,7 +176,19 @@ function App() {
                     label: "店铺日报管理",
                     icon: <BarChartOutlined />,
                   },
-                },                
+                },
+                {
+                  name: "appNew",
+                  list: AppNewList,
+                  create: AppNewCreate,
+                  edit: AppNewEdit,
+                  show: AppNewShow,
+                  meta: {
+                    canDelete: true,
+                    label: "应用管理New",
+                    icon: <ApiOutlined />,
+                  },
+                },                               
               ]}
               options={{
                 syncWithLocation: true,
@@ -233,7 +251,13 @@ function App() {
                     <Route path="create" element={<ShopDailyStatCreate />} />
                     <Route path="edit/:id" element={<ShopDailyStatEdit />} />
                     <Route path="show/:id" element={<ShopDailyStatShow />} />
-                  </Route>                  
+                  </Route>
+                  <Route path="/appNew">
+                    <Route index element={<AppNewList />} />
+                    <Route path="create" element={<AppNewCreate />} />
+                    <Route path="edit/:id" element={<AppNewEdit />} />
+                    <Route path="show/:id" element={<AppNewShow />} />
+                  </Route>                          
                   <Route path="*" element={<ErrorComponent />} />
                 </Route>
                 <Route

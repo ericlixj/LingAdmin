@@ -1,0 +1,22 @@
+import { Create, useForm } from "@refinedev/antd";
+import { Form, Input } from "antd";
+
+export const {{ class_name }}Create = () => {
+  const { formProps, saveButtonProps } = useForm();
+
+  return (
+    <Create saveButtonProps={saveButtonProps}>
+      <Form {...formProps} layout="vertical">
+{% for field in fields if not field.common %}
+        <Form.Item
+          name="{{ field.name }}"
+          label="{{ field.description if field.description else field.name | capitalize }}"
+          rules={[{% if field.primary_key or field.default is not none %}{% else %}{ required: true }{% endif %}]}
+        >
+          <Input />
+        </Form.Item>
+{% endfor %}
+      </Form>
+    </Create>
+  );
+};

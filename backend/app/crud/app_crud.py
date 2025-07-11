@@ -54,10 +54,11 @@ class AppCRUD:
         order_by: Optional[UnaryExpression] = None,
     ) -> List[App]:
         query = select(App).where(App.deleted == False)
-        if "code" in filters:
-            query = query.where(App.code.contains(filters["code"]))
-        if "name" in filters:
-            query = query.where(App.name.contains(filters["name"]))
+        if filters:
+            if "code" in filters:
+                query = query.where(App.code.contains(filters["code"]))
+            if "name" in filters:
+                query = query.where(App.name.contains(filters["name"]))
 
         if order_by is not None:
             query = query.order_by(order_by)
@@ -70,14 +71,9 @@ class AppCRUD:
         query = select(func.count()).select_from(App).where(App.deleted == False)
 
         if filters:
-            for key, value in filters.items():
-                field = getattr(App, key, None)
-                if field is not None:
-                    statement = statement.where(field.like(f"%{value}%"))
-
-        if "code" in filters:
-            query = query.where(App.code.contains(filters["code"]))
-        if "name" in filters:
-            query = query.where(App.name.contains(filters["name"]))
+            if "code" in filters:
+                query = query.where(App.code.contains(filters["code"]))
+            if "name" in filters:
+                query = query.where(App.name.contains(filters["name"]))
                         
         return self.session.exec(query).one()
