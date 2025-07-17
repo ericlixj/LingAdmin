@@ -8,7 +8,7 @@ import {
 import { Input, Select, Space, Table, DatePicker  } from "antd";
 import dayjs from "dayjs";
 
-export const CurdModel001List = () => {
+export const CurdModel02List = () => {
   const { tableProps, filters } = useTable({
     syncWithLocation: true,
     filters: {

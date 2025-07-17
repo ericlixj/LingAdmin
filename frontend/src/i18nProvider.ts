@@ -115,6 +115,14 @@ const translations = {
             edit: "编辑单表模型01管理",
             show: "单表模型01管理详情",
         },
+    },
+    curdModel02: {
+        titles: {
+            list: "单表模型02管理列表",
+            create: "创建单表模型02管理",
+            edit: "编辑单表模型02管理",
+            show: "单表模型02管理详情",
+        },
     },    
 };
 const i18nProvider = {

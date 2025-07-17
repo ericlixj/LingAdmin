@@ -2,7 +2,7 @@ import logging
 from datetime import datetime
 from typing import Any, Dict, List, Optional
 
-from app.models.curdModel001 import CurdModel001, CurdModel001Create, CurdModel001Update
+from app.models.curdModel02 import CurdModel02, CurdModel02Create, CurdModel02Update
 from sqlalchemy import func
 from sqlalchemy.sql.elements import UnaryExpression
 from sqlmodel import Session, col, select
@@ -18,29 +18,29 @@ QUERYABLE_FIELDS = {
   "status": "eq",
 }
 
-class CurdModel001CRUD:
+class CurdModel02CRUD:
     def __init__(self, session: Session):
         self.session = session
-        self.model = CurdModel001
+        self.model = CurdModel02
 
-    def get_by_id(self, curdModel001_id: int) -> Optional[CurdModel001]:
-        statement = select(CurdModel001).where(CurdModel001.id == curdModel001_id, CurdModel001.deleted == False)
+    def get_by_id(self, curdModel02_id: int) -> Optional[CurdModel02]:
+        statement = select(CurdModel02).where(CurdModel02.id == curdModel02_id, CurdModel02.deleted == False)
         result = self.session.exec(statement).first()
         return result
 
-    def get_by_code(self, code: str) -> Optional[CurdModel001]:
-        statement = select(CurdModel001).where(CurdModel001.code == code, CurdModel001.deleted == False)
+    def get_by_code(self, code: str) -> Optional[CurdModel02]:
+        statement = select(CurdModel02).where(CurdModel02.code == code, CurdModel02.deleted == False)
         result = self.session.exec(statement).first()
         return result
 
-    def create(self, obj_in: CurdModel001Create) -> CurdModel001:
-        db_obj = CurdModel001.from_orm(obj_in)
+    def create(self, obj_in: CurdModel02Create) -> CurdModel02:
+        db_obj = CurdModel02.from_orm(obj_in)
         self.session.add(db_obj)
         self.session.commit()
         self.session.refresh(db_obj)
         return db_obj
 
-    def update(self, db_obj: CurdModel001, obj_in: CurdModel001Update) -> CurdModel001:
+    def update(self, db_obj: CurdModel02, obj_in: CurdModel02Update) -> CurdModel02:
         update_data = obj_in.dict(exclude_unset=True)
         for field, value in update_data.items():
             setattr(db_obj, field, value)
@@ -50,7 +50,7 @@ class CurdModel001CRUD:
         self.session.refresh(db_obj)
         return db_obj
 
-    def soft_delete(self, db_obj: CurdModel001) -> CurdModel001:
+    def soft_delete(self, db_obj: CurdModel02) -> CurdModel02:
         db_obj.deleted = True
         db_obj.update_time = datetime.utcnow()
         self.session.add(db_obj)
@@ -120,17 +120,17 @@ class CurdModel001CRUD:
         limit: int = 10,
         filters: Optional[Dict[str, Any]] = None,
         order_by: Optional[UnaryExpression] = None,
-    ) -> List[CurdModel001]:
-        query = select(CurdModel001).where(CurdModel001.deleted == False)
+    ) -> List[CurdModel02]:
+        query = select(CurdModel02).where(CurdModel02.deleted == False)
         query = self._apply_filters(query, filters)
         if order_by is not None:
             query = query.order_by(order_by)
         else:
-            query = query.order_by(CurdModel001.id.desc())
-        logger.info(f"Executing query: {query}")
+            query = query.order_by(CurdModel02.id.desc())
+        logger.debug(f"Executing query: {query}")
         return self.session.exec(query.offset(skip).limit(limit)).all()
 
     def count_all(self, filters: Optional[Dict[str, Any]] = None) -> int:
-        query = select(func.count()).select_from(CurdModel001).where(CurdModel001.deleted == False)
+        query = select(func.count()).select_from(CurdModel02).where(CurdModel02.deleted == False)
         query = self._apply_filters(query, filters)
         return self.session.exec(query).one()

@@ -1,6 +1,6 @@
 {
-  "module_name": "curdModel001",
-  "label": "单表模型01管理",
+  "module_name": "curdModel02",
+  "label": "单表模型02管理",
   "fields": [
     {
       "name": "id",

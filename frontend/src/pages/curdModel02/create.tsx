@@ -1,7 +1,7 @@
 import { Create, useForm } from "@refinedev/antd";
 import { Form, Input, Select, Checkbox, DatePicker } from "antd";
 
-export const CurdModel001Create = () => {
+export const CurdModel02Create = () => {
   const { formProps, saveButtonProps } = useForm();
 
   const handleFinish = (values: any) => {

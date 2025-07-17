@@ -14,3 +14,4 @@ node_modules/
 /frontend/.nuxt/
 /backend/codegen/venv/
 /frontend/codegen/.venv/
+/frontend/codegen/target/

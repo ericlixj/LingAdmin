@@ -20,7 +20,7 @@ function prepareInitialValues(record: Record<string, any>, fields: any[]) {
   return result;
 }
 
-export const CurdModel001Edit = () => {
+export const CurdModel02Edit = () => {
   const { formProps, saveButtonProps, queryResult } = useForm();
   const [initialized, setInitialized] = useState(false);
 

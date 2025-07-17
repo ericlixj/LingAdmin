@@ -5,7 +5,7 @@ import dayjs from "dayjs";
 
 const { Text } = Typography;
 
-export const CurdModel001Show = () => {
+export const CurdModel02Show = () => {
   const { queryResult } = useShow();
   const { data, isLoading } = queryResult;
   const record = data?.data;

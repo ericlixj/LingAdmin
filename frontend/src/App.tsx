@@ -109,6 +109,12 @@ import {
   CurdModel001List,
   CurdModel001Show,
 } from "./pages/curdModel001";
+import {
+  CurdModel02Create,
+  CurdModel02Edit,
+  CurdModel02List,
+  CurdModel02Show,
+} from "./pages/curdModel02";
 
 function App() {
   return (
@@ -278,7 +284,19 @@ function App() {
                     label: "单表模型01管理",
                     icon: <ApiOutlined />,
                   },
-                },                             
+                },
+                {
+                  name: "curdModel02",
+                  list: CurdModel02List,
+                  create: CurdModel02Create,
+                  edit: CurdModel02Edit,
+                  show: CurdModel02Show,
+                  meta: {
+                    canDelete: true,
+                    label: "单表模型02管理",
+                    icon: <ApiOutlined />,
+                  },
+                },                                   
               ]}
               options={{
                 syncWithLocation: true,
@@ -377,7 +395,13 @@ function App() {
                     <Route path="create" element={<CurdModel001Create />} />
                     <Route path="edit/:id" element={<CurdModel001Edit />} />
                     <Route path="show/:id" element={<CurdModel001Show />} />
-                  </Route>                  
+                  </Route>
+                  <Route path="/curdModel02">
+                    <Route index element={<CurdModel02List />} />
+                    <Route path="create" element={<CurdModel02Create />} />
+                    <Route path="edit/:id" element={<CurdModel02Edit />} />
+                    <Route path="show/:id" element={<CurdModel02Show />} />
+                  </Route>                         
 
                   <Route path="*" element={<ErrorComponent />} />
                 </Route>

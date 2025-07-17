@@ -13,6 +13,7 @@ from app.api.routes import (
     appNew4,
     appNew5,
     curdModel001,
+    curdModel02,
 )
 from fastapi import APIRouter
 
@@ -35,3 +36,4 @@ api_router.include_router(appNew3.router, prefix="/appNew3", tags=["AppNew3"])
 api_router.include_router(appNew4.router, prefix="/appNew4", tags=["AppNew4"])
 api_router.include_router(appNew5.router, prefix="/appNew5", tags=["AppNew5"])
 api_router.include_router(curdModel001.router, prefix="/curdModel001", tags=["CurdModel001"])
+api_router.include_router(curdModel02.router, prefix="/curdModel02", tags=["CurdModel02"])

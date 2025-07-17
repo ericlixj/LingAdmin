@@ -4,7 +4,7 @@ from typing import Optional, List
 from sqlalchemy import Column, DateTime, text
 from sqlmodel import Field, SQLModel
 
-class CurdModel001(SQLModel, table=True):
+class CurdModel02(SQLModel, table=True):
 
     id: int = Field(default=None, primary_key=True, description="主键")
 
@@ -35,7 +35,7 @@ class CurdModel001(SQLModel, table=True):
         description="更新时间"
     )
 
-class CurdModel001Create(SQLModel):
+class CurdModel02Create(SQLModel):
     name: str
     code: str
     open_time: Optional[datetime] = None
@@ -44,7 +44,7 @@ class CurdModel001Create(SQLModel):
     description: Optional[str] = None
     creator: Optional[str] = Field(default=None, max_length=64)
 
-class CurdModel001Update(SQLModel):
+class CurdModel02Update(SQLModel):
     name: Optional[str] = None
     code: Optional[str] = None
     open_time: Optional[datetime] = None
@@ -53,6 +53,6 @@ class CurdModel001Update(SQLModel):
     description: Optional[str] = None
     updater: Optional[str] = Field(default=None, max_length=64)
 
-class CurdModel001ListResponse(SQLModel):
-    data: List[CurdModel001]
+class CurdModel02ListResponse(SQLModel):
+    data: List[CurdModel02]
     total: int
