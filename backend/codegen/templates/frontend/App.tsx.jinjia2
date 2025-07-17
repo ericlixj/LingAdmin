@@ -1,0 +1,33 @@
+// Template: frontend/src/App.tsx
+
+// 1. Import Section (add where all other pages are imported)
+import {
+  {{ class_name }}Create,
+  {{ class_name }}Edit,
+  {{ class_name }}List,
+  {{ class_name }}Show,
+} from "./pages/{{ module_name }}";
+
+
+// 2. Resource Section (inside the resources array)
+                {
+                  name: "{{ module_name }}",
+                  list: {{ class_name }}List,
+                  create: {{ class_name }}Create,
+                  edit: {{ class_name }}Edit,
+                  show: {{ class_name }}Show,
+                  meta: {
+                    canDelete: true,
+                    label: "{{ label }}",
+                    icon: <ApiOutlined />,
+                  },
+                },
+
+
+// 3. Route Section (inside the Routes definition)
+                  <Route path="/{{ module_name }}">
+                    <Route index element={<{{ class_name }}List />} />
+                    <Route path="create" element={<{{ class_name }}Create />} />
+                    <Route path="edit/:id" element={<{{ class_name }}Edit />} />
+                    <Route path="show/:id" element={<{{ class_name }}Show />} />
+                  </Route>

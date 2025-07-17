@@ -32,6 +32,7 @@ const translations = {
             show: "应用详情",
         },
     },
+
     shop: {
         titles: {
             list: "店铺列表",
@@ -66,6 +67,54 @@ const translations = {
     notifications: {
         success: "操作成功",
         error: "操作失败"
+    },
+    appNew: {
+        titles: {
+            list: "应用管理New列表",
+            create: "创建应用管理New",
+            edit: "编辑应用管理New",
+            show: "应用管理New详情",
+        },
+    },    
+    appNew2: {
+        titles: {
+            list: "应用管理New2列表",
+            create: "创建应用管理New2",
+            edit: "编辑应用管理New2",
+            show: "应用管理New2详情",
+        },
+    },
+    appNew3: {
+        titles: {
+            list: "应用管理New3列表",
+            create: "创建应用管理New3",
+            edit: "编辑应用管理New3",
+            show: "应用管理New3详情",
+        },
+    },    
+    appNew4: {
+        titles: {
+            list: "应用管理New4列表",
+            create: "创建应用管理New4",
+            edit: "编辑应用管理New4",
+            show: "应用管理New4详情",
+        },
+    },    
+    appNew5: {
+        titles: {
+            list: "应用管理New5列表",
+            create: "创建应用管理New5",
+            edit: "编辑应用管理New5",
+            show: "应用管理New5详情",
+        },
+    },
+    curdModel001: {
+        titles: {
+            list: "单表模型01管理列表",
+            create: "创建单表模型01管理",
+            edit: "编辑单表模型01管理",
+            show: "单表模型01管理详情",
+        },
     },    
 };
 const i18nProvider = {

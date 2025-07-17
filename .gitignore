@@ -7,3 +7,10 @@ node_modules/
 /playwright-report/
 /blob-report/
 /playwright/.cache/
+/backend/.venv/
+/frontend/node_modules/
+/frontend/dist/ 
+/frontend/.next/
+/frontend/.nuxt/
+/backend/codegen/venv/
+/frontend/codegen/.venv/

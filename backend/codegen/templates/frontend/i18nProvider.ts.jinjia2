@@ -1,0 +1,12 @@
+#paste this code to frjonted/src/i18nProvider.ts
+
+...
+    {{ module_name }}: {
+        titles: {
+            list: "{{ label }}列表",
+            create: "创建{{ label }}",
+            edit: "编辑{{ label }}",
+            show: "{{ label }}详情",
+        },
+    },
+...

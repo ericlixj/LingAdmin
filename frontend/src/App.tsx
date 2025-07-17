@@ -79,6 +79,36 @@ import {
   AppNewList,
   AppNewShow,
 } from "./pages/appNew";
+import {
+  AppNew2Create,
+  AppNew2Edit,
+  AppNew2List,
+  AppNew2Show,
+} from "./pages/appNew2";
+import {
+  AppNew3Create,
+  AppNew3Edit,
+  AppNew3List,
+  AppNew3Show,
+} from "./pages/appNew3";
+import {
+  AppNew4Create,
+  AppNew4Edit,
+  AppNew4List,
+  AppNew4Show,
+} from "./pages/appNew4";
+import {
+  AppNew5Create,
+  AppNew5Edit,
+  AppNew5List,
+  AppNew5Show,
+} from "./pages/appNew5";
+import {
+  CurdModel001Create,
+  CurdModel001Edit,
+  CurdModel001List,
+  CurdModel001Show,
+} from "./pages/curdModel001";
 
 function App() {
   return (
@@ -188,7 +218,67 @@ function App() {
                     label: "应用管理New",
                     icon: <ApiOutlined />,
                   },
+                },
+                {
+                  name: "appNew2",
+                  list: AppNew2List,
+                  create: AppNew2Create,
+                  edit: AppNew2Edit,
+                  show: AppNew2Show,
+                  meta: {
+                    canDelete: true,
+                    label: "应用管理New2",
+                    icon: <ApiOutlined />,
+                  },
+                },
+                {
+                  name: "appNew3",
+                  list: AppNew3List,
+                  create: AppNew3Create,
+                  edit: AppNew3Edit,
+                  show: AppNew3Show,
+                  meta: {
+                    canDelete: true,
+                    label: "应用管理New3",
+                    icon: <ApiOutlined />,
+                  },
                 },                               
+                {
+                  name: "appNew4",
+                  list: AppNew4List,
+                  create: AppNew4Create,
+                  edit: AppNew4Edit,
+                  show: AppNew4Show,
+                  meta: {
+                    canDelete: true,
+                    label: "应用管理New4",
+                    icon: <ApiOutlined />,
+                  },
+                },
+                {
+                  name: "appNew5",
+                  list: AppNew5List,
+                  create: AppNew5Create,
+                  edit: AppNew5Edit,
+                  show: AppNew5Show,
+                  meta: {
+                    canDelete: true,
+                    label: "应用管理New5",
+                    icon: <ApiOutlined />,
+                  },
+                },  
+                {
+                  name: "curdModel001",
+                  list: CurdModel001List,
+                  create: CurdModel001Create,
+                  edit: CurdModel001Edit,
+                  show: CurdModel001Show,
+                  meta: {
+                    canDelete: true,
+                    label: "单表模型01管理",
+                    icon: <ApiOutlined />,
+                  },
+                },                             
               ]}
               options={{
                 syncWithLocation: true,
@@ -258,6 +348,37 @@ function App() {
                     <Route path="edit/:id" element={<AppNewEdit />} />
                     <Route path="show/:id" element={<AppNewShow />} />
                   </Route>                          
+                  <Route path="/appNew2">
+                    <Route index element={<AppNew2List />} />
+                    <Route path="create" element={<AppNew2Create />} />
+                    <Route path="edit/:id" element={<AppNew2Edit />} />
+                    <Route path="show/:id" element={<AppNew2Show />} />
+                  </Route>
+                  <Route path="/appNew3">
+                    <Route index element={<AppNew3List />} />
+                    <Route path="create" element={<AppNew3Create />} />
+                    <Route path="edit/:id" element={<AppNew3Edit />} />
+                    <Route path="show/:id" element={<AppNew3Show />} />
+                  </Route>
+                  <Route path="/appNew4">
+                    <Route index element={<AppNew4List />} />
+                    <Route path="create" element={<AppNew4Create />} />
+                    <Route path="edit/:id" element={<AppNew4Edit />} />
+                    <Route path="show/:id" element={<AppNew4Show />} />
+                  </Route>                  
+                  <Route path="/appNew5">
+                    <Route index element={<AppNew5List />} />
+                    <Route path="create" element={<AppNew5Create />} />
+                    <Route path="edit/:id" element={<AppNew5Edit />} />
+                    <Route path="show/:id" element={<AppNew5Show />} />
+                  </Route>        
+                  <Route path="/curdModel001">
+                    <Route index element={<CurdModel001List />} />
+                    <Route path="create" element={<CurdModel001Create />} />
+                    <Route path="edit/:id" element={<CurdModel001Edit />} />
+                    <Route path="show/:id" element={<CurdModel001Show />} />
+                  </Route>                  
+
                   <Route path="*" element={<ErrorComponent />} />
                 </Route>
                 <Route

@@ -77,7 +77,7 @@ now, you can start backend service by
 $ ./start.sh
 ```
 
-how to import new lib in backend project
+how to import new lib in backend project(install new lib)
 ```
 uv add colorlog
 ```
@@ -86,9 +86,10 @@ uv add colorlog
 ### backend
 1. add model file： cac-dw-admin\backend\app\models\third_part_config.py
 2. sync model to db:
-    - alembic revision --autogenerate -m "Add column last_name to User model"
+    - cd backend
+    - alembic revision --autogenerate -m "Add module thirdPartConfig"
     - alembic upgrade head 
-    - commit alembic version file
+    - git commit alembic version file
 3. add crud file：cac-dw-admin\backend\app\crud\third_party_config_crud.py
 4. add route file: cac-dw-admin\backend\app\api\routes\third_part_config.py
 ### frontend
