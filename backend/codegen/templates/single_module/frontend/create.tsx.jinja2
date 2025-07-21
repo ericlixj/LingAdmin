@@ -1,0 +1,64 @@
+import { Create, useForm } from "@refinedev/antd";
+import { Form, Input, Select, Checkbox, DatePicker } from "antd";
+
+export const {{ class_name }}Create = () => {
+  const { formProps, saveButtonProps } = useForm();
+
+  const handleFinish = (values: any) => {
+    const processed = {
+      ...values,
+      {% for field in fields if field.form_type == "checkbox" and field.options %}
+      {{ field.name }}: (values.{{ field.name }} || []).join(","),
+      {% endfor %}
+    };
+    return formProps.onFinish?.(processed);
+  };
+
+  return (
+    <Create saveButtonProps={saveButtonProps}>
+      <Form {...formProps} layout="vertical" onFinish={handleFinish}>
+      {% for field in fields if not field.common %}
+        <Form.Item
+          name="{{ field.name }}"
+          label="{{ field.description if field.description else field.name | capitalize }}"
+          {% if field.form_type == 'checkbox' and not field.options %}
+          valuePropName="checked"
+          {% endif %}
+          rules={[
+            {% if field.required %}{ required: true, message: '请输入{{ field.description or field.name }}' },{% endif %}
+            {% if field.type == 'str' and field.max_length and field.max_length > 0 %}
+            { max: {{ field.max_length }}, message: '最多输入 {{ field.max_length }} 个字符' },
+            {% endif %}
+          ]}
+        >
+          {% if field.form_type == "textarea" %}
+          <Input.TextArea rows={4} />
+
+          {% elif field.form_type == "select" and field.options %}
+          <Select>
+            {% for option in field.options %}
+              <Select.Option value="{{ option.value }}">{{ option.label }}</Select.Option>
+            {% endfor %}
+          </Select>
+
+          {% elif field.form_type == "checkbox" and field.options %}
+          <Checkbox.Group
+            options={[
+              {% for option in field.options %}
+                { label: "{{ option.label }}", value: {{ option.value }} }{% if not loop.last %}, {% endif %}
+              {% endfor %}
+            ]}
+          />
+
+          {% elif field.form_type == "date" %}
+          {% raw %}<DatePicker style={{ width: "100%" }} />{% endraw %}
+
+          {% else %}
+          <Input />
+          {% endif %}
+        </Form.Item>
+      {% endfor %}
+      </Form>
+    </Create>
+  );
+};

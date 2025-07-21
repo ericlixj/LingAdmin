@@ -4,7 +4,7 @@ from jinja2 import Environment, FileSystemLoader
 from base.model import CURDModel
 
 env = Environment(
-    loader=FileSystemLoader("templates"),
+    loader=FileSystemLoader("templates/single_module"),
     trim_blocks=True,
     lstrip_blocks=True,
 )
@@ -19,7 +19,7 @@ def generate_frontend_App(module_name: str, model: CURDModel) -> str:
         "module_name": module_name,
         "label": model.label or "",
     }
-    return render_template("frontend/App.tsx.jinjia2", context)
+    return render_template("frontend/App.tsx.jinja2", context)
 
 def generate_frontend_i8n(module_name: str, model: CURDModel) -> str:
     context = {
@@ -27,7 +27,7 @@ def generate_frontend_i8n(module_name: str, model: CURDModel) -> str:
         "module_name": module_name,
         "label": model.label or "",
     }
-    return render_template("frontend/i18nProvider.ts.jinjia2", context)
+    return render_template("frontend/i18nProvider.ts.jinja2", context)
 
 def generate_frontend_pages(module_name: str, model: CURDModel, target_dir: str):
     pages = {

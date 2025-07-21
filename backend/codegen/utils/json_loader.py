@@ -1,23 +1,35 @@
 import os
 import json
-from base.model import CURDModel
+from base.model import CURDModel, MasterDetailCURDModel
 
 def load_single_module_json(source_dir: str) -> CURDModel:
-    """
-    从 source_dir 目录读取单个 JSON 文件并解析成 CURDModel 实例。
-    目录中允许且只能有一个 JSON 文件。
-    """
-    json_files = [f for f in os.listdir(source_dir) if f.endswith(".json")]
+    json_path = os.path.join(source_dir, "single_module_define.json")
 
-    if not json_files:
-        raise FileNotFoundError(f"No .json file found in {source_dir}")
-    if len(json_files) > 1:
-        raise ValueError(f"Only one .json file is allowed in {source_dir}, found: {json_files}")
+    if not os.path.exists(json_path):
+        raise FileNotFoundError(f"{json_path} does not exist")
 
-    json_path = os.path.join(source_dir, json_files[0])
     with open(json_path, encoding="utf-8") as f:
         model_data = json.load(f)
 
     model = CURDModel(**model_data)
     print(json.dumps(model.model_dump(), indent=2, ensure_ascii=False))
+    return model
+
+
+def load_master_detail_json(source_dir: str) -> MasterDetailCURDModel:
+    json_filename = "master_detail_module_define.json"
+    json_path = os.path.join(source_dir, json_filename)
+
+    if not os.path.exists(json_path):
+        raise FileNotFoundError(f"{json_filename} 不存在于目录: {source_dir}")
+
+    with open(json_path, encoding="utf-8") as f:
+        data = json.load(f)
+
+    try:
+        model = MasterDetailCURDModel(**data)
+    except Exception as e:
+        raise ValueError(f"解析 JSON 文件失败: {e}")
+
+    # print(json.dumps(model.model_dump(), indent=2, ensure_ascii=False))
     return model

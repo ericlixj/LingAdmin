@@ -4,7 +4,7 @@ from jinja2 import Environment, FileSystemLoader
 from base.model import CURDModel
 
 env = Environment(
-    loader=FileSystemLoader("templates"),
+    loader=FileSystemLoader("templates/single_module"),
     trim_blocks=True,
     lstrip_blocks=True,
 )

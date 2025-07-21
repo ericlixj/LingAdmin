@@ -123,7 +123,24 @@ const translations = {
             edit: "编辑单表模型02管理",
             show: "单表模型02管理详情",
         },
+    },
+    mulCurdModelUser: {
+        titles: {
+            list: "主子表模型用户管理列表",
+            create: "创建主子表模型用户管理",
+            edit: "编辑主子表模型用户管理",
+            show: "主子表模型用户管理详情",
+        },
     },    
+    mulCurdModelUser01: {
+        titles: {
+            list: "主子表模型用户管理01列表",
+            create: "创建主子表模型用户管理01",
+            edit: "编辑主子表模型用户管理01",
+            show: "主子表模型用户管理01详情",
+        },
+    },    
+  
 };
 const i18nProvider = {
     translate: (key, params) => {

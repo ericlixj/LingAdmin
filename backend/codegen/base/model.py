@@ -1,5 +1,5 @@
 from typing import List, Optional, Union, Literal
-from pydantic import BaseModel, Field, validator, root_validator
+from pydantic import BaseModel, validator, root_validator
 
 
 COMMON_FIELDS = {"id", "creator", "updater", "deleted", "create_time", "update_time"}
@@ -61,4 +61,9 @@ class CURDModel(BaseModel):
         if not module_name:
             raise ValueError("module_name is required to generate class_name")
         return module_name[0].upper() + module_name[1:]
+    
+class MasterDetailCURDModel(BaseModel):
+    master_module: CURDModel
+    detail_module: CURDModel
+    relation_field: str    
     

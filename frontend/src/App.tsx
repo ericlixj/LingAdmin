@@ -115,6 +115,18 @@ import {
   CurdModel02List,
   CurdModel02Show,
 } from "./pages/curdModel02";
+import {
+  MulCurdModelUserCreate,
+  MulCurdModelUserEdit,
+  MulCurdModelUserList,
+  MulCurdModelUserShow,
+} from "./pages/mulCurdModelUser";
+import {
+  MulCurdModelUser01Create,
+  MulCurdModelUser01Edit,
+  MulCurdModelUser01List,
+  MulCurdModelUser01Show,
+} from "./pages/mulCurdModelUser01";
 
 function App() {
   return (
@@ -296,7 +308,31 @@ function App() {
                     label: "单表模型02管理",
                     icon: <ApiOutlined />,
                   },
-                },                                   
+                },
+                {
+                  name: "mulCurdModelUser",
+                  list: MulCurdModelUserList,
+                  create: MulCurdModelUserCreate,
+                  edit: MulCurdModelUserEdit,
+                  show: MulCurdModelUserShow,
+                  meta: {
+                    canDelete: true,
+                    label: "主子表模型用户管理",
+                    icon: <ApiOutlined />,
+                  },
+                },
+                {
+                  name: "mulCurdModelUser01",
+                  list: MulCurdModelUser01List,
+                  create: MulCurdModelUser01Create,
+                  edit: MulCurdModelUser01Edit,
+                  show: MulCurdModelUser01Show,
+                  meta: {
+                    canDelete: true,
+                    label: "主子表模型用户管理01",
+                    icon: <ApiOutlined />,
+                  },
+                },                
               ]}
               options={{
                 syncWithLocation: true,
@@ -401,7 +437,19 @@ function App() {
                     <Route path="create" element={<CurdModel02Create />} />
                     <Route path="edit/:id" element={<CurdModel02Edit />} />
                     <Route path="show/:id" element={<CurdModel02Show />} />
-                  </Route>                         
+                  </Route>
+                  <Route path="/mulCurdModelUser">
+                    <Route index element={<MulCurdModelUserList />} />
+                    <Route path="create" element={<MulCurdModelUserCreate />} />
+                    <Route path="edit/:id" element={<MulCurdModelUserEdit />} />
+                    <Route path="show/:id" element={<MulCurdModelUserShow />} />
+                  </Route>            
+                  <Route path="/mulCurdModelUser01">
+                    <Route index element={<MulCurdModelUser01List />} />
+                    <Route path="create" element={<MulCurdModelUser01Create />} />
+                    <Route path="edit/:id" element={<MulCurdModelUser01Edit />} />
+                    <Route path="show/:id" element={<MulCurdModelUser01Show />} />
+                  </Route>                                              
 
                   <Route path="*" element={<ErrorComponent />} />
                 </Route>

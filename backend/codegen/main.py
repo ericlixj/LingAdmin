@@ -7,7 +7,7 @@ from generator.backend_generator import generate_backend_files
 from generator.frontend_generator import generate_frontend_files
 from utils.json_loader import load_single_module_json
 
-def process_modules(source_dir="source/modules", target_dir="target"):
+def process_modules(source_dir="source/modules", target_dir="target/single_module"):
     if os.path.exists(target_dir):
         shutil.rmtree(target_dir)
     os.makedirs(target_dir, exist_ok=True)

@@ -14,6 +14,10 @@ from app.api.routes import (
     appNew5,
     curdModel001,
     curdModel02,
+    mulCurdModelUser,
+    mulCurdModelOrder,
+    mulCurdModelUser01,
+    mulCurdModelOrder01,
 )
 from fastapi import APIRouter
 
@@ -37,3 +41,7 @@ api_router.include_router(appNew4.router, prefix="/appNew4", tags=["AppNew4"])
 api_router.include_router(appNew5.router, prefix="/appNew5", tags=["AppNew5"])
 api_router.include_router(curdModel001.router, prefix="/curdModel001", tags=["CurdModel001"])
 api_router.include_router(curdModel02.router, prefix="/curdModel02", tags=["CurdModel02"])
+api_router.include_router(mulCurdModelUser.router, prefix="/mulCurdModelUser", tags=["MulCurdModelUser"])
+api_router.include_router(mulCurdModelOrder.router, prefix="/mulCurdModelOrder", tags=["MulCurdModelOrder"])
+api_router.include_router(mulCurdModelUser01.router, prefix="/mulCurdModelUser01", tags=["MulCurdModelUser01"])
+api_router.include_router(mulCurdModelOrder01.router, prefix="/mulCurdModelOrder01", tags=["MulCurdModelOrder01"])
