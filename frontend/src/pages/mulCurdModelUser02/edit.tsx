@@ -20,7 +20,7 @@ function prepareInitialValues(record: Record<string, any>, fields: any[]) {
   return result;
 }
 
-export const MulCurdModelUser01Edit = () => {
+export const MulCurdModelUser02Edit = () => {
   const { formProps, saveButtonProps, queryResult } = useForm();
   const [initialized, setInitialized] = useState(false);
 

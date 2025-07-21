@@ -16,11 +16,11 @@ import {
 } from "antd";
 import { EditOutlined } from "@ant-design/icons";
 import dayjs from "dayjs";
-import { MulCurdModelOrder01 } from "./components/mulCurdModelOrder01";
+import { MulCurdModelOrder02 } from "./components/mulCurdModelOrder02";
 
 const { Text, Title } = Typography;
 
-export const MulCurdModelUser01Show = () => {
+export const MulCurdModelUser02Show = () => {
   const { queryResult } = useShow();
   const { data, isLoading } = queryResult;
   const record = data?.data;
@@ -30,7 +30,7 @@ export const MulCurdModelUser01Show = () => {
   const [editRecord, setEditRecord] = useState(null);
 
   const { tableProps, filters, setFilters } = useTable({
-    resource: "mulCurdModelOrder01",
+    resource: "mulCurdModelOrder02",
     syncWithLocation: false,
     pagination: { pageSize: 5 },
     filters: {
@@ -61,7 +61,7 @@ export const MulCurdModelUser01Show = () => {
   const handleDelete = async (id: number) => {
     try {
       await deleteMutation.mutateAsync({
-        resource: "mulCurdModelOrder01",
+        resource: "mulCurdModelOrder02",
         id,
       });
       message.success("删除成功");
@@ -131,9 +131,9 @@ export const MulCurdModelUser01Show = () => {
       {/* 子表标题和新增按钮 */}
 
       <Title level={5} style={{ marginBottom: 16 }}>
-        主子表模型订单管理01
+        主子表模型02订单管理
         <CreateButton style={{ float: "right" }} onClick={() => setModalVisible(true)}>
-          新增主子表模型订单管理01
+          新增主子表模型02订单管理
         </CreateButton>
       </Title>
 
@@ -278,7 +278,7 @@ sorter          filteredValue={
 
       {/* 新增弹窗 */}
       <Modal
-        title="新增主子表模型订单管理01"
+        title="新增主子表模型02订单管理"
         open={modalVisible}
         footer={null}
         onCancel={() => setModalVisible(false)}
@@ -286,7 +286,7 @@ sorter          filteredValue={
         width={600}
       >
         {record?.id && (
-          <MulCurdModelOrder01
+          <MulCurdModelOrder02
             user_id={Number(record.id)}
             onSuccess={onCreateSuccess}
             onCancel={() => setModalVisible(false)}
@@ -296,7 +296,7 @@ sorter          filteredValue={
 
       {/* 编辑弹窗 */}
       <Modal
-        title="编辑主子表模型订单管理01"
+        title="编辑主子表模型02订单管理"
         open={editModalVisible}
         footer={null}
         onCancel={() => {
@@ -307,7 +307,7 @@ sorter          filteredValue={
         width={600}
       >
         {record?.id && editRecord && (
-          <MulCurdModelOrder01
+          <MulCurdModelOrder02
             user_id={Number(record.id)}
             initialValues={editRecord}
             isEdit={true}

@@ -13,5 +13,5 @@ node_modules/
 /frontend/.next/
 /frontend/.nuxt/
 /backend/codegen/venv/
-/frontend/codegen/.venv/
-/frontend/codegen/target/
+/backend/codegen/.venv/
+/backend/codegen/target/

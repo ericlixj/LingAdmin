@@ -127,6 +127,12 @@ import {
   MulCurdModelUser01List,
   MulCurdModelUser01Show,
 } from "./pages/mulCurdModelUser01";
+import {
+  MulCurdModelUser02Create,
+  MulCurdModelUser02Edit,
+  MulCurdModelUser02List,
+  MulCurdModelUser02Show,
+} from "./pages/mulCurdModelUser02";
 
 function App() {
   return (
@@ -332,7 +338,19 @@ function App() {
                     label: "主子表模型用户管理01",
                     icon: <ApiOutlined />,
                   },
-                },                
+                },         
+                {
+                  name: "mulCurdModelUser02",
+                  list: MulCurdModelUser02List,
+                  create: MulCurdModelUser02Create,
+                  edit: MulCurdModelUser02Edit,
+                  show: MulCurdModelUser02Show,
+                  meta: {
+                    canDelete: true,
+                    label: "主子表模型02用户管理",
+                    icon: <ApiOutlined />,
+                  },
+                },                       
               ]}
               options={{
                 syncWithLocation: true,
@@ -449,7 +467,13 @@ function App() {
                     <Route path="create" element={<MulCurdModelUser01Create />} />
                     <Route path="edit/:id" element={<MulCurdModelUser01Edit />} />
                     <Route path="show/:id" element={<MulCurdModelUser01Show />} />
-                  </Route>                                              
+                  </Route>       
+                  <Route path="/mulCurdModelUser02">
+                    <Route index element={<MulCurdModelUser02List />} />
+                    <Route path="create" element={<MulCurdModelUser02Create />} />
+                    <Route path="edit/:id" element={<MulCurdModelUser02Edit />} />
+                    <Route path="show/:id" element={<MulCurdModelUser02Show />} />
+                  </Route>                                                         
 
                   <Route path="*" element={<ErrorComponent />} />
                 </Route>

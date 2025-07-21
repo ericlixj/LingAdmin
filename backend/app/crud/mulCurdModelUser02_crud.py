@@ -2,8 +2,8 @@ import logging
 from datetime import datetime
 from typing import Any, Dict, List, Optional
 
-from app.models.mulCurdModelUser01 import MulCurdModelUser01, MulCurdModelUser01Create, MulCurdModelUser01Update
-from app.models.mulCurdModelOrder01 import MulCurdModelOrder01
+from app.models.mulCurdModelUser02 import MulCurdModelUser02, MulCurdModelUser02Create, MulCurdModelUser02Update
+from app.models.mulCurdModelOrder02 import MulCurdModelOrder02
 from sqlalchemy import update
 from sqlalchemy import func
 from sqlalchemy.sql.elements import UnaryExpression
@@ -20,24 +20,24 @@ QUERYABLE_FIELDS = {
   "user_status": "eq",
 }
 
-class MulCurdModelUser01CRUD:
+class MulCurdModelUser02CRUD:
     def __init__(self, session: Session):
         self.session = session
-        self.model = MulCurdModelUser01
+        self.model = MulCurdModelUser02
 
-    def get_by_id(self, mulCurdModelUser01_id: int) -> Optional[MulCurdModelUser01]:
-        statement = select(MulCurdModelUser01).where(MulCurdModelUser01.id == mulCurdModelUser01_id, MulCurdModelUser01.deleted == False)
+    def get_by_id(self, mulCurdModelUser02_id: int) -> Optional[MulCurdModelUser02]:
+        statement = select(MulCurdModelUser02).where(MulCurdModelUser02.id == mulCurdModelUser02_id, MulCurdModelUser02.deleted == False)
         result = self.session.exec(statement).first()
         return result
 
-    def create(self, obj_in: MulCurdModelUser01Create) -> MulCurdModelUser01:
-        db_obj = MulCurdModelUser01.from_orm(obj_in)
+    def create(self, obj_in: MulCurdModelUser02Create) -> MulCurdModelUser02:
+        db_obj = MulCurdModelUser02.from_orm(obj_in)
         self.session.add(db_obj)
         self.session.commit()
         self.session.refresh(db_obj)
         return db_obj
 
-    def update(self, db_obj: MulCurdModelUser01, obj_in: MulCurdModelUser01Update) -> MulCurdModelUser01:
+    def update(self, db_obj: MulCurdModelUser02, obj_in: MulCurdModelUser02Update) -> MulCurdModelUser02:
         update_data = obj_in.dict(exclude_unset=True)
         for field, value in update_data.items():
             setattr(db_obj, field, value)
@@ -47,13 +47,13 @@ class MulCurdModelUser01CRUD:
         self.session.refresh(db_obj)
         return db_obj
 
-    def soft_delete(self, db_obj: MulCurdModelUser01) -> MulCurdModelUser01:
+    def soft_delete(self, db_obj: MulCurdModelUser02) -> MulCurdModelUser02:
         db_obj.deleted = True
         db_obj.update_time = datetime.utcnow()
         self.session.add(db_obj)
         self.session.execute(
-            update(MulCurdModelOrder01)
-            .where(MulCurdModelOrder01.user_id == db_obj.id)
+            update(MulCurdModelOrder02)
+            .where(MulCurdModelOrder02.user_id == db_obj.id)
             .values(
                 deleted=True,
                 update_time=datetime.utcnow()
@@ -129,17 +129,17 @@ class MulCurdModelUser01CRUD:
         limit: int = 10,
         filters: Optional[Dict[str, Any]] = None,
         order_by: Optional[UnaryExpression] = None,
-    ) -> List[MulCurdModelUser01]:
-        query = select(MulCurdModelUser01).where(MulCurdModelUser01.deleted == False)
+    ) -> List[MulCurdModelUser02]:
+        query = select(MulCurdModelUser02).where(MulCurdModelUser02.deleted == False)
         query = self._apply_filters(query, filters)
         if order_by is not None:
             query = query.order_by(order_by)
         else:
-            query = query.order_by(MulCurdModelUser01.id.desc())
+            query = query.order_by(MulCurdModelUser02.id.desc())
         logger.debug(f"Executing query: {query}")
         return self.session.exec(query.offset(skip).limit(limit)).all()
 
     def count_all(self, filters: Optional[Dict[str, Any]] = None) -> int:
-        query = select(func.count()).select_from(MulCurdModelUser01).where(MulCurdModelUser01.deleted == False)
+        query = select(func.count()).select_from(MulCurdModelUser02).where(MulCurdModelUser02.deleted == False)
         query = self._apply_filters(query, filters)
         return self.session.exec(query).one()

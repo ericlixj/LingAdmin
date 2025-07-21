@@ -2,7 +2,7 @@ import { useForm } from "@refinedev/antd";
 import { Form, Input, Select, Checkbox, DatePicker, Button } from "antd";
 import dayjs from "dayjs";
 
-interface MulCurdModelOrder01Props {
+interface MulCurdModelOrder02Props {
   user_id: number | string;
   initialValues?: any;
   isEdit?: boolean;
@@ -10,19 +10,19 @@ interface MulCurdModelOrder01Props {
   onCancel?: () => void;
 }
 
-export const MulCurdModelOrder01 = ({
+export const MulCurdModelOrder02 = ({
   user_id,
   initialValues,
   isEdit = false,
   onSuccess,
   onCancel,
-}: MulCurdModelOrder01Props) => {
+}: MulCurdModelOrder02Props) => {
   const {
     formProps,
     saveButtonProps,
     form,
   } = useForm({
-    resource: "mulCurdModelOrder01",
+    resource: "mulCurdModelOrder02",
     action: isEdit ? "edit" : "create",
     id: initialValues?.id,
     redirect: false,

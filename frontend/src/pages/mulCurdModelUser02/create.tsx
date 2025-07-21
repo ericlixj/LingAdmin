@@ -1,7 +1,7 @@
 import { Create, useForm } from "@refinedev/antd";
 import { Form, Input, Select, Checkbox, DatePicker } from "antd";
 
-export const MulCurdModelUser01Create = () => {
+export const MulCurdModelUser02Create = () => {
   const { formProps, saveButtonProps } = useForm();
 
   const handleFinish = (values: any) => {

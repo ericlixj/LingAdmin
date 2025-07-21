@@ -140,6 +140,14 @@ const translations = {
             show: "主子表模型用户管理01详情",
         },
     },    
+    mulCurdModelUser02: {
+        titles: {
+            list: "主子表模型02用户管理列表",
+            create: "创建主子表模型02用户管理",
+            edit: "编辑主子表模型02用户管理",
+            show: "主子表模型02用户管理详情",
+        },
+    },    
   
 };
 const i18nProvider = {

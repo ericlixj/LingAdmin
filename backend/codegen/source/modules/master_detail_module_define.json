@@ -1,7 +1,7 @@
 {
     "master_module": {
-        "module_name": "mulCurdModelUser01",
-        "label": "主子表模型用户管理01",
+        "module_name": "mulCurdModelUser02",
+        "label": "主子表模型02用户管理",
         "fields": [
             {
                 "name": "id",
@@ -145,8 +145,8 @@
         ]
     },
     "detail_module": {
-        "module_name": "mulCurdModelOrder01",
-        "label": "主子表模型订单管理01",
+        "module_name": "mulCurdModelOrder02",
+        "label": "主子表模型02订单管理",
         "fields": [
             {
                 "name": "id",

@@ -2,7 +2,7 @@ import logging
 from datetime import datetime
 from typing import Any, Dict, List, Optional
 
-from app.models.mulCurdModelOrder01 import MulCurdModelOrder01, MulCurdModelOrder01Create, MulCurdModelOrder01Update
+from app.models.mulCurdModelOrder02 import MulCurdModelOrder02, MulCurdModelOrder02Create, MulCurdModelOrder02Update
 from sqlalchemy import func
 from sqlalchemy.sql.elements import UnaryExpression
 from sqlmodel import Session, col, select
@@ -18,24 +18,24 @@ QUERYABLE_FIELDS = {
   "order_status": "eq",
 }
 
-class MulCurdModelOrder01CRUD:
+class MulCurdModelOrder02CRUD:
     def __init__(self, session: Session):
         self.session = session
-        self.model = MulCurdModelOrder01
+        self.model = MulCurdModelOrder02
 
-    def get_by_id(self, mulCurdModelOrder01_id: int) -> Optional[MulCurdModelOrder01]:
-        statement = select(MulCurdModelOrder01).where(MulCurdModelOrder01.id == mulCurdModelOrder01_id, MulCurdModelOrder01.deleted == False)
+    def get_by_id(self, mulCurdModelOrder02_id: int) -> Optional[MulCurdModelOrder02]:
+        statement = select(MulCurdModelOrder02).where(MulCurdModelOrder02.id == mulCurdModelOrder02_id, MulCurdModelOrder02.deleted == False)
         result = self.session.exec(statement).first()
         return result
 
-    def create(self, obj_in: MulCurdModelOrder01Create) -> MulCurdModelOrder01:
-        db_obj = MulCurdModelOrder01.from_orm(obj_in)
+    def create(self, obj_in: MulCurdModelOrder02Create) -> MulCurdModelOrder02:
+        db_obj = MulCurdModelOrder02.from_orm(obj_in)
         self.session.add(db_obj)
         self.session.commit()
         self.session.refresh(db_obj)
         return db_obj
 
-    def update(self, db_obj: MulCurdModelOrder01, obj_in: MulCurdModelOrder01Update) -> MulCurdModelOrder01:
+    def update(self, db_obj: MulCurdModelOrder02, obj_in: MulCurdModelOrder02Update) -> MulCurdModelOrder02:
         update_data = obj_in.dict(exclude_unset=True)
         for field, value in update_data.items():
             setattr(db_obj, field, value)
@@ -45,7 +45,7 @@ class MulCurdModelOrder01CRUD:
         self.session.refresh(db_obj)
         return db_obj
 
-    def soft_delete(self, db_obj: MulCurdModelOrder01) -> MulCurdModelOrder01:
+    def soft_delete(self, db_obj: MulCurdModelOrder02) -> MulCurdModelOrder02:
         db_obj.deleted = True
         db_obj.update_time = datetime.utcnow()
         self.session.add(db_obj)
@@ -119,17 +119,17 @@ class MulCurdModelOrder01CRUD:
         limit: int = 10,
         filters: Optional[Dict[str, Any]] = None,
         order_by: Optional[UnaryExpression] = None,
-    ) -> List[MulCurdModelOrder01]:
-        query = select(MulCurdModelOrder01).where(MulCurdModelOrder01.deleted == False)
+    ) -> List[MulCurdModelOrder02]:
+        query = select(MulCurdModelOrder02).where(MulCurdModelOrder02.deleted == False)
         query = self._apply_filters(query, filters)
         if order_by is not None:
             query = query.order_by(order_by)
         else:
-            query = query.order_by(MulCurdModelOrder01.id.desc())
+            query = query.order_by(MulCurdModelOrder02.id.desc())
         logger.debug(f"Executing query: {query}")
         return self.session.exec(query.offset(skip).limit(limit)).all()
 
     def count_all(self, filters: Optional[Dict[str, Any]] = None) -> int:
-        query = select(func.count()).select_from(MulCurdModelOrder01).where(MulCurdModelOrder01.deleted == False)
+        query = select(func.count()).select_from(MulCurdModelOrder02).where(MulCurdModelOrder02.deleted == False)
         query = self._apply_filters(query, filters)
         return self.session.exec(query).one()

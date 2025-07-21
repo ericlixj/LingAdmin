@@ -8,7 +8,7 @@ import {
 import { Input, Select, Space, Table, DatePicker  } from "antd";
 import dayjs from "dayjs";
 
-export const MulCurdModelUser01List = () => {
+export const MulCurdModelUser02List = () => {
   const { tableProps, filters } = useTable({
     syncWithLocation: true,
     filters: {

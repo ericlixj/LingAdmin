@@ -4,21 +4,21 @@ from typing import Optional, List
 from sqlalchemy import Column, DateTime, text
 from sqlmodel import Field, SQLModel
 
-class MulCurdModelUser01(SQLModel, table=True):
+class MulCurdModelOrder02(SQLModel, table=True):
 
     id: int = Field(default=None, primary_key=True, description="主键")
 
-    user_name: str = Field(default="", max_length=50, index=True, description="用户名称")
+    user_id: int = Field(default=0, index=True, description="关联用户ID")
 
-    user_code: str = Field(default="", max_length=50, index=True, unique=True, description="用户编码")
+    order_code: str = Field(default="", max_length=50, index=True, unique=True, description="订单编码")
 
     open_date: Optional[datetime] = Field(default=None, description="开启日期")
 
-    user_status: Optional[str] = Field(default=None, max_length=128, description="用户状态")
+    order_status: Optional[str] = Field(default=None, max_length=128, description="订单状态")
 
     open_function: Optional[str] = Field(default=None, description="开启功能")
 
-    user_info: Optional[str] = Field(default=None, max_length=255, description="用户信息")
+    order_info: Optional[str] = Field(default=None, max_length=255, description="订单信息")
 
     # 默认加入通用字段
     creator: Optional[str] = Field(default=None, max_length=64, description="创建人")
@@ -35,24 +35,24 @@ class MulCurdModelUser01(SQLModel, table=True):
         description="更新时间"
     )
 
-class MulCurdModelUser01Create(SQLModel):
-    user_name: str
-    user_code: str
+class MulCurdModelOrder02Create(SQLModel):
+    user_id: int
+    order_code: str
     open_date: Optional[datetime] = None
-    user_status: Optional[str] = None
+    order_status: Optional[str] = None
     open_function: Optional[str] = None
-    user_info: Optional[str] = None
+    order_info: Optional[str] = None
     creator: Optional[str] = Field(default=None, max_length=64)
 
-class MulCurdModelUser01Update(SQLModel):
-    user_name: Optional[str] = None
-    user_code: Optional[str] = None
+class MulCurdModelOrder02Update(SQLModel):
+    user_id: Optional[int] = None
+    order_code: Optional[str] = None
     open_date: Optional[datetime] = None
-    user_status: Optional[str] = None
+    order_status: Optional[str] = None
     open_function: Optional[str] = None
-    user_info: Optional[str] = None
+    order_info: Optional[str] = None
     updater: Optional[str] = Field(default=None, max_length=64)
 
-class MulCurdModelUser01ListResponse(SQLModel):
-    data: List[MulCurdModelUser01]
+class MulCurdModelOrder02ListResponse(SQLModel):
+    data: List[MulCurdModelOrder02]
     total: int

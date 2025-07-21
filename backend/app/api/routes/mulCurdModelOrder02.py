@@ -4,8 +4,8 @@ from typing import List, Optional
 from app.core.db import get_session
 from app.core.deps import get_current_user_id, has_permission
 from app.core.logger import init_logger
-from app.crud.mulCurdModelUser01_crud import MulCurdModelUser01CRUD
-from app.models.mulCurdModelUser01 import MulCurdModelUser01, MulCurdModelUser01Create, MulCurdModelUser01ListResponse, MulCurdModelUser01Update
+from app.crud.mulCurdModelOrder02_crud import MulCurdModelOrder02CRUD
+from app.models.mulCurdModelOrder02 import MulCurdModelOrder02, MulCurdModelOrder02Create, MulCurdModelOrder02ListResponse, MulCurdModelOrder02Update
 from fastapi import APIRouter, Depends, HTTPException, Query, Request
 from sqlmodel import Session
 from datetime import datetime
@@ -15,13 +15,13 @@ logger = logging.getLogger(__name__)
 router = APIRouter()
 
 
-@router.post("", dependencies=[Depends(has_permission("super_admin"))], response_model=MulCurdModelUser01)
+@router.post("", dependencies=[Depends(has_permission("super_admin"))], response_model=MulCurdModelOrder02)
 def create_item(
-    item_in: MulCurdModelUser01Create,
+    item_in: MulCurdModelOrder02Create,
     session: Session = Depends(get_session),
     current_user_id: int = Depends(get_current_user_id),
 ):
-    crud = MulCurdModelUser01CRUD(session)
+    crud = MulCurdModelOrder02CRUD(session)
     item_in.creator = str(current_user_id)
     return crud.create(item_in)
 
@@ -67,7 +67,7 @@ def parse_refine_filters(query_params: dict) -> list[dict]:
 
     return filters
 
-@router.get("", dependencies=[Depends(has_permission("super_admin"))], response_model=MulCurdModelUser01ListResponse)
+@router.get("", dependencies=[Depends(has_permission("super_admin"))], response_model=MulCurdModelOrder02ListResponse)
 def list_items(
     request: Request,
     _start: int = Query(0),
@@ -78,7 +78,7 @@ def list_items(
     exclude_keys = {"_start", "_end", "sortField", "sortOrder"}
     filters = parse_refine_filters(query_params)
 
-    crud = MulCurdModelUser01CRUD(session)
+    crud = MulCurdModelOrder02CRUD(session)
     skip = _start
     limit = _end - _start
     sortField = query_params.get("sortField")
@@ -86,7 +86,7 @@ def list_items(
 
     order_by = None
     if sortField and sortOrder:
-        field = getattr(MulCurdModelUser01, sortField, None)
+        field = getattr(MulCurdModelOrder02, sortField, None)
         if field is not None:
             order_by = field.asc() if sortOrder.lower() == "asc" else field.desc()
 
@@ -96,39 +96,39 @@ def list_items(
     return {"data": items, "total": total}
 
 
-@router.get("/{item_id}", dependencies=[Depends(has_permission("super_admin"))], response_model=MulCurdModelUser01)
+@router.get("/{item_id}", dependencies=[Depends(has_permission("super_admin"))], response_model=MulCurdModelOrder02)
 def get_item(item_id: int, session: Session = Depends(get_session)):
-    crud = MulCurdModelUser01CRUD(session)
+    crud = MulCurdModelOrder02CRUD(session)
     item = crud.get_by_id(item_id)
     if not item:
-        raise HTTPException(status_code=404, detail="MulCurdModelUser01 not found")
+        raise HTTPException(status_code=404, detail="MulCurdModelOrder02 not found")
     return item
 
 
-@router.patch("/{item_id}", dependencies=[Depends(has_permission("super_admin"))], response_model=MulCurdModelUser01)
+@router.patch("/{item_id}", dependencies=[Depends(has_permission("super_admin"))], response_model=MulCurdModelOrder02)
 def update_item(
     item_id: int,
-    item_in: MulCurdModelUser01Update,
+    item_in: MulCurdModelOrder02Update,
     session: Session = Depends(get_session),
     current_user_id: int = Depends(get_current_user_id),
 ):
-    crud = MulCurdModelUser01CRUD(session)
+    crud = MulCurdModelOrder02CRUD(session)
     db_item = crud.get_by_id(item_id)
     if not db_item:
-        raise HTTPException(status_code=404, detail="MulCurdModelUser01 not found")
+        raise HTTPException(status_code=404, detail="MulCurdModelOrder02 not found")
     item_in.updater = str(current_user_id)
     return crud.update(db_item, item_in)
 
 
-@router.delete("/{item_id}", dependencies=[Depends(has_permission("super_admin"))], response_model=MulCurdModelUser01)
+@router.delete("/{item_id}", dependencies=[Depends(has_permission("super_admin"))], response_model=MulCurdModelOrder02)
 def delete_item(
     item_id: int,
     session: Session = Depends(get_session),
     current_user_id: int = Depends(get_current_user_id),
 ):
-    crud = MulCurdModelUser01CRUD(session)
+    crud = MulCurdModelOrder02CRUD(session)
     db_item = crud.get_by_id(item_id)
     if not db_item:
-        raise HTTPException(status_code=404, detail="MulCurdModelUser01 not found")
+        raise HTTPException(status_code=404, detail="MulCurdModelOrder02 not found")
     db_item.updater = str(current_user_id)
     return crud.soft_delete(db_item)

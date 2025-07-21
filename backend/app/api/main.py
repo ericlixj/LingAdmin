@@ -18,6 +18,8 @@ from app.api.routes import (
     mulCurdModelOrder,
     mulCurdModelUser01,
     mulCurdModelOrder01,
+    mulCurdModelUser02,
+    mulCurdModelOrder02,
 )
 from fastapi import APIRouter
 
@@ -45,3 +47,5 @@ api_router.include_router(mulCurdModelUser.router, prefix="/mulCurdModelUser", t
 api_router.include_router(mulCurdModelOrder.router, prefix="/mulCurdModelOrder", tags=["MulCurdModelOrder"])
 api_router.include_router(mulCurdModelUser01.router, prefix="/mulCurdModelUser01", tags=["MulCurdModelUser01"])
 api_router.include_router(mulCurdModelOrder01.router, prefix="/mulCurdModelOrder01", tags=["MulCurdModelOrder01"])
+api_router.include_router(mulCurdModelUser02.router, prefix="/mulCurdModelUser02", tags=["MulCurdModelUser02"])
+api_router.include_router(mulCurdModelOrder02.router, prefix="/mulCurdModelOrder02", tags=["MulCurdModelOrder02"])
