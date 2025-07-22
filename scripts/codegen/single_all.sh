@@ -1,4 +1,4 @@
 #!/bin/bash
 
-./gen_code.sh
+./single_gen_code.sh
 ./deploy_single_code.sh

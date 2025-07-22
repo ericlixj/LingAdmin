@@ -7,7 +7,7 @@ CURRENT_DIR=$(pwd)
 cd ../../backend/codegen || { echo "目录不存在: ../../backend/codegen"; exit 1; }
 
 # 执行代码生成脚本
-python main.py || { echo "执行 main.py 失败"; cd "$CURRENT_DIR"; exit 1; }
+python processor.py || { echo "执行 processor.py 失败"; cd "$CURRENT_DIR"; exit 1; }
 
 # 回到原始目录
 cd "$CURRENT_DIR" || exit

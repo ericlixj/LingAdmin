@@ -1,0 +1,292 @@
+{
+    "master_module": {
+        "module_name": "mulCurdModelUser03",
+        "label": "主子表模型03用户管理",
+        "fields": [
+            {
+                "name": "id",
+                "type": "int",
+                "description": "主键",
+                "primary_key": true
+            },
+            {
+                "name": "user_name",
+                "type": "str",
+                "description": "用户名称",
+                "primary_key": false,
+                "required": true,
+                "insertable": true,
+                "updatable": true,
+                "listable": true,
+                "queryable": true,
+                "query_type": "like",
+                "nullable": false,
+                "form_type": "input",
+                "sortable": true,
+                "default": "",
+                "unique": false,
+                "max_length": 50,
+                "index": true
+            },            
+            {
+                "name": "user_code",
+                "type": "str",
+                "description": "用户编码",
+                "primary_key": false,
+                "required": true,
+                "insertable": true,
+                "updatable": true,
+                "listable": true,
+                "queryable": true,
+                "query_type": "like",
+                "nullable": false,
+                "form_type": "input",
+                "sortable": true,
+                "default": "",
+                "unique": true,
+                "max_length": 50,
+                "index": true
+            },
+            {
+                "name": "open_date",
+                "type": "datetime",
+                "description": "开启日期",
+                "primary_key": false,
+                "required": false,
+                "insertable": true,
+                "updatable": true,
+                "listable": true,
+                "queryable": true,
+                "query_type": "in",
+                "nullable": true,
+                "form_type": "date",
+                "sortable": true,
+                "default": null,
+                "unique": false,
+                "index": false
+            },
+            {
+                "name": "user_status",
+                "type": "str",
+                "description": "用户状态",
+                "primary_key": false,
+                "required": false,
+                "insertable": true,
+                "updatable": true,
+                "listable": true,
+                "queryable": true,
+                "nullable": true,
+                "form_type": "select",
+                "options": [
+                    {
+                        "label": "启用",
+                        "value": "enabled"
+                    },
+                    {
+                        "label": "停用",
+                        "value": "disabled"
+                    }
+                ],
+                "sortable": true,
+                "default": null,
+                "unique": false,
+                "max_length": 128,
+                "index": false
+            },
+            {
+                "name": "open_function",
+                "type": "str",
+                "description": "开启功能",
+                "primary_key": false,
+                "required": false,
+                "insertable": true,
+                "updatable": true,
+                "listable": true,
+                "queryable": false,
+                "nullable": true,
+                "form_type": "checkbox",
+                "options": [
+                    {
+                        "label": "功能A",
+                        "value": 1
+                    },
+                    {
+                        "label": "功能B",
+                        "value": 2
+                    },
+                    {
+                        "label": "功能C",
+                        "value": 3
+                    }
+                ],
+                "sortable": false,
+                "default": null,
+                "unique": false,
+                "index": false
+            },
+            {
+                "name": "user_info",
+                "type": "str",
+                "description": "用户信息",
+                "primary_key": false,
+                "required": false,
+                "insertable": true,
+                "updatable": true,
+                "listable": false,
+                "queryable": false,
+                "nullable": true,
+                "form_type": "textarea",
+                "sortable": false,
+                "default": null,
+                "unique": false,
+                "max_length": 255,
+                "index": false
+            }
+        ]
+    },
+    "detail_module": {
+        "module_name": "mulCurdModelOrder03",
+        "label": "主子表模型03订单管理",
+        "fields": [
+            {
+                "name": "id",
+                "type": "int",
+                "description": "主键",
+                "primary_key": true
+            },
+            {
+                "name": "user_id",
+                "type": "int",
+                "description": "关联用户ID",
+                "primary_key": false,
+                "required": true,
+                "insertable": true,
+                "updatable": true,
+                "listable": true,
+                "queryable": true,
+                "query_type": "eq",
+                "nullable": false,
+                "form_type": "input",
+                "sortable": true,
+                "default": 0,
+                "unique": false,
+                "index": true
+            },
+            {
+                "name": "order_code",
+                "type": "str",
+                "description": "订单编码",
+                "primary_key": false,
+                "required": true,
+                "insertable": true,
+                "updatable": true,
+                "listable": true,
+                "queryable": true,
+                "query_type": "like",
+                "nullable": false,
+                "form_type": "input",
+                "sortable": true,
+                "default": "",
+                "unique": true,
+                "max_length": 50,
+                "index": true
+            },
+            {
+                "name": "open_date",
+                "type": "datetime",
+                "description": "开启日期",
+                "primary_key": false,
+                "required": false,
+                "insertable": true,
+                "updatable": true,
+                "listable": true,
+                "queryable": true,
+                "query_type": "in",
+                "nullable": true,
+                "form_type": "date",
+                "sortable": true,
+                "default": null,
+                "unique": false,
+                "index": false
+            },
+            {
+                "name": "order_status",
+                "type": "str",
+                "description": "订单状态",
+                "primary_key": false,
+                "required": false,
+                "insertable": true,
+                "updatable": true,
+                "listable": true,
+                "queryable": true,
+                "nullable": true,
+                "form_type": "select",
+                "options": [
+                    {
+                        "label": "启用",
+                        "value": "enabled"
+                    },
+                    {
+                        "label": "停用",
+                        "value": "disabled"
+                    }
+                ],
+                "sortable": true,
+                "default": null,
+                "unique": false,
+                "max_length": 128,
+                "index": false
+            },
+            {
+                "name": "open_function",
+                "type": "str",
+                "description": "开启功能",
+                "primary_key": false,
+                "required": false,
+                "insertable": true,
+                "updatable": true,
+                "listable": true,
+                "queryable": false,
+                "nullable": true,
+                "form_type": "checkbox",
+                "options": [
+                    {
+                        "label": "功能A",
+                        "value": 1
+                    },
+                    {
+                        "label": "功能B",
+                        "value": 2
+                    },
+                    {
+                        "label": "功能C",
+                        "value": 3
+                    }
+                ],
+                "sortable": false,
+                "default": null,
+                "unique": false,
+                "index": false
+            },
+            {
+                "name": "order_info",
+                "type": "str",
+                "description": "订单信息",
+                "primary_key": false,
+                "required": false,
+                "insertable": true,
+                "updatable": true,
+                "listable": false,
+                "queryable": false,
+                "nullable": true,
+                "form_type": "textarea",
+                "sortable": false,
+                "default": null,
+                "unique": false,
+                "max_length": 255,
+                "index": false
+            }
+        ]
+    },
+    "relation_field": "user_id"
+}

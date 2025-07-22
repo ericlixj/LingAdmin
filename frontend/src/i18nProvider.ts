@@ -68,54 +68,6 @@ const translations = {
         success: "操作成功",
         error: "操作失败"
     },
-    appNew: {
-        titles: {
-            list: "应用管理New列表",
-            create: "创建应用管理New",
-            edit: "编辑应用管理New",
-            show: "应用管理New详情",
-        },
-    },    
-    appNew2: {
-        titles: {
-            list: "应用管理New2列表",
-            create: "创建应用管理New2",
-            edit: "编辑应用管理New2",
-            show: "应用管理New2详情",
-        },
-    },
-    appNew3: {
-        titles: {
-            list: "应用管理New3列表",
-            create: "创建应用管理New3",
-            edit: "编辑应用管理New3",
-            show: "应用管理New3详情",
-        },
-    },    
-    appNew4: {
-        titles: {
-            list: "应用管理New4列表",
-            create: "创建应用管理New4",
-            edit: "编辑应用管理New4",
-            show: "应用管理New4详情",
-        },
-    },    
-    appNew5: {
-        titles: {
-            list: "应用管理New5列表",
-            create: "创建应用管理New5",
-            edit: "编辑应用管理New5",
-            show: "应用管理New5详情",
-        },
-    },
-    curdModel001: {
-        titles: {
-            list: "单表模型01管理列表",
-            create: "创建单表模型01管理",
-            edit: "编辑单表模型01管理",
-            show: "单表模型01管理详情",
-        },
-    },
     curdModel02: {
         titles: {
             list: "单表模型02管理列表",
@@ -124,28 +76,28 @@ const translations = {
             show: "单表模型02管理详情",
         },
     },
-    mulCurdModelUser: {
+    mulCurdModelUser03: {
         titles: {
-            list: "主子表模型用户管理列表",
-            create: "创建主子表模型用户管理",
-            edit: "编辑主子表模型用户管理",
-            show: "主子表模型用户管理详情",
+            list: "主子表模型03用户管理列表",
+            create: "创建主子表模型03用户管理",
+            edit: "编辑主子表模型03用户管理",
+            show: "主子表模型03用户管理详情",
         },
     },    
-    mulCurdModelUser01: {
+    crudDefineModuel: {
         titles: {
-            list: "主子表模型用户管理01列表",
-            create: "创建主子表模型用户管理01",
-            edit: "编辑主子表模型用户管理01",
-            show: "主子表模型用户管理01详情",
+            list: "CRUD模块定义列表",
+            create: "创建CRUD模块定义",
+            edit: "编辑CRUD模块定义",
+            show: "CRUD模块定义详情",
         },
     },    
-    mulCurdModelUser02: {
+    demoOrder01: {
         titles: {
-            list: "主子表模型02用户管理列表",
-            create: "创建主子表模型02用户管理",
-            edit: "编辑主子表模型02用户管理",
-            show: "主子表模型02用户管理详情",
+            list: "演示订单01列表",
+            create: "创建演示订单01",
+            edit: "编辑演示订单01",
+            show: "演示订单01详情",
         },
     },    
   

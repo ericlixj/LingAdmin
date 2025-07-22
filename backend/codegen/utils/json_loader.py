@@ -1,6 +1,6 @@
 import os
 import json
-from base.model import CURDModel, MasterDetailCURDModel
+from codegen.base.model import CURDModel, MasterDetailCURDModel
 
 def load_single_module_json(source_dir: str) -> CURDModel:
     json_path = os.path.join(source_dir, "single_module_define.json")

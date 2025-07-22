@@ -7,19 +7,13 @@ from app.api.routes import (
     shop,
     shop_daily_stat,
     user,
-    appNew,
-    appNew2,
-    appNew3,
-    appNew4,
-    appNew5,
-    curdModel001,
     curdModel02,
-    mulCurdModelUser,
-    mulCurdModelOrder,
-    mulCurdModelUser01,
-    mulCurdModelOrder01,
-    mulCurdModelUser02,
-    mulCurdModelOrder02,
+    mulCurdModelUser03,
+    mulCurdModelOrder03,
+    crudDefineModuel,
+    crudDefineFileds,
+    demoOrder,
+    demoOrder01,
 )
 from fastapi import APIRouter
 
@@ -33,19 +27,11 @@ api_router.include_router(role.router, prefix="/role", tags=["Role"])
 api_router.include_router(permission.router, prefix="/permission", tags=["Permission"])
 api_router.include_router(app.router, prefix="/app", tags=["app"])
 api_router.include_router(shop.router, prefix="/shop", tags=["shop"])
-api_router.include_router(
-    shop_daily_stat.router, prefix="/shop-daily-stat", tags=["ShopDailyStat"]
-)
-api_router.include_router(appNew.router, prefix="/appNew", tags=["AppNew"])
-api_router.include_router(appNew2.router, prefix="/appNew2", tags=["AppNew2"])
-api_router.include_router(appNew3.router, prefix="/appNew3", tags=["AppNew3"])
-api_router.include_router(appNew4.router, prefix="/appNew4", tags=["AppNew4"])
-api_router.include_router(appNew5.router, prefix="/appNew5", tags=["AppNew5"])
-api_router.include_router(curdModel001.router, prefix="/curdModel001", tags=["CurdModel001"])
+api_router.include_router(shop_daily_stat.router, prefix="/shop-daily-stat", tags=["ShopDailyStat"])
 api_router.include_router(curdModel02.router, prefix="/curdModel02", tags=["CurdModel02"])
-api_router.include_router(mulCurdModelUser.router, prefix="/mulCurdModelUser", tags=["MulCurdModelUser"])
-api_router.include_router(mulCurdModelOrder.router, prefix="/mulCurdModelOrder", tags=["MulCurdModelOrder"])
-api_router.include_router(mulCurdModelUser01.router, prefix="/mulCurdModelUser01", tags=["MulCurdModelUser01"])
-api_router.include_router(mulCurdModelOrder01.router, prefix="/mulCurdModelOrder01", tags=["MulCurdModelOrder01"])
-api_router.include_router(mulCurdModelUser02.router, prefix="/mulCurdModelUser02", tags=["MulCurdModelUser02"])
-api_router.include_router(mulCurdModelOrder02.router, prefix="/mulCurdModelOrder02", tags=["MulCurdModelOrder02"])
+api_router.include_router(mulCurdModelUser03.router, prefix="/mulCurdModelUser03", tags=["MulCurdModelUser03"])
+api_router.include_router(mulCurdModelOrder03.router, prefix="/mulCurdModelOrder03", tags=["MulCurdModelOrder03"])
+api_router.include_router(crudDefineModuel.router, prefix="/crudDefineModuel", tags=["CrudDefineModuel"])
+api_router.include_router(crudDefineFileds.router, prefix="/crudDefineFileds", tags=["CrudDefineFileds"])
+api_router.include_router(demoOrder.router, prefix="/demoOrder", tags=["DemoOrder"])
+api_router.include_router(demoOrder01.router, prefix="/demoOrder01", tags=["DemoOrder01"])

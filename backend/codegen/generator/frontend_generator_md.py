@@ -1,6 +1,6 @@
 import os
 from jinja2 import Environment, FileSystemLoader
-from base.model import CURDModel, MasterDetailCURDModel
+from codegen.base.model import CURDModel, MasterDetailCURDModel
 
 # Jinja2 模板引擎初始化
 env = Environment(
@@ -35,7 +35,7 @@ def generate_frontend_i18n(model: CURDModel, target_dir: str):
         "label": model.label or "",
     })
 
-    path = os.path.join(target_dir, "frontend", "src", "i18nProvider_TMP.ts")
+    path = os.path.join(target_dir, "frontend", "src", "i18nProvider_tmp.ts")
     os.makedirs(os.path.dirname(path), exist_ok=True)
     with open(path, "w", encoding="utf-8") as f:
         f.write(content)

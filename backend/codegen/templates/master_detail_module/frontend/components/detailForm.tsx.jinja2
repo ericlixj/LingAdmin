@@ -99,7 +99,19 @@ export const {{ detail_module.class_name }} = ({
       >
         <Select allowClear>
           {% for option in field.options or [] %}
-          <Select.Option value="{{ option.value }}">{{ option.label }}</Select.Option>
+          <Select.Option
+            value={
+              {% if option.value is boolean %}
+                {{ "true" if option.value else "false" }}
+              {% elif option.value is number %}
+                {{ option.value }}
+              {% else %}
+                "{{ option.value }}"
+              {% endif %}
+            }
+          >
+            {{ option.label }}
+          </Select.Option>
           {% endfor %}
         </Select>
       </Form.Item>

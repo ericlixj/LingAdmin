@@ -39,7 +39,7 @@ export const {{ master_module.class_name }}Show = () => {
   const { tableProps, filters, setFilters } = useTable({
     resource: "{{ detail_module.module_name }}",
     syncWithLocation: false,
-    pagination: { pageSize: 5 },
+    pagination: { pageSize: 10 },
     filters: {
       mode: "server",
       permanent: [

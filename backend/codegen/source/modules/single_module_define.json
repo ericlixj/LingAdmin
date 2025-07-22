@@ -1,30 +1,23 @@
 {
-  "module_name": "mulCurdModelOrder",
-  "label": "主子表模型订单管理",
+  "module_name": "demoOrder",
+  "label": "演示订单",
   "fields": [
     {
       "name": "id",
       "type": "int",
       "description": "主键",
-      "primary_key": true
-    },
-    {
-      "name": "user_id",
-      "type": "int",
-      "description": "关联用户ID",
-      "primary_key": false,
-      "required": true,
-      "insertable": true,
-      "updatable": true,
-      "listable": true,
-      "queryable": true,
+      "primary_key": true,
+      "required": false,
+      "insertable": false,
+      "updatable": false,
+      "listable": false,
+      "queryable": false,
       "query_type": "eq",
       "nullable": false,
-      "form_type": "input",
-      "sortable": true,
-      "default": 0,
+      "options": [],
+      "sortable": false,
       "unique": false,
-      "index": true
+      "index": false
     },
     {
       "name": "order_code",
@@ -39,11 +32,12 @@
       "query_type": "like",
       "nullable": false,
       "form_type": "input",
+      "options": [],
       "sortable": true,
       "default": "",
       "unique": true,
-      "max_length": 50,
-      "index": true
+      "index": true,
+      "max_length": 50
     },
     {
       "name": "open_date",
@@ -58,8 +52,9 @@
       "query_type": "in",
       "nullable": true,
       "form_type": "date",
+      "options": [],
       "sortable": true,
-      "default": null,
+      "default": "",
       "unique": false,
       "index": false
     },
@@ -68,22 +63,29 @@
       "type": "str",
       "description": "订单状态",
       "primary_key": false,
-      "required": false,
+      "required": true,
       "insertable": true,
       "updatable": true,
       "listable": true,
       "queryable": true,
-      "nullable": true,
+      "query_type": "eq",
+      "nullable": false,
       "form_type": "select",
       "options": [
-        { "label": "启用", "value": "enabled" },
-        { "label": "停用", "value": "disabled" }
+        {
+          "label": "启用",
+          "value": "enabled"
+        },
+        {
+          "label": "停用",
+          "value": "disabled"
+        }
       ],
       "sortable": true,
-      "default": null,
+      "default": "enabled",
       "unique": false,
-      "max_length": 128,
-      "index": false
+      "index": false,
+      "max_length": 128
     },
     {
       "name": "open_function",
@@ -95,15 +97,25 @@
       "updatable": true,
       "listable": true,
       "queryable": false,
+      "query_type": "eq",
       "nullable": true,
       "form_type": "checkbox",
       "options": [
-        { "label": "功能A", "value": 1 },
-        { "label": "功能B", "value": 2 },
-        { "label": "功能C", "value": 3 }
-      ],      
+        {
+          "label": "功能A",
+          "value": 1
+        },
+        {
+          "label": "功能B",
+          "value": 2
+        },
+        {
+          "label": "功能C",
+          "value": 3
+        }
+      ],
       "sortable": false,
-      "default": null,
+      "default": "None",
       "unique": false,
       "index": false
     },
@@ -117,13 +129,15 @@
       "updatable": true,
       "listable": false,
       "queryable": false,
+      "query_type": "eq",
       "nullable": true,
       "form_type": "textarea",
+      "options": [],
       "sortable": false,
-      "default": null,
+      "default": "",
       "unique": false,
-      "max_length": 255,
-      "index": false
+      "index": false,
+      "max_length": 1000
     }
   ]
 }

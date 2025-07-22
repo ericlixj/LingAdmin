@@ -106,6 +106,20 @@ const axiosDataProvider: DataProvider = {
   },
 
   // 可按需添加其他方法，例如 getMany、deleteMany 等
+  custom: async ({ url, method, config }) => {
+    try {
+      const response = await axiosInstance.request({
+        url,
+        method,
+        ...config,
+      });
+      return {
+        data: response.data,
+      };
+    } catch (error) {
+      handleAxiosError(error);
+    }
+  },
 };
 
 

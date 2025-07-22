@@ -1,11 +1,11 @@
 import os
 import shutil
 import json
-from base.model import CURDModel
+from codegen.base.model import CURDModel
 
-from generator.backend_generator_md import generate_backend_files
-from generator.frontend_generator_md import generate_frontend_files
-from utils.json_loader import load_master_detail_json
+from codegen.generator.backend_generator_md import generate_backend_files
+from codegen.generator.frontend_generator_md import generate_frontend_files
+from codegen.utils.json_loader import load_master_detail_json
 
 def process_modules(source_dir="source/modules", target_dir="target/master_detail_module"):
     if os.path.exists(target_dir):

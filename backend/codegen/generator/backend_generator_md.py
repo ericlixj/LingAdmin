@@ -1,7 +1,7 @@
 # generator/model_extender.py
 import os
 from jinja2 import Environment, FileSystemLoader
-from base.model import MasterDetailCURDModel, CURDModel
+from codegen.base.model import MasterDetailCURDModel, CURDModel
 
 env = Environment(
     loader=FileSystemLoader("templates/master_detail_module/backend"),

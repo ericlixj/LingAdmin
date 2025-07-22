@@ -2,32 +2,32 @@
 
 // 1. Import Section (add where all other pages are imported)
 import {
-  MulCurdModelUser02Create,
-  MulCurdModelUser02Edit,
-  MulCurdModelUser02List,
-  MulCurdModelUser02Show,
-} from "./pages/mulCurdModelUser02";
+  DemoOrder01Create,
+  DemoOrder01Edit,
+  DemoOrder01List,
+  DemoOrder01Show,
+} from "./pages/demoOrder01";
 
 
 // 2. Resource Section (inside the resources array)
                 {
-                  name: "mulCurdModelUser02",
-                  list: MulCurdModelUser02List,
-                  create: MulCurdModelUser02Create,
-                  edit: MulCurdModelUser02Edit,
-                  show: MulCurdModelUser02Show,
+                  name: "demoOrder01",
+                  list: DemoOrder01List,
+                  create: DemoOrder01Create,
+                  edit: DemoOrder01Edit,
+                  show: DemoOrder01Show,
                   meta: {
                     canDelete: true,
-                    label: "主子表模型02用户管理",
+                    label: "演示订单01",
                     icon: <ApiOutlined />,
                   },
                 },
 
 
 // 3. Route Section (inside the Routes definition)
-                  <Route path="/mulCurdModelUser02">
-                    <Route index element={<MulCurdModelUser02List />} />
-                    <Route path="create" element={<MulCurdModelUser02Create />} />
-                    <Route path="edit/:id" element={<MulCurdModelUser02Edit />} />
-                    <Route path="show/:id" element={<MulCurdModelUser02Show />} />
+                  <Route path="/demoOrder01">
+                    <Route index element={<DemoOrder01List />} />
+                    <Route path="create" element={<DemoOrder01Create />} />
+                    <Route path="edit/:id" element={<DemoOrder01Edit />} />
+                    <Route path="show/:id" element={<DemoOrder01Show />} />
                   </Route>
