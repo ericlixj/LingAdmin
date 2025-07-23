@@ -68,36 +68,12 @@ const translations = {
         success: "操作成功",
         error: "操作失败"
     },
-    curdModel02: {
-        titles: {
-            list: "单表模型02管理列表",
-            create: "创建单表模型02管理",
-            edit: "编辑单表模型02管理",
-            show: "单表模型02管理详情",
-        },
-    },
-    mulCurdModelUser03: {
-        titles: {
-            list: "主子表模型03用户管理列表",
-            create: "创建主子表模型03用户管理",
-            edit: "编辑主子表模型03用户管理",
-            show: "主子表模型03用户管理详情",
-        },
-    },    
     crudDefineModuel: {
         titles: {
             list: "CRUD模块定义列表",
             create: "创建CRUD模块定义",
             edit: "编辑CRUD模块定义",
             show: "CRUD模块定义详情",
-        },
-    },    
-    demoOrder01: {
-        titles: {
-            list: "演示订单01列表",
-            create: "创建演示订单01",
-            edit: "编辑演示订单01",
-            show: "演示订单01详情",
         },
     },    
     masterDetailRel: {

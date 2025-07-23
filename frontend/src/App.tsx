@@ -72,35 +72,11 @@ import {
   UserShow,
 } from "./pages/users";
 import {
-  CurdModel02Create,
-  CurdModel02Edit,
-  CurdModel02List,
-  CurdModel02Show,
-} from "./pages/curdModel02";
-import {
-  MulCurdModelUser03Create,
-  MulCurdModelUser03Edit,
-  MulCurdModelUser03List,
-  MulCurdModelUser03Show,
-} from "./pages/mulCurdModelUser03";
-import {
   CrudDefineModuelCreate,
   CrudDefineModuelEdit,
   CrudDefineModuelList,
   CrudDefineModuelShow,
 } from "./pages/crudDefineModuel";
-import {
-  DemoOrderCreate,
-  DemoOrderEdit,
-  DemoOrderList,
-  DemoOrderShow,
-} from "./pages/demoOrder";
-import {
-  DemoOrder01Create,
-  DemoOrder01Edit,
-  DemoOrder01List,
-  DemoOrder01Show,
-} from "./pages/demoOrder01";
 import {
   MasterDetailRelCreate,
   MasterDetailRelEdit,
@@ -235,32 +211,6 @@ function App() {
                   },
                 },
                 {
-                  name: "curdModel02",
-                  list: CurdModel02List,
-                  create: CurdModel02Create,
-                  edit: CurdModel02Edit,
-                  show: CurdModel02Show,
-                  meta: {
-                    canDelete: true,
-                    label: "单表模型02管理",
-                    icon: <ApiOutlined />,
-                    parent: "demo",
-                  },
-                },
-                {
-                  name: "mulCurdModelUser03",
-                  list: MulCurdModelUser03List,
-                  create: MulCurdModelUser03Create,
-                  edit: MulCurdModelUser03Edit,
-                  show: MulCurdModelUser03Show,
-                  meta: {
-                    canDelete: true,
-                    label: "主子表模型03用户管理",
-                    icon: <ApiOutlined />,
-                    parent: "demo",
-                  },
-                },                
-                {
                   name: "crudDefineModuel",
                   list: CrudDefineModuelList,
                   create: CrudDefineModuelCreate,
@@ -273,30 +223,6 @@ function App() {
                     parent: "infra",
                   },
                 },
-                {
-                  name: "demoOrder",
-                  list: DemoOrderList,
-                  create: DemoOrderCreate,
-                  edit: DemoOrderEdit,
-                  show: DemoOrderShow,
-                  meta: {
-                    canDelete: true,
-                    label: "演示订单",
-                    icon: <ApiOutlined />,
-                  },
-                },           
-                {
-                  name: "demoOrder01",
-                  list: DemoOrder01List,
-                  create: DemoOrder01Create,
-                  edit: DemoOrder01Edit,
-                  show: DemoOrder01Show,
-                  meta: {
-                    canDelete: true,
-                    label: "演示订单01",
-                    icon: <ApiOutlined />,
-                  },
-                },            
                 {
                   name: "masterDetailRel",
                   list: MasterDetailRelList,
@@ -373,36 +299,12 @@ function App() {
                     <Route path="edit/:id" element={<ShopDailyStatEdit />} />
                     <Route path="show/:id" element={<ShopDailyStatShow />} />
                   </Route>
-                  <Route path="/curdModel02">
-                    <Route index element={<CurdModel02List />} />
-                    <Route path="create" element={<CurdModel02Create />} />
-                    <Route path="edit/:id" element={<CurdModel02Edit />} />
-                    <Route path="show/:id" element={<CurdModel02Show />} />
-                  </Route>
-                  <Route path="/mulCurdModelUser03">
-                    <Route index element={<MulCurdModelUser03List />} />
-                    <Route path="create" element={<MulCurdModelUser03Create />} />
-                    <Route path="edit/:id" element={<MulCurdModelUser03Edit />} />
-                    <Route path="show/:id" element={<MulCurdModelUser03Show />} />
-                  </Route>     
                   <Route path="/crudDefineModuel">
                     <Route index element={<CrudDefineModuelList />} />
                     <Route path="create" element={<CrudDefineModuelCreate />} />
                     <Route path="edit/:id" element={<CrudDefineModuelEdit />} />
                     <Route path="show/:id" element={<CrudDefineModuelShow />} />
                   </Route>                                                                                            
-                  <Route path="/demoOrder">
-                    <Route index element={<DemoOrderList />} />
-                    <Route path="create" element={<DemoOrderCreate />} />
-                    <Route path="edit/:id" element={<DemoOrderEdit />} />
-                    <Route path="show/:id" element={<DemoOrderShow />} />
-                  </Route>            
-                  <Route path="/demoOrder01">
-                    <Route index element={<DemoOrder01List />} />
-                    <Route path="create" element={<DemoOrder01Create />} />
-                    <Route path="edit/:id" element={<DemoOrder01Edit />} />
-                    <Route path="show/:id" element={<DemoOrder01Show />} />
-                  </Route>                        
                   <Route path="/masterDetailRel">
                     <Route index element={<MasterDetailRelList />} />
                     <Route path="create" element={<MasterDetailRelCreate />} />
