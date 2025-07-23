@@ -227,7 +227,7 @@ sorter          filteredValue={
                 showSearch
                 placeholder="请选择表单类型"
                 style={{ minWidth: 150 }}                options={
-                  [{"label": "\u6587\u672c\u6846", "value": "text"}, {"label": "\u6587\u672c\u5757", "value": "textarea"}, {"label": "\u590d\u9009\u6846", "value": "checkbox"}, {"label": "\u4e0b\u62c9\u6846", "value": "select"}, {"label": "\u65e5\u671f\u9009\u62e9\u6846", "value": "date"}]
+                  [{"label": "\u6587\u672c\u6846", "value": "input"}, {"label": "\u6587\u672c\u5757", "value": "textarea"}, {"label": "\u590d\u9009\u6846", "value": "checkbox"}, {"label": "\u4e0b\u62c9\u6846", "value": "select"}, {"label": "\u65e5\u671f\u9009\u62e9\u6846", "value": "date"}]
                 }
                 value={props.selectedKeys[0]}
                 onChange={(value) =>
@@ -240,7 +240,7 @@ sorter          filteredValue={
           render={(value) => {
             const values = String(value).split(",");
             const labels = values.map((v) =>
-              [{"label": "\u6587\u672c\u6846", "value": "text"}, {"label": "\u6587\u672c\u5757", "value": "textarea"}, {"label": "\u590d\u9009\u6846", "value": "checkbox"}, {"label": "\u4e0b\u62c9\u6846", "value": "select"}, {"label": "\u65e5\u671f\u9009\u62e9\u6846", "value": "date"}].find((o) => String(o.value) === v)?.label || v
+              [{"label": "\u6587\u672c\u6846", "value": "input"}, {"label": "\u6587\u672c\u5757", "value": "textarea"}, {"label": "\u590d\u9009\u6846", "value": "checkbox"}, {"label": "\u4e0b\u62c9\u6846", "value": "select"}, {"label": "\u65e5\u671f\u9009\u62e9\u6846", "value": "date"}].find((o) => String(o.value) === v)?.label || v
             );
             return labels.join(", ");
           }}

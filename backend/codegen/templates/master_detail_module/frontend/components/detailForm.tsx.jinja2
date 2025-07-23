@@ -1,6 +1,7 @@
 import { useForm } from "@refinedev/antd";
 import { Form, Input, Select, Checkbox, DatePicker, Button } from "antd";
 import dayjs from "dayjs";
+import { useEffect } from "react";
 
 interface {{ detail_module.class_name }}Props {
   {{ relation_field }}: number | string;
@@ -34,18 +35,19 @@ export const {{ detail_module.class_name }} = ({
     },
   });
 
-  // 预填初始值（支持编辑场景）
-  if (isEdit && initialValues) {
-    formProps.form?.setFieldsValue({
-      ...initialValues,
-      {% for field in detail_module.fields if field.type == "datetime" %}
-      {{ field.name }}: initialValues.{{ field.name }} ? dayjs(initialValues.{{ field.name }}) : undefined,
-      {% endfor %}
-      {% for field in detail_module.fields if field.form_type == "checkbox" %}
-      {{ field.name }}: initialValues.{{ field.name }}?.split(",").map(Number),
-      {% endfor %}
-    });
-  }
+  useEffect(() => {
+    if (isEdit && initialValues) {
+      formProps.form?.setFieldsValue({
+        ...initialValues,
+        {% for field in detail_module.fields if field.type == "datetime" %}
+        {{ field.name }}: initialValues.{{ field.name }} ? dayjs(initialValues.{{ field.name }}) : undefined,
+        {% endfor %}
+        {% for field in detail_module.fields if field.form_type == "checkbox" %}
+        {{ field.name }}: initialValues.{{ field.name }}?.split(",").map(Number),
+        {% endfor %}
+      });
+    }
+  }, [isEdit, initialValues, form]);  
 
   const handleFinish = (values: any) => {
     const processed = {

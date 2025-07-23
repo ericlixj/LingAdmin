@@ -10,8 +10,12 @@ class {{ class_name }}(SQLModel, table=True):
     {%- if field.default is not none %}
         {%- if field.type == "str" %}
             {%- set default_str = 'default="' ~ field.default ~ '"' %}
-        {%- elif field.type == "int" or field.type == "float" %}
-            {%- set default_str = 'default=' ~ field.default|string %}
+        {%- elif field.type in ["int", "float"] %}
+            {%- if field.default == "" %}
+                {%- set default_str = 'default=None' %}
+            {%- else %}
+                {%- set default_str = 'default=' ~ field.default|string %}
+            {%- endif %}
         {%- elif field.type == "bool" %}
             {%- set default_str = 'default=' ~ ('True' if field.default else 'False') %}
         {%- else %}

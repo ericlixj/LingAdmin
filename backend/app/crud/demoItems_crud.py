@@ -2,9 +2,7 @@ import logging
 from datetime import datetime
 from typing import Any, Dict, List, Optional
 
-from app.models.demoOrder01 import DemoOrder01, DemoOrder01Create, DemoOrder01Update
-from app.models.demoItems import DemoItems
-from sqlalchemy import update
+from app.models.demoItems import DemoItems, DemoItemsCreate, DemoItemsUpdate
 from sqlalchemy import func
 from sqlalchemy.sql.elements import UnaryExpression
 from sqlmodel import Session, col, select
@@ -14,29 +12,28 @@ init_logger()
 logger = logging.getLogger(__name__)
 
 QUERYABLE_FIELDS = {
-  "order_code": "like",
-  "open_date": "in",
-  "order_status": "eq",
+  "name": "like",
+  "price": "eq",
 }
 
-class DemoOrder01CRUD:
+class DemoItemsCRUD:
     def __init__(self, session: Session):
         self.session = session
-        self.model = DemoOrder01
+        self.model = DemoItems
 
-    def get_by_id(self, demoOrder01_id: int) -> Optional[DemoOrder01]:
-        statement = select(DemoOrder01).where(DemoOrder01.id == demoOrder01_id, DemoOrder01.deleted == False)
+    def get_by_id(self, demoItems_id: int) -> Optional[DemoItems]:
+        statement = select(DemoItems).where(DemoItems.id == demoItems_id, DemoItems.deleted == False)
         result = self.session.exec(statement).first()
         return result
 
-    def create(self, obj_in: DemoOrder01Create) -> DemoOrder01:
-        db_obj = DemoOrder01.from_orm(obj_in)
+    def create(self, obj_in: DemoItemsCreate) -> DemoItems:
+        db_obj = DemoItems.from_orm(obj_in)
         self.session.add(db_obj)
         self.session.commit()
         self.session.refresh(db_obj)
         return db_obj
 
-    def update(self, db_obj: DemoOrder01, obj_in: DemoOrder01Update) -> DemoOrder01:
+    def update(self, db_obj: DemoItems, obj_in: DemoItemsUpdate) -> DemoItems:
         update_data = obj_in.dict(exclude_unset=True)
         for field, value in update_data.items():
             setattr(db_obj, field, value)
@@ -46,18 +43,10 @@ class DemoOrder01CRUD:
         self.session.refresh(db_obj)
         return db_obj
 
-    def soft_delete(self, db_obj: DemoOrder01) -> DemoOrder01:
+    def soft_delete(self, db_obj: DemoItems) -> DemoItems:
         db_obj.deleted = True
         db_obj.update_time = datetime.utcnow()
         self.session.add(db_obj)
-        self.session.execute(
-            update(DemoItems)
-            .where(DemoItems.order_id == db_obj.id)
-            .values(
-                deleted=True,
-                update_time=datetime.utcnow()
-            )
-        )
         self.session.commit()
         self.session.refresh(db_obj)
         return db_obj
@@ -128,17 +117,17 @@ class DemoOrder01CRUD:
         limit: int = 10,
         filters: Optional[Dict[str, Any]] = None,
         order_by: Optional[UnaryExpression] = None,
-    ) -> List[DemoOrder01]:
-        query = select(DemoOrder01).where(DemoOrder01.deleted == False)
+    ) -> List[DemoItems]:
+        query = select(DemoItems).where(DemoItems.deleted == False)
         query = self._apply_filters(query, filters)
         if order_by is not None:
             query = query.order_by(order_by)
         else:
-            query = query.order_by(DemoOrder01.id.desc())
+            query = query.order_by(DemoItems.id.desc())
         logger.debug(f"Executing query: {query}")
         return self.session.exec(query.offset(skip).limit(limit)).all()
 
     def count_all(self, filters: Optional[Dict[str, Any]] = None) -> int:
-        query = select(func.count()).select_from(DemoOrder01).where(DemoOrder01.deleted == False)
+        query = select(func.count()).select_from(DemoItems).where(DemoItems.deleted == False)
         query = self._apply_filters(query, filters)
         return self.session.exec(query).one()

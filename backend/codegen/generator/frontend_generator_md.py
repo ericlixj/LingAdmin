@@ -3,8 +3,11 @@ from jinja2 import Environment, FileSystemLoader
 from codegen.base.model import CURDModel, MasterDetailCURDModel
 
 # Jinja2 模板引擎初始化
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+TEMPLATE_DIR = os.path.join(BASE_DIR, "templates", "master_detail_module")
+
 env = Environment(
-    loader=FileSystemLoader("templates/master_detail_module/frontend"),
+    loader=FileSystemLoader(TEMPLATE_DIR),
     trim_blocks=True,
     lstrip_blocks=True,
 )
@@ -14,105 +17,106 @@ def render_template(template_name, context):
     return template.render(context)
 
 # 生成 App.tsx
-def generate_frontend_app(model: CURDModel, target_dir: str):
-    content = render_template("App.tsx.jinja2", {
+def generate_frontend_app(model: CURDModel) -> tuple[str, str]:
+    content = render_template("frontend/App.tsx.jinja2", {
         "class_name": model.class_name,
         "module_name": model.module_name,
         "label": model.label or "",
     })
+    path = os.path.join("frontend", "src", "App_tmp.tsx")
+    return path, content
 
-    path = os.path.join(target_dir, "frontend", "src", "App_tmp.tsx")
-    os.makedirs(os.path.dirname(path), exist_ok=True)
-    with open(path, "w", encoding="utf-8") as f:
-        f.write(content)
-    print(f"Generated: {path}")
-
-# 生成 i18nProvider.ts
-def generate_frontend_i18n(model: CURDModel, target_dir: str):
-    content = render_template("i18nProvider.ts.jinja2", {
+def generate_frontend_i18n(model: CURDModel) -> tuple[str, str]:
+    content = render_template("frontend/i18nProvider.ts.jinja2", {
         "class_name": model.class_name,
         "module_name": model.module_name,
         "label": model.label or "",
     })
+    path = os.path.join("frontend", "src", "i18nProvider_tmp.ts")
+    return path, content
 
-    path = os.path.join(target_dir, "frontend", "src", "i18nProvider_tmp.ts")
-    os.makedirs(os.path.dirname(path), exist_ok=True)
-    with open(path, "w", encoding="utf-8") as f:
-        f.write(content)
-    print(f"Generated: {path}")
-
-# 生成 CRUD 页面（不含 show）
-def generate_frontend_crud_pages(model: CURDModel, target_dir: str):
+def generate_frontend_crud_pages(model: CURDModel) -> dict[str, str]:
     templates = {
-        "create.tsx.jinja2": "create.tsx",
-        "edit.tsx.jinja2": "edit.tsx",
-        "list.tsx.jinja2": "list.tsx",
-        "index.tsx.jinja2": "index.tsx",
+        "frontend/create.tsx.jinja2": "create.tsx",
+        "frontend/edit.tsx.jinja2": "edit.tsx",
+        "frontend/list.tsx.jinja2": "list.tsx",
+        "frontend/index.tsx.jinja2": "index.tsx",
     }
 
-    pages_dir = os.path.join(target_dir, "frontend", "src", "pages", model.module_name)
-    os.makedirs(pages_dir, exist_ok=True)
-
+    result = {}
     for tpl, filename in templates.items():
         content = render_template(tpl, {
             "class_name": model.class_name,
             "module_name": model.module_name,
             "fields": [f.dict() for f in model.fields],
         })
-        path = os.path.join(pages_dir, filename)
-        with open(path, "w", encoding="utf-8") as f:
-            f.write(content)
-        print(f"Generated: {path}")
+        path = os.path.join("frontend", "src", "pages", model.module_name, filename)
+        result[path] = content
+    return result
 
-# 生成 show 页面（主子表）
-def generate_frontend_show_page(module: MasterDetailCURDModel, target_dir: str):
+def generate_frontend_show_page(module: MasterDetailCURDModel) -> tuple[str, str]:
     master = module.master_module
     detail = module.detail_module
 
-    content = render_template("show.tsx.jinja2", {
+    content = render_template("frontend/show.tsx.jinja2", {
         "master_module": master.dict(),
         "detail_module": detail.dict(),
         "relation_field": module.relation_field,
     })
 
-    path = os.path.join(target_dir, "frontend", "src", "pages", master.module_name, "show.tsx")
-    os.makedirs(os.path.dirname(path), exist_ok=True)
-    with open(path, "w", encoding="utf-8") as f:
-        f.write(content)
-    print(f"Generated: {path}")
+    path = os.path.join("frontend", "src", "pages", master.module_name, "show.tsx")
+    return path, content
 
-# 生成 detail 子表表单组件
-def generate_detail_form_component(module: MasterDetailCURDModel, target_dir: str):
+def generate_detail_form_component(module: MasterDetailCURDModel) -> tuple[str, str]:
     master = module.master_module
     detail = module.detail_module
 
-    content = render_template("components/detailForm.tsx.jinja2", {
+    content = render_template("frontend/components/detailForm.tsx.jinja2", {
         "detail_module": detail,
         "relation_field": module.relation_field,
     })
 
     path = os.path.join(
-    target_dir,
-    "frontend",
-    "src",
-    "pages",
-    master.module_name,
-    "components",
-    f"{detail.module_name}.tsx"
-)
-    os.makedirs(os.path.dirname(path), exist_ok=True)
-    with open(path, "w", encoding="utf-8") as f:
-        f.write(content)
-    print(f"Generated: {path}")
+        "frontend",
+        "src",
+        "pages",
+        master.module_name,
+        "components",
+        f"{detail.module_name}.tsx"
+    )
+    return path, content
 
-# 前端主入口：一键生成
-def generate_frontend_files(module: MasterDetailCURDModel, target_dir: str):
-    print("\n Generating frontend files...")
+def generate_frontend_files(module: MasterDetailCURDModel, target_dir: str | None) -> dict[str, str]:
+    print("\n🚀 Generating frontend files...")
 
-    generate_frontend_app(module.master_module, target_dir)
-    generate_frontend_i18n(module.master_module, target_dir)
-    generate_frontend_crud_pages(module.master_module, target_dir)
-    generate_frontend_show_page(module, target_dir)
-    generate_detail_form_component(module, target_dir)
+    file_map: dict[str, str] = {}
 
-    print("Frontend generation completed.\n")
+    # App.tsx & i18nProvider
+    path, content = generate_frontend_app(module.master_module)
+    file_map[path] = content
+    path, content = generate_frontend_i18n(module.master_module)
+    file_map[path] = content
+
+    # CRUD 页面（不含 show）
+    file_map.update(generate_frontend_crud_pages(module.master_module))
+
+    # show 页面
+    path, content = generate_frontend_show_page(module)
+    file_map[path] = content
+
+    # 子表组件
+    path, content = generate_detail_form_component(module)
+    file_map[path] = content
+
+    if target_dir:
+        for relative_path, content in file_map.items():
+            full_path = os.path.join(target_dir, relative_path)
+            os.makedirs(os.path.dirname(full_path), exist_ok=True)
+            with open(full_path, "w", encoding="utf-8") as f:
+                f.write(content)
+            print(f"Generated: {full_path}")
+        print("Frontend generation completed.\n")
+    else:
+        print("Dry run (no files written).")
+
+    return file_map

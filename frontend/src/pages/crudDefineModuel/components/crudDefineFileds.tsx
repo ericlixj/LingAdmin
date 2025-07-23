@@ -1,6 +1,7 @@
 import { useForm } from "@refinedev/antd";
 import { Form, Input, Select, Checkbox, DatePicker, Button } from "antd";
 import dayjs from "dayjs";
+import { useEffect } from "react";
 
 interface CrudDefineFiledsProps {
   module_id: number | string;
@@ -34,12 +35,11 @@ export const CrudDefineFileds = ({
     },
   });
 
-  // 预填初始值（支持编辑场景）
-  if (isEdit && initialValues) {
-    formProps.form?.setFieldsValue({
-      ...initialValues,
-    });
-  }
+  useEffect(() => {
+    if (isEdit && initialValues) {
+      form.setFieldsValue(initialValues);
+    }
+  }, [isEdit, initialValues, form]);
 
   const handleFinish = (values: any) => {
     const processed = {
@@ -132,7 +132,7 @@ export const CrudDefineFileds = ({
         <Select allowClear>
           <Select.Option
             value={
-                "text"
+                "input"
             }
           >
             文本框

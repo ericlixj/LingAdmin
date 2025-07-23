@@ -101,6 +101,12 @@ import {
   DemoOrder01List,
   DemoOrder01Show,
 } from "./pages/demoOrder01";
+import {
+  MasterDetailRelCreate,
+  MasterDetailRelEdit,
+  MasterDetailRelList,
+  MasterDetailRelShow,
+} from "./pages/masterDetailRel";
 
 function App() {
   return (
@@ -262,7 +268,7 @@ function App() {
                   show: CrudDefineModuelShow,
                   meta: {
                     canDelete: true,
-                    label: "单表CRUD配置",
+                    label: "单表配置",
                     icon: <ApiOutlined />,
                     parent: "infra",
                   },
@@ -290,7 +296,20 @@ function App() {
                     label: "演示订单01",
                     icon: <ApiOutlined />,
                   },
-                },                                                
+                },            
+                {
+                  name: "masterDetailRel",
+                  list: MasterDetailRelList,
+                  create: MasterDetailRelCreate,
+                  edit: MasterDetailRelEdit,
+                  show: MasterDetailRelShow,
+                  meta: {
+                    canDelete: true,
+                    label: "主子表配置",
+                    icon: <ApiOutlined />,
+                    parent:"infra",
+                  },
+                },                                                    
               ]}
               options={{
                 syncWithLocation: true,
@@ -384,6 +403,12 @@ function App() {
                     <Route path="edit/:id" element={<DemoOrder01Edit />} />
                     <Route path="show/:id" element={<DemoOrder01Show />} />
                   </Route>                        
+                  <Route path="/masterDetailRel">
+                    <Route index element={<MasterDetailRelList />} />
+                    <Route path="create" element={<MasterDetailRelCreate />} />
+                    <Route path="edit/:id" element={<MasterDetailRelEdit />} />
+                    <Route path="show/:id" element={<MasterDetailRelShow />} />
+                  </Route>
 
                   <Route path="*" element={<ErrorComponent />} />
                 </Route>

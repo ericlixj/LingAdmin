@@ -1,11 +1,10 @@
 import {
   EditButton,
   FilterDropdown,
-  List,
   ShowButton,
   useTable,
 } from "@refinedev/antd";
-import { Input, Select, Space, Table, DatePicker  } from "antd";
+import { Input, Select, Space, Table, DatePicker, List  } from "antd";
 import dayjs from "dayjs";
 
 export const CurdModel02List = () => {

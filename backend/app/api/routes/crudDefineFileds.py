@@ -95,6 +95,38 @@ def list_items(
 
     return {"data": items, "total": total}
 
+@router.get(
+    "/filed_select",
+    dependencies=[Depends(has_permission("super_admin"))],
+    response_model=CrudDefineFiledsListResponse,
+)
+def list_items_filed_select(
+    request: Request,
+    _start: int = Query(0),
+    _end: int = Query(10),
+    session: Session = Depends(get_session),
+):
+    query_params = dict(request.query_params)
+    filters = parse_refine_filters(query_params)
+
+    crud = CrudDefineFiledsCRUD(session)
+    skip = _start
+    limit = _end - _start
+    sortField = query_params.get("sortField")
+    sortOrder = query_params.get("sortOrder")
+
+    order_by = None
+    if sortField and sortOrder:
+        field = getattr(CrudDefineFileds, sortField, None)
+        if field is not None:
+            order_by = field.asc() if sortOrder.lower() == "asc" else field.desc()
+
+    items = crud.list_all(skip=skip, limit=limit, filters=filters, order_by=order_by)
+    total = crud.count_all(filters=filters)
+    data = [{"name": item.name, "description": item.description+"["+item.name+"]"} for item in items]
+    return {"data": data, "total": total}
+
+
 
 @router.get("/{item_id}", dependencies=[Depends(has_permission("super_admin"))], response_model=CrudDefineFileds)
 def get_item(item_id: int, session: Session = Depends(get_session)):

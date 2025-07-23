@@ -14,6 +14,8 @@ from app.api.routes import (
     crudDefineFileds,
     demoOrder,
     demoOrder01,
+    masterDetailRel,
+    demoItems,
 )
 from fastapi import APIRouter
 
@@ -35,3 +37,5 @@ api_router.include_router(crudDefineModuel.router, prefix="/crudDefineModuel", t
 api_router.include_router(crudDefineFileds.router, prefix="/crudDefineFileds", tags=["CrudDefineFileds"])
 api_router.include_router(demoOrder.router, prefix="/demoOrder", tags=["DemoOrder"])
 api_router.include_router(demoOrder01.router, prefix="/demoOrder01", tags=["DemoOrder01"])
+api_router.include_router(masterDetailRel.router, prefix="/masterDetailRel", tags=["MasterDetailRel"])
+api_router.include_router(demoItems.router, prefix="/demoItems", tags=["DemoItems"])

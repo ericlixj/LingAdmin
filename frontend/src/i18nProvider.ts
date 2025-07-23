@@ -100,6 +100,14 @@ const translations = {
             show: "演示订单01详情",
         },
     },    
+    masterDetailRel: {
+        titles: {
+            list: "主子表关系列表",
+            create: "创建主子表关系",
+            edit: "编辑主子表关系",
+            show: "主子表关系详情",
+        },
+    },    
   
 };
 const i18nProvider = {

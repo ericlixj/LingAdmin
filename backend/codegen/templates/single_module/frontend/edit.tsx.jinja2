@@ -13,6 +13,8 @@ function prepareInitialValues(record: Record<string, any>, fields: any[]) {
       result[field.name] = value ? dayjs(value) : null;
     } else if (field.form_type === "checkbox" && field.options) {
       result[field.name] = value ? value.split(",").map((v: string) => Number(v.trim())) : [];
+    } else if (field.form_type === "select") {
+      result[field.name] = String(value);
     } else {
       result[field.name] = value;
     }
