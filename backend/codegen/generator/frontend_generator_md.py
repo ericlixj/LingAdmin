@@ -4,7 +4,7 @@ from codegen.base.model import CURDModel, MasterDetailCURDModel
 
 # Jinja2 模板引擎初始化
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-TEMPLATE_DIR = os.path.join(BASE_DIR, "templates", "master_detail_module")
+TEMPLATE_DIR = os.path.join(BASE_DIR, "templates")
 
 env = Environment(
     loader=FileSystemLoader(TEMPLATE_DIR),
@@ -18,7 +18,7 @@ def render_template(template_name, context):
 
 # 生成 App.tsx
 def generate_frontend_app(model: CURDModel) -> tuple[str, str]:
-    content = render_template("frontend/App.tsx.jinja2", {
+    content = render_template("common/frontend/App.tsx.jinja2", {
         "class_name": model.class_name,
         "module_name": model.module_name,
         "label": model.label or "",
@@ -27,7 +27,7 @@ def generate_frontend_app(model: CURDModel) -> tuple[str, str]:
     return path, content
 
 def generate_frontend_i18n(model: CURDModel) -> tuple[str, str]:
-    content = render_template("frontend/i18nProvider.ts.jinja2", {
+    content = render_template("common/frontend/i18nProvider.ts.jinja2", {
         "class_name": model.class_name,
         "module_name": model.module_name,
         "label": model.label or "",
@@ -37,10 +37,10 @@ def generate_frontend_i18n(model: CURDModel) -> tuple[str, str]:
 
 def generate_frontend_crud_pages(model: CURDModel) -> dict[str, str]:
     templates = {
-        "frontend/create.tsx.jinja2": "create.tsx",
-        "frontend/edit.tsx.jinja2": "edit.tsx",
-        "frontend/list.tsx.jinja2": "list.tsx",
-        "frontend/index.tsx.jinja2": "index.tsx",
+        "common/frontend/create.tsx.jinja2": "create.tsx",
+        "common/frontend/edit.tsx.jinja2": "edit.tsx",
+        "master_detail_module/frontend/list.tsx.jinja2": "list.tsx",
+        "common/frontend/index.tsx.jinja2": "index.tsx",
     }
 
     result = {}
@@ -58,7 +58,7 @@ def generate_frontend_show_page(module: MasterDetailCURDModel) -> tuple[str, str
     master = module.master_module
     detail = module.detail_module
 
-    content = render_template("frontend/show.tsx.jinja2", {
+    content = render_template("master_detail_module/frontend/show.tsx.jinja2", {
         "master_module": master.dict(),
         "detail_module": detail.dict(),
         "relation_field": module.relation_field,
@@ -71,7 +71,7 @@ def generate_detail_form_component(module: MasterDetailCURDModel) -> tuple[str, 
     master = module.master_module
     detail = module.detail_module
 
-    content = render_template("frontend/components/detailForm.tsx.jinja2", {
+    content = render_template("master_detail_module/frontend/components/detailForm.tsx.jinja2", {
         "detail_module": detail,
         "relation_field": module.relation_field,
     })

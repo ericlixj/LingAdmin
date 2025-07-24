@@ -7,13 +7,10 @@ export const SysDicCreate = () => {
 
   useEffect(() => {
     const defaults = {
-      dic_code: "",
-      dic_name: "",
-      status: "0",
-      remark: "",
+      status:"0",
     };
     formProps.form?.setFieldsValue(defaults);
-  }, [formProps.form]);
+  }, [formProps.form]);  
 
   const handleFinish = (values: any) => {
     const processed = {
@@ -33,7 +30,7 @@ export const SysDicCreate = () => {
             { max: 50, message: '最多输入 50 个字符' }
           ]}
         >
-                <Input />
+              <Input />
         </Form.Item>
         <Form.Item
           name="dic_name"
@@ -43,7 +40,7 @@ export const SysDicCreate = () => {
             { max: 100, message: '最多输入 100 个字符' }
           ]}
         >
-                <Input />
+              <Input />
         </Form.Item>
         <Form.Item
           name="status"

@@ -2,32 +2,32 @@
 
 // 1. Import Section (add where all other pages are imported)
 import {
-  DemoUserCreate,
-  DemoUserEdit,
-  DemoUserList,
-  DemoUserShow,
-} from "./pages/demoUser";
+  SysDicCreate,
+  SysDicEdit,
+  SysDicList,
+  SysDicShow,
+} from "./pages/sysDic";
 
 
 // 2. Resource Section (inside the resources array)
                 {
-                  name: "demoUser",
-                  list: DemoUserList,
-                  create: DemoUserCreate,
-                  edit: DemoUserEdit,
-                  show: DemoUserShow,
+                  name: "sysDic",
+                  list: SysDicList,
+                  create: SysDicCreate,
+                  edit: SysDicEdit,
+                  show: SysDicShow,
                   meta: {
                     canDelete: true,
-                    label: "演示用户",
+                    label: "字典表",
                     icon: <ApiOutlined />,
                   },
                 },
 
 
 // 3. Route Section (inside the Routes definition)
-                  <Route path="/demoUser">
-                    <Route index element={<DemoUserList />} />
-                    <Route path="create" element={<DemoUserCreate />} />
-                    <Route path="edit/:id" element={<DemoUserEdit />} />
-                    <Route path="show/:id" element={<DemoUserShow />} />
+                  <Route path="/sysDic">
+                    <Route index element={<SysDicList />} />
+                    <Route path="create" element={<SysDicCreate />} />
+                    <Route path="edit/:id" element={<SysDicEdit />} />
+                    <Route path="show/:id" element={<SysDicShow />} />
                   </Route>

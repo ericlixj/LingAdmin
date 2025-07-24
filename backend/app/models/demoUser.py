@@ -5,6 +5,7 @@ from sqlalchemy import Column, DateTime, text, String, Integer
 from sqlmodel import Field, SQLModel
 
 class DemoUser(SQLModel, table=True):
+    __tablename__ = "demo_user"
     id:        int = Field(
         description="主键",
         sa_column=Column(

@@ -4,7 +4,7 @@ from jinja2 import Environment, FileSystemLoader
 from codegen.base.model import MasterDetailCURDModel, CURDModel
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-TEMPLATE_DIR = os.path.join(BASE_DIR, "templates", "master_detail_module")
+TEMPLATE_DIR = os.path.join(BASE_DIR, "templates")
 
 env = Environment(
     loader=FileSystemLoader(TEMPLATE_DIR),
@@ -19,9 +19,10 @@ def render_template(template_name, context):
 def generate_backend_model(model: CURDModel) -> str:
     context = {
         "class_name": model.class_name,
+        "table_name": model.table_name,
         "fields": model.fields,
     }
-    return render_template("backend/modules.jinja2", context)
+    return render_template("common/backend/modules.jinja2", context)
 
 def generate_backend_crud(model: CURDModel, isMaster: bool, detail_class_name: str, detail_module_name: str, relation_field: str) -> str:
     context = {
@@ -33,14 +34,14 @@ def generate_backend_crud(model: CURDModel, isMaster: bool, detail_class_name: s
         "detail_module_name": detail_module_name,
         "relation_field": relation_field,
     }
-    return render_template("backend/crud.jinja2", context)
+    return render_template("master_detail_module/backend/crud.jinja2", context)
 
 def generate_backend_routes(model: CURDModel) -> str:
     context = {
         "class_name": model.class_name,
         "module_name": model.module_name,
     }
-    return render_template("backend/routes.jinja2", context)
+    return render_template("common/backend/routes.jinja2", context)
 
 def generate_routes_main_content(master_model: CURDModel, detail_model: CURDModel) -> str:
     context = {
@@ -49,7 +50,7 @@ def generate_routes_main_content(master_model: CURDModel, detail_model: CURDMode
         "detail_class_name": detail_model.class_name,
         "detail_module_name": detail_model.module_name,
     }
-    return render_template("backend/main.jinja2", context)
+    return render_template("master_detail_module/backend/main.jinja2", context)
 
 def generate_backend_files(module: MasterDetailCURDModel, target_dir: str | None):
     print("\n🚀 Generating backend files...")

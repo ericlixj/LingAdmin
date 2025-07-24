@@ -6,7 +6,7 @@ from typing import Optional
 
 # 取当前文件的目录，定位 templates 目录绝对路径
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-TEMPLATE_DIR = os.path.join(BASE_DIR, "templates", "single_module")
+TEMPLATE_DIR = os.path.join(BASE_DIR, "templates")
 
 env = Environment(
     loader=FileSystemLoader(TEMPLATE_DIR),
@@ -24,7 +24,7 @@ def generate_frontend_App(module_name: str, model: CURDModel) -> str:
         "module_name": module_name,
         "label": model.label or "",
     }
-    return render_template("frontend/App.tsx.jinja2", context)
+    return render_template("common/frontend/App.tsx.jinja2", context)
 
 def generate_frontend_i8n(module_name: str, model: CURDModel) -> str:
     context = {
@@ -32,7 +32,7 @@ def generate_frontend_i8n(module_name: str, model: CURDModel) -> str:
         "module_name": module_name,
         "label": model.label or "",
     }
-    return render_template("frontend/i18nProvider.ts.jinja2", context)
+    return render_template("common/frontend/i18nProvider.ts.jinja2", context)
 
 def generate_frontend_files(model: CURDModel, target_dir: Optional[str] = "codegen/target/single_module") -> dict:
     module_name = model.module_name
@@ -58,11 +58,11 @@ def generate_frontend_files(model: CURDModel, target_dir: Optional[str] = "codeg
 
     # 页面部分
     pages = {
-        "frontend/create.tsx.jinja2": "create.tsx",
-        "frontend/edit.tsx.jinja2": "edit.tsx",
-        "frontend/list.tsx.jinja2": "list.tsx",
-        "frontend/show.tsx.jinja2": "show.tsx",
-        "frontend/index.tsx.jinja2": "index.tsx",
+        "common/frontend/create.tsx.jinja2": "create.tsx",
+        "common/frontend/edit.tsx.jinja2": "edit.tsx",
+        "single_module/frontend/list.tsx.jinja2": "list.tsx",
+        "single_module/frontend/show.tsx.jinja2": "show.tsx",
+        "common/frontend/index.tsx.jinja2": "index.tsx",
     }
 
     for template_file, filename in pages.items():

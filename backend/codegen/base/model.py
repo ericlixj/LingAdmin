@@ -1,8 +1,14 @@
 from typing import List, Optional, Union, Literal
 from pydantic import BaseModel, validator, root_validator
+import re
 
 
 COMMON_FIELDS = {"id", "creator", "updater", "deleted", "create_time", "update_time"}
+
+def camel_to_snake(name: str) -> str:
+    s1 = re.sub(r'(.)([A-Z][a-z]+)', r'\1_\2', name)
+    v = re.sub(r'([a-z0-9])([A-Z])', r'\1_\2', s1).lower()
+    return v
 
 class FieldOption(BaseModel):
     label: str
@@ -49,7 +55,8 @@ class CURDModel(BaseModel):
     模块整体模型定义
     """
     module_name: str  # 模块名，通常就是文件名
-    class_name: Optional[str] = None # 类名，首字母大写
+    class_name: Optional[str] = None
+    table_name: Optional[str] = None
     label: str  # 模块中文名，用于界面显示
     fields: List[FieldDef]
 
@@ -61,6 +68,15 @@ class CURDModel(BaseModel):
         if not module_name:
             raise ValueError("module_name is required to generate class_name")
         return module_name[0].upper() + module_name[1:]
+    
+    @validator('table_name', always=True)
+    def auto_generate_table_name(cls, v, values):
+        if v:
+            return v
+        class_name = values.get("class_name")
+        if not class_name:
+            raise ValueError("class_name is required to generate table_name")
+        return camel_to_snake(class_name)
     
 class MasterDetailCURDModel(BaseModel):
     master_module: CURDModel
