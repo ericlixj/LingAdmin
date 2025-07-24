@@ -32,7 +32,7 @@ class {{ class_name }}CRUD:
         return result
 
     def create(self, obj_in: {{ class_name }}Create) -> {{ class_name }}:
-        db_obj = {{ class_name }}.from_orm(obj_in)
+        db_obj = {{ class_name }}(**obj_in.dict())
         self.session.add(db_obj)
         self.session.commit()
         self.session.refresh(db_obj)

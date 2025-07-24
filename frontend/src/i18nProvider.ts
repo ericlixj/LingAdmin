@@ -24,31 +24,6 @@ const translations = {
             show: "权限详情",
         },
     },
-    app: {
-        titles: {
-            list: "应用列表",
-            create: "创建应用",
-            edit: "编辑应用",
-            show: "应用详情",
-        },
-    },
-
-    shop: {
-        titles: {
-            list: "店铺列表",
-            create: "创建店铺",
-            edit: "编辑店铺",
-            show: "店铺详情",
-        },
-    },  
-    "shop-daily-stat": {
-        titles: {
-            list: "店铺日报列表",
-            create: "创建店铺日报",
-            edit: "编辑店铺日报",
-            show: "店铺日报详情",
-        },
-    },        
     buttons: {
         create: "新增",
         refresh: "刷新",
@@ -82,6 +57,22 @@ const translations = {
             create: "创建主子表关系",
             edit: "编辑主子表关系",
             show: "主子表关系详情",
+        },
+    },    
+    demoUser: {
+        titles: {
+            list: "演示用户列表",
+            create: "创建演示用户",
+            edit: "编辑演示用户",
+            show: "演示用户详情",
+        },
+    },    
+    sysDic: {
+        titles: {
+            list: "字典表列表",
+            create: "创建字典表",
+            edit: "编辑字典表",
+            show: "字典表详情",
         },
     },    
   

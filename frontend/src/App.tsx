@@ -33,12 +33,6 @@ import { Header } from "./components/header";
 import { ColorModeContextProvider } from "./contexts/color-mode";
 import dataProvider from "./dataProvider";
 import i18nProvider from "./i18nProvider";
-import {
-  AppCreate,
-  AppEdit,
-  AppList,
-  AppShow,
-} from "./pages/app";
 import { Dashboard } from "./pages/dashboard";
 import { Login } from "./pages/login";
 import {
@@ -53,18 +47,6 @@ import {
   RoleList,
   RoleShow,
 } from "./pages/roles";
-import {
-  ShopCreate,
-  ShopEdit,
-  ShopList,
-  ShopShow,
-} from "./pages/shop";
-import {
-  ShopDailyStatCreate,
-  ShopDailyStatEdit,
-  ShopDailyStatList,
-  ShopDailyStatShow,
-} from "./pages/shop-daily-stat";
 import {
   UserCreate,
   UserEdit,
@@ -83,6 +65,18 @@ import {
   MasterDetailRelList,
   MasterDetailRelShow,
 } from "./pages/masterDetailRel";
+import {
+  DemoUserCreate,
+  DemoUserEdit,
+  DemoUserList,
+  DemoUserShow,
+} from "./pages/demoUser";
+import {
+  SysDicCreate,
+  SysDicEdit,
+  SysDicList,
+  SysDicShow,
+} from "./pages/sysDic";
 
 function App() {
   return (
@@ -162,7 +156,7 @@ function App() {
                     icon: <ApiOutlined />,
                   },
                 },
-                // 一级菜单 - 业务系统
+                // 一级菜单 - 演示
                 {
                   name: "demo",
                   list: () => null,
@@ -171,45 +165,6 @@ function App() {
                     icon: <BarChartOutlined  />,
                   },
                 },                     
-                {
-                  name: "app",
-                  list: AppList,
-                  create: AppCreate,
-                  edit: AppEdit,
-                  show: AppShow,
-                  meta: {
-                    canDelete: true,
-                    label: "应用管理",
-                    icon: <ApiOutlined />,
-                    parent: "demo",
-                  },
-                },
-                {
-                  name: "shop",
-                  list: ShopList,
-                  create: ShopCreate,
-                  edit: ShopEdit,
-                  show: ShopShow,
-                  meta: {
-                    canDelete: true,
-                    label: "店铺管理",
-                    icon: <ShopOutlined />,
-                    parent: "demo",
-                  },
-                },
-                {
-                  name: "shop-daily-stat",
-                  list: ShopDailyStatList,
-                  create: ShopDailyStatCreate,
-                  edit: ShopDailyStatEdit,
-                  show: ShopDailyStatShow,
-                  meta: {
-                    canDelete: true,
-                    label: "店铺日报管理",
-                    icon: <BarChartOutlined />,
-                    parent: "demo",
-                  },
-                },
                 {
                   name: "crudDefineModuel",
                   list: CrudDefineModuelList,
@@ -235,7 +190,35 @@ function App() {
                     icon: <ApiOutlined />,
                     parent:"infra",
                   },
-                },                                                    
+                },
+                {
+                  name: "demoUser",
+                  list: DemoUserList,
+                  create: DemoUserCreate,
+                  edit: DemoUserEdit,
+                  show: DemoUserShow,
+                  meta: {
+                    canDelete: true,
+                    label: "单表CRUD_demoUser",
+                    icon: <ApiOutlined />,
+                    parent:"demo",
+                  },
+                },          
+                {
+                  name: "sysDic",
+                  list: SysDicList,
+                  create: SysDicCreate,
+                  edit: SysDicEdit,
+                  show: SysDicShow,
+                  meta: {
+                    canDelete: true,
+                    label: "字典管理",
+                    parent: "system",
+                  },
+                },                                      
+                
+                
+                //
               ]}
               options={{
                 syncWithLocation: true,
@@ -281,24 +264,6 @@ function App() {
                     <Route path="edit/:id" element={<PermissionEdit />} />
                     <Route path="show/:id" element={<PermissionShow />} />
                   </Route>
-                  <Route path="/app">
-                    <Route index element={<AppList />} />
-                    <Route path="create" element={<AppCreate />} />
-                    <Route path="edit/:id" element={<AppEdit />} />
-                    <Route path="show/:id" element={<AppShow />} />
-                  </Route>
-                  <Route path="/shop">
-                    <Route index element={<ShopList />} />
-                    <Route path="create" element={<ShopCreate />} />
-                    <Route path="edit/:id" element={<ShopEdit />} />
-                    <Route path="show/:id" element={<ShopShow />} />
-                  </Route>
-                  <Route path="/shop-daily-stat">
-                    <Route index element={<ShopDailyStatList />} />
-                    <Route path="create" element={<ShopDailyStatCreate />} />
-                    <Route path="edit/:id" element={<ShopDailyStatEdit />} />
-                    <Route path="show/:id" element={<ShopDailyStatShow />} />
-                  </Route>
                   <Route path="/crudDefineModuel">
                     <Route index element={<CrudDefineModuelList />} />
                     <Route path="create" element={<CrudDefineModuelCreate />} />
@@ -311,6 +276,18 @@ function App() {
                     <Route path="edit/:id" element={<MasterDetailRelEdit />} />
                     <Route path="show/:id" element={<MasterDetailRelShow />} />
                   </Route>
+                  <Route path="/demoUser">
+                    <Route index element={<DemoUserList />} />
+                    <Route path="create" element={<DemoUserCreate />} />
+                    <Route path="edit/:id" element={<DemoUserEdit />} />
+                    <Route path="show/:id" element={<DemoUserShow />} />
+                  </Route>                  
+                  <Route path="/sysDic">
+                    <Route index element={<SysDicList />} />
+                    <Route path="create" element={<SysDicCreate />} />
+                    <Route path="edit/:id" element={<SysDicEdit />} />
+                    <Route path="show/:id" element={<SysDicShow />} />
+                  </Route>                  
 
                   <Route path="*" element={<ErrorComponent />} />
                 </Route>

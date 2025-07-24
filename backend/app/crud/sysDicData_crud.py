@@ -2,7 +2,7 @@ import logging
 from datetime import datetime
 from typing import Any, Dict, List, Optional
 
-from app.models.{{ module_name }} import {{ class_name }}, {{ class_name }}Create, {{ class_name }}Update
+from app.models.sysDicData import SysDicData, SysDicDataCreate, SysDicDataUpdate
 from sqlalchemy import func
 from sqlalchemy.sql.elements import UnaryExpression
 from sqlmodel import Session, col, select
@@ -12,29 +12,29 @@ init_logger()
 logger = logging.getLogger(__name__)
 
 QUERYABLE_FIELDS = {
-  {% for f in fields if f.queryable %}
-  "{{ f.name }}": "{{ f.query_type if f.query_type else 'eq' }}",
-  {% endfor %}
+  "label": "like",
+  "value": "like",
+  "status": "eq",
 }
 
-class {{ class_name }}CRUD:
+class SysDicDataCRUD:
     def __init__(self, session: Session):
         self.session = session
-        self.model = {{ class_name }}
+        self.model = SysDicData
 
-    def get_by_id(self, {{ module_name }}_id: int) -> Optional[{{ class_name }}]:
-        statement = select({{ class_name }}).where({{ class_name }}.id == {{ module_name }}_id, {{ class_name }}.deleted == False)
+    def get_by_id(self, sysDicData_id: int) -> Optional[SysDicData]:
+        statement = select(SysDicData).where(SysDicData.id == sysDicData_id, SysDicData.deleted == False)
         result = self.session.exec(statement).first()
         return result
 
-    def create(self, obj_in: {{ class_name }}Create) -> {{ class_name }}:
-        db_obj = {{ class_name }}(**obj_in.dict())
+    def create(self, obj_in: SysDicDataCreate) -> SysDicData:
+        db_obj = SysDicData(**obj_in.dict())
         self.session.add(db_obj)
         self.session.commit()
         self.session.refresh(db_obj)
         return db_obj
 
-    def update(self, db_obj: {{ class_name }}, obj_in: {{ class_name }}Update) -> {{ class_name }}:
+    def update(self, db_obj: SysDicData, obj_in: SysDicDataUpdate) -> SysDicData:
         update_data = obj_in.dict(exclude_unset=True)
         for field, value in update_data.items():
             setattr(db_obj, field, value)
@@ -44,13 +44,14 @@ class {{ class_name }}CRUD:
         self.session.refresh(db_obj)
         return db_obj
 
-    def soft_delete(self, db_obj: {{ class_name }}) -> {{ class_name }}:
+    def soft_delete(self, db_obj: SysDicData) -> SysDicData:
         db_obj.deleted = True
         db_obj.update_time = datetime.utcnow()
         self.session.add(db_obj)
         self.session.commit()
         self.session.refresh(db_obj)
         return db_obj
+        
     def _parse_dayjs_obj(self, obj):
         if isinstance(obj, dict) and "$d" in obj:
             return datetime.fromisoformat(obj["$d"].replace("Z", "+00:00"))
@@ -117,17 +118,17 @@ class {{ class_name }}CRUD:
         limit: int = 10,
         filters: Optional[Dict[str, Any]] = None,
         order_by: Optional[UnaryExpression] = None,
-    ) -> List[{{ class_name }}]:
-        query = select({{ class_name }}).where({{ class_name }}.deleted == False)
+    ) -> List[SysDicData]:
+        query = select(SysDicData).where(SysDicData.deleted == False)
         query = self._apply_filters(query, filters)
         if order_by is not None:
             query = query.order_by(order_by)
         else:
-            query = query.order_by({{ class_name }}.id.desc())
+            query = query.order_by(SysDicData.id.desc())
         logger.debug(f"Executing query: {query}")
         return self.session.exec(query.offset(skip).limit(limit)).all()
 
     def count_all(self, filters: Optional[Dict[str, Any]] = None) -> int:
-        query = select(func.count()).select_from({{ class_name }}).where({{ class_name }}.deleted == False)
+        query = select(func.count()).select_from(SysDicData).where(SysDicData.deleted == False)
         query = self._apply_filters(query, filters)
         return self.session.exec(query).one()

@@ -1,5 +1,5 @@
 import { useForm } from "@refinedev/antd";
-import { Form, Input, Select, Checkbox, DatePicker, Button } from "antd";
+import { Form, Input, Select, Checkbox, DatePicker, Button, InputNumber } from "antd";
 import dayjs from "dayjs";
 import { useEffect } from "react";
 
@@ -73,9 +73,14 @@ export const {{ detail_module.class_name }} = ({
         rules={[
           {% if field.required %}{ required: true, message: '请输入{{ field.description or field.name }}' },{% endif %}
           {% if field.max_length %}{ max: {{ field.max_length }}, message: '最多输入 {{ field.max_length }} 个字符' },{% endif %}
+          {% if field.type == 'int' %}{ type: "number", message: "必须是数字" },{% endif %}  
         ]}
       >
+      {% if field.type == "int" %}
+        <InputNumber style={{ '{{' }} width: "100%" {{ '}}' }} />
+      {% else %}
         <Input />
+      {% endif %}
       </Form.Item>
       {% elif field.form_type == "textarea" %}
       <Form.Item

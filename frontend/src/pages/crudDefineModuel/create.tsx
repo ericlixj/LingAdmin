@@ -16,18 +16,18 @@ export const CrudDefineModuelCreate = () => {
       <Form {...formProps} layout="vertical" onFinish={handleFinish}>
         <Form.Item
           name="module_name"
-          label="模块名称"
+          label="模块编码（例如：systemLog）"
           rules={[
-{ required: true, message: '请输入模块名称' },            { max: 100, message: '最多输入 100 个字符' },
+{ required: true, message: '请输入模块编码' },            { max: 100, message: '最多输入 100 个字符' },
           ]}
         >
           <Input />
         </Form.Item>
         <Form.Item
           name="label"
-          label="模块标识"
+          label="模块名称 （例如：系统日志）"
           rules={[
-{ required: true, message: '请输入模块标识' },            { max: 50, message: '最多输入 50 个字符' },
+{ required: true, message: '请输入模块名称' },            { max: 50, message: '最多输入 50 个字符' },
           ]}
         >
           <Input />

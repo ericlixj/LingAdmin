@@ -55,12 +55,12 @@ export const CrudDefineModuelList = () => {
 
         <Table.Column
           dataIndex="module_name"
-          title="模块名称"
+          title="模块编码"
           sorter
           filterDropdown={(props) => (
             <FilterDropdown {...props}>
               <Input
-                placeholder="搜索模块名称"
+                placeholder="搜索模块编码"
                 value={(props.selectedKeys[0] as string) || ""}
                 onChange={(e) =>
                   props.setSelectedKeys(e.target.value ? [e.target.value] : [])
@@ -80,12 +80,12 @@ export const CrudDefineModuelList = () => {
         />
         <Table.Column
           dataIndex="label"
-          title="模块标识"
+          title="模块名称"
           sorter
           filterDropdown={(props) => (
             <FilterDropdown {...props}>
               <Input
-                placeholder="搜索模块标识"
+                placeholder="搜索模块名称"
                 value={(props.selectedKeys[0] as string) || ""}
                 onChange={(e) =>
                   props.setSelectedKeys(e.target.value ? [e.target.value] : [])
@@ -117,7 +117,7 @@ export const CrudDefineModuelList = () => {
           render={(_, record) => (
             <Space>
               <EditButton recordItemId={record.id} />
-              <ShowButton recordItemId={record.id} />
+              <ShowButton recordItemId={record.id}>字段管理</ShowButton>
               <Button type="link" onClick={() => handlePreview(record)}>
                 预览代码
               </Button>

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import dayjs from "dayjs";
 import { Edit, useForm } from "@refinedev/antd";
-import { Form, Input, Select, Checkbox, DatePicker, Spin } from "antd";
+import { Form, Input, Select, Checkbox, DatePicker, Spin, InputNumber } from "antd";
 
 const fields = {{ fields | tojson }};
 
@@ -12,7 +12,7 @@ function prepareInitialValues(record: Record<string, any>, fields: any[]) {
     if (field.form_type === "date") {
       result[field.name] = value ? dayjs(value) : null;
     } else if (field.form_type === "checkbox" && field.options) {
-      result[field.name] = value ? value.split(",").map((v: string) => Number(v.trim())) : [];
+      result[field.name] = value ? value.split(",").map((v: string) => v.trim()) : [];
     } else if (field.form_type === "select") {
       result[field.name] = String(value);
     } else {
@@ -59,10 +59,17 @@ export const {{ class_name }}Edit = () => {
           label="{{ field.description if field.description else field.name | capitalize }}"
           {% if field.form_type == 'checkbox' and not field.options %} valuePropName="checked" {% endif %}
           rules={[
-            {% if field.required %}{ required: true, message: '请输入{{ field.description or field.name }}' },{% endif %}
-            {% if field.type == 'str' and field.max_length and field.max_length > 0 %}
-            { max: {{ field.max_length }}, message: '最多输入 {{ field.max_length }} 个字符' },
+            {% set rules = [] %}
+            {% if field.required %}
+            {% set _ = rules.append("{ required: true, message: '请输入" ~ (field.description or field.name) ~ "' }") %}
             {% endif %}
+            {% if field.type == 'str' and field.max_length and field.max_length > 0 %}
+            {% set _ = rules.append("{ max: " ~ field.max_length|string ~ ", message: '最多输入 " ~ field.max_length|string ~ " 个字符' }") %}
+            {% endif %}
+            {% if field.type == 'int' and field.form_type == 'input' %}
+            {% set _ = rules.append('{ type: "number", message: "必须是数字" }') %}
+            {% endif %}
+            {{ rules | join(",\n            ") }}
           ]}
         >
           {% if field.form_type == "textarea" %}
@@ -77,7 +84,7 @@ export const {{ class_name }}Edit = () => {
             <Checkbox.Group
               options={[
                 {% for option in field.options %}
-                  { label: "{{ option.label }}", value: {{ option.value }} }{% if not loop.last %}, {% endif %}
+                  { label: "{{ option.label }}", value: "{{ option.value }}" }{% if not loop.last %}, {% endif %}
                 {% endfor %}
               ]}
             />
@@ -86,7 +93,11 @@ export const {{ class_name }}Edit = () => {
             <DatePicker style={{ width: "100%" }} />
             {% endraw %}
           {% else %}
-            <Input />
+            {% if field.type == "int" %}
+              <InputNumber style={{ '{{' }} width: "100%" {{ '}}' }} />
+            {% else %}
+              <Input />
+            {% endif %}
           {% endif %}
         </Form.Item>
         {% endfor %}

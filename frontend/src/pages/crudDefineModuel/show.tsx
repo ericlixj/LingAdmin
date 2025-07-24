@@ -77,14 +77,14 @@ export const CrudDefineModuelShow = () => {
   return (
     <Show isLoading={isLoading}>
       {/* 主表字段渲染 */}
-      <Text strong>模块名称:</Text>
+      <Text strong>模块编码:</Text>
       <Text>
         {
           record?.module_name
         }
       </Text>
       <br />
-      <Text strong>模块标识:</Text>
+      <Text strong>模块名称:</Text>
       <Text>
         {
           record?.label

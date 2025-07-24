@@ -1,41 +1,65 @@
 from datetime import datetime
 from typing import Optional, List
 
-from sqlalchemy import Column, DateTime, text
+from sqlalchemy import Column, DateTime, text, String, Integer
 from sqlmodel import Field, SQLModel
 
 class {{ class_name }}(SQLModel, table=True):
-{% for field in fields %}
-    {%- set default_str = None %}
+{%- for field in fields %}
+    {%- set default_val = None %}
+    {%- set server_default_val = None %}
+
     {%- if field.default is not none %}
         {%- if field.type == "str" %}
-            {%- set default_str = 'default="' ~ field.default ~ '"' %}
+            {%- set default_val = '"' ~ field.default ~ '"' %}
+            {%- set server_default_val = 'text("' ~ "'" ~ field.default ~ "'" ~ '")' %}
         {%- elif field.type in ["int", "float"] %}
             {%- if field.default == "" %}
-                {%- set default_str = 'default=None' %}
+                {%- set default_val = 'None' %}
+                {%- set server_default_val = None %}
             {%- else %}
-                {%- set default_str = 'default=' ~ field.default|string %}
+                {%- set default_val = field.default|string %}
+                {%- set server_default_val = None %}
             {%- endif %}
         {%- elif field.type == "bool" %}
-            {%- set default_str = 'default=' ~ ('True' if field.default else 'False') %}
+            {%- set default_val = 'True' if field.default else 'False' %}
+            {%- set server_default_val = 'text("' ~ ('true' if field.default else 'false') ~ '")' %}
         {%- else %}
-            {%- set default_str = 'default=None' %}
+            {%- set default_val = 'None' %}
+            {%- set server_default_val = None %}
         {%- endif %}
     {%- else %}
-        {%- set default_str = 'default=None' %}
+        {%- set default_val = 'None' %}
+        {%- set server_default_val = None %}
     {%- endif %}
 
-    {{ field.name }}: {% if not field.required %}Optional[{{ field.type }}]{% else %}{{ field.type }}{% endif %} = Field({{
-        [
-            default_str,
-            'primary_key=True' if field.primary_key else None,
-            'max_length=' ~ field.max_length|string if field.max_length else None,
-            'index=True' if field.index else None,
-            'unique=True' if field.unique else None,
-            'description="' ~ field.description ~ '"' if field.description else None
-        ] | reject('none') | join(', ')
-    }})
-{% endfor %}
+    {%- set col_type = "String" if field.type == "str" else "Integer" if field.type == "int" else "Boolean" if field.type=="bool" else "String" %}
+    {%- if field.max_length and field.type == "str" %}
+        {%- set col_type = col_type + "(" + field.max_length|string + ")" %}
+    {%- endif %}
+
+    {{ field.name }}: 
+    {%- if field.primary_key %}
+        {{ field.type }}
+    {%- elif not field.required %}
+        Optional[{{ field.type }}]
+    {%- else %}
+        {{ field.type }}
+    {%- endif %} = Field(
+        {% if not field.primary_key %}
+            default={{ default_val }},
+        {% endif %}
+        description="{{ field.description }}",
+        sa_column=Column(
+            {{ col_type }},
+            nullable={{ "True" if field.nullable else "False" }},
+            primary_key={{ "True" if field.primary_key else "False" }},
+            index={{ "True" if field.index else "False" }},
+            unique={{ "True" if field.unique else "False" }},
+            {%- if server_default_val %}server_default={{ server_default_val }},{% endif %}
+        )
+    )
+{%- endfor %}
 
     # 默认加入通用字段
     creator: Optional[str] = Field(default=None, max_length=64, description="创建人")

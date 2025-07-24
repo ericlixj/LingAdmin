@@ -90,6 +90,13 @@ export const CrudDefineFileds = ({
           >
             日期
           </Select.Option>
+          <Select.Option
+            value={
+                "bool"
+            }
+          >
+            BOOL类型
+          </Select.Option>          
         </Select>
       </Form.Item>
       <Form.Item
