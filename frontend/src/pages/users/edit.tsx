@@ -4,7 +4,7 @@ import { Form, Input, Switch } from "antd";
 
 export const UserEdit = () => {
   const { formProps, saveButtonProps } = useForm();
-  const { id } = useParsed(); // 从 URL 解析 ID
+  const { id } = useParsed(); 
   const recordId = Number(id);
 
   const canDelete = recordId !== 1;

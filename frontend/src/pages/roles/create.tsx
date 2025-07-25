@@ -1,8 +1,10 @@
 import { Create, useForm, useTable } from "@refinedev/antd";
+import { useTranslate } from "@refinedev/core";
 import { Form, Input, Select, Table } from "antd";
 import { useState } from "react";
 
 export const RoleCreate = () => {
+  const t = useTranslate();
   const { formProps, saveButtonProps } = useForm();
   const [selectedShopIds, setSelectedShopIds] = useState<number[]>([]);
 
@@ -14,7 +16,6 @@ export const RoleCreate = () => {
   });
 
   const handleFinish = (values: any) => {
-    // 加入选中 shop 列表
     if (values.data_scope === 1) {
       values.shop_ids = selectedShopIds;
     } else {
@@ -31,32 +32,49 @@ export const RoleCreate = () => {
         layout="vertical"
         onFinish={handleFinish}
       >
-        <Form.Item name="code" label="角色编码" rules={[{ required: true }]}>
+        <Form.Item
+          name="code"
+          label={t("role.fields.code")}
+          rules={[{ required: true }]}
+        >
           <Input />
         </Form.Item>
-        <Form.Item name="name" label="角色名称" rules={[{ required: true }]}>
+
+        <Form.Item
+          name="name"
+          label={t("role.fields.name")}
+          rules={[{ required: true }]}
+        >
           <Input />
         </Form.Item>
-        <Form.Item name="description" label="角色描述">
+
+        <Form.Item
+          name="description"
+          label={t("role.fields.description")}
+        >
           <Input />
         </Form.Item>
+
         <Form.Item
           name="data_scope"
-          label="数据范围"
+          label={t("role.fields.data_scope")}
           initialValue={0}
-          rules={[{ required: true, message: "请选择数据范围" }]}
+          rules={[{ required: true, message: t("role.messages.select_data_scope") }]}
         >
           <Select>
-            <Select.Option value={0}>全部数据权限</Select.Option>
-            <Select.Option value={1}>自定义数据权限</Select.Option>
+            <Select.Option value={0}>
+              {t("role.enums.data_scope.all")}
+            </Select.Option>
+            <Select.Option value={1}>
+              {t("role.enums.data_scope.custom")}
+            </Select.Option>
           </Select>
         </Form.Item>
 
-        {/* 动态展示 shop 表格 */}
         <Form.Item shouldUpdate={(prev, curr) => prev.data_scope !== curr.data_scope}>
           {({ getFieldValue }) =>
             getFieldValue("data_scope") === 1 && (
-              <Form.Item label="选择店铺">
+              <Form.Item label={t("role.fields.shop_ids")}>
                 <Table
                   {...tableProps}
                   rowKey="id"
@@ -68,8 +86,8 @@ export const RoleCreate = () => {
                   }}
                   columns={[
                     { title: "ID", dataIndex: "id" },
-                    { title: "店铺编码", dataIndex: "code" },
-                    { title: "店铺名称", dataIndex: "name" },
+                    { title: t("shop.fields.code"), dataIndex: "code" },
+                    { title: t("shop.fields.name"), dataIndex: "name" },
                   ]}
                 />
               </Form.Item>

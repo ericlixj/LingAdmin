@@ -10,14 +10,14 @@ export const MasterDetailRelCreate = () => {
 
   // 主表模块列表（接口不变，固定请求）
   const { selectProps: masterModuleSelectProps } = useSelect({
-    resource: "crudDefineModuel/md_select",
+    resource: "crudDefineModuel/md_select?needExludeExist=1",
     optionLabel: "label",
     optionValue: "id",
   });
 
   // 子表模块列表，接口不变
   const { selectProps: detailModuleSelectProps } = useSelect({
-    resource: "crudDefineModuel/md_select",
+    resource: "crudDefineModuel/md_select?needExludeExist=1",
     optionLabel: "label",
     optionValue: "id",
   });

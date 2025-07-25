@@ -26,13 +26,21 @@ def generate_frontend_App(module_name: str, model: CURDModel) -> str:
     }
     return render_template("common/frontend/App.tsx.jinja2", context)
 
-def generate_frontend_i8n(module_name: str, model: CURDModel) -> str:
+def generate_frontend_i8n_zh(module_name: str, model: CURDModel) -> str:
     context = {
         "class_name": model.class_name,
         "module_name": module_name,
         "label": model.label or "",
     }
-    return render_template("common/frontend/i18nProvider.ts.jinja2", context)
+    return render_template("common/frontend/i18n_zh.ts.jinja2", context)
+
+def generate_frontend_i8n_en(module_name: str, model: CURDModel) -> str:
+    context = {
+        "class_name": model.class_name,
+        "module_name": module_name,
+        "label": model.label or "",
+    }
+    return render_template("common/frontend/i18n_en.ts.jinja2", context)
 
 def generate_frontend_files(model: CURDModel, target_dir: Optional[str] = "codegen/target/single_module") -> dict:
     module_name = model.module_name
@@ -51,10 +59,15 @@ def generate_frontend_files(model: CURDModel, target_dir: Optional[str] = "codeg
     app_content = generate_frontend_App(module_name, model)
     write_file(rel_app_path, app_content)
 
-    # i18nProvider_tmp.ts
-    rel_i18n_path = os.path.join("frontend", "src", "i18nProvider_tmp.ts")
-    i18n_content = generate_frontend_i8n(module_name, model)
+    # zh_tmp.ts
+    rel_i18n_path = os.path.join("frontend", "src", "i18n", "locale", "zh_tmp.ts")
+    i18n_content = generate_frontend_i8n_zh(module_name, model)
     write_file(rel_i18n_path, i18n_content)
+
+    # en_tmp.ts
+    rel_i18n_path1 = os.path.join("frontend", "src", "i18n", "locale", "en_tmp.ts")
+    i18n_content1 = generate_frontend_i8n_en(module_name, model)
+    write_file(rel_i18n_path1, i18n_content1)    
 
     # 页面部分
     pages = {

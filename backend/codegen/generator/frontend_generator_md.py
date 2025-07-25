@@ -26,13 +26,22 @@ def generate_frontend_app(model: CURDModel) -> tuple[str, str]:
     path = os.path.join("frontend", "src", "App_tmp.tsx")
     return path, content
 
-def generate_frontend_i18n(model: CURDModel) -> tuple[str, str]:
-    content = render_template("common/frontend/i18nProvider.ts.jinja2", {
+def generate_frontend_i18n_zh(model: CURDModel) -> tuple[str, str]:
+    content = render_template("common/frontend/i18n_zh.ts.jinja2", {
         "class_name": model.class_name,
         "module_name": model.module_name,
         "label": model.label or "",
     })
-    path = os.path.join("frontend", "src", "i18nProvider_tmp.ts")
+    path = os.path.join("frontend", "src", "i18n", "locale", "zh_tmp.ts")
+    return path, content
+
+def generate_frontend_i18n_en(model: CURDModel) -> tuple[str, str]:
+    content = render_template("common/frontend/i18n_en.ts.jinja2", {
+        "class_name": model.class_name,
+        "module_name": model.module_name,
+        "label": model.label or "",
+    })
+    path = os.path.join("frontend", "src", "i18n", "locale", "en_tmp.ts")
     return path, content
 
 def generate_frontend_crud_pages(model: CURDModel) -> dict[str, str]:
@@ -94,8 +103,11 @@ def generate_frontend_files(module: MasterDetailCURDModel, target_dir: str | Non
     # App.tsx & i18nProvider
     path, content = generate_frontend_app(module.master_module)
     file_map[path] = content
-    path, content = generate_frontend_i18n(module.master_module)
+
+    path, content = generate_frontend_i18n_zh(module.master_module)
     file_map[path] = content
+    path, content = generate_frontend_i18n_en(module.master_module)
+    file_map[path] = content    
 
     # CRUD 页面（不含 show）
     file_map.update(generate_frontend_crud_pages(module.master_module))

@@ -1,6 +1,6 @@
 import logging
 from datetime import datetime
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Set
 
 from app.models.masterDetailRel import MasterDetailRel, MasterDetailRelCreate, MasterDetailRelUpdate
 from sqlalchemy import func
@@ -130,3 +130,14 @@ class MasterDetailRelCRUD:
         query = select(func.count()).select_from(MasterDetailRel).where(MasterDetailRel.deleted == False)
         query = self._apply_filters(query, filters)
         return self.session.exec(query).one()
+
+    def get_all_related_module_ids(self) -> Set[int]:
+        statement = select(MasterDetailRel).where(MasterDetailRel.deleted == False)
+        result = self.session.exec(statement).all()
+        related_ids = set()
+        for item in result:
+            if item.master_module_id:
+                related_ids.add(item.master_module_id)
+            if item.detail_module_id:
+                related_ids.add(item.detail_module_id)
+        return related_ids    

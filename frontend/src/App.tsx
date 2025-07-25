@@ -1,22 +1,17 @@
-
 import {
   ApiOutlined,
   BarChartOutlined,
   DashboardOutlined,
-  ShopOutlined,
-  UserOutlined
+  UserOutlined,
 } from "@ant-design/icons";
 import {
   ErrorComponent,
   ThemedLayoutV2,
   ThemedSiderV2,
-  useNotificationProvider
+  useNotificationProvider,
 } from "@refinedev/antd";
 import "@refinedev/antd/dist/reset.css";
-import {
-  Authenticated,
-  Refine
-} from "@refinedev/core";
+import { Authenticated, Refine } from "@refinedev/core";
 import { RefineKbar, RefineKbarProvider } from "@refinedev/kbar";
 import routerBindings, {
   CatchAllNavigate,
@@ -32,7 +27,8 @@ import { AppIcon } from "./components/app-icon";
 import { Header } from "./components/header";
 import { ColorModeContextProvider } from "./contexts/color-mode";
 import dataProvider from "./dataProvider";
-import i18nProvider from "./i18nProvider";
+import i18nProvider from "./i18n/i18nProvider";
+import { useTranslate } from "@refinedev/core";
 import { Dashboard } from "./pages/dashboard";
 import { Login } from "./pages/login";
 import {
@@ -78,7 +74,10 @@ import {
   SysDicShow,
 } from "./pages/sysDic";
 
+const t = i18nProvider.translate;
+
 function App() {
+  // const t = useTranslate();
   return (
     <BrowserRouter>
       <RefineKbarProvider>
@@ -94,21 +93,21 @@ function App() {
               resources={[
                 {
                   name: "dashboard",
-                  options: { label: "首页" },
+                  options: { label: t("dashboard.titles.list") },
                   list: Dashboard,
                   meta: {
                     canDelete: false,
                     canEdit: false,
                     canCreate: false,
-                    icon: <DashboardOutlined /> // 你需要导入合适图标
+                    icon: <DashboardOutlined />,
                   },
                 },
                 {
                   name: "system",
                   list: () => null,
                   meta: {
-                    label: "系统管理",
-                    icon: <UserOutlined />, // 可自定义图标
+                    label: t("system.titles.list"),
+                    icon: <UserOutlined />,
                   },
                 },
                 {
@@ -118,7 +117,7 @@ function App() {
                   edit: UserEdit,
                   show: UserShow,
                   meta: {
-                    label: "用户管理",
+                    label: t("user.titles.list"),
                     canDelete: true,
                     parent: "system",
                   },
@@ -130,7 +129,7 @@ function App() {
                   edit: RoleEdit,
                   show: RoleShow,
                   meta: {
-                    label: "角色管理",
+                    label: t("role.titles.list"),
                     canDelete: true,
                     parent: "system",
                   },
@@ -142,29 +141,27 @@ function App() {
                   edit: PermissionEdit,
                   show: PermissionShow,
                   meta: {
-                    label: "权限管理",
+                    label: t("permission.titles.list"),
                     canDelete: true,
                     parent: "system",
                   },
                 },
-                // 一级菜单 - 基础设施
                 {
                   name: "infra",
                   list: () => null,
                   meta: {
-                    label: "基础设施",
+                    label: t("infra.titles.list") || "Infrastructure", // 如果没有定义，可以填默认英文
                     icon: <ApiOutlined />,
                   },
                 },
-                // 一级菜单 - 演示
                 {
                   name: "demo",
                   list: () => null,
                   meta: {
-                    label: "演示",
-                    icon: <BarChartOutlined  />,
+                    label: t("demo.titles.list") || "Demo",
+                    icon: <BarChartOutlined />,
                   },
-                },                     
+                },
                 {
                   name: "crudDefineModuel",
                   list: CrudDefineModuelList,
@@ -173,7 +170,7 @@ function App() {
                   show: CrudDefineModuelShow,
                   meta: {
                     canDelete: true,
-                    label: "单表配置",
+                    label: t("crudDefineModuel.titles.list"),
                     icon: <ApiOutlined />,
                     parent: "infra",
                   },
@@ -186,9 +183,9 @@ function App() {
                   show: MasterDetailRelShow,
                   meta: {
                     canDelete: true,
-                    label: "主子表配置",
+                    label: t("masterDetailRel.titles.list"),
                     icon: <ApiOutlined />,
-                    parent:"infra",
+                    parent: "infra",
                   },
                 },
                 {
@@ -199,11 +196,11 @@ function App() {
                   show: DemoUserShow,
                   meta: {
                     canDelete: true,
-                    label: "单表CRUD_demoUser",
+                    label: t("demoUser.titles.list"),
                     icon: <ApiOutlined />,
-                    parent:"demo",
+                    parent: "demo",
                   },
-                },          
+                },
                 {
                   name: "sysDic",
                   list: SysDicList,
@@ -212,13 +209,10 @@ function App() {
                   show: SysDicShow,
                   meta: {
                     canDelete: true,
-                    label: "字典管理",
+                    label: t("sysDic.titles.list"),
                     parent: "system",
                   },
-                },                                      
-                
-                
-                //
+                },
               ]}
               options={{
                 syncWithLocation: true,
@@ -269,7 +263,7 @@ function App() {
                     <Route path="create" element={<CrudDefineModuelCreate />} />
                     <Route path="edit/:id" element={<CrudDefineModuelEdit />} />
                     <Route path="show/:id" element={<CrudDefineModuelShow />} />
-                  </Route>                                                                                            
+                  </Route>
                   <Route path="/masterDetailRel">
                     <Route index element={<MasterDetailRelList />} />
                     <Route path="create" element={<MasterDetailRelCreate />} />
@@ -281,22 +275,19 @@ function App() {
                     <Route path="create" element={<DemoUserCreate />} />
                     <Route path="edit/:id" element={<DemoUserEdit />} />
                     <Route path="show/:id" element={<DemoUserShow />} />
-                  </Route>                  
+                  </Route>
                   <Route path="/sysDic">
                     <Route index element={<SysDicList />} />
                     <Route path="create" element={<SysDicCreate />} />
                     <Route path="edit/:id" element={<SysDicEdit />} />
                     <Route path="show/:id" element={<SysDicShow />} />
-                  </Route>                  
+                  </Route>
 
                   <Route path="*" element={<ErrorComponent />} />
                 </Route>
                 <Route
                   element={
-                    <Authenticated
-                      key="authenticated-outer"
-                      fallback={<Outlet />}
-                    >
+                    <Authenticated key="authenticated-outer" fallback={<Outlet />}>
                       <NavigateToResource />
                     </Authenticated>
                   }

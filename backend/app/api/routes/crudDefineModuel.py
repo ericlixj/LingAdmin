@@ -6,6 +6,7 @@ from app.core.db import get_session
 from app.core.deps import get_current_user_id, has_permission
 from app.core.logger import init_logger
 from app.crud.crudDefineModuel_crud import CrudDefineModuelCRUD
+from app.crud.masterDetailRel_crud import MasterDetailRelCRUD
 from app.models.crudDefineModuel import CrudDefineModuel, CrudDefineModuelCreate, CrudDefineModuelListResponse, CrudDefineModuelUpdate
 from fastapi import APIRouter, Depends, HTTPException, Query, Request, Response
 from sqlmodel import Session
@@ -123,6 +124,7 @@ def list_items_md_select(
     limit = _end - _start
     sortField = query_params.get("sortField")
     sortOrder = query_params.get("sortOrder")
+    needExludeExist = query_params.get("needExludeExist")
 
     order_by = None
     if sortField and sortOrder:
@@ -130,9 +132,21 @@ def list_items_md_select(
         if field is not None:
             order_by = field.asc() if sortOrder.lower() == "asc" else field.desc()
 
-    items = crud.list_all(skip=skip, limit=limit, filters=filters, order_by=order_by)
+    all_items = crud.list_all(skip=skip, limit=limit, filters=filters, order_by=order_by)
     total = crud.count_all(filters=filters)
-    data = [{"id": item.id, "label": item.label+"["+ item.module_name +"]"} for item in items]
+
+
+    if needExludeExist:
+        md_crud = MasterDetailRelCRUD(session)
+        excluded_ids = md_crud.get_all_related_module_ids()
+
+        items = [item for item in all_items if item.id not in excluded_ids]
+        total = len(items)
+        items = items[skip: skip + limit]  # 再做分页
+        data = [{"id": item.id, "label": item.label+"["+ item.module_name +"]"} for item in items]
+    else:
+        data = [{"id": item.id, "label": item.label+"["+ item.module_name +"]"} for item in all_items]
+
     return {"data": data, "total": total}
 
 

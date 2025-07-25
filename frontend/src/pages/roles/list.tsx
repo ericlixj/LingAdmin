@@ -5,19 +5,21 @@ import {
   ShowButton,
   useTable,
 } from "@refinedev/antd";
-import { useList, useUpdate } from "@refinedev/core";
+import { useList, useUpdate, useTranslate } from "@refinedev/core";
 import {
   Button,
   Checkbox,
   Input,
   Modal,
   Space,
-  Table
+  Table,
 } from "antd";
 import { useState } from "react";
 import axiosInstance from "../../utils/axiosInstance";
 
 export const RoleList = () => {
+  const t = useTranslate();
+
   const { tableProps, filters } = useTable({
     syncWithLocation: true,
     filters: {
@@ -47,31 +49,29 @@ export const RoleList = () => {
     setSelectedPermissionIds(checkedValues);
   };
 
-const handleBindPermissions = () => {
-  if (selectedRoleId !== null) {
-    updateRolePermissions(
-      {
+  const handleBindPermissions = () => {
+    if (selectedRoleId !== null) {
+      updateRolePermissions({
         resource: `role/bind-permissions`,
         values: {
           permission_ids: selectedPermissionIds,
         },
         id: selectedRoleId,
-      }
-    );
-  }
-  setModalVisible(false);
-  setSelectedPermissionIds([]);
-};
+      });
+    }
+    setModalVisible(false);
+    setSelectedPermissionIds([]);
+  };
 
-const fetchBoundPermissions = async (roleId: number) => {
-  try {
-    const response = await axiosInstance.get(`/role/bind-permissions/${roleId}`);
-    return response.data as number[];
-  } catch (error) {
-    console.error("获取绑定权限失败", error);
-    return [];
-  }
-};
+  const fetchBoundPermissions = async (roleId: number) => {
+    try {
+      const response = await axiosInstance.get(`/role/bind-permissions/${roleId}`);
+      return response.data as number[];
+    } catch (error) {
+      console.error("获取绑定权限失败", error);
+      return [];
+    }
+  };
 
   const closeModal = () => {
     setModalVisible(false);
@@ -86,12 +86,12 @@ const fetchBoundPermissions = async (roleId: number) => {
         <Table.Column dataIndex="id" title="ID" />
         <Table.Column
           dataIndex="code"
-          title="角色编码"
+          title={t("role.fields.code")}
           sorter
           filterDropdown={(props) => (
             <FilterDropdown {...props}>
               <Input
-                placeholder="Search code"
+                placeholder={t("role.fields.code")}
                 value={(props.selectedKeys[0] as string) || ""}
                 onChange={(e) =>
                   props.setSelectedKeys(e.target.value ? [e.target.value] : [])
@@ -107,12 +107,12 @@ const fetchBoundPermissions = async (roleId: number) => {
         />
         <Table.Column
           dataIndex="name"
-          title="角色名称"
+          title={t("role.fields.name")}
           sorter
           filterDropdown={(props) => (
             <FilterDropdown {...props}>
               <Input
-                placeholder="Search name"
+                placeholder={t("role.fields.name")}
                 value={(props.selectedKeys[0] as string) || ""}
                 onChange={(e) =>
                   props.setSelectedKeys(e.target.value ? [e.target.value] : [])
@@ -126,23 +126,28 @@ const fetchBoundPermissions = async (roleId: number) => {
             (filters.find((f) => f.field === "name")?.value as string[]) || null
           }
         />
-        <Table.Column dataIndex="description" title="角色描述" />
+        <Table.Column dataIndex="description" title={t("role.fields.description")} />
         <Table.Column
           dataIndex="data_scope"
-          title="数据范围"
+          title={t("role.fields.data_scope")}
           render={(value: number) =>
-            value === 0 ? "全部数据权限" : "自定义数据权限"
+            value === 0
+              ? t("role.enums.data_scope.all")
+              : t("role.enums.data_scope.custom")
           }
         />
-        <Table.Column dataIndex="create_time" title="创建时间" />
+        <Table.Column dataIndex="create_time" title={t("common.fields.create_time")} />
         <Table.Column
-          title="操作"
+          title={t("common.actions")}
           render={(_, record) => (
             <Space>
-              <EditButton recordItemId={record.id} disabled={record.id==1}/>
+              <EditButton recordItemId={record.id} disabled={record.id == 1} />
               <ShowButton recordItemId={record.id} />
-              <Button onClick={() => openPermissionModal(record.id)} disabled={record.id==1}>
-                绑定权限
+              <Button
+                onClick={() => openPermissionModal(record.id)}
+                disabled={record.id == 1}
+              >
+                {t("role.actions.bind_permissions")}
               </Button>
             </Space>
           )}
@@ -150,14 +155,18 @@ const fetchBoundPermissions = async (roleId: number) => {
       </Table>
 
       <Modal
-        title="绑定权限"
+        title={t("role.titles.bind_permissions")}
         open={modalVisible}
         onOk={handleBindPermissions}
         onCancel={closeModal}
-        okText="绑定"
-        cancelText="取消"
+        okText={t("common.actions.confirm")}
+        cancelText={t("common.actions.cancel")}
       >
-        <Checkbox.Group style={{ width: "100%" }} onChange={handlePermissionChange} value={selectedPermissionIds}>
+        <Checkbox.Group
+          style={{ width: "100%" }}
+          onChange={handlePermissionChange}
+          value={selectedPermissionIds}
+        >
           <Space direction="vertical">
             {permissionData?.data.map((perm: any) => (
               <Checkbox key={perm.id} value={perm.id}>

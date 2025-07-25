@@ -5,7 +5,7 @@ import {
   ShowButton,
   useTable,
 } from "@refinedev/antd";
-import { useList, useUpdate } from "@refinedev/core";
+import { useList, useTranslate, useUpdate } from "@refinedev/core";
 import { Button, Checkbox, Input, Modal, Space, Table, Tag } from "antd";
 import { useState } from "react";
 import axiosInstance from "../../utils/axiosInstance";
@@ -20,6 +20,7 @@ export const UserList = () => {
 
   const { data: roleData } = useList({ resource: "role" });
   const { mutate: updateUserRoles } = useUpdate();
+  const t = useTranslate();
 
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedUserId, setSelectedUserId] = useState<number | null>(null);
@@ -59,18 +60,18 @@ export const UserList = () => {
   };
 
   return (
-    <List>
+    <List title={t("user.titles.list")}>
       <Table {...tableProps} rowKey="id">
         <Table.Column dataIndex="id" title="ID" />
 
         <Table.Column
           dataIndex="email"
-          title="注册邮箱"
+          title={t("user.fields.email")}
           sorter
           filterDropdown={(props) => (
             <FilterDropdown {...props}>
               <Input
-                placeholder="Search email"
+                placeholder={t("user.filters.email")}
                 value={(props.selectedKeys[0] as string) || ""}
                 onChange={(e) =>
                   props.setSelectedKeys(e.target.value ? [e.target.value] : [])
@@ -88,12 +89,12 @@ export const UserList = () => {
 
         <Table.Column
           dataIndex="full_name"
-          title="全名"
+          title={t("user.fields.full_name")}
           sorter
           filterDropdown={(props) => (
             <FilterDropdown {...props}>
               <Input
-                placeholder="Search full name"
+                placeholder={t("user.filters.full_name")}
                 value={(props.selectedKeys[0] as string) || ""}
                 onChange={(e) =>
                   props.setSelectedKeys(e.target.value ? [e.target.value] : [])
@@ -111,14 +112,21 @@ export const UserList = () => {
 
         <Table.Column
           dataIndex="is_active"
-          title="是否激活"
+          title={t("user.fields.is_active")}
           render={(value) =>
-            value ? <Tag color="green">Yes</Tag> : <Tag color="red">No</Tag>
+            value ? (
+              <Tag color="green">{t("user.enums.active.yes")}</Tag>
+            ) : (
+              <Tag color="red">{t("user.enums.active.no")}</Tag>
+            )
           }
         />
-        <Table.Column dataIndex="create_time" title="创建时间" />
         <Table.Column
-          title="操作"
+          dataIndex="create_time"
+          title={t("user.fields.create_time")}
+        />
+        <Table.Column
+          title={t("user.actions.title")}
           render={(_, record) => (
             <Space>
               <EditButton
@@ -126,19 +134,24 @@ export const UserList = () => {
                 disabled={record.is_superuser}
               />
               <ShowButton recordItemId={record.id} />
-              <Button onClick={() => openRoleModal(record.id)} disabled={record.is_superuser}>绑定角色</Button>
+              <Button
+                onClick={() => openRoleModal(record.id)}
+                disabled={record.is_superuser}
+              >
+                {t("user.actions.bind_roles")}
+              </Button>
             </Space>
           )}
         />
       </Table>
 
       <Modal
-        title="绑定角色"
+        title={t("user.modal.title")}
         open={modalVisible}
         onOk={handleBindRoles}
         onCancel={() => setModalVisible(false)}
-        okText="绑定"
-        cancelText="取消"
+        okText={t("user.modal.ok")}
+        cancelText={t("user.modal.cancel")}
       >
         <Checkbox.Group
           style={{ width: "100%" }}

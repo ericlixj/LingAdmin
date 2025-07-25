@@ -1,5 +1,5 @@
 import { Show } from "@refinedev/antd";
-import { useShow } from "@refinedev/core";
+import { useShow, useTranslate } from "@refinedev/core";
 import { Typography } from "antd";
 
 const { Text } = Typography;
@@ -8,37 +8,43 @@ export const UserShow = () => {
   const { queryResult } = useShow();
   const { data, isLoading } = queryResult;
   const record = data?.data;
+  const t = useTranslate();
 
   return (
     <Show isLoading={isLoading}>
-      <Text strong>ID:</Text>
+      <Text strong>{t("common.fields.id")}:</Text>
       <Text>{record?.id}</Text>
       <br />
-      <Text strong>Email:</Text>
+
+      <Text strong>{t("user.fields.email")}:</Text>
       <Text>{record?.email}</Text>
       <br />
-      <Text strong>Full Name:</Text>
+
+      <Text strong>{t("user.fields.full_name")}:</Text>
       <Text>{record?.full_name}</Text>
       <br />
-      <Text strong>Active:</Text>
-      <Text>{record?.is_active ? "Yes" : "No"}</Text>
+
+      <Text strong>{t("user.fields.is_active")}:</Text>
+      <Text>{record?.is_active ? t("common.enums.yes") : t("common.enums.no")}</Text>
       <br />
-      <Text strong>Superuser:</Text>
-      <Text>{record?.is_superuser ? "Yes" : "No"}</Text>
+
+      <Text strong>{t("user.fields.is_superuser")}:</Text>
+      <Text>{record?.is_superuser ? t("common.enums.yes") : t("common.enums.no")}</Text>
       <br />
-      <Text strong>创建人:</Text>
+
+      <Text strong>{t("common.fields.creator")}:</Text>
       <Text>{record?.creator}</Text>
       <br />
 
-      <Text strong>更新人:</Text>
+      <Text strong>{t("common.fields.updater")}:</Text>
       <Text>{record?.updater}</Text>
       <br />
 
-      <Text strong>创建时间:</Text>
+      <Text strong>{t("common.fields.create_time")}:</Text>
       <Text>{record?.create_time}</Text>
       <br />
 
-      <Text strong>更新时间:</Text>
+      <Text strong>{t("common.fields.update_time")}:</Text>
       <Text>{record?.update_time}</Text>
     </Show>
   );

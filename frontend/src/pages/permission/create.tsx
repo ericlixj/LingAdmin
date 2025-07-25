@@ -1,7 +1,9 @@
 import { Create, useForm } from "@refinedev/antd";
+import { useTranslate } from "@refinedev/core";
 import { Form, Input } from "antd";
 
 export const PermissionCreate = () => {
+  const t = useTranslate();
   const { formProps, saveButtonProps } = useForm();
 
   return (
@@ -11,13 +13,24 @@ export const PermissionCreate = () => {
         form={formProps.form}
         layout="vertical"
       >
-        <Form.Item name="code" label="权限编码" rules={[{ required: true }]}>
+        <Form.Item
+          name="code"
+          label={t("permission.fields.code")}
+          rules={[{ required: true, message: t("permission.messages.code_required") }]}
+        >
           <Input />
         </Form.Item>
-        <Form.Item name="name" label="权限名称" rules={[{ required: true }]}>
+        <Form.Item
+          name="name"
+          label={t("permission.fields.name")}
+          rules={[{ required: true, message: t("permission.messages.name_required") }]}
+        >
           <Input />
         </Form.Item>
-        <Form.Item name="description" label="权限描述">
+        <Form.Item
+          name="description"
+          label={t("permission.fields.description")}
+        >
           <Input />
         </Form.Item>
       </Form>
