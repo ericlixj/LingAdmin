@@ -115,9 +115,9 @@ export const UserList = () => {
           title={t("user.fields.is_active")}
           render={(value) =>
             value ? (
-              <Tag color="green">{t("user.enums.active.yes")}</Tag>
+              <Tag color="green">{t("common.enums.yes")}</Tag>
             ) : (
-              <Tag color="red">{t("user.enums.active.no")}</Tag>
+              <Tag color="red">{t("common.enums.no")}</Tag>
             )
           }
         />
