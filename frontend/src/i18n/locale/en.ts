@@ -219,6 +219,15 @@ const en = {
       name: "Shop Name",
     },
   },
+  menu: {
+      titles: {
+          list: "Menu List",
+          create: "Create PurchaseMenu",
+          edit: "Edit Menu",
+          show: "Menu Details",
+      },
+  },
+
 };
 
 export default en;

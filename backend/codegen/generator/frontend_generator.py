@@ -75,7 +75,7 @@ def generate_frontend_files(model: CURDModel, target_dir: Optional[str] = "codeg
         "common/frontend/edit.tsx.jinja2": "edit.tsx",
         "single_module/frontend/list.tsx.jinja2": "list.tsx",
         "single_module/frontend/show.tsx.jinja2": "show.tsx",
-        "common/frontend/index.tsx.jinja2": "index.tsx",
+        "common/frontend/index.ts.jinja2": "index.ts",
     }
 
     for template_file, filename in pages.items():

@@ -218,6 +218,14 @@ const zh = {
       name: "店铺名称",
     },
   },
+  menu: {
+      titles: {
+          list: "菜单列表",
+          create: "创建菜单",
+          edit: "编辑菜单",
+          show: "菜单详情",
+      },
+  },  
 };
 
 export default zh;

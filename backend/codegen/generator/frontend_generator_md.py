@@ -49,7 +49,7 @@ def generate_frontend_crud_pages(model: CURDModel) -> dict[str, str]:
         "common/frontend/create.tsx.jinja2": "create.tsx",
         "common/frontend/edit.tsx.jinja2": "edit.tsx",
         "master_detail_module/frontend/list.tsx.jinja2": "list.tsx",
-        "common/frontend/index.tsx.jinja2": "index.tsx",
+        "common/frontend/index.ts.jinja2": "index.ts",
     }
 
     result = {}

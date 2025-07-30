@@ -10,6 +10,7 @@ from app.api.routes import (
     demoUser,
     sysDic,
     sysDicData,
+    menu,
 )
 from fastapi import APIRouter
 
@@ -27,3 +28,4 @@ api_router.include_router(masterDetailRel.router, prefix="/masterDetailRel", tag
 api_router.include_router(demoUser.router, prefix="/demoUser", tags=["DemoUser"])
 api_router.include_router(sysDic.router, prefix="/sysDic", tags=["SysDic"])
 api_router.include_router(sysDicData.router, prefix="/sysDicData", tags=["SysDicData"])
+api_router.include_router(menu.router, prefix="/menu", tags=["Menu"])

@@ -11,6 +11,10 @@ import {
 import React, { useContext } from "react";
 import { ColorModeContext } from "../../contexts/color-mode";
 import { LanguageSwitcher } from "../header/LanguageSwitcher";
+import { useLogout } from "@refinedev/core";
+import { LogoutOutlined } from "@ant-design/icons";
+import { Button } from "antd";
+import { useTranslate } from "@refinedev/core";
 
 const { Text } = Typography;
 const { useToken } = theme;
@@ -24,6 +28,7 @@ type IUser = {
 export const Header: React.FC<RefineThemedLayoutV2HeaderProps> = ({
   sticky = true,
 }) => {
+  const t = useTranslate();
   const { token } = useToken();
   const { data: user } = useGetIdentity<IUser>();
   const { mode, setMode } = useContext(ColorModeContext);
@@ -43,6 +48,8 @@ export const Header: React.FC<RefineThemedLayoutV2HeaderProps> = ({
     headerStyles.zIndex = 1;
   }
 
+  const { mutate: logout } = useLogout();
+
   return (
     <AntdLayout.Header style={headerStyles}>
       <Space>
@@ -59,6 +66,10 @@ export const Header: React.FC<RefineThemedLayoutV2HeaderProps> = ({
           {user?.name && <Text strong>{user.name}</Text>}
           {user?.avatar && <Avatar src={user?.avatar} alt={user?.name} />}
         </Space>
+
+        <Button icon={<LogoutOutlined />} onClick={() => logout()}>
+            {t("buttons.logout", "登出")}
+        </Button>
       </Space>
     </AntdLayout.Header>
   );
