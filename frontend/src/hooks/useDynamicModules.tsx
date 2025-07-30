@@ -59,14 +59,14 @@ export function useDynamicModules(
     }
   }
 
-  // 按 parentCode 分组菜单
+  // 按 parent_id 分组菜单
   const groupedMenus = rawMenus.reduce<Record<string | undefined, any[]>>(
     (acc, menu) => {
-      const parentCode = getParentMenuCode(menu.parent_id, rawMenus);
-      if (!acc[parentCode]) {
-        acc[parentCode] = [];
+      const key = getParentPermissionCode(menu.parent_id, rawMenus);
+      if (!acc[key]) {
+        acc[key] = [];
       }
-      acc[parentCode].push(menu);
+      acc[key].push(menu);
       return acc;
     },
     {}
@@ -77,21 +77,21 @@ export function useDynamicModules(
     groupedMenus[key].sort((a, b) => (a.order_by ?? 0) - (b.order_by ?? 0));
   }
 
-  // 递归展开菜单，按层级顺序+排序平铺
+  // 展平菜单
   const flattenMenus: any[] = [];
 
   function traverseMenus(parentCode: string | undefined) {
     const menus = groupedMenus[parentCode] || [];
     for (const menu of menus) {
       flattenMenus.push(menu);
-      traverseMenus(menu.code); // 递归子菜单
+      traverseMenus(menu.permission_code); // 递归子菜单
     }
   }
   traverseMenus(undefined);
 
-  // 构造资源数组
+  // 构造资源
   const resources: IResourceItem[] = flattenMenus.map((menu) => {
-    if(menu.code === "dashboard") {
+    if (menu.module_code === "dashboard") {
       return {
         name: "dashboard",
         list: Dashboard,
@@ -102,23 +102,23 @@ export function useDynamicModules(
           hidden: menu.hidden,
         },
       };
-    }else{
-      const isDirectory = menu.type === 0;
-      const moduleCode = menu.code;
-      const moduleName = menu.name;
+    } else {
+      const isMenu = menu.type === 1;
+      const moduleCode = menu.module_code;
+      const menuLabel = menu.menu_label;
       const comp = pageMap[moduleCode] || {};
 
       return {
-        name: moduleCode,
-        list: isDirectory ? undefined : comp.list,
-        create: isDirectory ? undefined : comp.create,
-        edit: isDirectory ? undefined : comp.edit,
-        show: isDirectory ? undefined : comp.show,
+        name: moduleCode || menu.permission_code,
+        list: isMenu ? comp.list : undefined,
+        create: isMenu ? comp.create : undefined,
+        edit: isMenu ? comp.edit : undefined,
+        show: isMenu ? comp.show : undefined,
         meta: {
-          label: moduleName,
+          label: menuLabel,
           icon: menu.icon && iconMap[menu.icon],
-          parent: getParentMenuCode(menu.parent_id, rawMenus),
-          canDelete: !isDirectory,
+          parent: getParentPermissionCode(menu.parent_id, rawMenus),
+          canDelete: true,
           order: menu.order_by,
           hidden: menu.hidden,
         },
@@ -126,7 +126,7 @@ export function useDynamicModules(
     }
   });
 
-  // 生成 routes
+  // 路由生成
   const routes: React.ReactNode[] = Object.entries(pageMap).map(([name, comp]) => (
     <Route path={`/${name}`} key={name}>
       {comp.list && <Route index element={React.createElement(comp.list)} />}
@@ -139,8 +139,8 @@ export function useDynamicModules(
   return { resources, routes, pageMap };
 }
 
-// 获取 parent 的 code
-function getParentMenuCode(parentId: number, allMenus: any[]): string | undefined {
+// 获取父菜单的 permission_code
+function getParentPermissionCode(parentId: number, allMenus: any[]): string | undefined {
   const parent = allMenus.find((m) => m.id === parentId);
-  return parent?.code || undefined;
+  return parent?.permission_code || undefined;
 }

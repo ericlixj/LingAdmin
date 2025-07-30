@@ -12,11 +12,11 @@ init_logger()
 logger = logging.getLogger(__name__)
 
 QUERYABLE_FIELDS = {
-  "name": "like",
-  "code": "like",
+  "menu_label": "like",
+  "permission_code": "like",
   "type": "eq",
   "status": "eq",
-  "modual_name": "like",
+  "module_code": "like",
 }
 
 class MenuCRUD:

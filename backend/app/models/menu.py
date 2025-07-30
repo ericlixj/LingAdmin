@@ -25,9 +25,9 @@ class Menu(SQLModel, table=True):
             index=True,
             unique=False,        )
     )
-    name:        str = Field(
+    menu_label:        str = Field(
             default="",
-        description="菜单名称",
+        description="菜单标识",
         sa_column=Column(
             String(50),
             nullable=False,
@@ -35,9 +35,9 @@ class Menu(SQLModel, table=True):
             index=False,
             unique=False,server_default=text("''"),        )
     )
-    code:        str = Field(
+    permission_code:        str = Field(
             default="",
-        description="编码",
+        description="权限编码",
         sa_column=Column(
             String(100),
             nullable=False,
@@ -85,9 +85,9 @@ class Menu(SQLModel, table=True):
             index=False,
             unique=False,        )
     )
-    modual_name:        str = Field(
+    module_code:        str = Field(
             default="",
-        description="模块名称（形如：sysDicData）",
+        description="模块编码",
         sa_column=Column(
             String(50),
             nullable=False,
@@ -112,24 +112,24 @@ class Menu(SQLModel, table=True):
 
 class MenuCreate(SQLModel):
     parent_id: int
-    name: str
-    code: str
+    menu_label: str
+    permission_code: str
     type: int
     order_by: int
     status: int
-    modual_name: str
+    module_code: str
     icon: Optional[str] = None
     creator: Optional[str] = Field(default=None, max_length=64)
 
 class MenuUpdate(SQLModel):
     parent_id: Optional[int] = None
-    name: Optional[str] = None
-    code: Optional[str] = None
+    menu_label: Optional[str] = None
+    permission_code: Optional[str] = None
     icon: Optional[str] = None
     type: Optional[int] = None
     order_by: Optional[int] = None
     status: Optional[int] = None
-    modual_name: Optional[str] = None
+    module_code: Optional[str] = None
     updater: Optional[str] = Field(default=None, max_length=64)
 
 class MenuListResponse(SQLModel):

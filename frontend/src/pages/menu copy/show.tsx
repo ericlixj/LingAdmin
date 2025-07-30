@@ -26,17 +26,17 @@ export const MenuShow = () => {
         }
       </Text>
       <br />
-      <Text strong>菜单标识:</Text>
+      <Text strong>菜单名称:</Text>
       <Text>
         {
-          record?.menu_label
+          record?.name
         }
       </Text>
       <br />
-      <Text strong>权限编码:</Text>
+      <Text strong>编码:</Text>
       <Text>
         {
-          record?.permission_code
+          record?.code
         }
       </Text>
       <br />
@@ -68,10 +68,10 @@ export const MenuShow = () => {
         }
       </Text>
       <br />
-      <Text strong>模块编码:</Text>
+      <Text strong>模块名称（形如：sysDicData）:</Text>
       <Text>
         {
-          record?.module_code
+          record?.modual_name
         }
       </Text>
       <br />
