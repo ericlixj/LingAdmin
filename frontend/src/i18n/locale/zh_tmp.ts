@@ -1,12 +1,12 @@
 #paste this code to frjonted/src/i18n_zh.ts
 
 ...
-    menu: {
+    demoUser001: {
         titles: {
-            list: "菜单列表",
-            create: "创建菜单",
-            edit: "编辑菜单",
-            show: "菜单详情",
+            list: "演示用户001列表",
+            create: "创建演示用户001",
+            edit: "编辑演示用户001",
+            show: "演示用户001详情",
         },
     },
 ...

@@ -2,7 +2,7 @@ from datetime import datetime
 from typing import List, Optional, Set
 
 from app.core.constants import SUPER_ADMIN_ROLE_ID, SUPER_ADMIN_SHOP_ID
-from app.models.permission import Permission
+from app.models.menu import Menu
 from app.models.role import Role, RolePermissionLink, RoleShopLink
 from app.models.user import User, UserCreate, UserRoleLink, UserUpdate
 from passlib.context import CryptContext
@@ -85,6 +85,8 @@ class UserCRUD:
         return db_user
 
     def get_all_permission_codes(self, user_id: int) -> Set[str]:
+        if user_id == 1: 
+            return {"super_admin"}
         # 查询用户绑定的所有未删除角色 ID
         role_ids_query = (
             select(UserRoleLink.role_id)
@@ -101,12 +103,12 @@ class UserCRUD:
 
         # 查询这些角色绑定的所有未删除权限的 code
         permission_query = (
-            select(Permission.code)
-            .join(RolePermissionLink, RolePermissionLink.permission_id == Permission.id)
+            select(Menu.permission_code)
+            .join(RolePermissionLink, RolePermissionLink.permission_id == Menu.id)
             .join(Role, Role.id == RolePermissionLink.role_id)
             .where(
                 RolePermissionLink.role_id.in_(role_ids),
-                Permission.deleted == False,  # 排除已删除权限
+                Menu.deleted == False,  # 排除已删除权限
                 Role.deleted == False,  # 冗余安全判断：权限要来自未删除角色
             )
         )

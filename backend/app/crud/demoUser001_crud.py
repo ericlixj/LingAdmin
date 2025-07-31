@@ -2,42 +2,37 @@ import logging
 from datetime import datetime
 from typing import Any, Dict, List, Optional
 
-from app.models.menu import Menu, MenuCreate, MenuUpdate
+from app.models.demoUser001 import DemoUser001, DemoUser001Create, DemoUser001Update
 from sqlalchemy import func
 from sqlalchemy.sql.elements import UnaryExpression
 from sqlmodel import Session, col, select
 from app.core.logger import init_logger
-from app.crud.user_crud import UserRoleLink, RolePermissionLink
 
 init_logger()
 logger = logging.getLogger(__name__)
 
 QUERYABLE_FIELDS = {
-  "menu_label": "like",
-  "permission_code": "like",
-  "type": "eq",
-  "status": "eq",
-  "module_code": "like",
+  "name": "like",
 }
 
-class MenuCRUD:
+class DemoUser001CRUD:
     def __init__(self, session: Session):
         self.session = session
-        self.model = Menu
+        self.model = DemoUser001
 
-    def get_by_id(self, menu_id: int) -> Optional[Menu]:
-        statement = select(Menu).where(Menu.id == menu_id, Menu.deleted == False)
+    def get_by_id(self, demoUser001_id: int) -> Optional[DemoUser001]:
+        statement = select(DemoUser001).where(DemoUser001.id == demoUser001_id, DemoUser001.deleted == False)
         result = self.session.exec(statement).first()
         return result
 
-    def create(self, obj_in: MenuCreate) -> Menu:
-        db_obj = Menu(**obj_in.dict())
+    def create(self, obj_in: DemoUser001Create) -> DemoUser001:
+        db_obj = DemoUser001(**obj_in.dict())
         self.session.add(db_obj)
         self.session.commit()
         self.session.refresh(db_obj)
         return db_obj
 
-    def update(self, db_obj: Menu, obj_in: MenuUpdate) -> Menu:
+    def update(self, db_obj: DemoUser001, obj_in: DemoUser001Update) -> DemoUser001:
         update_data = obj_in.dict(exclude_unset=True)
         for field, value in update_data.items():
             setattr(db_obj, field, value)
@@ -47,7 +42,7 @@ class MenuCRUD:
         self.session.refresh(db_obj)
         return db_obj
 
-    def soft_delete(self, db_obj: Menu) -> Menu:
+    def soft_delete(self, db_obj: DemoUser001) -> DemoUser001:
         db_obj.deleted = True
         db_obj.update_time = datetime.utcnow()
         self.session.add(db_obj)
@@ -118,81 +113,19 @@ class MenuCRUD:
         self,
         skip: int = 0,
         limit: int = 10,
+        filters: Optional[Dict[str, Any]] = None,
         order_by: Optional[UnaryExpression] = None,
-        current_user_id: Optional[int] = None,
-    ) -> List[Menu]:
-
-        if current_user_id is None:
-            return []
-        
-        if current_user_id == 1:
-            # 超级管理员，查询所有未删除菜单
-            query = select(Menu).where(Menu.deleted == False)
-            if order_by is not None:
-                query = query.order_by(order_by)
-            else:
-                query = query.order_by(Menu.id.desc())
-            return self.session.exec(query.offset(skip).limit(limit)).all()            
-
-        user_role = UserRoleLink.__table__
-        role_permission = RolePermissionLink.__table__
-        menu = Menu.__table__
-
-        j = (
-            user_role.join(
-                role_permission, user_role.c.role_id == role_permission.c.role_id
-            )
-            .join(menu, role_permission.c.permission_id == menu.c.id)
-        )
-
-        stmt = (
-            select(Menu)
-            .select_from(j)
-            .where(user_role.c.user_id == current_user_id, menu.c.deleted == False)
-            .distinct()
-            .offset(skip)
-            .limit(limit)
-        )
-
+    ) -> List[DemoUser001]:
+        query = select(DemoUser001).where(DemoUser001.deleted == False)
+        query = self._apply_filters(query, filters)
         if order_by is not None:
-            stmt = stmt.order_by(order_by)
+            query = query.order_by(order_by)
         else:
-            stmt = stmt.order_by(menu.c.id.desc())
-        results = self.session.exec(stmt).all()
-        # for item in results:
-        #     logger.debug(f"Menu item: id={item.id}, label={item.menu_label}")
-        return results
+            query = query.order_by(DemoUser001.id.desc())
+        logger.debug(f"Executing query: {query}")
+        return self.session.exec(query.offset(skip).limit(limit)).all()
 
-    def count_all(
-        self,
-        current_user_id: Optional[int] = None,
-    ) -> int:
-
-        if current_user_id is None:
-            # 无 user_id，返回 0
-            return 0
-
-        if current_user_id == 1:
-            query = select(func.count()).select_from(Menu).where(Menu.deleted == False)
-            count = self.session.exec(query).one()
-            return count or 0        
-
-        user_role = UserRoleLink.__table__
-        role_permission = RolePermissionLink.__table__
-        menu = Menu.__table__
-
-        j = (
-            user_role.join(
-                role_permission, user_role.c.role_id == role_permission.c.role_id
-            )
-            .join(menu, role_permission.c.permission_id == menu.c.id)
-        )
-
-        query = (
-            select(func.count(func.distinct(menu.c.id)))
-            .select_from(j)
-            .where(user_role.c.user_id == current_user_id, menu.c.deleted == False)
-        )
-
-        count = self.session.exec(query).one()
-        return count if count is not None else 0
+    def count_all(self, filters: Optional[Dict[str, Any]] = None) -> int:
+        query = select(func.count()).select_from(DemoUser001).where(DemoUser001.deleted == False)
+        query = self._apply_filters(query, filters)
+        return self.session.exec(query).one()

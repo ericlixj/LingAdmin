@@ -31,19 +31,35 @@ import axiosInstance from "./utils/axiosInstance";
 function App() {
   const [menus, setMenus] = useState([]);
   const [loadingMenus, setLoadingMenus] = useState(true);
+    const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
 
   useEffect(() => {
-    axiosInstance.get("/menu?_start=0&_end=1000&sortField=id&sortOrder=asc").then((res) => {
-      setMenus(res.data.data || []);
-      setLoadingMenus(false);
-    });
+    const init = async () => {
+      try {
+        const authCheck = await authProvider.check();
+        if (authCheck.authenticated) {
+          setIsAuthenticated(true);
+          // 登录后再加载菜单
+          const res = await axiosInstance.get("/menu?_start=0&_end=1000&sortField=id&sortOrder=asc");
+          setMenus(res.data.data || []);
+        } else {
+          setIsAuthenticated(false);
+        }
+      } catch (error) {
+        setIsAuthenticated(false);
+      } finally {
+        setLoadingMenus(false);
+      }
+    };
+    init();
   }, []);
+
 
   if (loadingMenus) {
     return <div>Loading menus...</div>;
   }
   console.info("Menus loaded:", menus);
-  const { resources, routes } = useDynamicModules(menus);
+  const { resources, routes } = useDynamicModules(isAuthenticated ? menus : []);
   console.info("Resources:", resources);
   console.info("Routes:", routes);
   return (

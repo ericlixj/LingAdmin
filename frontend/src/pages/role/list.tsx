@@ -16,6 +16,9 @@ import {
 } from "antd";
 import { useState } from "react";
 import axiosInstance from "../../utils/axiosInstance";
+import { Tree } from "antd";
+import { useMenuData } from "../../hooks/userMenuData";
+import { useMemo } from "react";
 
 export const RoleList = () => {
   const t = useTranslate();
@@ -30,31 +33,57 @@ export const RoleList = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedRoleId, setSelectedRoleId] = useState<number | null>(null);
   const [selectedPermissionIds, setSelectedPermissionIds] = useState<number[]>([]);
-  const { data: permissionData } = useList({ resource: "permission" });
+  const { data: permissionData } = useMenuData();
   const { mutate: updateRolePermissions } = useUpdate();
   const [boundIds, setBoundIds] = useState<number[]>([]);
   const [loading, setLoading] = useState(false);
+
+  const getLeafNodeIds = (ids: number[], list: any[]): number[] => {
+    const parentIdSet = new Set(list.map((item) => item.parent_id).filter(Boolean));
+    return ids.filter((id) => !parentIdSet.has(id) && id !== 0);
+  };
 
   const openPermissionModal = async (roleId: number) => {
     setSelectedRoleId(roleId);
     setLoading(true);
     const ids = await fetchBoundPermissions(roleId);
     setBoundIds(ids);
-    setSelectedPermissionIds(ids);
+    // 只选中叶子节点用于回显
+    console.info("已绑定的权限 ID 列表：", ids);
+    const leafIds = getLeafNodeIds(ids, permissionData?.data || []);
+    console.info("叶子节点 ID 列表：", leafIds);
+    setSelectedPermissionIds(leafIds);
     setLoading(false);
     setModalVisible(true);
   };
 
-  const handlePermissionChange = (checkedValues: any) => {
-    setSelectedPermissionIds(checkedValues);
+  const collectWithAncestors = (selectedIds: number[]): number[] => {
+    console.info("parentMap", parentMap);
+    const resultSet = new Set<number>();
+    const addWithParents = (id: number) => {
+      if (resultSet.has(id)) return;
+      resultSet.add(id);
+
+      const parentId = parentMap.get(id);
+      if (parentId != null) {
+        addWithParents(parentId);
+      }
+    };
+
+    selectedIds.forEach((id) => addWithParents(id));
+
+    return Array.from(resultSet);
   };
 
   const handleBindPermissions = () => {
     if (selectedRoleId !== null) {
+      console.log("🔗 正在提交绑定的权限 ID 列表：", selectedPermissionIds);
+      const allIdsToSave = collectWithAncestors(selectedPermissionIds);
+      console.info("所有选中权限及其祖先 ID 列表：", allIdsToSave);
       updateRolePermissions({
         resource: `role/bind-permissions`,
         values: {
-          permission_ids: selectedPermissionIds,
+          permission_ids: allIdsToSave,
         },
         id: selectedRoleId,
       });
@@ -79,6 +108,37 @@ export const RoleList = () => {
     setSelectedRoleId(null);
     setBoundIds([]);
   };
+
+  const { treeData, parentMap } = useMemo(() => {
+  const parentMap = new Map<number, number | null>();
+  const list = permissionData?.data || [];
+
+  const map = new Map<number, any>();
+  const tree: any[] = [];
+
+  list.forEach((item) => {
+    map.set(item.id, {
+      ...item,
+      key: item.id,
+      title: `${item.menu_label}（${item.permission_code}）`,
+      children: [],
+    });
+    parentMap.set(item.id, item.parent_id); 
+  });
+
+  list.forEach((item) => {
+    const node = map.get(item.id);
+    const parent = map.get(item.parent_id);
+    if (parent) {
+      parent.children.push(node);
+    } else {
+      tree.push(node);
+    }
+  });
+
+  return { treeData: tree, parentMap }; // 👈 返回
+}, [permissionData?.data]);
+
 
   return (
     <List>
@@ -155,26 +215,22 @@ export const RoleList = () => {
       </Table>
 
       <Modal
-        title={t("role.titles.bind_permissions")}
+        title={t("role.actions.bind_permissions")}
         open={modalVisible}
         onOk={handleBindPermissions}
         onCancel={closeModal}
-        okText={t("common.actions.confirm")}
-        cancelText={t("common.actions.cancel")}
+        okText={t("common.confirm")}
+        cancelText={t("common.cancel")}
       >
-        <Checkbox.Group
-          style={{ width: "100%" }}
-          onChange={handlePermissionChange}
-          value={selectedPermissionIds}
-        >
-          <Space direction="vertical">
-            {permissionData?.data.map((perm: any) => (
-              <Checkbox key={perm.id} value={perm.id}>
-                {perm.name}（{perm.code}）
-              </Checkbox>
-            ))}
-          </Space>
-        </Checkbox.Group>
+        <Tree
+          checkable
+          defaultExpandAll
+          treeData={treeData}
+          checkedKeys={selectedPermissionIds}
+          onCheck={(checkedKeys) => {
+            setSelectedPermissionIds(checkedKeys as number[]);
+          }}
+        />
       </Modal>
     </List>
   );

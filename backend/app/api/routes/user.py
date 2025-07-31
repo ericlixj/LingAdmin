@@ -23,7 +23,7 @@ router = APIRouter()
 
 
 @router.post(
-    "", dependencies=[Depends(has_permission("super_admin"))], response_model=User
+    "", dependencies=[Depends(has_permission("user:create"))], response_model=User
 )
 def create_user(
     user_in: UserCreate,
@@ -40,7 +40,7 @@ def create_user(
 
 @router.get(
     "",
-    dependencies=[Depends(has_permission("super_admin"))],
+    dependencies=[Depends(has_permission("user:list"))],
     response_model=UserListResponse,
 )
 def list_users(
@@ -82,7 +82,7 @@ def list_users(
 
 @router.get(
     "/{user_id}",
-    dependencies=[Depends(has_permission("super_admin"))],
+    dependencies=[Depends(has_permission("user:get"))],
     response_model=User,
 )
 def get_user(user_id: int, session: Session = Depends(get_session)):
@@ -95,7 +95,7 @@ def get_user(user_id: int, session: Session = Depends(get_session)):
 
 @router.patch(
     "/{user_id}",
-    dependencies=[Depends(has_permission("super_admin"))],
+    dependencies=[Depends(has_permission("user:update"))],
     response_model=User,
 )
 def update_user(
@@ -114,7 +114,7 @@ def update_user(
 
 @router.delete(
     "/{user_id}",
-    dependencies=[Depends(has_permission("super_admin"))],
+    dependencies=[Depends(has_permission("user:delete"))],
     response_model=User,
 )
 def delete_user(
@@ -132,7 +132,7 @@ def delete_user(
 
 @router.get(
     "/bind-roles/{user_id}",
-    dependencies=[Depends(has_permission("super_admin"))],
+    dependencies=[Depends(has_permission("user:get_user_roles"))],
     response_model=List[int],
 )
 def get_user_roles(
@@ -149,7 +149,10 @@ def get_user_roles(
     return results
 
 
-@router.patch("/bind-roles/{user_id}")
+@router.patch(
+        "/bind-roles/{user_id}",
+        dependencies=[Depends(has_permission("user:bind_user_roles"))],
+        )
 def bind_user_roles(
     user_id: int,
     bind_roles_request: BindRolesRequest,

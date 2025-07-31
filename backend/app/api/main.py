@@ -1,31 +1,34 @@
-from app.api.routes import (
-    auth,
-    health_check,
-    permission,
-    role,
-    user,
-    crudDefineModuel,
-    crudDefineFileds,
-    masterDetailRel,
-    demoUser,
-    sysDic,
-    sysDicData,
-    menu,
-)
+import importlib
+import os
 from fastapi import APIRouter
+from pathlib import Path
 
 api_router = APIRouter()
-api_router.include_router(
-    health_check.router, prefix="/health-check", tags=["HealthCheck"]
-)
-api_router.include_router(auth.router, prefix="", tags=["auth"])
-api_router.include_router(user.router, prefix="/user", tags=["User"])
-api_router.include_router(role.router, prefix="/role", tags=["Role"])
-api_router.include_router(permission.router, prefix="/permission", tags=["Permission"])
-api_router.include_router(crudDefineModuel.router, prefix="/crudDefineModuel", tags=["CrudDefineModuel"])
-api_router.include_router(crudDefineFileds.router, prefix="/crudDefineFileds", tags=["CrudDefineFileds"])
-api_router.include_router(masterDetailRel.router, prefix="/masterDetailRel", tags=["MasterDetailRel"])
-api_router.include_router(demoUser.router, prefix="/demoUser", tags=["DemoUser"])
-api_router.include_router(sysDic.router, prefix="/sysDic", tags=["SysDic"])
-api_router.include_router(sysDicData.router, prefix="/sysDicData", tags=["SysDicData"])
-api_router.include_router(menu.router, prefix="/menu", tags=["Menu"])
+
+ROUTES_DIR = Path(__file__).parent / "routes"
+
+# 固定挂载 auth 路由，prefix 为空，tags 为 auth
+try:
+    auth_mod = importlib.import_module("app.api.routes.auth")
+    auth_router = getattr(auth_mod, "router", None)
+    if auth_router:
+        api_router.include_router(auth_router, prefix="", tags=["auth"])
+except Exception as e:
+    print(f"⚠️ 加载模块 app.api.routes.auth 失败: {e}")
+
+for file in os.listdir(ROUTES_DIR):
+    if file.endswith(".py") and file != "__init__.py":
+        module_name = file[:-3]  # 去掉 .py 后缀
+        module_path = f"app.api.routes.{module_name}"
+
+        try:
+            mod = importlib.import_module(module_path)
+            router = getattr(mod, "router", None)
+            if router:
+                api_router.include_router(
+                    router,
+                    prefix=f"/{module_name}",
+                    tags=[module_name.capitalize()],
+                )
+        except Exception as e:
+            print(f"⚠️ 加载模块 {module_path} 失败: {e}")

@@ -49,7 +49,7 @@ export const MenuEdit = () => {
       children: buildTree(data, item.id),
     }));
 }
-  const treeData = buildTree(menuData?.data || [], 0);
+  const treeData = buildTree(menuData?.data || [], -1);
   const record = queryResult?.data?.data;
   const form = formProps?.form;
   useEffect(() => {

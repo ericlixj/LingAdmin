@@ -23,7 +23,7 @@ router = APIRouter()
 
 
 @router.post(
-    "", dependencies=[Depends(has_permission("super_admin"))], response_model=Role
+    "", dependencies=[Depends(has_permission("role:create"))], response_model=Role
 )
 def create_role(
     role_in: RoleCreate,
@@ -47,7 +47,7 @@ def create_role(
 
 @router.get(
     "",
-    dependencies=[Depends(has_permission("super_admin"))],
+    dependencies=[Depends(has_permission("role:list"))],
     response_model=RoleListResponse,
 )
 def list_roles(
@@ -85,7 +85,7 @@ def list_roles(
 
 @router.get(
     "/{role_id}",
-    dependencies=[Depends(has_permission("super_admin"))],
+    dependencies=[Depends(has_permission("role:get"))],
 )
 def get_role(role_id: int, session: Session = Depends(get_session)):
     crud = RoleCRUD(session)
@@ -100,7 +100,7 @@ def get_role(role_id: int, session: Session = Depends(get_session)):
 
 @router.patch(
     "/{role_id}",
-    dependencies=[Depends(has_permission("super_admin"))],
+    dependencies=[Depends(has_permission("role:update"))],
     response_model=Role,
 )
 def update_role(
@@ -124,7 +124,7 @@ def update_role(
 
 @router.delete(
     "/{role_id}",
-    dependencies=[Depends(has_permission("super_admin"))],
+    dependencies=[Depends(has_permission("role:delete"))],
     response_model=Role,
 )
 def delete_role(
@@ -145,7 +145,7 @@ def delete_role(
 
 @router.patch(
     "/bind-permissions/{role_id}",
-    dependencies=[Depends(has_permission("super_admin"))],
+    dependencies=[Depends(has_permission("role:bind_permissions"))],
 )
 def bind_permissions_to_role(
     role_id: int,
@@ -174,7 +174,7 @@ def bind_permissions_to_role(
 @router.get(
     "/bind-permissions/{role_id}",
     response_model=List[int],
-    dependencies=[Depends(has_permission("super_admin"))],
+    dependencies=[Depends(has_permission("role:get_bound_permissions"))],
 )
 def get_bound_permission_ids(
     role_id: int,

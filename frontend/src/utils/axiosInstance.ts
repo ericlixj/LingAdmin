@@ -33,10 +33,9 @@ axiosInstance.interceptors.response.use(
   (response) => response,
   async (error) => {
     const originalRequest = error.config;
-
-    // 如果是 401 且未重试过 且存在 refresh token
+    const is401 = error.response?.status === 401;
     if (
-      error.response?.status === 401 &&
+      is401  &&
       !originalRequest._retry &&
       localStorage.getItem(REFRESH_TOKEN_KEY)
     ) {
@@ -68,6 +67,10 @@ axiosInstance.interceptors.response.use(
         redirectToLogin();
         return Promise.reject(refreshError);
       }
+    }
+
+    if (is401) {
+      redirectToLogin();
     }
 
     // 如果不是 401 或没有 refresh token，直接抛出错误

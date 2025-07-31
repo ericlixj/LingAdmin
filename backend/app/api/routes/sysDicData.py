@@ -15,15 +15,6 @@ logger = logging.getLogger(__name__)
 router = APIRouter()
 
 
-@router.post("", dependencies=[Depends(has_permission("super_admin"))], response_model=SysDicData)
-def create_item(
-    item_in: SysDicDataCreate,
-    session: Session = Depends(get_session),
-    current_user_id: int = Depends(get_current_user_id),
-):
-    crud = SysDicDataCRUD(session)
-    item_in.creator = str(current_user_id)
-    return crud.create(item_in)
 
 def try_parse_datetime(val: str):
     try:
@@ -67,7 +58,17 @@ def parse_refine_filters(query_params: dict) -> list[dict]:
 
     return filters
 
-@router.get("", dependencies=[Depends(has_permission("super_admin"))], response_model=SysDicDataListResponse)
+@router.post("", dependencies=[Depends(has_permission("sysDicData:create"))], response_model=SysDicData)
+def create_item(
+    item_in: SysDicDataCreate,
+    session: Session = Depends(get_session),
+    current_user_id: int = Depends(get_current_user_id),
+):
+    crud = SysDicDataCRUD(session)
+    item_in.creator = str(current_user_id)
+    return crud.create(item_in)
+
+@router.get("", dependencies=[Depends(has_permission("sysDicData:list"))], response_model=SysDicDataListResponse)
 def list_items(
     request: Request,
     _start: int = Query(0),
@@ -96,7 +97,7 @@ def list_items(
     return {"data": items, "total": total}
 
 
-@router.get("/{item_id}", dependencies=[Depends(has_permission("super_admin"))], response_model=SysDicData)
+@router.get("/{item_id}", dependencies=[Depends(has_permission("sysDicData:get"))], response_model=SysDicData)
 def get_item(item_id: int, session: Session = Depends(get_session)):
     crud = SysDicDataCRUD(session)
     item = crud.get_by_id(item_id)
@@ -105,7 +106,7 @@ def get_item(item_id: int, session: Session = Depends(get_session)):
     return item
 
 
-@router.patch("/{item_id}", dependencies=[Depends(has_permission("super_admin"))], response_model=SysDicData)
+@router.patch("/{item_id}", dependencies=[Depends(has_permission("sysDicData:update"))], response_model=SysDicData)
 def update_item(
     item_id: int,
     item_in: SysDicDataUpdate,
@@ -120,7 +121,7 @@ def update_item(
     return crud.update(db_item, item_in)
 
 
-@router.delete("/{item_id}", dependencies=[Depends(has_permission("super_admin"))], response_model=SysDicData)
+@router.delete("/{item_id}", dependencies=[Depends(has_permission("sysDicData:delete"))], response_model=SysDicData)
 def delete_item(
     item_id: int,
     session: Session = Depends(get_session),

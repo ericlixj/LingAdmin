@@ -76,9 +76,9 @@ def generate_backend_files(model: CURDModel, target_dir: Optional[str] = "codege
     record_code_file(rel_routes_path, routes_content)
 
     # main.py 路由注册
-    rel_main_path = os.path.join("backend", "app", "api", "main_tmp.py")
-    main_content = generate_routes_main_content(module_name, model)
-    record_code_file(rel_main_path, main_content)
+    # rel_main_path = os.path.join("backend", "app", "api", "main_tmp.py")
+    # main_content = generate_routes_main_content(module_name, model)
+    # record_code_file(rel_main_path, main_content)
 
     return generated_files
 

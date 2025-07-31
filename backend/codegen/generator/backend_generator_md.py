@@ -98,10 +98,10 @@ def generate_backend_files(module: MasterDetailCURDModel, target_dir: str | None
     file_map[detail_route_path] = generate_backend_routes(detail_module)
 
     # main.py 路由注册
-    main_dir = os.path.join("backend", "app", "api")
-    main_file_path = os.path.join(main_dir, "main_tmp.py")
+    # main_dir = os.path.join("backend", "app", "api")
+    # main_file_path = os.path.join(main_dir, "main_tmp.py")
 
-    file_map[main_file_path] = generate_routes_main_content(master_module, detail_module)
+    # file_map[main_file_path] = generate_routes_main_content(master_module, detail_module)
 
     # 若指定 target_dir，则执行实际写入
     if target_dir:

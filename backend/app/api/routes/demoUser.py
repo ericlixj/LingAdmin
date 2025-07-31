@@ -15,7 +15,7 @@ logger = logging.getLogger(__name__)
 router = APIRouter()
 
 
-@router.post("", dependencies=[Depends(has_permission("super_admin"))], response_model=DemoUser)
+@router.post("", dependencies=[Depends(has_permission("demoUser:create"))], response_model=DemoUser)
 def create_item(
     item_in: DemoUserCreate,
     session: Session = Depends(get_session),
@@ -67,7 +67,7 @@ def parse_refine_filters(query_params: dict) -> list[dict]:
 
     return filters
 
-@router.get("", dependencies=[Depends(has_permission("super_admin"))], response_model=DemoUserListResponse)
+@router.get("", dependencies=[Depends(has_permission("demoUser:list"))], response_model=DemoUserListResponse)
 def list_items(
     request: Request,
     _start: int = Query(0),
@@ -96,7 +96,7 @@ def list_items(
     return {"data": items, "total": total}
 
 
-@router.get("/{item_id}", dependencies=[Depends(has_permission("super_admin"))], response_model=DemoUser)
+@router.get("/{item_id}", dependencies=[Depends(has_permission("demoUser:get"))], response_model=DemoUser)
 def get_item(item_id: int, session: Session = Depends(get_session)):
     crud = DemoUserCRUD(session)
     item = crud.get_by_id(item_id)
@@ -105,7 +105,7 @@ def get_item(item_id: int, session: Session = Depends(get_session)):
     return item
 
 
-@router.patch("/{item_id}", dependencies=[Depends(has_permission("super_admin"))], response_model=DemoUser)
+@router.patch("/{item_id}", dependencies=[Depends(has_permission("demoUser:update"))], response_model=DemoUser)
 def update_item(
     item_id: int,
     item_in: DemoUserUpdate,
@@ -120,7 +120,7 @@ def update_item(
     return crud.update(db_item, item_in)
 
 
-@router.delete("/{item_id}", dependencies=[Depends(has_permission("super_admin"))], response_model=DemoUser)
+@router.delete("/{item_id}", dependencies=[Depends(has_permission("demoUser:delete"))], response_model=DemoUser)
 def delete_item(
     item_id: int,
     session: Session = Depends(get_session),

@@ -91,7 +91,7 @@ const en = {
     },
 
     actions: {
-      bind_permissions: "Bind Permissions",
+      bind_permissions: "Menu Permissions",
     },
   },
   permission: {
@@ -220,14 +220,21 @@ const en = {
     },
   },
   menu: {
-      titles: {
-          list: "Menu List",
-          create: "Create PurchaseMenu",
-          edit: "Edit Menu",
-          show: "Menu Details",
-      },
+    titles: {
+      list: "Menu List",
+      create: "Create PurchaseMenu",
+      edit: "Edit Menu",
+      show: "Menu Details",
+    },
   },
-
+  demoUser001: {
+    titles: {
+      list: "演示用户001 List",
+      create: "Create 演示用户001",
+      edit: "Edit 演示用户001",
+      show: "演示用户001 Details",
+    },
+  },
 };
 
 export default en;

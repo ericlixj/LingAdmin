@@ -84,13 +84,15 @@ export function useDynamicModules(
     const menus = groupedMenus[parentCode] || [];
     for (const menu of menus) {
       flattenMenus.push(menu);
-      traverseMenus(menu.permission_code); // 递归子菜单
+      traverseMenus(menu.module_code); // 递归子菜单
     }
   }
   traverseMenus(undefined);
 
   // 构造资源
-  const resources: IResourceItem[] = flattenMenus.map((menu) => {
+  const resources: IResourceItem[] = flattenMenus
+  .filter(menu => menu.id !== 0 && menu.type !== 2) // 过滤掉根菜单和按钮类型
+  .map((menu) => {
     if (menu.module_code === "dashboard") {
       return {
         name: "dashboard",
@@ -99,7 +101,7 @@ export function useDynamicModules(
           label: "首页",
           icon: <DashboardOutlined />,
           order: menu.order_by,
-          hidden: menu.hidden,
+          hidden: false,
         },
       };
     } else {
@@ -109,7 +111,7 @@ export function useDynamicModules(
       const comp = pageMap[moduleCode] || {};
 
       return {
-        name: moduleCode || menu.permission_code,
+        name: moduleCode,
         list: isMenu ? comp.list : undefined,
         create: isMenu ? comp.create : undefined,
         edit: isMenu ? comp.edit : undefined,
@@ -120,7 +122,7 @@ export function useDynamicModules(
           parent: getParentPermissionCode(menu.parent_id, rawMenus),
           canDelete: true,
           order: menu.order_by,
-          hidden: menu.hidden,
+          hidden: false,
         },
       };
     }
@@ -141,6 +143,9 @@ export function useDynamicModules(
 
 // 获取父菜单的 permission_code
 function getParentPermissionCode(parentId: number, allMenus: any[]): string | undefined {
+  if (parentId === 0 || parentId === null) {
+    return undefined;
+  }
   const parent = allMenus.find((m) => m.id === parentId);
-  return parent?.permission_code || undefined;
+  return parent?.module_code || undefined;
 }

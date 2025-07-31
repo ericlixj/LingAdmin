@@ -55,9 +55,9 @@ def generate_frontend_files(model: CURDModel, target_dir: Optional[str] = "codeg
                 f.write(content)
 
     # App_tmp.tsx
-    rel_app_path = os.path.join("frontend", "src", "App_tmp.tsx")
-    app_content = generate_frontend_App(module_name, model)
-    write_file(rel_app_path, app_content)
+    # rel_app_path = os.path.join("frontend", "src", "App_tmp.tsx")
+    # app_content = generate_frontend_App(module_name, model)
+    # write_file(rel_app_path, app_content)
 
     # zh_tmp.ts
     rel_i18n_path = os.path.join("frontend", "src", "i18n", "locale", "zh_tmp.ts")

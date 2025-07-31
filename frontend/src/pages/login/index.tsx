@@ -32,7 +32,14 @@ export const Login = () => {
         <Form
           layout="vertical"
           initialValues={{ email: "admin@kxf.ca", password: "admin123" }}
-          onFinish={(values) => login(values)}
+          onFinish={(values) =>
+            login(values, {
+              onSuccess: () => {
+                // 登录成功后刷新页面,resources无法动态加载，只能这样搞一下
+                window.location.reload();
+              },
+            })
+          }
         >
           <Form.Item
             label={t("login.email")}

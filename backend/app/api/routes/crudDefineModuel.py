@@ -17,28 +17,6 @@ init_logger()
 logger = logging.getLogger(__name__)
 router = APIRouter()
 
-@router.get("/preview_code")
-def preview_code(id: int = Query(...), session: Session = Depends(get_session)):
-    crud = CrudDefineModuelCRUD(session)
-    result_dict = crud.get_crud_module_dict(id)
-    logger.info(f"result_dict={result_dict}")
-    if not result_dict:
-        raise HTTPException(status_code=404, detail="单表配置未找到")
-
-    file_content_map = process_module_from_dict(result_dict)  # 直接传dict
-    file_content_map["model.json"] = json.dumps(result_dict, ensure_ascii=False, indent=2)
-    return file_content_map
-
-@router.post("", dependencies=[Depends(has_permission("super_admin"))], response_model=CrudDefineModuel)
-def create_item(
-    item_in: CrudDefineModuelCreate,
-    session: Session = Depends(get_session),
-    current_user_id: int = Depends(get_current_user_id),
-):
-    crud = CrudDefineModuelCRUD(session)
-    item_in.creator = str(current_user_id)
-    return crud.create(item_in)
-
 def try_parse_datetime(val: str):
     try:
         return datetime.fromisoformat(val.replace("Z", "+00:00"))
@@ -78,10 +56,31 @@ def parse_refine_filters(query_params: dict) -> list[dict]:
             "operator": f.get("operator"),
             "value": value,
         })
-
     return filters
 
-@router.get("", dependencies=[Depends(has_permission("super_admin"))], response_model=CrudDefineModuelListResponse)
+@router.get("/preview_code", dependencies=[Depends(has_permission("crudDefineModuel:preview_code"))])
+def preview_code(id: int = Query(...), session: Session = Depends(get_session)):
+    crud = CrudDefineModuelCRUD(session)
+    result_dict = crud.get_crud_module_dict(id)
+    logger.info(f"result_dict={result_dict}")
+    if not result_dict:
+        raise HTTPException(status_code=404, detail="单表配置未找到")
+
+    file_content_map = process_module_from_dict(result_dict)  # 直接传dict
+    file_content_map["model.json"] = json.dumps(result_dict, ensure_ascii=False, indent=2)
+    return file_content_map
+
+@router.post("", dependencies=[Depends(has_permission("crudDefineModuel:create"))], response_model=CrudDefineModuel)
+def create_item(
+    item_in: CrudDefineModuelCreate,
+    session: Session = Depends(get_session),
+    current_user_id: int = Depends(get_current_user_id),
+):
+    crud = CrudDefineModuelCRUD(session)
+    item_in.creator = str(current_user_id)
+    return crud.create(item_in)
+
+@router.get("", dependencies=[Depends(has_permission("crudDefineModuel:list"))], response_model=CrudDefineModuelListResponse)
 def list_items(
     request: Request,
     _start: int = Query(0),
@@ -109,7 +108,7 @@ def list_items(
 
     return {"data": items, "total": total}
 
-@router.get("/md_select", dependencies=[Depends(has_permission("super_admin"))], response_model=CrudDefineModuelListResponse)
+@router.get("/md_select", response_model=CrudDefineModuelListResponse)
 def list_items_md_select(
     request: Request,
     _start: int = Query(0),
@@ -150,7 +149,7 @@ def list_items_md_select(
     return {"data": data, "total": total}
 
 
-@router.get("/{item_id}", dependencies=[Depends(has_permission("super_admin"))], response_model=CrudDefineModuel)
+@router.get("/{item_id}", dependencies=[Depends(has_permission("crudDefineModuel:get"))], response_model=CrudDefineModuel)
 def get_item(item_id: int, session: Session = Depends(get_session)):
     crud = CrudDefineModuelCRUD(session)
     item = crud.get_by_id(item_id)
@@ -159,7 +158,7 @@ def get_item(item_id: int, session: Session = Depends(get_session)):
     return item
 
 
-@router.patch("/{item_id}", dependencies=[Depends(has_permission("super_admin"))], response_model=CrudDefineModuel)
+@router.patch("/{item_id}", dependencies=[Depends(has_permission("crudDefineModuel:update"))], response_model=CrudDefineModuel)
 def update_item(
     item_id: int,
     item_in: CrudDefineModuelUpdate,
@@ -174,7 +173,7 @@ def update_item(
     return crud.update(db_item, item_in)
 
 
-@router.delete("/{item_id}", dependencies=[Depends(has_permission("super_admin"))], response_model=CrudDefineModuel)
+@router.delete("/{item_id}", dependencies=[Depends(has_permission("crudDefineModuel:delete"))], response_model=CrudDefineModuel)
 def delete_item(
     item_id: int,
     session: Session = Depends(get_session),

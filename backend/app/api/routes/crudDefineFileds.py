@@ -15,7 +15,7 @@ logger = logging.getLogger(__name__)
 router = APIRouter()
 
 
-@router.post("", dependencies=[Depends(has_permission("super_admin"))], response_model=CrudDefineFileds)
+@router.post("", dependencies=[Depends(has_permission("crudDefineFileds:create"))], response_model=CrudDefineFileds)
 def create_item(
     item_in: CrudDefineFiledsCreate,
     session: Session = Depends(get_session),
@@ -67,7 +67,7 @@ def parse_refine_filters(query_params: dict) -> list[dict]:
 
     return filters
 
-@router.get("", dependencies=[Depends(has_permission("super_admin"))], response_model=CrudDefineFiledsListResponse)
+@router.get("", dependencies=[Depends(has_permission("crudDefineFileds:list"))], response_model=CrudDefineFiledsListResponse)
 def list_items(
     request: Request,
     _start: int = Query(0),
@@ -97,7 +97,6 @@ def list_items(
 
 @router.get(
     "/filed_select",
-    dependencies=[Depends(has_permission("super_admin"))],
     response_model=CrudDefineFiledsListResponse,
 )
 def list_items_filed_select(
@@ -128,7 +127,7 @@ def list_items_filed_select(
 
 
 
-@router.get("/{item_id}", dependencies=[Depends(has_permission("super_admin"))], response_model=CrudDefineFileds)
+@router.get("/{item_id}", dependencies=[Depends(has_permission("crudDefineFileds:get"))], response_model=CrudDefineFileds)
 def get_item(item_id: int, session: Session = Depends(get_session)):
     crud = CrudDefineFiledsCRUD(session)
     item = crud.get_by_id(item_id)
@@ -137,7 +136,7 @@ def get_item(item_id: int, session: Session = Depends(get_session)):
     return item
 
 
-@router.patch("/{item_id}", dependencies=[Depends(has_permission("super_admin"))], response_model=CrudDefineFileds)
+@router.patch("/{item_id}", dependencies=[Depends(has_permission("crudDefineFileds:update"))], response_model=CrudDefineFileds)
 def update_item(
     item_id: int,
     item_in: CrudDefineFiledsUpdate,
@@ -152,7 +151,7 @@ def update_item(
     return crud.update(db_item, item_in)
 
 
-@router.delete("/{item_id}", dependencies=[Depends(has_permission("super_admin"))], response_model=CrudDefineFileds)
+@router.delete("/{item_id}", dependencies=[Depends(has_permission("crudDefineFileds:delete"))], response_model=CrudDefineFileds)
 def delete_item(
     item_id: int,
     session: Session = Depends(get_session),

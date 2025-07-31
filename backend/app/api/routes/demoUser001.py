@@ -1,54 +1,19 @@
 import logging
-import json
 from typing import List, Optional
 
 from app.core.db import get_session
 from app.core.deps import get_current_user_id, has_permission
 from app.core.logger import init_logger
-from app.crud.masterDetailRel_crud import MasterDetailRelCRUD
-from app.crud.crudDefineModuel_crud import CrudDefineModuelCRUD
-from app.models.masterDetailRel import MasterDetailRel, MasterDetailRelCreate, MasterDetailRelListResponse, MasterDetailRelUpdate
+from app.crud.demoUser001_crud import DemoUser001CRUD
+from app.models.demoUser001 import DemoUser001, DemoUser001Create, DemoUser001ListResponse, DemoUser001Update
 from fastapi import APIRouter, Depends, HTTPException, Query, Request
 from sqlmodel import Session
 from datetime import datetime
-from codegen.processor4md import process_module_from_dict
 
 init_logger()
 logger = logging.getLogger(__name__)
 router = APIRouter()
 
-@router.get("/preview_code", dependencies=[Depends(has_permission("masterDetailRel:preview_code"))])
-def preview_code(id: int = Query(...), session: Session = Depends(get_session)):
-    crud = MasterDetailRelCRUD(session)
-    crud4Module = CrudDefineModuelCRUD(session)
-    masterDetailRel = crud.get_by_id(id)
-    logger.info(f"masterDetailRel={masterDetailRel}")
-    if not masterDetailRel:
-        raise HTTPException(status_code=404, detail="主子表配置未找到")
-    
-    master_module_id = masterDetailRel.master_module_id
-    detail_module_id = masterDetailRel.detail_module_id
-    rel_filed_name = masterDetailRel.rel_filed_name
-
-    mdDict = {}
-    mdDict["master_module"] = crud4Module.get_crud_module_dict(master_module_id)
-    mdDict["detail_module"] = crud4Module.get_crud_module_dict(detail_module_id)
-    mdDict["relation_field"] = rel_filed_name
-
-    file_content_map = {}
-    file_content_map = process_module_from_dict(mdDict)
-    file_content_map["model.json"] = json.dumps(mdDict, ensure_ascii=False, indent=2)
-    return file_content_map
-
-@router.post("", dependencies=[Depends(has_permission("masterDetailRel:create"))], response_model=MasterDetailRel)
-def create_item(
-    item_in: MasterDetailRelCreate,
-    session: Session = Depends(get_session),
-    current_user_id: int = Depends(get_current_user_id),
-):
-    crud = MasterDetailRelCRUD(session)
-    item_in.creator = str(current_user_id)
-    return crud.create(item_in)
 
 def try_parse_datetime(val: str):
     try:
@@ -92,7 +57,17 @@ def parse_refine_filters(query_params: dict) -> list[dict]:
 
     return filters
 
-@router.get("", dependencies=[Depends(has_permission("masterDetailRel:list"))], response_model=MasterDetailRelListResponse)
+@router.post("", dependencies=[Depends(has_permission("demoUser001:create"))], response_model=DemoUser001)
+def create_item(
+    item_in: DemoUser001Create,
+    session: Session = Depends(get_session),
+    current_user_id: int = Depends(get_current_user_id),
+):
+    crud = DemoUser001CRUD(session)
+    item_in.creator = str(current_user_id)
+    return crud.create(item_in)
+
+@router.get("", dependencies=[Depends(has_permission("demoUser001:list"))], response_model=DemoUser001ListResponse)
 def list_items(
     request: Request,
     _start: int = Query(0),
@@ -103,7 +78,7 @@ def list_items(
     exclude_keys = {"_start", "_end", "sortField", "sortOrder"}
     filters = parse_refine_filters(query_params)
 
-    crud = MasterDetailRelCRUD(session)
+    crud = DemoUser001CRUD(session)
     skip = _start
     limit = _end - _start
     sortField = query_params.get("sortField")
@@ -111,7 +86,7 @@ def list_items(
 
     order_by = None
     if sortField and sortOrder:
-        field = getattr(MasterDetailRel, sortField, None)
+        field = getattr(DemoUser001, sortField, None)
         if field is not None:
             order_by = field.asc() if sortOrder.lower() == "asc" else field.desc()
 
@@ -121,39 +96,39 @@ def list_items(
     return {"data": items, "total": total}
 
 
-@router.get("/{item_id}", dependencies=[Depends(has_permission("masterDetailRel:get"))], response_model=MasterDetailRel)
+@router.get("/{item_id}", dependencies=[Depends(has_permission("demoUser001:get"))], response_model=DemoUser001)
 def get_item(item_id: int, session: Session = Depends(get_session)):
-    crud = MasterDetailRelCRUD(session)
+    crud = DemoUser001CRUD(session)
     item = crud.get_by_id(item_id)
     if not item:
-        raise HTTPException(status_code=404, detail="MasterDetailRel not found")
+        raise HTTPException(status_code=404, detail="DemoUser001 not found")
     return item
 
 
-@router.patch("/{item_id}", dependencies=[Depends(has_permission("masterDetailRel:update"))], response_model=MasterDetailRel)
+@router.patch("/{item_id}", dependencies=[Depends(has_permission("demoUser001:update"))], response_model=DemoUser001)
 def update_item(
     item_id: int,
-    item_in: MasterDetailRelUpdate,
+    item_in: DemoUser001Update,
     session: Session = Depends(get_session),
     current_user_id: int = Depends(get_current_user_id),
 ):
-    crud = MasterDetailRelCRUD(session)
+    crud = DemoUser001CRUD(session)
     db_item = crud.get_by_id(item_id)
     if not db_item:
-        raise HTTPException(status_code=404, detail="MasterDetailRel not found")
+        raise HTTPException(status_code=404, detail="DemoUser001 not found")
     item_in.updater = str(current_user_id)
     return crud.update(db_item, item_in)
 
 
-@router.delete("/{item_id}", dependencies=[Depends(has_permission("masterDetailRel:delete"))], response_model=MasterDetailRel)
+@router.delete("/{item_id}", dependencies=[Depends(has_permission("demoUser001:delete"))], response_model=DemoUser001)
 def delete_item(
     item_id: int,
     session: Session = Depends(get_session),
     current_user_id: int = Depends(get_current_user_id),
 ):
-    crud = MasterDetailRelCRUD(session)
+    crud = DemoUser001CRUD(session)
     db_item = crud.get_by_id(item_id)
     if not db_item:
-        raise HTTPException(status_code=404, detail="MasterDetailRel not found")
+        raise HTTPException(status_code=404, detail="DemoUser001 not found")
     db_item.updater = str(current_user_id)
     return crud.soft_delete(db_item)

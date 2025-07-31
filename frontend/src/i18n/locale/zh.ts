@@ -91,7 +91,7 @@ const zh = {
     },
 
     actions: {
-      bind_permissions: "绑定权限",
+      bind_permissions: "菜单权限",
     },
   },
   permission: {
@@ -224,6 +224,14 @@ const zh = {
           create: "创建菜单",
           edit: "编辑菜单",
           show: "菜单详情",
+      },
+  },  
+  demoUser001: {
+      titles: {
+          list: "演示用户001列表",
+          create: "创建演示用户001",
+          edit: "编辑演示用户001",
+          show: "演示用户001详情",
       },
   },  
 };

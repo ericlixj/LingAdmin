@@ -14,17 +14,6 @@ init_logger()
 logger = logging.getLogger(__name__)
 router = APIRouter()
 
-
-@router.post("", dependencies=[Depends(has_permission("super_admin"))], response_model={{ class_name }})
-def create_item(
-    item_in: {{ class_name }}Create,
-    session: Session = Depends(get_session),
-    current_user_id: int = Depends(get_current_user_id),
-):
-    crud = {{ class_name }}CRUD(session)
-    item_in.creator = str(current_user_id)
-    return crud.create(item_in)
-
 def try_parse_datetime(val: str):
     try:
         return datetime.fromisoformat(val.replace("Z", "+00:00"))
@@ -67,7 +56,17 @@ def parse_refine_filters(query_params: dict) -> list[dict]:
 
     return filters
 
-@router.get("", dependencies=[Depends(has_permission("super_admin"))], response_model={{ class_name }}ListResponse)
+@router.post("", dependencies=[Depends(has_permission("{{ module_name }}:create"))], response_model={{ class_name }})
+def create_item(
+    item_in: {{ class_name }}Create,
+    session: Session = Depends(get_session),
+    current_user_id: int = Depends(get_current_user_id),
+):
+    crud = {{ class_name }}CRUD(session)
+    item_in.creator = str(current_user_id)
+    return crud.create(item_in)    
+
+@router.get("", dependencies=[Depends(has_permission("{{ module_name }}:list"))], response_model={{ class_name }}ListResponse)
 def list_items(
     request: Request,
     _start: int = Query(0),
@@ -96,7 +95,7 @@ def list_items(
     return {"data": items, "total": total}
 
 
-@router.get("/{item_id}", dependencies=[Depends(has_permission("super_admin"))], response_model={{ class_name }})
+@router.get("/{item_id}", dependencies=[Depends(has_permission("{{ module_name }}:get"))], response_model={{ class_name }})
 def get_item(item_id: int, session: Session = Depends(get_session)):
     crud = {{ class_name }}CRUD(session)
     item = crud.get_by_id(item_id)
@@ -105,7 +104,7 @@ def get_item(item_id: int, session: Session = Depends(get_session)):
     return item
 
 
-@router.patch("/{item_id}", dependencies=[Depends(has_permission("super_admin"))], response_model={{ class_name }})
+@router.patch("/{item_id}", dependencies=[Depends(has_permission("{{ module_name }}:update"))], response_model={{ class_name }})
 def update_item(
     item_id: int,
     item_in: {{ class_name }}Update,
@@ -120,7 +119,7 @@ def update_item(
     return crud.update(db_item, item_in)
 
 
-@router.delete("/{item_id}", dependencies=[Depends(has_permission("super_admin"))], response_model={{ class_name }})
+@router.delete("/{item_id}", dependencies=[Depends(has_permission("{{ module_name }}:delete"))], response_model={{ class_name }})
 def delete_item(
     item_id: int,
     session: Session = Depends(get_session),

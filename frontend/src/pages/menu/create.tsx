@@ -30,7 +30,7 @@ export const MenuCreate = () => {
           children: buildTree(data, item.id),
         }));
     }
-    const treeData = buildTree(menuData?.data || [], 0);
+    const treeData = buildTree(menuData?.data || [], -1);
   useEffect(() => {
     const defaults = {
       type:"0",

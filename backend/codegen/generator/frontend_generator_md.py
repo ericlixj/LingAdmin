@@ -17,14 +17,14 @@ def render_template(template_name, context):
     return template.render(context)
 
 # 生成 App.tsx
-def generate_frontend_app(model: CURDModel) -> tuple[str, str]:
-    content = render_template("common/frontend/App.tsx.jinja2", {
-        "class_name": model.class_name,
-        "module_name": model.module_name,
-        "label": model.label or "",
-    })
-    path = os.path.join("frontend", "src", "App_tmp.tsx")
-    return path, content
+# def generate_frontend_app(model: CURDModel) -> tuple[str, str]:
+#     content = render_template("common/frontend/App.tsx.jinja2", {
+#         "class_name": model.class_name,
+#         "module_name": model.module_name,
+#         "label": model.label or "",
+#     })
+#     path = os.path.join("frontend", "src", "App_tmp.tsx")
+#     return path, content
 
 def generate_frontend_i18n_zh(model: CURDModel) -> tuple[str, str]:
     content = render_template("common/frontend/i18n_zh.ts.jinja2", {
@@ -101,8 +101,8 @@ def generate_frontend_files(module: MasterDetailCURDModel, target_dir: str | Non
     file_map: dict[str, str] = {}
 
     # App.tsx & i18nProvider
-    path, content = generate_frontend_app(module.master_module)
-    file_map[path] = content
+    # path, content = generate_frontend_app(module.master_module)
+    # file_map[path] = content
 
     path, content = generate_frontend_i18n_zh(module.master_module)
     file_map[path] = content

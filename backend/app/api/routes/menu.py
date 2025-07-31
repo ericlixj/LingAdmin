@@ -15,15 +15,6 @@ logger = logging.getLogger(__name__)
 router = APIRouter()
 
 
-@router.post("", dependencies=[Depends(has_permission("super_admin"))], response_model=Menu)
-def create_item(
-    item_in: MenuCreate,
-    session: Session = Depends(get_session),
-    current_user_id: int = Depends(get_current_user_id),
-):
-    crud = MenuCRUD(session)
-    item_in.creator = str(current_user_id)
-    return crud.create(item_in)
 
 def try_parse_datetime(val: str):
     try:
@@ -67,17 +58,25 @@ def parse_refine_filters(query_params: dict) -> list[dict]:
 
     return filters
 
-@router.get("", dependencies=[Depends(has_permission("super_admin"))], response_model=MenuListResponse)
+@router.post("", dependencies=[Depends(has_permission("menu:create"))], response_model=Menu)
+def create_item(
+    item_in: MenuCreate,
+    session: Session = Depends(get_session),
+    current_user_id: int = Depends(get_current_user_id),
+):
+    crud = MenuCRUD(session)
+    item_in.creator = str(current_user_id)
+    return crud.create(item_in)
+
+@router.get("", response_model=MenuListResponse)
 def list_items(
     request: Request,
     _start: int = Query(0),
     _end: int = Query(10),
     session: Session = Depends(get_session),
+    current_user_id: int = Depends(get_current_user_id),
 ):
     query_params = dict(request.query_params)
-    exclude_keys = {"_start", "_end", "sortField", "sortOrder"}
-    filters = parse_refine_filters(query_params)
-
     crud = MenuCRUD(session)
     skip = _start
     limit = _end - _start
@@ -90,13 +89,13 @@ def list_items(
         if field is not None:
             order_by = field.asc() if sortOrder.lower() == "asc" else field.desc()
 
-    items = crud.list_all(skip=skip, limit=limit, filters=filters, order_by=order_by)
-    total = crud.count_all(filters=filters)
+    items = crud.list_all(skip=skip, limit=limit, order_by=order_by,current_user_id=current_user_id)
+    total = crud.count_all(current_user_id=current_user_id)
 
     return {"data": items, "total": total}
 
 
-@router.get("/{item_id}", dependencies=[Depends(has_permission("super_admin"))], response_model=Menu)
+@router.get("/{item_id}", dependencies=[Depends(has_permission("menu:get"))], response_model=Menu)
 def get_item(item_id: int, session: Session = Depends(get_session)):
     crud = MenuCRUD(session)
     item = crud.get_by_id(item_id)
@@ -105,7 +104,7 @@ def get_item(item_id: int, session: Session = Depends(get_session)):
     return item
 
 
-@router.patch("/{item_id}", dependencies=[Depends(has_permission("super_admin"))], response_model=Menu)
+@router.patch("/{item_id}", dependencies=[Depends(has_permission("menu:update"))], response_model=Menu)
 def update_item(
     item_id: int,
     item_in: MenuUpdate,
@@ -120,7 +119,7 @@ def update_item(
     return crud.update(db_item, item_in)
 
 
-@router.delete("/{item_id}", dependencies=[Depends(has_permission("super_admin"))], response_model=Menu)
+@router.delete("/{item_id}", dependencies=[Depends(has_permission("menu:delete"))], response_model=Menu)
 def delete_item(
     item_id: int,
     session: Session = Depends(get_session),
