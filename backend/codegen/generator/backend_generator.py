@@ -41,6 +41,13 @@ def generate_backend_routes(module_name: str, model: CURDModel) -> str:
     }
     return render_template("common/backend/routes.jinja2", context)
 
+def generate_backend_sql(module_name: str, model: CURDModel) -> str:
+    context = {
+        "label": model.label,
+        "module_name": module_name,
+    }
+    return render_template("single_module/backend/sql.jinja2", context)
+
 def generate_routes_main_content(module_name: str, model: CURDModel) -> str:
     context = {
         "class_name": model.class_name,
@@ -79,6 +86,11 @@ def generate_backend_files(model: CURDModel, target_dir: Optional[str] = "codege
     # rel_main_path = os.path.join("backend", "app", "api", "main_tmp.py")
     # main_content = generate_routes_main_content(module_name, model)
     # record_code_file(rel_main_path, main_content)
+
+    # sql 文件
+    rel_sql_path = os.path.join("sql")
+    sql_content = generate_backend_sql(module_name, model)
+    record_code_file(rel_sql_path, sql_content)
 
     return generated_files
 

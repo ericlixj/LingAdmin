@@ -106,7 +106,7 @@ def get_item(item_id: int, session: Session = Depends(get_session)):
     return item
 
 
-@router.patch("/{item_id}", dependencies=[Depends(has_permission("sysDicData:update"))], response_model=SysDicData)
+@router.patch("/{item_id}", dependencies=[Depends(has_permission("sysDicData:edit"))], response_model=SysDicData)
 def update_item(
     item_id: int,
     item_in: SysDicDataUpdate,

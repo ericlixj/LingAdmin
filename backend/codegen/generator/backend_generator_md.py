@@ -52,6 +52,16 @@ def generate_routes_main_content(master_model: CURDModel, detail_model: CURDMode
     }
     return render_template("master_detail_module/backend/main.jinja2", context)
 
+def generate_sql_content(master_model: CURDModel, detail_model: CURDModel) -> str:
+    context = {
+        "master_module_name": master_model.module_name,
+        "master_label": master_model.label,
+        "detail_module_name": detail_model.module_name,
+        "detail_label": detail_model.label,
+
+    }
+    return render_template("master_detail_module/backend/sql.jinja2", context)
+
 def generate_backend_files(module: MasterDetailCURDModel, target_dir: str | None):
     print("\n🚀 Generating backend files...")
 
@@ -102,6 +112,12 @@ def generate_backend_files(module: MasterDetailCURDModel, target_dir: str | None
     # main_file_path = os.path.join(main_dir, "main_tmp.py")
 
     # file_map[main_file_path] = generate_routes_main_content(master_module, detail_module)
+
+    # sql 文件
+    main_dir = os.path.join("")
+    main_file_path = os.path.join(main_dir, "sql")
+
+    file_map[main_file_path] = generate_sql_content(master_module, detail_module)    
 
     # 若指定 target_dir，则执行实际写入
     if target_dir:

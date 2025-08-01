@@ -6,11 +6,13 @@ import {
   ShowButton,
   useTable,
 } from "@refinedev/antd";
-import { Input, Select, Space, Table } from "antd";
+import { Button, Space, Table } from "antd";
 import type { Key } from "react";
+import { useGo } from "@refinedev/core";
 import "./menu-list.css"; // 用于自定义样式
 
 export const MenuList = () => {
+  const go = useGo();
   const { tableProps, filters } = useTable({
     syncWithLocation: true,
     filters: {
@@ -101,6 +103,18 @@ export const MenuList = () => {
             <Space>
               <EditButton recordItemId={record.id} />
               <ShowButton recordItemId={record.id} />
+              <Button
+                type="link"
+                onClick={(e) => {
+                  e.stopPropagation(); // 避免触发行点击
+                  go({
+                    to: `/menu/create?parent_id=${record.id}`,
+                    type: "push",
+                  });
+                }}
+              >
+                新建
+              </Button>
             </Space>
           )}
         />

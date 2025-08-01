@@ -15,15 +15,6 @@ logger = logging.getLogger(__name__)
 router = APIRouter()
 
 
-@router.post("", dependencies=[Depends(has_permission("demoUser:create"))], response_model=DemoUser)
-def create_item(
-    item_in: DemoUserCreate,
-    session: Session = Depends(get_session),
-    current_user_id: int = Depends(get_current_user_id),
-):
-    crud = DemoUserCRUD(session)
-    item_in.creator = str(current_user_id)
-    return crud.create(item_in)
 
 def try_parse_datetime(val: str):
     try:
@@ -67,6 +58,16 @@ def parse_refine_filters(query_params: dict) -> list[dict]:
 
     return filters
 
+@router.post("", dependencies=[Depends(has_permission("demoUser:create"))], response_model=DemoUser)
+def create_item(
+    item_in: DemoUserCreate,
+    session: Session = Depends(get_session),
+    current_user_id: int = Depends(get_current_user_id),
+):
+    crud = DemoUserCRUD(session)
+    item_in.creator = str(current_user_id)
+    return crud.create(item_in)
+
 @router.get("", dependencies=[Depends(has_permission("demoUser:list"))], response_model=DemoUserListResponse)
 def list_items(
     request: Request,
@@ -105,7 +106,7 @@ def get_item(item_id: int, session: Session = Depends(get_session)):
     return item
 
 
-@router.patch("/{item_id}", dependencies=[Depends(has_permission("demoUser:update"))], response_model=DemoUser)
+@router.patch("/{item_id}", dependencies=[Depends(has_permission("demoUser:edit"))], response_model=DemoUser)
 def update_item(
     item_id: int,
     item_in: DemoUserUpdate,

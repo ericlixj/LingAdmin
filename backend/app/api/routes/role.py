@@ -100,7 +100,7 @@ def get_role(role_id: int, session: Session = Depends(get_session)):
 
 @router.patch(
     "/{role_id}",
-    dependencies=[Depends(has_permission("role:update"))],
+    dependencies=[Depends(has_permission("role:edit"))],
     response_model=Role,
 )
 def update_role(

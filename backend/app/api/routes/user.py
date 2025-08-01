@@ -95,7 +95,7 @@ def get_user(user_id: int, session: Session = Depends(get_session)):
 
 @router.patch(
     "/{user_id}",
-    dependencies=[Depends(has_permission("user:update"))],
+    dependencies=[Depends(has_permission("user:edit"))],
     response_model=User,
 )
 def update_user(

@@ -130,7 +130,7 @@ def get_item(item_id: int, session: Session = Depends(get_session)):
     return item
 
 
-@router.patch("/{item_id}", dependencies=[Depends(has_permission("masterDetailRel:update"))], response_model=MasterDetailRel)
+@router.patch("/{item_id}", dependencies=[Depends(has_permission("masterDetailRel:edit"))], response_model=MasterDetailRel)
 def update_item(
     item_id: int,
     item_in: MasterDetailRelUpdate,

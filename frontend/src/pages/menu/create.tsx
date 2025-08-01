@@ -1,38 +1,43 @@
 import { Create, useForm } from "@refinedev/antd";
 import { Form, Input, Select, InputNumber, TreeSelect } from "antd";
 import { useEffect } from "react";
-import { useList } from "@refinedev/core";
+import { useList} from "@refinedev/core";
+import { useSearchParams } from "react-router-dom";
+
 export const MenuCreate = () => {
+const [searchParams] = useSearchParams();
+const parentId = searchParams.get("parent_id");
   const { formProps, saveButtonProps } = useForm();
-    // 加载菜单数据用于 parent_id 下拉
-    const { data: menuData } = useList({
-      resource: "menu", // 确保这个 resource 是你的菜单接口
-      sorters: [
-        {
-          field: "id",
-          order: "asc",
-        },
-      ],      
-      pagination: {
-        current: 1,
-        pageSize: 1001,
+  // 加载菜单数据用于 parent_id 下拉
+  const { data: menuData } = useList({
+    resource: "menu", // 确保这个 resource 是你的菜单接口
+    sorters: [
+      {
+        field: "id",
+        order: "asc",
       },
-    });
-    // 构建树结构工具函数
-    function buildTree(data: any[], parentId: number | null = null) {
-      return data
-        .filter((item) => item.parent_id === parentId)
-        .map((item) => ({
-          ...item,
-          key: item.id,
-          value: item.id,
-          title: item.menu_label,
-          children: buildTree(data, item.id),
-        }));
-    }
-    const treeData = buildTree(menuData?.data || [], -1);
+    ],      
+    pagination: {
+      current: 1,
+      pageSize: 1001,
+    },
+  });
+  // 构建树结构工具函数
+  function buildTree(data: any[], parentId: number | null = null) {
+    return data
+      .filter((item) => item.parent_id === parentId)
+      .map((item) => ({
+        ...item,
+        key: item.id,
+        value: item.id,
+        title: item.menu_label,
+        children: buildTree(data, item.id),
+      }));
+  }
+  const treeData = buildTree(menuData?.data || [], -1);
   useEffect(() => {
     const defaults = {
+      parent_id: parentId,
       type:"0",
       order_by:"0",
       status:"0",

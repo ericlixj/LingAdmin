@@ -158,7 +158,7 @@ def get_item(item_id: int, session: Session = Depends(get_session)):
     return item
 
 
-@router.patch("/{item_id}", dependencies=[Depends(has_permission("crudDefineModuel:update"))], response_model=CrudDefineModuel)
+@router.patch("/{item_id}", dependencies=[Depends(has_permission("crudDefineModuel:edit"))], response_model=CrudDefineModuel)
 def update_item(
     item_id: int,
     item_in: CrudDefineModuelUpdate,
