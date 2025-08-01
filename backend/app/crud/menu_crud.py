@@ -120,20 +120,24 @@ class MenuCRUD:
         limit: int = 10,
         order_by: Optional[UnaryExpression] = None,
         current_user_id: Optional[int] = None,
+        filters: Optional[Dict[str, Any]] = None,
     ) -> List[Menu]:
+
+        filters = filters or {}
+        menu_filters = build_filters(Menu, filters)
 
         if current_user_id is None:
             return []
-        
+
         if current_user_id == 1:
-            # 超级管理员，查询所有未删除菜单
-            query = select(Menu).where(Menu.deleted == False)
+            query = select(Menu).where(Menu.deleted == False, *menu_filters)
             if order_by is not None:
                 query = query.order_by(order_by)
             else:
                 query = query.order_by(Menu.id.desc())
-            return self.session.exec(query.offset(skip).limit(limit)).all()            
+            return self.session.exec(query.offset(skip).limit(limit)).all()
 
+        # 普通用户：通过角色-权限连接表
         user_role = UserRoleLink.__table__
         role_permission = RolePermissionLink.__table__
         menu = Menu.__table__
@@ -145,7 +149,7 @@ class MenuCRUD:
             .join(menu, role_permission.c.permission_id == menu.c.id)
         )
 
-        stmt = (
+        stmt: Select = (
             select(Menu)
             .select_from(j)
             .where(user_role.c.user_id == current_user_id, menu.c.deleted == False)
@@ -154,28 +158,34 @@ class MenuCRUD:
             .limit(limit)
         )
 
+        # 额外 filters（只能作用于 Menu 的字段）
+        for k, v in filters.items():
+            col_attr = getattr(menu.c, k, None)
+            if col_attr is not None and v is not None:
+                stmt = stmt.where(col_attr == v)
+
+        # stmt = stmt.order_by(order_by or menu.c.id.desc())
         if order_by is not None:
             stmt = stmt.order_by(order_by)
         else:
-            stmt = stmt.order_by(menu.c.id.desc())
-        results = self.session.exec(stmt).all()
-        # for item in results:
-        #     logger.debug(f"Menu item: id={item.id}, label={item.menu_label}")
-        return results
+            stmt = stmt.order_by(menu.c.id.desc())        
+        return self.session.exec(stmt).all()
 
     def count_all(
         self,
         current_user_id: Optional[int] = None,
+        filters: Optional[Dict[str, Any]] = None,
     ) -> int:
 
+        filters = filters or {}
+        menu_filters = build_filters(Menu, filters)
+
         if current_user_id is None:
-            # 无 user_id，返回 0
             return 0
 
         if current_user_id == 1:
-            query = select(func.count()).select_from(Menu).where(Menu.deleted == False)
-            count = self.session.exec(query).one()
-            return count or 0        
+            query = select(func.count()).select_from(Menu).where(Menu.deleted == False, *menu_filters)
+            return self.session.exec(query).one() or 0
 
         user_role = UserRoleLink.__table__
         role_permission = RolePermissionLink.__table__
@@ -194,5 +204,18 @@ class MenuCRUD:
             .where(user_role.c.user_id == current_user_id, menu.c.deleted == False)
         )
 
+        for k, v in filters.items():
+            col_attr = getattr(menu.c, k, None)
+            if col_attr is not None and v is not None:
+                query = query.where(col_attr == v)
+
         count = self.session.exec(query).one()
-        return count if count is not None else 0
+        return count or 0
+    
+def build_filters(model, filters: Dict[str, Any]):
+    expressions = []
+    for key, value in filters.items():
+        column = getattr(model, key, None)
+        if column is not None and value is not None:
+            expressions.append(column == value)
+    return expressions    

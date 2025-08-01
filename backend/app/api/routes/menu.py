@@ -68,7 +68,7 @@ def create_item(
     item_in.creator = str(current_user_id)
     return crud.create(item_in)
 
-@router.get("", response_model=MenuListResponse)
+@router.get("", dependencies=[Depends(has_permission("menu:list"))], response_model=MenuListResponse)
 def list_items(
     request: Request,
     _start: int = Query(0),
@@ -91,6 +91,32 @@ def list_items(
 
     items = crud.list_all(skip=skip, limit=limit, order_by=order_by,current_user_id=current_user_id)
     total = crud.count_all(current_user_id=current_user_id)
+
+    return {"data": items, "total": total}
+
+@router.get("/vv", response_model=MenuListResponse)
+def list_items(
+    request: Request,
+    _start: int = Query(0),
+    _end: int = Query(10),
+    session: Session = Depends(get_session),
+    current_user_id: int = Depends(get_current_user_id),
+):
+    query_params = dict(request.query_params)
+    crud = MenuCRUD(session)
+    skip = _start
+    limit = _end - _start
+    sortField = query_params.get("sortField")
+    sortOrder = query_params.get("sortOrder")
+
+    order_by = None
+    if sortField and sortOrder:
+        field = getattr(Menu, sortField, None)
+        if field is not None:
+            order_by = field.asc() if sortOrder.lower() == "asc" else field.desc()
+
+    items = crud.list_all(skip=skip, limit=limit, order_by=order_by,current_user_id=current_user_id,filters={"status": 0})
+    total = crud.count_all(current_user_id=current_user_id,filters={"status": 0})
 
     return {"data": items, "total": total}
 

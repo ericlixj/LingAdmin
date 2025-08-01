@@ -40,7 +40,7 @@ function App() {
         if (authCheck.authenticated) {
           setIsAuthenticated(true);
           // 登录后再加载菜单
-          const res = await axiosInstance.get("/menu?_start=0&_end=1000&sortField=id&sortOrder=asc");
+          const res = await axiosInstance.get("/menu/vv?_start=0&_end=1000&sortField=id&sortOrder=asc");
           setMenus(res.data.data || []);
         } else {
           setIsAuthenticated(false);
