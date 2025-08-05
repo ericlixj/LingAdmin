@@ -88,7 +88,7 @@ def generate_backend_files(model: CURDModel, target_dir: Optional[str] = "codege
     # record_code_file(rel_main_path, main_content)
 
     # sql 文件
-    rel_sql_path = os.path.join("sql")
+    rel_sql_path = os.path.join("sql_tmp")
     sql_content = generate_backend_sql(module_name, model)
     record_code_file(rel_sql_path, sql_content)
 

@@ -58,10 +58,10 @@ function App() {
   if (loadingMenus) {
     return <div>Loading menus...</div>;
   }
-  console.info("Menus loaded:", menus);
+  // console.info("Menus loaded:", menus);
   const { resources, routes } = useDynamicModules(isAuthenticated ? menus : []);
-  console.info("Resources:", resources);
-  console.info("Routes:", routes);
+  // console.info("Resources:", resources);
+  // console.info("Routes:", routes);
   return (
     <BrowserRouter>
       <RefineKbarProvider>

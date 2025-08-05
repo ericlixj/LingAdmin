@@ -9,7 +9,7 @@ import {
 import { Button, Space, Table } from "antd";
 import type { Key } from "react";
 import { useGo } from "@refinedev/core";
-import "./menu-list.css"; // 用于自定义样式
+import styles from "./menu.module.css";
 
 export const MenuList = () => {
   const go = useGo();
@@ -81,15 +81,15 @@ export const MenuList = () => {
         onRow={(record) => ({
           onClick: () => handleRowClick(record),
         })}
-        rowClassName={(record) =>
-          record.parent_id === 0 || record.parent_id === null
-            ? "menu-row-parent"
-            : "menu-row-child"
-        }
+        rowClassName={(record) => {
+          return record.children && record.children.length > 0
+            ? styles["non-leaf-row"]
+            : styles["leaf-row"];
+        }}             
       >
         {/* 你的各列配置 */}
-        <Table.Column dataIndex="id" title="ID" />
-        <Table.Column dataIndex="parent_id" title="父ID" />
+        {/* <Table.Column dataIndex="id" title="ID" />
+        <Table.Column dataIndex="parent_id" title="父ID" /> */}
         <Table.Column dataIndex="menu_label" title="菜单名称"  />
         <Table.Column dataIndex="permission_code" title="权限编码"  />
         <Table.Column dataIndex="icon" title="图标" />

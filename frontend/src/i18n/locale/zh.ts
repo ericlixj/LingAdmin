@@ -219,21 +219,45 @@ const zh = {
     },
   },
   menu: {
-      titles: {
-          list: "菜单列表",
-          create: "创建菜单",
-          edit: "编辑菜单",
-          show: "菜单详情",
-      },
-  },  
+    titles: {
+      list: "菜单列表",
+      create: "创建菜单",
+      edit: "编辑菜单",
+      show: "菜单详情",
+    },
+  },
   demoUser001: {
-      titles: {
-          list: "演示用户001列表",
-          create: "创建演示用户001",
-          edit: "编辑演示用户001",
-          show: "演示用户001详情",
-      },
-  },  
+    titles: {
+      list: "演示用户001列表",
+      create: "创建演示用户001",
+      edit: "编辑演示用户001",
+      show: "演示用户001详情",
+    },
+  },
+  dept: {
+    titles: {
+      list: "部门管理列表",
+      create: "创建部门管理",
+      edit: "编辑部门管理",
+      show: "部门管理详情",
+    },
+  },
+  sysDic001: {
+    titles: {
+      list: "字典表001列表",
+      create: "创建字典表001",
+      edit: "编辑字典表001",
+      show: "字典表001详情",
+    },
+  },
+  demoUser002: {
+    titles: {
+      list: "演示用户002列表",
+      create: "创建演示用户002",
+      edit: "编辑演示用户002",
+      show: "演示用户002详情",
+    },
+  },
 };
 
 export default zh;

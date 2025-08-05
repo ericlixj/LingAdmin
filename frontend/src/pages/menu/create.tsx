@@ -5,8 +5,8 @@ import { useList} from "@refinedev/core";
 import { useSearchParams } from "react-router-dom";
 
 export const MenuCreate = () => {
-const [searchParams] = useSearchParams();
-const parentId = searchParams.get("parent_id");
+  const [searchParams] = useSearchParams();
+  const parentId = searchParams.get("parent_id");
   const { formProps, saveButtonProps } = useForm();
   // 加载菜单数据用于 parent_id 下拉
   const { data: menuData } = useList({

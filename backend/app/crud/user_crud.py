@@ -34,6 +34,8 @@ class UserCRUD:
             query = query.where(User.email.contains(filters["email"]))
         if "full_name" in filters:
             query = query.where(User.full_name.contains(filters["full_name"]))
+        if "is_active" in filters:
+            query = query.where(User.is_active == filters["is_active"])            
 
         if order_by is not None:
             query = query.order_by(order_by)
@@ -50,6 +52,9 @@ class UserCRUD:
 
         if "full_name" in filters:
             query = query.where(User.full_name.contains(filters["full_name"]))
+
+        if "is_active" in filters:
+            query = query.where(User.is_active == filters["is_active"])                  
 
         return self.session.exec(query).one()
 

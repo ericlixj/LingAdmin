@@ -115,7 +115,7 @@ def generate_backend_files(module: MasterDetailCURDModel, target_dir: str | None
 
     # sql 文件
     main_dir = os.path.join("")
-    main_file_path = os.path.join(main_dir, "sql")
+    main_file_path = os.path.join(main_dir, "sql_tmp")
 
     file_map[main_file_path] = generate_sql_content(master_module, detail_module)    
 

@@ -79,6 +79,43 @@ def list_users(
 
     return users
 
+@router.get(
+    "/list_all_active_users",
+    dependencies=[Depends(has_permission("user:list"))],
+    response_model=UserListResponse,
+)
+def list_all_active_users(
+    _start: int = Query(0),
+    _end: int = Query(1000),
+    sortField: Optional[str] = Query(None, alias="sortField"),
+    sortOrder: Optional[str] = Query(None, alias="sortOrder"),
+    session: Session = Depends(get_session),
+):
+    logger.info(
+        f"queryActiveUsers users with start={_start}, end={_end}, sortField={sortField}, sortOrder={sortOrder}"
+    )
+    crud = UserCRUD(session)
+    skip = _start
+    limit = _end - _start
+
+    filters = {}
+    filters["is_active"] = True
+
+    order_by = None
+    if sortField and sortOrder:
+        if sortOrder.lower() == "asc":
+            order_by = getattr(User, sortField).asc()
+        elif sortOrder.lower() == "desc":
+            order_by = getattr(User, sortField).desc()
+
+    users = crud.list_all(skip=skip, limit=limit, filters=filters, order_by=order_by)
+    total = crud.count_all(filters=filters)
+
+    return {"data": users, "total": total}
+
+    return users
+
+
 
 @router.get(
     "/{user_id}",

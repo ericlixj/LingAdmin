@@ -235,6 +235,14 @@ const en = {
       show: "演示用户001 Details",
     },
   },
+  dept: {
+      titles: {
+          list: "部门管理 List",
+          create: "Create 部门管理",
+          edit: "Edit 部门管理",
+          show: "部门管理 Details",
+      },
+  },  
 };
 
 export default en;
