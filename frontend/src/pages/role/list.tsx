@@ -38,36 +38,8 @@ export const RoleList = () => {
   const [loading, setLoading] = useState(false);
 
   const getLeafNodeIds = (ids: number[], list: any[]): number[] => {
-    // 构建一个 id -> node 的映射
-    const idToNodeMap = new Map<number, any>();
-    list.forEach((item) => {
-      idToNodeMap.set(item.id, item);
-    });
-
-    // 构建所有 parent_id 集合（活跃子节点可能的父节点）
-    const parentIdSet = new Set(
-      list
-        .filter((item) => item.is_active === true)
-        .map((item) => item.parent_id)
-        .filter((id) => id !== undefined && id !== null && id !== 0)
-    );
-
-    // 判断当前节点及其所有祖先是否都 active
-    const isNodeAndAncestorsActive = (nodeId: number): boolean => {
-      let current = idToNodeMap.get(nodeId);
-      while (current) {
-        if (!current.is_active) return false;
-        current = idToNodeMap.get(current.parent_id);
-      }
-      return true;
-    };
-
-    return ids.filter(
-      (id) =>
-        id !== 0 &&
-        !parentIdSet.has(id) &&
-        isNodeAndAncestorsActive(id)
-    );
+    const parentIdSet = new Set(list.map((item) => item.parent_id).filter(Boolean));
+    return ids.filter((id) => !parentIdSet.has(id) && id !== 0);
   };
 
 
@@ -77,9 +49,9 @@ export const RoleList = () => {
     const ids = await fetchBoundPermissions(roleId);
     setBoundIds(ids);
     // 只选中叶子节点用于回显
-    // console.info("已绑定的权限 ID 列表：", ids);
+    console.info("已绑定的权限 ID 列表：", ids);
     const leafIds = getLeafNodeIds(ids, permissionData?.data || []);
-    // console.info("叶子节点 ID 列表：", leafIds);
+    console.info("叶子节点 ID 列表：", leafIds);
     setSelectedPermissionIds(leafIds);
     setLoading(false);
     setModalVisible(true);
