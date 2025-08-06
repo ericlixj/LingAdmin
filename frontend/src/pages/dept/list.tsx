@@ -152,6 +152,7 @@ useEffect(() => {
             return user?.label ?? value ?? "-";
           }}
           filterDropdown={(props) => {
+            // FIXME 无法展示label
             const selectedId = (props.selectedKeys && props.selectedKeys.length > 0) ? props.selectedKeys[0] : undefined;
             const selectedIdNumber = selectedId !== undefined ? Number(selectedId) : undefined;
             return (
@@ -196,6 +197,7 @@ useEffect(() => {
           dataIndex="status"
           title="状态"
           filterDropdown={(props) => (
+            // FIXME 无法展示label
             <FilterDropdown {...props}>
               <Select
                 allowClear

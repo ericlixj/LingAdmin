@@ -82,8 +82,11 @@ const zh = {
     },
     enums: {
       data_scope: {
-        all: "全部数据权限",
-        custom: "自定义数据权限",
+        all: "全部",
+        custom: "自定义",
+        dept_only: "本部门",
+        dept_and_sub: "本部门及以下",
+        self_only: "仅本人",
       },
     },
     messages: {
@@ -92,6 +95,7 @@ const zh = {
 
     actions: {
       bind_permissions: "菜单权限",
+      bind_data_permissions: "数据权限",
     },
   },
   permission: {

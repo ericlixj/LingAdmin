@@ -11,8 +11,9 @@ from app.models.role import (
     RoleCreate,
     RoleListResponse,
     RolePermissionLink,
-    RoleShopLink,
+    RoleDeptLink,
     RoleUpdate,
+    BindDeptRequest,
 )
 from fastapi import APIRouter, Depends, HTTPException, Query, Request
 from sqlmodel import Session, delete, select
@@ -38,9 +39,9 @@ def create_role(
     role_in.creator = str(current_user_id)
     db_role = crud.create(role_in)
 
-    # 建立 role_shop_link 数据
-    if role_in.data_scope == 1 and role_in.shop_ids:
-        crud.update_role_shop_links(db_role.id, role_in.shop_ids)
+    # 建立 role_dept_link 数据
+    if role_in.data_scope == 1 and role_in.dept_ids:
+        crud.update_role_dept_links(db_role.id, role_in.dept_ids)
 
     return db_role
 
@@ -92,9 +93,9 @@ def get_role(role_id: int, session: Session = Depends(get_session)):
     role = crud.get_by_id(role_id)
     if not role:
         raise HTTPException(status_code=404, detail=_("Role not found"))
-    shop_ids = crud.get_shop_ids_by_role(role_id)
+    dept_ids = crud.get_dept_ids_by_role(role_id)
     role_dict = role.dict()
-    role_dict["shop_ids"] = shop_ids
+    role_dict["dept_ids"] = dept_ids
     return role_dict
 
 
@@ -117,8 +118,8 @@ def update_role(
 
     db_rule = crud.update(db_role, role_in)
 
-    if role_in.data_scope == 1 and role_in.shop_ids:
-        crud.update_role_shop_links(db_role.id, role_in.shop_ids)
+    if role_in.data_scope == 1 and role_in.dept_ids:
+        crud.update_role_dept_links(db_role.id, role_in.dept_ids)
     return db_rule
 
 
@@ -139,7 +140,7 @@ def delete_role(
     db_role.updater = str(current_user_id)
     db_role = crud.soft_delete(db_role)
 
-    crud.delete_role_shop_links(role_id)
+    crud.delete_role_dept_links(role_id)
     return db_role
 
 
@@ -186,6 +187,67 @@ def get_bound_permission_ids(
 
     statement = select(RolePermissionLink.permission_id).where(
         RolePermissionLink.role_id == role_id
+    )
+    results = session.exec(statement).all()
+
+    return results
+
+
+@router.patch(
+    "/bind-data-permissions/{role_id}",
+    dependencies=[Depends(has_permission("role:bind_data_permissions"))],
+)
+def bind_data_permissions(
+    role_id: int,
+    payload: BindDeptRequest,
+    session: Session = Depends(get_session),
+    current_user_id: int = Depends(get_current_user_id),
+):
+    data_scope = payload.data_scope
+    if data_scope not in [0, 1, 2, 3, 4]:
+        raise HTTPException(status_code=400, detail=_("Invalid data scope"))
+
+    role = session.get(Role, role_id)
+    if not role:
+        raise HTTPException(status_code=404, detail=_("Role not found"))
+
+    role.data_scope = data_scope
+    role.updater = str(current_user_id)
+    session.add(role)
+
+    if data_scope == 1:
+        dept_ids = payload.dept_ids
+        if not dept_ids:
+            raise HTTPException(status_code=400, detail=_("Department IDs cannot be empty for custom data scope"))
+        session.exec(delete(RoleDeptLink).where(RoleDeptLink.role_id == role_id))
+        for dept_id in dept_ids:
+            session.add(RoleDeptLink(role_id=role_id, dept_id=dept_id))
+
+    session.commit()
+
+    return {
+        "success": True,
+        "role_id": role_id,
+        "data_scope": data_scope,
+        "dept_ids": dept_ids if data_scope == 1 else [],
+    }
+
+
+@router.get(
+    "/bind-dept/{role_id}",
+    response_model=List[int],
+    dependencies=[Depends(has_permission("role:get_bound_depts"))],
+)
+def get_bound_dept_ids(
+    role_id: int,
+    session: Session = Depends(get_session),
+):
+    role = session.get(Role, role_id)
+    if not role:
+        raise HTTPException(status_code=404, detail=_("Role not found"))
+
+    statement = select(RoleDeptLink.dept_id).where(
+        RoleDeptLink.role_id == role_id
     )
     results = session.exec(statement).all()
 

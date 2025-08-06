@@ -2,7 +2,7 @@ import { useList } from "@refinedev/core";
 
 export const useMenuData = () => {
   return useList({
-    resource: "menu",
+    resource: "menu/list_valid_menus",
     pagination: {
       pageSize: 9999,
     },

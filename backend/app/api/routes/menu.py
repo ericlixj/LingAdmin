@@ -94,7 +94,7 @@ def list_items(
 
     return {"data": items, "total": total}
 
-@router.get("/vv", response_model=MenuListResponse)
+@router.get("/list_valid_menus", response_model=MenuListResponse)
 def list_items(
     request: Request,
     _start: int = Query(0),
@@ -130,7 +130,24 @@ def get_item(item_id: int, session: Session = Depends(get_session)):
     return item
 
 
-@router.patch("/{item_id}", dependencies=[Depends(has_permission("menu:edit"))], response_model=Menu)
+# @router.patch("/{item_id}", dependencies=[Depends(has_permission("menu:edit"))], response_model=Menu)
+# def update_item(
+#     item_id: int,
+#     item_in: MenuUpdate,
+#     session: Session = Depends(get_session),
+#     current_user_id: int = Depends(get_current_user_id),
+# ):
+#     crud = MenuCRUD(session)
+#     db_item = crud.get_by_id(item_id)
+#     if not db_item:
+#         raise HTTPException(status_code=404, detail="Menu not found")
+#     item_in.updater = str(current_user_id)
+#     return crud.update(db_item, item_in)
+@router.patch(
+    "/{item_id}",
+    dependencies=[Depends(has_permission("menu:edit"))],
+    response_model=Menu,
+)
 def update_item(
     item_id: int,
     item_in: MenuUpdate,
@@ -141,8 +158,30 @@ def update_item(
     db_item = crud.get_by_id(item_id)
     if not db_item:
         raise HTTPException(status_code=404, detail="Menu not found")
+
+    # 设置更新人
     item_in.updater = str(current_user_id)
-    return crud.update(db_item, item_in)
+
+    # 判断 status 是否发生变化
+    status_changed = (
+        item_in.status is not None and item_in.status != db_item.status
+    )
+
+    if status_changed:
+        # 级联更新 status
+        crud.cascade_update(item_id, {
+            "status": item_in.status,
+            "updater": str(current_user_id),
+        })
+
+    # 再次更新当前节点的其他字段（排除 status）
+    # 因为 status 已经通过 cascade_update 处理
+    item_in_data = item_in.dict(exclude_unset=True)
+    item_in_data.pop("status", None)  # 避免重复更新
+    item_patch = MenuUpdate(**item_in_data)
+
+    return crud.update(db_item, item_patch)
+
 
 
 @router.delete("/{item_id}", dependencies=[Depends(has_permission("menu:delete"))], response_model=Menu)
@@ -156,4 +195,6 @@ def delete_item(
     if not db_item:
         raise HTTPException(status_code=404, detail="Menu not found")
     db_item.updater = str(current_user_id)
-    return crud.soft_delete(db_item)
+    crud.soft_delete(db_item)
+    crud.cascade_update(item_id, {"deleted": True})
+    return db_item

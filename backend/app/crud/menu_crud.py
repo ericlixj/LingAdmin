@@ -3,7 +3,7 @@ from datetime import datetime
 from typing import Any, Dict, List, Optional
 
 from app.models.menu import Menu, MenuCreate, MenuUpdate
-from sqlalchemy import func
+from sqlalchemy import func, update
 from sqlalchemy.sql.elements import UnaryExpression
 from sqlmodel import Session, col, select
 from app.core.logger import init_logger
@@ -54,6 +54,40 @@ class MenuCRUD:
         self.session.commit()
         self.session.refresh(db_obj)
         return db_obj
+
+    def get_descendant_ids(self, node_id: int) -> List[int]:
+        all_nodes = self.session.exec(select(Menu).where(Menu.deleted == False)).all()
+        id_to_children = {}
+        for node in all_nodes:
+            id_to_children.setdefault(node.parent_id, []).append(node)
+
+        result = []
+
+        def collect_children(current_id: int):
+            children = id_to_children.get(current_id, [])
+            for child in children:
+                result.append(child.id)
+                collect_children(child.id)
+
+        collect_children(node_id)
+        return result
+        
+    def cascade_update(
+        self,
+        menu_id: int,
+        update_fields: Dict[str, Any],
+    ):
+        descendant_ids = self.get_descendant_ids(menu_id)
+        all_ids = [menu_id] + descendant_ids
+        update_fields["update_time"] = datetime.utcnow()
+
+        self.session.exec(
+            update(Menu)
+            .where(Menu.id.in_(all_ids))
+            .values(**update_fields)
+        )
+        self.session.commit()    
+    
     def _parse_dayjs_obj(self, obj):
         if isinstance(obj, dict) and "$d" in obj:
             return datetime.fromisoformat(obj["$d"].replace("Z", "+00:00"))
@@ -112,7 +146,6 @@ class MenuCRUD:
                     query = query.where(column == value)
 
         return query
-
 
     def list_all(
         self,
@@ -219,3 +252,4 @@ def build_filters(model, filters: Dict[str, Any]):
         if column is not None and value is not None:
             expressions.append(column == value)
     return expressions    
+

@@ -1,9 +1,9 @@
 from datetime import datetime
 from typing import List, Optional, Set
 
-from app.core.constants import SUPER_ADMIN_ROLE_ID, SUPER_ADMIN_SHOP_ID
+from app.core.constants import SUPER_ADMIN_ROLE_ID, SUPER_ADMIN_DEPT_ID
 from app.models.menu import Menu
-from app.models.role import Role, RolePermissionLink, RoleShopLink
+from app.models.role import Role, RolePermissionLink, RoleDeptLink
 from app.models.user import User, UserCreate, UserRoleLink, UserUpdate
 from passlib.context import CryptContext
 from sqlalchemy import and_, func
@@ -120,7 +120,7 @@ class UserCRUD:
         permission_codes = self.session.exec(permission_query).all()
         return set(permission_codes)
 
-    def get_all_shop_ids_by_user(self, user_id: int) -> Set[int]:
+    def get_all_dept_ids_by_user(self, user_id: int) -> Set[int]:
         # 1. 查询用户绑定的所有未删除角色 ID
         role_ids_query = (
             select(UserRoleLink.role_id)
@@ -137,17 +137,17 @@ class UserCRUD:
 
         role_ids_set = set(role_ids)
         if SUPER_ADMIN_ROLE_ID in role_ids_set:
-            return {SUPER_ADMIN_SHOP_ID}
+            return {SUPER_ADMIN__ID}
 
-        # 2. 通过角色-店铺关联表查所有未删除的 shop_id
-        shop_ids_query = (
-            select(RoleShopLink.shop_id)
-            .join(Role, Role.id == RoleShopLink.role_id)
+        # 2. 通过角色-店铺关联表查所有未删除的 dept_id
+        dept_ids_query = (
+            select(RoleDeptLink.dept_id)
+            .join(Role, Role.id == RoleDeptLink.role_id)
             .where(
-                RoleShopLink.role_id.in_(role_ids),
+                RoleDeptLink.role_id.in_(role_ids),
                 Role.deleted == False,
             )
         )
-        shop_ids = self.session.exec(shop_ids_query).all()
+        dept_ids = self.session.exec(dept_ids_query).all()
 
-        return set(shop_ids)
+        return set(dept_ids)

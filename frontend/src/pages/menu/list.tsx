@@ -6,7 +6,7 @@ import {
   ShowButton,
   useTable,
 } from "@refinedev/antd";
-import { Button, Space, Table } from "antd";
+import { Button, Space, Table, Tag } from "antd";
 import type { Key } from "react";
 import { useGo } from "@refinedev/core";
 import styles from "./menu.module.css";
@@ -95,7 +95,19 @@ export const MenuList = () => {
         <Table.Column dataIndex="icon" title="图标" />
         <Table.Column dataIndex="type" title="类型"  />
         <Table.Column dataIndex="order_by" title="排序号"  />
-        <Table.Column dataIndex="status" title="状态"  />
+        <Table.Column
+          dataIndex="status"
+          title="状态"
+          render={(value) => {
+            if (value === 0) {
+              return <Tag color="green">开启</Tag>;
+            }
+            if (value === 1) {
+              return <Tag color="red">关闭</Tag>;
+            }
+            return "-";
+          }}
+        />
         <Table.Column dataIndex="module_code" title="模块编码"  />
         <Table.Column
           title="操作"
