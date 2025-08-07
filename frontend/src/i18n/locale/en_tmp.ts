@@ -1,12 +1,12 @@
 #paste this code to frjonted/src/i18n_zh.ts
 
 ...
-    demoUser002: {
+    main001: {
         titles: {
-            list: "演示用户002 List",
-            create: "Create 演示用户002",
-            edit: "Edit 演示用户002",
-            show: "演示用户002 Details",
+            list: "主表001 List",
+            create: "Create 主表001",
+            edit: "Edit 主表001",
+            show: "主表001 Details",
         },
     },
 ...

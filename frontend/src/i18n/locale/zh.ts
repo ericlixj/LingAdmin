@@ -263,6 +263,14 @@ const zh = {
       show: "演示用户002详情",
     },
   },
+  demoUser003: {
+    titles: {
+      list: "演示用户003列表",
+      create: "创建演示用户003",
+      edit: "编辑演示用户003",
+      show: "演示用户003详情",
+    },
+  },
 };
 
 export default zh;

@@ -4,8 +4,8 @@ from typing import Optional, List
 from sqlalchemy import Column, DateTime, text, String, Integer
 from sqlmodel import Field, SQLModel
 
-class DemoUser002(SQLModel, table=True):
-    __tablename__ = "demo_user002"
+class Main001(SQLModel, table=True):
+    __tablename__ = "main001"
     id:        int = Field(
         description="主键",
         sa_column=Column(
@@ -15,12 +15,42 @@ class DemoUser002(SQLModel, table=True):
             index=False,
             unique=False,        )
     )
-    name:        str = Field(
+    dic_code:        str = Field(
             default="",
-        description="名称",
+        description="字段编码",
+        sa_column=Column(
+            String(50),
+            nullable=False,
+            primary_key=False,
+            index=True,
+            unique=True,server_default=text("''"),        )
+    )
+    dic_name:        str = Field(
+            default="",
+        description="字典名称",
         sa_column=Column(
             String(100),
             nullable=False,
+            primary_key=False,
+            index=False,
+            unique=False,server_default=text("''"),        )
+    )
+    status:        int = Field(
+            default=0,
+        description="状态",
+        sa_column=Column(
+            Integer,
+            nullable=False,
+            primary_key=False,
+            index=False,
+            unique=False,        )
+    )
+    remark:        Optional[str] = Field(
+            default="",
+        description="备注",
+        sa_column=Column(
+            String(255),
+            nullable=True,
             primary_key=False,
             index=False,
             unique=False,server_default=text("''"),        )
@@ -29,14 +59,14 @@ class DemoUser002(SQLModel, table=True):
     creator: Optional[str] = Field(default=None, max_length=64, description="创建人")
     dept_id: Optional[int] = Field(
         default=0,
-        description="创建者部门ID",
+        description="创建人部门ID",
         sa_column=Column(
             Integer,
             nullable=True,
             primary_key=False,
             index=True,
             unique=False,        )
-    )
+    )    
     updater: Optional[str] = Field(default=None, max_length=64, description="更新人")
     deleted: bool = Field(default=False)
     create_time: datetime = Field(
@@ -50,16 +80,22 @@ class DemoUser002(SQLModel, table=True):
         description="更新时间"
     )
 
-class DemoUser002Create(SQLModel):
-    name: str
-    dept_id: Optional[int] = None
+class Main001Create(SQLModel):
+    dic_code: str
+    dic_name: str
+    status: int
+    remark: Optional[str] = None
     creator: Optional[str] = Field(default=None, max_length=64)
-
-class DemoUser002Update(SQLModel):
-    name: Optional[str] = None
     dept_id: Optional[int] = None
-    updater: Optional[str] = Field(default=None, max_length=64)
 
-class DemoUser002ListResponse(SQLModel):
-    data: List[DemoUser002]
+class Main001Update(SQLModel):
+    dic_code: Optional[str] = None
+    dic_name: Optional[str] = None
+    status: Optional[int] = None
+    remark: Optional[str] = None
+    updater: Optional[str] = Field(default=None, max_length=64)
+    dept_id: Optional[int] = None
+
+class Main001ListResponse(SQLModel):
+    data: List[Main001]
     total: int

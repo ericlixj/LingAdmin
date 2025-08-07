@@ -4,8 +4,8 @@ from typing import Optional, List
 from sqlalchemy import Column, DateTime, text, String, Integer
 from sqlmodel import Field, SQLModel
 
-class DemoUser002(SQLModel, table=True):
-    __tablename__ = "demo_user002"
+class DemoUser003(SQLModel, table=True):
+    __tablename__ = "demo_user003"
     id:        int = Field(
         description="主键",
         sa_column=Column(
@@ -29,14 +29,14 @@ class DemoUser002(SQLModel, table=True):
     creator: Optional[str] = Field(default=None, max_length=64, description="创建人")
     dept_id: Optional[int] = Field(
         default=0,
-        description="创建者部门ID",
+        description="创建人部门ID",
         sa_column=Column(
             Integer,
             nullable=True,
             primary_key=False,
             index=True,
             unique=False,        )
-    )
+    )    
     updater: Optional[str] = Field(default=None, max_length=64, description="更新人")
     deleted: bool = Field(default=False)
     create_time: datetime = Field(
@@ -50,16 +50,16 @@ class DemoUser002(SQLModel, table=True):
         description="更新时间"
     )
 
-class DemoUser002Create(SQLModel):
+class DemoUser003Create(SQLModel):
     name: str
-    dept_id: Optional[int] = None
     creator: Optional[str] = Field(default=None, max_length=64)
-
-class DemoUser002Update(SQLModel):
-    name: Optional[str] = None
     dept_id: Optional[int] = None
-    updater: Optional[str] = Field(default=None, max_length=64)
 
-class DemoUser002ListResponse(SQLModel):
-    data: List[DemoUser002]
+class DemoUser003Update(SQLModel):
+    name: Optional[str] = None
+    updater: Optional[str] = Field(default=None, max_length=64)
+    dept_id: Optional[int] = None
+
+class DemoUser003ListResponse(SQLModel):
+    data: List[DemoUser003]
     total: int

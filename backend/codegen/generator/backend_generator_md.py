@@ -94,7 +94,7 @@ def generate_backend_files(module: MasterDetailCURDModel, target_dir: str | None
     file_map[detail_crud_path] = generate_backend_crud(
         detail_module,
         isMaster=False,
-        detail_module_name=detail_module.module_name,
+        detail_module_name=master_module.module_name,
         detail_class_name=master_module.class_name,
         relation_field=relation_field,
     )

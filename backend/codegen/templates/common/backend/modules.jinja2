@@ -64,6 +64,16 @@ class {{ class_name }}(SQLModel, table=True):
 
     # 默认加入通用字段
     creator: Optional[str] = Field(default=None, max_length=64, description="创建人")
+    dept_id: Optional[int] = Field(
+        default=0,
+        description="创建人部门ID",
+        sa_column=Column(
+            Integer,
+            nullable=True,
+            primary_key=False,
+            index=True,
+            unique=False,        )
+    )    
     updater: Optional[str] = Field(default=None, max_length=64, description="更新人")
     deleted: bool = Field(default=False)
     create_time: datetime = Field(
@@ -85,12 +95,14 @@ class {{ class_name }}Create(SQLModel):
     {{ field.name }}: Optional[{{ field.type }}] = None
 {% endfor %}
     creator: Optional[str] = Field(default=None, max_length=64)
+    dept_id: Optional[int] = None
 
 class {{ class_name }}Update(SQLModel):
 {% for field in fields if not field.primary_key %}
     {{ field.name }}: Optional[{{ field.type }}] = None
 {% endfor %}
     updater: Optional[str] = Field(default=None, max_length=64)
+    dept_id: Optional[int] = None
 
 class {{ class_name }}ListResponse(SQLModel):
     data: List[{{ class_name }}]

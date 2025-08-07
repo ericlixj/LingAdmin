@@ -17,7 +17,7 @@ from sqlalchemy.sql.elements import BinaryExpression
 from app.models.user import User,UserRoleLink
 from app.models.role import Role
 from app.models.dept import Dept
-from app.enums.data_scope_type import DataScopeType
+from app.core.constants import DataScopeType
 from app.models.common import DataPermission
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/api/v1/access_token")
