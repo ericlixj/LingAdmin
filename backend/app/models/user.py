@@ -74,7 +74,7 @@ class UserOut(BaseModel):
     id: int
     email: EmailStr
     dept_id: Optional[int]
-    dept_name: Optional[str]
+    dept_name: Optional[str] = None
     full_name: Optional[str]
     is_active: bool
     is_superuser: bool
