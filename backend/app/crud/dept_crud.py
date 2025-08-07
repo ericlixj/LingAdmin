@@ -132,3 +132,18 @@ class DeptCRUD:
         query = select(func.count()).select_from(Dept).where(Dept.deleted == False)
         query = self._apply_filters(query, filters)
         return self.session.exec(query).one()
+    
+    def get_dept_and_sub_dept_ids(self, dept_id: int, session: Session) -> set[int]:
+        result_ids = set()
+        
+        def recurse(current_id: int):
+            result_ids.add(current_id)
+            sub_depts = session.exec(
+                select(Dept.id).where(Dept.parent_id == current_id)
+            ).all()
+            for sub_id in sub_depts:
+                recurse(sub_id)
+
+        recurse(dept_id)
+        return result_ids
+    

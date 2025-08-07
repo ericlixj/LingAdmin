@@ -47,6 +47,7 @@ const zh = {
     fields: {
       email: "注册邮箱",
       full_name: "全名",
+      dept: "所属部门",
       is_active: "是否激活",
       is_superuser: "是否超级管理员",
       create_time: "创建时间",

@@ -25,6 +25,16 @@ class DemoUser002(SQLModel, table=True):
             index=False,
             unique=False,server_default=text("''"),        )
     )
+    dept_id:        Optional[int] = Field(
+            default=0,
+        description="创建用户部门ID",
+        sa_column=Column(
+            Integer,
+            nullable=True,
+            primary_key=False,
+            index=False,
+            unique=False,        )
+    )
     # 默认加入通用字段
     creator: Optional[str] = Field(default=None, max_length=64, description="创建人")
     updater: Optional[str] = Field(default=None, max_length=64, description="更新人")
@@ -42,10 +52,12 @@ class DemoUser002(SQLModel, table=True):
 
 class DemoUser002Create(SQLModel):
     name: str
+    dept_id: Optional[int] = None
     creator: Optional[str] = Field(default=None, max_length=64)
 
 class DemoUser002Update(SQLModel):
     name: Optional[str] = None
+    dept_id: Optional[int] = None
     updater: Optional[str] = Field(default=None, max_length=64)
 
 class DemoUser002ListResponse(SQLModel):

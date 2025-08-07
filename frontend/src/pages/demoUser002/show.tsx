@@ -26,6 +26,13 @@ export const DemoUser002Show = () => {
         }
       </Text>
       <br />
+      <Text strong>创建用户部门ID:</Text>
+      <Text>
+        {
+          record?.dept_id
+        }
+      </Text>
+      <br />
     </Show>
   );
 };

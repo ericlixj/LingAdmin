@@ -1,24 +1,19 @@
-import logging
 from datetime import datetime
 from typing import Any, Dict, List, Optional
 
 from app.models.demoUser002 import DemoUser002, DemoUser002Create, DemoUser002Update
 from sqlalchemy import func
 from sqlalchemy.sql.elements import UnaryExpression
-from sqlmodel import Session, col, select
+from sqlmodel import select
+from app.crud.base import BaseCRUD
+
 from app.core.logger import init_logger
-
+import logging
 init_logger()
-logger = logging.getLogger(__name__)
+logger = logging.getLogger(__name__) 
 
-QUERYABLE_FIELDS = {
-  "name": "like",
-}
-
-class DemoUser002CRUD:
-    def __init__(self, session: Session):
-        self.session = session
-        self.model = DemoUser002
+class DemoUser002CRUD(BaseCRUD):
+    model = DemoUser002
 
     def get_by_id(self, demoUser002_id: int) -> Optional[DemoUser002]:
         statement = select(DemoUser002).where(DemoUser002.id == demoUser002_id, DemoUser002.deleted == False)
@@ -49,65 +44,6 @@ class DemoUser002CRUD:
         self.session.commit()
         self.session.refresh(db_obj)
         return db_obj
-    def _parse_dayjs_obj(self, obj):
-        if isinstance(obj, dict) and "$d" in obj:
-            return datetime.fromisoformat(obj["$d"].replace("Z", "+00:00"))
-        return obj
-
-    def _get_query_type(self, field_name: str) -> str:
-        return QUERYABLE_FIELDS.get(field_name, "eq")
-
-    def _apply_filters(self, query, filters: Optional[List[Dict[str, Any]]]):
-        if not filters:
-            return query
-
-        for f in filters:
-            field = f.get("field")
-            operator = self._get_query_type(field) or f.get("operator") or "eq"
-            value = f.get("value")
-
-            logger.debug(f"Applying filter: {field} {operator} {value}")
-
-            if not hasattr(self.model, field):
-                continue
-
-            column = getattr(self.model, field)
-
-            # 尝试获取字段对应Python类型
-            try:
-                python_type = column.type.python_type
-            except (AttributeError, NotImplementedError):
-                python_type = None
-
-            # 类型转换，避免字符串类型与数据库字段类型不匹配
-            if python_type == int and isinstance(value, str) and not isinstance(value, int):
-                value = int(value)
-
-            # 字符串类型处理
-            if isinstance(value, str):
-                if operator == "contains" or operator == "like":
-                    query = query.where(column.contains(value))
-                elif operator == "eq" or operator == "equals" or operator == "equal":
-                    query = query.where(column == value)
-                # 你可以按需支持更多operator，如startswith、endswith等
-
-            # 日期范围处理
-            elif isinstance(value, (list, tuple)) and len(value) == 2:
-                start, end = value
-                start = self._parse_dayjs_obj(start)
-                end = self._parse_dayjs_obj(end)
-                if start:
-                    query = query.where(column >= start)
-                if end:
-                    query = query.where(column <= end)
-
-            # 其他类型按 eq 处理
-            else:
-                if operator == "eq":
-                    query = query.where(column == value)
-
-        return query
-
 
     def list_all(
         self,
@@ -122,7 +58,7 @@ class DemoUser002CRUD:
             query = query.order_by(order_by)
         else:
             query = query.order_by(DemoUser002.id.desc())
-        logger.debug(f"Executing query: {query}")
+        logger.debug(f"Executing query: {str(query)}")
         return self.session.exec(query.offset(skip).limit(limit)).all()
 
     def count_all(self, filters: Optional[Dict[str, Any]] = None) -> int:

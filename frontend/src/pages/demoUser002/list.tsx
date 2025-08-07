@@ -46,6 +46,14 @@ export const DemoUser002List = () => {
             return value;
           }}
         />
+        <Table.Column
+          dataIndex="dept_id"
+          title="创建用户部门ID"
+
+          render={(value) => {
+            return value;
+          }}
+        />
 
         <Table.Column
           title="操作"

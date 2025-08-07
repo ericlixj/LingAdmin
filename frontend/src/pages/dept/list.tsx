@@ -92,8 +92,8 @@ useEffect(() => {
             : styles["leaf-row"];
         }}        
       >
-        {/* <Table.Column dataIndex="id" title="ID" />
-        <Table.Column dataIndex="parent_id" title="父ID" /> */}
+        <Table.Column dataIndex="id" title="ID" />
+        <Table.Column dataIndex="parent_id" title="父ID" />
 
 
         <Table.Column

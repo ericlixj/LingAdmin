@@ -60,10 +60,9 @@ class UserCRUD:
 
     def create(self, user_in: UserCreate) -> User:
         hashed_password = pwd_context.hash(user_in.password)
+        user_data = user_in.dict(exclude={"password"})
         user = User(
-            email=user_in.email,
-            is_superuser=user_in.is_superuser,
-            full_name=user_in.full_name,
+            **user_data,
             hashed_password=hashed_password,
         )
         self.session.add(user)
@@ -120,34 +119,14 @@ class UserCRUD:
         permission_codes = self.session.exec(permission_query).all()
         return set(permission_codes)
 
-    def get_all_dept_ids_by_user(self, user_id: int) -> Set[int]:
-        # 1. 查询用户绑定的所有未删除角色 ID
-        role_ids_query = (
-            select(UserRoleLink.role_id)
-            .join(Role, Role.id == UserRoleLink.role_id)
+    # 获取用户的所有角色
+    def get_roles(self, user_id: int) -> List[Role]:
+        statement = (
+            select(Role)
+            .join(UserRoleLink, UserRoleLink.role_id == Role.id)
             .where(
                 UserRoleLink.user_id == user_id,
                 Role.deleted == False,
             )
         )
-        role_ids = list(self.session.exec(role_ids_query).all())
-
-        if not role_ids:
-            return set()
-
-        role_ids_set = set(role_ids)
-        if SUPER_ADMIN_ROLE_ID in role_ids_set:
-            return {SUPER_ADMIN__ID}
-
-        # 2. 通过角色-店铺关联表查所有未删除的 dept_id
-        dept_ids_query = (
-            select(RoleDeptLink.dept_id)
-            .join(Role, Role.id == RoleDeptLink.role_id)
-            .where(
-                RoleDeptLink.role_id.in_(role_ids),
-                Role.deleted == False,
-            )
-        )
-        dept_ids = self.session.exec(dept_ids_query).all()
-
-        return set(dept_ids)
+        return self.session.exec(statement).all()

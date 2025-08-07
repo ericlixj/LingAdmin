@@ -111,6 +111,29 @@ export const UserList = () => {
         />
 
         <Table.Column
+          dataIndex="dept_name"  // 假设后端返回的用户数据里有 dept_name 字段
+          title={t("user.fields.dept")}
+          sorter
+          render={(value: string | undefined) => value ?? "-"}
+          filterDropdown={(props) => (
+            <FilterDropdown {...props}>
+              <Input
+                placeholder={t("user.filters.dept")}
+                value={(props.selectedKeys[0] as string) || ""}
+                onChange={(e) =>
+                  props.setSelectedKeys(e.target.value ? [e.target.value] : [])
+                }
+                onPressEnter={() => props.confirm()}
+                onBlur={() => props.confirm()}
+              />
+            </FilterDropdown>
+          )}
+          filteredValue={
+            (filters.find((f) => f.field === "dept_name")?.value as string[]) || null
+          }
+        />        
+
+        <Table.Column
           dataIndex="is_active"
           title={t("user.fields.is_active")}
           render={(value) =>

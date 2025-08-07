@@ -16,6 +16,9 @@ from app.models.user import (
 )
 from fastapi import APIRouter, Depends, HTTPException, Query, Response
 from sqlmodel import Session, delete, select
+from sqlalchemy.orm import Session, aliased
+from sqlalchemy import or_, and_
+from app.models.dept import Dept
 
 init_logger()
 logger = logging.getLogger(__name__)
@@ -52,32 +55,49 @@ def list_users(
     sortOrder: Optional[str] = Query(None, alias="sortOrder"),
     session: Session = Depends(get_session),
 ):
-    logger.info(
-        f"Listing users with start={_start}, end={_end}, email={email}, full_name={full_name}, sortField={sortField}, sortOrder={sortOrder}"
-    )
-    crud = UserCRUD(session)
     skip = _start
     limit = _end - _start
 
-    filters = {}
+    DeptAlias = aliased(Dept)
+
+    # 构造基础查询，左连接部门表
+    query = (
+        session.query(
+            User,
+            DeptAlias.dept_name.label("dept_name")
+        )
+        .outerjoin(DeptAlias, User.dept_id == DeptAlias.id)
+    )
+
+    # 过滤条件，支持模糊匹配（根据需求调整）
     if email:
-        filters["email"] = email
+        query = query.filter(User.email.ilike(f"%{email}%"))
     if full_name:
-        filters["full_name"] = full_name
+        query = query.filter(User.full_name.ilike(f"%{full_name}%"))
 
-    order_by = None
+    # 排序
     if sortField and sortOrder:
-        if sortOrder.lower() == "asc":
-            order_by = getattr(User, sortField).asc()
-        elif sortOrder.lower() == "desc":
-            order_by = getattr(User, sortField).desc()
+        sort_col = getattr(User, sortField, None)
+        if sort_col is not None:
+            if sortOrder.lower() == "asc":
+                query = query.order_by(sort_col.asc())
+            elif sortOrder.lower() == "desc":
+                query = query.order_by(sort_col.desc())
 
-    users = crud.list_all(skip=skip, limit=limit, filters=filters, order_by=order_by)
-    total = crud.count_all(filters=filters)
+    total = query.count()
+    results = query.offset(skip).limit(limit).all()
 
-    return {"data": users, "total": total}
+    # 将结果拆包成字典，加上 dept_name 字段
+    data = []
+    for user, dept_name in results:
+        user_dict = user.__dict__.copy()
+        # 删除 _sa_instance_state 防止序列化出错
+        user_dict.pop("_sa_instance_state", None)
+        user_dict.pop("hashed_password", None)
+        user_dict["dept_name"] = dept_name
+        data.append(user_dict)
 
-    return users
+    return {"data": data, "total": total}
 
 @router.get(
     "/list_all_active_users",

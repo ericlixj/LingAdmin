@@ -7,6 +7,7 @@ export const DemoUser002Create = () => {
 
   useEffect(() => {
     const defaults = {
+      dept_id:"0",
     };
     formProps.form?.setFieldsValue(defaults);
   }, [formProps.form]);  

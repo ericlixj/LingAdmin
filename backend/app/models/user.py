@@ -2,13 +2,23 @@ from datetime import datetime
 from typing import List, Optional
 
 from pydantic import BaseModel, EmailStr
-from sqlalchemy import Column, DateTime, text
+from sqlalchemy import Column, DateTime, text, Integer
 from sqlmodel import Field, SQLModel
 
 
 class User(SQLModel, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
     email: EmailStr = Field(index=True, max_length=255)
+    dept_id: Optional[int] = Field(
+        default=0,
+        description="部门id",
+        sa_column=Column(
+            Integer,
+            nullable=True,
+            primary_key=False,
+            index=True,
+            unique=False,        )
+    )
     hashed_password: str = Field(max_length=255)
     is_active: bool = Field(default=True)
     is_superuser: bool = Field(default=False)
@@ -48,6 +58,7 @@ class UserCreate(SQLModel):
     email: EmailStr
     password: str
     full_name: Optional[str] = None
+    dept_id: int
     is_superuser: bool = Field(default=False)
     creator: Optional[str] = Field(default=None, max_length=64)
 
@@ -55,12 +66,26 @@ class UserCreate(SQLModel):
 class UserUpdate(SQLModel):
     email: Optional[EmailStr] = None
     full_name: Optional[str] = None
+    dept_id: Optional[int] = 0
     is_active: Optional[bool] = None
     updater: Optional[str] = Field(default=None, max_length=64)
 
+class UserOut(BaseModel):
+    id: int
+    email: EmailStr
+    dept_id: Optional[int]
+    dept_name: Optional[str]
+    full_name: Optional[str]
+    is_active: bool
+    is_superuser: bool
+    creator: Optional[str]
+    updater: Optional[str]
+    deleted: bool
+    create_time: datetime
+    update_time: datetime
 
 class UserListResponse(BaseModel):
-    data: List[User]
+    data: List[UserOut]
     total: int
 
 class BindRolesRequest(SQLModel):
