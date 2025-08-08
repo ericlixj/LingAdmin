@@ -225,7 +225,30 @@ const zh = {
       show: "部门管理详情",
     },
   },
-
+  demoOrder01: {
+    titles: {
+      list: "演示订单01列表",
+      create: "创建演示订单01",
+      edit: "编辑演示订单01",
+      show: "演示订单01详情",
+    },
+  },
+  main002: {
+    titles: {
+      list: "主表002列表",
+      create: "创建主表002",
+      edit: "编辑主表002",
+      show: "主表002详情",
+    },
+  },
+  sub002: {
+    titles: {
+      list: "子表数据002列表",
+      create: "创建子表数据002",
+      edit: "编辑子表数据002",
+      show: "子表数据002详情",
+    },
+  },
 };
 
 export default zh;
