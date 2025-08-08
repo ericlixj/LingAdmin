@@ -1,5 +1,6 @@
 import { Create, useForm } from "@refinedev/antd";
 import { Form, Input, Select, Checkbox, DatePicker } from "antd";
+import { MenuTreeSelect } from "../../components/common/MenuTreeSelect";
 
 export const CrudDefineModuelCreate = () => {
   const { formProps, saveButtonProps } = useForm();
@@ -15,10 +16,17 @@ export const CrudDefineModuelCreate = () => {
     <Create saveButtonProps={saveButtonProps}>
       <Form {...formProps} layout="vertical" onFinish={handleFinish}>
         <Form.Item
+          name="parent_menu_id"
+          label="上级菜单"
+        >
+          <MenuTreeSelect />
+        </Form.Item>        
+        <Form.Item
           name="module_name"
           label="模块编码（使用驼峰命名且首字母小写，例如：systemLog）"
           rules={[
-{ required: true, message: '请输入模块编码' },            { max: 100, message: '最多输入 100 个字符' },
+            { required: true, message: '请输入模块编码' },
+            { max: 100, message: '最多输入 100 个字符' },
           ]}
         >
           <Input />

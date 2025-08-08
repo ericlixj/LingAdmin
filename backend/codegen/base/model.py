@@ -58,6 +58,7 @@ class CURDModel(BaseModel):
     class_name: Optional[str] = None
     table_name: Optional[str] = None
     label: str  # 模块中文名，用于界面显示
+    parent_menu_id: Optional[int] = None  # 上级菜单ID
     fields: List[FieldDef]
 
     @validator('class_name', always=True)
@@ -79,6 +80,7 @@ class CURDModel(BaseModel):
         return camel_to_snake(class_name)
     
 class MasterDetailCURDModel(BaseModel):
+    parent_menu_id: Optional[int] = None  # 上级菜单ID
     master_module: CURDModel
     detail_module: CURDModel
     relation_field: str    

@@ -1,12 +1,24 @@
 from datetime import datetime
 from typing import Optional, List
 
-from sqlalchemy import Column, DateTime, text
+from sqlalchemy import Column, DateTime, text, Integer
 from sqlmodel import Field, SQLModel
 
 class MasterDetailRel(SQLModel, table=True):
 
     id: Optional[int] = Field(default=None, primary_key=True, description="主键")
+
+    parent_menu_id: Optional[int] = Field(
+        default=None,
+        description="父菜单ID",
+        sa_column=Column(
+            Integer,
+            nullable=True,
+            primary_key=False,
+            index=True,
+            unique=False,
+        )
+    )
 
     master_module_id: int = Field(default=None, index=True, description="主表模块")
 
@@ -30,12 +42,14 @@ class MasterDetailRel(SQLModel, table=True):
     )
 
 class MasterDetailRelCreate(SQLModel):
+    parent_menu_id: Optional[int] = None
     master_module_id: int
     detail_module_id: int
     rel_filed_name: str
     creator: Optional[str] = Field(default=None, max_length=64)
 
 class MasterDetailRelUpdate(SQLModel):
+    parent_menu_id: Optional[int] = None
     master_module_id: Optional[int] = None
     detail_module_id: Optional[int] = None
     rel_filed_name: Optional[str] = None

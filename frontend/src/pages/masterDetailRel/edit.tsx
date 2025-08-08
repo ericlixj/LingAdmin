@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import dayjs from "dayjs";
 import { Edit, useForm, useSelect } from "@refinedev/antd";
 import { Form, Select, Spin } from "antd";
+import { MenuTreeSelect } from "../../components/common/MenuTreeSelect";
 
 function prepareInitialValues(record: Record<string, any>, fields: string[]) {
   const result: Record<string, any> = {};
@@ -82,6 +83,12 @@ export const MasterDetailRelEdit = () => {
   return (
     <Edit saveButtonProps={saveButtonProps}>
       <Form {...formProps} layout="vertical" onFinish={handleFinish}>
+        <Form.Item
+          name="parent_menu_id"
+          label="上级菜单"
+        >
+          <MenuTreeSelect />
+        </Form.Item>         
         {/* 主表模块 */}
         <Form.Item
           name="master_module_id"

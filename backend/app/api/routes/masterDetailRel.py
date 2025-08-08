@@ -22,19 +22,20 @@ def preview_code(id: int = Query(...), session: Session = Depends(get_session)):
     crud = MasterDetailRelCRUD(session)
     crud4Module = CrudDefineModuelCRUD(session)
     masterDetailRel = crud.get_by_id(id)
-    logger.info(f"masterDetailRel={masterDetailRel}")
+    # logger.info(f"masterDetailRel={masterDetailRel}")
     if not masterDetailRel:
         raise HTTPException(status_code=404, detail="主子表配置未找到")
     
     master_module_id = masterDetailRel.master_module_id
     detail_module_id = masterDetailRel.detail_module_id
     rel_filed_name = masterDetailRel.rel_filed_name
+    parent_menu_id = masterDetailRel.parent_menu_id or 0
 
     mdDict = {}
     mdDict["master_module"] = crud4Module.get_crud_module_dict(master_module_id)
     mdDict["detail_module"] = crud4Module.get_crud_module_dict(detail_module_id)
     mdDict["relation_field"] = rel_filed_name
-
+    mdDict["parent_menu_id"] = parent_menu_id
     file_content_map = {}
     file_content_map = process_module_from_dict(mdDict)
     file_content_map["model.json"] = json.dumps(mdDict, ensure_ascii=False, indent=2)

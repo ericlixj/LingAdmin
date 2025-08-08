@@ -1,7 +1,7 @@
 from datetime import datetime
 from typing import Optional, List
 
-from sqlalchemy import Column, DateTime, text
+from sqlalchemy import Column, DateTime, text, Integer
 from sqlmodel import Field, SQLModel
 
 class CrudDefineModuel(SQLModel, table=True):
@@ -9,6 +9,18 @@ class CrudDefineModuel(SQLModel, table=True):
     id: int = Field(default=None, primary_key=True, description="主键")
 
     module_name: str = Field(default="", max_length=100, index=True, unique=True, description="模块名称")
+
+    parent_menu_id: Optional[int] = Field(
+        default=None,
+        description="父菜单ID",
+        sa_column=Column(
+            Integer,
+            nullable=True,
+            primary_key=False,
+            index=True,
+            unique=False,
+        )
+    )
 
     label: str = Field(default="", max_length=50, index=True, unique=True, description="模块标识")
 
@@ -31,12 +43,14 @@ class CrudDefineModuel(SQLModel, table=True):
 
 class CrudDefineModuelCreate(SQLModel):
     module_name: str
+    parent_menu_id: Optional[int] = None
     label: str
     description: Optional[str] = None
     creator: Optional[str] = Field(default=None, max_length=64)
 
 class CrudDefineModuelUpdate(SQLModel):
     module_name: Optional[str] = None
+    parent_menu_id: Optional[int] = None
     label: Optional[str] = None
     description: Optional[str] = None
     updater: Optional[str] = Field(default=None, max_length=64)

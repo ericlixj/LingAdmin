@@ -205,6 +205,7 @@ class CrudDefineModuelCRUD:
 
         result = {
             "module_name": module.module_name,
+            "parent_menu_id": module.parent_menu_id,
             "label": module.label,
             "fields": field_list,
         }

@@ -45,6 +45,7 @@ def generate_backend_sql(module_name: str, model: CURDModel) -> str:
     context = {
         "label": model.label,
         "module_name": module_name,
+        "parent_menu_id": model.parent_menu_id,
     }
     return render_template("single_module/backend/sql.jinja2", context)
 

@@ -18,6 +18,7 @@ import { useState, useMemo } from "react";
 import axiosInstance from "../../utils/axiosInstance";
 import { Tree } from "antd";
 import { useMenuData } from "../../hooks/userMenuData";
+import { DeptTreeSelect } from "../../components/common/DeptTreeSelect";
 
 export const RoleList = () => {
   const t = useTranslate();
@@ -163,33 +164,6 @@ export const RoleList = () => {
     setDataModalVisible(true);
   };
 
-  const deptTreeData = useMemo(() => {
-    const list = deptData?.data || [];
-    const map = new Map<number, any>();
-    const tree: any[] = [];
-
-    list.forEach((item) => {
-      map.set(item.id, {
-        ...item,
-        key: item.id,
-        title: item.dept_name,
-        children: [],
-      });
-    });
-
-    list.forEach((item) => {
-      const node = map.get(item.id);
-      const parent = map.get(item.parent_id);
-      if (parent) {
-        parent.children.push(node);
-      } else {
-        tree.push(node);
-      }
-    });
-
-    return tree;
-  }, [deptData?.data]);
-  
   const handleBindDataPermissions = async () => {
     const payload = {
       data_scope: selectedDataScope,
@@ -337,13 +311,13 @@ export const RoleList = () => {
         </div>
 
         {selectedDataScope === 1 && (
-          <Tree
-            checkable
-            defaultExpandAll
-            treeData={deptTreeData}
-            checkedKeys={selectedDeptIds}
-            onCheck={(checkedKeys) => setSelectedDeptIds(checkedKeys as number[])}
+          <DeptTreeSelect
+            value={selectedDeptIds} 
+            onChange={(val) => setSelectedDeptIds(val)}
+            multiple={true}
+            placeholder="请选择部门"
           />
+
         )}
       </Modal>      
     </List>

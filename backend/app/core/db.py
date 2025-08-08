@@ -3,7 +3,6 @@ import logging
 from app.core.config import settings
 from app.core.logger import init_logger
 from app.crud.user_crud import UserCRUD
-from app.models.permission import Permission
 from app.models.role import Role, RolePermissionLink
 from app.models.user import User, UserCreate, UserRoleLink
 from sqlalchemy import text

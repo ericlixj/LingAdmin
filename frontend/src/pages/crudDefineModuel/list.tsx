@@ -9,7 +9,8 @@ import { Input, Space, Table, Typography , Button } from "antd";
 import { useState } from "react";
 import axiosInstance from "../../utils/axiosInstance";
 import { CodePreviewModal } from "../../components/common/CodePreviewModal";
-const { Text } = Typography;
+import { useMemo } from "react";
+import { useList } from "@refinedev/core";
 
 export const CrudDefineModuelList = () => {
   const { tableProps, filters } = useTable({
@@ -48,11 +49,33 @@ export const CrudDefineModuelList = () => {
     }
   };
 
+  const { data: menuData } = useList({
+    resource: "menu/list_valid_menus",
+    pagination: {
+      pageSize: 9999,
+    },    
+    meta: { selectAll: true },
+  });
+
+  const idNameMap = useMemo(() => {
+    const map = new Map<number, string>();
+    (menuData?.data || []).forEach(item => {
+      map.set(item.id, item.menu_label);
+    });
+    return map;
+  }, [menuData?.data]);
+  // console.info("ID-Name Map:", idNameMap);
   return (
     <List>
       <Table {...tableProps} rowKey="id">
         <Table.Column dataIndex="id" title="ID" sorter />
-
+        <Table.Column
+          dataIndex="parent_menu_id"
+          title="上级菜单"
+          render={(menuId: number) => {
+            return idNameMap.get(menuId) || menuId || "-";
+          }}
+        />        
         <Table.Column
           dataIndex="module_name"
           title="模块编码"

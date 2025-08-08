@@ -1,6 +1,7 @@
 import { Create, useForm, useSelect } from "@refinedev/antd";
 import { Form, Select } from "antd";
 import { useState, useEffect } from "react";
+import { MenuTreeSelect } from "../../components/common/MenuTreeSelect";
 
 export const MasterDetailRelCreate = () => {
   const { formProps, saveButtonProps } = useForm();
@@ -41,6 +42,12 @@ export const MasterDetailRelCreate = () => {
   return (
     <Create saveButtonProps={saveButtonProps}>
       <Form {...formProps} layout="vertical">
+        <Form.Item
+          name="parent_menu_id"
+          label="上级菜单"
+        >
+          <MenuTreeSelect />
+        </Form.Item>         
         {/* 主表模块 */}
         <Form.Item
           name="master_module_id"

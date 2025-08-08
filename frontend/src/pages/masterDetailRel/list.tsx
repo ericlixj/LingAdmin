@@ -9,6 +9,8 @@ import {
 import { Select, Space, Table, Button } from "antd";
 import { useState } from "react";
 import axiosInstance from "../../utils/axiosInstance"; // 请确认路径
+import { useMemo } from "react";
+import { useList } from "@refinedev/core";
 import { CodePreviewModal } from "../../components/common/CodePreviewModal";
 
 export const MasterDetailRelList = () => {
@@ -86,13 +88,35 @@ export const MasterDetailRelList = () => {
       setLoading(false);
     }
   };
+  const { data: menuData } = useList({
+    resource: "menu/list_valid_menus",
+    pagination: {
+      pageSize: 9999,
+    },    
+    meta: { selectAll: true },
+  });
+
+  const idNameMap = useMemo(() => {
+    const map = new Map<number, string>();
+    (menuData?.data || []).forEach(item => {
+      map.set(item.id, item.menu_label);
+    });
+    return map;
+  }, [menuData?.data]);
+  // console.info("ID-Name Map:", idNameMap);  
 
   return (
     <>
       <List>
         <Table {...tableProps} rowKey="id">
           <Table.Column dataIndex="id" title="ID" sorter />
-
+          <Table.Column
+            dataIndex="parent_menu_id"
+            title="上级菜单"
+            render={(menuId: number) => {
+              return idNameMap.get(menuId) || menuId || "-";
+            }}
+          />    
           <Table.Column
             dataIndex="master_module_id"
             title="主表模块"

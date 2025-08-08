@@ -165,14 +165,6 @@ const zh = {
       show: "主子表关系详情",
     },
   },
-  demoUser: {
-    titles: {
-      list: "演示用户列表",
-      create: "创建演示用户",
-      edit: "编辑演示用户",
-      show: "演示用户详情",
-    },
-  },
   sysDic: {
     titles: {
       list: "字典表列表",
@@ -217,26 +209,12 @@ const zh = {
       },
     },
   },
-  shop: {
-    fields: {
-      code: "店铺编码",
-      name: "店铺名称",
-    },
-  },
   menu: {
     titles: {
       list: "菜单列表",
       create: "创建菜单",
       edit: "编辑菜单",
       show: "菜单详情",
-    },
-  },
-  demoUser001: {
-    titles: {
-      list: "演示用户001列表",
-      create: "创建演示用户001",
-      edit: "编辑演示用户001",
-      show: "演示用户001详情",
     },
   },
   dept: {
@@ -247,30 +225,7 @@ const zh = {
       show: "部门管理详情",
     },
   },
-  sysDic001: {
-    titles: {
-      list: "字典表001列表",
-      create: "创建字典表001",
-      edit: "编辑字典表001",
-      show: "字典表001详情",
-    },
-  },
-  demoUser002: {
-    titles: {
-      list: "演示用户002列表",
-      create: "创建演示用户002",
-      edit: "编辑演示用户002",
-      show: "演示用户002详情",
-    },
-  },
-  demoUser003: {
-    titles: {
-      list: "演示用户003列表",
-      create: "创建演示用户003",
-      edit: "编辑演示用户003",
-      show: "演示用户003详情",
-    },
-  },
+
 };
 
 export default zh;
