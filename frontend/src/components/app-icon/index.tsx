@@ -19,7 +19,7 @@ export const AppIcon: React.FC<MasterSwordIconProps> = ({
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      {/* 圆框 */}
+      {/* 圆框11 */}
       <circle
         cx="32"
         cy="32"
