@@ -11,7 +11,7 @@ export const AppIcon: React.FC<MasterSwordIconProps> = ({
   color = "#1890ff",
   strokeWidth = 2,
 }) => {
-  return (
+  return ( 
     <svg
       width={size}
       height={size}
@@ -19,7 +19,7 @@ export const AppIcon: React.FC<MasterSwordIconProps> = ({
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      {/* 圆框 */}
+      {/* 圆框1111 */}
       <circle
         cx="32"
         cy="32"
