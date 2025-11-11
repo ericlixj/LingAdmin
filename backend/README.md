@@ -7,7 +7,7 @@
 curl -LsSf https://astral.sh/uv/install.sh | sh
 make sure use python3.12.5
 create visual env name .venv, not venv, cause uv need this!
-
+python3 -m venv .venv
 ## Docker Compose
 
 Start the local development environment with Docker Compose following the guide in [../development.md](../development.md).

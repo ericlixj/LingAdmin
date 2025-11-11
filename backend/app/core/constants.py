@@ -7,6 +7,7 @@ SUPER_ADMIN_PERMISSION_ID = 1
 SUPER_ADMIN_USER_ID = 1
 
 
+
 class DataScopeType(int, Enum):
     ALL = 0               # 全部数据权限
     CUSTOM = 1            # 指定部门

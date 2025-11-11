@@ -31,7 +31,7 @@ export const Login = () => {
       <Card title={t("login.title")} style={{ width: 320 }}>
         <Form
           layout="vertical"
-          initialValues={{ email: "dy@cacnaturals.com", password: "123456" }}
+          initialValues={{ email: "cacdw@cacnaturals.com", password: "admin123" }}
           onFinish={(values) =>
             login(values, {
               onSuccess: () => {

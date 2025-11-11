@@ -1,7 +1,7 @@
 from datetime import datetime
 from typing import Any, Dict, List, Optional, Set
 
-from app.core.constants import SUPER_ADMIN_SHOP_ID
+# from app.core.constants import SUPER_ADMIN_SHOP_ID
 from app.models.shop_daily_stat import (
     ShopDailyStat,
     ShopDailyStatCreate,
@@ -62,8 +62,8 @@ class ShopDailyStatCRUD:
 
         query = select(ShopDailyStat).where(ShopDailyStat.deleted == False)
 
-        if SUPER_ADMIN_SHOP_ID not in shop_ids:
-            query = query.where(ShopDailyStat.shop_id.in_(shop_ids))
+        # if SUPER_ADMIN_SHOP_ID not in shop_ids:
+        #     query = query.where(ShopDailyStat.shop_id.in_(shop_ids))
 
         if filters:
             if "shop_id" in filters:

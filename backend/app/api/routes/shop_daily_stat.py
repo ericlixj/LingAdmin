@@ -2,7 +2,7 @@ import logging
 from typing import Optional, Set
 
 from app.core.db import get_session
-from app.core.deps import get_current_user_id, get_user_shop_ids, has_permission
+from app.core.deps import get_current_user_id, has_permission
 from app.core.logger import init_logger
 from app.crud.shop_daily_stat_crud import ShopDailyStatCRUD
 from app.models.shop_daily_stat import (
@@ -33,46 +33,46 @@ def create_shop_daily_stat(
     return crud.create(stat_in)
 
 
-@router.get(
-    "",
-    dependencies=[Depends(has_permission("shop-daily-stat:list"))],
-    response_model=dict,
-)
-def list_shop_daily_stats(
-    request: Request,
-    _start: int = Query(0),
-    _end: int = Query(10),
-    session: Session = Depends(get_session),
-    shop_ids: Set[int] = Depends(get_user_shop_ids),
+# @router.get(
+#     "",
+#     dependencies=[Depends(has_permission("shop-daily-stat:list"))],
+#     response_model=dict,
+# )
+# def list_shop_daily_stats(
+#     request: Request,
+#     _start: int = Query(0),
+#     _end: int = Query(10),
+#     session: Session = Depends(get_session),
+#     shop_ids: Set[int] = Depends(get_user_shop_ids),
 
-):
-    query_params = dict(request.query_params)
-    exclude_keys = {"_start", "_end", "sortField", "sortOrder"}
-    filters = {
-        k: v
-        for k, v in query_params.items()
-        if k not in exclude_keys and v != ""
-    }
+# ):
+#     query_params = dict(request.query_params)
+#     exclude_keys = {"_start", "_end", "sortField", "sortOrder"}
+#     filters = {
+#         k: v
+#         for k, v in query_params.items()
+#         if k not in exclude_keys and v != ""
+#     }
 
-    crud = ShopDailyStatCRUD(session)
-    skip = _start
-    limit = _end - _start
-    sortField = query_params.get("sortField")
-    sortOrder = query_params.get("sortOrder")
+#     crud = ShopDailyStatCRUD(session)
+#     skip = _start
+#     limit = _end - _start
+#     sortField = query_params.get("sortField")
+#     sortOrder = query_params.get("sortOrder")
 
-    order_by = None
-    if sortField and sortOrder:
-        field = getattr(ShopDailyStat, sortField, None)
-        if field is not None:
-            if sortOrder.lower() == "asc":
-                order_by = field.asc()
-            elif sortOrder.lower() == "desc":
-                order_by = field.desc()
+#     order_by = None
+#     if sortField and sortOrder:
+#         field = getattr(ShopDailyStat, sortField, None)
+#         if field is not None:
+#             if sortOrder.lower() == "asc":
+#                 order_by = field.asc()
+#             elif sortOrder.lower() == "desc":
+#                 order_by = field.desc()
 
-    stats = crud.list_all(skip=skip, limit=limit, filters=filters, order_by=order_by, shop_ids=shop_ids)
-    total = crud.count_all(filters=filters, shop_ids=shop_ids)
+#     stats = crud.list_all(skip=skip, limit=limit, filters=filters, order_by=order_by, shop_ids=shop_ids)
+#     total = crud.count_all(filters=filters, shop_ids=shop_ids)
 
-    return {"data": stats, "total": total}
+#     return {"data": stats, "total": total}
 
 
 @router.get(
