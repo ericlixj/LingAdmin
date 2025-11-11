@@ -1,0 +1,266 @@
+{# 模板变量结构：
+{
+  "master_module": CURDModel,
+  "detail_module": CURDModel,
+  "relation_field": str
+}
+#}
+import React, { useState } from "react";
+import { Show, useTable, CreateButton, FilterDropdown } from "@refinedev/antd";
+import { useShow, useDelete } from "@refinedev/core";
+import {
+  Typography,
+  Divider,
+  Modal,
+  Table,
+  Input,
+  Select,
+  DatePicker,
+  Space,
+  Button,
+  Popconfirm,
+  message,
+} from "antd";
+import { EditOutlined } from "@ant-design/icons";
+import dayjs from "dayjs";
+import { {{ detail_module.class_name }} } from "./components/{{ detail_module.module_name }}";
+
+const { Text, Title } = Typography;
+
+export const {{ master_module.class_name }}Show = () => {
+  const { queryResult } = useShow();
+  const { data, isLoading } = queryResult;
+  const record = data?.data;
+
+  const [modalVisible, setModalVisible] = useState(false);
+  const [editModalVisible, setEditModalVisible] = useState(false);
+  const [editRecord, setEditRecord] = useState(null);
+
+  const { tableProps, filters, setFilters } = useTable({
+    resource: "{{ detail_module.module_name }}",
+    syncWithLocation: false,
+    pagination: { pageSize: 10 },
+    filters: {
+      mode: "server",
+      permanent: [
+        {
+          field: "{{ relation_field }}",
+          operator: "eq",
+          value: record?.id,
+        },
+      ],
+    },
+    queryOptions: {
+      enabled: !!record?.id,
+    },
+  });
+
+  const onCreateSuccess = () => {
+    setModalVisible(false);
+  };
+
+  const onEditSuccess = () => {
+    setEditModalVisible(false);
+    setEditRecord(null);
+  };
+
+  const deleteMutation = useDelete();
+  const handleDelete = async (id: number) => {
+    try {
+      await deleteMutation.mutateAsync({
+        resource: "{{ detail_module.module_name }}",
+        id,
+      });
+      message.success("删除成功");
+      tableProps.pagination?.onChange?.(
+        tableProps.pagination.current,
+        tableProps.pagination.pageSize
+      );
+    } catch (error) {
+      message.error("删除失败");
+    }
+  };
+
+  return (
+    <Show isLoading={isLoading}>
+      {/* 主表字段渲染 */}
+      {% for field in master_module.fields if not field.common %}
+      <Text strong>{{ field.description or field.name | capitalize }}:</Text>
+      <Text>
+        {
+          {% if field.form_type == "checkbox" and field.options %}
+          (record?.{{ field.name }} || "")
+            .split(",")
+            .map(val =>
+              {{ field.options|tojson }}.find(opt => opt.value == val || opt.value == Number(val))?.label
+            )
+            .filter(Boolean)
+            .join(", ")
+          {% elif field.form_type == "select" and field.options %}
+          {{ field.options|tojson }}.find(opt => opt.value === record?.{{ field.name }})?.label || record?.{{ field.name }}
+          {% elif field.form_type == "date" %}
+          record?.{{ field.name }} ? dayjs(record.{{ field.name }}).format("YYYY-MM-DD") : ""
+          {% elif field.form_type == "checkbox" and not field.options %}
+          record?.{{ field.name }} ? "是" : "否"
+          {% else %}
+          record?.{{ field.name }}
+          {% endif %}
+        }
+      </Text>
+      <br />
+      {% endfor %}
+
+      <Divider />
+
+      {/* 子表标题和新增按钮 */}
+      {% raw %}
+      <Title level={5} style={{ marginBottom: 16 }}>
+      {% endraw %}
+        {{ detail_module.label }}
+        <CreateButton style={% raw %}{{ float: "right" }}{% endraw %} onClick={() => setModalVisible(true)}>
+          新增{{ detail_module.label }}
+        </CreateButton>
+      </Title>
+
+      {/* 子表表格 */}
+      <Table {...tableProps} rowKey="id" pagination={tableProps.pagination}>
+        {% for field in detail_module.fields if field.listable %}
+        <Table.Column
+          dataIndex="{{ field.name }}"
+          title="{{ field.description or field.name }}"
+          {% if field.sortable %}sorter{% endif %}
+          {% if field.queryable %}
+          filteredValue={
+            (filters.find((f) => f.field === "{{ field.name }}")?.value as any[]) || null
+          }
+          filterDropdown={(props) => (
+            <FilterDropdown {...props}>
+              {% if field.form_type in ["input", "textarea"] %}
+              <Input
+                placeholder="搜索{{ field.description or field.name }}"
+                value={(props.selectedKeys[0] as string) || ""}
+                onChange={(e) =>
+                  props.setSelectedKeys(e.target.value ? [e.target.value] : [])
+                }
+                onPressEnter={() => props.confirm()}
+                onBlur={() => props.confirm()}
+              />
+              {% elif field.form_type == "select" and field.options %}
+              <Select
+                allowClear
+                showSearch
+                placeholder="请选择{{ field.description or field.name }}"
+                style={% raw %}{{ minWidth: 150 }}{% endraw %}
+                options={
+                  {{ field.options | tojson }}
+                }
+                value={props.selectedKeys[0]}
+                onChange={(value) =>
+                  props.setSelectedKeys(value ? [value] : [])
+                }
+                onBlur={() => props.confirm()}
+              />
+              {% elif field.form_type == "date" %}
+              <DatePicker.RangePicker
+                style={% raw %}{{ width: "100%" }}{% endraw %}
+                value={props.selectedKeys[0]}
+                onChange={(dates) => {
+                  props.setSelectedKeys(dates ? [dates] : []);
+                }}
+                onOk={() => props.confirm()}
+              />
+              {% endif %}
+            </FilterDropdown>
+          )}
+          {% endif %}
+          {% if field.form_type in ["select", "checkbox"] and field.options %}
+          render={(value) => {
+            const values = String(value).split(",");
+            const labels = values.map((v) =>
+              {{ field.options|tojson }}.find((o) => String(o.value) === v)?.label || v
+            );
+            return labels.join(", ");
+          }}
+          {% elif field.form_type == "date" %}
+          render={(value) => (value ? dayjs(value).format("YYYY-MM-DD") : "")}
+          {% endif %}
+        />
+        {% endfor %}
+
+        {/* 操作列 */}
+        <Table.Column
+          title="操作"
+          key="actions"
+          render={(_, record) => (
+            <Space>
+              <Button
+                type="link"
+                icon={<EditOutlined />}
+                onClick={() => {
+                  setEditRecord(record);
+                  setEditModalVisible(true);
+                }}
+              >
+                编辑
+              </Button>
+              <Popconfirm
+                title="确定删除此项吗？"
+                onConfirm={() => handleDelete(record.id)}
+                okText="确认"
+                cancelText="取消"
+              >
+                <Button type="link" danger>
+                  删除
+                </Button>
+              </Popconfirm>
+            </Space>
+          )}
+        />
+      </Table>
+
+      {/* 新增弹窗 */}
+      <Modal
+        title="新增{{ detail_module.label }}"
+        open={modalVisible}
+        footer={null}
+        onCancel={() => setModalVisible(false)}
+        destroyOnClose
+        width={600}
+      >
+        {record?.id && (
+          <{{ detail_module.class_name }}
+            {{ relation_field }}={Number(record.id)}
+            onSuccess={onCreateSuccess}
+            onCancel={() => setModalVisible(false)}
+          />
+        )}
+      </Modal>
+
+      {/* 编辑弹窗 */}
+      <Modal
+        title="编辑{{ detail_module.label }}"
+        open={editModalVisible}
+        footer={null}
+        onCancel={() => {
+          setEditModalVisible(false);
+          setEditRecord(null);
+        }}
+        destroyOnClose
+        width={600}
+      >
+        {record?.id && editRecord && (
+          <{{ detail_module.class_name }}
+            {{ relation_field }}={Number(record.id)}
+            initialValues={editRecord}
+            isEdit={true}
+            onSuccess={onEditSuccess}
+            onCancel={() => {
+              setEditModalVisible(false);
+              setEditRecord(null);
+            }}
+          />
+        )}
+      </Modal>
+    </Show>
+  );
+};

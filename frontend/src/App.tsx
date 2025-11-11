@@ -1,24 +1,11 @@
-
-import {
-  ApiOutlined,
-  BarChartOutlined,
-  DashboardOutlined,
-  KeyOutlined,
-  ShopOutlined,
-  TeamOutlined,
-  UserOutlined
-} from "@ant-design/icons";
 import {
   ErrorComponent,
   ThemedLayoutV2,
   ThemedSiderV2,
-  useNotificationProvider
+  useNotificationProvider,
 } from "@refinedev/antd";
 import "@refinedev/antd/dist/reset.css";
-import {
-  Authenticated,
-  Refine
-} from "@refinedev/core";
+import { Authenticated, Refine  } from "@refinedev/core";
 import { RefineKbar, RefineKbarProvider } from "@refinedev/kbar";
 import routerBindings, {
   CatchAllNavigate,
@@ -34,47 +21,48 @@ import { AppIcon } from "./components/app-icon";
 import { Header } from "./components/header";
 import { ColorModeContextProvider } from "./contexts/color-mode";
 import dataProvider from "./dataProvider";
-import i18nProvider from "./i18nProvider";
-import {
-  AppCreate,
-  AppEdit,
-  AppList,
-  AppShow,
-} from "./pages/app";
+import i18nProvider from "./i18n/i18nProvider";
 import { Dashboard } from "./pages/dashboard";
 import { Login } from "./pages/login";
-import {
-  PermissionCreate,
-  PermissionEdit,
-  PermissionList,
-  PermissionShow,
-} from "./pages/permission";
-import {
-  RoleCreate,
-  RoleEdit,
-  RoleList,
-  RoleShow,
-} from "./pages/roles";
-import {
-  ShopCreate,
-  ShopEdit,
-  ShopList,
-  ShopShow,
-} from "./pages/shop";
-import {
-  ShopDailyStatCreate,
-  ShopDailyStatEdit,
-  ShopDailyStatList,
-  ShopDailyStatShow,
-} from "./pages/shop-daily-stat";
-import {
-  UserCreate,
-  UserEdit,
-  UserList,
-  UserShow,
-} from "./pages/users";
+import { useEffect, useState } from "react";
+import { useDynamicModules } from "./hooks/useDynamicModules";
+import axiosInstance from "./utils/axiosInstance";
+import { MustChangePasswordModal } from "./components/MustChangePasswordModal";
 
 function App() {
+  const [menus, setMenus] = useState([]);
+  const [loadingMenus, setLoadingMenus] = useState(true);
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
+  
+  useEffect(() => {
+    const init = async () => {
+      try {
+        const authCheck = await authProvider.check();
+        if (authCheck.authenticated) {
+          setIsAuthenticated(true);
+          // 登录后再加载菜单
+          const res = await axiosInstance.get("/menu/list_valid_menus?_start=0&_end=1000&sortField=id&sortOrder=asc");
+          setMenus(res.data.data || []);
+        } else {
+          setIsAuthenticated(false);
+        }
+      } catch (error) {
+        setIsAuthenticated(false);
+      } finally {
+        setLoadingMenus(false);
+      }
+    };
+    init();
+  }, []);
+
+
+  if (loadingMenus) {
+    return <div>Loading menus...</div>;
+  }
+  // console.info("Menus loaded:", menus);
+  const { resources, routes } = useDynamicModules(isAuthenticated ? menus : []);
+  // console.info("Resources:", resources);
+  // console.info("Routes:", routes);
   return (
     <BrowserRouter>
       <RefineKbarProvider>
@@ -87,99 +75,16 @@ function App() {
               accessControlProvider={accessControlProvider}
               i18nProvider={i18nProvider}
               routerProvider={routerBindings}
-              resources={[
-                {
-                  name: "dashboard",
-                  options: { label: "首页" },
-                  list: Dashboard,
-                  meta: {
-                    canDelete: false,
-                    canEdit: false,
-                    canCreate: false,
-                    icon: <DashboardOutlined /> // 你需要导入合适图标
-                  },
-                },
-                {
-                  name: "user",
-                  list: UserList,
-                  create: UserCreate,
-                  edit: UserEdit,
-                  show: UserShow,
-                  meta: {
-                    canDelete: true,
-                    label: "用户管理",
-                    icon: <UserOutlined />,
-                  },
-                },
-                {
-                  name: "role",
-                  list: RoleList,
-                  create: RoleCreate,
-                  edit: RoleEdit,
-                  show: RoleShow,
-                  meta: {
-                    canDelete: true,
-                    label: "角色管理",
-                    icon: <TeamOutlined />,
-                  },
-                },
-                {
-                  name: "permission",
-                  list: PermissionList,
-                  create: PermissionCreate,
-                  edit: PermissionEdit,
-                  show: PermissionShow,
-                  meta: {
-                    canDelete: true,
-                    label: "权限管理",
-                    icon: <KeyOutlined />,
-                  },
-                },
-                {
-                  name: "app",
-                  list: AppList,
-                  create: AppCreate,
-                  edit: AppEdit,
-                  show: AppShow,
-                  meta: {
-                    canDelete: true,
-                    label: "应用管理",
-                    icon: <ApiOutlined />,
-                  },
-                },
-                {
-                  name: "shop",
-                  list: ShopList,
-                  create: ShopCreate,
-                  edit: ShopEdit,
-                  show: ShopShow,
-                  meta: {
-                    canDelete: true,
-                    label: "店铺管理",
-                    icon: <ShopOutlined />,
-                  },
-                },
-                {
-                  name: "shop-daily-stat",
-                  list: ShopDailyStatList,
-                  create: ShopDailyStatCreate,
-                  edit: ShopDailyStatEdit,
-                  show: ShopDailyStatShow,
-                  meta: {
-                    canDelete: true,
-                    label: "店铺日报管理",
-                    icon: <BarChartOutlined />,
-                  },
-                },                
-              ]}
+              resources={resources}
               options={{
                 syncWithLocation: true,
                 warnWhenUnsavedChanges: true,
                 useNewQueryKeys: true,
                 projectId: "NGKlvZ-4e9SNh-YAkDWt",
-                title: { text: "LingAdmin", icon: <AppIcon size={30} /> },
+                title: { text: "CAC数仓管理系统", icon: <AppIcon size={30} /> },
               }}
             >
+              <MustChangePasswordModal />            
               <Routes>
                 <Route
                   element={
@@ -198,50 +103,12 @@ function App() {
                 >
                   <Route index element={<NavigateToResource resource="dashboard" />} />
                   <Route path="/dashboard" element={<Dashboard />} />
-                  <Route path="/user">
-                    <Route index element={<UserList />} />
-                    <Route path="create" element={<UserCreate />} />
-                    <Route path="edit/:id" element={<UserEdit />} />
-                    <Route path="show/:id" element={<UserShow />} />
-                  </Route>
-                  <Route path="/role">
-                    <Route index element={<RoleList />} />
-                    <Route path="create" element={<RoleCreate />} />
-                    <Route path="edit/:id" element={<RoleEdit />} />
-                    <Route path="show/:id" element={<RoleShow />} />
-                  </Route>
-                  <Route path="/permission">
-                    <Route index element={<PermissionList />} />
-                    <Route path="create" element={<PermissionCreate />} />
-                    <Route path="edit/:id" element={<PermissionEdit />} />
-                    <Route path="show/:id" element={<PermissionShow />} />
-                  </Route>
-                  <Route path="/app">
-                    <Route index element={<AppList />} />
-                    <Route path="create" element={<AppCreate />} />
-                    <Route path="edit/:id" element={<AppEdit />} />
-                    <Route path="show/:id" element={<AppShow />} />
-                  </Route>
-                  <Route path="/shop">
-                    <Route index element={<ShopList />} />
-                    <Route path="create" element={<ShopCreate />} />
-                    <Route path="edit/:id" element={<ShopEdit />} />
-                    <Route path="show/:id" element={<ShopShow />} />
-                  </Route>
-                  <Route path="/shop-daily-stat">
-                    <Route index element={<ShopDailyStatList />} />
-                    <Route path="create" element={<ShopDailyStatCreate />} />
-                    <Route path="edit/:id" element={<ShopDailyStatEdit />} />
-                    <Route path="show/:id" element={<ShopDailyStatShow />} />
-                  </Route>                  
+                  {routes}       
                   <Route path="*" element={<ErrorComponent />} />
                 </Route>
                 <Route
                   element={
-                    <Authenticated
-                      key="authenticated-outer"
-                      fallback={<Outlet />}
-                    >
+                    <Authenticated key="authenticated-outer" fallback={<Outlet />}>
                       <NavigateToResource />
                     </Authenticated>
                   }

@@ -21,7 +21,7 @@ LOGGING_CONFIG = {
         "console": {
             "class": "logging.StreamHandler",
             "formatter": "colored",
-            "level": "DEBUG",
+            "level": "INFO",
         }
     },
     "root": {

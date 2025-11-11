@@ -1,13 +1,16 @@
 from datetime import datetime
 from typing import List, Optional, Set
 
-from app.core.constants import SUPER_ADMIN_ROLE_ID, SUPER_ADMIN_SHOP_ID
-from app.models.permission import Permission
-from app.models.role import Role, RolePermissionLink, RoleShopLink
+from app.core.constants import SUPER_ADMIN_ROLE_ID, SUPER_ADMIN_DEPT_ID
+from app.models.menu import Menu
+from app.models.role import Role, RolePermissionLink, RoleDeptLink
 from app.models.user import User, UserCreate, UserRoleLink, UserUpdate
+from app.models.dept import Dept
 from passlib.context import CryptContext
 from sqlalchemy import and_, func
 from sqlmodel import Session, select
+from app.core.security import verify_password
+from app.core.exceptions import BusinessException
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
@@ -34,6 +37,8 @@ class UserCRUD:
             query = query.where(User.email.contains(filters["email"]))
         if "full_name" in filters:
             query = query.where(User.full_name.contains(filters["full_name"]))
+        if "is_active" in filters:
+            query = query.where(User.is_active == filters["is_active"])            
 
         if order_by is not None:
             query = query.order_by(order_by)
@@ -51,15 +56,18 @@ class UserCRUD:
         if "full_name" in filters:
             query = query.where(User.full_name.contains(filters["full_name"]))
 
+        if "is_active" in filters:
+            query = query.where(User.is_active == filters["is_active"])                  
+
         return self.session.exec(query).one()
 
     def create(self, user_in: UserCreate) -> User:
         hashed_password = pwd_context.hash(user_in.password)
+        user_data = user_in.dict(exclude={"password"})
         user = User(
-            email=user_in.email,
-            is_superuser=user_in.is_superuser,
-            full_name=user_in.full_name,
+            **user_data,
             hashed_password=hashed_password,
+            must_change_password=True,
         )
         self.session.add(user)
         self.session.commit()
@@ -85,6 +93,8 @@ class UserCRUD:
         return db_user
 
     def get_all_permission_codes(self, user_id: int) -> Set[str]:
+        if user_id == 1: 
+            return {"super_admin"}
         # 查询用户绑定的所有未删除角色 ID
         role_ids_query = (
             select(UserRoleLink.role_id)
@@ -101,46 +111,65 @@ class UserCRUD:
 
         # 查询这些角色绑定的所有未删除权限的 code
         permission_query = (
-            select(Permission.code)
-            .join(RolePermissionLink, RolePermissionLink.permission_id == Permission.id)
+            select(Menu.permission_code)
+            .join(RolePermissionLink, RolePermissionLink.permission_id == Menu.id)
             .join(Role, Role.id == RolePermissionLink.role_id)
             .where(
                 RolePermissionLink.role_id.in_(role_ids),
-                Permission.deleted == False,  # 排除已删除权限
+                Menu.deleted == False,  # 排除已删除权限
                 Role.deleted == False,  # 冗余安全判断：权限要来自未删除角色
             )
         )
         permission_codes = self.session.exec(permission_query).all()
         return set(permission_codes)
 
-    def get_all_shop_ids_by_user(self, user_id: int) -> Set[int]:
-        # 1. 查询用户绑定的所有未删除角色 ID
-        role_ids_query = (
-            select(UserRoleLink.role_id)
-            .join(Role, Role.id == UserRoleLink.role_id)
+    # 获取用户的所有角色
+    def get_roles(self, user_id: int) -> List[Role]:
+        statement = (
+            select(Role)
+            .join(UserRoleLink, UserRoleLink.role_id == Role.id)
             .where(
                 UserRoleLink.user_id == user_id,
                 Role.deleted == False,
             )
         )
-        role_ids = list(self.session.exec(role_ids_query).all())
+        return self.session.exec(statement).all()
+    
+    # 重置用户密码
+    def reset_password(self, user_id: int, new_password: str) -> User:
+        user = self.get_by_id(user_id)
+        if not user:
+            raise ValueError("用户不存在")
 
-        if not role_ids:
-            return set()
+        hashed_password = pwd_context.hash(new_password)
+        user.hashed_password = hashed_password
+        user.must_change_password = True
+        user.update_time = datetime.utcnow()
+        
+        self.session.add(user)
+        self.session.commit()
+        self.session.refresh(user)
+        
+        return user
+    
+    def change_password(self, user_id: int, old_password: str, new_password: str) -> User:
+        user = self.get_by_id(user_id)
+        if not user:
+            raise BusinessException("用户不存在")
 
-        role_ids_set = set(role_ids)
-        if SUPER_ADMIN_ROLE_ID in role_ids_set:
-            return {SUPER_ADMIN_SHOP_ID}
+        if not verify_password(old_password, user.hashed_password):
+            raise BusinessException("旧密码错误")
 
-        # 2. 通过角色-店铺关联表查所有未删除的 shop_id
-        shop_ids_query = (
-            select(RoleShopLink.shop_id)
-            .join(Role, Role.id == RoleShopLink.role_id)
-            .where(
-                RoleShopLink.role_id.in_(role_ids),
-                Role.deleted == False,
-            )
-        )
-        shop_ids = self.session.exec(shop_ids_query).all()
+        if verify_password(new_password, user.hashed_password):
+            raise BusinessException("新密码不能与旧密码相同")
 
-        return set(shop_ids)
+        user.hashed_password = pwd_context.hash(new_password)
+        user.must_change_password = False
+        user.update_time = datetime.utcnow()
+
+        self.session.add(user)
+        self.session.commit()
+        self.session.refresh(user)
+
+        return user
+    

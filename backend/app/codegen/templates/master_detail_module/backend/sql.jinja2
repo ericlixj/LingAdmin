@@ -1,0 +1,25 @@
+-- 插入主菜单并返回 id
+WITH parent AS (
+  INSERT INTO menu (
+    parent_id, icon, type, order_by, status, creator, updater, deleted,
+    create_time, update_time, menu_label, permission_code, module_code
+  ) VALUES 
+  ({{ parent_menu_id }}, '', 1, 10, '0', 1, 1, false,now(), now(), '{{ master_label}}', '{{ master_module_name}}:list', '{{ master_module_name}}')
+  RETURNING id
+)
+
+-- 插入子菜单，使用 parent.id 作为 parent_id
+INSERT INTO menu (
+  parent_id, icon, type, order_by, status, creator, updater, deleted,
+  create_time, update_time, menu_label, permission_code, module_code
+)
+VALUES
+  ((SELECT id FROM parent), '', 2, 10, '0', 1, 1, false, now(), now(), '{{ master_label}}创建', '{{ master_module_name}}:create', '{{ master_module_name}}:create'),
+  ((SELECT id FROM parent), '', 2, 20, '0', 1, 1, false, now(), now(), '{{ master_label}}修改', '{{ master_module_name}}:edit', '{{ master_module_name}}:edit'),
+  ((SELECT id FROM parent), '', 2, 30, '0', 1, 1, false, now(), now(), '{{ master_label}}删除', '{{ master_module_name}}:delete', '{{ master_module_name}}:delete'),
+  ((SELECT id FROM parent), '', 2, 40, '0', 1, 1, false, now(), now(), '{{ master_label}}查询单条', '{{ master_module_name}}:show', '{{ master_module_name}}:show'),
+  ((SELECT id FROM parent), '', 2, 60, '0', 1, 1, false, now(), now(), '{{ detail_label}}列表', '{{ detail_module_name}}:list', '{{ detail_module_name}}:list'),
+  ((SELECT id FROM parent), '', 2, 70, '0', 1, 1, false, now(), now(), '{{ detail_label}}创建', '{{ detail_module_name}}:create', '{{ detail_module_name}}:create'),
+  ((SELECT id FROM parent), '', 2, 80, '0', 1, 1, false, now(), now(), '{{ detail_label}}修改', '{{ detail_module_name}}:edit', '{{ detail_module_name}}:edit'),
+  ((SELECT id FROM parent), '', 2, 90, '0', 1, 1, false, now(), now(), '{{ detail_label}}删除', '{{ detail_module_name}}:delete', '{{ detail_module_name}}:delete'),
+  ((SELECT id FROM parent), '', 2, 100, '0', 1, 1, false, now(), now(), '{{ detail_label}}查询单条', '{{ detail_module_name}}:show', '{{ detail_module_name}}:show');

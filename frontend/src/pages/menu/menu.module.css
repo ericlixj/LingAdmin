@@ -1,0 +1,24 @@
+/* menu.module.css */
+
+/* 非叶子节点（有子节点） */
+.non-leaf-row {
+  background-color: #e6f7ff; /* 淡蓝 */
+  color: #096dd9; /* 深蓝 */
+  font-weight: bold;
+}
+
+/* 叶子节点（无子节点） */
+.leaf-row {
+  background-color: #f6ffed; /* 淡绿 */
+  color: #389e0d; /* 绿色 */
+  font-weight: 500;
+}
+
+/* 可选：hover 效果提升交互感 */
+.leaf-row:hover {
+  background-color: #d9f7be;
+}
+
+.non-leaf-row:hover {
+  background-color: #bae7ff;
+}

@@ -55,6 +55,11 @@ services:
     ports:
       - "8080:8080"
 
+  opensearch-dashboards:
+    restart: "no"
+    ports:
+      - "5601:5601"      
+
   backend:
     restart: "no"
     ports:
@@ -102,6 +107,16 @@ services:
       args:
         - VITE_API_URL=http://localhost:8000        
         - NODE_ENV=development
+
+  frontend2c:
+    restart: "no"
+    ports:
+      - "5174:80"
+    build:
+      context: ./frontend2c
+      args:
+        - VITE_API_URL=http://localhost:8000        
+        - NODE_ENV=development        
 
   # playwright:
   #   build:

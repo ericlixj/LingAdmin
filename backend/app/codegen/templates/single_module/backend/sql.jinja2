@@ -1,0 +1,20 @@
+-- 插入主菜单并返回 id
+WITH parent AS (
+  INSERT INTO menu (
+    parent_id, icon, type, order_by, status, creator, updater, deleted,
+    create_time, update_time, menu_label, permission_code, module_code
+  ) VALUES 
+  ({{ parent_menu_id }}, '', 1, 10, '0', 1, 1, false,now(), now(), '{{ label}}', '{{ module_name }}:list', '{{ module_name }}')
+  RETURNING id
+)
+
+-- 插入子菜单，使用 parent.id 作为 parent_id
+INSERT INTO menu (
+  parent_id, icon, type, order_by, status, creator, updater, deleted,
+  create_time, update_time, menu_label, permission_code, module_code
+)
+VALUES
+  ((SELECT id FROM parent), '', 2, 10, '0', 1, 1, false, now(), now(), '{{ label }}创建', '{{ module_name }}:create', '{{ module_name }}:create'),
+  ((SELECT id FROM parent), '', 2, 20, '0', 1, 1, false, now(), now(), '{{ label }}修改', '{{ module_name }}:edit', '{{ module_name }}:edit'),
+  ((SELECT id FROM parent), '', 2, 30, '0', 1, 1, false, now(), now(), '{{ label }}删除', '{{ module_name }}:delete', '{{ module_name }}:delete'),
+  ((SELECT id FROM parent), '', 2, 40, '0', 1, 1, false, now(), now(), '{{ label }}查询单条', '{{ module_name }}:show', '{{ module_name }}:show');

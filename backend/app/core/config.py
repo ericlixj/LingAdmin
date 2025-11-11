@@ -57,6 +57,20 @@ class Settings(BaseSettings):
     POSTGRES_PASSWORD: str = ""
     POSTGRES_DB: str = ""
 
+    CLICKHOUSE_HOST: str
+    CLICKHOUSE_PORT: int = 8123
+    CLICKHOUSE_USERNAME: str
+    CLICKHOUSE_PASSWORD: str
+    CLICKHOUSE_DATABASE: str
+
+    ES_SERVER: str
+    ES_PORT: str
+    ES_USER: str
+    ES_PASSWORD: str = ""    
+    
+
+
+
     @computed_field  # type: ignore[prop-decorator]
     @property
     def SQLALCHEMY_DATABASE_URI(self) -> PostgresDsn:

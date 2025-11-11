@@ -1,0 +1,143 @@
+{
+  "module_name": "demoOrder",
+  "label": "演示订单",
+  "fields": [
+    {
+      "name": "id",
+      "type": "int",
+      "description": "主键",
+      "primary_key": true,
+      "required": false,
+      "insertable": false,
+      "updatable": false,
+      "listable": false,
+      "queryable": false,
+      "query_type": "eq",
+      "nullable": false,
+      "options": [],
+      "sortable": false,
+      "unique": false,
+      "index": false
+    },
+    {
+      "name": "order_code",
+      "type": "str",
+      "description": "订单编码",
+      "primary_key": false,
+      "required": true,
+      "insertable": true,
+      "updatable": true,
+      "listable": true,
+      "queryable": true,
+      "query_type": "like",
+      "nullable": false,
+      "form_type": "input",
+      "options": [],
+      "sortable": true,
+      "default": "",
+      "unique": true,
+      "index": true,
+      "max_length": 50
+    },
+    {
+      "name": "open_date",
+      "type": "datetime",
+      "description": "开启日期",
+      "primary_key": false,
+      "required": false,
+      "insertable": true,
+      "updatable": true,
+      "listable": true,
+      "queryable": true,
+      "query_type": "in",
+      "nullable": true,
+      "form_type": "date",
+      "options": [],
+      "sortable": true,
+      "default": "",
+      "unique": false,
+      "index": false
+    },
+    {
+      "name": "order_status",
+      "type": "str",
+      "description": "订单状态",
+      "primary_key": false,
+      "required": true,
+      "insertable": true,
+      "updatable": true,
+      "listable": true,
+      "queryable": true,
+      "query_type": "eq",
+      "nullable": false,
+      "form_type": "select",
+      "options": [
+        {
+          "label": "启用",
+          "value": "enabled"
+        },
+        {
+          "label": "停用",
+          "value": "disabled"
+        }
+      ],
+      "sortable": true,
+      "default": "enabled",
+      "unique": false,
+      "index": false,
+      "max_length": 128
+    },
+    {
+      "name": "open_function",
+      "type": "str",
+      "description": "开启功能",
+      "primary_key": false,
+      "required": false,
+      "insertable": true,
+      "updatable": true,
+      "listable": true,
+      "queryable": false,
+      "query_type": "eq",
+      "nullable": true,
+      "form_type": "checkbox",
+      "options": [
+        {
+          "label": "功能A",
+          "value": 1
+        },
+        {
+          "label": "功能B",
+          "value": 2
+        },
+        {
+          "label": "功能C",
+          "value": 3
+        }
+      ],
+      "sortable": false,
+      "default": "None",
+      "unique": false,
+      "index": false
+    },
+    {
+      "name": "order_info",
+      "type": "str",
+      "description": "订单信息",
+      "primary_key": false,
+      "required": false,
+      "insertable": true,
+      "updatable": true,
+      "listable": false,
+      "queryable": false,
+      "query_type": "eq",
+      "nullable": true,
+      "form_type": "textarea",
+      "options": [],
+      "sortable": false,
+      "default": "",
+      "unique": false,
+      "index": false,
+      "max_length": 1000
+    }
+  ]
+}

@@ -1,7 +1,7 @@
 from datetime import datetime
 from typing import Dict, List, Optional
 
-from app.models.role import Role, RoleCreate, RoleShopLink, RoleUpdate
+from app.models.role import Role, RoleCreate, RoleDeptLink, RoleUpdate
 from sqlalchemy import func
 from sqlmodel import Session, delete, select
 
@@ -25,8 +25,8 @@ class RoleCRUD:
 
     def update(self, db_obj: Role, obj_in: RoleUpdate) -> Role:
         obj_data = obj_in.dict(exclude_unset=True)
-        if "shop_ids" in obj_data:
-            obj_data.pop("shop_ids")  # 排除 shop_ids 字段        
+        if "dept_ids" in obj_data:
+            obj_data.pop("dept_ids")  # 排除 dept_ids 字段        
         for key, value in obj_data.items():
             setattr(db_obj, key, value)
 
@@ -74,24 +74,24 @@ class RoleCRUD:
                         
         return self.session.exec(query).one()
     
-    def update_role_shop_links(self, role_id: int, shop_ids: List[int]):
-        self.delete_role_shop_links(role_id)
-        if shop_ids:
-            self.create_role_shop_links(role_id, shop_ids)    
+    def update_role_dept_links(self, role_id: int, dept_ids: List[int]):
+        self.delete_role_dept_links(role_id)
+        if dept_ids:
+            self.create_role_dept_links(role_id, dept_ids)    
 
-    def create_role_shop_links(self, role_id: int, shop_ids: List[int]):
+    def create_role_dept_links(self, role_id: int, dept_ids: List[int]):
         links = [
-            RoleShopLink(role_id=role_id, shop_id=shop_id)
-            for shop_id in shop_ids
+            RoleDeptLink(role_id=role_id, dept_id=dept_id)
+            for dept_id in dept_ids
         ]
         self.session.add_all(links)
         self.session.commit()
 
-    def delete_role_shop_links(self, role_id: int):
-        stmt = delete(RoleShopLink).where(RoleShopLink.role_id == role_id)
+    def delete_role_dept_links(self, role_id: int):
+        stmt = delete(RoleDeptLink).where(RoleDeptLink.role_id == role_id)
         self.session.exec(stmt)
         self.session.commit()
 
-    def get_shop_ids_by_role(self, role_id: int) -> List[int]:
-        stmt = select(RoleShopLink.shop_id).where(RoleShopLink.role_id == role_id)
+    def get_dept_ids_by_role(self, role_id: int) -> List[int]:
+        stmt = select(RoleDeptLink.dept_id).where(RoleDeptLink.role_id == role_id)
         return self.session.exec(stmt).all()

@@ -1,0 +1,152 @@
+import { useForm } from "@refinedev/antd";
+import { Form, Input, Select, Checkbox, DatePicker, Button, InputNumber } from "antd";
+import dayjs from "dayjs";
+import { useEffect } from "react";
+
+interface {{ detail_module.class_name }}Props {
+  {{ relation_field }}: number | string;
+  initialValues?: any;
+  isEdit?: boolean;
+  onSuccess?: () => void;
+  onCancel?: () => void;
+}
+
+export const {{ detail_module.class_name }} = ({
+  {{ relation_field }},
+  initialValues,
+  isEdit = false,
+  onSuccess,
+  onCancel,
+}: {{ detail_module.class_name }}Props) => {
+  const {
+    formProps,
+    saveButtonProps,
+    form,
+  } = useForm({
+    resource: "{{ detail_module.module_name }}",
+    action: isEdit ? "edit" : "create",
+    id: initialValues?.id,
+    redirect: false,
+    defaultFormValues: {
+      {{ relation_field }}: Number({{ relation_field }}),
+    },
+    onMutationSuccess: () => {
+      if (onSuccess) onSuccess();
+    },
+  });
+
+  useEffect(() => {
+    if (isEdit && initialValues) {
+      formProps.form?.setFieldsValue({
+        ...initialValues,
+        {% for field in detail_module.fields if field.type == "datetime" %}
+        {{ field.name }}: initialValues.{{ field.name }} ? dayjs(initialValues.{{ field.name }}) : undefined,
+        {% endfor %}
+        {% for field in detail_module.fields if field.form_type == "checkbox" %}
+        {{ field.name }}: initialValues.{{ field.name }}?.split(",").map(Number),
+        {% endfor %}
+      });
+    }
+  }, [isEdit, initialValues, form]);  
+
+  const handleFinish = (values: any) => {
+    const processed = {
+      ...values,
+      {% for field in detail_module.fields if field.form_type == "checkbox" %}
+      {{ field.name }}: (values.{{ field.name }} || []).join(","),
+      {% endfor %}
+    };
+    return formProps.onFinish?.(processed);
+  };
+
+  return (
+    <Form {...formProps} layout="vertical" onFinish={handleFinish}>
+      <Form.Item name="{{ relation_field }}" hidden>
+        <Input type="hidden" />
+      </Form.Item>
+
+      {% for field in detail_module.fields if field.name != relation_field and not field.common %}
+      {% if field.form_type == "input" %}
+      <Form.Item
+        name="{{ field.name }}"
+        label="{{ field.description or field.name }}"
+        rules={[
+          {% if field.required %}{ required: true, message: '请输入{{ field.description or field.name }}' },{% endif %}
+          {% if field.max_length %}{ max: {{ field.max_length }}, message: '最多输入 {{ field.max_length }} 个字符' },{% endif %}
+          {% if field.type == 'int' %}{ type: "number", message: "必须是数字" },{% endif %}  
+        ]}
+      >
+      {% if field.type == "int" %}
+        <InputNumber style={{ '{{' }} width: "100%" {{ '}}' }} />
+      {% else %}
+        <Input />
+      {% endif %}
+      </Form.Item>
+      {% elif field.form_type == "textarea" %}
+      <Form.Item
+        name="{{ field.name }}"
+        label="{{ field.description or field.name }}"
+        rules={[
+          {% if field.max_length %}{ max: {{ field.max_length }}, message: '最多输入 {{ field.max_length }} 个字符' },{% endif %}
+        ]}
+      >
+        <Input.TextArea rows={4} />
+      </Form.Item>
+      {% elif field.form_type == "date" %}
+      <Form.Item name="{{ field.name }}" label="{{ field.description or field.name }}">
+        <DatePicker style={% raw %}{{ width: "100%" }}{% endraw %} />
+      </Form.Item>
+      {% elif field.form_type == "select" %}
+      <Form.Item
+        name="{{ field.name }}"
+        label="{{ field.description or field.name }}"
+        rules={[
+          {% if field.max_length %}{ max: {{ field.max_length }}, message: '最多输入 {{ field.max_length }} 个字符' },{% endif %}
+        ]}
+      >
+        <Select allowClear>
+          {% for option in field.options or [] %}
+          <Select.Option
+            value={
+              {% if option.value is boolean %}
+                {{ "true" if option.value else "false" }}
+              {% elif option.value is number %}
+                {{ option.value }}
+              {% else %}
+                "{{ option.value }}"
+              {% endif %}
+            }
+          >
+            {{ option.label }}
+          </Select.Option>
+          {% endfor %}
+        </Select>
+      </Form.Item>
+      {% elif field.form_type == "checkbox" %}
+      <Form.Item name="{{ field.name }}" label="{{ field.description or field.name }}">
+        <Checkbox.Group
+          options={[
+            {% for option in field.options or [] %}
+            { label: "{{ option.label }}", value: {{ option.value }} },
+            {% endfor %}
+          ]}
+        />
+      </Form.Item>
+      {% endif %}
+      {% endfor %}
+
+      <Form.Item style={% raw %}{{ textAlign: "right" }}{% endraw %}>
+        <Button
+          type="primary"
+          onClick={() => form.submit()}
+          loading={saveButtonProps.loading}
+        >
+          {isEdit ? "保存修改" : "保存"}
+        </Button>
+        <Button onClick={onCancel} style={% raw %}{{ marginLeft: 8 }}{% endraw %}>
+          取消
+        </Button>
+      </Form.Item>
+    </Form>
+  );
+};

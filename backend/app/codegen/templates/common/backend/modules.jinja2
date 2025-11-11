@@ -1,0 +1,109 @@
+from datetime import datetime
+from typing import Optional, List
+
+from sqlalchemy import Column, DateTime, text, String, Integer
+from sqlmodel import Field, SQLModel
+
+class {{ class_name }}(SQLModel, table=True):
+    __tablename__ = "{{ table_name }}"
+{%- for field in fields %}
+    {%- set default_val = None %}
+    {%- set server_default_val = None %}
+
+    {%- if field.default is not none %}
+        {%- if field.type == "str" %}
+            {%- set default_val = '"' ~ field.default ~ '"' %}
+            {%- set server_default_val = 'text("' ~ "'" ~ field.default ~ "'" ~ '")' %}
+        {%- elif field.type in ["int", "float"] %}
+            {%- if field.default == "" %}
+                {%- set default_val = 'None' %}
+                {%- set server_default_val = None %}
+            {%- else %}
+                {%- set default_val = field.default|string %}
+                {%- set server_default_val = None %}
+            {%- endif %}
+        {%- elif field.type == "bool" %}
+            {%- set default_val = 'True' if field.default else 'False' %}
+            {%- set server_default_val = 'text("' ~ ('true' if field.default else 'false') ~ '")' %}
+        {%- else %}
+            {%- set default_val = 'None' %}
+            {%- set server_default_val = None %}
+        {%- endif %}
+    {%- else %}
+        {%- set default_val = 'None' %}
+        {%- set server_default_val = None %}
+    {%- endif %}
+
+    {%- set col_type = "String" if field.type == "str" else "Integer" if field.type == "int" else "Boolean" if field.type=="bool" else "String" %}
+    {%- if field.max_length and field.type == "str" %}
+        {%- set col_type = col_type + "(" + field.max_length|string + ")" %}
+    {%- endif %}
+
+    {{ field.name }}: 
+    {%- if field.primary_key %}
+        {{ field.type }}
+    {%- elif not field.required %}
+        Optional[{{ field.type }}]
+    {%- else %}
+        {{ field.type }}
+    {%- endif %} = Field(
+        {% if not field.primary_key %}
+            default={{ default_val }},
+        {% endif %}
+        description="{{ field.description }}",
+        sa_column=Column(
+            {{ col_type }},
+            nullable={{ "True" if field.nullable else "False" }},
+            primary_key={{ "True" if field.primary_key else "False" }},
+            index={{ "True" if field.index else "False" }},
+            unique={{ "True" if field.unique else "False" }},
+            {%- if server_default_val %}server_default={{ server_default_val }},{% endif %}
+        )
+    )
+{%- endfor %}
+
+    # 默认加入通用字段
+    creator: Optional[str] = Field(default=None, max_length=64, description="创建人")
+    dept_id: Optional[int] = Field(
+        default=0,
+        description="创建人部门ID",
+        sa_column=Column(
+            Integer,
+            nullable=True,
+            primary_key=False,
+            index=True,
+            unique=False,        )
+    )    
+    updater: Optional[str] = Field(default=None, max_length=64, description="更新人")
+    deleted: bool = Field(default=False)
+    create_time: datetime = Field(
+        default_factory=datetime.utcnow,
+        sa_column=Column(DateTime, nullable=False, server_default=text("CURRENT_TIMESTAMP")),
+        description="创建时间"
+    )
+    update_time: datetime = Field(
+        default_factory=datetime.utcnow,
+        sa_column=Column(DateTime, nullable=False, server_default=text("CURRENT_TIMESTAMP"), server_onupdate=text("CURRENT_TIMESTAMP")),
+        description="更新时间"
+    )
+
+class {{ class_name }}Create(SQLModel):
+{% for field in fields if field.required and not field.primary_key %}
+    {{ field.name }}: {{ field.type }}
+{% endfor %}
+{% for field in fields if not field.required and not field.primary_key %}
+    {{ field.name }}: Optional[{{ field.type }}] = None
+{% endfor %}
+    creator: Optional[str] = Field(default=None, max_length=64)
+    dept_id: Optional[int] = None
+
+class {{ class_name }}Update(SQLModel):
+{% for field in fields if not field.primary_key %}
+    {{ field.name }}: Optional[{{ field.type }}] = None
+{% endfor %}
+    updater: Optional[str] = Field(default=None, max_length=64)
+    dept_id: Optional[int] = None
+
+class {{ class_name }}ListResponse(SQLModel):
+    data: List[{{ class_name }}]
+    total: int

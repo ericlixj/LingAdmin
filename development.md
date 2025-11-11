@@ -54,6 +54,9 @@ cd ${projectDir}/frontend
 npm run dev
 
 cd ${projectDir}/backend
+python3 -m venv .venv
+source .venv/bin/activate
+uv sync
 uvicorn app.main:app --reload
 ```
 

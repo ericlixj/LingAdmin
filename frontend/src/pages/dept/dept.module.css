@@ -1,0 +1,11 @@
+.leaf-row {
+  background-color: #f6ffed;
+  color: #389e0d;
+  font-weight: 500;
+}
+
+.non-leaf-row {
+  background-color: #e6f7ff;
+  color: #096dd9;
+  font-weight: 600;
+}

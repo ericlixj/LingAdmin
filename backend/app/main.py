@@ -8,6 +8,7 @@ from app.core.logger import init_logger
 from fastapi import FastAPI
 from fastapi.routing import APIRoute
 from starlette.middleware.cors import CORSMiddleware
+from app.core.exception_handlers import register_exception_handlers
 
 init_logger()
 logger = logging.getLogger(__name__)
@@ -39,3 +40,12 @@ if settings.all_cors_origins:
 app.add_middleware(LocaleMiddleware)
 
 app.include_router(api_router, prefix=settings.API_V1_STR)
+
+register_exception_handlers(app)
+
+
+# 注册退出时释放 driver
+import atexit
+from app.utils.scrape_driver import SeleniumDriver
+driver = SeleniumDriver()  # 全局单例
+atexit.register(lambda: driver.quit())

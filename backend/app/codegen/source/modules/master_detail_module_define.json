@@ -1,0 +1,569 @@
+{
+    "master_module": {
+        "module_name": "crudDefineModuel",
+        "label": "CRUD模块定义",
+        "fields": [
+            {
+                "name": "id",
+                "type": "int",
+                "description": "主键",
+                "primary_key": true
+            },
+            {
+                "name": "module_name",
+                "type": "str",
+                "description": "模块名称",
+                "primary_key": false,
+                "required": true,
+                "insertable": true,
+                "updatable": true,
+                "listable": true,
+                "queryable": true,
+                "query_type": "like",
+                "nullable": false,
+                "form_type": "input",
+                "sortable": true,
+                "default": "",
+                "unique": true,
+                "max_length": 100,
+                "index": true
+            },            
+            {
+                "name": "label",
+                "type": "str",
+                "description": "模块标识",
+                "primary_key": false,
+                "required": true,
+                "insertable": true,
+                "updatable": true,
+                "listable": true,
+                "queryable": true,
+                "query_type": "like",
+                "nullable": false,
+                "form_type": "input",
+                "sortable": true,
+                "default": "",
+                "unique": true,
+                "max_length": 50,
+                "index": true
+            },
+            {
+                "name": "description",
+                "type": "str",
+                "description": "描述信息",
+                "primary_key": false,
+                "required": false,
+                "insertable": true,
+                "updatable": true,
+                "listable": false,
+                "queryable": false,
+                "nullable": true,
+                "form_type": "textarea",
+                "sortable": false,
+                "default": null,
+                "unique": false,
+                "max_length": 255,
+                "index": false
+            }
+        ]
+    },
+    "detail_module": {
+        "module_name": "crudDefineFileds",
+        "label": "CRUD字段定义",
+        "fields": [
+            {
+                "name": "id",
+                "type": "int",
+                "description": "主键",
+                "primary_key": true,
+                "listable": false
+            },
+            {
+                "name": "module_id",
+                "type": "int",
+                "description": "关联模块ID",
+                "primary_key": false,
+                "required": true,
+                "insertable": true,
+                "updatable": true,
+                "listable": false,
+                "queryable": true,
+                "query_type": "eq",
+                "nullable": false,
+                "form_type": "input",
+                "sortable": true,
+                "default": 0,
+                "unique": false,
+                "index": true
+            },
+            {
+                "name": "name",
+                "type": "str",
+                "description": "字段名",
+                "primary_key": false,
+                "required": true,
+                "insertable": true,
+                "updatable": true,
+                "listable": true,
+                "queryable": true,
+                "query_type": "eq",
+                "nullable": false,
+                "form_type": "input",
+                "sortable": true,
+                "default": 0,
+                "unique": false,
+                "index": true
+            },
+            {
+                "name": "type",
+                "type": "str",
+                "description": "字段类型",
+                "primary_key": false,
+                "required": true,
+                "insertable": true,
+                "updatable": true,
+                "listable": true,
+                "queryable": true,
+                "nullable": true,
+                "form_type": "select",
+                "options": [
+                    {
+                        "label": "字符串",
+                        "value": "str"
+                    },
+                    {
+                        "label": "整数",
+                        "value": "int"
+                    }
+                    ,
+                    {
+                        "label": "日期",
+                        "value": "datetime"
+                    }
+                ],
+                "sortable": true,
+                "default": null,
+                "unique": false,
+                "max_length": 50,
+                "index": false
+            },
+            {
+                "name": "primary_key",
+                "type": "bool",
+                "description": "是否为主键",
+                "primary_key": false,
+                "required": false,
+                "insertable": true,
+                "updatable": true,
+                "listable": true,
+                "queryable": true,
+                "nullable": true,
+                "form_type": "select",
+                "options": [
+                    {
+                        "label": "是",
+                        "value": true
+                    },
+                    {
+                        "label": "否",
+                        "value": false
+                    }
+                ],
+                "sortable": true,
+                "default": 0,
+                "unique": false,
+                "index": false
+            },     
+            {
+                "name": "description",
+                "type": "str",
+                "description": "描述",
+                "primary_key": false,
+                "required": true,
+                "insertable": true,
+                "updatable": true,
+                "listable": true,
+                "queryable": true,
+                "query_type": "eq",
+                "nullable": false,
+                "form_type": "input",
+                "sortable": true,
+                "default": 0,
+                "unique": false,
+                "max_length": 255,
+                "index": true
+            },                      
+            {
+                "name": "form_type",
+                "type": "str",
+                "description": "表单类型",
+                "primary_key": false,
+                "required": false,
+                "insertable": true,
+                "updatable": true,
+                "listable": true,
+                "queryable": true,
+                "nullable": true,
+                "form_type": "select",
+                "options": [
+                    {
+                        "label": "文本框",
+                        "value": "text"
+                    },
+                    {
+                        "label": "文本块",
+                        "value": "textarea"
+                    },
+                    {
+                        "label": "复选框",
+                        "value": "checkbox"
+                    },
+                    {
+                        "label": "下拉框",
+                        "value": "select"
+                    },
+                    {
+                        "label": "日期选择框",
+                        "value": "date"
+                    }
+                ],
+                "sortable": true,
+                "default": null,
+                "unique": false,
+                "max_length": 50,
+                "index": false
+            },
+            {
+                "name": "options",
+                "type": "str",
+                "description": "备选值",
+                "primary_key": false,
+                "required": false,
+                "insertable": true,
+                "updatable": true,
+                "listable": true,
+                "queryable": true,
+                "query_type": "eq",
+                "nullable": false,
+                "form_type": "textarea",
+                "sortable": true,
+                "default": 0,
+                "unique": false,
+                "max_length": 1024,
+                "index": false
+            },
+            
+            {
+                "name": "max_length",
+                "type": "int",
+                "description": "最大长度",
+                "primary_key": false,
+                "required": false,
+                "insertable": true,
+                "updatable": true,
+                "listable": true,
+                "queryable": true,
+                "query_type": "eq",
+                "nullable": false,
+                "form_type": "input",
+                "sortable": true,
+                "default": 0,
+                "unique": false,
+                "index": true
+            },
+            {
+                "name": "default",
+                "type": "str",
+                "description": "默认值",
+                "primary_key": false,
+                "required": false,
+                "insertable": true,
+                "updatable": true,
+                "listable": true,
+                "queryable": true,
+                "query_type": "eq",
+                "nullable": false,
+                "form_type": "input",
+                "sortable": true,
+                "default": "",
+                "unique": false,
+                "index": true
+            },            
+            {
+                "name": "required",
+                "type": "bool",
+                "description": "是否必填",
+                "primary_key": false,
+                "required": false,
+                "insertable": true,
+                "updatable": true,
+                "listable": true,
+                "queryable": true,
+                "nullable": true,
+                "form_type": "select",
+                "options": [
+                    {
+                        "label": "是",
+                        "value": true
+                    },
+                    {
+                        "label": "否",
+                        "value": false
+                    }
+                ],
+                "sortable": true,
+                "default": false,
+                "unique": false,
+                "index": false
+            },            
+            {
+                "name": "insertable",
+                "type": "bool",
+                "description": "是否可插入",
+                "primary_key": false,
+                "required": false,
+                "insertable": true,
+                "updatable": true,
+                "listable": true,
+                "queryable": true,
+                "nullable": true,
+                "form_type": "select",
+                "options": [
+                    {
+                        "label": "是",
+                        "value": true
+                    },
+                    {
+                        "label": "否",
+                        "value": false
+                    }
+                ],
+                "sortable": true,
+                "default": 0,
+                "unique": false,
+                "index": false
+            },            
+            {
+                "name": "updatable",
+                "type": "bool",
+                "description": "是否可更新",
+                "primary_key": false,
+                "required": false,
+                "insertable": true,
+                "updatable": true,
+                "listable": true,
+                "queryable": true,
+                "nullable": true,
+                "form_type": "select",
+                "options": [
+                    {
+                        "label": "是",
+                        "value": true
+                    },
+                    {
+                        "label": "否",
+                        "value": false
+                    }
+                ],
+                "sortable": true,
+                "default": 0,
+                "unique": false,
+                "index": false
+            },            
+            {
+                "name": "listable",
+                "type": "bool",
+                "description": "是否可列表",
+                "primary_key": false,
+                "required": false,
+                "insertable": true,
+                "updatable": true,
+                "listable": true,
+                "queryable": true,
+                "nullable": true,
+                "form_type": "select",
+                "options": [
+                    {
+                        "label": "是",
+                        "value": true
+                    },
+                    {
+                        "label": "否",
+                        "value": false
+                    }
+                ],
+                "sortable": true,
+                "default": 0,
+                "unique": false,
+                "index": false
+            },            
+            {
+                "name": "queryable",
+                "type": "bool",
+                "description": "是否可查询",
+                "primary_key": false,
+                "required": false,
+                "insertable": true,
+                "updatable": true,
+                "listable": true,
+                "queryable": true,
+                "nullable": true,
+                "form_type": "select",
+                "options": [
+                    {
+                        "label": "是",
+                        "value": true
+                    },
+                    {
+                        "label": "否",
+                        "value": false
+                    }
+                ],
+                "sortable": true,
+                "default": 0,
+                "unique": false,
+                "index": false
+            },      
+            {
+                "name": "query_type",
+                "type": "str",
+                "description": "查询类型",
+                "primary_key": false,
+                "required": false,
+                "insertable": true,
+                "updatable": true,
+                "listable": true,
+                "queryable": true,
+                "nullable": true,
+                "form_type": "select",
+                "options": [
+                    {
+                        "label": "等于",
+                        "value": "eq"
+                    },
+                    {
+                        "label": "包含",
+                        "value": "like"
+                    },
+                    {
+                        "label": "在范围内",
+                        "value": "in"
+                    }
+                ],
+                "sortable": true,
+                "default": "eq",
+                "unique": false,
+                "index": false
+            },                    
+            {
+                "name": "sortable",
+                "type": "bool",
+                "description": "是否可排序",
+                "primary_key": false,
+                "required": false,
+                "insertable": true,
+                "updatable": true,
+                "listable": true,
+                "queryable": true,
+                "nullable": true,
+                "form_type": "select",
+                "options": [
+                    {
+                        "label": "是",
+                        "value": true
+                    },
+                    {
+                        "label": "否",
+                        "value": false
+                    }
+                ],
+                "sortable": true,
+                "default": 0,
+                "unique": false,
+                "index": false
+            },            
+            {
+                "name": "nullable",
+                "type": "bool",
+                "description": "是否可为空",
+                "primary_key": false,
+                "required": false,
+                "insertable": true,
+                "updatable": true,
+                "listable": true,
+                "queryable": true,
+                "nullable": true,
+                "form_type": "select",
+                "options": [
+                    {
+                        "label": "是",
+                        "value": true
+                    },
+                    {
+                        "label": "否",
+                        "value": false
+                    }
+                ],
+                "sortable": true,
+                "default": "[]",
+                "unique": false,
+                "index": false
+            },            
+            {
+                "name": "unique",
+                "type": "bool",
+                "description": "是否建立唯一索引",
+                "primary_key": false,
+                "required": false,
+                "insertable": true,
+                "updatable": true,
+                "listable": true,
+                "queryable": true,
+                "nullable": true,
+                "form_type": "select",
+                "options": [
+                    {
+                        "label": "是",
+                        "value": true
+                    },
+                    {
+                        "label": "否",
+                        "value": false
+                    }
+                ],
+                "sortable": true,
+                "default": 0,
+                "unique": false,
+                "index": false
+            },            
+            {
+                "name": "index",
+                "type": "bool",
+                "description": "是否建立索引",
+                "primary_key": false,
+                "required": false,
+                "insertable": true,
+                "updatable": true,
+                "listable": true,
+                "queryable": true,
+                "nullable": true,
+                "form_type": "select",
+                "options": [
+                    {
+                        "label": "是",
+                        "value": true
+                    },
+                    {
+                        "label": "否",
+                        "value": false
+                    }
+                ],
+                "sortable": true,
+                "default": 0,
+                "unique": false,
+                "index": false
+            }
+        ]
+    },
+    "relation_field": "module_id"
+}

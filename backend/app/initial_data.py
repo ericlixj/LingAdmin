@@ -14,7 +14,8 @@ def init() -> None:
 
 def main() -> None:
     logger.info("Creating initial data...")
-    init()
+    # FIXME: Uncomment the following line when the init_db function is ready
+    # init()
     logger.info("finish initial data created!")
 
 

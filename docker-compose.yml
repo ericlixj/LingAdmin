@@ -10,7 +10,7 @@ services:
       start_period: 30s
       timeout: 10s
     volumes:
-      - app-db-data:/var/lib/postgresql/data/pgdata
+      - cac-db-data:/var/lib/postgresql/data/pgdata
     env_file:
       - .env
     environment:
@@ -110,7 +110,7 @@ services:
       - SENTRY_DSN=${SENTRY_DSN}
 
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8000/api/v1/health-check/"]
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/v1/health_check/"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -155,10 +155,95 @@ services:
       - traefik.http.routers.${STACK_NAME?Variable not set}-frontend-https.tls.certresolver=le
       # Enable redirection for HTTP and HTTPS
       - traefik.http.routers.${STACK_NAME?Variable not set}-frontend-http.middlewares=https-redirect
+
+
+  opensearch-node1:
+    build:
+      context: ./opensearch
+      dockerfile: Dockerfile
+    container_name: opensearch-node1
+    networks:
+      - traefik-public
+      - default    
+    environment:
+      - cluster.name=opensearch-cluster
+      - node.name=opensearch-node1
+      - discovery.type=single-node
+      - bootstrap.memory_lock=true
+      - "OPENSEARCH_JAVA_OPTS=-Xms512m -Xmx512m"
+      - plugins.security.disabled=true
+      - OPENSEARCH_INITIAL_ADMIN_PASSWORD=OpenSearch@2025#
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - opensearch-data1:/usr/share/opensearch/data
+    ports:
+      - 9200:9200
+      - 9600:9600
+
+  opensearch-dashboards:
+    image: opensearchproject/opensearch-dashboards:2.12.0
+    container_name: opensearch-dashboards
+    networks:
+      - traefik-public
+      - default
+    environment:
+      - OPENSEARCH_HOSTS=http://opensearch-node1:9200
+      - DISABLE_SECURITY_DASHBOARDS_PLUGIN=true
+    depends_on:
+      - opensearch-node1
+    labels:
+      - traefik.enable=true
+      - traefik.docker.network=traefik-public
+      # 设置 Dashboards 服务内部端口
+      - traefik.http.services.${STACK_NAME?Variable not set}-opensearch-dashboards.loadbalancer.server.port=5601
+      # HTTP 路由
+      - traefik.http.routers.${STACK_NAME?Variable not set}-opensearch-dashboards-http.rule=Host(`opensearch.${DOMAIN?Variable not set}`)
+      - traefik.http.routers.${STACK_NAME?Variable not set}-opensearch-dashboards-http.entrypoints=http
+      - traefik.http.routers.${STACK_NAME?Variable not set}-opensearch-dashboards-http.middlewares=https-redirect
+      # HTTPS 路由
+      - traefik.http.routers.${STACK_NAME?Variable not set}-opensearch-dashboards-https.rule=Host(`opensearch.${DOMAIN?Variable not set}`)
+      - traefik.http.routers.${STACK_NAME?Variable not set}-opensearch-dashboards-https.entrypoints=https
+      - traefik.http.routers.${STACK_NAME?Variable not set}-opensearch-dashboards-https.tls=true
+      - traefik.http.routers.${STACK_NAME?Variable not set}-opensearch-dashboards-https.tls.certresolver=le
+
+
+
+  ########################################################
+  frontend2c:
+    image: '${DOCKER_IMAGE_FRONTEND_TO_C?Variable not set}:${TAG-latest}'
+    restart: always
+    networks:
+      - traefik-public
+      - default
+    build:
+      context: ./frontend2c
+      args:
+        VITE_API_URL: "https://api.${DOMAIN?Variable not set}"
+        NODE_ENV: "production"
+    labels:
+      - traefik.enable=true
+      - traefik.docker.network=traefik-public
+      - traefik.constraint-label=traefik-public
+      # HTTP router
+      - traefik.http.routers.${STACK_NAME?Variable not set}-frontend2c-http.rule=Host(`c.${DOMAIN?Variable not set}`)
+      - traefik.http.routers.${STACK_NAME?Variable not set}-frontend2c-http.entrypoints=http
+      - traefik.http.routers.${STACK_NAME?Variable not set}-frontend2c-http.middlewares=https-redirect
+      # HTTPS router
+      - traefik.http.routers.${STACK_NAME?Variable not set}-frontend2c-https.rule=Host(`c.${DOMAIN?Variable not set}`)
+      - traefik.http.routers.${STACK_NAME?Variable not set}-frontend2c-https.entrypoints=https
+      - traefik.http.routers.${STACK_NAME?Variable not set}-frontend2c-https.tls=true
+      - traefik.http.routers.${STACK_NAME?Variable not set}-frontend2c-https.tls.certresolver=le
+      # service
+      - traefik.http.services.${STACK_NAME?Variable not set}-frontend2c.loadbalancer.server.port=80
+
+
 volumes:
-  app-db-data:
+  cac-db-data:
+  opensearch-data1:
 
 networks:
   traefik-public:
-    # Allow setting it to false for testing
     external: true

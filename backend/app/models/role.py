@@ -54,7 +54,7 @@ class RoleCreate(SQLModel):
     description: Optional[str] = None
     data_scope: int = Field(default=0, description="数据范围: 0=all, 1=custom")
     creator: Optional[str] = Field(default=None, max_length=64)
-    shop_ids: Optional[List[int]] = []  # 新增字段    
+    dept_ids: Optional[List[int]] = []  # 新增字段    
 
 
 class RoleUpdate(SQLModel):
@@ -64,7 +64,7 @@ class RoleUpdate(SQLModel):
         default=None, description="数据范围: 0=全部, 1=自定义"
     )
     updater: Optional[str] = Field(default=None, max_length=64)
-    shop_ids: Optional[List[int]] = []  # 新增字段
+    dept_ids: Optional[List[int]] = []  # 新增字段
 
 
 class RoleListResponse(SQLModel):
@@ -75,9 +75,13 @@ class RoleListResponse(SQLModel):
 class BindPermissionsRequest(SQLModel):
     permission_ids: List[int]
 
+class BindDeptRequest(SQLModel):
+    data_scope: int = Field(..., description="数据权限范围")
+    dept_ids: Optional[List[int]] = Field(default_factory=list, description="指定部门ID列表，仅当 data_scope = 1 时使用")
 
-class RoleShopLink(SQLModel, table=True):
-    __tablename__ = "role_shop_link"
+
+class RoleDeptLink(SQLModel, table=True):
+    __tablename__ = "role_dept_link"
 
     role_id: int = Field(primary_key=True)
-    shop_id: int = Field(primary_key=True)
+    dept_id: int = Field(primary_key=True)

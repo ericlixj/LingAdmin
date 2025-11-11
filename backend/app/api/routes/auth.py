@@ -12,9 +12,10 @@ from app.core.security import (
     verify_password,
 )
 from app.crud.user_crud import UserCRUD
+from app.crud.dept_crud import DeptCRUD
 from app.models.common import RefreshTokenRequest as Ref
 from app.models.common import Token
-from app.models.user import User
+from app.models.user import User, UserMeResponse
 from fastapi import APIRouter, Body, Depends, HTTPException
 from fastapi.security import OAuth2PasswordRequestForm
 from jwt import ExpiredSignatureError, PyJWTError
@@ -92,7 +93,7 @@ def refresh_token_endpoint(data: Ref):
         raise HTTPException(status_code=401, detail=_("Invalid refresh token"))
 
 
-@router.get("/me")
+@router.get("/me", response_model=UserMeResponse)
 def me(token: str = Depends(oauth2_scheme), db: Session = Depends(get_session)):
     try:
         payload = decode_access_token(token)
@@ -119,12 +120,22 @@ def me(token: str = Depends(oauth2_scheme), db: Session = Depends(get_session)):
 
     # 获取权限码列表
     crud = UserCRUD(db)
-    permission_codes = crud.get_all_permission_codes(user_id)
+    dept_crud = DeptCRUD(db)
 
-    return {
-        "id": user.id,
-        "email": user.email,
-        "name": user.full_name,
-        "avatar": "https://i.pravatar.cc/300",
-        "permissions": permission_codes,
-    }
+    permission_codes = crud.get_all_permission_codes(user_id)
+    roles = crud.get_roles(user_id)
+    dept = dept_crud.get_by_id(user.dept_id)
+    
+    rv = UserMeResponse(
+        id=user.id,
+        email=user.email,
+        name=user.full_name,
+        avatar="https://i.pravatar.cc/300",
+        permissions=permission_codes,
+        create_time=user.create_time,
+        dept_name=dept.dept_name+"["+ dept.dept_code + "]",
+        roles=roles,
+        must_change_password=user.must_change_password,
+    )
+    # logger.info(rv)
+    return rv

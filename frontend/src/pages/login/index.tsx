@@ -1,46 +1,63 @@
-import { useLogin } from "@refinedev/core";
+import { useLogin, useTranslate } from "@refinedev/core";
 import { Button, Card, Form, Input } from "antd";
 import { AppIcon } from "../../components/app-icon";
+import { LanguageSwitcher } from "../../components/header/LanguageSwitcher"; // ✅ 导入语言切换组件
 
 export const Login = () => {
   const { mutate: login, isLoading } = useLogin();
+  const t = useTranslate();
 
   return (
-    <div style={{
-      display: "flex",
-      flexDirection: "column",
-      height: "100vh",
-      justifyContent: "center",
-      alignItems: "center",
-    }}>
-      {/* logo */}
-      <div style={{ marginBottom: 24 }}>
-        <AppIcon size={64}/>
+    <div
+      style={{
+        position: "relative",
+        display: "flex",
+        flexDirection: "column",
+        height: "100vh",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      {/* ✅ 顶部语言切换按钮 */}
+      <div style={{ position: "absolute", top: 16, right: 16 }}>
+        <LanguageSwitcher />
       </div>
 
-      <Card title="LingAdmin" style={{ width: 320 }}>
+      {/* logo */}
+      <div style={{ marginBottom: 24 }}>
+        <AppIcon size={64} />
+      </div>
+
+      <Card title={t("login.title")} style={{ width: 320 }}>
         <Form
           layout="vertical"
-          initialValues={{ email: "admin@kxf.ca", password: "admin123" }}
-          onFinish={(values) => login(values)}
+          initialValues={{ email: "dy@cacnaturals.com", password: "123456" }}
+          onFinish={(values) =>
+            login(values, {
+              onSuccess: () => {
+                // 登录成功后刷新页面,resources无法动态加载，只能这样搞一下
+                window.location.reload();
+              },
+            })
+          }
         >
           <Form.Item
-            label="邮箱"
+            label={t("login.email")}
             name="email"
-            rules={[{ required: true, message: "请输入注册邮箱" }]}
+            rules={[{ required: true, message: t("login.email_required") }]}
           >
             <Input />
           </Form.Item>
           <Form.Item
-            label="密码"
+            label={t("login.password")}
             name="password"
-            rules={[{ required: true, message: "请输入密码" }]}
+            rules={[{ required: true, message: t("login.password_required") }]}
           >
             <Input.Password />
           </Form.Item>
           <Form.Item>
             <Button type="primary" htmlType="submit" block loading={isLoading}>
-              登录
+              {t("login.submit")}
             </Button>
           </Form.Item>
         </Form>
