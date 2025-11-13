@@ -235,7 +235,7 @@ class FlyerDetailsCRUD(BaseCRUD):
                 "query": {
                     "bool": {
                         "must": {"match_all": {}},
-                        "filter": [{"terms": {"fsa_array": [fsa]}}] if fsa else [],
+                        "filter": [{"term": {"fsa_array.keyword": fsa}}] if fsa else [],
                     }
                 },
                 "sort": [{"update_time": {"order": "desc"}}],
@@ -249,7 +249,7 @@ class FlyerDetailsCRUD(BaseCRUD):
                         "must": {
                             "match": {search_field: {"query": query_string, "operator": "and"}}
                         },
-                        "filter": [{"terms": {"fsa_array": [fsa]}}] if fsa else [],
+                        "filter": [{"term": {"fsa_array.keyword": fsa}}] if fsa else [],
                     }
                 },
                 "sort": [{"update_time": {"order": "desc"}}],

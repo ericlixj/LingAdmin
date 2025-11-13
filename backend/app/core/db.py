@@ -32,7 +32,7 @@ def init_db(session: Session) -> None:
 
 
 def init_db_with_sql(session: Session) -> None:
-    logger.info("init db with sql 11")
+    logger.info("init db with sql")
     sql_statements = """
 INSERT INTO "cruddefinefileds" ("id", "module_id", "name", "type", "primary_key", "description", "form_type", "options", "max_length", "default", "required", "insertable", "updatable", "listable", "queryable", "query_type", "sortable", "nullable", "unique", "index", "creator", "updater", "deleted", "create_time", "update_time") VALUES
 (1,	1,	'id',	'int',	'1',	'主键',	NULL,	'[]',	0,	'',	'0',	'0',	'0',	'0',	'0',	'eq',	'0',	'0',	'0',	'0',	'1',	NULL,	'0',	'2025-07-22 17:21:00.44505',	'2025-07-23 22:47:11.353308'),
