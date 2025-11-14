@@ -4,4 +4,8 @@ import react from '@vitejs/plugin-react'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
+  server: {
+    port: 5174,          // ← 改成 5174
+    host: "0.0.0.0"      // 允许外部访问（docker 或局域网）
+  }
 })
