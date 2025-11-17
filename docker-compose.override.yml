@@ -108,15 +108,29 @@ services:
         - VITE_API_URL=http://localhost:8000        
         - NODE_ENV=development
 
-  frontend2c:
-    restart: "no"
+
+  capp-backend:
+    # 去除 Traefik 标签（override 会直接覆盖为空列表）
+    labels: []
+    # 不走 traefik-public 网络，直接本地访问
+    networks:
+      - capp-net
+    # 覆盖生产环境的 API 域名行为 → 直接暴露 4000
+    ports:
+      - "4000:4000"
+
+  capp-frontend:
+    labels: []
+    networks:
+      - capp-net
+    # 前端暴露 5174 本地开发端口
     ports:
       - "5174:80"
+    # 覆盖构建参数：直接连 localhost 后端
     build:
-      context: ./frontend2c
       args:
-        - VITE_API_URL=http://localhost:8000        
-        - NODE_ENV=development        
+        VITE_API_URL: "http://localhost:4000"
+        NODE_ENV: "development"
 
   # playwright:
   #   build:
@@ -147,3 +161,5 @@ networks:
   traefik-public:
     # For local dev, don't expect an external Traefik network
     external: false
+  capp-net:
+    driver: bridge    

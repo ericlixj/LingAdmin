@@ -5,7 +5,7 @@ docker compose down
 docker compose build --no-cache
 docker compose up -d
 
-echo "停止 backend 和 frontend2c 服务..."
-docker compose stop backend frontend2c
+echo "停止 capp-backend 和 capp-frontend 服务..."
+docker compose stop capp-backend capp-frontend
 
-echo "完成。"
+echo "请手动启动 capp-backend 和 capp-frontend 服务 进行开发。"

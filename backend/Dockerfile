@@ -11,13 +11,6 @@ RUN wget -O /tmp/chrome.zip https://storage.googleapis.com/chrome-for-testing-pu
     rm /tmp/chrome.zip && \
     ln -s /opt/chrome/chrome-linux64/chrome /usr/local/bin/google-chrome
 
-# 下载并解压 Chromedriver
-RUN wget -O /tmp/chromedriver.zip https://storage.googleapis.com/chrome-for-testing-public/139.0.7258.68/linux64/chromedriver-linux64.zip && \
-    unzip /tmp/chromedriver.zip -d /tmp/chromedriver && \
-    mv /tmp/chromedriver/chromedriver-linux64/chromedriver /usr/local/bin/ && \
-    rm -rf /tmp/chromedriver /tmp/chromedriver.zip && \
-    chmod +x /usr/local/bin/chromedriver
-
 # 安装 Chrome 依赖
 RUN apt-get update 
 RUN apt-get install -y --no-install-recommends \
