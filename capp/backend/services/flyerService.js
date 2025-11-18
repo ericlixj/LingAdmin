@@ -36,7 +36,24 @@ async function searchFlyerDetails({
     }
 
     // 提取 FSA（邮编前3位）
-    const fsa = zipCode ? zipCode.slice(0, 3).toUpperCase() : null;
+    // 清理邮编：去掉空格和特殊字符，转大写，然后取前3位
+    let fsa = null;
+    if (zipCode) {
+      const cleanZipCode = String(zipCode).replace(/\s+/g, '').replace(/[^A-Z0-9]/gi, '').toUpperCase();
+      if (cleanZipCode.length >= 3) {
+        fsa = cleanZipCode.slice(0, 3);
+      }
+    }
+
+    // 如果邮编为空，返回空结果
+    if (!fsa) {
+      return {
+        total: 0,
+        data: [],
+        from,
+        size
+      };
+    }
 
     // 构造查询体
     const queryBody = {
@@ -54,7 +71,7 @@ async function searchFlyerDetails({
                 }
               }
             : { match_all: {} },
-          filter: fsa ? [{ term: { 'fsa_array.keyword': fsa } }] : []
+          filter: [{ term: { 'fsa_array.keyword': fsa } }]
         }
       },
       sort: [{ update_time: { order: 'desc' } }]

@@ -2,14 +2,41 @@
 import { useEffect, useState, useRef, useCallback } from "react";
 
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:4000";
-const PAGE_SIZE = 3; // 每页数量
+const PAGE_SIZE = 10; // 每页数量
+const ZIP_CODE_STORAGE_KEY = "flyer_zip_code"; // localStorage 中保存邮编的 key
 
 function App() {
+  // 从 localStorage 读取保存的邮编
+  const getStoredZipCode = () => {
+    try {
+      const stored = localStorage.getItem(ZIP_CODE_STORAGE_KEY);
+      return stored || "";
+    } catch (error) {
+      console.error("Failed to read zip code from localStorage:", error);
+      return "";
+    }
+  };
+
+  // 保存邮编到 localStorage
+  const saveZipCodeToStorage = (code) => {
+    try {
+      if (code) {
+        localStorage.setItem(ZIP_CODE_STORAGE_KEY, code);
+      } else {
+        localStorage.removeItem(ZIP_CODE_STORAGE_KEY);
+      }
+    } catch (error) {
+      console.error("Failed to save zip code to localStorage:", error);
+    }
+  };
+
   const [error, setError] = useState("");
   const [flyers, setFlyers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [loadingMore, setLoadingMore] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const [zipCode, setZipCode] = useState(() => getStoredZipCode()); // 邮编状态，从 localStorage 初始化
+  const [zipCodeError, setZipCodeError] = useState(""); // 邮编格式错误信息
   const [lang, setLang] = useState("cn"); // 语言状态：cn/en/hk
   const [total, setTotal] = useState(0);
   const [hasMore, setHasMore] = useState(true);
@@ -23,8 +50,46 @@ function App() {
     { value: "hk", label: "繁體中文" }
   ];
 
+  // 加拿大邮编格式校验
+  // 格式：A1A 1A1 或 A1A1A1（字母数字字母 + 空格 + 数字字母数字）
+  // 正则：^[A-Za-z]\d[A-Za-z]\s?\d[A-Za-z]\d$
+  const validateCanadianPostalCode = (code, currentLang = lang) => {
+    // 邮编可以为空（为空时返回空结果）
+    if (!code || code.trim() === "") {
+      return { valid: true, error: "" };
+    }
+    // 去掉空格进行校验
+    const cleanCode = code.replace(/\s+/g, '').toUpperCase();
+    // 加拿大邮编格式：6位字符，字母数字字母数字字母数字
+    const postalCodeRegex = /^[A-Z]\d[A-Z]\d[A-Z]\d$/;
+    if (cleanCode.length !== 6) {
+      return { 
+        valid: false, 
+        error: currentLang === "cn" ? "邮编必须是6位字符" : currentLang === "en" ? "Postal code must be 6 characters" : "郵編必須是6位字符"
+      };
+    }
+    if (!postalCodeRegex.test(cleanCode)) {
+      return { 
+        valid: false, 
+        error: currentLang === "cn" ? "邮编格式不正确，应为 A1A 1A1 格式" : currentLang === "en" ? "Invalid postal code format, should be A1A 1A1" : "郵編格式不正確，應為 A1A 1A1 格式"
+      };
+    }
+    return { valid: true, error: "" };
+  };
+
+  // 格式化邮编（自动添加空格）
+  const formatPostalCode = (value) => {
+    // 只保留字母和数字
+    let cleaned = value.replace(/[^A-Z0-9]/gi, '').toUpperCase();
+    // 如果长度超过3，在第3位后添加空格
+    if (cleaned.length > 3) {
+      cleaned = cleaned.slice(0, 3) + ' ' + cleaned.slice(3, 6);
+    }
+    return cleaned;
+  };
+
   // 获取 flyer_details 数据
-  const fetchFlyers = useCallback(async (query = "", page = 0, append = false, language = lang) => {
+  const fetchFlyers = useCallback(async (query = "", page = 0, append = false, language = lang, postalCode = zipCode) => {
     try {
       if (page === 0) {
         setLoading(true);
@@ -37,6 +102,9 @@ function App() {
         params.append('q', query);
       }
       params.append('lang', language); // 添加语言参数
+      if (postalCode) {
+        params.append('zip_code', postalCode); // 添加邮编参数
+      }
       const start = page * PAGE_SIZE;
       const end = start + PAGE_SIZE;
       params.append('_start', start.toString());
@@ -69,16 +137,16 @@ function App() {
       setLoading(false);
       setLoadingMore(false);
     }
-  }, [lang]);
+  }, [lang, zipCode]);
 
   // 加载更多数据
   const loadMore = useCallback(() => {
     if (!loadingMore && hasMore && !loading) {
       const nextPage = currentPage + 1;
       setCurrentPage(nextPage);
-      fetchFlyers(searchQuery, nextPage, true, lang);
+      fetchFlyers(searchQuery, nextPage, true, lang, zipCode);
     }
-  }, [currentPage, searchQuery, loadingMore, hasMore, loading, fetchFlyers, lang]);
+  }, [currentPage, searchQuery, loadingMore, hasMore, loading, fetchFlyers, lang, zipCode]);
 
   // 滚动监听 - 使用 Intersection Observer
   useEffect(() => {
@@ -113,34 +181,91 @@ function App() {
     };
   }, [loading, hasMore, loadingMore, loadMore, flyers.length]); // 添加 flyers.length 确保数据更新后重新设置
 
-  // 初始加载
+  // 初始加载：使用保存的邮编（只在组件首次挂载和 lang 变化时）
   useEffect(() => {
-    fetchFlyers("", 0, false, lang);
-  }, [fetchFlyers, lang]);
+    // 使用 state 中的 zipCode（已经从 localStorage 初始化）
+    const validation = validateCanadianPostalCode(zipCode, lang);
+    if (validation.valid) {
+      // 邮编为空或格式正确都可以查询（为空时返回空结果）
+      fetchFlyers("", 0, false, lang, zipCode || "");
+    } else {
+      setZipCodeError(validation.error);
+      setLoading(false);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [fetchFlyers, lang]); // 不依赖 zipCode，避免循环
 
   // 语言切换处理
   const handleLangChange = (newLang) => {
     setLang(newLang);
     setCurrentPage(0);
     setHasMore(true);
-    // 语言切换时重新搜索
-    fetchFlyers(searchQuery, 0, false, newLang);
+    // 校验邮编格式并更新错误信息为新的语言
+    const validation = validateCanadianPostalCode(zipCode, newLang);
+    setZipCodeError(validation.error);
+    // 如果邮编格式无效，不进行搜索
+    if (!validation.valid) {
+      return;
+    }
+    // 语言切换时重新搜索（邮编为空也可以查询，返回空结果）
+    fetchFlyers(searchQuery, 0, false, newLang, zipCode || "");
   };
 
   // 搜索处理
   const handleSearch = (e) => {
     e.preventDefault();
+    
+    // 校验邮编格式（空值也允许，会返回空结果）
+    const validation = validateCanadianPostalCode(zipCode);
+    if (!validation.valid) {
+      setZipCodeError(validation.error);
+      return;
+    }
+    
+    setZipCodeError("");
     setCurrentPage(0);
     setHasMore(true);
-    fetchFlyers(searchQuery, 0, false, lang);
+    // 邮编为空也可以查询（返回空结果）
+    fetchFlyers(searchQuery, 0, false, lang, zipCode || "");
   };
 
-  // 清空搜索
+  // 邮编输入处理
+  const handleZipCodeInput = (e) => {
+    const inputValue = e.target.value;
+    // 格式化邮编（自动添加空格）
+    const formatted = formatPostalCode(inputValue);
+    setZipCode(formatted);
+    
+    // 保存到 localStorage
+    saveZipCodeToStorage(formatted);
+    
+    // 实时校验格式
+    const validation = validateCanadianPostalCode(formatted, lang);
+    if (!validation.valid) {
+      setZipCodeError(validation.error);
+    } else {
+      setZipCodeError("");
+    }
+  };
+
+  // 清空邮编（同时清除 localStorage）
+  const handleClearZipCode = () => {
+    setZipCode("");
+    setZipCodeError("");
+    saveZipCodeToStorage("");
+    // 邮编为空时也可以查询（返回空结果），不显示错误
+  };
+
+  // 清空搜索（只清空搜索关键词，不清空邮编）
   const handleClear = () => {
     setSearchQuery("");
     setCurrentPage(0);
     setHasMore(true);
-    fetchFlyers("", 0, false, lang);
+    // 使用当前邮编重新搜索（邮编为空也可以，返回空结果）
+    const validation = validateCanadianPostalCode(zipCode, lang);
+    if (validation.valid) {
+      fetchFlyers("", 0, false, lang, zipCode || "");
+    }
   };
 
   return (
@@ -161,31 +286,87 @@ function App() {
 
       {/* 搜索框和语言切换 */}
       <div style={{ marginBottom: "2rem" }}>
-        {/* 语言切换 */}
-        <div style={{ marginBottom: "1rem", display: "flex", alignItems: "center", gap: "0.5rem" }}>
-          <label style={{ fontSize: "0.9rem", color: "#666" }}>语言:</label>
-          <div style={{ display: "flex", gap: "0.5rem" }}>
-            {langOptions.map((option) => (
-              <button
-                key={option.value}
-                type="button"
-                onClick={() => handleLangChange(option.value)}
-                disabled={loading}
+        {/* 语言切换和邮编 */}
+        <div style={{ marginBottom: "1rem", display: "flex", alignItems: "center", gap: "1.5rem", flexWrap: "wrap" }}>
+          {/* 语言切换 */}
+          <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+            <label style={{ fontSize: "0.9rem", color: "#666", fontWeight: "500" }}>
+              {lang === "cn" ? "语言:" : lang === "en" ? "Language:" : "語言:"}
+            </label>
+            <div style={{ display: "flex", gap: "0.5rem" }}>
+              {langOptions.map((option) => (
+                <button
+                  key={option.value}
+                  type="button"
+                  onClick={() => handleLangChange(option.value)}
+                  disabled={loading}
+                  style={{
+                    padding: "0.5rem 1rem",
+                    fontSize: "0.9rem",
+                    backgroundColor: lang === option.value ? "#007bff" : "#f0f0f0",
+                    color: lang === option.value ? "white" : "#333",
+                    border: `1px solid ${lang === option.value ? "#007bff" : "#ddd"}`,
+                    borderRadius: "4px",
+                    cursor: loading ? "not-allowed" : "pointer",
+                    fontWeight: lang === option.value ? "bold" : "normal",
+                    transition: "all 0.2s"
+                  }}
+                >
+                  {option.label}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* 邮编输入 */}
+          <div style={{ display: "flex", flexDirection: "column", gap: "0.25rem" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+              <label style={{ fontSize: "0.9rem", color: "#666", fontWeight: "500" }}>
+                {lang === "cn" ? "邮编:" : lang === "en" ? "Postal Code:" : "郵編:"}
+              </label>
+              <input
+                type="text"
+                value={zipCode}
+                onChange={handleZipCodeInput}
+                placeholder={lang === "cn" ? "例如: K1A 0A6" : lang === "en" ? "e.g. K1A 0A6" : "例如: K1A 0A6"}
                 style={{
-                  padding: "0.5rem 1rem",
+                  padding: "0.5rem",
                   fontSize: "0.9rem",
-                  backgroundColor: lang === option.value ? "#007bff" : "#f0f0f0",
-                  color: lang === option.value ? "white" : "#333",
-                  border: `1px solid ${lang === option.value ? "#007bff" : "#ddd"}`,
+                  border: zipCodeError ? "1px solid #dc3545" : "1px solid #ddd",
                   borderRadius: "4px",
-                  cursor: loading ? "not-allowed" : "pointer",
-                  fontWeight: lang === option.value ? "bold" : "normal",
-                  transition: "all 0.2s"
+                  width: "120px",
+                  textTransform: "uppercase"
                 }}
-              >
-                {option.label}
-              </button>
-            ))}
+              />
+              {zipCode && (
+                <button
+                  type="button"
+                  onClick={handleClearZipCode}
+                  style={{
+                    padding: "0.25rem 0.5rem",
+                    fontSize: "0.8rem",
+                    backgroundColor: "#dc3545",
+                    color: "white",
+                    border: "none",
+                    borderRadius: "4px",
+                    cursor: "pointer"
+                  }}
+                  title={lang === "cn" ? "清除邮编" : lang === "en" ? "Clear postal code" : "清除郵編"}
+                >
+                  ×
+                </button>
+              )}
+              {zipCode && !zipCodeError && (
+                <span style={{ fontSize: "0.85rem", color: "#666" }}>
+                  ({lang === "cn" ? "FSA: " : lang === "en" ? "FSA: " : "FSA: "}{zipCode.replace(/\s+/g, '').length >= 3 ? zipCode.replace(/\s+/g, '').slice(0, 3) : zipCode.replace(/\s+/g, '')})
+                </span>
+              )}
+            </div>
+            {zipCodeError && (
+              <span style={{ fontSize: "0.75rem", color: "#dc3545", marginLeft: "60px" }}>
+                {zipCodeError}
+              </span>
+            )}
           </div>
         </div>
 
