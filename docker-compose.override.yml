@@ -60,12 +60,13 @@ services:
     ports:
       - "5601:5601"      
 
-  backend:
+  # 2Admin backend (FastAPI, admin/backend)
+  admin-backend:
     restart: "no"
     ports:
       - "8000:8000"
     build:
-      context: ./backend
+      context: ./admin/backend
     # command: sleep infinity  # Infinite loop to keep container alive doing nothing
     command:
       - fastapi
@@ -74,18 +75,18 @@ services:
       - "app/main.py"
     develop:
       watch:
-        - path: ./backend
+        - path: ./admin/backend
           action: sync
           target: /app
           ignore:
-            - ./backend/.venv
+            - ./admin/backend/.venv
             - .venv
-        - path: ./backend/pyproject.toml
+        - path: ./admin/backend/pyproject.toml
           action: rebuild
     # TODO: remove once coverage is done locally
     volumes:
-      - ./backend/app:/app/app    
-      - ./backend/htmlcov:/app/htmlcov
+      - ./admin/backend/app:/app/app    
+      - ./admin/backend/htmlcov:/app/htmlcov
     environment:
       SMTP_HOST: "mailcatcher"
       SMTP_PORT: "1025"
@@ -98,12 +99,13 @@ services:
       - "1080:1080"
       - "1025:1025"
 
-  frontend:
+  # 2Admin frontend (Refine React, admin/frontend)
+  admin-frontend:
     restart: "no"
     ports:
       - "5173:80"
     build:
-      context: ./frontend
+      context: ./admin/frontend
       args:
         - VITE_API_URL=http://localhost:8000        
         - NODE_ENV=development
