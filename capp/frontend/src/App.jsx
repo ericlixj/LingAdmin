@@ -1,11 +1,16 @@
 // capp/frontend/src/App.jsx
 import { useEffect, useState, useRef, useCallback } from "react";
+import Login from "./Login";
 
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:4000";
 const PAGE_SIZE = 10; // 每页数量
 const ZIP_CODE_STORAGE_KEY = "flyer_zip_code"; // localStorage 中保存邮编的 key
 
 function App() {
+  // 认证状态
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [user, setUser] = useState(null);
+  const [checkingAuth, setCheckingAuth] = useState(true);
   // 从 localStorage 读取保存的邮编
   const getStoredZipCode = () => {
     try {
@@ -88,6 +93,81 @@ function App() {
     return cleaned;
   };
 
+  // 检查认证状态
+  useEffect(() => {
+    const checkAuth = async () => {
+      const token = localStorage.getItem("access_token");
+      if (!token) {
+        setCheckingAuth(false);
+        return;
+      }
+
+      try {
+        const response = await fetch(`${API_URL}/api/c/auth/me`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        const data = await response.json();
+
+        if (data.code === 0) {
+          setIsAuthenticated(true);
+          setUser(data.data.user);
+        } else {
+          localStorage.removeItem("access_token");
+          localStorage.removeItem("refresh_token");
+        }
+      } catch (error) {
+        console.error("Auth check failed:", error);
+        localStorage.removeItem("access_token");
+        localStorage.removeItem("refresh_token");
+      } finally {
+        setCheckingAuth(false);
+      }
+    };
+
+    checkAuth();
+  }, []);
+
+  // 处理登录成功
+  const handleLogin = (userData) => {
+    setIsAuthenticated(true);
+    setUser(userData.user);
+  };
+
+  // 处理登出
+  const handleLogout = () => {
+    localStorage.removeItem("access_token");
+    localStorage.removeItem("refresh_token");
+    setIsAuthenticated(false);
+    setUser(null);
+  };
+
+  // 检查邮箱验证（URL参数）
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const token = params.get("token");
+
+    if (token) {
+      // 验证邮箱
+      fetch(`${API_URL}/api/c/auth/verify-email?token=${token}`)
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.code === 0) {
+            alert("邮箱验证成功！请登录。");
+            window.history.replaceState({}, "", window.location.pathname);
+          } else {
+            alert("验证失败: " + data.message);
+          }
+        })
+        .catch((error) => {
+          console.error("Verification error:", error);
+          alert("验证失败，请重试");
+        });
+    }
+  }, []);
+
   // 获取 flyer_details 数据
   const fetchFlyers = useCallback(async (query = "", page = 0, append = false, language = lang, postalCode = zipCode) => {
     try {
@@ -95,6 +175,11 @@ function App() {
         setLoading(true);
       } else {
         setLoadingMore(true);
+      }
+
+      const token = localStorage.getItem("access_token");
+      if (!token) {
+        throw new Error("未登录");
       }
 
       const params = new URLSearchParams();
@@ -110,7 +195,11 @@ function App() {
       params.append('_start', start.toString());
       params.append('_end', end.toString());
 
-      const response = await fetch(`${API_URL}/api/c/flyer_details?${params}`);
+      const response = await fetch(`${API_URL}/api/c/flyer_details?${params}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       if (!response.ok) {
         throw new Error(`flyer_details api: ${response.status}`);
       }
@@ -268,8 +357,43 @@ function App() {
     }
   };
 
+  // 如果正在检查认证，显示加载中
+  if (checkingAuth) {
+    return (
+      <div style={{ textAlign: "center", padding: "2rem" }}>
+        <p>加载中...</p>
+      </div>
+    );
+  }
+
+  // 如果未认证，显示登录页面
+  if (!isAuthenticated) {
+    return <Login onLogin={handleLogin} />;
+  }
+
+  // 原有的 App 内容，添加登出按钮
   return (
     <div style={{ padding: "2rem", fontFamily: "system-ui, sans-serif", maxWidth: "1200px", margin: "0 auto" }}>
+      {/* 头部：登出按钮 */}
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1rem" }}>
+        <h1>Flyer Details</h1>
+        <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+          <span>{user?.email}</span>
+          <button
+            onClick={handleLogout}
+            style={{
+              padding: "0.5rem 1rem",
+              backgroundColor: "#dc3545",
+              color: "white",
+              border: "none",
+              borderRadius: "4px",
+              cursor: "pointer",
+            }}
+          >
+            登出
+          </button>
+        </div>
+      </div>
       
       {error && (
         <div style={{ 

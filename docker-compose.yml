@@ -233,6 +233,18 @@ services:
       - OPENSEARCH_HOST=opensearch-node1
       - OPENSEARCH_PORT=9200
       - OPENSEARCH_PROTOCOL=http
+      # JWT 配置（与 admin-backend 相同）
+      - SECRET_KEY=${SECRET_KEY?Variable not set}
+      - ACCESS_TOKEN_EXPIRE_MINUTES=${ACCESS_TOKEN_EXPIRE_MINUTES:-11520}
+      # SMTP 配置（与 admin-backend 相同）
+      - SMTP_HOST=${SMTP_HOST}
+      - SMTP_PORT=${SMTP_PORT}
+      - SMTP_USER=${SMTP_USER}
+      - SMTP_PASSWORD=${SMTP_PASSWORD}
+      - SMTP_TLS=${SMTP_TLS:-true}
+      - EMAILS_FROM_EMAIL=${EMAILS_FROM_EMAIL}
+      - FRONTEND_HOST=${FRONTEND_HOST}
+      - CAPP_FRONTEND_HOST=${CAPP_FRONTEND_HOST:-${FRONTEND_HOST}}
     depends_on:
       db:
         condition: service_healthy

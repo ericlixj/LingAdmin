@@ -1,7 +1,28 @@
 // capp/backend/index.js
 const express = require("express");
 const cors = require("cors");
+const path = require("path");
+const fs = require("fs");
 const { searchFlyerDetails } = require("./services/flyerService");
+
+// 从项目根目录加载 .env 文件
+const rootEnvPath = path.resolve(__dirname, '../../.env');
+if (fs.existsSync(rootEnvPath)) {
+  require("dotenv").config({ path: rootEnvPath });
+} else {
+  require("dotenv").config();
+}
+
+// 调试：打印数据库配置信息（仅在非生产环境）
+if (process.env.NODE_ENV !== 'production') {
+  console.log('[DEBUG] Database Configuration:', {
+    POSTGRES_SERVER: process.env.POSTGRES_SERVER,
+    POSTGRES_PORT: process.env.POSTGRES_PORT,
+    POSTGRES_DB: process.env.POSTGRES_DB,
+    POSTGRES_USER: process.env.POSTGRES_USER,
+    POSTGRES_PASSWORD: process.env.POSTGRES_PASSWORD ? `[${process.env.POSTGRES_PASSWORD.length} chars]` : '(not set)'
+  });
+}
 
 const app = express();
 const PORT = process.env.PORT || 4000;
@@ -53,8 +74,15 @@ app.get("/api/c/hello", (req, res) => {
   });
 });
 
-// 查询 flyer_details from OpenSearch
-app.get("/api/c/flyer_details", async (req, res) => {
+// 添加认证路由（这是缺失的部分！）
+const authRouter = require("./routes/auth");
+const { authenticateToken } = require("./utils/jwt");
+
+// 认证路由
+app.use("/api/c/auth", authRouter);
+
+// 查询 flyer_details from OpenSearch（需要认证）
+app.get("/api/c/flyer_details", authenticateToken, async (req, res) => {
   const { 
     q,              // 搜索关键词
     name,           // 别名（向后兼容）
@@ -72,7 +100,7 @@ app.get("/api/c/flyer_details", async (req, res) => {
   const zipCodeParam = zip_code || zipCode || null;
   const langParam = lang || 'cn';
 
-  console.log(`[INFO] flyer_details search - q: "${queryString}", zipCode: ${zipCodeParam}, lang: ${langParam}, from: ${from}, size: ${size}`);
+  console.log(`[INFO] flyer_details search - user: ${req.userId}, q: "${queryString}", zipCode: ${zipCodeParam}, lang: ${langParam}, from: ${from}, size: ${size}`);
   
   try {
     const result = await searchFlyerDetails({
