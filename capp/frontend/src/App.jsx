@@ -10,13 +10,21 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [loadingMore, setLoadingMore] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const [lang, setLang] = useState("cn"); // 语言状态：cn/en/hk
   const [total, setTotal] = useState(0);
   const [hasMore, setHasMore] = useState(true);
   const [currentPage, setCurrentPage] = useState(0);
   const observerTarget = useRef(null);
 
+  // 语言选项
+  const langOptions = [
+    { value: "cn", label: "中文" },
+    { value: "en", label: "English" },
+    { value: "hk", label: "繁體中文" }
+  ];
+
   // 获取 flyer_details 数据
-  const fetchFlyers = useCallback(async (query = "", page = 0, append = false) => {
+  const fetchFlyers = useCallback(async (query = "", page = 0, append = false, language = lang) => {
     try {
       if (page === 0) {
         setLoading(true);
@@ -28,6 +36,7 @@ function App() {
       if (query) {
         params.append('q', query);
       }
+      params.append('lang', language); // 添加语言参数
       const start = page * PAGE_SIZE;
       const end = start + PAGE_SIZE;
       params.append('_start', start.toString());
@@ -60,16 +69,16 @@ function App() {
       setLoading(false);
       setLoadingMore(false);
     }
-  }, []);
+  }, [lang]);
 
   // 加载更多数据
   const loadMore = useCallback(() => {
     if (!loadingMore && hasMore && !loading) {
       const nextPage = currentPage + 1;
       setCurrentPage(nextPage);
-      fetchFlyers(searchQuery, nextPage, true);
+      fetchFlyers(searchQuery, nextPage, true, lang);
     }
-  }, [currentPage, searchQuery, loadingMore, hasMore, loading, fetchFlyers]);
+  }, [currentPage, searchQuery, loadingMore, hasMore, loading, fetchFlyers, lang]);
 
   // 滚动监听 - 使用 Intersection Observer
   useEffect(() => {
@@ -106,15 +115,24 @@ function App() {
 
   // 初始加载
   useEffect(() => {
-    fetchFlyers();
-  }, [fetchFlyers]);
+    fetchFlyers("", 0, false, lang);
+  }, [fetchFlyers, lang]);
+
+  // 语言切换处理
+  const handleLangChange = (newLang) => {
+    setLang(newLang);
+    setCurrentPage(0);
+    setHasMore(true);
+    // 语言切换时重新搜索
+    fetchFlyers(searchQuery, 0, false, newLang);
+  };
 
   // 搜索处理
   const handleSearch = (e) => {
     e.preventDefault();
     setCurrentPage(0);
     setHasMore(true);
-    fetchFlyers(searchQuery, 0, false);
+    fetchFlyers(searchQuery, 0, false, lang);
   };
 
   // 清空搜索
@@ -122,7 +140,7 @@ function App() {
     setSearchQuery("");
     setCurrentPage(0);
     setHasMore(true);
-    fetchFlyers("", 0, false);
+    fetchFlyers("", 0, false, lang);
   };
 
   return (
@@ -141,14 +159,43 @@ function App() {
         </div>
       )}
 
-      {/* 搜索框 */}
+      {/* 搜索框和语言切换 */}
       <div style={{ marginBottom: "2rem" }}>
+        {/* 语言切换 */}
+        <div style={{ marginBottom: "1rem", display: "flex", alignItems: "center", gap: "0.5rem" }}>
+          <label style={{ fontSize: "0.9rem", color: "#666" }}>语言:</label>
+          <div style={{ display: "flex", gap: "0.5rem" }}>
+            {langOptions.map((option) => (
+              <button
+                key={option.value}
+                type="button"
+                onClick={() => handleLangChange(option.value)}
+                disabled={loading}
+                style={{
+                  padding: "0.5rem 1rem",
+                  fontSize: "0.9rem",
+                  backgroundColor: lang === option.value ? "#007bff" : "#f0f0f0",
+                  color: lang === option.value ? "white" : "#333",
+                  border: `1px solid ${lang === option.value ? "#007bff" : "#ddd"}`,
+                  borderRadius: "4px",
+                  cursor: loading ? "not-allowed" : "pointer",
+                  fontWeight: lang === option.value ? "bold" : "normal",
+                  transition: "all 0.2s"
+                }}
+              >
+                {option.label}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* 搜索框 */}
         <form onSubmit={handleSearch} style={{ display: "flex", gap: "0.5rem" }}>
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="搜索商品名称..."
+            placeholder={lang === "cn" ? "搜索商品名称..." : lang === "en" ? "Search product name..." : "搜尋商品名稱..."}
             style={{
               flex: 1,
               padding: "0.5rem",
@@ -170,7 +217,7 @@ function App() {
               cursor: loading ? "not-allowed" : "pointer"
             }}
           >
-            搜索
+            {lang === "cn" ? "搜索" : lang === "en" ? "Search" : "搜尋"}
           </button>
           <button
             type="button"
@@ -186,7 +233,7 @@ function App() {
               cursor: loading ? "not-allowed" : "pointer"
             }}
           >
-            清空
+            {lang === "cn" ? "清空" : lang === "en" ? "Clear" : "清除"}
           </button>
         </form>
       </div>
@@ -196,11 +243,11 @@ function App() {
         <h2>{total > 0 && `(${flyers.length} / ${total} 项)`}</h2>
         {loading ? (
           <div style={{ textAlign: "center", padding: "2rem" }}>
-            <p>加载中...</p>
+            <p>{lang === "cn" ? "加载中..." : lang === "en" ? "Loading..." : "載入中..."}</p>
           </div>
         ) : flyers.length === 0 ? (
           <div style={{ textAlign: "center", padding: "2rem" }}>
-            <p>没有找到 flyer details。</p>
+            <p>{lang === "cn" ? "没有找到 flyer details。" : lang === "en" ? "No flyer details found." : "沒有找到 flyer details。"}</p>
           </div>
         ) : (
           <>
@@ -238,11 +285,11 @@ function App() {
                     />
                   )}
                   <h3 style={{ margin: "0.5rem 0", fontSize: "1.1rem" }}>
-                    {item.title || item.cn_name || item.name || "无标题"}
+                    {item.title || item.cn_name || item.name || (lang === "cn" ? "无标题" : lang === "en" ? "No title" : "無標題")}
                   </h3>
                   {item.brand && (
                     <p style={{ margin: "0.25rem 0", color: "#666", fontSize: "0.9rem" }}>
-                      <b>品牌:</b> {item.brand}
+                      <b>{lang === "cn" ? "品牌:" : lang === "en" ? "Brand:" : "品牌:"}</b> {item.brand}
                     </p>
                   )}
                   {item.price !== null && item.price !== undefined && (
@@ -252,12 +299,12 @@ function App() {
                   )}
                   {item.merchant && (
                     <p style={{ margin: "0.25rem 0", color: "#666", fontSize: "0.85rem" }}>
-                      <b>商家:</b> {item.merchant}
+                      <b>{lang === "cn" ? "商家:" : lang === "en" ? "Merchant:" : "商家:"}</b> {item.merchant}
                     </p>
                   )}
                   {item.valid_from && item.valid_to && (
                     <p style={{ margin: "0.25rem 0", color: "#666", fontSize: "0.85rem" }}>
-                      <b>有效期:</b> {new Date(item.valid_from).toLocaleDateString()} - {new Date(item.valid_to).toLocaleDateString()}
+                      <b>{lang === "cn" ? "有效期:" : lang === "en" ? "Valid:" : "有效期:"}</b> {new Date(item.valid_from).toLocaleDateString()} - {new Date(item.valid_to).toLocaleDateString()}
                     </p>
                   )}
                 </div>
@@ -279,14 +326,14 @@ function App() {
             {/* 加载更多指示器 */}
             {loadingMore && (
               <div style={{ textAlign: "center", padding: "2rem" }}>
-                <p>加载更多...</p>
+                <p>{lang === "cn" ? "加载更多..." : lang === "en" ? "Loading more..." : "載入更多..."}</p>
               </div>
             )}
 
             {/* 没有更多数据提示 */}
             {!hasMore && flyers.length > 0 && (
               <div style={{ textAlign: "center", padding: "2rem", color: "#666" }}>
-                <p>已加载全部数据</p>
+                <p>{lang === "cn" ? "已加载全部数据" : lang === "en" ? "All data loaded" : "已載入全部資料"}</p>
               </div>
             )}
           </>
