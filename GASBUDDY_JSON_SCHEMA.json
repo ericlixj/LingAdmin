@@ -1,0 +1,236 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "GasBuddy API Response Schema",
+  "description": "Schema for GasBuddy API response focusing on price and location data",
+  "type": "object",
+  "required": ["code", "message", "data"],
+  "properties": {
+    "code": {
+      "type": "integer",
+      "description": "Response code (0 = success, non-zero = error)"
+    },
+    "message": {
+      "type": "string",
+      "description": "Response message"
+    },
+    "data": {
+      "type": ["object", "null"],
+      "description": "Response data (null on error)",
+      "properties": {
+        "postcode": {
+          "type": "string",
+          "description": "Search postal code"
+        },
+        "location": {
+          "type": "object",
+          "required": ["countryCode", "displayName", "latitude", "longitude", "regionCode"],
+          "properties": {
+            "countryCode": {
+              "type": "string",
+              "description": "Country code (e.g., 'CA')"
+            },
+            "displayName": {
+              "type": "string",
+              "description": "Display name (e.g., 'Vancouver, BC')"
+            },
+            "latitude": {
+              "type": "number",
+              "description": "Latitude coordinate"
+            },
+            "longitude": {
+              "type": "number",
+              "description": "Longitude coordinate"
+            },
+            "regionCode": {
+              "type": "string",
+              "description": "Region/Province code (e.g., 'BC')"
+            }
+          }
+        },
+        "trends": {
+          "type": ["object", "null"],
+          "properties": {
+            "areaName": {
+              "type": "string",
+              "description": "Area name"
+            },
+            "country": {
+              "type": "string",
+              "description": "Country code"
+            },
+            "today": {
+              "type": "number",
+              "description": "Today's average price"
+            },
+            "todayLow": {
+              "type": "number",
+              "description": "Today's lowest price"
+            },
+            "trend": {
+              "type": "string",
+              "enum": ["up", "down", "stable"],
+              "description": "Price trend"
+            }
+          }
+        },
+        "stations": {
+          "type": "array",
+          "description": "List of gas stations",
+          "items": {
+            "type": "object",
+            "required": ["id", "name", "address", "prices", "distance"],
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Unique station ID"
+              },
+              "name": {
+                "type": "string",
+                "description": "Station name"
+              },
+              "distance": {
+                "type": "number",
+                "description": "Distance from search location in kilometers"
+              },
+              "address": {
+                "type": "object",
+                "required": ["line1", "locality", "region", "postalCode", "country"],
+                "properties": {
+                  "line1": {
+                    "type": "string",
+                    "description": "Street address line 1"
+                  },
+                  "line2": {
+                    "type": ["string", "null"],
+                    "description": "Street address line 2"
+                  },
+                  "locality": {
+                    "type": "string",
+                    "description": "City name"
+                  },
+                  "region": {
+                    "type": "string",
+                    "description": "Province/State code"
+                  },
+                  "postalCode": {
+                    "type": "string",
+                    "description": "Postal code"
+                  },
+                  "country": {
+                    "type": "string",
+                    "description": "Country code"
+                  }
+                }
+              },
+              "prices": {
+                "type": "array",
+                "description": "Fuel prices (Critical for business)",
+                "items": {
+                  "type": "object",
+                  "required": ["fuelProduct"],
+                  "properties": {
+                    "fuelProduct": {
+                      "type": "integer",
+                      "description": "Fuel type: 1=Regular, 2=Mid, 3=Premium, 4=Diesel"
+                    },
+                    "cash": {
+                      "type": ["object", "null"],
+                      "properties": {
+                        "nickname": {
+                          "type": "string",
+                          "description": "Fuel grade name"
+                        },
+                        "price": {
+                          "type": "number",
+                          "description": "Price per liter/gallon"
+                        },
+                        "formattedPrice": {
+                          "type": "string",
+                          "description": "Formatted price string"
+                        },
+                        "postedTime": {
+                          "type": "string",
+                          "format": "date-time",
+                          "description": "ISO 8601 timestamp when price was posted"
+                        }
+                      }
+                    },
+                    "credit": {
+                      "type": ["object", "null"],
+                      "properties": {
+                        "nickname": {
+                          "type": "string",
+                          "description": "Fuel grade name"
+                        },
+                        "price": {
+                          "type": "number",
+                          "description": "Price per liter/gallon"
+                        },
+                        "formattedPrice": {
+                          "type": "string",
+                          "description": "Formatted price string"
+                        },
+                        "postedTime": {
+                          "type": "string",
+                          "format": "date-time",
+                          "description": "ISO 8601 timestamp when price was posted"
+                        }
+                      }
+                    },
+                    "discount": {
+                      "type": ["number", "null"],
+                      "description": "Discount amount"
+                    }
+                  }
+                }
+              },
+              "brands": {
+                "type": "array",
+                "description": "Station brands",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "brandId": {
+                      "type": "integer"
+                    },
+                    "name": {
+                      "type": "string",
+                      "description": "Brand name (e.g., 'Shell', 'Esso')"
+                    },
+                    "brandingType": {
+                      "type": "string"
+                    },
+                    "imageUrl": {
+                      "type": ["string", "null"]
+                    }
+                  }
+                }
+              },
+              "starRating": {
+                "type": ["number", "null"],
+                "description": "Average rating (0-5)"
+              },
+              "ratingsCount": {
+                "type": ["integer", "null"],
+                "description": "Number of ratings"
+              },
+              "payStatus": {
+                "type": ["object", "null"],
+                "properties": {
+                  "isPayAvailable": {
+                    "type": "boolean"
+                  }
+                }
+              },
+              "hasActiveOutage": {
+                "type": ["boolean", "null"]
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+

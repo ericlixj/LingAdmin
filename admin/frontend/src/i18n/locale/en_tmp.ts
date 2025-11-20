@@ -1,12 +1,12 @@
 #paste this code to frjonted/src/i18n_zh.ts
 
 ...
-    brand: {
+    gasTrends: {
         titles: {
-            list: "品牌管理 List",
-            create: "Create 品牌管理",
-            edit: "Edit 品牌管理",
-            show: "品牌管理 Details",
+            list: "油价趋势 List",
+            create: "Create 油价趋势",
+            edit: "Edit 油价趋势",
+            show: "油价趋势 Details",
         },
     },
 ...

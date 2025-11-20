@@ -1,6 +1,7 @@
 // capp/frontend/src/App.jsx
 import { useEffect, useState, useRef, useCallback } from "react";
 import Login from "./Login";
+import GasBuddy from "./GasBuddy";
 
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:4000";
 const PAGE_SIZE = 10; // 每页数量
@@ -47,6 +48,7 @@ function App() {
   const [hasMore, setHasMore] = useState(true);
   const [currentPage, setCurrentPage] = useState(0);
   const observerTarget = useRef(null);
+  const [activeTab, setActiveTab] = useState("flyers"); // "flyers" 或 "gasbuddy"
 
   // 语言选项
   const langOptions = [
@@ -371,29 +373,73 @@ function App() {
     return <Login onLogin={handleLogin} />;
   }
 
-  // 原有的 App 内容，添加登出按钮
+  // 原有的 App 内容，添加登出按钮和标签页
   return (
     <div style={{ padding: "2rem", fontFamily: "system-ui, sans-serif", maxWidth: "1200px", margin: "0 auto" }}>
-      {/* 头部：登出按钮 */}
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1rem" }}>
-        <h1>Flyer Details</h1>
-        <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-          <span>{user?.email}</span>
+      {/* 头部：标题、标签页和登出按钮 */}
+      <div style={{ marginBottom: "2rem" }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1rem" }}>
+          <h1 style={{ margin: 0 }}>数据查询</h1>
+          <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+            <span>{user?.email}</span>
+            <button
+              onClick={handleLogout}
+              style={{
+                padding: "0.5rem 1rem",
+                backgroundColor: "#dc3545",
+                color: "white",
+                border: "none",
+                borderRadius: "4px",
+                cursor: "pointer",
+              }}
+            >
+              登出
+            </button>
+          </div>
+        </div>
+
+        {/* 标签页导航 */}
+        <div style={{ display: "flex", gap: "0.5rem", borderBottom: "2px solid #dee2e6" }}>
           <button
-            onClick={handleLogout}
+            onClick={() => setActiveTab("flyers")}
             style={{
-              padding: "0.5rem 1rem",
-              backgroundColor: "#dc3545",
-              color: "white",
+              padding: "0.75rem 1.5rem",
+              fontSize: "1rem",
+              backgroundColor: "transparent",
+              color: activeTab === "flyers" ? "#007bff" : "#666",
               border: "none",
-              borderRadius: "4px",
+              borderBottom: activeTab === "flyers" ? "3px solid #007bff" : "3px solid transparent",
               cursor: "pointer",
+              fontWeight: activeTab === "flyers" ? "bold" : "normal",
+              transition: "all 0.2s"
             }}
           >
-            登出
+            {lang === "cn" ? "传单详情" : lang === "en" ? "Flyer Details" : "傳單詳情"}
+          </button>
+          <button
+            onClick={() => setActiveTab("gasbuddy")}
+            style={{
+              padding: "0.75rem 1.5rem",
+              fontSize: "1rem",
+              backgroundColor: "transparent",
+              color: activeTab === "gasbuddy" ? "#007bff" : "#666",
+              border: "none",
+              borderBottom: activeTab === "gasbuddy" ? "3px solid #007bff" : "3px solid transparent",
+              cursor: "pointer",
+              fontWeight: activeTab === "gasbuddy" ? "bold" : "normal",
+              transition: "all 0.2s"
+            }}
+          >
+            GasBuddy
           </button>
         </div>
       </div>
+
+      {/* 根据活动标签页显示内容 */}
+      {activeTab === "gasbuddy" ? (
+        <GasBuddy lang={lang} />
+      ) : (
+        <>
       
       {error && (
         <div style={{ 
@@ -644,6 +690,8 @@ function App() {
           </>
         )}
       </div>
+        )
+      }
     </div>
   );
 }

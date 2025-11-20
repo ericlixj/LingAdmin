@@ -322,6 +322,14 @@ const zh = {
       show: "品牌管理详情",
     },
   },
+  gasPostcode: {
+    titles: {
+        list: "油价涉及邮编列表",
+        create: "创建油价涉及邮编",
+        edit: "编辑油价涉及邮编",
+        show: "油价涉及邮编详情",
+    },
+},  
 };
 
 export default zh;
