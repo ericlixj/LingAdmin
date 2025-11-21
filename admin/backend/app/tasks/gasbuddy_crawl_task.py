@@ -7,12 +7,9 @@ from typing import List, Set
 import logging
 import threading
 
-from scrapy.crawler import CrawlerRunner
+from scrapy.crawler import CrawlerProcess
 from scrapy.utils.project import get_project_settings
 from sqlmodel import Session, select
-from twisted.internet import reactor, defer
-from twisted.internet.defer import DeferredList
-from twisted.internet.threads import deferToThread
 
 from app.core.db import engine
 from app.core.config import settings
@@ -344,8 +341,13 @@ def get_postcodes_to_crawl() -> Set[str]:
 def _run_crawl_in_thread(postcodes, collected_items_ref):
     """
     在线程中运行爬虫任务，避免 reactor 重复启动的问题
+    使用 CrawlerProcess，它会自动管理 reactor
     """
-    from twisted.internet import reactor as thread_reactor
+    # 在线程中，我们需要确保使用新的 reactor 实例
+    # 删除可能已存在的 reactor 模块引用
+    import sys
+    if 'twisted.internet.reactor' in sys.modules:
+        del sys.modules['twisted.internet.reactor']
     
     logger.info(f"[Task] Starting crawl in thread for {len(postcodes)} postcodes")
     
@@ -360,103 +362,69 @@ def _run_crawl_in_thread(postcodes, collected_items_ref):
             'app.tasks.gasbuddy_crawl_task.GasBuddyDatabasePipeline': 300,
         })
         scrapy_settings.set('LOG_LEVEL', 'INFO')
-        scrapy_settings.set('TWISTED_REACTOR', None)
         
-        # 创建 CrawlerRunner
-        runner = CrawlerRunner(scrapy_settings)
+        # 使用 CrawlerProcess，它会自动管理 reactor
+        # CrawlerProcess 在单独的线程中运行，不会影响主线程
+        process = CrawlerProcess(scrapy_settings)
         
-        # 为每个 postcode 创建 deferred
-        deferreds = []
+        # 为每个 postcode 添加爬虫任务
         for postcode in postcodes:
             logger.info(f"[Task] Queuing crawl for postcode: {postcode}")
-            d = runner.crawl(GasBuddySpider, postcode=postcode)
-            deferreds.append(d)
+            process.crawl(GasBuddySpider, postcode=postcode)
         
-        logger.info(f"[Task] Total {len(deferreds)} crawl tasks queued")
+        logger.info(f"[Task] Total {len(postcodes)} crawl tasks queued")
         
-        # 等待所有爬虫完成
-        def process_all_results(results):
-            """处理所有收集到的结果"""
-            try:
-                logger.info("=" * 60)
-                logger.info(f"[Task] All crawls completed. Processing {len(collected_items_ref['items'])} items")
-                logger.info("=" * 60)
-                
-                # 检查每个 deferred 的结果
-                for idx, (success, result) in enumerate(results):
-                    if success:
-                        logger.info(f"[Task] Crawl task {idx+1} completed successfully")
-                    else:
-                        logger.error(f"[Task] Crawl task {idx+1} failed: {result}")
-                
-                if not collected_items_ref['items']:
-                    logger.warning("[Task] No items collected!")
-                    thread_reactor.stop()  # type: ignore
-                    return
-                
-                # 创建 session 和 processor
-                with Session(engine) as session:
-                    processor = GasBuddyDataProcessor(session, user_id=1, dept_id=0)
-                    
-                    # 处理每个 item
-                    for idx, item in enumerate(collected_items_ref['items'], 1):
-                        try:
-                            logger.info(f"[Task] Processing item {idx}/{len(collected_items_ref['items'])}")
-                            processor.process_item(item)
-                        except Exception as e:
-                            logger.error(f"[Task] Error processing item {idx}: {e}", exc_info=True)
-                            session.rollback()
-                
-                # 数据入库完成
-                logger.info("=" * 60)
-                logger.info("[Task] GasBuddy crawl task completed successfully")
-                logger.info("=" * 60)
-                
-                # 异步发送gas价格邮件通知
+        # 启动爬虫（阻塞直到所有任务完成）
+        # stop_after_crawl=True 确保在所有爬虫完成后自动停止 reactor
+        process.start(stop_after_crawl=True)
+        
+        logger.info("=" * 60)
+        logger.info(f"[Task] All crawls completed. Processing {len(collected_items_ref['items'])} items")
+        logger.info("=" * 60)
+        
+        if not collected_items_ref['items']:
+            logger.warning("[Task] No items collected!")
+            return
+        
+        # 创建 session 和 processor
+        with Session(engine) as session:
+            processor = GasBuddyDataProcessor(session, user_id=1, dept_id=0)
+            
+            # 处理每个 item
+            for idx, item in enumerate(collected_items_ref['items'], 1):
                 try:
-                    import asyncio
-                    from app.utils.gas_email import send_gas_price_emails
-                    
-                    def send_emails_async():
-                        try:
-                            asyncio.run(send_gas_price_emails())
-                        except Exception as e:
-                            logger.error(f"[Email] Error sending emails: {e}", exc_info=True)
-                    
-                    email_thread = threading.Thread(target=send_emails_async, daemon=True)
-                    email_thread.start()
-                    logger.info("[Task] Email notification started in background thread")
+                    logger.info(f"[Task] Processing item {idx}/{len(collected_items_ref['items'])}")
+                    processor.process_item(item)
                 except Exception as e:
-                    logger.error(f"[Task] Error starting email thread: {e}", exc_info=True)
-                
-                # 停止 reactor
-                thread_reactor.stop()  # type: ignore
-                
-            except Exception as e:
-                logger.error(f"Error in process_all_results: {e}", exc_info=True)
+                    logger.error(f"[Task] Error processing item {idx}: {e}", exc_info=True)
+                    session.rollback()
+        
+        # 数据入库完成
+        logger.info("=" * 60)
+        logger.info("[Task] GasBuddy crawl task completed successfully")
+        logger.info("=" * 60)
+        
+        # 异步发送gas价格邮件通知
+        try:
+            import asyncio
+            from app.utils.gas_email import send_gas_price_emails
+            
+            def send_emails_async():
                 try:
-                    thread_reactor.stop()  # type: ignore
-                except:
-                    pass
+                    asyncio.run(send_gas_price_emails())
+                except Exception as e:
+                    logger.error(f"[Email] Error sending emails: {e}", exc_info=True)
+            
+            email_thread = threading.Thread(target=send_emails_async, daemon=True)
+            email_thread.start()
+            logger.info("[Task] Email notification started in background thread")
+        except Exception as e:
+            logger.error(f"[Task] Error starting email thread: {e}", exc_info=True)
         
-        # 等待所有 deferred 完成
-        all_done = DeferredList(deferreds, consumeErrors=True)
-        all_done.addCallback(process_all_results)
-        all_done.addErrback(lambda failure: 
-            logger.error(f"[Task] DeferredList error: {failure}", exc_info=True) or thread_reactor.stop()  # type: ignore
-        )
-        
-        # 启动 reactor（阻塞直到所有任务完成）
-        thread_reactor.run(installSignalHandlers=0)  # type: ignore
         logger.info("[Task] Reactor stopped in thread")
         
     except Exception as e:
         logger.error(f"Error in crawl thread: {e}", exc_info=True)
-        try:
-            if hasattr(thread_reactor, 'running') and thread_reactor.running:  # type: ignore
-                thread_reactor.stop()  # type: ignore
-        except:
-            pass
         raise
 
 
