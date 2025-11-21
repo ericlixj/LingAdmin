@@ -28,9 +28,9 @@ from pathlib import Path
 
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(
-        # Use admin/.env file (four levels above ./app/core/)
-        # From admin/backend/app/core/config.py -> admin/.env
-        env_file=str(Path(__file__).parent.parent.parent.parent / ".env"),
+        # Use project root .env file (five levels above ./app/core/)
+        # From admin/backend/app/core/config.py -> project root/.env
+        env_file=str(Path(__file__).parent.parent.parent.parent.parent / ".env"),
         env_ignore_empty=True,
         extra="ignore",
     )

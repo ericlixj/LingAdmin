@@ -5,15 +5,15 @@ const path = require("path");
 const fs = require("fs");
 const { searchFlyerDetails } = require("./services/flyerService");
 
-// 从 capp/.env 文件加载环境变量
-const cappEnvPath = path.resolve(__dirname, '../.env');
-if (fs.existsSync(cappEnvPath)) {
-  require("dotenv").config({ path: cappEnvPath });
+// 从项目根目录 .env 文件加载环境变量
+const rootEnvPath = path.resolve(__dirname, '../../.env');
+if (fs.existsSync(rootEnvPath)) {
+  require("dotenv").config({ path: rootEnvPath });
 } else {
-  // 如果 capp/.env 不存在，尝试从项目根目录加载（向后兼容）
-  const rootEnvPath = path.resolve(__dirname, '../../.env');
-  if (fs.existsSync(rootEnvPath)) {
-    require("dotenv").config({ path: rootEnvPath });
+  // 如果项目根目录 .env 不存在，尝试从 capp/.env 加载（向后兼容）
+  const cappEnvPath = path.resolve(__dirname, '../.env');
+  if (fs.existsSync(cappEnvPath)) {
+    require("dotenv").config({ path: cappEnvPath });
   } else {
     require("dotenv").config();
   }
