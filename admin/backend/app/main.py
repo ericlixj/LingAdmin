@@ -55,6 +55,7 @@ atexit.register(lambda: driver.quit())
 from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler.triggers.cron import CronTrigger
 from app.tasks.gasbuddy_crawl_task import gasbuddy_crawl_task
+from app.tasks.gasbuddy_daily_email_task import gasbuddy_daily_email_task
 
 scheduler = None
 
@@ -86,8 +87,21 @@ def start_gasbuddy_scheduler():
             misfire_grace_time=300,  # 如果任务延迟不超过5分钟，仍然执行
         )
         
+        # 每日19:00发送油价邮件任务
+        scheduler.add_job(
+            gasbuddy_daily_email_task,
+            trigger=CronTrigger.from_crontab("0 19 * * *"),  # 每天19:00执行
+            id='gasbuddy_daily_email_task',
+            name='GasBuddy Daily Email Task',
+            replace_existing=True,
+            coalesce=True,
+            max_instances=1,
+            misfire_grace_time=300,  # 如果任务延迟不超过5分钟，仍然执行
+        )
+        
         scheduler.start()
-        logger.info(f"GasBuddy scheduler started with cron expression: {cron_expression}")
+        logger.info(f"GasBuddy scheduler started with crawl cron expression: {cron_expression}")
+        logger.info("GasBuddy daily email task scheduled for 19:00 every day")
         
     except Exception as e:
         logger.error(f"Failed to start GasBuddy scheduler: {e}", exc_info=True)
