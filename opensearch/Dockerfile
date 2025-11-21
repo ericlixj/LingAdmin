@@ -5,7 +5,10 @@ ENV JAVA_HOME=/usr/share/opensearch/jdk
 ENV PATH="${JAVA_HOME}/bin:${PATH}"
 
 COPY opensearch-analysis-ik212.zip /tmp/
-RUN /usr/share/opensearch/bin/opensearch-plugin install file:///tmp/opensearch-analysis-ik212.zip --batch
+RUN export JAVA_HOME=$(dirname $(dirname $(readlink -f $(which java)))) \
+    && export PATH=$JAVA_HOME/bin:$PATH \
+    && /usr/share/opensearch/bin/opensearch-plugin install file:///tmp/opensearch-analysis-ik212.zip --batch
+
 
 # 拷贝自定义配置
 COPY config/* /usr/share/opensearch/plugins/opensearch-analysis-ik/config/
