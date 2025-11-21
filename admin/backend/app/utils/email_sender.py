@@ -12,7 +12,7 @@ init_logger()
 logger = logging.getLogger(__name__)
 
 class AsyncEmailSender:
-    def __init__(self, sender_name: str = "系统通知"):
+    def __init__(self, sender_name: str = "LingAdmin系统通知"):
         self.smtp_host = settings.SMTP_HOST
         self.smtp_port = settings.SMTP_PORT
         self.smtp_user = settings.SMTP_USER
@@ -75,4 +75,4 @@ class AsyncEmailSender:
 
 
 # 在模块末尾直接实例化一个全局对象，方便导入使用
-email_sender = AsyncEmailSender(sender_name="系统通知")
+email_sender = AsyncEmailSender(sender_name="LingAdmin系统通知")

@@ -48,7 +48,7 @@ function App() {
   const [hasMore, setHasMore] = useState(true);
   const [currentPage, setCurrentPage] = useState(0);
   const observerTarget = useRef(null);
-  const [activeTab, setActiveTab] = useState("flyers"); // "flyers" 或 "gasbuddy"
+  const [pageView, setPageView] = useState(null); // null: 主页, "flyers": flyer页面, "gas": gas页面
 
   // 语言选项
   const langOptions = [
@@ -373,13 +373,127 @@ function App() {
     return <Login onLogin={handleLogin} />;
   }
 
-  // 原有的 App 内容，添加登出按钮和标签页
+  // 原有的 App 内容，添加登出按钮和功能选择
+  // 如果未选择页面，显示主页（功能选择）
+  if (pageView === null) {
+    return (
+      <div style={{ padding: "2rem", fontFamily: "system-ui, sans-serif", maxWidth: "1200px", margin: "0 auto" }}>
+        {/* 头部：标题和登出按钮 */}
+        <div style={{ marginBottom: "2rem" }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1rem" }}>
+            <h1 style={{ margin: 0 }}>
+              {lang === "cn" ? "数据查询" : lang === "en" ? "Data Query" : "數據查詢"}
+            </h1>
+            <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+              <span>{user?.email}</span>
+              <button
+                onClick={handleLogout}
+                style={{
+                  padding: "0.5rem 1rem",
+                  backgroundColor: "#dc3545",
+                  color: "white",
+                  border: "none",
+                  borderRadius: "4px",
+                  cursor: "pointer",
+                }}
+              >
+                {lang === "cn" ? "登出" : lang === "en" ? "Logout" : "登出"}
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* 功能选择按钮 */}
+        <div style={{ display: "flex", gap: "2rem", justifyContent: "center", marginTop: "4rem" }}>
+          <button
+            onClick={() => setPageView("flyers")}
+            style={{
+              padding: "2rem 4rem",
+              fontSize: "1.5rem",
+              backgroundColor: "#007bff",
+              color: "white",
+              border: "none",
+              borderRadius: "8px",
+              cursor: "pointer",
+              fontWeight: "bold",
+              boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
+              transition: "all 0.2s",
+            }}
+            onMouseEnter={(e) => {
+              e.target.style.backgroundColor = "#0056b3";
+              e.target.style.transform = "translateY(-2px)";
+            }}
+            onMouseLeave={(e) => {
+              e.target.style.backgroundColor = "#007bff";
+              e.target.style.transform = "translateY(0)";
+            }}
+          >
+            {lang === "cn" ? "传单详情" : lang === "en" ? "Flyer Details" : "傳單詳情"}
+          </button>
+          <button
+            onClick={() => setPageView("gas")}
+            style={{
+              padding: "2rem 4rem",
+              fontSize: "1.5rem",
+              backgroundColor: "#28a745",
+              color: "white",
+              border: "none",
+              borderRadius: "8px",
+              cursor: "pointer",
+              fontWeight: "bold",
+              boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
+              transition: "all 0.2s",
+            }}
+            onMouseEnter={(e) => {
+              e.target.style.backgroundColor = "#218838";
+              e.target.style.transform = "translateY(-2px)";
+            }}
+            onMouseLeave={(e) => {
+              e.target.style.backgroundColor = "#28a745";
+              e.target.style.transform = "translateY(0)";
+            }}
+          >
+            {lang === "cn" ? "加油站查询" : lang === "en" ? "Gas Stations" : "加油站查詢"}
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  // 如果选择了页面，显示对应内容
   return (
     <div style={{ padding: "2rem", fontFamily: "system-ui, sans-serif", maxWidth: "1200px", margin: "0 auto" }}>
-      {/* 头部：标题、标签页和登出按钮 */}
+      {/* 头部：标题、返回按钮和登出按钮 */}
       <div style={{ marginBottom: "2rem" }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1rem" }}>
-          <h1 style={{ margin: 0 }}>数据查询</h1>
+          <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+            <button
+              onClick={() => setPageView(null)}
+              style={{
+                padding: "0.5rem 1rem",
+                backgroundColor: "#6c757d",
+                color: "white",
+                border: "none",
+                borderRadius: "4px",
+                cursor: "pointer",
+              }}
+            >
+              {lang === "cn" ? "← 返回" : lang === "en" ? "← Back" : "← 返回"}
+            </button>
+            <h1 style={{ margin: 0 }}>
+              {pageView === "flyers"
+                ? lang === "cn"
+                  ? "传单详情"
+                  : lang === "en"
+                  ? "Flyer Details"
+                  : "傳單詳情"
+                : lang === "cn"
+                ? "加油站查询"
+                : lang === "en"
+                ? "Gas Stations"
+                : "加油站查詢"}
+            </h1>
+          </div>
           <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
             <span>{user?.email}</span>
             <button
@@ -393,50 +507,14 @@ function App() {
                 cursor: "pointer",
               }}
             >
-              登出
+              {lang === "cn" ? "登出" : lang === "en" ? "Logout" : "登出"}
             </button>
           </div>
         </div>
-
-        {/* 标签页导航 */}
-        <div style={{ display: "flex", gap: "0.5rem", borderBottom: "2px solid #dee2e6" }}>
-          <button
-            onClick={() => setActiveTab("flyers")}
-            style={{
-              padding: "0.75rem 1.5rem",
-              fontSize: "1rem",
-              backgroundColor: "transparent",
-              color: activeTab === "flyers" ? "#007bff" : "#666",
-              border: "none",
-              borderBottom: activeTab === "flyers" ? "3px solid #007bff" : "3px solid transparent",
-              cursor: "pointer",
-              fontWeight: activeTab === "flyers" ? "bold" : "normal",
-              transition: "all 0.2s"
-            }}
-          >
-            {lang === "cn" ? "传单详情" : lang === "en" ? "Flyer Details" : "傳單詳情"}
-          </button>
-          <button
-            onClick={() => setActiveTab("gasbuddy")}
-            style={{
-              padding: "0.75rem 1.5rem",
-              fontSize: "1rem",
-              backgroundColor: "transparent",
-              color: activeTab === "gasbuddy" ? "#007bff" : "#666",
-              border: "none",
-              borderBottom: activeTab === "gasbuddy" ? "3px solid #007bff" : "3px solid transparent",
-              cursor: "pointer",
-              fontWeight: activeTab === "gasbuddy" ? "bold" : "normal",
-              transition: "all 0.2s"
-            }}
-          >
-            GasBuddy
-          </button>
-        </div>
       </div>
 
-      {/* 根据活动标签页显示内容 */}
-      {activeTab === "gasbuddy" ? (
+      {/* 根据当前页面显示内容 */}
+      {pageView === "gas" ? (
         <GasBuddy lang={lang} />
       ) : (
         <>
@@ -690,8 +768,8 @@ function App() {
           </>
         )}
       </div>
-        )
-      }
+        </>
+      )}
     </div>
   );
 }

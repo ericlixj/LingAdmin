@@ -50,7 +50,7 @@ async function sendEmail(to, subject, text, html) {
 
   try {
     const info = await transport.sendMail({
-      from: `"LingAdimin系统通知" <${EMAILS_FROM_EMAIL}>`,
+      from: `"LingAdmin系统通知" <${EMAILS_FROM_EMAIL}>`,
       to,
       subject,
       text,
@@ -70,7 +70,7 @@ async function sendEmail(to, subject, text, html) {
 async function sendRegistrationEmail(email, verificationToken) {
   const verificationUrl = `${BACKEND_HOST}/api/c/auth/verify-email?token=${verificationToken}`;
   
-  const subject = '请验证您的邮箱地址';
+  const subject = 'LingAdmin系统通知 - 请验证您的邮箱地址';
   const text = `请点击以下链接验证您的邮箱：${verificationUrl}`;
   const html = `
     <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">

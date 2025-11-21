@@ -215,7 +215,7 @@ class TestGasBuddySpider:
         }
         
         request = Request("https://www.gasbuddy.com/graphql", meta={"postcode": "v6y1j5"})
-        response = Response(
+        response = TextResponse(
             url="https://www.gasbuddy.com/graphql",
             body=json.dumps(mock_response_data).encode("utf-8"),
             request=request,
@@ -233,11 +233,14 @@ class TestGasBuddySpider:
         failure = Mock()
         failure.value = Exception("Network error")
         
+        # 设置 mock 的返回值
+        spider.crawler.stats.get_value.return_value = 1
+
         # 应该不会抛出异常
         spider.handle_request_error(failure)
-        
-        # 验证统计信息被更新
-        assert spider.crawler.stats.get_value("gasbuddy/request_failed") == 1
+
+        # 验证统计信息被更新（调用 inc_value）
+        spider.crawler.stats.inc_value.assert_called_once_with("gasbuddy/request_failed")
 
     def test_custom_settings(self, spider):
         """测试自定义设置"""

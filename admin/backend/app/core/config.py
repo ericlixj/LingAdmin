@@ -24,10 +24,13 @@ def parse_cors(v: Any) -> list[str] | str:
     raise ValueError(v)
 
 
+from pathlib import Path
+
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(
-        # Use top level .env file (one level above ./backend/)
-        env_file="../.env",
+        # Use admin/.env file (four levels above ./app/core/)
+        # From admin/backend/app/core/config.py -> admin/.env
+        env_file=str(Path(__file__).parent.parent.parent.parent / ".env"),
         env_ignore_empty=True,
         extra="ignore",
     )
@@ -68,6 +71,15 @@ class Settings(BaseSettings):
     ES_USER: str
     ES_PASSWORD: str = ""    
     
+    # GasBuddy 定时任务配置
+    GASBUDDY_CRON_EXPRESSION: str = "*/5 * * * *"  # Cron 表达式（分钟 小时 日 月 星期），默认每5分钟执行
+    GASBUDDY_CRON_ENABLED: bool = True  # 是否启用定时任务
+    # 邮件发送配置
+    GASBUDDY_EMAIL_START_HOUR: int = 16  # 邮件发送开始时间（小时）
+    GASBUDDY_EMAIL_START_MINUTE: int = 50  # 邮件发送开始时间（分钟）
+    GASBUDDY_EMAIL_END_HOUR: int = 21  # 邮件发送结束时间（小时）
+    GASBUDDY_EMAIL_END_MINUTE: int = 50  # 邮件发送结束时间（分钟）
+    GASBUDDY_PRICE_ALERT_THRESHOLD: float = 150.0  # 价格提醒阈值，低于此值时立即发送邮件
 
 
 
@@ -95,7 +107,7 @@ class Settings(BaseSettings):
     @model_validator(mode="after")
     def _set_default_emails_from(self) -> Self:
         if not self.EMAILS_FROM_NAME:
-            self.EMAILS_FROM_NAME = self.PROJECT_NAME
+            self.EMAILS_FROM_NAME = "LingAdmin系统通知"
         return self
 
     EMAIL_RESET_TOKEN_EXPIRE_HOURS: int = 48

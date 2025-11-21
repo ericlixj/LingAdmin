@@ -1,58 +1,27 @@
 // capp/frontend/src/GasBuddy.jsx
 import { useEffect, useState } from "react";
+import PostcodeManager from "./PostcodeManager";
 
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:4000";
 
 function GasBuddy({ lang = "cn" }) {
-  const [postcode, setPostcode] = useState("");
+  const [selectedPostcode, setSelectedPostcode] = useState("");
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [showPostcodeManager, setShowPostcodeManager] = useState(false);
+  const [userPostcodes, setUserPostcodes] = useState([]);
+  const [maxDistance, setMaxDistance] = useState(5);
 
-  // 加拿大邮编格式校验
-  const validateCanadianPostalCode = (code) => {
-    if (!code || code.trim() === "") {
-      return { valid: false, error: "" };
-    }
-    const cleanCode = code.replace(/\s+/g, '').toUpperCase();
-    const postalCodeRegex = /^[A-Z]\d[A-Z]\d[A-Z]\d$/;
-    if (cleanCode.length !== 6) {
-      return { 
-        valid: false, 
-        error: lang === "cn" ? "邮编必须是6位字符" : lang === "en" ? "Postal code must be 6 characters" : "郵編必須是6位字符"
-      };
-    }
-    if (!postalCodeRegex.test(cleanCode)) {
-      return { 
-        valid: false, 
-        error: lang === "cn" ? "邮编格式不正确，应为 A1A 1A1 格式" : lang === "en" ? "Invalid postal code format, should be A1A 1A1" : "郵編格式不正確，應為 A1A 1A1 格式"
-      };
-    }
-    return { valid: true, error: "" };
-  };
-
-  // 格式化邮编（自动添加空格）
-  const formatPostalCode = (value) => {
-    let cleaned = value.replace(/[^A-Z0-9]/gi, '').toUpperCase();
-    if (cleaned.length > 3) {
-      cleaned = cleaned.slice(0, 3) + ' ' + cleaned.slice(3, 6);
-    }
-    return cleaned;
-  };
-
-  // 获取 GasBuddy 数据
-  const fetchGasBuddyData = async (postalCode) => {
-    setLoading(true);
-    setError("");
-    setData(null);
-
+  // 加载用户 postcode 列表
+  const fetchUserPostcodes = async () => {
     try {
       const token = localStorage.getItem("access_token");
       if (!token) {
-        throw new Error("未登录");
+        return;
       }
 
-      const response = await fetch(`${API_URL}/api/c/gasbuddy?postcode=${encodeURIComponent(postalCode)}`, {
+      const response = await fetch(`${API_URL}/api/c/postcode`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -63,96 +32,210 @@ function GasBuddy({ lang = "cn" }) {
       }
 
       const result = await response.json();
-      
+      if (result.code === 0) {
+        setUserPostcodes(result.data);
+        // 如果有 postcode，默认选择第一个
+        if (result.data.length > 0 && !selectedPostcode) {
+          setSelectedPostcode(result.data[0].postcode);
+        }
+      }
+    } catch (err) {
+      console.error("Fetch user postcodes error:", err);
+    }
+  };
+
+  useEffect(() => {
+    fetchUserPostcodes();
+  }, []);
+
+  // 当选择 postcode 或距离变化时，自动查询
+  useEffect(() => {
+    if (selectedPostcode) {
+      fetchGasData(selectedPostcode);
+    }
+  }, [selectedPostcode, maxDistance]);
+
+  // 获取加油站数据
+  const fetchGasData = async (postcode) => {
+    if (!postcode) {
+      return;
+    }
+
+    setLoading(true);
+    setError("");
+    setData(null);
+
+    try {
+      const token = localStorage.getItem("access_token");
+      if (!token) {
+        throw new Error("未登录");
+      }
+
+      const cleanPostcode = postcode.replace(/\s+/g, '');
+      const response = await fetch(
+        `${API_URL}/api/c/gas?postcode=${encodeURIComponent(cleanPostcode)}&maxDistance=${maxDistance}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(`API error: ${response.status}`);
+      }
+
+      const result = await response.json();
+
       if (result.code === 0) {
         setData(result.data);
       } else {
         throw new Error(result.message || "获取数据失败");
       }
     } catch (err) {
-      setError(err.message || "获取 GasBuddy 数据失败");
-      console.error("GasBuddy fetch error:", err);
+      setError(err.message || "获取加油站数据失败");
+      console.error("Gas fetch error:", err);
     } finally {
       setLoading(false);
     }
   };
 
-  // 处理搜索
-  const handleSearch = (e) => {
-    e.preventDefault();
-    const validation = validateCanadianPostalCode(postcode);
-    if (!validation.valid) {
-      setError(validation.error);
-      return;
+  // 格式化 postcode（显示时添加空格）
+  const formatPostcodeDisplay = (postcode) => {
+    if (!postcode) return "";
+    const clean = postcode.replace(/\s+/g, '');
+    if (clean.length === 6) {
+      return `${clean.slice(0, 3)} ${clean.slice(3)}`;
     }
-    const cleanPostcode = postcode.replace(/\s+/g, '');
-    fetchGasBuddyData(cleanPostcode);
+    return postcode;
   };
 
-  // 邮编输入处理
-  const handlePostcodeInput = (e) => {
-    const formatted = formatPostalCode(e.target.value);
-    setPostcode(formatted);
-    setError("");
-  };
+  // 如果显示 postcode 管理页面
+  if (showPostcodeManager) {
+    return (
+      <div>
+        <div style={{ marginBottom: "1rem", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+          <h2 style={{ margin: 0 }}>
+            {lang === "cn" ? "Postcode 管理" : lang === "en" ? "Postcode Management" : "Postcode 管理"}
+          </h2>
+          <button
+            onClick={() => {
+              setShowPostcodeManager(false);
+              fetchUserPostcodes(); // 刷新列表
+            }}
+            style={{
+              padding: "0.5rem 1rem",
+              backgroundColor: "#6c757d",
+              color: "white",
+              border: "none",
+              borderRadius: "4px",
+              cursor: "pointer",
+            }}
+          >
+            {lang === "cn" ? "← 返回" : lang === "en" ? "← Back" : "← 返回"}
+          </button>
+        </div>
+        <PostcodeManager lang={lang} />
+      </div>
+    );
+  }
 
   return (
     <div style={{ padding: "2rem", fontFamily: "system-ui, sans-serif", maxWidth: "1200px", margin: "0 auto" }}>
-      <h1>GasBuddy 加油站数据</h1>
-
-      {/* 搜索表单 */}
-      <div style={{ marginBottom: "2rem" }}>
-        <form onSubmit={handleSearch} style={{ display: "flex", gap: "0.5rem", alignItems: "flex-start" }}>
+      {/* 控制面板 */}
+      <div style={{ marginBottom: "2rem", padding: "1.5rem", backgroundColor: "#f8f9fa", borderRadius: "8px", border: "1px solid #dee2e6" }}>
+        <div style={{ display: "flex", gap: "1rem", alignItems: "center", flexWrap: "wrap", marginBottom: "1rem" }}>
+          {/* Postcode 选择 */}
           <div style={{ display: "flex", flexDirection: "column", gap: "0.25rem" }}>
             <label style={{ fontSize: "0.9rem", color: "#666", fontWeight: "500" }}>
-              {lang === "cn" ? "邮编:" : lang === "en" ? "Postal Code:" : "郵編:"}
+              {lang === "cn" ? "选择 Postcode:" : lang === "en" ? "Select Postcode:" : "選擇 Postcode:"}
             </label>
-            <input
-              type="text"
-              value={postcode}
-              onChange={handlePostcodeInput}
-              placeholder={lang === "cn" ? "例如: V6Y 1J5" : lang === "en" ? "e.g. V6Y 1J5" : "例如: V6Y 1J5"}
+            <select
+              value={selectedPostcode}
+              onChange={(e) => setSelectedPostcode(e.target.value)}
               style={{
                 padding: "0.5rem",
                 fontSize: "1rem",
                 border: "1px solid #ddd",
                 borderRadius: "4px",
-                width: "150px",
-                textTransform: "uppercase"
+                minWidth: "150px",
+              }}
+            >
+              <option value="">
+                {lang === "cn" ? "-- 请选择 --" : lang === "en" ? "-- Please select --" : "-- 請選擇 --"}
+              </option>
+              {userPostcodes.map((pc) => (
+                <option key={pc.id} value={pc.postcode}>
+                  {formatPostcodeDisplay(pc.postcode)} {pc.label ? `(${pc.label})` : ""}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          {/* 距离选择 */}
+          <div style={{ display: "flex", flexDirection: "column", gap: "0.25rem" }}>
+            <label style={{ fontSize: "0.9rem", color: "#666", fontWeight: "500" }}>
+              {lang === "cn" ? "最大距离 (公里):" : lang === "en" ? "Max Distance (km):" : "最大距離 (公里):"}
+            </label>
+            <input
+              type="number"
+              value={maxDistance}
+              onChange={(e) => setMaxDistance(parseFloat(e.target.value) || 5)}
+              min="1"
+              max="50"
+              step="1"
+              style={{
+                padding: "0.5rem",
+                fontSize: "1rem",
+                border: "1px solid #ddd",
+                borderRadius: "4px",
+                width: "100px",
               }}
             />
           </div>
-          <div style={{ display: "flex", alignItems: "flex-end", gap: "0.5rem" }}>
+
+          {/* Postcode 管理按钮 */}
+          <div style={{ display: "flex", alignItems: "flex-end" }}>
             <button
-              type="submit"
-              disabled={loading}
+              onClick={() => setShowPostcodeManager(true)}
               style={{
-                padding: "0.5rem 1.5rem",
-                fontSize: "1rem",
-                backgroundColor: loading ? "#ccc" : "#007bff",
+                padding: "0.5rem 1rem",
+                fontSize: "0.9rem",
+                backgroundColor: "#6c757d",
                 color: "white",
                 border: "none",
                 borderRadius: "4px",
-                cursor: loading ? "not-allowed" : "pointer",
-                height: "fit-content"
+                cursor: "pointer",
+                height: "fit-content",
               }}
             >
-              {lang === "cn" ? "搜索" : lang === "en" ? "Search" : "搜尋"}
+              {lang === "cn" ? "管理 Postcode" : lang === "en" ? "Manage Postcodes" : "管理 Postcode"}
             </button>
           </div>
-        </form>
+        </div>
+
+        {/* 说明 */}
+        <div style={{ fontSize: "0.85rem", color: "#666" }}>
+          {lang === "cn"
+            ? "默认显示5公里内的加油站，按价格从低到高排序"
+            : lang === "en"
+            ? "Default shows gas stations within 5km, sorted by price from low to high"
+            : "默認顯示5公里內的加油站，按價格從低到高排序"}
+        </div>
       </div>
 
       {/* 错误提示 */}
       {error && (
-        <div style={{ 
-          padding: "1rem", 
-          backgroundColor: "#fee", 
-          border: "1px solid #fcc",
-          borderRadius: "4px",
-          marginBottom: "1rem",
-          color: "#c00"
-        }}>
+        <div
+          style={{
+            padding: "1rem",
+            backgroundColor: "#fee",
+            border: "1px solid #fcc",
+            borderRadius: "4px",
+            marginBottom: "1rem",
+            color: "#c00",
+          }}
+        >
           {error}
         </div>
       )}
@@ -167,145 +250,84 @@ function GasBuddy({ lang = "cn" }) {
       {/* 数据展示 */}
       {data && !loading && (
         <div>
-          {/* 位置信息 */}
-          {data.location && (
-            <div style={{ 
-              marginBottom: "2rem", 
-              padding: "1rem", 
-              backgroundColor: "#f8f9fa", 
-              borderRadius: "8px",
-              border: "1px solid #dee2e6"
-            }}>
-              <h2 style={{ marginTop: 0 }}>
-                {lang === "cn" ? "位置信息" : lang === "en" ? "Location" : "位置資訊"}
-              </h2>
-              <p><strong>{lang === "cn" ? "显示名称:" : lang === "en" ? "Display Name:" : "顯示名稱:"}</strong> {data.location.displayName}</p>
-              <p><strong>{lang === "cn" ? "国家代码:" : lang === "en" ? "Country Code:" : "國家代碼:"}</strong> {data.location.countryCode}</p>
-              <p><strong>{lang === "cn" ? "地区代码:" : lang === "en" ? "Region Code:" : "地區代碼:"}</strong> {data.location.regionCode}</p>
-              {data.location.latitude && data.location.longitude && (
-                <p>
-                  <strong>{lang === "cn" ? "坐标:" : lang === "en" ? "Coordinates:" : "座標:"}</strong> 
-                  {data.location.latitude}, {data.location.longitude}
-                </p>
-              )}
-            </div>
-          )}
-
-          {/* 趋势信息 */}
-          {data.trends && (
-            <div style={{ 
-              marginBottom: "2rem", 
-              padding: "1rem", 
-              backgroundColor: "#e7f3ff", 
-              borderRadius: "8px",
-              border: "1px solid #b3d9ff"
-            }}>
-              <h2 style={{ marginTop: 0 }}>
-                {lang === "cn" ? "价格趋势" : lang === "en" ? "Price Trends" : "價格趨勢"}
-              </h2>
-              <p><strong>{lang === "cn" ? "地区:" : lang === "en" ? "Area:" : "地區:"}</strong> {data.trends.areaName}</p>
-              {data.trends.today && (
-                <p><strong>{lang === "cn" ? "今日价格:" : lang === "en" ? "Today:" : "今日價格:"}</strong> ${data.trends.today}</p>
-              )}
-              {data.trends.todayLow && (
-                <p><strong>{lang === "cn" ? "今日最低:" : lang === "en" ? "Today Low:" : "今日最低:"}</strong> ${data.trends.todayLow}</p>
-              )}
-              {data.trends.trend && (
-                <p><strong>{lang === "cn" ? "趋势:" : lang === "en" ? "Trend:" : "趨勢:"}</strong> {data.trends.trend}</p>
-              )}
-            </div>
-          )}
+          {/* 统计信息 */}
+          <div style={{ marginBottom: "1rem", padding: "1rem", backgroundColor: "#e7f3ff", borderRadius: "8px", border: "1px solid #b3d9ff" }}>
+            <p style={{ margin: 0, fontSize: "1.1rem", fontWeight: "bold" }}>
+              {lang === "cn"
+                ? `找到 ${data.total} 个加油站（${maxDistance}公里内）`
+                : lang === "en"
+                ? `Found ${data.total} gas stations (within ${maxDistance}km)`
+                : `找到 ${data.total} 個加油站（${maxDistance}公里內）`}
+            </p>
+          </div>
 
           {/* 加油站列表 */}
-          {data.stations && data.stations.length > 0 && (
-            <div>
-              <h2>
-                {lang === "cn" ? `加油站 (${data.stations.length})` : lang === "en" ? `Gas Stations (${data.stations.length})` : `加油站 (${data.stations.length})`}
-              </h2>
-              <div style={{ 
-                display: "grid", 
-                gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))", 
-                gap: "1rem" 
-              }}>
-                {data.stations.map((station, idx) => (
-                  <div
-                    key={station.id || idx}
-                    style={{
-                      border: "1px solid #ddd",
-                      borderRadius: "8px",
-                      padding: "1rem",
-                      backgroundColor: "white",
-                      boxShadow: "0 2px 4px rgba(0,0,0,0.1)"
-                    }}
-                  >
-                    <h3 style={{ marginTop: 0, fontSize: "1.1rem" }}>
-                      {station.name || (lang === "cn" ? "未命名加油站" : lang === "en" ? "Unnamed Station" : "未命名加油站")}
-                    </h3>
-                    
-                    {/* 地址 */}
-                    {station.address && (
-                      <div style={{ marginBottom: "0.5rem", color: "#666", fontSize: "0.9rem" }}>
-                        {station.address.line1 && <p style={{ margin: "0.25rem 0" }}>{station.address.line1}</p>}
-                        {station.address.locality && station.address.region && (
-                          <p style={{ margin: "0.25rem 0" }}>
-                            {station.address.locality}, {station.address.region} {station.address.postalCode}
-                          </p>
-                        )}
-                      </div>
-                    )}
+          {data.stations && data.stations.length > 0 ? (
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
+                gap: "1rem",
+              }}
+            >
+              {data.stations.map((station, idx) => (
+                <div
+                  key={station.id || idx}
+                  style={{
+                    border: "1px solid #ddd",
+                    borderRadius: "8px",
+                    padding: "1rem",
+                    backgroundColor: "white",
+                    boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
+                  }}
+                >
+                  <h3 style={{ marginTop: 0, fontSize: "1.2rem", color: "#333" }}>
+                    {station.name || (lang === "cn" ? "未命名加油站" : lang === "en" ? "Unnamed Station" : "未命名加油站")}
+                  </h3>
 
-                    {/* 距离 */}
-                    {station.distance !== undefined && (
-                      <p style={{ margin: "0.25rem 0", color: "#666", fontSize: "0.9rem" }}>
-                        <strong>{lang === "cn" ? "距离:" : lang === "en" ? "Distance:" : "距離:"}</strong> {station.distance.toFixed(2)} km
+                  {/* 价格 - 突出显示 */}
+                  {station.price !== null && station.formatted_price ? (
+                    <div style={{ margin: "1rem 0", padding: "0.75rem", backgroundColor: "#fff3cd", borderRadius: "4px", border: "2px solid #ffc107" }}>
+                      <p style={{ margin: 0, fontSize: "1.5rem", fontWeight: "bold", color: "#d32f2f" }}>
+                        {station.formatted_price}
                       </p>
-                    )}
-
-                    {/* 价格 */}
-                    {station.prices && station.prices.length > 0 && (
-                      <div style={{ marginTop: "0.5rem" }}>
-                        {station.prices.map((price, priceIdx) => (
-                          <div key={priceIdx} style={{ marginBottom: "0.5rem" }}>
-                            {price.cash && price.cash.formattedPrice && (
-                              <p style={{ 
-                                margin: "0.25rem 0", 
-                                color: "#d32f2f", 
-                                fontSize: "1.2rem", 
-                                fontWeight: "bold" 
-                              }}>
-                                {lang === "cn" ? "现金:" : lang === "en" ? "Cash:" : "現金:"} {price.cash.formattedPrice}
-                              </p>
-                            )}
-                            {price.credit && price.credit.formattedPrice && (
-                              <p style={{ 
-                                margin: "0.25rem 0", 
-                                color: "#1976d2", 
-                                fontSize: "1.1rem" 
-                              }}>
-                                {lang === "cn" ? "信用卡:" : lang === "en" ? "Credit:" : "信用卡:"} {price.credit.formattedPrice}
-                              </p>
-                            )}
-                          </div>
-                        ))}
-                      </div>
-                    )}
-
-                    {/* 评分 */}
-                    {station.starRating && (
-                      <p style={{ margin: "0.25rem 0", color: "#666", fontSize: "0.9rem" }}>
-                        <strong>{lang === "cn" ? "评分:" : lang === "en" ? "Rating:" : "評分:"}</strong> ⭐ {station.starRating} 
-                        {station.ratingsCount && ` (${station.ratingsCount})`}
+                    </div>
+                  ) : (
+                    <div style={{ margin: "1rem 0", padding: "0.75rem", backgroundColor: "#f5f5f5", borderRadius: "4px" }}>
+                      <p style={{ margin: 0, fontSize: "0.9rem", color: "#666" }}>
+                        {lang === "cn" ? "暂无价格信息" : lang === "en" ? "No price information" : "暫無價格資訊"}
                       </p>
-                    )}
-                  </div>
-                ))}
-              </div>
+                    </div>
+                  )}
+
+                  {/* 地址 */}
+                  {station.address && (
+                    <div style={{ marginBottom: "0.5rem", color: "#666", fontSize: "0.9rem" }}>
+                      <p style={{ margin: "0.25rem 0" }}>
+                        <strong>{lang === "cn" ? "地址:" : lang === "en" ? "Address:" : "地址:"}</strong> {station.address}
+                      </p>
+                    </div>
+                  )}
+
+                  {/* 距离 */}
+                  {station.distance !== null && station.distance !== undefined && (
+                    <p style={{ margin: "0.25rem 0", color: "#666", fontSize: "0.9rem" }}>
+                      <strong>{lang === "cn" ? "距离:" : lang === "en" ? "Distance:" : "距離:"}</strong>{" "}
+                      {station.distance.toFixed(2)} km
+                    </p>
+                  )}
+                </div>
+              ))}
             </div>
-          )}
-
-          {(!data.stations || data.stations.length === 0) && (
+          ) : (
             <div style={{ textAlign: "center", padding: "2rem" }}>
-              <p>{lang === "cn" ? "该邮编区域没有找到加油站" : lang === "en" ? "No gas stations found for this postal code" : "該郵編區域沒有找到加油站"}</p>
+              <p>
+                {lang === "cn"
+                  ? "该 postcode 区域没有找到加油站"
+                  : lang === "en"
+                  ? "No gas stations found for this postcode"
+                  : "該 postcode 區域沒有找到加油站"}
+              </p>
             </div>
           )}
         </div>
@@ -313,7 +335,13 @@ function GasBuddy({ lang = "cn" }) {
 
       {!data && !loading && !error && (
         <div style={{ textAlign: "center", padding: "2rem", color: "#666" }}>
-          <p>{lang === "cn" ? "请输入邮编搜索加油站数据" : lang === "en" ? "Please enter a postal code to search for gas stations" : "請輸入郵編搜尋加油站數據"}</p>
+          <p>
+            {lang === "cn"
+              ? "请先添加并选择一个 postcode"
+              : lang === "en"
+              ? "Please add and select a postcode first"
+              : "請先添加並選擇一個 postcode"}
+          </p>
         </div>
       )}
     </div>
@@ -321,5 +349,3 @@ function GasBuddy({ lang = "cn" }) {
 }
 
 export default GasBuddy;
-
-

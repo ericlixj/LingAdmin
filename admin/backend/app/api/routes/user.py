@@ -204,7 +204,7 @@ async def reset_password(
 
     await email_sender.send_email(
         recipients=[user.email],
-        subject="密码重置成功",
+        subject="LingAdmin系统通知 - 密码重置成功",
         body=email_body,
         body_html=email_body_html
     )

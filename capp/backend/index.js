@@ -5,12 +5,18 @@ const path = require("path");
 const fs = require("fs");
 const { searchFlyerDetails } = require("./services/flyerService");
 
-// 从项目根目录加载 .env 文件
-const rootEnvPath = path.resolve(__dirname, '../../.env');
-if (fs.existsSync(rootEnvPath)) {
-  require("dotenv").config({ path: rootEnvPath });
+// 从 capp/.env 文件加载环境变量
+const cappEnvPath = path.resolve(__dirname, '../.env');
+if (fs.existsSync(cappEnvPath)) {
+  require("dotenv").config({ path: cappEnvPath });
 } else {
-  require("dotenv").config();
+  // 如果 capp/.env 不存在，尝试从项目根目录加载（向后兼容）
+  const rootEnvPath = path.resolve(__dirname, '../../.env');
+  if (fs.existsSync(rootEnvPath)) {
+    require("dotenv").config({ path: rootEnvPath });
+  } else {
+    require("dotenv").config();
+  }
 }
 
 // 调试：打印数据库配置信息（仅在非生产环境）
@@ -76,10 +82,18 @@ app.get("/api/c/hello", (req, res) => {
 
 // 添加认证路由（这是缺失的部分！）
 const authRouter = require("./routes/auth");
+const postcodeRouter = require("./routes/postcode");
+const gasRouter = require("./routes/gas");
 const { authenticateToken } = require("./utils/jwt");
 
 // 认证路由
 app.use("/api/c/auth", authRouter);
+
+// Postcode 维护路由
+app.use("/api/c/postcode", postcodeRouter);
+
+// Gas 查询路由
+app.use("/api/c/gas", gasRouter);
 
 // 查询 flyer_details from OpenSearch（需要认证）
 app.get("/api/c/flyer_details", authenticateToken, async (req, res) => {
