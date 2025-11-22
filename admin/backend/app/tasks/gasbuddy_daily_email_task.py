@@ -100,7 +100,7 @@ async def send_daily_gas_price_emails():
                     postcode_data = {}
                     
                     for postcode in postcodes:
-                        prices = get_gas_prices_within_5km(postcode, fuel_product=1)
+                        prices = get_gas_prices_within_5km(postcode, fuel_product=1, session=session)
                         if prices:
                             postcode_data[postcode] = prices
                     
@@ -113,7 +113,8 @@ async def send_daily_gas_price_emails():
                     
                     # 生成聚合邮件内容（包含所有邮编，按 label 优先级排序）
                     text_content, html_content = generate_multi_postcode_email_content(
-                        user.email, postcode_data, postcode_label_map=postcode_label_map, fuel_product_name="Regular Gas"
+                        user.email, postcode_data, postcode_label_map=postcode_label_map, 
+                        fuel_product_name="Regular Gas", session=session
                     )
                     
                     # 生成邮件主题（每日定时邮件）

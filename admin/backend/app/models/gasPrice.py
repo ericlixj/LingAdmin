@@ -75,6 +75,16 @@ class GasPrice(SQLModel, table=True):
             index=False,
             unique=False,        )
     )
+    posted_time:        Optional[datetime] = Field(
+            default=None,
+        description="价格提交时间（postedTime from API）",
+        sa_column=Column(
+            String,
+            nullable=True,
+            primary_key=False,
+            index=False,
+            unique=False,        )
+    )
     # 默认加入通用字段
     creator: Optional[str] = Field(default=None, max_length=64, description="创建人")
     dept_id: Optional[int] = Field(
@@ -107,6 +117,7 @@ class GasPriceCreate(SQLModel):
     cash_price: Optional[str] = None
     cash_formatted_price: Optional[str] = None
     crawl_time: Optional[datetime] = None
+    posted_time: Optional[datetime] = None
     creator: Optional[str] = Field(default=None, max_length=64)
     dept_id: Optional[int] = None
 
@@ -117,6 +128,7 @@ class GasPriceUpdate(SQLModel):
     cash_price: Optional[str] = None
     cash_formatted_price: Optional[str] = None
     crawl_time: Optional[datetime] = None
+    posted_time: Optional[datetime] = None
     updater: Optional[str] = Field(default=None, max_length=64)
     dept_id: Optional[int] = None
 

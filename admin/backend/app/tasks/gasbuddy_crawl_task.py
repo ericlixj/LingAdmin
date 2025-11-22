@@ -3,7 +3,7 @@ GasBuddy 定时爬取任务
 每5分钟爬取指定 postcode 的油价数据并存储到数据库
 """
 from datetime import datetime
-from typing import List, Set
+from typing import List, Set, Optional, Union
 import logging
 import threading
 
@@ -100,7 +100,10 @@ class GasBuddyDataProcessor:
     def _upsert_postcode(self, postcode: str, location: dict):
         """更新或创建 postcode 记录"""
         existing = self.session.exec(
-            select(GasPostcode).where(GasPostcode.postcode == postcode)
+            select(GasPostcode).where(
+                GasPostcode.postcode == postcode,
+                GasPostcode.deleted == False
+            )
         ).first()
         
         postcode_data = GasPostcodeCreate(
@@ -136,7 +139,10 @@ class GasBuddyDataProcessor:
         station_id_str = str(station_id)
         
         existing = self.session.exec(
-            select(GasStation).where(GasStation.station_id == station_id_str)
+            select(GasStation).where(
+                GasStation.station_id == station_id_str,
+                GasStation.deleted == False
+            )
         ).first()
         
         address_obj = station_data.get("address", {})
@@ -227,10 +233,43 @@ class GasBuddyDataProcessor:
         
         price_value = price_obj.get("price")
         formatted_price = price_obj.get("formattedPrice")
+        posted_time_str = price_obj.get("postedTime")  # 获取价格提交时间
         
         if price_value is None:
             logger.warning(f"[Processor] Price value is None for station {station_id}, fuel_product {fuel_product_str}")
             return
+        
+        # 处理 postedTime：可能是 ISO 格式字符串，需要转换为 datetime
+        posted_time: Optional[datetime] = None
+        if posted_time_str:
+            try:
+                # 尝试解析 ISO 格式时间字符串
+                if isinstance(posted_time_str, str):
+                    # 尝试多种格式
+                    for fmt in [
+                        "%Y-%m-%dT%H:%M:%S",
+                        "%Y-%m-%dT%H:%M:%S.%f",
+                        "%Y-%m-%dT%H:%M:%SZ",
+                        "%Y-%m-%dT%H:%M:%S.%fZ",
+                    ]:
+                        try:
+                            posted_time = datetime.strptime(posted_time_str.replace('Z', ''), fmt.replace('Z', ''))
+                            break
+                        except ValueError:
+                            continue
+                    else:
+                        # 尝试 ISO 格式解析
+                        try:
+                            posted_time = datetime.fromisoformat(posted_time_str.replace('Z', '+00:00'))
+                        except:
+                            # 如果解析失败，设为 None（posted_time 字段为可选）
+                            posted_time = None
+                            logger.warning(f"[Processor] Failed to parse postedTime {posted_time_str}, setting to None")
+                elif isinstance(posted_time_str, datetime):
+                    posted_time = posted_time_str
+            except Exception as e:
+                logger.warning(f"[Processor] Failed to parse postedTime {posted_time_str}: {e}")
+                posted_time = None
         
         # 注意：即使使用的是 credit 价格，也存储在 cash_price 字段中
         # 因为模型设计时可能只考虑了 cash 价格
@@ -242,6 +281,7 @@ class GasBuddyDataProcessor:
             cash_price=str(price_value),
             cash_formatted_price=formatted_price,
             crawl_time=self.crawl_time,
+            posted_time=posted_time,  # 添加价格提交时间
             creator=str(self.user_id),
             dept_id=self.dept_id,
         )
@@ -272,7 +312,10 @@ class GasBuddyDataProcessor:
             return
         
         existing = self.session.exec(
-            select(GasTrends).where(GasTrends.postcode == postcode)
+            select(GasTrends).where(
+                GasTrends.postcode == postcode,
+                GasTrends.deleted == False
+            )
         ).first()
         
         # 处理 today 数据，可能是 dict 或直接是数值
