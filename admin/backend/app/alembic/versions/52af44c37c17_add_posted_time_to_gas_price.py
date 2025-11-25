@@ -27,3 +27,4 @@ def downgrade():
     op.drop_column('gas_price', 'posted_time')
     # ### end Alembic commands ###
 
+
