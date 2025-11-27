@@ -21,8 +21,8 @@ from app.crud.gasEmailHistory_crud import GasEmailHistoryCRUD
 
 logger = logging.getLogger(__name__)
 
-# 价格提醒阈值（写死150）
-PRICE_ALERT_THRESHOLD = 150.0
+# 价格提醒阈值（从配置读取，默认150）
+PRICE_ALERT_THRESHOLD = settings.GASBUDDY_PRICE_ALERT_THRESHOLD
 
 # 加拿大省份代码到时区的映射
 CANADA_PROVINCE_TIMEZONE_MAP = {

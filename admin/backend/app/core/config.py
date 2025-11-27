@@ -72,14 +72,11 @@ class Settings(BaseSettings):
     ES_PASSWORD: str = ""    
     
     # GasBuddy 定时任务配置
-    GASBUDDY_CRON_EXPRESSION: str = "*/5 * * * *"  # Cron 表达式（分钟 小时 日 月 星期），默认每5分钟执行
+    GASBUDDY_CRON_EXPRESSION: str = "*/5 * * * *"  # 爬取任务 Cron 表达式（分钟 小时 日 月 星期），默认每5分钟执行
     GASBUDDY_CRON_ENABLED: bool = True  # 是否启用定时任务
-    # 邮件发送配置
-    GASBUDDY_EMAIL_START_HOUR: int = 16  # 邮件发送开始时间（小时）
-    GASBUDDY_EMAIL_START_MINUTE: int = 50  # 邮件发送开始时间（分钟）
-    GASBUDDY_EMAIL_END_HOUR: int = 21  # 邮件发送结束时间（小时）
-    GASBUDDY_EMAIL_END_MINUTE: int = 50  # 邮件发送结束时间（分钟）
-    GASBUDDY_PRICE_ALERT_THRESHOLD: float = 150.0  # 价格提醒阈值，低于此值时立即发送邮件
+    GASBUDDY_DAILY_EMAIL_CRON: str = "0 19 * * *"  # 每日邮件 Cron 表达式，默认每天19:00（温哥华时间）
+    GASBUDDY_PRICE_ALERT_THRESHOLD: float = 150.0  # 价格提醒阈值（单位：分），低于此值时立即发送邮件
+    GASBUDDY_SCHEDULER_TIMEZONE: str = "America/Vancouver"  # 调度器时区，默认温哥华时间
 
 
 

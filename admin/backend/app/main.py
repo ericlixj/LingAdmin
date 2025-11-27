@@ -56,6 +56,7 @@ from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler.triggers.cron import CronTrigger
 from app.tasks.gasbuddy_crawl_task import gasbuddy_crawl_task
 from app.tasks.gasbuddy_daily_email_task import gasbuddy_daily_email_task
+from zoneinfo import ZoneInfo
 
 scheduler = None
 
@@ -68,17 +69,19 @@ def start_gasbuddy_scheduler():
         return
     
     try:
-        scheduler = BackgroundScheduler()
+        # 从配置读取时区，默认温哥华时间
+        scheduler_timezone = ZoneInfo(settings.GASBUDDY_SCHEDULER_TIMEZONE)
+        scheduler = BackgroundScheduler(timezone=scheduler_timezone)
         
-        # 油价同步任务时间点：从配置文件中读取cron表达式
+        # 油价爬取任务：从配置文件中读取cron表达式
         # cron表达式格式：分钟 小时 日 月 星期
         # 示例: "30 16-21 * * *" = 每天16:30到21:30之间，每小时的30分执行
         #       "0 17 * * *" = 每天17:00执行
-        cron_expression = settings.GASBUDDY_CRON_EXPRESSION
+        crawl_cron = settings.GASBUDDY_CRON_EXPRESSION
         
         scheduler.add_job(
             gasbuddy_crawl_task,
-            trigger=CronTrigger.from_crontab(cron_expression),
+            trigger=CronTrigger.from_crontab(crawl_cron),
             id='gasbuddy_crawl_task',
             name='GasBuddy Crawl Task',
             replace_existing=True,
@@ -87,10 +90,12 @@ def start_gasbuddy_scheduler():
             misfire_grace_time=300,  # 如果任务延迟不超过5分钟，仍然执行
         )
         
-        # 每日19:00发送油价邮件任务
+        # 每日邮件任务：从配置文件中读取cron表达式
+        daily_email_cron = settings.GASBUDDY_DAILY_EMAIL_CRON
+        
         scheduler.add_job(
             gasbuddy_daily_email_task,
-            trigger=CronTrigger.from_crontab("0 19 * * *"),  # 每天19:00执行
+            trigger=CronTrigger.from_crontab(daily_email_cron),
             id='gasbuddy_daily_email_task',
             name='GasBuddy Daily Email Task',
             replace_existing=True,
@@ -100,8 +105,10 @@ def start_gasbuddy_scheduler():
         )
         
         scheduler.start()
-        logger.info(f"GasBuddy scheduler started with crawl cron expression: {cron_expression}")
-        logger.info("GasBuddy daily email task scheduled for 19:00 every day")
+        logger.info(f"GasBuddy scheduler started (timezone: {settings.GASBUDDY_SCHEDULER_TIMEZONE})")
+        logger.info(f"  - Crawl task cron: {crawl_cron}")
+        logger.info(f"  - Daily email cron: {daily_email_cron}")
+        logger.info(f"  - Price alert threshold: {settings.GASBUDDY_PRICE_ALERT_THRESHOLD}")
         
     except Exception as e:
         logger.error(f"Failed to start GasBuddy scheduler: {e}", exc_info=True)
