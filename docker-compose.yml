@@ -109,6 +109,8 @@ services:
       - POSTGRES_USER=${POSTGRES_USER?Variable not set}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD?Variable not set}
       - SENTRY_DSN=${SENTRY_DSN}
+      # 禁用调度器，由专门的 admin-scheduler 容器运行
+      - RUN_SCHEDULER=false
 
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8000/api/v1/health_check/"]
@@ -131,6 +133,46 @@ services:
       - traefik.http.routers.${STACK_NAME?Variable not set}-admin-backend-https.tls.certresolver=le
       # Enable redirection for HTTP and HTTPS
       - traefik.http.routers.${STACK_NAME?Variable not set}-admin-backend-http.middlewares=https-redirect
+
+  # 专门运行定时任务调度器的容器（单实例，避免重复执行）
+  admin-scheduler:
+    image: '${DOCKER_IMAGE_BACKEND?Variable not set}:${TAG-latest}'
+    restart: always
+    networks:
+      - default
+    depends_on:
+      db:
+        condition: service_healthy
+        restart: true
+      prestart:
+        condition: service_completed_successfully
+    # 单进程运行调度器
+    command: ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8001", "--workers", "1"]
+    env_file:
+      - .env
+    environment:
+      - DOMAIN=${DOMAIN}
+      - FRONTEND_HOST=${FRONTEND_HOST?Variable not set}
+      - ENVIRONMENT=${ENVIRONMENT}
+      - BACKEND_CORS_ORIGINS=${BACKEND_CORS_ORIGINS}
+      - SECRET_KEY=${SECRET_KEY?Variable not set}
+      - FIRST_SUPERUSER=${FIRST_SUPERUSER?Variable not set}
+      - FIRST_SUPERUSER_PASSWORD=${FIRST_SUPERUSER_PASSWORD?Variable not set}
+      - SMTP_HOST=${SMTP_HOST}
+      - SMTP_USER=${SMTP_USER}
+      - SMTP_PASSWORD=${SMTP_PASSWORD}
+      - EMAILS_FROM_EMAIL=${EMAILS_FROM_EMAIL}
+      - POSTGRES_SERVER=db
+      - POSTGRES_PORT=${POSTGRES_PORT}
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER?Variable not set}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD?Variable not set}
+      - SENTRY_DSN=${SENTRY_DSN}
+      # 只有这个容器运行调度器
+      - RUN_SCHEDULER=true
+      # GasBuddy 配置
+      - GASBUDDY_CRON_ENABLED=${GASBUDDY_CRON_ENABLED:-true}
+      - GASBUDDY_CRON_EXPRESSION=${GASBUDDY_CRON_EXPRESSION:-0 17 * * *}
 
   # 2Admin frontend (Refine React, admin/frontend)
   admin-frontend:

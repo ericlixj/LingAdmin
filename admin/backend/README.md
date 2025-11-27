@@ -4,7 +4,11 @@
 
 * [Docker](https://www.docker.com/).
 * [uv](https://docs.astral.sh/uv/) for Python package and environment management.
+```
 curl -LsSf https://astral.sh/uv/install.sh | sh
+source $HOME/.local/bin/env 
+uv sync
+```
 make sure use python3.12.5
 create visual env name .venv, not venv, cause uv need this!
 python3 -m venv .venv

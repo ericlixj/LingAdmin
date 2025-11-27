@@ -116,9 +116,20 @@ def stop_gasbuddy_scheduler():
 
 
 # 应用启动时启动定时任务
+# 注意：只在主进程中启动调度器，避免多 worker 重复执行
+import os
+
 @app.on_event("startup")
 async def startup_event():
-    start_gasbuddy_scheduler()
+    # 检查是否应该启动调度器
+    # 方法1: 检查环境变量 RUN_SCHEDULER（推荐用于多 worker 部署）
+    # 方法2: 对于 uvicorn 多 worker，只有 worker_id=0 时启动
+    should_run_scheduler = os.environ.get("RUN_SCHEDULER", "true").lower() == "true"
+    
+    if should_run_scheduler:
+        start_gasbuddy_scheduler()
+    else:
+        logger.info("Scheduler disabled for this worker (RUN_SCHEDULER != true)")
 
 
 # 应用关闭时停止定时任务

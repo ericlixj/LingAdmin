@@ -494,25 +494,18 @@ def gasbuddy_crawl_task():
         collected_items_ref = {'items': []}
         _collected_items = collected_items_ref['items']  # 更新全局引用
         
-        # 在线程中运行爬虫任务
+        # 在线程中运行爬虫任务（后台运行，不阻塞主进程）
         crawl_thread = threading.Thread(
             target=_run_crawl_in_thread,
             args=(postcodes, collected_items_ref),
-            daemon=False,
+            daemon=True,  # 改为 daemon=True，程序退出时自动终止
             name="GasBuddyCrawlThread"
         )
         crawl_thread.start()
         
-        # 等待线程完成（设置超时）
-        crawl_thread.join(timeout=1800)  # 30分钟超时
-        
-        if crawl_thread.is_alive():
-            logger.warning("[Task] Crawl thread is still running after timeout")
-        else:
-            logger.info("[Task] Crawl thread completed")
-        
-        # 恢复全局引用
-        _collected_items = collected_items_ref['items']
+        # 不再等待线程完成，让爬虫在后台运行
+        # 这样不会阻塞 web 服务响应其他请求
+        logger.info("[Task] Crawl thread started in background, returning immediately")
         
     except Exception as e:
         logger.error(f"Error in GasBuddy crawl task: {e}", exc_info=True)
