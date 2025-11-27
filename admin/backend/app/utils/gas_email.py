@@ -557,10 +557,7 @@ def generate_multi_postcode_email_content(
                 text_content += f"     发布时间: {relative_time_str}\n"
             if price_info['address']:
                 text_content += f"     Address: {price_info['address']}\n"
-            text_content += "\n"
-    
-    text_content += f"\nUpdated at: {datetime.utcnow()}\n"
-    
+            text_content += "\n"    
     # HTML版本
     alert_banner = ""
     if has_alert and lowest_price is not None:
