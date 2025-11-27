@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "停止旧服务..."
+echo "停止旧服务11..."
 docker compose down
 
 echo "重新构建镜像..."
