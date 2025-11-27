@@ -494,7 +494,7 @@ def gasbuddy_crawl_task():
         collected_items_ref = {'items': []}
         _collected_items = collected_items_ref['items']  # 更新全局引用
         
-        # 在线程中运行爬虫任务（后台运行，不阻塞主进程）
+        # 在线程中运行爬虫任务（后台运行，不阻塞主进程）asynchronous
         crawl_thread = threading.Thread(
             target=_run_crawl_in_thread,
             args=(postcodes, collected_items_ref),
