@@ -549,12 +549,14 @@ def generate_multi_postcode_email_content(
         for idx, price_info in enumerate(prices[:10], 1):  # 每个邮编最多显示10个
             text_content += f"  {idx}. {price_info['station_name']}\n"
             text_content += f"     Price: {price_info['formatted_price']}\n"
-            # 显示价格发布时间（相对于当前时间的相对时间）
+            # 显示价格发布时间（相对时间 + 实际时间）
             posted_time = price_info.get('posted_time')
             if posted_time:
                 # 计算相对时间（当前时间 - 发布时间）
                 relative_time_str = format_relative_time(posted_time, current_time_utc)
-                text_content += f"     发布时间: {relative_time_str}\n"
+                # 格式化实际发布时间
+                posted_time_abs = format_datetime(posted_time, timezone=postcode_timezone) if posted_time else ""
+                text_content += f"     发布时间: {relative_time_str} ({posted_time_abs})\n"
             if price_info['address']:
                 text_content += f"     Address: {price_info['address']}\n"
             text_content += "\n"    
@@ -658,8 +660,13 @@ def generate_multi_postcode_email_content(
         
         for idx, price_info in enumerate(prices[:10], 1):  # 每个邮编最多显示10个
             posted_time = price_info.get('posted_time')
-            # 显示相对时间（当前时间 - 发布时间）
-            posted_time_display = format_relative_time(posted_time, current_time_utc) if posted_time else "N/A"
+            # 显示相对时间 + 实际时间
+            if posted_time:
+                relative_time = format_relative_time(posted_time, current_time_utc)
+                posted_time_abs = format_datetime(posted_time, timezone=postcode_timezone)
+                posted_time_display = f'{relative_time} <span class="posted-time-absolute">({posted_time_abs})</span>'
+            else:
+                posted_time_display = "N/A"
             html_content += f"""
                 <tr>
                     <td>{idx}</td>

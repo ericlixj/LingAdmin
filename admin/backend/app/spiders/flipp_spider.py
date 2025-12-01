@@ -8,6 +8,7 @@ from app.crud.flyerDetails_crud import FlyerDetailsCRUD
 from app.crud.fsaManage_crud import FsaManageCRUD
 from app.crud.fsaFlyerLink_crud import FsaFlyerLinkCRUD
 from app.crud.brand_crud import BrandCRUD
+from app.crud.userPostcode_crud import UserPostcodeCRUD
 from app.models.fsaFlyerLink import FsaFlyerLink
 from app.models.flippMerchant import FlippMerchantCreate, FlippMerchant
 from app.models.flyerMain import FlyerMainCreate, FlyerMain
@@ -77,17 +78,17 @@ class FlippSpider(scrapy.Spider):
                 self._cleared = True
                 logger.info("Tables cleared successfully.")
 
-            # 获取所有邮编
+            # 从 user_postcode 表获取所有有效的邮编（deleted=false）
             with Session(engine) as session:
-                fsa_crud = FsaManageCRUD(session=session, user_id=self.user_id, dept_id=self.dept_id)
-                postal_codes = fsa_crud.list_postal_codes()
+                user_postcode_crud = UserPostcodeCRUD(session=session, user_id=self.user_id, dept_id=self.dept_id)
+                postal_codes = user_postcode_crud.list_valid_postcodes()
 
             if not postal_codes:
-                logger.error("No postal codes found in FSA table.")
+                logger.error("No valid postal codes found in user_postcode table (deleted=false).")
                 return
 
             self.postal_codes = postal_codes
-            logger.info(f"Fetched {len(self.postal_codes)} postal codes.")
+            logger.info(f"Fetched {len(self.postal_codes)} valid postal codes from user_postcode table.")
 
             for postal_code in self.postal_codes:
                 url = f"https://dam.flippenterprise.net/api/flipp/data?locale={self.locale}&postal_code={postal_code}&sid={self.sid}"

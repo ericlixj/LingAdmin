@@ -191,18 +191,34 @@ async def run_all_tasks(user_id: int, dept_id: int):
     logger.info("===== 后台任务启动：爬取→翻译→ES =====")
 
     # -----------------------------
-    # 1️⃣ 爬取数据
+    # 1️⃣ 爬取数据（使用非阻塞方式，日志输出到文件）
     # -----------------------------
     try:
         logger.info("步骤1：爬取数据开始...")
         script_path = os.path.join(
             os.path.dirname(__file__), "../../scripts/run_flipp_spider.py"
         )
-        subprocess.run(
-            [sys.executable, script_path, str(user_id), str(dept_id)],
-            check=True,
-        )
-        logger.info("步骤1：爬取数据完成")
+        # 日志文件路径：admin/backend/logs/admin_backend.log
+        log_dir = os.path.join(os.path.dirname(__file__), "../../../logs")
+        os.makedirs(log_dir, exist_ok=True)
+        log_file = os.path.join(log_dir, "admin_backend.log")
+        
+        # 使用 asyncio.create_subprocess_exec 非阻塞运行
+        # 将输出重定向到日志文件
+        import asyncio
+        with open(log_file, "a") as f:
+            process = await asyncio.create_subprocess_exec(
+                sys.executable, script_path, str(user_id), str(dept_id),
+                stdout=f,
+                stderr=f
+            )
+            # 等待进程完成
+            returncode = await process.wait()
+        
+        if returncode != 0:
+            logger.error(f"步骤1爬取失败，返回码: {returncode}，日志: logs/admin_backend.log")
+        else:
+            logger.info("步骤1：爬取数据完成")
     except Exception as e:
         logger.error(f"步骤1失败: {e}", exc_info=True)
 

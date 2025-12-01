@@ -64,3 +64,22 @@ class UserPostcodeCRUD(BaseCRUD):
         query = select(func.count()).select_from(UserPostcode).where(UserPostcode.deleted == False)
         query = self._apply_filters(query, filters)
         return self.session.exec(query).one()
+
+    def list_valid_postcodes(self) -> List[str]:
+        """
+        获取所有有效的 postcode 列表（deleted=False 且 postcode 不为空）
+        
+        Returns:
+            有效的 postcode 列表（去重）
+        """
+        query = select(UserPostcode.postcode).where(
+            UserPostcode.deleted == False,
+            UserPostcode.postcode != "",
+            UserPostcode.postcode.isnot(None)
+        ).distinct()
+        
+        result = self.session.exec(query).all()
+        # 过滤掉空值并去重
+        postcodes = [p.strip() for p in result if p and p.strip()]
+        logger.info(f"Found {len(postcodes)} valid postcodes from user_postcode table")
+        return postcodes

@@ -23,6 +23,7 @@ from app.crud.gasPostcode_crud import GasPostcodeCRUD
 from app.crud.gasStation_crud import GasStationCRUD
 from app.crud.gasPrice_crud import GasPriceCRUD
 from app.crud.gasTrends_crud import GasTrendsCRUD
+from app.crud.userPostcode_crud import UserPostcodeCRUD
 
 init_logger()
 logger = logging.getLogger(__name__)
@@ -359,26 +360,15 @@ class GasBuddyDataProcessor:
 
 
 def get_postcodes_to_crawl() -> Set[str]:
-    """获取需要爬取的 postcode 列表"""
-    postcodes = set()
-    
+    """
+    获取需要爬取的 postcode 列表
+    使用 UserPostcodeCRUD 的通用方法，与 flyer 爬虫共享逻辑
+    """
     with Session(engine) as session:
-        postcode_list = session.exec(
-            select(GasPostcode.postcode).where(GasPostcode.deleted == False)
-        ).all()
-        postcodes.update([p for p in postcode_list if p])
-        
-        from app.models.userPostcode import UserPostcode
-        user_postcode_list = session.exec(
-            select(UserPostcode.postcode).where(
-                UserPostcode.deleted == False,
-                UserPostcode.postcode != "",
-            )
-        ).all()
-        # 过滤掉 None 值
-        postcodes.update([p for p in user_postcode_list if p and p.strip()])
+        user_postcode_crud = UserPostcodeCRUD(session=session, user_id=1, dept_id=0)
+        postcodes = user_postcode_crud.list_valid_postcodes()
     
-    return postcodes
+    return set(postcodes)
 
 
 def _run_crawl_in_thread(postcodes, collected_items_ref):
