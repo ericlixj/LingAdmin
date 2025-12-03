@@ -78,6 +78,17 @@ class Settings(BaseSettings):
     GASBUDDY_PRICE_ALERT_THRESHOLD: float = 150.0  # 价格提醒阈值（单位：分），低于此值时立即发送邮件
     GASBUDDY_SCHEDULER_TIMEZONE: str = "America/Vancouver"  # 调度器时区，默认温哥华时间
 
+    # IYF 视频定时任务配置
+    IYF_CRON_ENABLED: bool = True  # 是否启用定时任务
+    IYF_CRON_EXPRESSION: str = "0 1 * * *"  # 爬取任务 Cron 表达式，默认每天凌晨1:00执行
+    IYF_CATEGORIES: str = "movie,tv,variety"  # 需要爬取的分类列表（逗号分隔）
+    
+    @computed_field  # type: ignore[prop-decorator]
+    @property
+    def iyf_categories_list(self) -> list[str]:
+        """解析 IYF 分类列表"""
+        return [c.strip() for c in self.IYF_CATEGORIES.split(",") if c.strip()]
+
 
 
     @computed_field  # type: ignore[prop-decorator]

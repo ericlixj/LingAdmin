@@ -95,7 +95,7 @@ def list_items(
     return {"data": items, "total": total}
 
 @router.get("/list_valid_menus", response_model=MenuListResponse)
-def list_items(
+def list_valid_menus(
     request: Request,
     _start: int = Query(0),
     _end: int = Query(10),

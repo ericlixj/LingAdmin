@@ -51,75 +51,93 @@ driver = SeleniumDriver()  # 全局单例
 atexit.register(lambda: driver.quit())
 
 
-# 启动 GasBuddy 定时任务
+# 启动定时任务
 from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler.triggers.cron import CronTrigger
 from app.tasks.gasbuddy_crawl_task import gasbuddy_crawl_task
 from app.tasks.gasbuddy_daily_email_task import gasbuddy_daily_email_task
+from app.tasks.iyf_crawl_task import iyf_crawl_task
 from zoneinfo import ZoneInfo
 
 scheduler = None
 
-def start_gasbuddy_scheduler():
-    """启动 GasBuddy 定时任务调度器"""
+def start_scheduler():
+    """启动定时任务调度器"""
     global scheduler
-    
-    if not settings.GASBUDDY_CRON_ENABLED:
-        logger.info("GasBuddy cron job is disabled")
-        return
     
     try:
         # 从配置读取时区，默认温哥华时间
         scheduler_timezone = ZoneInfo(settings.GASBUDDY_SCHEDULER_TIMEZONE)
         scheduler = BackgroundScheduler(timezone=scheduler_timezone)
         
-        # 油价爬取任务：从配置文件中读取cron表达式
-        # cron表达式格式：分钟 小时 日 月 星期
-        # 示例: "30 16-21 * * *" = 每天16:30到21:30之间，每小时的30分执行
-        #       "0 17 * * *" = 每天17:00执行
-        crawl_cron = settings.GASBUDDY_CRON_EXPRESSION
+        # ==================== GasBuddy 任务 ====================
+        if settings.GASBUDDY_CRON_ENABLED:
+            # 油价爬取任务
+            crawl_cron = settings.GASBUDDY_CRON_EXPRESSION
+            scheduler.add_job(
+                gasbuddy_crawl_task,
+                trigger=CronTrigger.from_crontab(crawl_cron),
+                id='gasbuddy_crawl_task',
+                name='GasBuddy Crawl Task',
+                replace_existing=True,
+                coalesce=True,
+                max_instances=1,
+                misfire_grace_time=300,
+            )
+            
+            # 每日邮件任务
+            daily_email_cron = settings.GASBUDDY_DAILY_EMAIL_CRON
+            scheduler.add_job(
+                gasbuddy_daily_email_task,
+                trigger=CronTrigger.from_crontab(daily_email_cron),
+                id='gasbuddy_daily_email_task',
+                name='GasBuddy Daily Email Task',
+                replace_existing=True,
+                coalesce=True,
+                max_instances=1,
+                misfire_grace_time=300,
+            )
+            
+            logger.info(f"GasBuddy tasks enabled:")
+            logger.info(f"  - Crawl task cron: {crawl_cron}")
+            logger.info(f"  - Daily email cron: {daily_email_cron}")
+            logger.info(f"  - Price alert threshold: {settings.GASBUDDY_PRICE_ALERT_THRESHOLD}")
+        else:
+            logger.info("GasBuddy cron jobs disabled")
         
-        scheduler.add_job(
-            gasbuddy_crawl_task,
-            trigger=CronTrigger.from_crontab(crawl_cron),
-            id='gasbuddy_crawl_task',
-            name='GasBuddy Crawl Task',
-            replace_existing=True,
-            coalesce=True,  # 如果任务被延迟，立即执行而不是跳过
-            max_instances=1,  # 确保同一时间只有一个任务实例在运行
-            misfire_grace_time=300,  # 如果任务延迟不超过5分钟，仍然执行
-        )
-        
-        # 每日邮件任务：从配置文件中读取cron表达式
-        daily_email_cron = settings.GASBUDDY_DAILY_EMAIL_CRON
-        
-        scheduler.add_job(
-            gasbuddy_daily_email_task,
-            trigger=CronTrigger.from_crontab(daily_email_cron),
-            id='gasbuddy_daily_email_task',
-            name='GasBuddy Daily Email Task',
-            replace_existing=True,
-            coalesce=True,
-            max_instances=1,
-            misfire_grace_time=300,  # 如果任务延迟不超过5分钟，仍然执行
-        )
+        # ==================== IYF 视频任务 ====================
+        if settings.IYF_CRON_ENABLED:
+            iyf_cron = settings.IYF_CRON_EXPRESSION
+            scheduler.add_job(
+                iyf_crawl_task,
+                trigger=CronTrigger.from_crontab(iyf_cron),
+                id='iyf_crawl_task',
+                name='IYF Video Crawl Task',
+                replace_existing=True,
+                coalesce=True,
+                max_instances=1,
+                misfire_grace_time=300,
+            )
+            
+            logger.info(f"IYF tasks enabled:")
+            logger.info(f"  - Crawl task cron: {iyf_cron}")
+            logger.info(f"  - Categories: {settings.iyf_categories_list}")
+        else:
+            logger.info("IYF cron jobs disabled")
         
         scheduler.start()
-        logger.info(f"GasBuddy scheduler started (timezone: {settings.GASBUDDY_SCHEDULER_TIMEZONE})")
-        logger.info(f"  - Crawl task cron: {crawl_cron}")
-        logger.info(f"  - Daily email cron: {daily_email_cron}")
-        logger.info(f"  - Price alert threshold: {settings.GASBUDDY_PRICE_ALERT_THRESHOLD}")
+        logger.info(f"Scheduler started (timezone: {settings.GASBUDDY_SCHEDULER_TIMEZONE})")
         
     except Exception as e:
-        logger.error(f"Failed to start GasBuddy scheduler: {e}", exc_info=True)
+        logger.error(f"Failed to start scheduler: {e}", exc_info=True)
 
 
-def stop_gasbuddy_scheduler():
-    """停止 GasBuddy 定时任务调度器"""
+def stop_scheduler():
+    """停止定时任务调度器"""
     global scheduler
     if scheduler and scheduler.running:
         scheduler.shutdown()
-        logger.info("GasBuddy scheduler stopped")
+        logger.info("Scheduler stopped")
 
 
 # 应用启动时启动定时任务
@@ -134,7 +152,7 @@ async def startup_event():
     should_run_scheduler = os.environ.get("RUN_SCHEDULER", "true").lower() == "true"
     
     if should_run_scheduler:
-        start_gasbuddy_scheduler()
+        start_scheduler()
     else:
         logger.info("Scheduler disabled for this worker (RUN_SCHEDULER != true)")
 
@@ -142,5 +160,5 @@ async def startup_event():
 # 应用关闭时停止定时任务
 @app.on_event("shutdown")
 async def shutdown_event():
-    stop_gasbuddy_scheduler()
+    stop_scheduler()
     atexit.unregister(lambda: driver.quit())

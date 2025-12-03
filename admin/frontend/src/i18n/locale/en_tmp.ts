@@ -1,12 +1,12 @@
 #paste this code to frjonted/src/i18n_zh.ts
 
 ...
-    gasTrends: {
+    iyfVideo: {
         titles: {
-            list: "油价趋势 List",
-            create: "Create 油价趋势",
-            edit: "Edit 油价趋势",
-            show: "油价趋势 Details",
+            list: "iyf视频 List",
+            create: "Create iyf视频",
+            edit: "Edit iyf视频",
+            show: "iyf视频 Details",
         },
     },
 ...
