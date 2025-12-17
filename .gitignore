@@ -10,3 +10,7 @@ dist/
 build/
 .DS_Store
 admin/backend/logs/admin_backend.log
+
+# Traefik 环境配置文件（包含敏感信息）
+traefik/config_env_production.sh
+traefik/config_env_*.sh
