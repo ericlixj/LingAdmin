@@ -110,6 +110,7 @@ class IYFDataProcessor:
                 region=video_data.get("region"),
                 rating=video_data.get("rating"),
                 view_count=video_data.get("view_count"),
+                play_url=video_data.get("play_url"),
                 crawl_date=self.crawl_date,
                 updater=str(self.user_id),
             )
@@ -128,6 +129,7 @@ class IYFDataProcessor:
                 region=video_data.get("region", ""),
                 rating=video_data.get("rating", ""),
                 view_count=video_data.get("view_count", 0),
+                play_url=video_data.get("play_url", ""),
                 crawl_date=self.crawl_date,
                 creator=str(self.user_id),
                 dept_id=self.dept_id,

@@ -156,8 +156,9 @@ class IYFPlaywrightSpider:
             # regional -> region
             # rating -> rating
             # hot -> view_count
+            iyf_id = str(item.get("key") or item.get("id") or item.get("vid") or "")
             video = {
-                "iyf_id": str(item.get("key") or item.get("id") or item.get("vid") or ""),
+                "iyf_id": iyf_id,
                 "title": item.get("title") or item.get("name") or "",
                 "cover_url": item.get("image") or item.get("cover") or item.get("pic") or "",
                 "description": item.get("contxt") or item.get("desc") or "",
@@ -166,6 +167,7 @@ class IYFPlaywrightSpider:
                 "region": item.get("regional") or item.get("region") or "",
                 "rating": str(item.get("rating") or item.get("score") or ""),
                 "view_count": self._parse_int(item.get("hot") or item.get("viewCount") or 0),
+                "play_url": self._construct_play_url(iyf_id) if iyf_id else "",
             }
 
             # 只添加有效的视频（至少有 id 和 title）
@@ -191,6 +193,13 @@ class IYFPlaywrightSpider:
             return int(value)
         except (ValueError, TypeError):
             return 0
+
+    def _construct_play_url(self, iyf_id: str) -> str:
+        """构造电影播放地址"""
+        if not iyf_id:
+            return ""
+        # IYF 播放地址格式: https://www.iyf.tv/play/{iyf_id}
+        return f"https://www.iyf.tv/play/{iyf_id}"
 
 
 def run_iyf_spider(category: str = "movie", headless: bool = True) -> List[Dict]:

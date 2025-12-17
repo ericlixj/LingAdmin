@@ -105,12 +105,14 @@ IYF 平台有 {len(videos)} 部新视频上线：{category_summary}
 """
     for i, video in enumerate(videos, 1):
         desc = video.get("description") or "暂无简介"
+        play_url = video.get("play_url") or ""
+        play_link = f"   播放地址: {play_url}\n" if play_url else ""
         text_content += f"""
 {i}. {video.get('title', '未知')}
    类型: {video.get('category') or '未知'} | 年份: {video.get('year') or '未知'} | 地区: {video.get('region') or '未知'}
    评分: {video.get('rating') or '暂无'} | 播放量: {video.get('view_count') or 0}
    简介: {desc[:100]}{'...' if len(desc) > 100 else ''}
-
+{play_link}
 """
     
     text_content += f"""
@@ -290,6 +292,9 @@ IYF 平台有 {len(videos)} 部新视频上线：{category_summary}
         if video.get("description") and len(video.get("description", "")) > 150:
             desc += "..."
         
+        play_url = video.get("play_url") or ""
+        play_button = f'<a href="{play_url}" class="btn" style="display: inline-block; margin-top: 10px; padding: 8px 20px; font-size: 14px;">立即观看 →</a>' if play_url else ""
+        
         html_content += f"""
         <div class="video-card">
             {cover_html}
@@ -303,6 +308,7 @@ IYF 平台有 {len(videos)} 部新视频上线：{category_summary}
                     <span>👁 {video.get('view_count') or 0}</span>
                 </div>
                 <div class="video-desc">{desc}</div>
+                {play_button}
             </div>
         </div>
 """

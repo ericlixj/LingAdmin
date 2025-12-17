@@ -105,6 +105,16 @@ class IyfVideo(SQLModel, table=True):
             index=False,
             unique=False,        )
     )
+    play_url:        Optional[str] = Field(
+            default="",
+        description="播放地址",
+        sa_column=Column(
+            String,
+            nullable=False,
+            primary_key=False,
+            index=False,
+            unique=False,server_default=text("''"),        )
+    )
     crawl_date:        Optional[datetime] = Field(
             default=None,
         description="爬取时间",
@@ -150,6 +160,7 @@ class IyfVideoCreate(SQLModel):
     region: Optional[str] = None
     rating: Optional[str] = None
     view_count: Optional[int] = None
+    play_url: Optional[str] = None
     crawl_date: Optional[datetime] = None
     creator: Optional[str] = Field(default=None, max_length=64)
     dept_id: Optional[int] = None
@@ -164,6 +175,7 @@ class IyfVideoUpdate(SQLModel):
     region: Optional[str] = None
     rating: Optional[str] = None
     view_count: Optional[int] = None
+    play_url: Optional[str] = None
     crawl_date: Optional[datetime] = None
     updater: Optional[str] = Field(default=None, max_length=64)
     dept_id: Optional[int] = None
