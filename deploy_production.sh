@@ -19,7 +19,62 @@ echo ""
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$SCRIPT_DIR"
 
-# 1. 加载生产环境变量
+# 1. 拉取最新代码
+echo ""
+echo "📥 拉取最新代码..."
+if [ -d ".git" ]; then
+    # 获取当前分支
+    CURRENT_BRANCH=$(git branch --show-current 2>/dev/null || echo "main")
+    echo "📍 当前分支: $CURRENT_BRANCH"
+    
+    # 检查是否有未提交的更改
+    if ! git diff-index --quiet HEAD -- 2>/dev/null; then
+        echo "⚠️  警告: 检测到未提交的更改"
+        echo "   未提交的文件:"
+        git status --short | head -5
+        echo ""
+        read -p "是否继续？未提交的更改可能会被覆盖 (y/N): " -n 1 -r
+        echo
+        if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+            echo "❌ 用户取消操作"
+            exit 1
+        fi
+    fi
+    
+    # 保存当前提交哈希（用于对比）
+    OLD_COMMIT=$(git rev-parse HEAD 2>/dev/null || echo "")
+    
+    # 拉取最新代码
+    echo "🔄 执行 git pull origin $CURRENT_BRANCH..."
+    if git pull origin "$CURRENT_BRANCH" 2>&1; then
+        # 获取新的提交哈希
+        NEW_COMMIT=$(git rev-parse HEAD 2>/dev/null || echo "")
+        
+        if [ "$OLD_COMMIT" != "$NEW_COMMIT" ]; then
+            echo "✅ 代码更新成功"
+            echo ""
+            echo "📝 最新提交信息:"
+            git log -1 --pretty=format:"  - %h: %s (%an, %ar)" --no-color
+            echo ""
+        else
+            echo "✅ 代码已是最新版本，无需更新"
+            echo ""
+        fi
+    else
+        echo "❌ 错误: git pull 失败"
+        echo "请检查:"
+        echo "  1. 网络连接是否正常"
+        echo "  2. Git 仓库配置是否正确"
+        echo "  3. 是否有权限访问远程仓库"
+        exit 1
+    fi
+else
+    echo "⚠️  警告: 当前目录不是 Git 仓库，跳过代码拉取"
+    echo "   如果这是生产服务器，请确保代码已是最新版本"
+    echo ""
+fi
+
+# 2. 加载生产环境变量
 echo ""
 echo "📋 加载生产环境变量..."
 if [ -f "traefik/config_env_production.sh" ]; then
@@ -32,7 +87,7 @@ else
     exit 1
 fi
 
-# 2. 检查并创建 traefik-public 网络
+# 3. 检查并创建 traefik-public 网络
 echo ""
 echo "🌐 检查 traefik-public 网络..."
 if ! docker network ls | grep -q "traefik-public"; then
@@ -43,7 +98,7 @@ else
     echo "✅ traefik-public 网络已存在"
 fi
 
-# 3. 启动 Traefik（如果未运行）
+# 4. 启动 Traefik（如果未运行）
 echo ""
 echo "🔍 检查 Traefik 状态..."
 if ! docker compose -f traefik/docker-compose.traefik.yml ps | grep -q "Up"; then
@@ -56,48 +111,48 @@ else
     echo "✅ Traefik 已在运行"
 fi
 
-# 4. 停止旧服务
+# 5. 停止旧服务
 echo ""
 echo "🛑 停止旧服务..."
 docker compose -f "$COMPOSE_FILE" down
 echo "✅ 旧服务已停止"
 
-# 5. 重新构建镜像
+# 6. 重新构建镜像
 echo ""
 echo "🔨 重新构建镜像..."
 docker compose -f "$COMPOSE_FILE" build --no-cache
 echo "✅ 镜像构建完成"
 
-# 6. 启动所有服务
+# 7. 启动所有服务
 echo ""
 echo "🚀 启动所有服务..."
 docker compose -f "$COMPOSE_FILE" up -d
 echo "✅ 服务启动命令已执行"
 
-# 7. 等待服务启动
+# 8. 等待服务启动
 echo ""
 echo "⏳ 等待服务启动..."
 sleep 10
 
-# 8. 检查服务状态
+# 9. 检查服务状态
 echo ""
 echo "📊 检查服务状态..."
 docker compose -f "$COMPOSE_FILE" ps
 
-# 9. 显示服务健康状态
+# 10. 显示服务健康状态
 echo ""
 echo "🏥 检查服务健康状态..."
 echo "等待服务完全启动（30 秒）..."
 sleep 30
 
-# 10. 显示最终状态
+# 11. 显示最终状态
 echo ""
 echo "=========================================="
 echo "📊 最终服务状态"
 echo "=========================================="
 docker compose -f "$COMPOSE_FILE" ps
 
-# 11. 显示访问信息
+# 12. 显示访问信息
 echo ""
 echo "=========================================="
 echo "🌐 服务访问地址"
@@ -109,7 +164,7 @@ echo "📱 Dashboard: https://dashboard.${DOMAIN}"
 echo "🔍 OpenSearch: https://opensearch.${DOMAIN}"
 echo ""
 
-# 12. 显示日志查看命令
+# 13. 显示日志查看命令
 echo "=========================================="
 echo "📝 常用命令"
 echo "=========================================="
