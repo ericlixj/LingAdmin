@@ -32,13 +32,8 @@ if [ -d ".git" ]; then
         echo "⚠️  警告: 检测到未提交的更改"
         echo "   未提交的文件:"
         git status --short | head -5
+        echo "   注意: 未提交的更改可能会被覆盖，脚本将继续执行"
         echo ""
-        read -p "是否继续？未提交的更改可能会被覆盖 (y/N): " -n 1 -r
-        echo
-        if [[ ! $REPLY =~ ^[Yy]$ ]]; then
-            echo "❌ 用户取消操作"
-            exit 1
-        fi
     fi
     
     # 保存当前提交哈希（用于对比）
