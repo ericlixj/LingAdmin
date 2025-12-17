@@ -31,7 +31,10 @@ export const Login = () => {
       <Card title={t("login.title")} style={{ width: 320 }}>
         <Form
           layout="vertical"
-          initialValues={{ email: "cacdw@cacnaturals.com", password: "admin123" }}
+          // 默认登录凭据已移除，用户需要手动输入
+          // 如需恢复默认填充，可取消注释以下行：
+          // initialValues={{ email: "cacdw@cacnaturals.com", password: "admin123" }}
+          initialValues={{}}
           onFinish={(values) =>
             login(values, {
               onSuccess: () => {
