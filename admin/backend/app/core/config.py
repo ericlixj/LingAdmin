@@ -75,7 +75,7 @@ class Settings(BaseSettings):
     GASBUDDY_CRON_EXPRESSION: str = "*/5 * * * *"  # 爬取任务 Cron 表达式（分钟 小时 日 月 星期），默认每5分钟执行
     GASBUDDY_CRON_ENABLED: bool = True  # 是否启用定时任务
     GASBUDDY_DAILY_EMAIL_CRON: str = "0 19 * * *"  # 每日邮件 Cron 表达式，默认每天19:00（温哥华时间）
-    GASBUDDY_PRICE_ALERT_THRESHOLD: float = 150.0  # 价格提醒阈值（单位：分），低于此值时立即发送邮件
+    GASBUDDY_PRICE_ALERT_THRESHOLD: float = 150.0  # 价格提醒阈值（单位：分），低于此值时立即发送邮件。可通过环境变量 GASBUDDY_PRICE_ALERT_THRESHOLD 覆盖
     GASBUDDY_SCHEDULER_TIMEZONE: str = "America/Vancouver"  # 调度器时区，默认温哥华时间
 
     # IYF 视频定时任务配置

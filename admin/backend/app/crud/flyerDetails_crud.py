@@ -115,6 +115,54 @@ class FlyerDetailsCRUD(BaseCRUD):
             item.es_deal_flag = True
         self.session.commit()    
 
+    def ensure_index_exists(self, es_client, index_name: str):
+        """
+        确保索引存在，如果不存在则创建（带正确的 mapping）
+        """
+        try:
+            if not es_client.indices.exists(index=index_name):
+                logger.info(f"ES索引 {index_name} 不存在，开始创建...")
+                # 定义索引 mapping，确保 fsa_array 字段支持 keyword 查询
+                index_body = {
+                    "mappings": {
+                        "properties": {
+                            "id": {"type": "integer"},
+                            "item_id": {"type": "integer"},
+                            "name": {"type": "text", "fields": {"keyword": {"type": "keyword"}}},
+                            "brand": {"type": "text", "fields": {"keyword": {"type": "keyword"}}},
+                            "cn_name": {"type": "text", "fields": {"keyword": {"type": "keyword"}}},
+                            "hk_name": {"type": "text", "fields": {"keyword": {"type": "keyword"}}},
+                            "valid_from": {"type": "date"},
+                            "valid_to": {"type": "date"},
+                            "available_to": {"type": "date"},
+                            "cutout_image_url": {"type": "keyword"},
+                            "price": {"type": "float"},
+                            "flyer_id": {"type": "integer"},
+                            "fsa_array": {
+                                "type": "text",
+                                "fields": {
+                                    "keyword": {"type": "keyword"}
+                                }
+                            },
+                            "creator": {"type": "keyword"},
+                            "dept_id": {"type": "integer"},
+                            "updater": {"type": "keyword"},
+                            "deleted": {"type": "boolean"},
+                            "create_time": {"type": "date"},
+                            "update_time": {"type": "date"},
+                            "merchant_id": {"type": "integer"},
+                            "merchant": {"type": "text", "fields": {"keyword": {"type": "keyword"}}},
+                        }
+                    }
+                }
+                es_client.indices.create(index=index_name, body=index_body)
+                logger.info(f"ES索引 {index_name} 创建完成")
+            else:
+                logger.debug(f"ES索引 {index_name} 已存在")
+        except Exception as e:
+            logger.error(f"创建/检查 ES 索引 {index_name} 失败: {e}", exc_info=True)
+            raise
+
     def clear_es_index_data(self, es_client, index_name: str):
         """
         清空索引数据，但保留结构
@@ -142,6 +190,9 @@ class FlyerDetailsCRUD(BaseCRUD):
         es = get_es_client()
         total_synced = 0
 
+        # 确保索引存在（如果不存在则创建）
+        self.ensure_index_exists(es, ES_INDEX)
+        
         # 每次写入前清空索引数据
         self.clear_es_index_data(es, ES_INDEX)
 
@@ -216,6 +267,15 @@ class FlyerDetailsCRUD(BaseCRUD):
         fsa = zip_code[:3].upper() if zip_code else None
         es = get_es_client()
 
+        # 检查索引是否存在，如果不存在返回空结果
+        try:
+            if not es.indices.exists(index=ES_INDEX):
+                logger.warning(f"OpenSearch 索引 {ES_INDEX} 不存在，返回空结果")
+                return []
+        except Exception as e:
+            logger.error(f"检查 OpenSearch 索引 {ES_INDEX} 时出错: {e}", exc_info=True)
+            return []
+
         # 根据语言选择查询字段
         if lang == "en":
             search_field = "name"
@@ -255,17 +315,25 @@ class FlyerDetailsCRUD(BaseCRUD):
                 "sort": [{"update_time": {"order": "desc"}}],
             }
 
-        res = es.search(index=ES_INDEX, body=query_body)
-        hits = res.get("hits", {}).get("hits", [])
+        try:
+            res = es.search(index=ES_INDEX, body=query_body)
+            hits = res.get("hits", {}).get("hits", [])
 
-        # 返回数据时，把动态字段映射为统一字段 title
-        results = []
-        for hit in hits:
-            source = hit["_source"]
-            source["title"] = source.get(title_field, "")
-            results.append(source)
+            # 返回数据时，把动态字段映射为统一字段 title
+            results = []
+            for hit in hits:
+                source = hit["_source"]
+                source["title"] = source.get(title_field, "")
+                results.append(source)
 
-        return results
+            return results
+        except Exception as e:
+            logger.error(f"OpenSearch 搜索失败: {e}", exc_info=True)
+            # 如果是索引不存在的错误，返回空结果而不是抛出异常
+            if "index_not_found_exception" in str(e).lower() or "no such index" in str(e).lower():
+                logger.warning(f"索引 {ES_INDEX} 不存在，返回空结果")
+                return []
+            raise
     
 
 

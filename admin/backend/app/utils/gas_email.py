@@ -21,7 +21,7 @@ from app.crud.gasEmailHistory_crud import GasEmailHistoryCRUD
 
 logger = logging.getLogger(__name__)
 
-# 价格提醒阈值（从配置读取，默认150）
+# 价格提醒阈值（从配置读取，通过环境变量 GASBUDDY_PRICE_ALERT_THRESHOLD 设置）
 PRICE_ALERT_THRESHOLD = settings.GASBUDDY_PRICE_ALERT_THRESHOLD
 
 # 加拿大省份代码到时区的映射
@@ -723,7 +723,7 @@ async def send_gas_price_emails():
     完全异步执行，不影响数据入库流程
     
     规则：
-    1. 如果价格低于阈值（150），立即发送
+    1. 如果价格低于阈值（从环境变量 GASBUDDY_PRICE_ALERT_THRESHOLD 读取），立即发送
     2. 每个用户2小时内只发送一次价格提醒邮件（冷却期）
     3. 一个用户多个邮编，聚合到一份邮件中
     """

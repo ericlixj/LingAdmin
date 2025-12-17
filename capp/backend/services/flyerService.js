@@ -55,6 +55,28 @@ async function searchFlyerDetails({
       };
     }
 
+    // 检查索引是否存在
+    try {
+      const indexExists = await client.indices.exists({ index: ES_INDEX });
+      if (!indexExists.body) {
+        console.warn(`[WARN] OpenSearch 索引 ${ES_INDEX} 不存在，返回空结果`);
+        return {
+          total: 0,
+          data: [],
+          from,
+          size
+        };
+      }
+    } catch (error) {
+      console.error(`[ERROR] 检查 OpenSearch 索引 ${ES_INDEX} 时出错:`, error);
+      return {
+        total: 0,
+        data: [],
+        from,
+        size
+      };
+    }
+
     // 构造查询体
     const queryBody = {
       from: from,
@@ -101,6 +123,19 @@ async function searchFlyerDetails({
     };
   } catch (error) {
     console.error('OpenSearch search error:', error);
+    // 如果是索引不存在的错误，返回空结果而不是抛出异常
+    if (error.message && (
+      error.message.includes('index_not_found_exception') || 
+      error.message.includes('no such index')
+    )) {
+      console.warn(`[WARN] 索引 ${ES_INDEX} 不存在，返回空结果`);
+      return {
+        total: 0,
+        data: [],
+        from,
+        size
+      };
+    }
     throw error;
   }
 }
