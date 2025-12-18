@@ -153,3 +153,4 @@ A: 环境变量是在编译时加载的，不能热重载。必须清除缓存�
 - 建议使用 `npx expo start --clear` 而不是普通的 `npm start`
 - 如果经常修改环境变量，可以使用 `./clear-cache-and-restart.sh` 脚本
 
+

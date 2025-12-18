@@ -124,3 +124,4 @@ echo ""
 echo "💡 提示：在 WSL 中使用 Windows 可执行文件需要 .exe 扩展名"
 echo "   已创建别名方便使用：adb 和 emulator"
 
+

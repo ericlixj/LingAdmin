@@ -422,3 +422,4 @@ API_BASE_URL=http://192.168.1.100:4000  # 替换为您的电脑 IP
 - [iOS 模拟器官方文档](https://developer.apple.com/documentation/xcode/running-your-app-in-the-simulator-or-on-a-device)
 - [React Native 设备文档](https://reactnative.dev/docs/running-on-device)
 
+

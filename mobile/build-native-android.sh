@@ -83,3 +83,4 @@ echo "✅ 构建完成！"
 echo ""
 echo "📱 应用已安装到模拟器，包名: com.lingadmin.mobile"
 
+

@@ -66,3 +66,4 @@ echo ""
 
 exec npx expo start --clear --android
 
+

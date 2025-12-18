@@ -90,3 +90,4 @@ echo "✅ 验证安装："
 echo "  echo \$ANDROID_HOME"
 echo "  adb --version"
 
+

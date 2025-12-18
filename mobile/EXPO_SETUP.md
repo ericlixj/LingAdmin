@@ -260,3 +260,4 @@ eas build:configure
 - 定期更新 Expo SDK 以获得最新功能和安全修复
 - 使用 `expo-doctor` 检查项目配置：`npx expo-doctor`
 
+

@@ -117,3 +117,4 @@ const {postcodes, loading, error, refresh} = usePostcodes();
 4. ✅ 验证邮编选择器显示正确的邮编和标签
 5. ✅ 验证没有配置邮编时的提示信息
 
+

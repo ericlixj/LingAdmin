@@ -45,3 +45,4 @@ echo ""
 echo "💡 提示：如果 Android Studio 在 D 盘，但 SDK 可能在 C 盘（默认位置）"
 echo "   或者 SDK 也在 D 盘，但路径可能不同"
 
+

@@ -162,3 +162,4 @@ npm start -- --reset-cache
 2. 检查 [README.md](./README.md) 获取项目说明
 3. 查看 React Native 官方文档
 
+

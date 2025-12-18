@@ -187,3 +187,4 @@ npm run android:rebuild
   adb shell pm clear com.lingadmin.mobile
   ```
 
+

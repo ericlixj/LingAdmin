@@ -6,3 +6,4 @@
 echo "🧹 清除 Metro bundler 缓存..."
 npx expo start --clear
 
+

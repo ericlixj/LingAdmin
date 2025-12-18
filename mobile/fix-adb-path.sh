@@ -54,3 +54,4 @@ echo ""
 echo "💡 提示: 在 WSL 中，Expo 可能需要使用 adb.exe"
 echo "   如果仍有问题，建议使用 Expo Go（扫描 QR 码）"
 
+

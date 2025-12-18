@@ -201,3 +201,4 @@ npm start
 2. 运行 `adb devices` 的输出
 3. 运行 `echo $ANDROID_HOME` 的输出
 
+

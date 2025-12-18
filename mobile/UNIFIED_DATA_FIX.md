@@ -161,3 +161,4 @@ const items = getDataArray<FlyerItem>(response, ['items', 'results', 'data']);
 
 所有功能现在都应该能正确显示数据了。
 
+

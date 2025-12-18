@@ -51,3 +51,4 @@ echo "🚀 启动 Expo..."
 echo ""
 exec npx expo start --android
 
+
