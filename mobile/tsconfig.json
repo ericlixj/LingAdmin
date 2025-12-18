@@ -1,0 +1,20 @@
+{
+  "extends": "@tsconfig/react-native/tsconfig.json",
+  "compilerOptions": {
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "jsx": "react-native",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    }
+  },
+  "include": ["src/**/*", "index.js", "App.tsx"],
+  "exclude": ["node_modules", "babel.config.js", "metro.config.js"],
+  "typeRoots": ["./node_modules/@types", "./src/types"]
+}
+

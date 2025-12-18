@@ -1,0 +1,296 @@
+import axios, {AxiosInstance, AxiosError} from 'axios';
+import {API_CONFIG} from '../config/api';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {normalizeApiResponse} from '../utils/dataFormatter';
+
+const TOKEN_KEY = 'access_token';
+const REFRESH_TOKEN_KEY = 'refresh_token';
+
+// 调试模式：在开发环境下启用详细日志
+const DEBUG = __DEV__;
+
+class ApiService {
+  private api: AxiosInstance;
+
+  constructor() {
+    this.api = axios.create({
+      baseURL: API_CONFIG.BASE_URL,
+      timeout: API_CONFIG.TIMEOUT,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    // 请求拦截器 - 添加 token 和调试日志
+    this.api.interceptors.request.use(
+      async config => {
+        const token = await AsyncStorage.getItem(TOKEN_KEY);
+        if (token) {
+          config.headers.Authorization = `Bearer ${token}`;
+        }
+        
+        // 调试日志：记录请求信息
+        if (DEBUG) {
+          console.log('🌐 [API Request]', {
+            method: config.method?.toUpperCase(),
+            url: config.url,
+            baseURL: config.baseURL,
+            fullURL: `${config.baseURL}${config.url}`,
+            headers: {
+              ...config.headers,
+              Authorization: token ? 'Bearer ***' : undefined,
+            },
+            data: config.data,
+            params: config.params,
+            paramsString: config.params ? JSON.stringify(config.params, null, 2) : null,
+          });
+        }
+        
+        return config;
+      },
+      error => {
+        if (DEBUG) {
+          console.error('❌ [API Request Error]', error);
+        }
+        return Promise.reject(error);
+      },
+    );
+
+    // 响应拦截器 - 处理错误和调试日志
+    this.api.interceptors.response.use(
+      response => {
+        // 调试日志：记录成功响应
+        if (DEBUG) {
+          console.log('✅ [API Response Raw]', {
+            status: response.status,
+            statusText: response.statusText,
+            url: response.config.url,
+            requestParams: response.config.params,
+            requestData: response.config.data,
+            dataType: typeof response.data,
+            isArray: Array.isArray(response.data),
+            hasCode: response.data && typeof response.data === 'object' && 'code' in response.data,
+            dataKeys: response.data && typeof response.data === 'object' ? Object.keys(response.data) : null,
+            fullResponse: JSON.stringify(response.data, null, 2),
+            dataSample: Array.isArray(response.data) 
+              ? response.data.slice(0, 2)
+              : (response.data && typeof response.data === 'object' && 'data' in response.data && Array.isArray(response.data.data))
+                ? response.data.data.slice(0, 2)
+                : response.data,
+          });
+        }
+        return response;
+      },
+      async error => {
+        // 详细的错误日志
+        if (DEBUG) {
+          const errorInfo: any = {
+            message: error.message,
+            code: error.code,
+            url: error.config?.url,
+            baseURL: error.config?.baseURL,
+            fullURL: error.config ? `${error.config.baseURL}${error.config.url}` : 'N/A',
+          };
+
+          if (error.response) {
+            // 服务器返回了错误响应
+            errorInfo.response = {
+              status: error.response.status,
+              statusText: error.response.statusText,
+              data: error.response.data,
+              headers: error.response.headers,
+            };
+            console.error('❌ [API Response Error]', errorInfo);
+          } else if (error.request) {
+            // 请求已发出但没有收到响应
+            errorInfo.request = error.request;
+            errorInfo.message = '网络错误：无法连接到服务器';
+            console.error('❌ [API Network Error]', errorInfo);
+          } else {
+            // 其他错误
+            console.error('❌ [API Error]', errorInfo);
+          }
+        }
+
+        if (error.response?.status === 401) {
+          // Token 过期，清除存储并跳转到登录
+          await this.clearTokens();
+          // 这里可以触发导航到登录页面
+        }
+        return Promise.reject(error);
+      },
+    );
+  }
+
+  // 设置 token
+  async setTokens(accessToken: string, refreshToken: string) {
+    await AsyncStorage.setItem(TOKEN_KEY, accessToken);
+    await AsyncStorage.setItem(REFRESH_TOKEN_KEY, refreshToken);
+  }
+
+  // 清除 token
+  async clearTokens() {
+    await AsyncStorage.removeItem(TOKEN_KEY);
+    await AsyncStorage.removeItem(REFRESH_TOKEN_KEY);
+  }
+
+  // 获取 token
+  async getToken(): Promise<string | null> {
+    return await AsyncStorage.getItem(TOKEN_KEY);
+  }
+
+  // GET 请求
+  async get<T>(url: string, params?: any): Promise<T> {
+    try {
+      // 清理参数：移除 undefined 值，但保留空字符串和 0
+      const cleanParams = params ? Object.fromEntries(
+        Object.entries(params).filter(([_, value]) => value !== undefined)
+      ) : undefined;
+
+      // 调试日志：记录请求参数
+      if (DEBUG) {
+        console.log('📤 [API GET Request]', {
+          url,
+          originalParams: params,
+          cleanParams,
+          paramsString: cleanParams ? JSON.stringify(cleanParams, null, 2) : null,
+          paramsKeys: cleanParams ? Object.keys(cleanParams) : [],
+        });
+      }
+
+      const response = await this.api.get(url, {params: cleanParams});
+      
+      // 调试日志：记录原始响应
+      if (DEBUG) {
+        console.log('📥 [API GET Response]', {
+          url,
+          requestParams: cleanParams,
+          requestParamsString: cleanParams ? JSON.stringify(cleanParams, null, 2) : null,
+          actualRequestUrl: response.config.url,
+          actualRequestParams: response.config.params,
+          dataType: typeof response.data,
+          isArray: Array.isArray(response.data),
+          hasCode: response.data && typeof response.data === 'object' && 'code' in response.data,
+          dataKeys: response.data && typeof response.data === 'object' ? Object.keys(response.data) : null,
+          fullResponseData: JSON.stringify(response.data, null, 2),
+        });
+      }
+      
+      // 如果响应已经是标准格式 { code, message, data }，直接返回
+      // 否则标准化响应格式
+      if (response.data && typeof response.data === 'object' && 'code' in response.data) {
+        if (DEBUG) {
+          console.log('✅ [API GET] Response already in standard format');
+        }
+        return response.data as T;
+      }
+      
+      // 标准化响应格式
+      const normalized = normalizeApiResponse(response.data);
+      if (DEBUG) {
+        console.log('🔄 [API GET] Normalized response:', {
+          code: normalized.code,
+          dataType: typeof normalized.data,
+          isArray: Array.isArray(normalized.data),
+        });
+      }
+      return normalized as T;
+    } catch (error: any) {
+      // 增强错误信息
+      if (DEBUG) {
+        console.error(`[API GET Error] ${url}`, error);
+      }
+      throw this.enhanceError(error, 'GET', url);
+    }
+  }
+
+  // POST 请求
+  async post<T>(url: string, data?: any): Promise<T> {
+    try {
+      const response = await this.api.post(url, data);
+      // 标准化响应格式
+      return normalizeApiResponse(response.data) as T;
+    } catch (error: any) {
+      if (DEBUG) {
+        console.error(`[API POST Error] ${url}`, error);
+      }
+      throw this.enhanceError(error, 'POST', url);
+    }
+  }
+
+  // PATCH 请求
+  async patch<T>(url: string, data?: any): Promise<T> {
+    try {
+      const response = await this.api.patch(url, data);
+      // 标准化响应格式
+      return normalizeApiResponse(response.data) as T;
+    } catch (error: any) {
+      if (DEBUG) {
+        console.error(`[API PATCH Error] ${url}`, error);
+      }
+      throw this.enhanceError(error, 'PATCH', url);
+    }
+  }
+
+  // DELETE 请求
+  async delete<T>(url: string): Promise<T> {
+    try {
+      const response = await this.api.delete(url);
+      // 标准化响应格式
+      return normalizeApiResponse(response.data) as T;
+    } catch (error: any) {
+      if (DEBUG) {
+        console.error(`[API DELETE Error] ${url}`, error);
+      }
+      throw this.enhanceError(error, 'DELETE', url);
+    }
+  }
+
+  // 增强错误信息，提供更友好的错误消息
+  private enhanceError(error: any, method: string, url: string): Error {
+    let message = '网络错误';
+    
+    if (error.response) {
+      // 服务器返回了错误响应
+      const status = error.response.status;
+      const data = error.response.data;
+      
+      if (data?.message) {
+        message = data.message;
+      } else if (status === 404) {
+        message = '请求的资源不存在';
+      } else if (status === 401) {
+        message = '未授权，请重新登录';
+      } else if (status === 403) {
+        message = '没有权限访问此资源';
+      } else if (status >= 500) {
+        message = '服务器错误，请稍后重试';
+      } else {
+        message = `请求失败 (${status})`;
+      }
+    } else if (error.request) {
+      // 请求已发出但没有收到响应
+      if (error.code === 'ECONNABORTED') {
+        message = '请求超时，请检查网络连接';
+      } else if (error.code === 'ENOTFOUND' || error.code === 'ECONNREFUSED') {
+        message = `无法连接到服务器 (${API_CONFIG.BASE_URL})，请检查 API 地址配置`;
+      } else {
+        message = '网络连接失败，请检查网络设置';
+      }
+    } else {
+      // 其他错误
+      message = error.message || '未知错误';
+    }
+
+    const enhancedError = new Error(message);
+    (enhancedError as any).originalError = error;
+    (enhancedError as any).method = method;
+    (enhancedError as any).url = url;
+    (enhancedError as any).baseURL = API_CONFIG.BASE_URL;
+    
+    return enhancedError;
+  }
+}
+
+export default new ApiService();
+
