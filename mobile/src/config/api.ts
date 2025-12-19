@@ -1,5 +1,9 @@
 import {API_BASE_URL, API_TIMEOUT} from '@env';
 import {Platform} from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {Environment, getEnvironmentConfig, ENVIRONMENTS} from './environments';
+
+const ENVIRONMENT_STORAGE_KEY = 'app_environment';
 
 // 根据平台智能选择默认 API 地址
 const getDefaultBaseURL = () => {
@@ -20,13 +24,78 @@ const getDefaultBaseURL = () => {
   }
   
   // 生产环境
-  return 'https://your-production-api.com';
+  return 'https://c-api.kxf.ca';
 };
 
-// API 配置
+// 获取当前环境配置的 API 地址
+let cachedEnvironment: Environment | null = null;
+let cachedBaseUrl: string | null = null;
+
+/**
+ * 清除缓存（当环境切换时调用）
+ */
+export function clearApiBaseUrlCache() {
+  cachedEnvironment = null;
+  cachedBaseUrl = null;
+}
+
+/**
+ * 获取当前环境的 API 基础地址
+ * 优先使用用户选择的环境，其次使用编译时的环境变量
+ */
+export async function getCurrentApiBaseUrl(): Promise<string> {
+  try {
+    // 尝试从存储中获取用户选择的环境
+    const savedEnv = await AsyncStorage.getItem(ENVIRONMENT_STORAGE_KEY);
+    if (savedEnv && savedEnv in ENVIRONMENTS) {
+      const env = savedEnv as Environment;
+      // 如果环境变化或缓存为空，更新缓存
+      if (env !== cachedEnvironment || !cachedBaseUrl) {
+        cachedEnvironment = env;
+        cachedBaseUrl = ENVIRONMENTS[env].apiBaseUrl;
+        if (__DEV__) {
+          console.log('🔄 [API Config] Using environment:', env, cachedBaseUrl);
+        }
+      }
+      return cachedBaseUrl;
+    }
+  } catch (error) {
+    // 如果读取失败，使用默认值
+    if (__DEV__) {
+      console.error('Failed to get environment from storage:', error);
+    }
+  }
+  
+  // 如果没有保存的环境配置，使用编译时的环境变量或默认值
+  const defaultUrl = API_BASE_URL || getDefaultBaseURL();
+  
+  // 根据默认 URL 推断环境（仅初始化时）
+  if (!cachedBaseUrl) {
+    if (defaultUrl.includes('10.0.2.2') || defaultUrl.includes('localhost')) {
+      cachedEnvironment = 'development';
+    } else if (defaultUrl.includes('c-api.kxf.ca')) {
+      cachedEnvironment = 'production';
+    } else {
+      cachedEnvironment = 'production';
+    }
+    cachedBaseUrl = defaultUrl;
+  }
+  
+  return defaultUrl;
+}
+
+/**
+ * 同步获取 API 配置（用于初始化）
+ * 注意：这个函数返回的是编译时的配置，运行时切换环境需要通过 getCurrentApiBaseUrl
+ */
 export const API_CONFIG = {
-  BASE_URL: getDefaultBaseURL(),
-  TIMEOUT: API_TIMEOUT ? parseInt(API_TIMEOUT, 10) : 30000,
+  get BASE_URL(): string {
+    // 这个值在初始化时使用，运行时切换环境需要通过 API 服务层
+    return API_BASE_URL || getDefaultBaseURL();
+  },
+  get TIMEOUT(): number {
+    return API_TIMEOUT ? parseInt(API_TIMEOUT, 10) : 30000;
+  },
 };
 
 // API 端点

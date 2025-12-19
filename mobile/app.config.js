@@ -27,6 +27,7 @@ export default {
   expo: {
     name: 'LingAdmin',
     slug: 'lingadmin-mobile',
+    owner: 'ericlixj',
     version: '1.0.0',
     orientation: 'portrait',
     icon: './assets/icon.png',
@@ -54,8 +55,17 @@ export default {
     plugins: [],
     scheme: 'lingadmin',
     extra: {
-      apiBaseUrl: process.env.API_BASE_URL || 'http://localhost:4000',
+      // API 配置：根据环境变量或默认值
+      // 本地开发：使用 .env 文件中的配置
+      // 生产环境：使用 EAS 环境变量或默认值 https://c-api.kxf.ca
+      apiBaseUrl: process.env.API_BASE_URL || (process.env.NODE_ENV === 'production' ? 'https://c-api.kxf.ca' : 'http://localhost:4000'),
       apiTimeout: process.env.API_TIMEOUT || '30000',
+      router: {
+        origin: false,
+      },
+      eas: {
+        projectId: '0ea1d167-d9cb-40c6-9244-f8576639232f',
+      },
     },
   },
 };

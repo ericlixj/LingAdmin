@@ -16,6 +16,7 @@ import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {AuthStackParamList} from '../../navigation/AuthNavigator';
 import {API_CONFIG} from '../../config/api';
+import {useEnvironment} from '../../hooks/useEnvironment';
 
 type LoginScreenNavigationProp = NativeStackNavigationProp<
   AuthStackParamList,
@@ -28,6 +29,9 @@ const LoginScreen: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const {login} = useAuth();
   const navigation = useNavigation<LoginScreenNavigationProp>();
+  const {getCurrentConfig} = useEnvironment();
+  
+  const currentConfig = getCurrentConfig();
 
   const handleLogin = async () => {
     if (!email || !password) {
@@ -85,8 +89,9 @@ const LoginScreen: React.FC = () => {
           {__DEV__ && (
             <View style={styles.debugInfo}>
               <Text style={styles.debugText}>🔧 调试信息</Text>
-              <Text style={styles.debugText}>API: {API_CONFIG.BASE_URL}</Text>
-              <Text style={styles.debugText}>超时: {API_CONFIG.TIMEOUT}ms</Text>
+              <Text style={styles.debugText}>环境: {currentConfig.name}</Text>
+              <Text style={styles.debugText}>API: {currentConfig.apiBaseUrl}</Text>
+              <Text style={styles.debugText}>超时: {currentConfig.apiTimeout}ms</Text>
             </View>
           )}
 

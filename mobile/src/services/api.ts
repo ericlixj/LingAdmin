@@ -1,18 +1,23 @@
 import axios, {AxiosInstance, AxiosError} from 'axios';
-import {API_CONFIG} from '../config/api';
+import {API_CONFIG, getCurrentApiBaseUrl, clearApiBaseUrlCache} from '../config/api';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {normalizeApiResponse} from '../utils/dataFormatter';
+import {getEnvironmentConfig, Environment} from '../config/environments';
 
 const TOKEN_KEY = 'access_token';
 const REFRESH_TOKEN_KEY = 'refresh_token';
+const ENVIRONMENT_STORAGE_KEY = 'app_environment';
 
 // 调试模式：在开发环境下启用详细日志
 const DEBUG = __DEV__;
 
 class ApiService {
   private api: AxiosInstance;
+  private currentBaseUrl: string = API_CONFIG.BASE_URL;
+  private initPromise: Promise<void> | null = null;
 
   constructor() {
+    // 先使用默认配置创建实例
     this.api = axios.create({
       baseURL: API_CONFIG.BASE_URL,
       timeout: API_CONFIG.TIMEOUT,
@@ -20,6 +25,80 @@ class ApiService {
         'Content-Type': 'application/json',
       },
     });
+
+    this.setupInterceptors();
+    
+    // 异步加载环境配置并更新
+    this.initPromise = this.initializeApi();
+    
+    // 监听环境变化
+    this.setupEnvironmentListener();
+  }
+
+  // 初始化 API 实例（异步加载环境配置）
+  private async initializeApi() {
+    try {
+      // 获取当前环境的 API 地址
+      const baseUrl = await getCurrentApiBaseUrl();
+      if (baseUrl !== this.currentBaseUrl) {
+        this.currentBaseUrl = baseUrl;
+        this.api.defaults.baseURL = baseUrl;
+        
+        if (DEBUG) {
+          console.log('✅ [API Service] Initialized with base URL:', baseUrl);
+        }
+      }
+    } catch (error) {
+      console.error('Failed to initialize API with environment config:', error);
+    }
+  }
+
+  // 确保初始化完成
+  private async ensureInitialized() {
+    if (this.initPromise) {
+      await this.initPromise;
+      this.initPromise = null;
+    }
+  }
+
+  // 设置环境变化监听
+  private setupEnvironmentListener() {
+    // 定期检查环境是否变化（每2秒）
+    setInterval(async () => {
+      const newBaseUrl = await getCurrentApiBaseUrl();
+      if (newBaseUrl !== this.currentBaseUrl) {
+        if (DEBUG) {
+          console.log('🔄 [API Service] Environment changed, updating base URL:', {
+            old: this.currentBaseUrl,
+            new: newBaseUrl,
+          });
+        }
+        this.currentBaseUrl = newBaseUrl;
+        // 更新现有实例的 baseURL
+        this.api.defaults.baseURL = newBaseUrl;
+      }
+    }, 2000);
+  }
+
+  // 手动更新环境（供外部调用）
+  async updateEnvironment() {
+    // 清除缓存，强制重新读取环境配置
+    clearApiBaseUrlCache();
+    const newBaseUrl = await getCurrentApiBaseUrl();
+    if (newBaseUrl !== this.currentBaseUrl) {
+      if (DEBUG) {
+        console.log('🔄 [API Service] Manually updating environment:', {
+          old: this.currentBaseUrl,
+          new: newBaseUrl,
+        });
+      }
+      this.currentBaseUrl = newBaseUrl;
+      this.api.defaults.baseURL = newBaseUrl;
+    }
+  }
+
+  // 设置拦截器
+  private setupInterceptors() {
 
     // 请求拦截器 - 添加 token 和调试日志
     this.api.interceptors.request.use(
@@ -141,6 +220,16 @@ class ApiService {
 
   // GET 请求
   async get<T>(url: string, params?: any): Promise<T> {
+    // 确保已初始化
+    await this.ensureInitialized();
+    
+    // 每次请求前检查环境是否变化
+    const currentBaseUrl = await getCurrentApiBaseUrl();
+    if (currentBaseUrl !== this.currentBaseUrl) {
+      this.currentBaseUrl = currentBaseUrl;
+      this.api.defaults.baseURL = currentBaseUrl;
+    }
+
     try {
       // 清理参数：移除 undefined 值，但保留空字符串和 0
       const cleanParams = params ? Object.fromEntries(
@@ -206,6 +295,15 @@ class ApiService {
 
   // POST 请求
   async post<T>(url: string, data?: any): Promise<T> {
+    await this.ensureInitialized();
+    
+    // 每次请求前检查环境是否变化
+    const currentBaseUrl = await getCurrentApiBaseUrl();
+    if (currentBaseUrl !== this.currentBaseUrl) {
+      this.currentBaseUrl = currentBaseUrl;
+      this.api.defaults.baseURL = currentBaseUrl;
+    }
+
     try {
       const response = await this.api.post(url, data);
       // 标准化响应格式
@@ -220,6 +318,14 @@ class ApiService {
 
   // PATCH 请求
   async patch<T>(url: string, data?: any): Promise<T> {
+    await this.ensureInitialized();
+    
+    const currentBaseUrl = await getCurrentApiBaseUrl();
+    if (currentBaseUrl !== this.currentBaseUrl) {
+      this.currentBaseUrl = currentBaseUrl;
+      this.api.defaults.baseURL = currentBaseUrl;
+    }
+
     try {
       const response = await this.api.patch(url, data);
       // 标准化响应格式
@@ -234,6 +340,14 @@ class ApiService {
 
   // DELETE 请求
   async delete<T>(url: string): Promise<T> {
+    await this.ensureInitialized();
+    
+    const currentBaseUrl = await getCurrentApiBaseUrl();
+    if (currentBaseUrl !== this.currentBaseUrl) {
+      this.currentBaseUrl = currentBaseUrl;
+      this.api.defaults.baseURL = currentBaseUrl;
+    }
+
     try {
       const response = await this.api.delete(url);
       // 标准化响应格式

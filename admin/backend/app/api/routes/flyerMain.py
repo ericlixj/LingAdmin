@@ -198,8 +198,8 @@ async def run_all_tasks(user_id: int, dept_id: int):
         script_path = os.path.join(
             os.path.dirname(__file__), "../../scripts/run_flipp_spider.py"
         )
-        # 日志文件路径：admin/backend/logs/admin_backend.log
-        log_dir = os.path.join(os.path.dirname(__file__), "../../../logs")
+        # 日志文件路径：系统目录 /deploy/logs/lingadmin/admin/admin_backend.log
+        log_dir = "/deploy/logs/lingadmin/admin"
         os.makedirs(log_dir, exist_ok=True)
         log_file = os.path.join(log_dir, "admin_backend.log")
         
@@ -216,7 +216,7 @@ async def run_all_tasks(user_id: int, dept_id: int):
             returncode = await process.wait()
         
         if returncode != 0:
-            logger.error(f"步骤1爬取失败，返回码: {returncode}，日志: logs/admin_backend.log")
+            logger.error(f"步骤1爬取失败，返回码: {returncode}，日志: {log_file}")
         else:
             logger.info("步骤1：爬取数据完成")
     except Exception as e:

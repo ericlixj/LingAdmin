@@ -1,0 +1,33 @@
+{
+  "cli": {
+    "version": ">= 16.28.0",
+    "appVersionSource": "remote"
+  },
+  "build": {
+    "development": {
+      "developmentClient": true,
+      "distribution": "internal",
+      "env": {
+        "API_BASE_URL": "http://10.0.2.2:4000",
+        "API_TIMEOUT": "30000"
+      }
+    },
+    "preview": {
+      "distribution": "internal",
+      "env": {
+        "API_BASE_URL": "https://c-api.kxf.ca",
+        "API_TIMEOUT": "30000"
+      }
+    },
+    "production": {
+      "autoIncrement": true,
+      "env": {
+        "API_BASE_URL": "https://c-api.kxf.ca",
+        "API_TIMEOUT": "30000"
+      }
+    }
+  },
+  "submit": {
+    "production": {}
+  }
+}

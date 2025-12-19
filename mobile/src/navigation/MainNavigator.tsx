@@ -5,12 +5,14 @@ import HomeScreen from '../screens/main/HomeScreen';
 import FlyerDetailsScreen from '../screens/main/FlyerDetailsScreen';
 import GasStationsScreen from '../screens/main/GasStationsScreen';
 import PostcodeManagerScreen from '../screens/main/PostcodeManagerScreen';
+import SettingsScreen from '../screens/main/SettingsScreen';
 
 export type MainTabParamList = {
   Home: undefined;
   Flyers: undefined;
   Gas: undefined;
   Postcodes: undefined;
+  Settings: undefined;
 };
 
 export type MainStackParamList = {
@@ -18,6 +20,7 @@ export type MainStackParamList = {
   FlyerDetails: undefined;
   GasStations: undefined;
   PostcodeManager: undefined;
+  Settings: undefined;
 };
 
 const Tab = createBottomTabNavigator<MainTabParamList>();
@@ -51,6 +54,11 @@ const MainTabs: React.FC = () => {
         component={PostcodeManagerScreen}
         options={{title: '邮编管理', tabBarLabel: '邮编'}}
       />
+      <Tab.Screen
+        name="Settings"
+        component={SettingsScreen}
+        options={{title: '设置', tabBarLabel: '设置'}}
+      />
     </Tab.Navigator>
   );
 };
@@ -62,6 +70,11 @@ const MainNavigator: React.FC = () => {
         name="MainTabs"
         component={MainTabs}
         options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="Settings"
+        component={SettingsScreen}
+        options={{title: '设置'}}
       />
     </Stack.Navigator>
   );

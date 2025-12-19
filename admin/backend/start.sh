@@ -40,15 +40,43 @@ echo "=========================================="
 echo "启动 Admin Backend..."
 echo "=========================================="
 
+# 日志文件路径：系统目录
+LOG_DIR="/deploy/logs/lingadmin/admin"
+LOG_FILE="${LOG_DIR}/admin_backend.log"
+
 # 确保日志目录存在
-mkdir -p logs
+echo "检查日志目录: $LOG_DIR"
+if [ ! -d "$LOG_DIR" ]; then
+    echo "创建日志目录: $LOG_DIR"
+    # 尝试创建目录（可能需要 sudo）
+    if mkdir -p "$LOG_DIR" 2>/dev/null; then
+        echo "✓ 目录创建成功"
+    elif sudo mkdir -p "$LOG_DIR" 2>/dev/null; then
+        echo "✓ 目录创建成功（使用 sudo）"
+        # 设置权限，让当前用户可写
+        sudo chown -R $(whoami):$(whoami) "$LOG_DIR" 2>/dev/null || true
+        sudo chmod 755 "$LOG_DIR" 2>/dev/null || true
+    else
+        echo "✗ 错误: 无法创建日志目录 $LOG_DIR"
+        echo "请手动创建目录: sudo mkdir -p $LOG_DIR && sudo chmod 755 $LOG_DIR"
+        exit 1
+    fi
+else
+    echo "✓ 日志目录已存在"
+fi
+
+# 确保目录可写
+if [ ! -w "$LOG_DIR" ]; then
+    echo "警告: 日志目录不可写，尝试设置权限..."
+    sudo chmod 755 "$LOG_DIR" 2>/dev/null || chmod 755 "$LOG_DIR" 2>/dev/null || true
+fi
 
 # 后台启动 FastAPI，日志输出到文件
-nohup uvicorn app.main:app --reload >> logs/admin_backend.log 2>&1 &
+nohup uvicorn app.main:app --reload >> "$LOG_FILE" 2>&1 &
 UVICORN_PID=$!
 
 echo "FastAPI 已在后台启动，PID: $UVICORN_PID"
-echo "日志文件: logs/admin_backend.log"
+echo "日志文件: $LOG_FILE"
 echo "按 Ctrl+C 停止查看日志（服务仍在后台运行）"
 echo "停止服务请运行: kill $UVICORN_PID 或重新运行 ./start.sh"
 echo "=========================================="
@@ -57,4 +85,4 @@ echo "=========================================="
 sleep 2
 
 # 实时查看日志
-tail -f logs/admin_backend.log
+tail -f "$LOG_FILE"

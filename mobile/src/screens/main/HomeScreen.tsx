@@ -47,6 +47,15 @@ const HomeScreen: React.FC = () => {
             管理您的常用邮编
           </Text>
         </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.card}
+          onPress={() => navigation.navigate('Settings' as never)}>
+          <Text style={styles.cardTitle}>设置</Text>
+          <Text style={styles.cardDescription}>
+            环境配置和应用设置
+          </Text>
+        </TouchableOpacity>
       </View>
 
       <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
