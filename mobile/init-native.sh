@@ -52,3 +52,4 @@ echo "2. 对于 iOS (仅 macOS): cd ios && pod install && cd .."
 echo "3. 启动应用: npm run android 或 npm run ios"
 
 
+

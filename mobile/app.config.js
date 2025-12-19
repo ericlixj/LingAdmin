@@ -25,7 +25,7 @@ if (process.platform === 'linux' && !process.env.ANDROID_HOME) {
 
 export default {
   expo: {
-    name: 'LingAdmin',
+    name: 'Ling',
     slug: 'lingadmin-mobile',
     owner: 'ericlixj',
     version: '1.0.0',

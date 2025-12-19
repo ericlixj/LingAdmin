@@ -14,35 +14,68 @@ if [ -z "$ANDROID_HOME" ]; then
     export ANDROID_HOME=/mnt/c/Users/ericl/AppData/Local/Android/Sdk
     export PATH=$PATH:$ANDROID_HOME/platform-tools
     export PATH=$PATH:$ANDROID_HOME/emulator
+    echo "📝 已设置 ANDROID_HOME: $ANDROID_HOME"
 fi
 
 # 修复 WSL 中的 adb 路径问题
 if [ ! -e "$ANDROID_HOME/platform-tools/adb" ] && [ -f "$ANDROID_HOME/platform-tools/adb.exe" ]; then
     ln -sf "$ANDROID_HOME/platform-tools/adb.exe" "$ANDROID_HOME/platform-tools/adb" 2>/dev/null || true
+    echo "📝 已创建 adb 符号链接"
 fi
 
 echo "📱 Android SDK: $ANDROID_HOME"
 echo ""
 
+# 检查 Android SDK 是否存在
+if [ ! -d "$ANDROID_HOME" ]; then
+    echo "❌ 错误: Android SDK 目录不存在: $ANDROID_HOME"
+    echo ""
+    echo "请确保："
+    echo "1. Android Studio 已安装"
+    echo "2. Android SDK 路径正确"
+    echo "3. 或在 ~/.bashrc 中设置 ANDROID_HOME"
+    exit 1
+fi
+
 # 显示当前 API 配置
 echo "📋 当前 API 配置："
-cat .env | grep API_BASE_URL || echo "⚠️  未找到 API_BASE_URL"
+if [ -f ".env" ]; then
+    cat .env | grep API_BASE_URL || echo "⚠️  未找到 API_BASE_URL"
+else
+    echo "⚠️  未找到 .env 文件"
+fi
 echo ""
 
 # 检查设备
 echo "📱 检查连接的设备..."
 if [ -f "$ANDROID_HOME/platform-tools/adb.exe" ]; then
     ADB="$ANDROID_HOME/platform-tools/adb.exe"
-else
+elif [ -f "$ANDROID_HOME/platform-tools/adb" ]; then
     ADB="$ANDROID_HOME/platform-tools/adb"
+else
+    echo "❌ 错误: 找不到 adb 工具"
+    echo "   路径: $ANDROID_HOME/platform-tools/"
+    exit 1
+fi
+
+# 测试 adb 是否可用
+if ! $ADB version >/dev/null 2>&1; then
+    echo "❌ 错误: adb 无法执行"
+    echo "   请检查 Android SDK 是否正确安装"
+    exit 1
 fi
 
 DEVICES=$($ADB devices 2>/dev/null | grep -v "List" | grep "device" | wc -l)
 if [ "$DEVICES" -eq 0 ]; then
     echo "⚠️  警告: 没有检测到 Android 设备或模拟器"
-    echo "   请确保："
-    echo "   1. 在 Windows 上启动了 Android Studio"
-    echo "   2. 启动了 Android 模拟器"
+    echo ""
+    echo "请确保："
+    echo "1. 在 Windows 上启动了 Android Studio"
+    echo "2. 启动了 Android 模拟器"
+    echo "3. 或连接了物理设备并启用了 USB 调试"
+    echo ""
+    echo "当前连接的设备："
+    $ADB devices
     exit 1
 fi
 
@@ -55,14 +88,31 @@ if [ ! -d "android" ]; then
     echo "📦 首次构建，需要预构建原生项目..."
     echo "   这可能需要几分钟时间..."
     echo ""
+    
+    # 检查 expo 是否安装
+    if ! command -v npx &> /dev/null; then
+        echo "❌ 错误: 找不到 npx"
+        echo "   请确保 Node.js 和 npm 已正确安装"
+        exit 1
+    fi
+    
+    echo "运行: npx expo prebuild --platform android"
     npx expo prebuild --platform android
+    
+    if [ $? -ne 0 ]; then
+        echo "❌ 预构建失败"
+        exit 1
+    fi
+    
+    echo "✅ 预构建完成"
     echo ""
 fi
 
-# 清除缓存
+# 清除缓存（可选，但有助于解决构建问题）
 echo "🧹 清除构建缓存..."
 rm -rf android/app/build 2>/dev/null || true
 rm -rf android/build 2>/dev/null || true
+rm -rf android/.gradle 2>/dev/null || true
 echo "✅ 缓存已清除"
 echo ""
 
@@ -76,11 +126,26 @@ echo "   - 构建完成后会自动安装到模拟器"
 echo "   - 应用包名: com.lingadmin.mobile"
 echo ""
 
+# 使用 expo run:android 构建
+echo "运行: npx expo run:android"
 npx expo run:android
 
-echo ""
-echo "✅ 构建完成！"
-echo ""
-echo "📱 应用已安装到模拟器，包名: com.lingadmin.mobile"
-
-
+if [ $? -eq 0 ]; then
+    echo ""
+    echo "✅ 构建完成！"
+    echo ""
+    echo "📱 应用已安装到模拟器，包名: com.lingadmin.mobile"
+    echo ""
+    echo "💡 下一步："
+    echo "   运行 'npm start' 启动开发服务器"
+else
+    echo ""
+    echo "❌ 构建失败"
+    echo ""
+    echo "💡 故障排查："
+    echo "   1. 检查 Android SDK 是否正确安装"
+    echo "   2. 检查 Gradle 是否可用"
+    echo "   3. 查看上面的错误信息"
+    echo "   4. 尝试运行: npm run android:rebuild"
+    exit 1
+fi

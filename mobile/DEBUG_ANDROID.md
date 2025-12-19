@@ -202,3 +202,4 @@ npm start
 3. 运行 `echo $ANDROID_HOME` 的输出
 
 
+

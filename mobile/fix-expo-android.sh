@@ -48,3 +48,4 @@ echo "💡 提示：如果仍有问题，建议使用 Expo Go（扫描 QR 码）
 echo "   这样无需配置 Android SDK"
 
 
+

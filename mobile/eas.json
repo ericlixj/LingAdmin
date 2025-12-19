@@ -7,6 +7,12 @@
     "development": {
       "developmentClient": true,
       "distribution": "internal",
+      "android": {
+        "buildType": "apk"
+      },
+      "ios": {
+        "buildConfiguration": "Debug"
+      },
       "env": {
         "API_BASE_URL": "http://10.0.2.2:4000",
         "API_TIMEOUT": "30000"
@@ -14,6 +20,12 @@
     },
     "preview": {
       "distribution": "internal",
+      "android": {
+        "buildType": "apk"
+      },
+      "ios": {
+        "buildConfiguration": "Release"
+      },
       "env": {
         "API_BASE_URL": "https://c-api.kxf.ca",
         "API_TIMEOUT": "30000"
@@ -21,6 +33,12 @@
     },
     "production": {
       "autoIncrement": true,
+      "android": {
+        "buildType": "apk"
+      },
+      "ios": {
+        "buildConfiguration": "Release"
+      },
       "env": {
         "API_BASE_URL": "https://c-api.kxf.ca",
         "API_TIMEOUT": "30000"
@@ -28,6 +46,12 @@
     }
   },
   "submit": {
-    "production": {}
+    "production": {
+      "ios": {
+        "appleId": "your-apple-id@example.com",
+        "ascAppId": "your-app-store-connect-app-id",
+        "appleTeamId": "your-team-id"
+      }
+    }
   }
 }
