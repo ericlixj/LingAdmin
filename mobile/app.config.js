@@ -30,7 +30,7 @@ export default {
     owner: 'ericlixj',
     version: '1.0.0',
     orientation: 'portrait',
-    icon: './assets/icon.png',
+    icon: './assets/adaptive-icon.png',
     userInterfaceStyle: 'light',
     splash: {
       image: './assets/splash.png',

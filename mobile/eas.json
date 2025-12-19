@@ -27,7 +27,7 @@
         "buildConfiguration": "Release"
       },
       "env": {
-        "API_BASE_URL": "https://c-api.kxf.ca",
+        "API_BASE_URL": "https://c-api-staging.kxf.ca",
         "API_TIMEOUT": "30000"
       }
     },

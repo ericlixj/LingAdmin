@@ -1,7 +1,7 @@
 import {API_BASE_URL, API_TIMEOUT} from '@env';
 import {Platform} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {Environment, getEnvironmentConfig, ENVIRONMENTS} from './environments';
+import {Environment, getEnvironmentConfig, ENVIRONMENTS, getAllEnvironments} from './environments';
 
 const ENVIRONMENT_STORAGE_KEY = 'app_environment';
 
@@ -47,12 +47,27 @@ export async function getCurrentApiBaseUrl(): Promise<string> {
   try {
     // 尝试从存储中获取用户选择的环境
     const savedEnv = await AsyncStorage.getItem(ENVIRONMENT_STORAGE_KEY);
-    if (savedEnv && savedEnv in ENVIRONMENTS) {
-      const env = savedEnv as Environment;
+    const validEnvironments = getAllEnvironments();
+    
+    // 如果保存的是旧的 'preview' 环境，迁移到 'production'
+    let envToUse: Environment | null = null;
+    if (savedEnv) {
+      if (savedEnv === 'preview') {
+        // 迁移旧的预览环境到生产环境
+        envToUse = 'production';
+        await AsyncStorage.setItem(ENVIRONMENT_STORAGE_KEY, 'production');
+      } else if (validEnvironments.includes(savedEnv as Environment)) {
+        envToUse = savedEnv as Environment;
+      }
+    }
+    
+    if (envToUse) {
+      const env = envToUse;
       // 如果环境变化或缓存为空，更新缓存
       if (env !== cachedEnvironment || !cachedBaseUrl) {
         cachedEnvironment = env;
-        cachedBaseUrl = ENVIRONMENTS[env].apiBaseUrl;
+        // 使用 getEnvironmentConfig 获取配置，这样开发环境会根据平台动态选择
+        cachedBaseUrl = getEnvironmentConfig(env).apiBaseUrl;
         if (__DEV__) {
           console.log('🔄 [API Config] Using environment:', env, cachedBaseUrl);
         }

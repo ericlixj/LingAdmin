@@ -18,11 +18,23 @@ export function useEnvironment() {
     try {
       const saved = await AsyncStorage.getItem(ENVIRONMENT_STORAGE_KEY);
       if (saved) {
-        setCurrentEnvironment(saved as Environment);
+        // 如果保存的是旧的 'preview' 环境，迁移到 'production'
+        if (saved === 'preview') {
+          await AsyncStorage.setItem(ENVIRONMENT_STORAGE_KEY, 'production');
+          setCurrentEnvironment('production');
+        } else if (saved === 'development' || saved === 'production') {
+          setCurrentEnvironment(saved as Environment);
+        } else {
+          // 无效的环境值，使用默认值
+          const defaultEnv: Environment = API_BASE_URL && (API_BASE_URL.includes('localhost') || API_BASE_URL.includes('10.0.2.2'))
+            ? 'development'
+            : 'production';
+          setCurrentEnvironment(defaultEnv);
+        }
       } else {
         // 如果没有保存的配置，根据编译时的环境变量判断
         // 如果 .env 中有配置，使用 development，否则使用 production
-        const defaultEnv: Environment = API_BASE_URL && API_BASE_URL.includes('localhost') || API_BASE_URL.includes('10.0.2.2')
+        const defaultEnv: Environment = API_BASE_URL && (API_BASE_URL.includes('localhost') || API_BASE_URL.includes('10.0.2.2'))
           ? 'development'
           : 'production';
         setCurrentEnvironment(defaultEnv);

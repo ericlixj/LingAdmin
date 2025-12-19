@@ -17,6 +17,8 @@ import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {AuthStackParamList} from '../../navigation/AuthNavigator';
 import {API_CONFIG} from '../../config/api';
 import {useEnvironment} from '../../hooks/useEnvironment';
+import {Environment, ENVIRONMENTS, getAllEnvironments} from '../../config/environments';
+import api from '../../services/api';
 
 type LoginScreenNavigationProp = NativeStackNavigationProp<
   AuthStackParamList,
@@ -27,11 +29,37 @@ const LoginScreen: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
+  const [switching, setSwitching] = useState(false);
   const {login} = useAuth();
   const navigation = useNavigation<LoginScreenNavigationProp>();
-  const {getCurrentConfig} = useEnvironment();
+  const {currentEnvironment, setEnvironment, getCurrentConfig, loading: envLoading} = useEnvironment();
   
   const currentConfig = getCurrentConfig();
+
+  // 切换环境
+  const handleSwitchEnvironment = async (env: Environment) => {
+    if (env === currentEnvironment) {
+      return;
+    }
+
+    try {
+      setSwitching(true);
+      await setEnvironment(env);
+      
+      // 更新 API 服务的 baseURL
+      await api.updateEnvironment();
+      
+      Alert.alert(
+        '环境已切换',
+        `已切换到 ${ENVIRONMENTS[env].name}\n\nAPI 地址: ${ENVIRONMENTS[env].apiBaseUrl}`,
+        [{text: '确定'}],
+      );
+    } catch (error: any) {
+      Alert.alert('错误', `切换环境失败: ${error.message}`);
+    } finally {
+      setSwitching(false);
+    }
+  };
 
   const handleLogin = async () => {
     if (!email || !password) {
@@ -85,15 +113,46 @@ const LoginScreen: React.FC = () => {
           <Text style={styles.title}>LingAdmin</Text>
           <Text style={styles.subtitle}>登录您的账户</Text>
           
-          {/* 开发模式下显示 API 配置 */}
-          {__DEV__ && (
-            <View style={styles.debugInfo}>
-              <Text style={styles.debugText}>🔧 调试信息</Text>
-              <Text style={styles.debugText}>环境: {currentConfig.name}</Text>
-              <Text style={styles.debugText}>API: {currentConfig.apiBaseUrl}</Text>
-              <Text style={styles.debugText}>超时: {currentConfig.apiTimeout}ms</Text>
+          {/* 环境切换区域 */}
+          <View style={styles.environmentSection}>
+            <Text style={styles.environmentLabel}>当前环境: {currentConfig.name}</Text>
+            <Text style={styles.environmentUrl} numberOfLines={1}>
+              {currentConfig.apiBaseUrl}
+            </Text>
+            
+            <View style={styles.environmentButtons}>
+              {getAllEnvironments().map(env => {
+                const config = ENVIRONMENTS[env];
+                const isSelected = env === currentEnvironment;
+                
+                return (
+                  <TouchableOpacity
+                    key={env}
+                    style={[
+                      styles.environmentButton,
+                      isSelected && styles.environmentButtonActive,
+                    ]}
+                    onPress={() => handleSwitchEnvironment(env)}
+                    disabled={switching || isSelected || loading}>
+                    <Text
+                      style={[
+                        styles.environmentButtonText,
+                        isSelected && styles.environmentButtonTextActive,
+                      ]}>
+                      {config.name}
+                    </Text>
+                  </TouchableOpacity>
+                );
+              })}
             </View>
-          )}
+            
+            {switching && (
+              <View style={styles.switchingIndicator}>
+                <ActivityIndicator size="small" color="#007bff" />
+                <Text style={styles.switchingText}>切换中...</Text>
+              </View>
+            )}
+          </View>
 
           <View style={styles.form}>
             <TextInput
@@ -203,18 +262,64 @@ const styles = StyleSheet.create({
     color: '#007bff',
     fontSize: 14,
   },
-  debugInfo: {
-    backgroundColor: '#fff3cd',
+  environmentSection: {
+    backgroundColor: '#fff',
     borderRadius: 8,
-    padding: 12,
-    marginBottom: 16,
+    padding: 16,
+    marginBottom: 24,
     borderWidth: 1,
-    borderColor: '#ffc107',
+    borderColor: '#e0e0e0',
   },
-  debugText: {
+  environmentLabel: {
+    fontSize: 14,
+    fontWeight: '600',
+    color: '#333',
+    marginBottom: 8,
+  },
+  environmentUrl: {
     fontSize: 12,
-    color: '#856404',
+    color: '#666',
     fontFamily: Platform.OS === 'ios' ? 'Courier' : 'monospace',
+    marginBottom: 12,
+    padding: 8,
+    backgroundColor: '#f5f5f5',
+    borderRadius: 4,
+  },
+  environmentButtons: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: 8,
+  },
+  environmentButton: {
+    paddingHorizontal: 16,
+    paddingVertical: 8,
+    borderRadius: 6,
+    backgroundColor: '#f0f0f0',
+    borderWidth: 1,
+    borderColor: '#ddd',
+  },
+  environmentButtonActive: {
+    backgroundColor: '#007bff',
+    borderColor: '#007bff',
+  },
+  environmentButtonText: {
+    fontSize: 14,
+    fontWeight: '500',
+    color: '#333',
+  },
+  environmentButtonTextActive: {
+    color: '#fff',
+  },
+  switchingIndicator: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 12,
+    gap: 8,
+  },
+  switchingText: {
+    fontSize: 12,
+    color: '#666',
   },
 });
 

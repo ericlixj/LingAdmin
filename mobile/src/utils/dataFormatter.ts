@@ -63,14 +63,6 @@ export function extractArrayFromResponse(
     }
   }
 
-  if (DEBUG) {
-    console.warn('⚠️ [DataFormatter] Could not extract array from data:', {
-      dataType: typeof data,
-      isArray: Array.isArray(data),
-      keys: typeof data === 'object' ? Object.keys(data) : null,
-    });
-  }
-
   return [];
 }
 
@@ -122,9 +114,6 @@ export function getDataArray<T>(
 
   // 如果 code 不是 0，返回空数组
   if (normalized.code !== 0) {
-    if (DEBUG) {
-      console.warn('⚠️ [DataFormatter] Response code is not 0:', normalized.code);
-    }
     return [];
   }
 

@@ -125,19 +125,24 @@ API_BASE_URL=https://api.yourdomain.com
    ```bash
    # Android
    npm run android
+   # 或使用启动脚本
+   ./start-android.sh
    
    # iOS (仅 macOS)
    npm run ios
+   # 或使用启动脚本
+   ./start-ios.sh
    ```
 
 #### 详细步骤
 
-请参考 [QUICK_START.md](./QUICK_START.md) 获取完整的启动指南，包括：
-- 前置要求检查
-- 详细安装步骤
-- 环境配置
-- 常见问题解决
-- 真机调试指南
+- **Android**: 请参考 [QUICK_START.md](./QUICK_START.md) 获取完整的启动指南
+- **iOS**: 请参考 [IOS_TEST_GUIDE.md](./IOS_TEST_GUIDE.md) 获取 iOS 测试指南，包括：
+  - Expo Go 快速测试（最简单）
+  - EAS 构建预览版本（推荐用于完整测试）
+  - 本地 Xcode 构建（需要 Xcode）
+  - 真机调试指南
+  - 常见问题解决
 
 ## 开发说明
 

@@ -119,14 +119,9 @@ const FlyerDetailsScreen: React.FC = () => {
               console.log('✅ [FlyerDetails] Data is array, length:', newData.length);
               if (newData.length > 0) {
                 console.log('📦 [FlyerDetails] First item:', newData[0]);
-              } else {
-                console.warn('⚠️ [FlyerDetails] Array is empty!');
               }
             }
           } else if (response.data === null || response.data === undefined) {
-            if (__DEV__) {
-              console.warn('⚠️ [FlyerDetails] Data is null or undefined');
-            }
             newData = [];
           } else if (response.data && typeof response.data === 'object') {
             // 如果 data 是对象，尝试使用统一工具提取
@@ -141,9 +136,6 @@ const FlyerDetailsScreen: React.FC = () => {
               console.log('📦 [FlyerDetails] Extracted array length:', newData.length);
             }
           } else {
-            if (__DEV__) {
-              console.warn('⚠️ [FlyerDetails] Unexpected data type:', typeof response.data, response.data);
-            }
             newData = [];
           }
 
@@ -170,11 +162,7 @@ const FlyerDetailsScreen: React.FC = () => {
           );
 
           // 如果数据为空，显示提示
-          if (newData.length === 0 && !loading) {
-            if (__DEV__) {
-              console.warn('⚠️ [FlyerDetails] No data returned, but code is 0. Response:', response);
-            }
-          }
+          // (已移除 console.warn)
         } else {
           if (__DEV__) {
             console.error('❌ [FlyerDetails] Response code is not 0:', response.code, response.message);
