@@ -84,3 +84,5 @@ exec npx expo start --go --android --non-interactive
 
 
 
+
+

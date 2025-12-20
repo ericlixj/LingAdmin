@@ -324,12 +324,84 @@ const zh = {
   },
   gasPostcode: {
     titles: {
-        list: "油价涉及邮编列表",
-        create: "创建油价涉及邮编",
-        edit: "编辑油价涉及邮编",
-        show: "油价涉及邮编详情",
+      list: "油价涉及邮编列表",
+      create: "创建油价涉及邮编",
+      edit: "编辑油价涉及邮编",
+      show: "油价涉及邮编详情",
     },
-},  
+  },
+  studyExam: {
+    titles: {
+      list: "考试列表",
+      create: "创建考试",
+      edit: "编辑考试",
+      show: "考试详情",
+    },
+  },
+  studySource: {
+    titles: {
+      list: "权威来源 列表",
+      create: "创建权威来源 ",
+      edit: "编辑权威来源 ",
+      show: "权威来源 详情",
+    },
+  },
+  studySourceSection: {
+    titles: {
+      list: "来源章节列表",
+      create: "创建来源章节",
+      edit: "编辑来源章节",
+      show: "来源章节详情",
+    },
+  },
+  studyKnowledgeNode: {
+    titles: {
+      list: "知识点列表",
+      create: "创建知识点",
+      edit: "编辑知识点",
+      show: "知识点详情",
+    },
+  },
+  studyKnowledgeSourceSection: {
+    titles: {
+      list: "知识点对应来源章节列表",
+      create: "创建知识点对应来源章节",
+      edit: "编辑知识点对应来源章节",
+      show: "知识点对应来源章节详情",
+    },
+  },
+  studyQuestion: {
+    titles: {
+      list: "题库列表",
+      create: "创建题库",
+      edit: "编辑题库",
+      show: "题库详情",
+    },
+  },
+  studyQuestionKnowledge: {
+    titles: {
+      list: "题目知识点关系列表",
+      create: "创建题目知识点关系",
+      edit: "编辑题目知识点关系",
+      show: "题目知识点关系详情",
+    },
+  },
+  studyLearningItem: {
+    titles: {
+      list: "统一学习抽象层列表",
+      create: "创建统一学习抽象层",
+      edit: "编辑统一学习抽象层",
+      show: "统一学习抽象层详情",
+    },
+  },
+  studySession: {
+    titles: {
+      list: "学习记录列表",
+      create: "创建学习记录",
+      edit: "编辑学习记录",
+      show: "学习记录详情",
+    },
+  },
 };
 
 export default zh;

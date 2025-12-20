@@ -1,12 +1,12 @@
 #paste this code to frjonted/src/i18n_zh.ts
 
 ...
-    iyfVideo: {
+    studySource: {
         titles: {
-            list: "iyf视频列表",
-            create: "创建iyf视频",
-            edit: "编辑iyf视频",
-            show: "iyf视频详情",
+            list: "权威来源 列表",
+            create: "创建权威来源 ",
+            edit: "编辑权威来源 ",
+            show: "权威来源 详情",
         },
     },
 ...
