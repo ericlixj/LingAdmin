@@ -409,7 +409,8 @@ def _run_crawl_in_thread(postcodes, collected_items_ref):
         
         # 启动爬虫（阻塞直到所有任务完成）
         # stop_after_crawl=True 确保在所有爬虫完成后自动停止 reactor
-        process.start(stop_after_crawl=True)
+        # install_signal_handlers=False 避免在非主线程中安装信号处理器的错误
+        process.start(stop_after_crawl=True, install_signal_handlers=False)
         
         logger.info("=" * 60)
         logger.info(f"[Task] All crawls completed. Processing {len(collected_items_ref['items'])} items")

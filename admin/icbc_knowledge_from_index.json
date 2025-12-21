@@ -1,0 +1,2578 @@
+[
+  {
+    "code": "ADJ.A_AUTOMATIC_SLACK_ADJUSTERS",
+    "title": "A automatic slack adjusters(191-193)",
+    "description": "Fact #5: Automatic slack adjusters, as the name implies, automatically adjust for brake wear as the brakes are used.",
+    "chapter": 9,
+    "importance": "high",
+    "source_pages": "191-193"
+  },
+  {
+    "code": "BRK.AUTOMATIC_TRACTION_CONTROL",
+    "title": "automatic traction control(25)",
+    "description": "chapter 2 — heavy vehicle braking Automatic traction control Automatic Traction Control (ATC) is an optional addition to an ABS system.",
+    "chapter": 2,
+    "importance": "high",
+    "source_pages": "25"
+  },
+  {
+    "code": "DRV.AUXILIARY_TRANSMISSIONS",
+    "title": "auxiliary transmissions(47)",
+    "description": "If the vehicle has main and auxiliary transmissions, place both in gear.",
+    "chapter": 3,
+    "importance": "high",
+    "source_pages": "47"
+  },
+  {
+    "code": "AIR.ABS_AIRBRAKE_SYSTEM",
+    "title": "ABS airbrake system(180-182)",
+    "description": "This ABS warning light is positioned on the side of the trailer at the rear.",
+    "chapter": 8,
+    "importance": "high",
+    "source_pages": "180-182"
+  },
+  {
+    "code": "INFO.ACTS_AND_REGULATIONS",
+    "title": "acts and regulations(256)",
+    "description": "See page 256 for detailed information about acts and regulations.",
+    "chapter": 13,
+    "importance": "high",
+    "source_pages": "256"
+  },
+  {
+    "code": "TRK.DANGEROUS_BACKING_UP",
+    "title": "Dangerous backing up(75-76)",
+    "description": "This is extremely dangerous and must be dealt with immediately.",
+    "chapter": 5,
+    "importance": "high",
+    "source_pages": "75-76"
+  },
+  {
+    "code": "BUS.CRIMINAL_BAGGAGE",
+    "title": "Criminal baggage(124)",
+    "description": "Passenger vehicles with a seating capacity of more than 12, including the driver, must be equipped with an emergency exit door or emergency windows.",
+    "chapter": 6,
+    "importance": "high",
+    "source_pages": "124"
+  },
+  {
+    "code": "TRK.BAGGED_PRODUCTS",
+    "title": "bagged products(99)",
+    "description": "It must also be identified in one of two ways: TAC is the Transportation 1.",
+    "chapter": 5,
+    "importance": "high",
+    "source_pages": "99"
+  },
+  {
+    "code": "DRV.ACTS_OF_NATURE",
+    "title": "acts of nature(53-54)",
+    "description": "road surface is reduced, If a tire has the correct pressure when it’s cool, it will generate a normal steering control is also amount of heat during use.",
+    "chapter": 3,
+    "importance": "high",
+    "source_pages": "53-54"
+  },
+  {
+    "code": "AIR.BLENDED_AIR",
+    "title": "blended air(162)",
+    "description": "The only major item not found on a trailer air system is an air compressor.",
+    "chapter": 8,
+    "importance": "high",
+    "source_pages": "162"
+  },
+  {
+    "code": "TRK.AGGREGATE_LOADS",
+    "title": "aggregate loads(99-100)",
+    "description": "It must also be identified in one of two ways: TAC is the Transportation 1.",
+    "chapter": 5,
+    "importance": "high",
+    "source_pages": "99-100"
+  },
+  {
+    "code": "DRV.BLIND_SPOT",
+    "title": "blind spot(42-43)",
+    "description": "A light that’s been the good space margins, and same colour for some time is “stale.” That means it could change before you anticipating road hazards, reach the intersection.",
+    "chapter": 3,
+    "importance": "high",
+    "source_pages": "42-43"
+  },
+  {
+    "code": "AIR.BOBTAIL_PROPORTIONING_SYSTEM",
+    "title": "bobtail proportioning system(170)",
+    "description": "This allows the tractor to be driven bobtail so that no air will be lost through the disconnected glad hand couplers.",
+    "chapter": 8,
+    "importance": "high",
+    "source_pages": "170"
+  },
+  {
+    "code": "DRV.AIRBAGS_AND_HEAD_RESTRAINTS",
+    "title": "airbags and head restraints(60)",
+    "description": "The owner is then required to pay the vehicle towing and storage fees to get their vehicle back.",
+    "chapter": 3,
+    "importance": "high",
+    "source_pages": "60"
+  },
+  {
+    "code": "AIR.BOBTAILING",
+    "title": "bobtailing(170)",
+    "description": "Application air from the secondary foot valve is also passing through valve is closed.",
+    "chapter": 8,
+    "importance": "high",
+    "source_pages": "170"
+  },
+  {
+    "code": "ADJ.AIR_BRAKE_ADJUSTMENT",
+    "title": "air brake adjustment(185-194)",
+    "description": "190 chapter 9 — air brake adjustment It’s common, especially on tandem axle units, for the adjusting bolts on one driving tip axle to adjust in one direction, while the other axle requires an opposite turn.",
+    "chapter": 9,
+    "importance": "high",
+    "source_pages": "185-194"
+  },
+  {
+    "code": "ADJ.METHODS",
+    "title": "methods(188-189)",
+    "description": "Myth #2: A 90-degree angle between the centre of the slack adjuster arm and the chamber pushrod with the brakes applied is a good indication that the brake is adjusted correctly.",
+    "chapter": 9,
+    "importance": "high",
+    "source_pages": "188-189"
+  },
+  {
+    "code": "BRK.BRAKE_FADE",
+    "title": "brake fade(19)",
+    "description": "Brake fade occurs when your Heat will continue to build up with excessive hard braking until it exceeds brakes stop working properly because they’re overheated.",
+    "chapter": 2,
+    "importance": "high",
+    "source_pages": "19"
+  },
+  {
+    "code": "ADJ.MYTHS",
+    "title": "myths(193-194)",
+    "description": "Make this a part of your inspection routine.",
+    "chapter": 9,
+    "importance": "high",
+    "source_pages": "193-194"
+  },
+  {
+    "code": "DRV.BRAKE_FAILURE",
+    "title": "brake failure(57)",
+    "description": "• amber flashing lights are used on construction vehicles, towing vehicles, tow cars that are attending, snow-removal equipment, sanding equipment, pilot cars, and vehicles that are required by permit to use them, such as some oversize vehicles or vehicles carrying oversize loads (see chapter 5, skills for driving trucks and trailers).",
+    "chapter": 3,
+    "importance": "high",
+    "source_pages": "57"
+  },
+  {
+    "code": "AIR.AIR_BRAKE_CHAMBER",
+    "title": "air brake chamber(143-145)",
+    "description": "The air brake chamber pushrod is connected to a lever arm called a slack adjuster.",
+    "chapter": 8,
+    "importance": "high",
+    "source_pages": "143-145"
+  },
+  {
+    "code": "IND.BRAKE_INSPECTION_INDUSTRIAL",
+    "title": "brake inspection — industrial roads(249)",
+    "description": "• Information: 1-800-387-2000 • Website: nrcan.gc.ca Environment Canada Environment Canada is a federal agency.",
+    "chapter": 12,
+    "importance": "high",
+    "source_pages": "249"
+  },
+  {
+    "code": "LIC.AIR_BRAKE_COURSES",
+    "title": "air brake courses(13)",
+    "description": "chapter 1 — getting your driver’s licence Air brake courses An air brake course is highly recommended as even experienced drivers learn more about air brakes by taking the course.",
+    "chapter": 1,
+    "importance": "high",
+    "source_pages": "13"
+  },
+  {
+    "code": "BRK.BRAKE_LAG_TIME",
+    "title": "brake lag time(17)",
+    "description": "Total stopping distance is the Driver’s perception time distance your vehicle will travel from the moment you: + reaction time • see — a hazard + brake lag time • think — decide to stop + braking time • do — place your foot on the brake pedal until you stop.",
+    "chapter": 2,
+    "importance": "high",
+    "source_pages": "17"
+  },
+  {
+    "code": "LIC.AIR_BRAKE_ENDORSEMENT",
+    "title": "air brake endorsement(5-6)",
+    "description": "An applicant who fails to qualify on the air brake An air brake endorsement is also required to operate most vehicles equipped knowledge test after three with air-over-hydraulic brakes.",
+    "chapter": 1,
+    "importance": "high",
+    "source_pages": "5-6"
+  },
+  {
+    "code": "AIR.AIR_BRAKE_OPERATION",
+    "title": "air brake operation(150-151)",
+    "description": "Air from the primary tank is applied to the rear axle brakes and air failure.",
+    "chapter": 8,
+    "importance": "high",
+    "source_pages": "150-151"
+  },
+  {
+    "code": "INSP.PASSENGER_VEHICLES",
+    "title": "passenger vehicles(228)",
+    "description": "231 driving commercial vehicles Review questions 1.",
+    "chapter": 10,
+    "importance": "high",
+    "source_pages": "228"
+  },
+  {
+    "code": "INSP.SINGLE_UNIT_TRUCK",
+    "title": "single unit truck(217)",
+    "description": "driving commercial vehicles Class 2 or Class 4 (unrestricted) ❏ Brakes As you inspect the vehicle, check each brake: pre-trip inspection • for leaks • for missing or loose brake parts • for brake lines with cracks or leaks Close and secure engine compartment.",
+    "chapter": 10,
+    "importance": "high",
+    "source_pages": "217"
+  },
+  {
+    "code": "INSP.TRACTOR_TRAILERS",
+    "title": "tractor trailers(209)",
+    "description": "8 corrosion or holes • nothing will obstruct the mechanism • no audible air leaks • pushrod travel is within tolerance • check slack adjuster, s-cam and bushings for mechanical condition and wear • air lines are secure • no leaks, abrasions, cuts or cracks • no kinks • brake drums aren’t cracked or broken • linings or drums not contaminated • lining thickness is within tolerance (if visible) Close and secure hood.",
+    "chapter": 10,
+    "importance": "high",
+    "source_pages": "209"
+  },
+  {
+    "code": "INSP.BUSES",
+    "title": "buses(224)",
+    "description": "chapter 10 — vehicle and air brake pre-trip inspections Class 4 (restricted) pre-trip inspection ❏ Interior lights • ensure they work ❏ Four-way flashers • check that both indicators on dashboard work (the exterior lights will be checked later as part of checking the turn signals) ❏ Horn • ensure it works ❏ Engine noises • listen for unusual sounds 3.",
+    "chapter": 10,
+    "importance": "high",
+    "source_pages": "224"
+  },
+  {
+    "code": "BRK.BRAKE_SIGNS",
+    "title": "brake signs(22)",
+    "description": "If this doesn’t control your speed, and speed is increasing above your chosen fast fact speed: • apply the brakes hard enough to reduce speed by 10 to 15 km/h — the Always obey the regulatory stop and check brakes signs.",
+    "chapter": 2,
+    "importance": "high",
+    "source_pages": "22"
+  },
+  {
+    "code": "BRK.INTRODUCTION",
+    "title": "introduction(15-16)",
+    "description": "2 heavy vehicle braking What you’ll learn After reading this chapter you’ll be able to: ❏ explain why heavy vehicles take longer to stop than smaller passenger vehicles ❏ explain why air brakes are used on heavy vehicles definition ❏ describe the basic scientific principles of braking ❏ identify the elements of stopping distance Heat is a form of energy.",
+    "chapter": 2,
+    "importance": "high",
+    "source_pages": "15-16"
+  },
+  {
+    "code": "AIR.OPERATION",
+    "title": "operation(141-183)",
+    "description": "176 chapter 8 — air brakes Check the air dryer operation by periodically looking for water in the driving tip reservoirs.",
+    "chapter": 8,
+    "importance": "high",
+    "source_pages": "141-183"
+  },
+  {
+    "code": "IND.INDUSTRIAL_ROADS",
+    "title": "industrial roads(249)",
+    "description": "• Information: 1-800-387-2000 • Website: nrcan.gc.ca Environment Canada Environment Canada is a federal agency.",
+    "chapter": 12,
+    "importance": "high",
+    "source_pages": "249"
+  },
+  {
+    "code": "AIR.AIR_DISC_BRAKES",
+    "title": "air disc brakes(174-175)",
+    "description": "At the same time, a certain amount of clean air is allowed to flow back fast fact through the filters.",
+    "chapter": 8,
+    "importance": "high",
+    "source_pages": "174-175"
+  },
+  {
+    "code": "BUS.SCHOOL_BUSES",
+    "title": "school buses(125)",
+    "description": "School buses are equipped with alternating flashing red lights, swing-out stop signs and may also have flashing amber lights which are displayed with the flashing red lights.",
+    "chapter": 6,
+    "importance": "high",
+    "source_pages": "125"
+  },
+  {
+    "code": "AIR.AIR_DRYERS",
+    "title": "air dryers(176-177)",
+    "description": "Spring parking brake A second dashboard control valve is added so that air from the emergency emergency release systems are sometimes called release tank can be directed to the spring parking brakes to release them.",
+    "chapter": 8,
+    "importance": "high",
+    "source_pages": "176-177"
+  },
+  {
+    "code": "AIR.AIR_LINES",
+    "title": "air lines(142)",
+    "description": "The most common size air chamber used on truck drive axles and trailer axles is a regular Type 30 clamp type chamber with 30 square inches of effective diaphragm area.",
+    "chapter": 8,
+    "importance": "high",
+    "source_pages": "142"
+  },
+  {
+    "code": "AIR.AIR_OVER_HYDRAULIC_BRAKES",
+    "title": "air-over-hydraulic brakes(175-176)",
+    "description": "Spring parking brake A second dashboard control valve is added so that air from the emergency emergency release systems are sometimes called release tank can be directed to the spring parking brakes to release them.",
+    "chapter": 8,
+    "importance": "high",
+    "source_pages": "175-176"
+  },
+  {
+    "code": "AIR.ALCOHOL_EVAPORATORS",
+    "title": "alcohol evaporators(177-178)",
+    "description": "(276 kPa), manual front wheel limiting the steering axle brake pressure is approximately 50 per cent of drive axle valve, keep the control in the pressure.",
+    "chapter": 8,
+    "importance": "high",
+    "source_pages": "177-178"
+  },
+  {
+    "code": "AIR.ALCOHOL_INJECTORS",
+    "title": "alcohol injectors(177-178)",
+    "description": "(276 kPa), manual front wheel limiting the steering axle brake pressure is approximately 50 per cent of drive axle valve, keep the control in the pressure.",
+    "chapter": 8,
+    "importance": "high",
+    "source_pages": "177-178"
+  },
+  {
+    "code": "DRV.BRAKES_FIRE_DANGER",
+    "title": "brakes — fire danger(64)",
+    "description": "chapter 3 — basic driving skills Vehicles required to carry fire extinguishers One fire extinguisher must be carried on: • limited passenger vehicles that have an authorized seating capacity of more than 10 • all public passenger vehicles • all school buses — the fire extinguishers must meet Canadian Standard Association (CSA) Standard D250.",
+    "chapter": 3,
+    "importance": "high",
+    "source_pages": "64"
+  },
+  {
+    "code": "DRV.ALLEYS_LANES_AND_SIDE_ROADS",
+    "title": "alleys, lanes and side roads(50)",
+    "description": "Don’t assume that the train you can see is the only one in the area.",
+    "chapter": 3,
+    "importance": "high",
+    "source_pages": "50"
+  },
+  {
+    "code": "LIC.ALL_TERRAIN_CYCLES",
+    "title": "all-terrain cycles(4)",
+    "description": "definition Class 6 or 8* • Motorcycles, all-terrain cycles, all-terrain 16 vehicles (ATVs).",
+    "chapter": 1,
+    "importance": "high",
+    "source_pages": "4"
+  },
+  {
+    "code": "BRK.BASIC_PRINCIPLES",
+    "title": "basic principles(15-16)",
+    "description": "2 heavy vehicle braking What you’ll learn After reading this chapter you’ll be able to: ❏ explain why heavy vehicles take longer to stop than smaller passenger vehicles ❏ explain why air brakes are used on heavy vehicles definition ❏ describe the basic scientific principles of braking ❏ identify the elements of stopping distance Heat is a form of energy.",
+    "chapter": 2,
+    "importance": "high",
+    "source_pages": "15-16"
+  },
+  {
+    "code": "LIC.ALL_TERRAIN_VEHICLES",
+    "title": "all-terrain vehicles(4)",
+    "description": "fast fact • Limited-speed motorcycles** and all-terrain vehicles (ATVs).",
+    "chapter": 1,
+    "importance": "high",
+    "source_pages": "4"
+  },
+  {
+    "code": "BRK.HAZARDS",
+    "title": "hazards(21-25)",
+    "description": "What’s one of the hazards of stopping a tractor/trailer combination?",
+    "chapter": 2,
+    "importance": "high",
+    "source_pages": "21-25"
+  },
+  {
+    "code": "LIC.AMBULANCES",
+    "title": "ambulances(4, 127-128)",
+    "description": "43 driving commercial vehicles Emergency vehicles fast fact Police cars, ambulances and fire engines are equipped with flashing lights On a divided highway with and/or sirens.",
+    "chapter": 1,
+    "importance": "high",
+    "source_pages": "4, 127-128"
+  },
+  {
+    "code": "BRK.BRAKING_TIME",
+    "title": "braking time(17-19)",
+    "description": "Total stopping distance is the Driver’s perception time distance your vehicle will travel from the moment you: + reaction time • see — a hazard + brake lag time • think — decide to stop + braking time • do — place your foot on the brake pedal until you stop.",
+    "chapter": 2,
+    "importance": "high",
+    "source_pages": "17-19"
+  },
+  {
+    "code": "BRK.ANTI_LOCK_BRAKING_SYSTEM",
+    "title": "anti-lock braking system(23-24)",
+    "description": "Anti-lock braking systems Anti-lock braking systems (ABS) are mandatory in Canada on all trucks and buses over 4,560 kg manufactured since April 1, 2000 and on all commercial trailers equipped with air brakes.",
+    "chapter": 2,
+    "importance": "high",
+    "source_pages": "23-24"
+  },
+  {
+    "code": "DRV.BRIDGES",
+    "title": "bridges(35)",
+    "description": "Sharp right turns To make a sharp right turn (particularly with a forward-control vehicle such as a bus): 1.",
+    "chapter": 3,
+    "importance": "high",
+    "source_pages": "35"
+  },
+  {
+    "code": "AIR.APPLICATION_PRESSURE_GAUGE",
+    "title": "application pressure gauge(180)",
+    "description": "If a driver makes a 20-pound (138 kPa) brake application with the hand valve, what’s the application pressure at the tractor brakes?",
+    "chapter": 8,
+    "importance": "high",
+    "source_pages": "180"
+  },
+  {
+    "code": "AIR.AUTOMATIC_DRAIN_VALVES",
+    "title": "automatic drain valves(178)",
+    "description": "driving commercial vehicles Pressure-protection valves Pressure-protection valves are often installed between the service brake reservoirs and any non-essential air-operated accessories such as air seats, air horns, air windshield wipers, air suspensions, fifth wheel sliders and air shifts.",
+    "chapter": 8,
+    "importance": "high",
+    "source_pages": "178"
+  },
+  {
+    "code": "BUS.DEFINITION",
+    "title": "definition(117)",
+    "description": "chapter 6 — skills for driving buses, taxis, limousines and ride-hailing vehicles Manoeuvring You need to understand the handling characteristics of your vehicle in order to transport your passengers safely and comfortably.",
+    "chapter": 6,
+    "importance": "high",
+    "source_pages": "117"
+  },
+  {
+    "code": "AIR.AUTOMATIC_FRONT_WHEEL_LIMITING",
+    "title": "automatic front wheel limiting systems(178)",
+    "description": "driving commercial vehicles Pressure-protection valves Pressure-protection valves are often installed between the service brake reservoirs and any non-essential air-operated accessories such as air seats, air horns, air windshield wipers, air suspensions, fifth wheel sliders and air shifts.",
+    "chapter": 8,
+    "importance": "high",
+    "source_pages": "178"
+  },
+  {
+    "code": "INSP.PRE_TRIP_INSPECTION",
+    "title": "pre-trip inspection(218-224)",
+    "description": "224 chapter 10 — vehicle and air brake pre-trip inspections Passenger vehicle pre-trip inspection — Class 4 (restricted) The next pages detail the suggested pre-trip inspection of a restricted class 4 vehicle.",
+    "chapter": 10,
+    "importance": "high",
+    "source_pages": "218-224"
+  },
+  {
+    "code": "BUS.RIGHT_OF_WAY",
+    "title": "right-of-way(120)",
+    "description": "The carrier is responsible for ensuring this emergency equipment is available and in working order.",
+    "chapter": 6,
+    "importance": "high",
+    "source_pages": "120"
+  },
+  {
+    "code": "LIC.COMMERCIAL_DRIVER_TRAINING",
+    "title": "commercial driver training(12)",
+    "description": "Commercial driver training ICBC licensed Driving Schools deliver professional training Becoming a safe commercial driver requires both education and practical and are expected to provide experience.",
+    "chapter": 1,
+    "importance": "high",
+    "source_pages": "12"
+  },
+  {
+    "code": "TRK.COMMERCIAL_TRANSPORT_REGULATIO",
+    "title": "Commercial Transport Regulations(111-113)",
+    "description": "Pilot car sign regulations are detailed in Division 8 of the Commercial Transport Reporting to weigh scales Regulations.",
+    "chapter": 5,
+    "importance": "high",
+    "source_pages": "111-113"
+  },
+  {
+    "code": "AIR.CAGING_SPRING_PARKING_BRAKES",
+    "title": "caging — spring parking brakes(160-161)",
+    "description": "This arrangement will also ensure that the spring parking brakes will not automatically apply if there’s a total loss of air pressure in either reservoir.",
+    "chapter": 8,
+    "importance": "high",
+    "source_pages": "160-161"
+  },
+  {
+    "code": "INFO.CANADA_CUSTOMS",
+    "title": "Canada Customs(257)",
+    "description": "See page 257 for detailed information about Canada Customs.",
+    "chapter": 13,
+    "importance": "high",
+    "source_pages": "257"
+  },
+  {
+    "code": "BUS.COMPENSATION",
+    "title": "compensation(117)",
+    "description": "chapter 6 — skills for driving buses, taxis, limousines and ride-hailing vehicles Manoeuvring You need to understand the handling characteristics of your vehicle in order to transport your passengers safely and comfortably.",
+    "chapter": 6,
+    "importance": "high",
+    "source_pages": "117"
+  },
+  {
+    "code": "INFO.CANADIAN_TRANSPORT_EMERGENCY_C",
+    "title": "Canadian Transport Emergency Centre (CANUTEC)(253)",
+    "description": "• For information and bookings: 1-800-HELLOBC (435-5622) • Website: hellobc.com Reporting forest fires • Within B.C., report forest fire sightings to: 1-800-663-5555 • Cell: *5555 TaxiHost This program is designed to help create a consistently high standard of taxicab service.",
+    "chapter": 13,
+    "importance": "high",
+    "source_pages": "253"
+  },
+  {
+    "code": "AIR.COMPOUNDING_OF_BRAKES",
+    "title": "compounding of brakes(160)",
+    "description": "This arrangement will also ensure that the spring parking brakes will not automatically apply if there’s a total loss of air pressure in either reservoir.",
+    "chapter": 8,
+    "importance": "high",
+    "source_pages": "160"
+  },
+  {
+    "code": "AIR.CANUTEC_COMPRESSED_AIR",
+    "title": "CANUTEC compressed air(141-142)",
+    "description": "chapter 8 — air brakes Force multipliers The force generated at the wheel to stop is a lot more than the force you apply when pushing down on the brake pedal.",
+    "chapter": 8,
+    "importance": "high",
+    "source_pages": "141-142"
+  },
+  {
+    "code": "DRV.CARBON_MONOXIDE_POISONING",
+    "title": "carbon monoxide poisoning(59)",
+    "description": "By simply making sure the top of the head restraint is at least as high as the top of your head, and the head restraint is less than 10 cm from the back of your head, you can help prevent neck injuries.",
+    "chapter": 3,
+    "importance": "high",
+    "source_pages": "59"
+  },
+  {
+    "code": "DRV.CAST_SPOKE_WHEEL_PROBLEMS",
+    "title": "cast spoke wheel problems(57)",
+    "description": "• amber flashing lights are used on construction vehicles, towing vehicles, tow cars that are attending, snow-removal equipment, sanding equipment, pilot cars, and vehicles that are required by permit to use them, such as some oversize vehicles or vehicles carrying oversize loads (see chapter 5, skills for driving trucks and trailers).",
+    "chapter": 3,
+    "importance": "high",
+    "source_pages": "57"
+  },
+  {
+    "code": "LIC.CONSTRUCTION_VEHICLES",
+    "title": "construction vehicles(4)",
+    "description": "Construction vehicles include tractors, graders, loaders, shovels, rollers, Class 4 or 5 • Trailers or towed vehicles exceeding 18 scrapers or other self- with heavy trailer 4,600 kg provided neither the truck nor endorsement (code 20) trailer has air brakes.",
+    "chapter": 1,
+    "importance": "high",
+    "source_pages": "4"
+  },
+  {
+    "code": "DRV.CELLPHONES",
+    "title": "cellphones(60-61)",
+    "description": "chapter 3 — basic driving skills Non-GLP drivers, including commercial drivers, are permitted to use hands- free cellphones and devices that only require touching a single button to activate or deactivate, and where that single button is located in a fixed and secure location.",
+    "chapter": 3,
+    "importance": "high",
+    "source_pages": "60-61"
+  },
+  {
+    "code": "AIR.CONTROL_LINE",
+    "title": "control line(164)",
+    "description": "In this diagram, a control signal from the tractor has been sent through the control line to the trailer’s relay valve.",
+    "chapter": 8,
+    "importance": "high",
+    "source_pages": "164"
+  },
+  {
+    "code": "TRK.CENTRAL_WEIGHT_DISTRIBUTION_PO",
+    "title": "central weight distribution point(90-92)",
+    "description": "1.21 m 600 kg This article is 1.21 m long and weighs 600 kg.",
+    "chapter": 5,
+    "importance": "high",
+    "source_pages": "90-92"
+  },
+  {
+    "code": "TRK.CONVERTER_DOLLY",
+    "title": "converter dolly(85)",
+    "description": "chapter 5 — skills for driving trucks and trailers ❏ Truck and trailer • the truck pintle hook should line up with alignment the trailer pintle eye • adjust the drawbar height if needed so that the pintle eye is just slightly higher than the pintle hook 5.",
+    "chapter": 5,
+    "importance": "high",
+    "source_pages": "85"
+  },
+  {
+    "code": "TRK.CHAINS_COUPLING_AND_UNCOUPLING",
+    "title": "chains coupling and uncoupling(78-84)",
+    "description": "Check for turning clearance 82 chapter 5 — skills for driving trucks and trailers Uncoupling units Use these steps to uncouple a tractor and trailer joined with a fifth wheel: 1.",
+    "chapter": 5,
+    "importance": "high",
+    "source_pages": "78-84"
+  },
+  {
+    "code": "BRK.ICE",
+    "title": "ice(21)",
+    "description": "Use an appropriate 18 per cent gradient, which is low gear to hold that speed, and use the vehicle’s retarding device.",
+    "chapter": 2,
+    "importance": "high",
+    "source_pages": "21"
+  },
+  {
+    "code": "DRV.CRIMINAL_CODE_OF_CANADA",
+    "title": "Criminal Code of Canada(62-63)",
+    "description": "To help yourself get enough rest and stay alert, follow the hours of service regulations set by the National Safety Code (see chapter 7, hours of service requirements) and be sure to get enough sleep every 24 hours.",
+    "chapter": 3,
+    "importance": "high",
+    "source_pages": "62-63"
+  },
+  {
+    "code": "TRK.TIEDOWN",
+    "title": "tiedown(93-95)",
+    "description": "your tiedown assemblies, including the clevis hooks and load binders, Book 2 is available at are the lowest grade for their size unless they have a clear marking or a provincial weigh scales and permanently attached tag that states something different.",
+    "chapter": 5,
+    "importance": "high",
+    "source_pages": "93-95"
+  },
+  {
+    "code": "DRV.CROSSINGS",
+    "title": "crossings(49–52)",
+    "description": "50 chapter 3 — basic driving skills Railway crossings Large commercial vehicles need more space and more time to respond if a train is in the area.",
+    "chapter": 3,
+    "importance": "high",
+    "source_pages": "49–52"
+  },
+  {
+    "code": "LIC.CLASS_1_LICENCE",
+    "title": "Class 1 Licence(3)",
+    "description": "1 getting your driver’s licence This chapter tells you how to apply for a Class 1, 2, 3 or 4 licence.",
+    "chapter": 1,
+    "importance": "high",
+    "source_pages": "3"
+  },
+  {
+    "code": "LIC.CLASS_2_LICENCE",
+    "title": "Class 2 Licence(3)",
+    "description": "1 getting your driver’s licence This chapter tells you how to apply for a Class 1, 2, 3 or 4 licence.",
+    "chapter": 1,
+    "importance": "high",
+    "source_pages": "3"
+  },
+  {
+    "code": "HOS.DAILY_HOURS",
+    "title": "daily hours(133-134)",
+    "description": "3 + 7 = 10 hours (Sleeper Berth) 8 Hours Off Duty Off duty > 10 Driving < 13 No driving after 14 hours On duty Driving < 13 hours No driving after 16th hour ‘Daily’ No driving after 14 hours On Duty since last sleeper period Rules Team drivers using a sleeper berth can split their required off-duty time up into two periods if: • neither period is less than four hours • the two periods total at least eight hours, and • the total off-duty time is at least 10 hours.",
+    "chapter": 7,
+    "importance": "high",
+    "source_pages": "133-134"
+  },
+  {
+    "code": "LIC.CLASS_3_LICENCE",
+    "title": "Class 3 Licence(3)",
+    "description": "1 getting your driver’s licence This chapter tells you how to apply for a Class 1, 2, 3 or 4 licence.",
+    "chapter": 1,
+    "importance": "high",
+    "source_pages": "3"
+  },
+  {
+    "code": "TRK.DANGEROUS_GOODS",
+    "title": "dangerous goods(108–109)",
+    "description": "These items may extend up to 10 cm beyond the sides of a vehicle without being considered in that vehicle’s overall width: • anti-splash and spray devices • devices to secure loads • ladders • dangerous goods placards The maximum legal width of • glad hands and air connectors a vehicle and its load is 2.6 m unless the driver has an • electrical or hydraulic connectors oversize load permit.",
+    "chapter": 5,
+    "importance": "high",
+    "source_pages": "108–109"
+  },
+  {
+    "code": "LIC.CLASS_4_LICENCE_RESTRICTED",
+    "title": "Class 4 Licence — restricted(4)",
+    "description": "driving commercial vehicles Minimum definitions Class Vehicle type age A special activity bus is Class 4 (unrestricted) • Buses with a maximum seating capacity of 19 operated for a school, 25 persons (including the driver), including and doesn’t run on a set school buses, special activity buses and schedule.",
+    "chapter": 1,
+    "importance": "high",
+    "source_pages": "4"
+  },
+  {
+    "code": "INFO.EMERGENCY_PROCEDURES",
+    "title": "emergency procedures(253)",
+    "description": "• For information and bookings: 1-800-HELLOBC (435-5622) • Website: hellobc.com Reporting forest fires • Within B.C., report forest fire sightings to: 1-800-663-5555 • Cell: *5555 TaxiHost This program is designed to help create a consistently high standard of taxicab service.",
+    "chapter": 13,
+    "importance": "high",
+    "source_pages": "253"
+  },
+  {
+    "code": "INFO.CLASS_4_LICENCE_CODE_20_HE",
+    "title": "Class 4 Licence — code 20 — heavy trailer dangerous goods inspectors(255)",
+    "description": "See page 255 for detailed information about Class 4 Licence — code 20 — heavy trailer dangerous goods inspectors.",
+    "chapter": 13,
+    "importance": "high",
+    "source_pages": "255"
+  },
+  {
+    "code": "LIC.ENDORSEMENT",
+    "title": "endorsement(4)",
+    "description": "An applicant who fails to qualify on the air brake An air brake endorsement is also required to operate most vehicles equipped knowledge test after three with air-over-hydraulic brakes.",
+    "chapter": 1,
+    "importance": "high",
+    "source_pages": "4"
+  },
+  {
+    "code": "TRK.DANGEROUS_GOODS_SIGNS",
+    "title": "dangerous goods signs(108–109)",
+    "description": "These items may extend up to 10 cm beyond the sides of a vehicle without being considered in that vehicle’s overall width: • anti-splash and spray devices • devices to secure loads • ladders • dangerous goods placards The maximum legal width of • glad hands and air connectors a vehicle and its load is 2.6 m unless the driver has an • electrical or hydraulic connectors oversize load permit.",
+    "chapter": 5,
+    "importance": "high",
+    "source_pages": "108–109"
+  },
+  {
+    "code": "BUS.DECAL_COMMERCIAL_VEHICLE_INS",
+    "title": "decal — commercial vehicle inspection(123)",
+    "description": "125 driving commercial vehicles Refuelling Ensure that all passengers are off the bus and the engine is turned off before you refuel.",
+    "chapter": 6,
+    "importance": "high",
+    "source_pages": "123"
+  },
+  {
+    "code": "LIC.CLASS_4_LICENCE_UNRESTRICTED",
+    "title": "Class 4 Licence — unrestricted(4)",
+    "description": "driving commercial vehicles Minimum definitions Class Vehicle type age A special activity bus is Class 4 (unrestricted) • Buses with a maximum seating capacity of 19 operated for a school, 25 persons (including the driver), including and doesn’t run on a set school buses, special activity buses and schedule.",
+    "chapter": 1,
+    "importance": "high",
+    "source_pages": "4"
+  },
+  {
+    "code": "DRV.DIESEL_FUEL_TOXICITY",
+    "title": "diesel fuel toxicity(63)",
+    "description": "Warn others if there is any danger of an explosion, or exposure to toxic substances.",
+    "chapter": 3,
+    "importance": "high",
+    "source_pages": "63"
+  },
+  {
+    "code": "DRV.DISABLED_VEHICLES",
+    "title": "disabled vehicles(58)",
+    "description": "By simply making sure the top of the head restraint is at least as high as the top of your head, and the head restraint is less than 10 cm from the back of your head, you can help prevent neck injuries.",
+    "chapter": 3,
+    "importance": "high",
+    "source_pages": "58"
+  },
+  {
+    "code": "DRV.DISK_WHEEL_PROBLEMS",
+    "title": "disk wheel problems(57)",
+    "description": "• amber flashing lights are used on construction vehicles, towing vehicles, tow cars that are attending, snow-removal equipment, sanding equipment, pilot cars, and vehicles that are required by permit to use them, such as some oversize vehicles or vehicles carrying oversize loads (see chapter 5, skills for driving trucks and trailers).",
+    "chapter": 3,
+    "importance": "high",
+    "source_pages": "57"
+  },
+  {
+    "code": "TRK.DOUBLE_CLEVIS_LINK",
+    "title": "double clevis link(95)",
+    "description": "chapter 5 — skills for driving trucks and trailers A winch.",
+    "chapter": 5,
+    "importance": "high",
+    "source_pages": "95"
+  },
+  {
+    "code": "LIC.CLASS_6_LICENCE",
+    "title": "Class 6 Licence(4)",
+    "description": "* D rivers in B.C.’s Graduated Licensing Program are issued Class 7 and/or Class 8 driver’s licences.",
+    "chapter": 1,
+    "importance": "high",
+    "source_pages": "4"
+  },
+  {
+    "code": "DRV.DOUBLE_CLUTCHING",
+    "title": "double clutching(45)",
+    "description": "you can upshift by accelerating to 2,000 r.p.m., then double-clutching to enable the engine speed to decrease to 1,500 r.p.m., and then upshifting.",
+    "chapter": 3,
+    "importance": "high",
+    "source_pages": "45"
+  },
+  {
+    "code": "LIC.CLASS_7_LICENCE_GLP",
+    "title": "Class 7 Licence — GLP(4)",
+    "description": "* D rivers in B.C.’s Graduated Licensing Program are issued Class 7 and/or Class 8 driver’s licences.",
+    "chapter": 1,
+    "importance": "high",
+    "source_pages": "4"
+  },
+  {
+    "code": "INSP.DOUBLE_TRAILERS",
+    "title": "double trailers(209)",
+    "description": "8 corrosion or holes • nothing will obstruct the mechanism • no audible air leaks • pushrod travel is within tolerance • check slack adjuster, s-cam and bushings for mechanical condition and wear • air lines are secure • no leaks, abrasions, cuts or cracks • no kinks • brake drums aren’t cracked or broken • linings or drums not contaminated • lining thickness is within tolerance (if visible) Close and secure hood.",
+    "chapter": 10,
+    "importance": "high",
+    "source_pages": "209"
+  },
+  {
+    "code": "LIC.CLASS_8_LICENCE_GLP",
+    "title": "Class 8 Licence — GLP(4)",
+    "description": "* D rivers in B.C.’s Graduated Licensing Program are issued Class 7 and/or Class 8 driver’s licences.",
+    "chapter": 1,
+    "importance": "high",
+    "source_pages": "4"
+  },
+  {
+    "code": "BRK.DOWNGRADES",
+    "title": "downgrades(21-23)",
+    "description": "Frequent use of the service Downgrades brakes will cause them to heat up and reduce their There’s a limit to the amount of heat that brakes can absorb and dissipate.",
+    "chapter": 2,
+    "importance": "high",
+    "source_pages": "21-23"
+  },
+  {
+    "code": "IND.CODE_18_INDUSTRIAL_AIR_BRAKE",
+    "title": "Code 18 — Industrial Air Brake Endorsement(248)",
+    "description": "13 for more information Dangerous goods Dangerous goods training is available through some colleges, driving schools and consultants who specialize in this field.",
+    "chapter": 12,
+    "importance": "high",
+    "source_pages": "248"
+  },
+  {
+    "code": "TRK.DRAWBAR",
+    "title": "drawbar(85)",
+    "description": "chapter 5 — skills for driving trucks and trailers ❏ Truck and trailer • the truck pintle hook should line up with alignment the trailer pintle eye • adjust the drawbar height if needed so that the pintle eye is just slightly higher than the pintle hook 5.",
+    "chapter": 5,
+    "importance": "high",
+    "source_pages": "85"
+  },
+  {
+    "code": "IND.CODE_19_INDUSTRIAL_AIR_BRAKE",
+    "title": "Code 19 — Industrial Air Brake Endorsement(248)",
+    "description": "13 for more information Dangerous goods Dangerous goods training is available through some colleges, driving schools and consultants who specialize in this field.",
+    "chapter": 12,
+    "importance": "high",
+    "source_pages": "248"
+  },
+  {
+    "code": "BRK.COMBINATION_UNIT_BRAKING",
+    "title": "combination unit braking(23)",
+    "description": "Combination unit braking When you step on the brake pedal of a vehicle with air brakes, all of the brakes apply at the same time and at the same pressure.",
+    "chapter": 2,
+    "importance": "high",
+    "source_pages": "23"
+  },
+  {
+    "code": "LIC.DRIVER_MEDICAL_EXAMINATION_FOR",
+    "title": "driver medical examination form(5)",
+    "description": "• be given a Driver’s Medical Examination form that your doctor needs to complete and send to RoadSafetyBC.",
+    "chapter": 1,
+    "importance": "high",
+    "source_pages": "5"
+  },
+  {
+    "code": "LIC.S_MEDICAL_EXAMINATION_REPORT",
+    "title": "s Medical Examination Report(14)",
+    "description": "Your driver’s licence will not be downgraded if you fail to submit a routine Driver’s Medical Examination Report form.",
+    "chapter": 1,
+    "importance": "high",
+    "source_pages": "14"
+  },
+  {
+    "code": "BRK.S_PERCEPTION_TIME",
+    "title": "s Perception Time(17)",
+    "description": "Total stopping distance is the Driver’s perception time distance your vehicle will travel from the moment you: + reaction time • see — a hazard + brake lag time • think — decide to stop + braking time • do — place your foot on the brake pedal until you stop.",
+    "chapter": 2,
+    "importance": "high",
+    "source_pages": "17"
+  },
+  {
+    "code": "AIR.MANUAL",
+    "title": "manual(179)",
+    "description": "This ABS warning light is positioned on the side of the trailer at the rear.",
+    "chapter": 8,
+    "importance": "high",
+    "source_pages": "179"
+  },
+  {
+    "code": "DRV.DRUGS",
+    "title": "drugs(63)",
+    "description": "Warn others if there is any danger of an explosion, or exposure to toxic substances.",
+    "chapter": 3,
+    "importance": "high",
+    "source_pages": "63"
+  },
+  {
+    "code": "FUEL.FUEL_EFFICIENT_DRIVING",
+    "title": "fuel-efficient driving(67-74)",
+    "description": "Avoiding quick or sudden stops and starts is also smart, fuel-efficient driving.",
+    "chapter": 4,
+    "importance": "high",
+    "source_pages": "67-74"
+  },
+  {
+    "code": "BRK.DRUM_BRAKES",
+    "title": "drum brakes(16)",
+    "description": "Excessive use of the brakes could time is about 3/ of a second.",
+    "chapter": 2,
+    "importance": "high",
+    "source_pages": "16"
+  },
+  {
+    "code": "FUEL.SMART_DRIVING_TECHNIQUES",
+    "title": "smart-driving techniques(69-70)",
+    "description": "chapter 4 — fuel-efficient driving Maintaining your vehicle driving tip Regular maintenance keeps your vehicle running well, helps you avoid Low-viscosity lubricants such unexpected delays caused by vehicle breakdowns, and helps maintain fuel as synthetic motor oil can efficiency.",
+    "chapter": 4,
+    "importance": "high",
+    "source_pages": "69-70"
+  },
+  {
+    "code": "AIR.DUAL_AIR_BRAKE_SYSTEM",
+    "title": "dual air brake system(151-156)",
+    "description": "156 chapter 8 — air brakes The most common type of parking brake in an air brake system is the spring parking brake.",
+    "chapter": 8,
+    "importance": "high",
+    "source_pages": "151-156"
+  },
+  {
+    "code": "AIR.DUAL_AIR_TRACTOR_TRAILER_SYSTE",
+    "title": "dual air tractor trailer system(171-173)",
+    "description": "chapter 8 — air brakes Dual tractor-trailer system — trailer breakaway Despite the ruptured supply line, the driver can still make a controlled stop.",
+    "chapter": 8,
+    "importance": "high",
+    "source_pages": "171-173"
+  },
+  {
+    "code": "BUS.PASSENGER_VEHICLE",
+    "title": "passenger vehicle(124)",
+    "description": "Passenger vehicles with a seating capacity of more than 12, including the driver, must be equipped with an emergency exit door or emergency windows.",
+    "chapter": 6,
+    "importance": "high",
+    "source_pages": "124"
+  },
+  {
+    "code": "AIR.DUAL_FOOT_VALVE",
+    "title": "dual foot valve(152)",
+    "description": "154 chapter 8 — air brakes When the driver releases the foot valve, only the air in the line between the foot valve and the quick release valve is vented at the foot valve exhaust port.",
+    "chapter": 8,
+    "importance": "high",
+    "source_pages": "152"
+  },
+  {
+    "code": "BUS.SCHOOL_BUS",
+    "title": "school bus(126)",
+    "description": "An ambulance is an emergency vehicle that uses flashing red lights to get the right-of-way.",
+    "chapter": 6,
+    "importance": "high",
+    "source_pages": "126"
+  },
+  {
+    "code": "AIR.DYNAMITING_TRAILER_BRAKES",
+    "title": "dynamiting trailer brakes(166, 168)",
+    "description": "This action can also be called dynamiting of the trailer brakes.",
+    "chapter": 8,
+    "importance": "high",
+    "source_pages": "166, 168"
+  },
+  {
+    "code": "DRV.GASOLINE_ENGINES",
+    "title": "gasoline engines(46)",
+    "description": "Buffeting Small vehicles area riding in this area could be in danger Turbulent section Buffeting Small vehicles area riding in this area could Turbulent be in danger section Areas of turbulence.",
+    "chapter": 3,
+    "importance": "high",
+    "source_pages": "46"
+  },
+  {
+    "code": "AIR.ELECTRONIC_CONTROL_UNIT",
+    "title": "electronic control unit(181)",
+    "description": "Brake adjustment — it’s critical The most important part of any braking system is the foundation brakes.",
+    "chapter": 8,
+    "importance": "high",
+    "source_pages": "181"
+  },
+  {
+    "code": "BUS.EMERGENCY_EQUIPMENT",
+    "title": "emergency equipment(123, 126)",
+    "description": "Refer to chapter 3, basic driving skills, for more information about emergency equipment.",
+    "chapter": 6,
+    "importance": "high",
+    "source_pages": "123, 126"
+  },
+  {
+    "code": "DRV.EMERGENCY_VEHICLES",
+    "title": "emergency vehicles(44)",
+    "description": "For example, if the for information related to peak engine torque is at 1,500 r.p.m.",
+    "chapter": 3,
+    "importance": "high",
+    "source_pages": "44"
+  },
+  {
+    "code": "INSP.EN_ROUTE_INSPECTIONS",
+    "title": "en route inspections(229)",
+    "description": "232 11 signs, signals and road markings This chapter is a handy reference section that gives examples of the most common signs, signals and road markings that keep traffic organized and flowing smoothly.",
+    "chapter": 10,
+    "importance": "high",
+    "source_pages": "229"
+  },
+  {
+    "code": "DRV.ENGINE",
+    "title": "engine(46-47)",
+    "description": "Entering curves Before you enter a curve, slow to a safe speed and downshift to a gear that lets you use engine power all through the curve.",
+    "chapter": 3,
+    "importance": "high",
+    "source_pages": "46-47"
+  },
+  {
+    "code": "LIC.ENDORSEMENT_CODE_15",
+    "title": "endorsement code 15(5)",
+    "description": "Endorsement code 15 is shown in the “restrictions” section of a driver’s The air brake knowledge licence.",
+    "chapter": 1,
+    "importance": "high",
+    "source_pages": "5"
+  },
+  {
+    "code": "AIR.COMPRESSOR",
+    "title": "compressor(146-147)",
+    "description": "148 chapter 8 — air brakes Reservoirs fast fact Steel tanks (known as reservoirs) are used to store the compressed air from The safety valve is sometimes the compressor.",
+    "chapter": 8,
+    "importance": "high",
+    "source_pages": "146-147"
+  },
+  {
+    "code": "LIC.ENDORSEMENTS",
+    "title": "endorsements(5-6)",
+    "description": "See chapter 8, air brakes, for details about this attempts must complete or type of braking system.",
+    "chapter": 1,
+    "importance": "high",
+    "source_pages": "5-6"
+  },
+  {
+    "code": "TRK.GROSS_VEHICLE_WEIGHT_RATING",
+    "title": "Gross Vehicle Weight Rating(111, 131)",
+    "description": "If you drive a commercial vehicle with a licensed gross vehicle weight of more than fast fact 5,500 kg, you must report to a scale whenever a sign, a police officer or an authorized person directs you to do so.",
+    "chapter": 5,
+    "importance": "high",
+    "source_pages": "111, 131"
+  },
+  {
+    "code": "INFO.ENVIRONMENT_CANADA",
+    "title": "Environment Canada(254)",
+    "description": "chapter 13 — for more information Metric conversion table p.s.i.",
+    "chapter": 13,
+    "importance": "high",
+    "source_pages": "254"
+  },
+  {
+    "code": "TRK.HAY",
+    "title": "hay(101, 110)",
+    "description": "This arrangement of bundles is shown below.",
+    "chapter": 5,
+    "importance": "high",
+    "source_pages": "101, 110"
+  },
+  {
+    "code": "DRV.FATIGUE",
+    "title": "fatigue(63)",
+    "description": "Warn others if there is any danger of an explosion, or exposure to toxic substances.",
+    "chapter": 3,
+    "importance": "high",
+    "source_pages": "63"
+  },
+  {
+    "code": "TRK.FIFTH_WHEEL",
+    "title": "fifth wheel(78-89)",
+    "description": "driving tip ❏ Trailer connection • use the lowest reverse gear to back up Use the differential lockup very slowly • stop when you feel or hear for additional traction if it is the trailer kingpin lock into the fifth wheel slippery.",
+    "chapter": 5,
+    "importance": "high",
+    "source_pages": "78-89"
+  },
+  {
+    "code": "LIC.HEAVY_TRAILER",
+    "title": "heavy trailer(4)",
+    "description": "Construction vehicles include tractors, graders, loaders, shovels, rollers, Class 4 or 5 • Trailers or towed vehicles exceeding 18 scrapers or other self- with heavy trailer 4,600 kg provided neither the truck nor endorsement (code 20) trailer has air brakes.",
+    "chapter": 1,
+    "importance": "high",
+    "source_pages": "4"
+  },
+  {
+    "code": "DRV.FIRE_EXTINGUISHERS",
+    "title": "fire extinguishers(64-65)",
+    "description": "chapter 3 — basic driving skills Vehicles required to carry fire extinguishers One fire extinguisher must be carried on: • limited passenger vehicles that have an authorized seating capacity of more than 10 • all public passenger vehicles • all school buses — the fire extinguishers must meet Canadian Standard Association (CSA) Standard D250.",
+    "chapter": 3,
+    "importance": "high",
+    "source_pages": "64-65"
+  },
+  {
+    "code": "GEN.HEAVY_TRAILER_ENDORSEMENT",
+    "title": "heavy trailer endorsement(2-3)",
+    "description": "Your insurance claim may be ❏ know which vehicles require an air brake endorsed driver’s licence denied, including claims for your own injuries, or damage ❏ describe the steps to get a commercial driver’s licence, an air brake that you might cause to your endorsement or a heavy trailer endorsement.",
+    "chapter": 0,
+    "importance": "high",
+    "source_pages": "2-3"
+  },
+  {
+    "code": "DRV.FIRE_PREVENTION",
+    "title": "fire prevention(63-64)",
+    "description": "Warn others if there is any danger of an explosion, or exposure to toxic substances.",
+    "chapter": 3,
+    "importance": "high",
+    "source_pages": "63-64"
+  },
+  {
+    "code": "IND.HIGHWAY_CROSSING_PERMIT",
+    "title": "highway crossing permit(250)",
+    "description": "• Accessible 24 hours a day: 1-800-661-6844 Acts and regulations National Safety Code Pamphlets on the National Safety Code and Safety Code regulations are available at provincial weigh scales and at www.th.gov.bc.ca/cvse Information is also available during regular business hours from the Provincial National Safety Code office in Victoria.",
+    "chapter": 12,
+    "importance": "high",
+    "source_pages": "250"
+  },
+  {
+    "code": "DRV.FLASHING_LIGHTS",
+    "title": "flashing lights(58)",
+    "description": "By simply making sure the top of the head restraint is at least as high as the top of your head, and the head restraint is less than 10 cm from the back of your head, you can help prevent neck injuries.",
+    "chapter": 3,
+    "importance": "high",
+    "source_pages": "58"
+  },
+  {
+    "code": "HOS.HOURS_OF_SERVICE",
+    "title": "hours of service(131–140)",
+    "description": "chapter 7 — hours of service requirements Daily limits — a simple three-point check for compliance 8 Hours 24-Hour Period Off Duty 10 hours off duty 10 (*) 8 hours Off duty > 10 13 Driving < 13 1 No driving after 14 hours On duty (*) 8 consecutive hours is not required in the rules for the ‘Day’ Work shift A work shift is the elapsed time between two off-duty periods of at least eight consecutive hours.",
+    "chapter": 7,
+    "importance": "high",
+    "source_pages": "131–140"
+  },
+  {
+    "code": "DRV.FOLLOWING_DISTANCE",
+    "title": "following distance(27-28)",
+    "description": "affect several or all of the • You won’t be able to maintain a safe following distance, which means you other vehicles.",
+    "chapter": 3,
+    "importance": "high",
+    "source_pages": "27-28"
+  },
+  {
+    "code": "LIC.HOUSE_TRAILER",
+    "title": "house trailer(4)",
+    "description": "and getting a house trailer Class 5 or 7* • Two-axle vehicles including cars, vans, 16 endorsement, see Towing trucks and tow trucks.",
+    "chapter": 1,
+    "importance": "high",
+    "source_pages": "4"
+  },
+  {
+    "code": "DRV.FOOT_BRAKE",
+    "title": "foot brake(57, 171)",
+    "description": "• amber flashing lights are used on construction vehicles, towing vehicles, tow cars that are attending, snow-removal equipment, sanding equipment, pilot cars, and vehicles that are required by permit to use them, such as some oversize vehicles or vehicles carrying oversize loads (see chapter 5, skills for driving trucks and trailers).",
+    "chapter": 3,
+    "importance": "high",
+    "source_pages": "57, 171"
+  },
+  {
+    "code": "DRV.HUMPBACK_CROSSING",
+    "title": "humpback crossing(52)",
+    "description": "On average, To help prevent a collision with an animal: four people are killed and 450 are injured every year • Watch for animal crossing signs.",
+    "chapter": 3,
+    "importance": "high",
+    "source_pages": "52"
+  },
+  {
+    "code": "AIR.FOOT_VALVE_TREADLE",
+    "title": "foot valve treadle(150)",
+    "description": "driving commercial vehicles The device that made dual systems possible is the dual foot valve.",
+    "chapter": 8,
+    "importance": "high",
+    "source_pages": "150"
+  },
+  {
+    "code": "AIR.FORCE_MULTIPLIERS",
+    "title": "force multipliers(143)",
+    "description": "The most common size air chamber used on truck drive axles and trailer axles is a regular Type 30 clamp type chamber with 30 square inches of effective diaphragm area.",
+    "chapter": 8,
+    "importance": "high",
+    "source_pages": "143"
+  },
+  {
+    "code": "INFO.FOREST_FIRES",
+    "title": "forest fires(258)",
+    "description": "See page 258 for detailed information about forest fires.",
+    "chapter": 13,
+    "importance": "high",
+    "source_pages": "258"
+  },
+  {
+    "code": "INFO.ICBC",
+    "title": "ICBC(256)",
+    "description": "See page 256 for detailed information about ICBC.",
+    "chapter": 13,
+    "importance": "high",
+    "source_pages": "256"
+  },
+  {
+    "code": "AIR.FOUNDATION_BRAKES",
+    "title": "foundation brakes(142)",
+    "description": "Foundation brakes: s-cam type definition The brake assembly at each wheel is generally called the foundation brake.",
+    "chapter": 8,
+    "importance": "high",
+    "source_pages": "142"
+  },
+  {
+    "code": "BRK.ICY_ROADS",
+    "title": "icy roads(21)",
+    "description": "Icy roads To stop on icy roads, use extremely light pressure on the brake to control your driving tip vehicle’s speed.",
+    "chapter": 2,
+    "importance": "high",
+    "source_pages": "21"
+  },
+  {
+    "code": "DRV.AIR_OVER_IMPAIRED_DRIVING",
+    "title": "air–over impaired driving(61-63)",
+    "description": "Vehicle impoundment In addition to impounding vehicles operated by impaired drivers, police can also impound the vehicle you’re driving if you’re caught committing any of the following offences: • driving while unlicensed • driving while suspended or prohibited • excessive speeding (40 km/h or more over the posted limit) • street racing or stunt driving.",
+    "chapter": 3,
+    "importance": "high",
+    "source_pages": "61-63"
+  },
+  {
+    "code": "IND.INDUSTRIAL_AIR_BRAKE_ENDORSEME",
+    "title": "industrial air brake endorsement(248)",
+    "description": "13 for more information Dangerous goods Dangerous goods training is available through some colleges, driving schools and consultants who specialize in this field.",
+    "chapter": 12,
+    "importance": "high",
+    "source_pages": "248"
+  },
+  {
+    "code": "AIR.FOUNDATION_BRAKES_S_CAM_TYPE",
+    "title": "foundation brakes — s-cam type(145-146)",
+    "description": "chapter 8 — air brakes To prevent the compressor from overheating, two types of cooling systems are used.",
+    "chapter": 8,
+    "importance": "high",
+    "source_pages": "145-146"
+  },
+  {
+    "code": "TRK.FRONT_END_STRUCTURES",
+    "title": "front end structures(100-101)",
+    "description": "Vehicles transporting logs or poles — Under section 29(1) of the Standard, these vehicles must be equipped with bunks, bolsters, stakes or other means of cradling the logs.",
+    "chapter": 5,
+    "importance": "high",
+    "source_pages": "100-101"
+  },
+  {
+    "code": "GEN.INSPECTIONS",
+    "title": "Inspections(263)",
+    "description": "The only exception is a photocopy that is certified as a true copy by the government agency that issued it.",
+    "chapter": 0,
+    "importance": "high",
+    "source_pages": "263"
+  },
+  {
+    "code": "BUS.INDUSTRIAL_ROADS_BUSES_LIMOUS",
+    "title": "industrial roads buses, limousines and taxis(119–120)",
+    "description": "chapter 6 — skills for driving buses, taxis, limousines and ride-hailing vehicles Operating a bus, taxi, limousine or fast fact ride-hailing vehicle All illuminated taxi signs must meet Motor Vehicle You must have a passenger transportation licence if you’re responsible for Act specifications for type, a vehicle which transports passengers on a for-hire basis.",
+    "chapter": 6,
+    "importance": "high",
+    "source_pages": "119–120"
+  },
+  {
+    "code": "TRK.INSPECTOR",
+    "title": "inspector(113-114)",
+    "description": "When a coupling device (other than a fifth wheel) is used to join vehicles in combination, is an additional coupling device such as a chain or cable required?",
+    "chapter": 5,
+    "importance": "high",
+    "source_pages": "113-114"
+  },
+  {
+    "code": "AIR.MANUAL_FRONT_WHEEL_LIMITING_SY",
+    "title": "manual front wheel limiting system(179)",
+    "description": "Depending on the system, Stopping in an emergency the dash lamp may light, flash briefly, then stay lit until vehicle speed reaches with a combination unit — 7–11 km/h, or light briefly then turn off.",
+    "chapter": 8,
+    "importance": "high",
+    "source_pages": "179"
+  },
+  {
+    "code": "DRV.INTERSECTIONS",
+    "title": "intersections(49-50)",
+    "description": "Don’t assume that the train you can see is the only one in the area.",
+    "chapter": 3,
+    "importance": "high",
+    "source_pages": "49-50"
+  },
+  {
+    "code": "LIC.MEDICAL_EXAMINATION_PROCESSING",
+    "title": "medical examination processing fee(14)",
+    "description": "driving commercial vehicles Commercial driver medical examination fast fact processing fee If you hold a higher class out- of-province licence, some This fee helps cover the Province’s costs for processing commercial driver tests may be waived.",
+    "chapter": 1,
+    "importance": "high",
+    "source_pages": "14"
+  },
+  {
+    "code": "LIC.MEDICAL_FITNESS",
+    "title": "medical fitness(5)",
+    "description": "chapter 1 — getting your driver’s licence Medical fitness Commercial drivers need to be in good physical condition.",
+    "chapter": 1,
+    "importance": "high",
+    "source_pages": "5"
+  },
+  {
+    "code": "BRK.JACKNIFE",
+    "title": "jacknife(24)",
+    "description": "24 chapter 2 — heavy vehicle braking Automatic traction control Automatic Traction Control (ATC) is an optional addition to an ABS system.",
+    "chapter": 2,
+    "importance": "high",
+    "source_pages": "24"
+  },
+  {
+    "code": "LIC.EXAMINATIONS",
+    "title": "examinations(14)",
+    "description": "14 2 heavy vehicle braking What you’ll learn After reading this chapter you’ll be able to: ❏ explain why heavy vehicles take longer to stop than smaller passenger vehicles ❏ explain why air brakes are used on heavy vehicles definition ❏ describe the basic scientific principles of braking ❏ identify the elements of stopping distance Heat is a form of energy.",
+    "chapter": 1,
+    "importance": "high",
+    "source_pages": "14"
+  },
+  {
+    "code": "BUS.JUMP_SEATS",
+    "title": "jump seats(122)",
+    "description": "height of the remaining opening Book 2 is available at provincial weigh scales and • stowed under the seats and against a barrier which prevents forward at www.th.gov.bc.ca/cvse.",
+    "chapter": 6,
+    "importance": "high",
+    "source_pages": "122"
+  },
+  {
+    "code": "INFO.QUALIFICATIONS",
+    "title": "qualifications(255-256)",
+    "description": "See page 255-256 for detailed information about qualifications.",
+    "chapter": 13,
+    "importance": "high",
+    "source_pages": "255-256"
+  },
+  {
+    "code": "AIR.KILOPASCALS_KPA",
+    "title": "Kilopascals (kPa)(145)",
+    "description": "chapter 8 — air brakes To prevent the compressor from overheating, two types of cooling systems are used.",
+    "chapter": 8,
+    "importance": "high",
+    "source_pages": "145"
+  },
+  {
+    "code": "TRK.SIDE",
+    "title": "side(110)",
+    "description": "This applies whether your vehicle is loaded or not.",
+    "chapter": 5,
+    "importance": "high",
+    "source_pages": "110"
+  },
+  {
+    "code": "DRV.USING",
+    "title": "using(43)",
+    "description": "Yield the right-of-way to vehicles that are using flashing red two or more lanes, the or blue lights and sirens (or other audible warning signals such as buzzers or nearest edge could be the horns).",
+    "chapter": 3,
+    "importance": "high",
+    "source_pages": "43"
+  },
+  {
+    "code": "LIC.KNOWLEDGE_TESTS",
+    "title": "knowledge tests(8)",
+    "description": "One of the knowledge tests is a traffic signs test.",
+    "chapter": 1,
+    "importance": "high",
+    "source_pages": "8"
+  },
+  {
+    "code": "AIR.MODULATOR",
+    "title": "modulator(181)",
+    "description": "Brake adjustment — it’s critical The most important part of any braking system is the foundation brakes.",
+    "chapter": 8,
+    "importance": "high",
+    "source_pages": "181"
+  },
+  {
+    "code": "SIGN.LANE_CONTROL_SIGNALS",
+    "title": "lane control signals(240)",
+    "description": "chapter 11 — signs, signals and road markings White lines White lines are used to separate lanes of traffic moving in the same direction.",
+    "chapter": 11,
+    "importance": "high",
+    "source_pages": "240"
+  },
+  {
+    "code": "LIC.MOTORCYCLES",
+    "title": "motorcycles(4)",
+    "description": "• Does not include Class 4 vehicles or motorcycles.",
+    "chapter": 1,
+    "importance": "high",
+    "source_pages": "4"
+  },
+  {
+    "code": "DRV.LANE_USE",
+    "title": "lane use(43)",
+    "description": "44 chapter 3 — basic driving skills There are many different manual transmissions used in commercial vehicles, so only general information is given in this guide.",
+    "chapter": 3,
+    "importance": "high",
+    "source_pages": "43"
+  },
+  {
+    "code": "LIC.MOTORCYCLES_LIMITED_SPEED",
+    "title": "motorcycles — limited-speed(4)",
+    "description": "See chapter 8, air brakes, for details about this attempts must complete or type of braking system.",
+    "chapter": 1,
+    "importance": "high",
+    "source_pages": "4"
+  },
+  {
+    "code": "LIC.LANGUAGE_REQUIREMENTS",
+    "title": "language requirements(7)",
+    "description": "One of the knowledge tests is a traffic signs test.",
+    "chapter": 1,
+    "importance": "high",
+    "source_pages": "7"
+  },
+  {
+    "code": "LIC.MOTORHOMES",
+    "title": "motorhomes(4)",
+    "description": "• Motorhomes (including those with more than two axles).",
+    "chapter": 1,
+    "importance": "high",
+    "source_pages": "4"
+  },
+  {
+    "code": "AIR.LEVERAGE",
+    "title": "leverage(144)",
+    "description": "146 chapter 8 — air brakes To prevent the compressor from overheating, two types of cooling systems are used.",
+    "chapter": 8,
+    "importance": "high",
+    "source_pages": "144"
+  },
+  {
+    "code": "LIC.LICENCE_CLASSES",
+    "title": "licence classes(3–4)",
+    "description": "warning Driving without a valid What you’ll learn driver’s licence or correct After studying this chapter you’ll be able to: class of licence may breach your insurance coverage ❏ describe B.C.’s driver licence classes if you’re in a crash.",
+    "chapter": 1,
+    "importance": "high",
+    "source_pages": "3–4"
+  },
+  {
+    "code": "LIC.LICENCE_DOWNGRADE",
+    "title": "licence downgrade(14)",
+    "description": "Downgrading to a non-commercial licence If you want to downgrade to a non-commercial licence class (for example, from Class 1 to Class 5), you need to visit a driver licensing office to apply for a new licence.",
+    "chapter": 1,
+    "importance": "high",
+    "source_pages": "14"
+  },
+  {
+    "code": "DRV.TIRE_TREAD_DEPTH",
+    "title": "tire tread depth(56)",
+    "description": "57 driving commercial vehicles Flashing lights fast fact Flashing lights may be mounted and used on motor vehicles under the You must have a permit from following conditions: Commercial Vehicle Safety • red flashing lights are used only on emergency vehicles and Enforcement before you mount amber flashing lights • blue flashing lights are used only on police vehicles on a vehicle.",
+    "chapter": 3,
+    "importance": "high",
+    "source_pages": "56"
+  },
+  {
+    "code": "LIC.LICENSE_UPGRADE",
+    "title": "license upgrade(14)",
+    "description": "14 2 heavy vehicle braking What you’ll learn After reading this chapter you’ll be able to: ❏ explain why heavy vehicles take longer to stop than smaller passenger vehicles ❏ explain why air brakes are used on heavy vehicles definition ❏ describe the basic scientific principles of braking ❏ identify the elements of stopping distance Heat is a form of energy.",
+    "chapter": 1,
+    "importance": "high",
+    "source_pages": "14"
+  },
+  {
+    "code": "TRK.SECURING_CARGO",
+    "title": "securing cargo(92)",
+    "description": "1.21 m 600 kg This article is 1.21 m long and weighs 600 kg.",
+    "chapter": 5,
+    "importance": "high",
+    "source_pages": "92"
+  },
+  {
+    "code": "TRK.LICENSED_GROSS_VEHICLE_WEIGHT",
+    "title": "Licensed Gross Vehicle Weight(111)",
+    "description": "If you drive a commercial vehicle with a licensed gross vehicle weight of more than fast fact 5,500 kg, you must report to a scale whenever a sign, a police officer or an authorized person directs you to do so.",
+    "chapter": 5,
+    "importance": "high",
+    "source_pages": "111"
+  },
+  {
+    "code": "BUS.MOTOR_VEHICLE_SAFETY_ACT_CANA",
+    "title": "Motor Vehicle Safety Act (Canada)(117)",
+    "description": "Bus right-of-way The Motor Vehicle Act gives public transit buses the right-of-way when a bus driver signals to move from the curb lane or a bus stop into the traffic flow and the bus displays a sign telling motorists to yield.",
+    "chapter": 6,
+    "importance": "high",
+    "source_pages": "117"
+  },
+  {
+    "code": "DRV.MULTI_SPEED_REAR_AXLES",
+    "title": "multi-speed rear axles(47)",
+    "description": "48 chapter 3 — basic driving skills • If you’re parking a tractor-trailer combination on an uphill with or without a fast fact curb, always turn the wheels to the left towards the centre of the road.",
+    "chapter": 3,
+    "importance": "high",
+    "source_pages": "47"
+  },
+  {
+    "code": "LIC.LICENSING",
+    "title": "licensing(4)",
+    "description": "* D rivers in B.C.’s Graduated Licensing Program are issued Class 7 and/or Class 8 driver’s licences.",
+    "chapter": 1,
+    "importance": "high",
+    "source_pages": "4"
+  },
+  {
+    "code": "TRK.NARROW_ROAD_SIGNS",
+    "title": "narrow road signs(109, 237)",
+    "description": "111 driving commercial vehicles When you receive a permit, you’ll also be given a list of requirements you fast fact must fulfill including some or all of the following: • pilot car(s) To move oversize or overweight loads on city or • flags municipal roads, you may need to get a permit from • signs the local city government or municipal authority.",
+    "chapter": 5,
+    "importance": "high",
+    "source_pages": "109, 237"
+  },
+  {
+    "code": "TRK.LOAD_ENCIRCLING_BINDERS",
+    "title": "load-encircling binders(96-99)",
+    "description": "99 driving commercial vehicles Since this dump truck has a full load of paper, debris and garbage, use a cover.",
+    "chapter": 5,
+    "importance": "high",
+    "source_pages": "96-99"
+  },
+  {
+    "code": "DRV.NIGHT_DRIVING",
+    "title": "night driving(54)",
+    "description": "Less cent compared to driving contact between your tire and the road means less traction.",
+    "chapter": 3,
+    "importance": "high",
+    "source_pages": "54"
+  },
+  {
+    "code": "TRK.LOADING",
+    "title": "loading(89-107)",
+    "description": "Division 35 of the Cargo Security — Book 2, Motor Vehicle Act Regulations (MVAR) specifies requirements for transporting contains information on logs or poles, covers for loose loads, affixing and marking the front end loading various special structures and carrying luggage in buses.",
+    "chapter": 5,
+    "importance": "high",
+    "source_pages": "89-107"
+  },
+  {
+    "code": "TRK.LOADS_INSPECTION_FOR_WEAR",
+    "title": "loads — inspection for wear(93)",
+    "description": "your tiedown assemblies, including the clevis hooks and load binders, Book 2 is available at are the lowest grade for their size unless they have a clear marking or a provincial weigh scales and permanently attached tag that states something different.",
+    "chapter": 5,
+    "importance": "high",
+    "source_pages": "93"
+  },
+  {
+    "code": "HOS.LOGBOOKS",
+    "title": "logbooks(136-137)",
+    "description": "60th parallel Be aware that other jurisdictions have different requirements for the maintenance of logbooks and the number of hours you may work each day.",
+    "chapter": 7,
+    "importance": "high",
+    "source_pages": "136-137"
+  },
+  {
+    "code": "HOS.OFF_DUTY_TIME",
+    "title": "off-duty time(132)",
+    "description": "Sleeper berth hours of service regulations for off-duty time are as follows: 134 chapter 7 — hours of service requirements Single drivers using a sleeper berth may split up their required off-duty time into two periods if: • neither period is less than two hours, and • the total off-duty time is at least 10 hours.",
+    "chapter": 7,
+    "importance": "high",
+    "source_pages": "132"
+  },
+  {
+    "code": "TRK.LONG_LOAD_SIGNS",
+    "title": "long load signs(113)",
+    "description": "Do load limit signs at the approach to bridges and structures apply to all vehicles?",
+    "chapter": 5,
+    "importance": "high",
+    "source_pages": "113"
+  },
+  {
+    "code": "LIC.ROADSAFETYBC",
+    "title": "RoadSafetyBC(7, 8)",
+    "description": "RoadSafetyBC will determine whether you’re fit 13, for more information.",
+    "chapter": 1,
+    "importance": "high",
+    "source_pages": "7, 8"
+  },
+  {
+    "code": "AIR.LOW_AIR_WARNING_DEVICE",
+    "title": "low-air warning device(153-154)",
+    "description": "The low-air warning system must activate when pressure in any reservoir falls below 60 p.s.i.",
+    "chapter": 8,
+    "importance": "high",
+    "source_pages": "153-154"
+  },
+  {
+    "code": "DRV.OFF_TRACKING",
+    "title": "off-tracking(32-33)",
+    "description": "Inertia is the tendency for moving objects — in this case you and your vehicle — to continue to move forward in a straight line.",
+    "chapter": 3,
+    "importance": "high",
+    "source_pages": "32-33"
+  },
+  {
+    "code": "DRV.LUGGING",
+    "title": "lugging(45)",
+    "description": "For example, if the for information related to peak engine torque is at 1,500 r.p.m.",
+    "chapter": 3,
+    "importance": "high",
+    "source_pages": "45"
+  },
+  {
+    "code": "HOS.ON_DUTY_TIME",
+    "title": "on-duty time(132)",
+    "description": "driving commercial vehicles Cycle 2 — Drivers working on this cycle must not drive after completing 120 fast fact hours in 14 days, and must take at least 24 consecutive hours off duty prior to accumulating 70 hours of on-duty time.",
+    "chapter": 7,
+    "importance": "high",
+    "source_pages": "132"
+  },
+  {
+    "code": "AIR.ONE_WAY_CHECK_VALVE",
+    "title": "one-way check valve(152)",
+    "description": "Relay valves are used to reduce the lag time when the brakes are applied, and when they’re released.",
+    "chapter": 8,
+    "importance": "high",
+    "source_pages": "152"
+  },
+  {
+    "code": "HOS.OTHER_JURISDICTIONS_HOURS_OF",
+    "title": "other jurisdictions — hours of service(138-139)",
+    "description": "When you’re operating in Cycle 2, when must you take 24 consecutive hours of off-duty time?",
+    "chapter": 7,
+    "importance": "high",
+    "source_pages": "138-139"
+  },
+  {
+    "code": "LIC.OUT_OF_PROVINCE_LICENCE",
+    "title": "out-of-province licence(6, 14)",
+    "description": "driver’s licence for the past • hold or have held a full-privilege licence that is a minimum of a Class 5 or three years, ICBC will check Class 6, or an out-of-province equivalent your B.C.",
+    "chapter": 1,
+    "importance": "high",
+    "source_pages": "6, 14"
+  },
+  {
+    "code": "DRV.TRUCKS",
+    "title": "trucks(31-42)",
+    "description": "Curve ahead — trucks and buses slow to suggested speed to avoid tipping over.",
+    "chapter": 3,
+    "importance": "high",
+    "source_pages": "31-42"
+  },
+  {
+    "code": "TRK.OVERLOAD_AND_OVERSIZE_LOAD",
+    "title": "overload and oversize load(111-112)",
+    "description": "chapter 5 — skills for driving trucks and trailers Signs You must display the appropriate signs whenever you transport an oversize load.",
+    "chapter": 5,
+    "importance": "high",
+    "source_pages": "111-112"
+  },
+  {
+    "code": "TRK.PALLETS",
+    "title": "pallets(99)",
+    "description": "It must also be identified in one of two ways: TAC is the Transportation 1.",
+    "chapter": 5,
+    "importance": "high",
+    "source_pages": "99"
+  },
+  {
+    "code": "DRV.PARKING",
+    "title": "parking(48-49)",
+    "description": "chapter 3 — basic driving skills • If you’re parking a tractor-trailer combination on an uphill with or without a fast fact curb, always turn the wheels to the left towards the centre of the road.",
+    "chapter": 3,
+    "importance": "high",
+    "source_pages": "48-49"
+  },
+  {
+    "code": "INFO.ENFORCEMENT",
+    "title": "Enforcement(254)",
+    "description": "chapter 13 — for more information Metric conversion table p.s.i.",
+    "chapter": 13,
+    "importance": "high",
+    "source_pages": "254"
+  },
+  {
+    "code": "TRK.TRAILERS",
+    "title": "trailers(76)",
+    "description": "trailer 78 chapter 5 — skills for driving trucks and trailers 2.",
+    "chapter": 5,
+    "importance": "high",
+    "source_pages": "76"
+  },
+  {
+    "code": "AIR.PARKING_BRAKE_CONTROL_VALVE",
+    "title": "parking brake control valve(159)",
+    "description": "The two-way check valve shuttle has moved so that secondary reservoir pressure supplies the parking brake control valve.",
+    "chapter": 8,
+    "importance": "high",
+    "source_pages": "159"
+  },
+  {
+    "code": "AIR.PARKING_BRAKES",
+    "title": "parking brakes(156)",
+    "description": "While the push-pull parking brake control is the most common, some systems use a switch, usually set so that flipping it in one direction applies the spring parking brakes and flipping it in the other direction releases them.",
+    "chapter": 8,
+    "importance": "high",
+    "source_pages": "156"
+  },
+  {
+    "code": "BUS.PUBLIC_TRANSPORTATION_DEFINI",
+    "title": "public transportation — definition(117)",
+    "description": "Bus right-of-way The Motor Vehicle Act gives public transit buses the right-of-way when a bus driver signals to move from the curb lane or a bus stop into the traffic flow and the bus displays a sign telling motorists to yield.",
+    "chapter": 6,
+    "importance": "high",
+    "source_pages": "117"
+  },
+  {
+    "code": "INFO.PASSENGER_TRANSPORTATION_BRANC",
+    "title": "Passenger Transportation Branch(255)",
+    "description": "See page 255 for detailed information about Passenger Transportation Branch.",
+    "chapter": 13,
+    "importance": "high",
+    "source_pages": "255"
+  },
+  {
+    "code": "AIR.QUICK_RELEASE_VALVE",
+    "title": "quick release valve(154-155)",
+    "description": "driving commercial vehicles For simplicity, quick release valves and relay valves are not shown in the following diagrams because they don’t change the basic concept of an air brake system, but serve only to speed up the release of the brakes, if needed.",
+    "chapter": 8,
+    "importance": "high",
+    "source_pages": "154-155"
+  },
+  {
+    "code": "BUS.REFUSAL_TO_TRANSPORT",
+    "title": "refusal to transport(122)",
+    "description": "height of the remaining opening Book 2 is available at provincial weigh scales and • stowed under the seats and against a barrier which prevents forward at www.th.gov.bc.ca/cvse.",
+    "chapter": 6,
+    "importance": "high",
+    "source_pages": "122"
+  },
+  {
+    "code": "BUS.DISABLED",
+    "title": "disabled(122-123)",
+    "description": "height of the remaining opening Book 2 is available at provincial weigh scales and • stowed under the seats and against a barrier which prevents forward at www.th.gov.bc.ca/cvse.",
+    "chapter": 6,
+    "importance": "high",
+    "source_pages": "122-123"
+  },
+  {
+    "code": "DRV.RAILWAY_CROSSINGS",
+    "title": "railway crossings(51-52)",
+    "description": "Watch for humpback crossings — Over time, humps can form at railway crossings and present a danger to many low-clearance vehicles because: • low bed trailers may hang up on the crossing surface or the rails • low-hanging trailer appliances (for example, dolly wheels and tool boxes) may catch on the rail.",
+    "chapter": 3,
+    "importance": "high",
+    "source_pages": "51-52"
+  },
+  {
+    "code": "SIGN.RAILWAY_SIGNS",
+    "title": "railway signs(240)",
+    "description": "chapter 11 — signs, signals and road markings White lines White lines are used to separate lanes of traffic moving in the same direction.",
+    "chapter": 11,
+    "importance": "high",
+    "source_pages": "240"
+  },
+  {
+    "code": "DRV.PASSING",
+    "title": "passing(47-48, 120)",
+    "description": "driving commercial vehicles Passing Drivers often think big vehicles are travelling faster than they actually are.",
+    "chapter": 3,
+    "importance": "high",
+    "source_pages": "47-48, 120"
+  },
+  {
+    "code": "DRV.RATCHET_AND_PAWL_BRAKE",
+    "title": "ratchet-and-pawl brake(57)",
+    "description": "• amber flashing lights are used on construction vehicles, towing vehicles, tow cars that are attending, snow-removal equipment, sanding equipment, pilot cars, and vehicles that are required by permit to use them, such as some oversize vehicles or vehicles carrying oversize loads (see chapter 5, skills for driving trucks and trailers).",
+    "chapter": 3,
+    "importance": "high",
+    "source_pages": "57"
+  },
+  {
+    "code": "LIC.PERMITS_LICENCE_REQUIREMENTS",
+    "title": "permits licence requirements(4)",
+    "description": "See chapter 8, air brakes, for details about this attempts must complete or type of braking system.",
+    "chapter": 1,
+    "importance": "high",
+    "source_pages": "4"
+  },
+  {
+    "code": "DRV.AMBER_FLASHING_LIGHT",
+    "title": "amber flashing light(58)",
+    "description": "By simply making sure the top of the head restraint is at least as high as the top of your head, and the head restraint is less than 10 cm from the back of your head, you can help prevent neck injuries.",
+    "chapter": 3,
+    "importance": "high",
+    "source_pages": "58"
+  },
+  {
+    "code": "LIC.RE_EXAMINATION_DRIVER_LICENC",
+    "title": "re-examination — driver licence(13)",
+    "description": "chapter 1 — getting your driver’s licence Air brake courses An air brake course is highly recommended as even experienced drivers learn more about air brakes by taking the course.",
+    "chapter": 1,
+    "importance": "high",
+    "source_pages": "13"
+  },
+  {
+    "code": "TRK.OVERSIZE_AND_OVERLOAD",
+    "title": "oversize and overload(112)",
+    "description": "When a coupling device (other than a fifth wheel) is used to join vehicles in combination, is an additional coupling device such as a chain or cable required?",
+    "chapter": 5,
+    "importance": "high",
+    "source_pages": "112"
+  },
+  {
+    "code": "BUS.CHAUFFEUR",
+    "title": "chauffeur(123)",
+    "description": "chapter 6 — skills for driving buses, taxis, limousines and ride-hailing vehicles Reporting a defect or deficiency You must report any defect or deficiency that could make your vehicle unsafe.",
+    "chapter": 6,
+    "importance": "high",
+    "source_pages": "123"
+  },
+  {
+    "code": "AIR.COMMERCIAL_VEHICLE_PERMIT_RELA",
+    "title": "Commercial Vehicle Permit relay emergency valve(165)",
+    "description": "chapter 8 — air brakes The system shown uses one reservoir and two air valves, a relay valve for the driving tip service brakes, and a trailer spring brake valve that fills the reservoir and controls the spring parking brakes.",
+    "chapter": 8,
+    "importance": "high",
+    "source_pages": "165"
+  },
+  {
+    "code": "AIR.LINE_RELAY_VALVE",
+    "title": "Line relay valve(155-156)",
+    "description": "chapter 8 — air brakes The most common type of parking brake in an air brake system is the spring parking brake.",
+    "chapter": 8,
+    "importance": "high",
+    "source_pages": "155-156"
+  },
+  {
+    "code": "DRV.PERSONAL_SAFETY",
+    "title": "personal safety(59-65)",
+    "description": "By simply making sure the top of the head restraint is at least as high as the top of your head, and the head restraint is less than 10 cm from the back of your head, you can help prevent neck injuries.",
+    "chapter": 3,
+    "importance": "high",
+    "source_pages": "59-65"
+  },
+  {
+    "code": "TRK.PILOT_CAR",
+    "title": "pilot car(112)",
+    "description": "When a coupling device (other than a fifth wheel) is used to join vehicles in combination, is an additional coupling device such as a chain or cable required?",
+    "chapter": 5,
+    "importance": "high",
+    "source_pages": "112"
+  },
+  {
+    "code": "BUS.DEFECTS_OR_DEFICIENCY",
+    "title": "defects or deficiency(125)",
+    "description": "An ambulance is an emergency vehicle that uses flashing red lights to get the right-of-way.",
+    "chapter": 6,
+    "importance": "high",
+    "source_pages": "125"
+  },
+  {
+    "code": "TRK.PINTLE_HITCH",
+    "title": "pintle hitch(85-89)",
+    "description": "❏ Trailer connection • pintle eye should be securely held in pintle hook Uncoupling pintle hitch units Use these steps to uncouple a truck and trailer joined with a pintle hitch: 1.",
+    "chapter": 5,
+    "importance": "high",
+    "source_pages": "85-89"
+  },
+  {
+    "code": "INSP.PRE_TRIP",
+    "title": "pre-trip(197-198)",
+    "description": "driving commercial vehicles Tractor-trailer combination pre-trip inspection — Class 1 You should be able to complete this pre-trip inspection in less than 45 minutes.",
+    "chapter": 10,
+    "importance": "high",
+    "source_pages": "197-198"
+  },
+  {
+    "code": "TRK.POLE_TRAILER",
+    "title": "pole trailer(85)",
+    "description": "chapter 5 — skills for driving trucks and trailers ❏ Truck and trailer • the truck pintle hook should line up with alignment the trailer pintle eye • adjust the drawbar height if needed so that the pintle eye is just slightly higher than the pintle hook 5.",
+    "chapter": 5,
+    "importance": "high",
+    "source_pages": "85"
+  },
+  {
+    "code": "INSP.POST_TRIP_INSPECTIONS",
+    "title": "post-trip inspections(231)",
+    "description": "School zone — reduce speed when children Pedestrian activated are present crosswalk — prepare to Pedestrian crosswalk — School crosswalk — yield stop if the light is flashing yield to people crossing to pedestrians — if there is a crossing guard, follow directions School zone — if Playground nearby the tab underneath School zone — — be prepared to only indicates the the tab underneath slow down speed limit, that indicates the speed Playground zone — School zone — limit is in effect limit and the hours 30 km/h limit is in 50 km/h limit is in from 8 a.m.",
+    "chapter": 10,
+    "importance": "high",
+    "source_pages": "231"
+  },
+  {
+    "code": "AIR.RESERVOIRS",
+    "title": "reservoirs(141-183)",
+    "description": "148 chapter 8 — air brakes Reservoirs fast fact Steel tanks (known as reservoirs) are used to store the compressed air from The safety valve is sometimes the compressor.",
+    "chapter": 8,
+    "importance": "high",
+    "source_pages": "141-183"
+  },
+  {
+    "code": "INSP.PRE_HILL_INSPECTIONS",
+    "title": "pre-hill inspections(228)",
+    "description": "chapter 10 — vehicle and air brake pre-trip inspections driving tip Commercial trailers with an overall width of 2.05 m or more are required to have reflective markings to the rear and sides.",
+    "chapter": 10,
+    "importance": "high",
+    "source_pages": "228"
+  },
+  {
+    "code": "BRK.RETARDERS",
+    "title": "retarders(20)",
+    "description": "driving commercial vehicles Retarders definition Retarders are designed to provide auxiliary slowing of the vehicle, such as Retarders provide an for controlling the speed on long downgrades without the use of the main auxiliary slowing effect and braking system.",
+    "chapter": 2,
+    "importance": "high",
+    "source_pages": "20"
+  },
+  {
+    "code": "AIR.PRESSURE_PROTECTION_VALVES",
+    "title": "pressure protection valves(180)",
+    "description": "This ABS warning light is positioned on the side of the trailer at the rear.",
+    "chapter": 8,
+    "importance": "high",
+    "source_pages": "180"
+  },
+  {
+    "code": "BRK.PRE_TRIP_INSPECTION_DEFINITION",
+    "title": "pre-trip inspection definition(21)",
+    "description": "chapter 2 — heavy vehicle braking Braking definition Bringing your vehicle to a stop on a level roadway usually means squeezing The term r.p.m.",
+    "chapter": 2,
+    "importance": "high",
+    "source_pages": "21"
+  },
+  {
+    "code": "BUS.RIDE_HAIL_VEHICLES",
+    "title": "ride-hail vehicles(117)",
+    "description": "chapter 6 — skills for driving buses, taxis, limousines and ride-hailing vehicles Manoeuvring You need to understand the handling characteristics of your vehicle in order to transport your passengers safely and comfortably.",
+    "chapter": 6,
+    "importance": "high",
+    "source_pages": "117"
+  },
+  {
+    "code": "INSP.TRACTOR_TRAILER_CLASS_1_LICENC",
+    "title": "tractor trailer Class 1 Licence(200-209)",
+    "description": "from both the left and right sides of the tractor, and from Check that air pressure is at least 100 p.s.i.",
+    "chapter": 10,
+    "importance": "high",
+    "source_pages": "200-209"
+  },
+  {
+    "code": "INSP.BUSES_CLASS_2_OR_CLASS_4_UNR",
+    "title": "buses — Class 2 or Class 4 unrestricted(218-224)",
+    "description": "221 driving commercial vehicles Class 2 or Class 4 3.",
+    "chapter": 10,
+    "importance": "high",
+    "source_pages": "218-224"
+  },
+  {
+    "code": "INSP.SINGLE_UNIT_TRUCK_CLASS_3",
+    "title": "single unit truck — Class 3(210-217)",
+    "description": "(if equipped) 215 driving commercial vehicles Class 3 Rear of truck pre-trip inspection ❏ Cargo doors/lift/ • doors are securely mounted • securely tailgate closed or latched • lift is fully retracted • lift has no leaks, or damaged or missing parts driving tip ❏ Cargo • load is secured • adequate load security Make sure the load you’re devices are in place and are tight carrying is secure.",
+    "chapter": 10,
+    "importance": "high",
+    "source_pages": "210-217"
+  },
+  {
+    "code": "DRV.RULES",
+    "title": "rules(49)",
+    "description": "Alleys, lanes and side roads fast fact If you drive from an alley, lane or side road onto a highway, you must: The maximum speed in a lane or alley is 20 km/h unless otherwise posted.",
+    "chapter": 3,
+    "importance": "high",
+    "source_pages": "49"
+  },
+  {
+    "code": "INSP.PRE_TRIP_INSPECTION_REPORT_R",
+    "title": "pre-trip inspection report — road test(197-198)",
+    "description": "fast fact As part of your road test, Class 1 pre-trip inspection, you’ll be tested on your ability to complete a pre-trip inspection.",
+    "chapter": 10,
+    "importance": "high",
+    "source_pages": "197-198"
+  },
+  {
+    "code": "SIGN.ROAD_MARKINGS",
+    "title": "road markings(242-244)",
+    "description": "chapter 11 — signs, signals and road markings Review questions 1.",
+    "chapter": 11,
+    "importance": "high",
+    "source_pages": "242-244"
+  },
+  {
+    "code": "AIR.PRIMARY_AIR_SYSTEM_FAILURE",
+    "title": "primary air system — failure(172)",
+    "description": "Like a full air brake system, typical air-over-hydraulic braking systems use a standard air pressure of around 125 p.s.i.",
+    "chapter": 8,
+    "importance": "high",
+    "source_pages": "172"
+  },
+  {
+    "code": "INFO.ROAD_REPORTS",
+    "title": "road reports(257)",
+    "description": "See page 257 for detailed information about road reports.",
+    "chapter": 13,
+    "importance": "high",
+    "source_pages": "257"
+  },
+  {
+    "code": "SIGN.REGULATORY",
+    "title": "regulatory(234)",
+    "description": "chapter 11 — signs, signals and road markings Warning signs Most warning signs are yellow and diamond-shaped.",
+    "chapter": 11,
+    "importance": "high",
+    "source_pages": "234"
+  },
+  {
+    "code": "SIGN.WARNING",
+    "title": "warning(237-238)",
+    "description": "driving commercial vehicles Railway signs Public railway and highway crossings are indicated with signs or pavement markings and may also have mechanical or electrical warning devices for your protection.",
+    "chapter": 11,
+    "importance": "high",
+    "source_pages": "237-238"
+  },
+  {
+    "code": "LIC.ROAD_TEST_VEHICLES",
+    "title": "road test vehicles(10-12)",
+    "description": "fast fact Road test vehicles If you take your Class 1, You need to provide an appropriate vehicle when you take your road test.",
+    "chapter": 1,
+    "importance": "high",
+    "source_pages": "10-12"
+  },
+  {
+    "code": "LIC.ROAD_TESTS",
+    "title": "road tests(10)",
+    "description": "typical vehicles accepted for road tests: • Class 4 (restricted) — any car or pickup truck • Class 4 (unrestricted) — a full-sized passenger van or small school bus with a seating capacity of at least 11 adults • Class 3 — a large tandem or tridem rear axle truck such as a moving van or dump truck • Class 2 — a large bus with a seating capacity of at least 36 adults • Class 2 - a bus with a seating capacity of 25-34 adults (NOT including the driver); Restriction 51 “CL2 max 34 pass.",
+    "chapter": 1,
+    "importance": "high",
+    "source_pages": "10"
+  },
+  {
+    "code": "TRK.ROLLERS",
+    "title": "rollers(99)",
+    "description": "It must also be identified in one of two ways: TAC is the Transportation 1.",
+    "chapter": 5,
+    "importance": "high",
+    "source_pages": "99"
+  },
+  {
+    "code": "TRK.ROLLOVERS",
+    "title": "rollovers(76)",
+    "description": "Preparing to tow Almost all Class 1 drivers, and many drivers with a different class of licence, will need to become experts on coupling and uncoupling a tractor and trailer.",
+    "chapter": 5,
+    "importance": "high",
+    "source_pages": "76"
+  },
+  {
+    "code": "ADJ.SLACK_ADJUSTER",
+    "title": "slack adjuster(187-194)",
+    "description": "Myth #2: A 90-degree angle between the centre of the slack adjuster arm and the chamber pushrod with the brakes applied is a good indication that the brake is adjusted correctly.",
+    "chapter": 9,
+    "importance": "high",
+    "source_pages": "187-194"
+  },
+  {
+    "code": "DRV.ROUNDABOUTS",
+    "title": "roundabouts(38-39)",
+    "description": "chapter 3 — basic driving skills Roundabouts driving tip Some roundabouts have more than one lane.",
+    "chapter": 3,
+    "importance": "high",
+    "source_pages": "38-39"
+  },
+  {
+    "code": "AIR.SLIPPERY_ROAD_VALVE",
+    "title": "slippery road valve(178-179)",
+    "description": "This ABS warning light is positioned on the side of the trailer at the rear.",
+    "chapter": 8,
+    "importance": "high",
+    "source_pages": "178-179"
+  },
+  {
+    "code": "BRK.RUNAWAY_LANE",
+    "title": "runaway lane(23)",
+    "description": "Runaway lanes These two road signs alert you to runaway lanes.",
+    "chapter": 2,
+    "importance": "high",
+    "source_pages": "23"
+  },
+  {
+    "code": "DRV.SLOW_MOVING_VEHICLE_WARNING_SI",
+    "title": "slow moving vehicle warning sign(29)",
+    "description": "• continuously plan an escape route in case the Truck 1 is approximately 2½ danger zone becomes vehicle lengths from the occupied.",
+    "chapter": 3,
+    "importance": "high",
+    "source_pages": "29"
+  },
+  {
+    "code": "BUS.S_SMOKING_AND_ALCOHOL",
+    "title": "S smoking and alcohol(121, 124)",
+    "description": "height of the remaining opening Book 2 is available at provincial weigh scales and • stowed under the seats and against a barrier which prevents forward at www.th.gov.bc.ca/cvse.",
+    "chapter": 6,
+    "importance": "high",
+    "source_pages": "121, 124"
+  },
+  {
+    "code": "BRK.SNOW_TIRES",
+    "title": "snow tires(21)",
+    "description": "It’s extremely difficult to You need snow tires and/or chains on icy roads.",
+    "chapter": 2,
+    "importance": "high",
+    "source_pages": "21"
+  },
+  {
+    "code": "LIC.SPECIAL_ACTIVITY_BUS_DEFINIT",
+    "title": "special activity bus – definition(4, 117)",
+    "description": "driving commercial vehicles Minimum definitions Class Vehicle type age A special activity bus is Class 4 (unrestricted) • Buses with a maximum seating capacity of 19 operated for a school, 25 persons (including the driver), including and doesn’t run on a set school buses, special activity buses and schedule.",
+    "chapter": 1,
+    "importance": "high",
+    "source_pages": "4, 117"
+  },
+  {
+    "code": "AIR.SAFETY_ACTUATOR_PARKING_BRAKES",
+    "title": "safety actuator parking brakes(163-164)",
+    "description": "chapter 8 — air brakes There are two basic types of trailer air systems — those that use spring driving tip parking brakes and those that don’t.",
+    "chapter": 8,
+    "importance": "high",
+    "source_pages": "163-164"
+  },
+  {
+    "code": "LIC.SPECIAL_VEHICLE",
+    "title": "special vehicle(4, 117)",
+    "description": "• Special vehicles with a seating capacity of not more than 10 persons (including driving tip the driver) used to transport people with disabilities.",
+    "chapter": 1,
+    "importance": "high",
+    "source_pages": "4, 117"
+  },
+  {
+    "code": "DRV.SAFETY_EQUIPMENT",
+    "title": "safety equipment(59-60)",
+    "description": "By simply making sure the top of the head restraint is at least as high as the top of your head, and the head restraint is less than 10 cm from the back of your head, you can help prevent neck injuries.",
+    "chapter": 3,
+    "importance": "high",
+    "source_pages": "59-60"
+  },
+  {
+    "code": "TRK.SPECIFIC_CARGO_TYPES",
+    "title": "specific cargo types(102-107)",
+    "description": "Additional tiedowns may be required so that the aggregate working load limit of all tiedowns is at least 50 per cent of the cargo weight.",
+    "chapter": 5,
+    "importance": "high",
+    "source_pages": "102-107"
+  },
+  {
+    "code": "BRK.SPEED_AND_WEIGHT",
+    "title": "speed and weight(18)",
+    "description": "driving commercial vehicles Speed and weight facts fast fact Speed and weight affect the stopping power required to stop any vehicle, and Driving without due care and how far it will travel before it stops.",
+    "chapter": 2,
+    "importance": "high",
+    "source_pages": "18"
+  },
+  {
+    "code": "AIR.SAFETY_VALVE",
+    "title": "safety valve(149)",
+    "description": "151 driving commercial vehicles The device that made dual systems possible is the dual foot valve.",
+    "chapter": 8,
+    "importance": "high",
+    "source_pages": "149"
+  },
+  {
+    "code": "INFO.SPILLS_DANGEROUS_GOODS",
+    "title": "spills — dangerous goods(253)",
+    "description": "• For information and bookings: 1-800-HELLOBC (435-5622) • Website: hellobc.com Reporting forest fires • Within B.C., report forest fire sightings to: 1-800-663-5555 • Cell: *5555 TaxiHost This program is designed to help create a consistently high standard of taxicab service.",
+    "chapter": 13,
+    "importance": "high",
+    "source_pages": "253"
+  },
+  {
+    "code": "AIR.S_CAM_DRUM_BRAKE",
+    "title": "s-cam drum brake(145-146)",
+    "description": "chapter 8 — air brakes To prevent the compressor from overheating, two types of cooling systems are used.",
+    "chapter": 8,
+    "importance": "high",
+    "source_pages": "145-146"
+  },
+  {
+    "code": "AIR.SPRING_PARKING_BRAKE",
+    "title": "spring parking brake(157-163)",
+    "description": "While the push-pull parking brake control is the most common, some systems use a switch, usually set so that flipping it in one direction applies the spring parking brakes and flipping it in the other direction releases them.",
+    "chapter": 8,
+    "importance": "high",
+    "source_pages": "157-163"
+  },
+  {
+    "code": "ADJ.ADJUSTMENT",
+    "title": "adjustment(185-187)",
+    "description": "If this distance is more than 1¾ of an inch (45 mm), the brakes need adjustment.",
+    "chapter": 9,
+    "importance": "high",
+    "source_pages": "185-187"
+  },
+  {
+    "code": "AIR.TRAILER",
+    "title": "trailer(164-168)",
+    "description": "On highway trailers, one reservoir and one relay emergency valve are used for single or tandem axles.",
+    "chapter": 8,
+    "importance": "high",
+    "source_pages": "164-168"
+  },
+  {
+    "code": "AIR.EMERGENCY_RELEASE",
+    "title": "emergency release(179)",
+    "description": "Depending on the system, Stopping in an emergency the dash lamp may light, flash briefly, then stay lit until vehicle speed reaches with a combination unit — 7–11 km/h, or light briefly then turn off.",
+    "chapter": 8,
+    "importance": "high",
+    "source_pages": "179"
+  },
+  {
+    "code": "LIC.LICENCE_REQUIREMENTS",
+    "title": "licence requirements(4)",
+    "description": "See chapter 8, air brakes, for details about this attempts must complete or type of braking system.",
+    "chapter": 1,
+    "importance": "high",
+    "source_pages": "4"
+  },
+  {
+    "code": "BRK.STARTING_AND_STOPPING",
+    "title": "starting and stopping(16-19)",
+    "description": "If one or two of these brakes isn’t correctly adjusted, the others have to do more than their share of the braking, resulting in a longer stopping Reaction time is the time it distance.",
+    "chapter": 2,
+    "importance": "high",
+    "source_pages": "16-19"
+  },
+  {
+    "code": "BUS.OPERATING",
+    "title": "operating(125-127)",
+    "description": "Operating emergency vehicles Ambulance drivers use flashing red lights to warn other drivers when it is essential that they get the right-of-way.",
+    "chapter": 6,
+    "importance": "high",
+    "source_pages": "125-127"
+  },
+  {
+    "code": "DRV.STEERING_METHODS",
+    "title": "steering methods(37)",
+    "description": "38 chapter 3 — basic driving skills Roundabouts driving tip Some roundabouts have more than one lane.",
+    "chapter": 3,
+    "importance": "high",
+    "source_pages": "37"
+  },
+  {
+    "code": "BRK.STOPPING",
+    "title": "stopping(16-19)",
+    "description": "If one or two of these brakes isn’t correctly adjusted, the others have to do more than their share of the braking, resulting in a longer stopping Reaction time is the time it distance.",
+    "chapter": 2,
+    "importance": "high",
+    "source_pages": "16-19"
+  },
+  {
+    "code": "BRK.STOPPING_POWER",
+    "title": "stopping power(18-19)",
+    "description": "You need more stopping power whenever attention and unsafe speed the speed you’re travelling and/or the weight of your vehicle increases: are the top two factors • 2 ✕ vehicle speed requires 4 ✕ the stopping power assigned to commercial drivers involved in police- • 2 ✕ vehicle weight requires 2 ✕ the stopping power reported casualty crashes.",
+    "chapter": 2,
+    "importance": "high",
+    "source_pages": "18-19"
+  },
+  {
+    "code": "AIR.SUPPLY_LINE",
+    "title": "supply line(164)",
+    "description": "Trailer with relay emergency valve — dynamited This diagram shows a broken supply line.",
+    "chapter": 8,
+    "importance": "high",
+    "source_pages": "164"
+  },
+  {
+    "code": "DRV.SHIFTING_GEARS",
+    "title": "shifting gears(44–47)",
+    "description": "Shifting gears by double-clutching requires and increase engine speed practice.",
+    "chapter": 3,
+    "importance": "high",
+    "source_pages": "44–47"
+  },
+  {
+    "code": "TRK.SIDE_LOADS",
+    "title": "side loads(101)",
+    "description": "If blocked from lateral movement by stakes on the sides of the vehicle, or by blocking or high friction devices between tiers, secure bundles by tiedowns laid over the top layer, with a minimum of two tiedowns for bundles longer than 1.52 m.",
+    "chapter": 5,
+    "importance": "high",
+    "source_pages": "101"
+  },
+  {
+    "code": "SIGN.SIGNALS",
+    "title": "signals(240-241)",
+    "description": "chapter 11 — signs, signals and road markings White lines White lines are used to separate lanes of traffic moving in the same direction.",
+    "chapter": 11,
+    "importance": "high",
+    "source_pages": "240-241"
+  },
+  {
+    "code": "TRK.TARPS",
+    "title": "tarps(99)",
+    "description": "It must also be identified in one of two ways: TAC is the Transportation 1.",
+    "chapter": 5,
+    "importance": "high",
+    "source_pages": "99"
+  },
+  {
+    "code": "INFO.TAXIHOST_PROGRAM",
+    "title": "TaxiHost program(258)",
+    "description": "See page 258 for detailed information about TaxiHost program.",
+    "chapter": 13,
+    "importance": "high",
+    "source_pages": "258"
+  },
+  {
+    "code": "SIGN.TURN_CONTROL",
+    "title": "turn control(236)",
+    "description": "If the lane control signals over all of the lanes are flashing yellow, slow down and proceed with caution 240",
+    "chapter": 11,
+    "importance": "high",
+    "source_pages": "236"
+  },
+  {
+    "code": "SIGN.RESERVED_LANE",
+    "title": "reserved lane(236)",
+    "description": "If the lane control signals over all of the lanes are flashing yellow, slow down and proceed with caution 240",
+    "chapter": 11,
+    "importance": "high",
+    "source_pages": "236"
+  },
+  {
+    "code": "SIGN.OBJECT_MARKERS",
+    "title": "object markers(238)",
+    "description": "chapter 11 — signs, signals and road markings Traffic lights Traffic lights are used to help organize the flow of traffic.",
+    "chapter": 11,
+    "importance": "high",
+    "source_pages": "238"
+  },
+  {
+    "code": "SIGN.CONSTRUCTION",
+    "title": "construction(239)",
+    "description": "Solid line — do not change lanes Broken line — lane changing Stop line — stop before this is allowed when safe line Pedestrian crosswalk — stop for Pedestrian crosswalk — stop for Pedestrian-activated pedestrians in the crosswalk pedestrians in the crosswalk crosswalk with illuminating lights in pavement — stop for pedestrians in the crosswalk 243",
+    "chapter": 11,
+    "importance": "high",
+    "source_pages": "239"
+  },
+  {
+    "code": "BUS.SIGNS",
+    "title": "signs(121)",
+    "description": "height of the remaining opening Book 2 is available at provincial weigh scales and • stowed under the seats and against a barrier which prevents forward at www.th.gov.bc.ca/cvse.",
+    "chapter": 6,
+    "importance": "high",
+    "source_pages": "121"
+  },
+  {
+    "code": "SIGN.RAILWAY",
+    "title": "railway(240)",
+    "description": "chapter 11 — signs, signals and road markings White lines White lines are used to separate lanes of traffic moving in the same direction.",
+    "chapter": 11,
+    "importance": "high",
+    "source_pages": "240"
+  },
+  {
+    "code": "SIGN.SCHOOL_PLAYGROUND_AND_CROSSWA",
+    "title": "school, playground and crosswalk signs(235)",
+    "description": "Obstruction — keep right Obstruction — keep right Obstruction — keep left or left 238 chapter 11 — signs, signals and road markings Construction signs These signs warn of construction and maintenance work.",
+    "chapter": 11,
+    "importance": "high",
+    "source_pages": "235"
+  },
+  {
+    "code": "DRV.TIRES_AND_WHEELS",
+    "title": "tires and wheels(55-57)",
+    "description": "57 driving commercial vehicles Flashing lights fast fact Flashing lights may be mounted and used on motor vehicles under the You must have a permit from following conditions: Commercial Vehicle Safety • red flashing lights are used only on emergency vehicles and Enforcement before you mount amber flashing lights • blue flashing lights are used only on police vehicles on a vehicle.",
+    "chapter": 3,
+    "importance": "high",
+    "source_pages": "55-57"
+  },
+  {
+    "code": "SIGN.INFORMATION_AND_DESTINATION",
+    "title": "information and destination(239)",
+    "description": "Solid line — do not change lanes Broken line — lane changing Stop line — stop before this is allowed when safe line Pedestrian crosswalk — stop for Pedestrian crosswalk — stop for Pedestrian-activated pedestrians in the crosswalk pedestrians in the crosswalk crosswalk with illuminating lights in pavement — stop for pedestrians in the crosswalk 243",
+    "chapter": 11,
+    "importance": "high",
+    "source_pages": "239"
+  },
+  {
+    "code": "BRK.TOTAL_STOPPING_DISTANCE",
+    "title": "total stopping distance(17)",
+    "description": "Total stopping distance is the Driver’s perception time distance your vehicle will travel from the moment you: + reaction time • see — a hazard + brake lag time • think — decide to stop + braking time • do — place your foot on the brake pedal until you stop.",
+    "chapter": 2,
+    "importance": "high",
+    "source_pages": "17"
+  },
+  {
+    "code": "LIC.TOW_CAR",
+    "title": "tow car(4)",
+    "description": "and getting a house trailer Class 5 or 7* • Two-axle vehicles including cars, vans, 16 endorsement, see Towing trucks and tow trucks.",
+    "chapter": 1,
+    "importance": "high",
+    "source_pages": "4"
+  },
+  {
+    "code": "TRK.TOWING",
+    "title": "towing(76-89)",
+    "description": "It’s critical that any trailer you tow is securely fastened to your towing vehicle.",
+    "chapter": 5,
+    "importance": "high",
+    "source_pages": "76-89"
+  },
+  {
+    "code": "LIC.VISION_SCREENING",
+    "title": "vision screening(5)",
+    "description": "• be required to complete a vision screening (see below for details).",
+    "chapter": 1,
+    "importance": "high",
+    "source_pages": "5"
+  },
+  {
+    "code": "DRV.TRACTION",
+    "title": "traction(34)",
+    "description": "chapter 3 — basic driving skills When curving to the left, keep the front wheels close to the right edge of the lane to keep your driver’s side rear wheels out of the next lane of traffic.",
+    "chapter": 3,
+    "importance": "high",
+    "source_pages": "34"
+  },
+  {
+    "code": "AIR.TRACTOR_TRAILER_AIR_BRAKE_SYST",
+    "title": "tractor-trailer air brake systems(164-176)",
+    "description": "Spring parking brake A second dashboard control valve is added so that air from the emergency emergency release systems are sometimes called release tank can be directed to the spring parking brakes to release them.",
+    "chapter": 8,
+    "importance": "high",
+    "source_pages": "164-176"
+  },
+  {
+    "code": "DRV.TRAFFIC_CIRCLES",
+    "title": "traffic circles(38-39)",
+    "description": "Lane use signs and markings may be displayed at the approaches to indicate where you can go in each Traffic circles and lane when you’re in the roundabout.",
+    "chapter": 3,
+    "importance": "high",
+    "source_pages": "38-39"
+  },
+  {
+    "code": "AIR.TRAFFIC_FLOW_LOW_AIR",
+    "title": "traffic flow low air(153-154)",
+    "description": "156 chapter 8 — air brakes The most common type of parking brake in an air brake system is the spring parking brake.",
+    "chapter": 8,
+    "importance": "high",
+    "source_pages": "153-154"
+  },
+  {
+    "code": "SIGN.TRAFFIC_LIGHTS",
+    "title": "traffic lights(241)",
+    "description": "Reserved lane — additional signs Bicycle lane — for cyclists only — or markings state which vehicles cyclists must travel in the same are allowed direction as the traffic beside them — the lane is marked with an outline of a bicycle and sometimes with a diamond Other markings Vehicles in this lane must Vehicles in this lane must Painted island — keep to turn left go straight or turn left the right and do not drive on or over 244 chapter 11 — signs, signals and road markings Review questions 1.",
+    "chapter": 11,
+    "importance": "high",
+    "source_pages": "241"
+  },
+  {
+    "code": "IND.TRAILERS_INDUSTRIAL_ROADS",
+    "title": "trailers industrial roads(249-250)",
+    "description": "• Information: 1-800-387-2000 • Website: nrcan.gc.ca Environment Canada Environment Canada is a federal agency.",
+    "chapter": 12,
+    "importance": "high",
+    "source_pages": "249-250"
+  },
+  {
+    "code": "TRK.VEHICLE_REQUIREMENTS",
+    "title": "vehicle requirements(101)",
+    "description": "chapter 5 — skills for driving trucks and trailers Standard 10 provides the requirements pertaining to Log Configuration, as well as those for: • shortwood loaded crosswise • one stack of shortwood loaded crosswise • two stacks of shortwood loaded crosswise • long vehicles carrying shortwood loaded crosswise • shortwood loaded lengthwise • longwood loaded lengthwise • pole trailers.",
+    "chapter": 5,
+    "importance": "high",
+    "source_pages": "101"
+  },
+  {
+    "code": "IND.REPORTS_WATER_COOLED_BRAKES",
+    "title": "reports water cooled brakes(249)",
+    "description": "Staff at this agency deal primarily with spills and other events that affect oceans and waterways.",
+    "chapter": 12,
+    "importance": "high",
+    "source_pages": "249"
+  },
+  {
+    "code": "LIC.TRUCK_CRANE_MOBILE",
+    "title": "truck crane — mobile(4)",
+    "description": "Trucks, truck-tractors, mobile truck Class 4 or 5 with house • Recreational (house) trailers exceeding 18 cranes or truck-mounted trailer endorsement 4,600 kg provided neither the truck nor backhoes with three or more (code 07 – formerly code 51) trailer has air brakes.",
+    "chapter": 1,
+    "importance": "high",
+    "source_pages": "4"
+  },
+  {
+    "code": "DRV.WEATHER_CONDITIONS",
+    "title": "weather conditions(53-54)",
+    "description": "For example, a large, loaded truck travelling on a highway at 80 km/h can take more than 100 m to stop — further than your high beams will allow you to see under good conditions.",
+    "chapter": 3,
+    "importance": "high",
+    "source_pages": "53-54"
+  },
+  {
+    "code": "DRV.TURNING_RADIUS",
+    "title": "turning radius(31-33)",
+    "description": "The distance from the centre of that imaginary circle to the vehicle’s wheel is the turning radius.",
+    "chapter": 3,
+    "importance": "high",
+    "source_pages": "31-33"
+  },
+  {
+    "code": "INFO.WEATHER_REPORTS",
+    "title": "weather reports(257)",
+    "description": "See page 257 for detailed information about weather reports.",
+    "chapter": 13,
+    "importance": "high",
+    "source_pages": "257"
+  },
+  {
+    "code": "DRV.TURNS",
+    "title": "turns(34-38)",
+    "description": "Sharp right turns To make a sharp right turn (particularly with a forward-control vehicle such as a bus): 1.",
+    "chapter": 3,
+    "importance": "high",
+    "source_pages": "34-38"
+  },
+  {
+    "code": "TRK.WEBBING",
+    "title": "webbing(97)",
+    "description": "99 driving commercial vehicles Since this dump truck has a full load of paper, debris and garbage, use a cover.",
+    "chapter": 5,
+    "importance": "high",
+    "source_pages": "97"
+  },
+  {
+    "code": "AIR.TWO_AXLE_VEHICLES_WEDGE_BRAKES",
+    "title": "two-axle vehicles wedge brakes(174)",
+    "description": "In other words, air pressure actuates the braking driver’s licence is required action, but hydraulic pressure delivers the braking force to the foundation to operate most vehicles brakes to stop the vehicle.",
+    "chapter": 8,
+    "importance": "high",
+    "source_pages": "174"
+  },
+  {
+    "code": "TRK.WEIGH_SCALES",
+    "title": "weigh scales(113–114)",
+    "description": "Are all commercial vehicles required to report to weigh scales?",
+    "chapter": 5,
+    "importance": "high",
+    "source_pages": "113–114"
+  },
+  {
+    "code": "BRK.TWO_SECOND_RULE",
+    "title": "two-second rule(17, 28)",
+    "description": "Passenger cars and light truck drivers should use the two-second rule.",
+    "chapter": 2,
+    "importance": "high",
+    "source_pages": "17, 28"
+  },
+  {
+    "code": "AIR.TWO_WAY_CHECK_VALVE",
+    "title": "two-way check valve(162)",
+    "description": "The only major item not found on a trailer air system is an air compressor.",
+    "chapter": 8,
+    "importance": "high",
+    "source_pages": "162"
+  },
+  {
+    "code": "DRV.WHEEL_POSITION",
+    "title": "wheel position(31)",
+    "description": "The distance from the centre of that imaginary circle to the vehicle’s wheel is the turning radius.",
+    "chapter": 3,
+    "importance": "high",
+    "source_pages": "31"
+  },
+  {
+    "code": "TRK.UNITED_STATES_WIDE_LOAD",
+    "title": "United States wide load(113)",
+    "description": "Are you allowed to display Wide Load signs on your vehicle when a wide load isn’t actually being transported?",
+    "chapter": 5,
+    "importance": "high",
+    "source_pages": "113"
+  },
+  {
+    "code": "INFO.TRAVEL_INFORMATION",
+    "title": "travel information(257)",
+    "description": "See page 257 for detailed information about travel information.",
+    "chapter": 13,
+    "importance": "high",
+    "source_pages": "257"
+  },
+  {
+    "code": "DRV.VACUUM_BRAKES",
+    "title": "vacuum brakes(57)",
+    "description": "• amber flashing lights are used on construction vehicles, towing vehicles, tow cars that are attending, snow-removal equipment, sanding equipment, pilot cars, and vehicles that are required by permit to use them, such as some oversize vehicles or vehicles carrying oversize loads (see chapter 5, skills for driving trucks and trailers).",
+    "chapter": 3,
+    "importance": "high",
+    "source_pages": "57"
+  },
+  {
+    "code": "SIGN.YELLOW_LINES",
+    "title": "yellow lines(242)",
+    "description": "fast fact An industrial road is any road that exists for the transportation of natural resources, machinery, materials or personnel.",
+    "chapter": 11,
+    "importance": "high",
+    "source_pages": "242"
+  },
+  {
+    "code": "TRK.VEHICLE_DIMENSIONS",
+    "title": "vehicle dimensions(110-111)",
+    "description": "This applies whether your vehicle is loaded or not.",
+    "chapter": 5,
+    "importance": "high",
+    "source_pages": "110-111"
+  },
+  {
+    "code": "LIC.VEHICLE_INSURANCE",
+    "title": "vehicle insurance(9)",
+    "description": "2 or 3 road test using an Make sure that the vehicle meets safety standards, and that valid registration, automatic transmission, licence and insurance papers are in the vehicle.",
+    "chapter": 1,
+    "importance": "high",
+    "source_pages": "9"
+  },
+  {
+    "code": "BUS.BUS_TAXI_OR_LIMOUSINE",
+    "title": "bus, taxi or limousine(121-125)",
+    "description": "chapter 6 — skills for driving buses, taxis, limousines and ride-hailing vehicles Properly secure wheelchairs, scooters and other mobility aids.",
+    "chapter": 6,
+    "importance": "high",
+    "source_pages": "121-125"
+  }
+]

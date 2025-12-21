@@ -1,0 +1,3210 @@
+[
+  {
+    "code": "LIC.DEF.001",
+    "title": "Here",
+    "description": "Here is a list of some of the typical reasons that a Class 1 to 4 road test may be cancelled.",
+    "type": "definition",
+    "chapter": 1,
+    "importance": "high"
+  },
+  {
+    "code": "LIC.DEF.002",
+    "title": "Make Sure There",
+    "description": "Make sure there is a CVIP inspection decal and report in the vehicle, if required.",
+    "type": "definition",
+    "chapter": 1,
+    "importance": "high"
+  },
+  {
+    "code": "LIC.DEF.003",
+    "title": "Heat",
+    "description": "Heat is a form of energy.",
+    "type": "definition",
+    "chapter": 1,
+    "importance": "high"
+  },
+  {
+    "code": "LIC.DEF.004",
+    "title": "The Heat",
+    "description": "The heat is absorbed and dissipated into the atmosphere, primarily through the brake drums/rotors.",
+    "type": "definition",
+    "chapter": 1,
+    "importance": "high"
+  },
+  {
+    "code": "LIC.DEF.005",
+    "title": "Reaction Time",
+    "description": "Reaction time is the time it distance.",
+    "type": "definition",
+    "chapter": 1,
+    "importance": "high"
+  },
+  {
+    "code": "LIC.REQ.006",
+    "title": "Requirement: hold a full-privilege dump trucks and large tow trucks, but not Class ",
+    "description": "You must hold a full-privilege dump trucks and large tow trucks, but not Class 5 or equivalent licence including a bus that is being used to transport before you can apply for a passengers.",
+    "type": "rule",
+    "chapter": 1,
+    "importance": "high"
+  },
+  {
+    "code": "LIC.REQ.007",
+    "title": "Requirement: bring the same type of identification used to apply for your air brake",
+    "description": "You must bring the same type of identification used to apply for your air brake endorsement (see Step 3).",
+    "type": "rule",
+    "chapter": 1,
+    "importance": "high"
+  },
+  {
+    "code": "LIC.REQ.008",
+    "title": "Requirement: provide proof that How to apply for a Class 1, 2, 3 or 4 driver’s you ",
+    "description": "You must provide proof that How to apply for a Class 1, 2, 3 or 4 driver’s you have an acceptable licence driving record before you can get a commercial class Commercial drivers must meet a high standard.",
+    "type": "rule",
+    "chapter": 1,
+    "importance": "high"
+  },
+  {
+    "code": "LIC.REQ.009",
+    "title": "Requirement: be able to combination).",
+    "description": "You must be able to combination).",
+    "type": "rule",
+    "chapter": 1,
+    "importance": "high"
+  },
+  {
+    "code": "LIC.REQ.010",
+    "title": "Requirement: bring the same type of identification you used to apply for your learn",
+    "description": "You must bring the same type of identification you used to apply for your learner’s licence (Step 2) and the fee for your road test.",
+    "type": "rule",
+    "chapter": 1,
+    "importance": "high"
+  },
+  {
+    "code": "LIC.REQ.011",
+    "title": "Requirement: be able to complete these tests without assistance.",
+    "description": "You must be able to complete these tests without assistance.",
+    "type": "rule",
+    "chapter": 1,
+    "importance": "high"
+  },
+  {
+    "code": "LIC.REQ.012",
+    "title": "Requirement: be able to demonstrate these skills competently during your road test:",
+    "description": "You must be able to demonstrate these skills competently during your road test: • starting and stopping • shifting gears • turning • steering fast fact • backing up If you’re taking a road test • parking in an air-brake-equipped vehicle, you must have an air • merging with highway traffic brake endorsement on your • exiting from highways driver’s licence or have taken an approved air brake course • driving in traffic and passed the knowledge test.",
+    "type": "rule",
+    "chapter": 1,
+    "importance": "high"
+  },
+  {
+    "code": "LIC.REQ.013",
+    "title": "Requirement: also be re-examined when asked by RoadSafetyBC.",
+    "description": "You must also be re-examined when asked by RoadSafetyBC.",
+    "type": "rule",
+    "chapter": 1,
+    "importance": "high"
+  },
+  {
+    "code": "LIC.REQ.014",
+    "title": "Requirement: meet a higher vision standard than Class 5 drivers.",
+    "description": "are required to meet a higher vision standard than Class 5 drivers.",
+    "type": "rule",
+    "chapter": 1,
+    "importance": "high"
+  },
+  {
+    "code": "LIC.REQ.015",
+    "title": "Requirement: safely secure large commercial vehicles to conduct a pre-trip inspecti",
+    "description": "are required to safely secure large commercial vehicles to conduct a pre-trip inspection.",
+    "type": "rule",
+    "chapter": 1,
+    "importance": "high"
+  },
+  {
+    "code": "LIC.REC.016",
+    "title": "Recommendation: also ask how your vehicle must be loaded.",
+    "description": "You should also ask how your vehicle must be loaded.",
+    "type": "rule",
+    "chapter": 1,
+    "importance": "high"
+  },
+  {
+    "code": "LIC.REC.017",
+    "title": "Recommendation: also wear sturdy clothing, a hard hat, eye protection, boots, and a sa",
+    "description": "You should also wear sturdy clothing, a hard hat, eye protection, boots, and a safety vest.",
+    "type": "rule",
+    "chapter": 1,
+    "importance": "high"
+  },
+  {
+    "code": "LIC.LIMIT.018",
+    "title": "Minimum: 7 hours in length their driver’s licence within and are available at m",
+    "description": "minimum of 7 hours in length their driver’s licence within and are available at many driving schools, community colleges and other one year of passing the air sites.",
+    "type": "rule",
+    "chapter": 1,
+    "importance": "high"
+  },
+  {
+    "code": "LIC.LIMIT.019",
+    "title": "At least: 19 years old and hold air brake endorsement the appropriate licence fo",
+    "description": "at least 19 years old and hold air brake endorsement the appropriate licence for the vehicle you’re practising on (for example, is conducted entirely in hold a Class 1 driver’s licence if you’re practising on a Class 1 tractor-trailer English.",
+    "type": "rule",
+    "chapter": 1,
+    "importance": "high"
+  },
+  {
+    "code": "LIC.LIMIT.020",
+    "title": "At least: 19 years old, hold a Class 1, 2 or 3 driver’s licence, and must sit be",
+    "description": "at least 19 years old, hold a Class 1, 2 or 3 driver’s licence, and must sit beside you or immediately behind and to the right if there’s no seat beside the driver’s seat while you’re practising.",
+    "type": "rule",
+    "chapter": 1,
+    "importance": "high"
+  },
+  {
+    "code": "LIC.LIMIT.021",
+    "title": "At least: 15 minutes early.",
+    "description": "at least 15 minutes early.",
+    "type": "rule",
+    "chapter": 1,
+    "importance": "high"
+  },
+  {
+    "code": "LIC.LIMIT.022",
+    "title": "At least: 11 adults • Class 3 — a large tandem or tridem rear axle truck such as",
+    "description": "at least 11 adults • Class 3 — a large tandem or tridem rear axle truck such as a moving van or dump truck • Class 2 — a large bus with a seating capacity of at least 36 adults • Class 2 - a bus with a seating capacity of 25-34 adults (NOT including the driver); Restriction 51 “CL2 max 34 pass.",
+    "type": "rule",
+    "chapter": 1,
+    "importance": "high"
+  },
+  {
+    "code": "LIC.LIMIT.023",
+    "title": "At least: 13 metres long (7.",
+    "description": "at least 13 metres long (7.",
+    "type": "rule",
+    "chapter": 1,
+    "importance": "high"
+  },
+  {
+    "code": "LIC.TIME.024",
+    "title": "Time rule: 7 hours in length their driver’s licence within and are available at m",
+    "description": "7 hours in length their driver’s licence within and are available at many driving schools, community colleges and other one year of passing the air sites.",
+    "type": "rule",
+    "chapter": 1,
+    "importance": "high"
+  },
+  {
+    "code": "LIC.TIME.025",
+    "title": "Time rule: 48 hours notice or a valid reason for not attending.",
+    "description": "48 hours notice or a valid reason for not attending.",
+    "type": "rule",
+    "chapter": 1,
+    "importance": "high"
+  },
+  {
+    "code": "LIC.TIME.026",
+    "title": "Time rule: 7 hours of classroom theory on air brake check online or in the yellow",
+    "description": "7 hours of classroom theory on air brake check online or in the yellow systems along with four hours of practical training on conducting an air pages of the phone book brake pre-trip inspection.",
+    "type": "rule",
+    "chapter": 1,
+    "importance": "high"
+  },
+  {
+    "code": "LIC.TIME.027",
+    "title": "Time rule: 7 hours of classroom theory on air brake systems.",
+    "description": "7 hours of classroom theory on air brake systems.",
+    "type": "rule",
+    "chapter": 1,
+    "importance": "high"
+  },
+  {
+    "code": "LIC.DIST.028",
+    "title": "Distance rule: 5 metres if pintle hitch trailer).",
+    "description": "5 metres if pintle hitch trailer).",
+    "type": "rule",
+    "chapter": 1,
+    "importance": "high"
+  },
+  {
+    "code": "LIC.DIST.029",
+    "title": "Distance rule: 100 km/h within about 200 m and in less than 10 seconds.",
+    "description": "100 km/h within about 200 m and in less than 10 seconds.",
+    "type": "rule",
+    "chapter": 1,
+    "importance": "high"
+  },
+  {
+    "code": "LIC.COND.030",
+    "title": "Conditional rule: you’re taking a road test • parking in an air-brake-equipped vehicle",
+    "description": "If you’re taking a road test • parking in an air-brake-equipped vehicle, you must have an air • merging with highway traffic brake endorsement on your • exiting from highways driver’s licence or have taken an approved air brake course • driving in traffic and passed the knowledge test.",
+    "type": "rule",
+    "chapter": 1,
+    "importance": "high"
+  },
+  {
+    "code": "LIC.COND.031",
+    "title": "Conditional rule: you have been sent a routine medical form to continue to hold a commer",
+    "description": "If you have been sent a routine medical form to continue to hold a commercial class driver’s licence and you want to downgrade, you must visit a driver licensing office to apply for a new licence.",
+    "type": "rule",
+    "chapter": 1,
+    "importance": "high"
+  },
+  {
+    "code": "LIC.WARN.032",
+    "title": "Warning: Driving without a valid What you’ll learn driver’s licence or correct ",
+    "description": "warning Driving without a valid What you’ll learn driver’s licence or correct After studying this chapter you’ll be able to: class of licence may breach your insurance coverage ❏ describe B.",
+    "type": "rule",
+    "chapter": 1,
+    "importance": "high"
+  },
+  {
+    "code": "LIC.DIST.033",
+    "title": "Stopping distance: Heat is a form of energy.",
+    "description": "stopping distance Heat is a form of energy.",
+    "type": "fact",
+    "chapter": 1,
+    "importance": "high"
+  },
+  {
+    "code": "LIC.DIST.034",
+    "title": "Stopping distance: engine, the heat energy produced by engine ❏ explain how to brake safe",
+    "description": "stopping distance engine, the heat energy produced by engine ❏ explain how to brake safely in different situations.",
+    "type": "fact",
+    "chapter": 1,
+    "importance": "high"
+  },
+  {
+    "code": "LIC.WEIGHT.035",
+    "title": "Weight: 600 kg — may exceed 4,600 kg only if bus and trailers do not have air ",
+    "description": "600 kg — may exceed 4,600 kg only if bus and trailers do not have air brakes.",
+    "type": "fact",
+    "chapter": 1,
+    "importance": "high"
+  },
+  {
+    "code": "LIC.WEIGHT.036",
+    "title": "Weight: 600 kg — may exceed 4,600 kg only if truck house trailer endorsement.",
+    "description": "600 kg — may exceed 4,600 kg only if truck house trailer endorsement.",
+    "type": "fact",
+    "chapter": 1,
+    "importance": "high"
+  },
+  {
+    "code": "LIC.WEIGHT.037",
+    "title": "Weight: 600 kg provided neither the truck nor endorsement (code 20) trailer ha",
+    "description": "600 kg provided neither the truck nor endorsement (code 20) trailer has air brakes.",
+    "type": "fact",
+    "chapter": 1,
+    "importance": "high"
+  },
+  {
+    "code": "LIC.WEIGHT.038",
+    "title": "Weight: 600 kg provided neither the truck nor backhoes with three or more (cod",
+    "description": "600 kg provided neither the truck nor backhoes with three or more (code 07 – formerly code 51) trailer has air brakes.",
+    "type": "fact",
+    "chapter": 1,
+    "importance": "high"
+  },
+  {
+    "code": "LIC.WEIGHT.039",
+    "title": "Weight: 500 kg would be restricted to no more than 20,250 kg.",
+    "description": "500 kg would be restricted to no more than 20,250 kg.",
+    "type": "fact",
+    "chapter": 1,
+    "importance": "high"
+  },
+  {
+    "code": "LIC.WEIGHT.040",
+    "title": "Weight: 600 kg? 14 2 heavy vehicle braking What you’ll learn After reading thi",
+    "description": "600 kg? 14 2 heavy vehicle braking What you’ll learn After reading this chapter you’ll be able to: ❏ explain why heavy vehicles take longer to stop than smaller passenger vehicles ❏ explain why air brakes are used on heavy vehicles definition ❏ describe the basic scientific principles of braking ❏ identify the elements of stopping distance Heat is a form of energy.",
+    "type": "fact",
+    "chapter": 1,
+    "importance": "high"
+  },
+  {
+    "code": "LIC.WEIGHT.041",
+    "title": "Weight: 000 kg and has about 120 hp.",
+    "description": "000 kg and has about 120 hp.",
+    "type": "fact",
+    "chapter": 1,
+    "importance": "high"
+  },
+  {
+    "code": "BRK.DEF.042",
+    "title": "Total Stopping Distance",
+    "description": "Total stopping distance is the Driver’s perception time distance your vehicle will travel from the moment you: + reaction time • see — a hazard + brake lag time • think — decide to stop + braking time • do — place your foot on the brake pedal until you stop.",
+    "type": "definition",
+    "chapter": 2,
+    "importance": "high"
+  },
+  {
+    "code": "BRK.DEF.043",
+    "title": "Traffic Flow",
+    "description": "Traffic flow refers to the movement of a group of Driving faster than the flow vehicles travelling on one road.",
+    "type": "definition",
+    "chapter": 2,
+    "importance": "high"
+  },
+  {
+    "code": "BRK.REQ.044",
+    "title": "Requirement: control the speed of your vehicle so it can be stopped at any time for",
+    "description": "You must control the speed of your vehicle so it can be stopped at any time for any emergency while descending a hill.",
+    "type": "rule",
+    "chapter": 2,
+    "importance": "high"
+  },
+  {
+    "code": "BRK.PROH.045",
+    "title": "Never: shift to a higher gear on a downgrade unless the speed on the grade ca",
+    "description": "Never shift to a higher gear on a downgrade unless the speed on the grade can be controlled with a retarding device or engine compression.",
+    "type": "rule",
+    "chapter": 2,
+    "importance": "high"
+  },
+  {
+    "code": "BRK.BEST.046",
+    "title": "Always: allow enough following distance or time and choose a speed that will a",
+    "description": "Always allow enough following distance or time and choose a speed that will allow you to stop safely.",
+    "type": "rule",
+    "chapter": 2,
+    "importance": "high"
+  },
+  {
+    "code": "BRK.BEST.047",
+    "title": "Always: obey the regulatory stop and check brakes signs.",
+    "description": "Always obey the regulatory stop and check brakes signs.",
+    "type": "rule",
+    "chapter": 2,
+    "importance": "high"
+  },
+  {
+    "code": "BRK.BEST.048",
+    "title": "Always: reduce your vehicle’s speed before driving through large pools of wate",
+    "description": "Always reduce your vehicle’s speed before driving through large pools of water on the roadway.",
+    "type": "rule",
+    "chapter": 2,
+    "importance": "high"
+  },
+  {
+    "code": "BRK.REC.049",
+    "title": "Recommendation: be in a lower gear to go down the hill than used to climb it.",
+    "description": "You should be in a lower gear to go down the hill than used to climb it.",
+    "type": "rule",
+    "chapter": 2,
+    "importance": "high"
+  },
+  {
+    "code": "BRK.TIME.050",
+    "title": "Time rule: 4 second of perception time (see-think) and another 3/ of a second of ",
+    "description": "4 second of perception time (see-think) and another 3/ of a second of reaction driving tip 4 time (do).",
+    "type": "rule",
+    "chapter": 2,
+    "importance": "high"
+  },
+  {
+    "code": "BRK.DIST.051",
+    "title": "Distance rule: 30 km/h 10,000kg 30 km/h 20,000kg 30 km/h 10,000kg 60 km/h 2 X vehicle",
+    "description": "30 km/h 10,000kg 30 km/h 20,000kg 30 km/h 10,000kg 60 km/h 2 X vehicle weight requires 2 X the stopping power 2 X vehicle speed requires 4 X the stopping power Both weight and speed doubled 20,000kg 60 km/h 2 X vehicle weight + 2 X vehicle speed requires 8 X the stopping power A typical compact car weighs about 1,000 kg.",
+    "type": "rule",
+    "chapter": 2,
+    "importance": "high"
+  },
+  {
+    "code": "BRK.DIST.052",
+    "title": "Distance rule: 15 km/h — the Always obey the regulatory stop and check brakes signs.",
+    "description": "15 km/h — the Always obey the regulatory stop and check brakes signs.",
+    "type": "rule",
+    "chapter": 2,
+    "importance": "high"
+  },
+  {
+    "code": "BRK.WARN.053",
+    "title": "Warning: this can happen even at very low speeds.",
+    "description": "Warning: this can happen even at very low speeds.",
+    "type": "rule",
+    "chapter": 2,
+    "importance": "high"
+  },
+  {
+    "code": "BRK.DIST.054",
+    "title": "Following distance: or time and choose a speed that will allow you to stop safely.",
+    "description": "following distance or time and choose a speed that will allow you to stop safely.",
+    "type": "fact",
+    "chapter": 2,
+    "importance": "high"
+  },
+  {
+    "code": "BRK.DIST.055",
+    "title": "Following distance: and plan for gradual stops.",
+    "description": "following distance and plan for gradual stops.",
+    "type": "fact",
+    "chapter": 2,
+    "importance": "high"
+  },
+  {
+    "code": "BRK.DIST.056",
+    "title": "Following distance: Canada are produced by the road transportation sector.",
+    "description": "Following distance Canada are produced by the road transportation sector.",
+    "type": "fact",
+    "chapter": 2,
+    "importance": "high"
+  },
+  {
+    "code": "BRK.DIST.057",
+    "title": "Following distance: using different rules.",
+    "description": "following distance using different rules.",
+    "type": "fact",
+    "chapter": 2,
+    "importance": "high"
+  },
+  {
+    "code": "BRK.DIST.058",
+    "title": "Following distance: isn’t enough — drop back, pick a new checkpoint and count again.",
+    "description": "following distance isn’t enough — drop back, pick a new checkpoint and count again.",
+    "type": "fact",
+    "chapter": 2,
+    "importance": "high"
+  },
+  {
+    "code": "BRK.DIST.059",
+    "title": "Following distance: on the highway and when road or weather conditions are poor.",
+    "description": "following distance on the highway and when road or weather conditions are poor.",
+    "type": "fact",
+    "chapter": 2,
+    "importance": "high"
+  },
+  {
+    "code": "BRK.DIST.060",
+    "title": "Following distance: when driving a bus, truck or heavy vehicle.",
+    "description": "following distance when driving a bus, truck or heavy vehicle.",
+    "type": "fact",
+    "chapter": 2,
+    "importance": "high"
+  },
+  {
+    "code": "BRK.DIST.061",
+    "title": "Stopping distance: and stopping time definition To stop a vehicle, you need to see-think-",
+    "description": "Stopping distance and stopping time definition To stop a vehicle, you need to see-think-do.",
+    "type": "fact",
+    "chapter": 2,
+    "importance": "high"
+  },
+  {
+    "code": "BRK.DIST.062",
+    "title": "Stopping distance: is the Driver’s perception time distance your vehicle will travel from",
+    "description": "stopping distance is the Driver’s perception time distance your vehicle will travel from the moment you: + reaction time • see — a hazard + brake lag time • think — decide to stop + braking time • do — place your foot on the brake pedal until you stop.",
+    "type": "fact",
+    "chapter": 2,
+    "importance": "high"
+  },
+  {
+    "code": "BRK.DIST.063",
+    "title": "Stopping distance: or distance.",
+    "description": "stopping distance or distance.",
+    "type": "fact",
+    "chapter": 2,
+    "importance": "high"
+  },
+  {
+    "code": "BRK.DIST.064",
+    "title": "Stopping distance: includes perception time, reaction time, brake lag time and braking ti",
+    "description": "stopping distance includes perception time, reaction time, brake lag time and braking time.",
+    "type": "fact",
+    "chapter": 2,
+    "importance": "high"
+  },
+  {
+    "code": "BRK.DIST.065",
+    "title": "Stopping distance: than a vehicle travelling at the same speed on a level surface because",
+    "description": "stopping distance than a vehicle travelling at the same speed on a level surface because of the effect of gravity.",
+    "type": "fact",
+    "chapter": 2,
+    "importance": "high"
+  },
+  {
+    "code": "BRK.WEIGHT.066",
+    "title": "Weight: 000kg 30 km/h 10,000kg 30 km/h 20,000kg 30 km/h 10,000kg 60 km/h 2 X v",
+    "description": "000kg 30 km/h 10,000kg 30 km/h 20,000kg 30 km/h 10,000kg 60 km/h 2 X vehicle weight requires 2 X the stopping power 2 X vehicle speed requires 4 X the stopping power Both weight and speed doubled 20,000kg 60 km/h 2 X vehicle weight + 2 X vehicle speed requires 8 X the stopping power A typical compact car weighs about 1,000 kg.",
+    "type": "fact",
+    "chapter": 2,
+    "importance": "high"
+  },
+  {
+    "code": "BRK.WEIGHT.067",
+    "title": "Weight: 000 kg when fully loaded — over 25 times heavier than a car.",
+    "description": "000 kg when fully loaded — over 25 times heavier than a car.",
+    "type": "fact",
+    "chapter": 2,
+    "importance": "high"
+  },
+  {
+    "code": "BRK.WEIGHT.068",
+    "title": "Weight: 560 kg manufactured since April 1, 2000 and on all commercial trailers",
+    "description": "560 kg manufactured since April 1, 2000 and on all commercial trailers equipped with air brakes.",
+    "type": "fact",
+    "chapter": 2,
+    "importance": "high"
+  },
+  {
+    "code": "DRV.DEF.069",
+    "title": "More Flexing",
+    "description": "More flexing means more heat. Too much flexing can cause your tires to overheat and the tire air pressure to increase.",
+    "type": "definition",
+    "chapter": 3,
+    "importance": "high"
+  },
+  {
+    "code": "DRV.DEF.070",
+    "title": "The Radius",
+    "description": "The radius is the distance from the centre of a circle to the edge of the circle.",
+    "type": "definition",
+    "chapter": 3,
+    "importance": "high"
+  },
+  {
+    "code": "DRV.DEF.071",
+    "title": "Wheelbase",
+    "description": "Wheelbase is the distance between the front wheels and the rear wheels of a vehicle, or a combination between the front wheels and of vehicles, the greater the amount of off track.",
+    "type": "definition",
+    "chapter": 3,
+    "importance": "high"
+  },
+  {
+    "code": "DRV.DEF.072",
+    "title": "Inertia",
+    "description": "Inertia is the tendency for moving objects — in this case you and your vehicle — to continue to move forward in a straight line.",
+    "type": "definition",
+    "chapter": 3,
+    "importance": "high"
+  },
+  {
+    "code": "DRV.DEF.073",
+    "title": "Traction",
+    "description": "Traction is the grip created more difficult it’ll be to keep your vehicle on the path of the curve.",
+    "type": "definition",
+    "chapter": 3,
+    "importance": "high"
+  },
+  {
+    "code": "DRV.DEF.074",
+    "title": "Torque",
+    "description": "Torque is the ability of the engine to move the vehicle.",
+    "type": "definition",
+    "chapter": 3,
+    "importance": "high"
+  },
+  {
+    "code": "DRV.DEF.075",
+    "title": "Any Vehicle",
+    "description": "Any vehicle is a hazard when it’s parked on the side of a road.",
+    "type": "definition",
+    "chapter": 3,
+    "importance": "high"
+  },
+  {
+    "code": "DRV.DEF.076",
+    "title": "Carbon Monoxide Poisoning",
+    "description": "Carbon monoxide poisoning is an ever-present danger when you operate a motor vehicle.",
+    "type": "definition",
+    "chapter": 3,
+    "importance": "high"
+  },
+  {
+    "code": "DRV.DEF.077",
+    "title": "The Owner",
+    "description": "The owner is then required to pay the vehicle towing and storage fees to get their vehicle back.",
+    "type": "definition",
+    "chapter": 3,
+    "importance": "high"
+  },
+  {
+    "code": "DRV.DEF.078",
+    "title": "And The Environment",
+    "description": "And the environment is also a consideration.",
+    "type": "definition",
+    "chapter": 3,
+    "importance": "high"
+  },
+  {
+    "code": "DRV.REQ.079",
+    "title": "Requirement: be familiar with the amount of off track your vehicle displays.",
+    "description": "You must be familiar with the amount of off track your vehicle displays.",
+    "type": "rule",
+    "chapter": 3,
+    "importance": "high"
+  },
+  {
+    "code": "DRV.REQ.080",
+    "title": "Requirement: quickly: left shoulder.",
+    "description": "You must quickly: left shoulder.",
+    "type": "rule",
+    "chapter": 3,
+    "importance": "high"
+  },
+  {
+    "code": "DRV.REQ.081",
+    "title": "Requirement: yield the right-of- look for others.",
+    "description": "You must yield the right-of- look for others.",
+    "type": "rule",
+    "chapter": 3,
+    "importance": "high"
+  },
+  {
+    "code": "DRV.REQ.082",
+    "title": "Requirement: stop and yield the right-of-way when pulling out of an alley.",
+    "description": "You must stop and yield the right-of-way when pulling out of an alley.",
+    "type": "rule",
+    "chapter": 3,
+    "importance": "high"
+  },
+  {
+    "code": "DRV.REQ.083",
+    "title": "Requirement: not shift gears while crossing railroad tracks.",
+    "description": "You must not shift gears while crossing railroad tracks.",
+    "type": "rule",
+    "chapter": 3,
+    "importance": "high"
+  },
+  {
+    "code": "DRV.REQ.084",
+    "title": "Requirement: have a permit from following conditions: Commercial Vehicle Safety • r",
+    "description": "You must have a permit from following conditions: Commercial Vehicle Safety • red flashing lights are used only on emergency vehicles and Enforcement before you mount amber flashing lights • blue flashing lights are used only on police vehicles on a vehicle.",
+    "type": "rule",
+    "chapter": 3,
+    "importance": "high"
+  },
+  {
+    "code": "DRV.REQ.085",
+    "title": "Requirement: allow at least 25 cm (10 in) between your breastbone and the airbag un",
+    "description": "You must allow at least 25 cm (10 in) between your breastbone and the airbag unit in the steering wheel.",
+    "type": "rule",
+    "chapter": 3,
+    "importance": "high"
+  },
+  {
+    "code": "DRV.REQ.086",
+    "title": "Requirement: be properly fire hazards associated with your vehicle or with the load",
+    "description": "You must be properly fire hazards associated with your vehicle or with the loads you carry.",
+    "type": "rule",
+    "chapter": 3,
+    "importance": "high"
+  },
+  {
+    "code": "DRV.REQ.087",
+    "title": "Driver requirement: slow down and leave plenty of room when passing stopped vehicles displ",
+    "description": "Drivers must slow down and leave plenty of room when passing stopped vehicles displaying flashing lights to make highways safer for law enforcement, emergency personnel and other roadside workers.",
+    "type": "rule",
+    "chapter": 3,
+    "importance": "high"
+  },
+  {
+    "code": "DRV.REQ.088",
+    "title": "Driver requirement: be constantly aware of the vehicles ahead, behind and beside them.",
+    "description": "Drivers must be constantly aware of the vehicles ahead, behind and beside them.",
+    "type": "rule",
+    "chapter": 3,
+    "importance": "high"
+  },
+  {
+    "code": "DRV.REQ.089",
+    "title": "Requirement: stop at all uncontrolled main railway crossings are: ahead.",
+    "description": "are required to stop at all uncontrolled main railway crossings are: ahead.",
+    "type": "rule",
+    "chapter": 3,
+    "importance": "high"
+  },
+  {
+    "code": "DRV.REQ.090",
+    "title": "Requirement: put out approved warning devices when they park their commercial vehic",
+    "description": "are required to put out approved warning devices when they park their commercial vehicles at the Recommended safety side of the road in an area that isn’t designated for parking.",
+    "type": "rule",
+    "chapter": 3,
+    "importance": "high"
+  },
+  {
+    "code": "DRV.REQ.091",
+    "title": "Requirement: carry firefighting equipment.",
+    "description": "are required to carry firefighting equipment.",
+    "type": "rule",
+    "chapter": 3,
+    "importance": "high"
+  },
+  {
+    "code": "DRV.REQ.092",
+    "title": "Requirement: carry fire extinguishers? 65 4 fuel-efficient driving This chapter foc",
+    "description": "are required to carry fire extinguishers? 65 4 fuel-efficient driving This chapter focuses on fuel-efficient driving techniques for large diesel- powered commercial vehicles.",
+    "type": "rule",
+    "chapter": 3,
+    "importance": "high"
+  },
+  {
+    "code": "DRV.PROH.093",
+    "title": "Never: use a trailer hand runaway vehicle: valve to hold an unattended unit.",
+    "description": "Never use a trailer hand runaway vehicle: valve to hold an unattended unit.",
+    "type": "rule",
+    "chapter": 3,
+    "importance": "high"
+  },
+  {
+    "code": "DRV.PROH.094",
+    "title": "Never: operate a vehicle that has bald or damaged tires.",
+    "description": "Never operate a vehicle that has bald or damaged tires.",
+    "type": "rule",
+    "chapter": 3,
+    "importance": "high"
+  },
+  {
+    "code": "DRV.PROH.095",
+    "title": "Never: run your engine in a closed garage.",
+    "description": "Never run your engine in a closed garage.",
+    "type": "rule",
+    "chapter": 3,
+    "importance": "high"
+  },
+  {
+    "code": "DRV.PROH.096",
+    "title": "Never: start a vehicle with a fuel leak.",
+    "description": "Never start a vehicle with a fuel leak.",
+    "type": "rule",
+    "chapter": 3,
+    "importance": "high"
+  },
+  {
+    "code": "DRV.PROH.097",
+    "title": "Never: throw cigarette butts out of cab windows — they could blow back Diesel",
+    "description": "Never throw cigarette butts out of cab windows — they could blow back Diesel fuel is toxic — don’t into tarps or loads.",
+    "type": "rule",
+    "chapter": 3,
+    "importance": "high"
+  },
+  {
+    "code": "DRV.BEST.098",
+    "title": "Always: use the right lane when you’re travelling more slowly than other traff",
+    "description": "Always use the right lane when you’re travelling more slowly than other traffic and are going up or down a hill where a passing lane is provided.",
+    "type": "rule",
+    "chapter": 3,
+    "importance": "high"
+  },
+  {
+    "code": "DRV.BEST.099",
+    "title": "Always: watch for signs warning of curves and turns, and adjust your speed and",
+    "description": "Always watch for signs warning of curves and turns, and adjust your speed and approach.",
+    "type": "rule",
+    "chapter": 3,
+    "importance": "high"
+  },
+  {
+    "code": "DRV.BEST.100",
+    "title": "Always: use both hands to steer your vehicle.",
+    "description": "Always use both hands to steer your vehicle.",
+    "type": "rule",
+    "chapter": 3,
+    "importance": "high"
+  },
+  {
+    "code": "DRV.BEST.101",
+    "title": "Always: stay far enough behind the vehicle you’re following to allow you to ma",
+    "description": "Always stay far enough behind the vehicle you’re following to allow you to make your stops in a smooth, gradual way, even if the vehicle ahead makes a panic stop.",
+    "type": "rule",
+    "chapter": 3,
+    "importance": "high"
+  },
+  {
+    "code": "DRV.BEST.102",
+    "title": "Always: squeeze the throttle, rather than stabbing or jabbing at it.",
+    "description": "Always squeeze the throttle, rather than stabbing or jabbing at it.",
+    "type": "rule",
+    "chapter": 3,
+    "importance": "high"
+  },
+  {
+    "code": "DRV.BEST.103",
+    "title": "Always: use a torque wrench to tighten and check wheel nuts.",
+    "description": "Always use a torque wrench to tighten and check wheel nuts.",
+    "type": "rule",
+    "chapter": 3,
+    "importance": "high"
+  },
+  {
+    "code": "DRV.REC.104",
+    "title": "Recommendation: keep the rear of your vehicle close to the curb.",
+    "description": "You should keep the rear of your vehicle close to the curb.",
+    "type": "rule",
+    "chapter": 3,
+    "importance": "high"
+  },
+  {
+    "code": "DRV.REC.105",
+    "title": "Recommendation: develop the habit of watching the traffic well ahead of your driving t",
+    "description": "You should develop the habit of watching the traffic well ahead of your driving tip vehicle.",
+    "type": "rule",
+    "chapter": 3,
+    "importance": "high"
+  },
+  {
+    "code": "DRV.REC.106",
+    "title": "Recommendation: block the wheels of any large vehicle parked on even a slight grade.",
+    "description": "You should block the wheels of any large vehicle parked on even a slight grade.",
+    "type": "rule",
+    "chapter": 3,
+    "importance": "high"
+  },
+  {
+    "code": "DRV.LIMIT.107",
+    "title": "Maximum: 30 days 4 months Up to life Jail 0–5 years Up to 10 years – 5 years – ",
+    "description": "maximum 30 days 4 months Up to life Jail 0–5 years Up to 10 years – 5 years – 5 years imprisonment Other costs of impaired driving fast fact Besides the penalties listed above, there are other costs involved if you are If you drive while prohibited, caught riding or driving while impaired: you may face significant Money — If you’re convicted of impaired driving and you cause a crash, penalties including a stiff fine your insurance claim may be denied, including claims for damage that you and jail.",
+    "type": "rule",
+    "chapter": 3,
+    "importance": "high"
+  },
+  {
+    "code": "DRV.LIMIT.108",
+    "title": "At least: 60 m (200 ft) between your vehicle and other large commercial vehicles",
+    "description": "at least 60 m (200 ft) between your vehicle and other large commercial vehicles.",
+    "type": "rule",
+    "chapter": 3,
+    "importance": "high"
+  },
+  {
+    "code": "DRV.LIMIT.109",
+    "title": "At least: 10 seconds to cross — more if your vehicle requires it or if you’re cr",
+    "description": "at least 10 seconds to cross — more if your vehicle requires it or if you’re crossing more than one track at a time.",
+    "type": "rule",
+    "chapter": 3,
+    "importance": "high"
+  },
+  {
+    "code": "DRV.LIMIT.110",
+    "title": "At least: 150 m away from any vehicle you’re approaching or following to reduce ",
+    "description": "at least 150 m away from any vehicle you’re approaching or following to reduce glare on the eyes of other drivers.",
+    "type": "rule",
+    "chapter": 3,
+    "importance": "high"
+  },
+  {
+    "code": "DRV.LIMIT.111",
+    "title": "At least: 30 cm by 30 cm, or Only approved warning • two warning devices that ha",
+    "description": "at least 30 cm by 30 cm, or Only approved warning • two warning devices that have been approved for daylight use — including devices should be used to flares, fuses and reflectors.",
+    "type": "rule",
+    "chapter": 3,
+    "importance": "high"
+  },
+  {
+    "code": "DRV.LIMIT.112",
+    "title": "At least: 25 cm (10 in) between your breastbone and the airbag unit in the steer",
+    "description": "at least 25 cm (10 in) between your breastbone and the airbag unit in the steering wheel.",
+    "type": "rule",
+    "chapter": 3,
+    "importance": "high"
+  },
+  {
+    "code": "DRV.LIMIT.113",
+    "title": "Within: 15 m of the nearest rail of a railway crossing.",
+    "description": "within 15 m of the nearest rail of a railway crossing.",
+    "type": "rule",
+    "chapter": 3,
+    "importance": "high"
+  },
+  {
+    "code": "DRV.TIME.114",
+    "title": "Time rule: 10 seconds to cross — more if your vehicle requires it or if you’re cr",
+    "description": "10 seconds to cross — more if your vehicle requires it or if you’re crossing more than one track at a time.",
+    "type": "rule",
+    "chapter": 3,
+    "importance": "high"
+  },
+  {
+    "code": "DRV.TIME.115",
+    "title": "Time rule: 10 minutes if the temperature is below 0° C.",
+    "description": "10 minutes if the temperature is below 0° C.",
+    "type": "rule",
+    "chapter": 3,
+    "importance": "high"
+  },
+  {
+    "code": "DRV.DIST.116",
+    "title": "Distance rule: 40 km/h should display a red triangle slow moving vehicle sign.",
+    "description": "40 km/h should display a red triangle slow moving vehicle sign.",
+    "type": "rule",
+    "chapter": 3,
+    "importance": "high"
+  },
+  {
+    "code": "DRV.DIST.117",
+    "title": "Distance rule: 70 km/h if the speed limit is 80 km/h or more, and no faster than 40 k",
+    "description": "70 km/h if the speed limit is 80 km/h or more, and no faster than 40 km/h if the speed limit is less than 80 km/h.",
+    "type": "rule",
+    "chapter": 3,
+    "importance": "high"
+  },
+  {
+    "code": "DRV.DIST.118",
+    "title": "Distance rule: 20 km/h unless otherwise posted.",
+    "description": "20 km/h unless otherwise posted.",
+    "type": "rule",
+    "chapter": 3,
+    "importance": "high"
+  },
+  {
+    "code": "DRV.DIST.119",
+    "title": "Distance rule: 80 km/h can take more than 100 m to stop — further than your high beam",
+    "description": "80 km/h can take more than 100 m to stop — further than your high beams will allow you to see under good conditions.",
+    "type": "rule",
+    "chapter": 3,
+    "importance": "high"
+  },
+  {
+    "code": "DRV.DIST.120",
+    "title": "Distance rule: 110 km/h can reduce tread life by 20 per overinflated tire has less tr",
+    "description": "110 km/h can reduce tread life by 20 per overinflated tire has less tread surface in contact with the road surface.",
+    "type": "rule",
+    "chapter": 3,
+    "importance": "high"
+  },
+  {
+    "code": "DRV.DIST.121",
+    "title": "Distance rule: 40 km/h per hour or less.",
+    "description": "40 km/h per hour or less.",
+    "type": "rule",
+    "chapter": 3,
+    "importance": "high"
+  },
+  {
+    "code": "DRV.DIST.122",
+    "title": "Distance rule: 40 km/h or more over the posted limit) • street racing or stunt drivin",
+    "description": "40 km/h or more over the posted limit) • street racing or stunt driving.",
+    "type": "rule",
+    "chapter": 3,
+    "importance": "high"
+  },
+  {
+    "code": "DRV.COND.123",
+    "title": "Conditional rule: there are two turning lanes",
+    "description": "If there are two turning lanes, you should turn from the right-hand turn lane as this lane will better accommodate your vehicle’s off tracking.",
+    "type": "rule",
+    "chapter": 3,
+    "importance": "high"
+  },
+  {
+    "code": "DRV.COND.124",
+    "title": "Conditional rule: you need to apply the smooth braking when you squeeze the brake pedal.",
+    "description": "If you need to apply the smooth braking when you squeeze the brake pedal. throttle with a diesel engine to move off with a loaded Use only enough power to shift the vehicle into the next gear. Depending vehicle, you should be using upon your vehicle’s weight and transmission gear ratios, you may be a lower gear.",
+    "type": "rule",
+    "chapter": 3,
+    "importance": "high"
+  },
+  {
+    "code": "DRV.WARN.125",
+    "title": "Warning: of curves and turns, and adjust your speed and approach.",
+    "description": "warning of curves and turns, and adjust your speed and approach.",
+    "type": "rule",
+    "chapter": 3,
+    "importance": "high"
+  },
+  {
+    "code": "DRV.WARN.126",
+    "title": "Warning: whenever you’re about to stop, change directions or change lanes.",
+    "description": "warning whenever you’re about to stop, change directions or change lanes.",
+    "type": "rule",
+    "chapter": 3,
+    "importance": "high"
+  },
+  {
+    "code": "DRV.WARN.127",
+    "title": "Warning: signals such as buzzers or nearest edge could be the horns).",
+    "description": "warning signals such as buzzers or nearest edge could be the horns).",
+    "type": "rule",
+    "chapter": 3,
+    "importance": "high"
+  },
+  {
+    "code": "DRV.WARN.128",
+    "title": "Warning: systems • there may be more humpback crossings.",
+    "description": "warning systems • there may be more humpback crossings.",
+    "type": "rule",
+    "chapter": 3,
+    "importance": "high"
+  },
+  {
+    "code": "DRV.WARN.129",
+    "title": "Warning: devices All vehicles using air or vacuum brakes must be equipped with ",
+    "description": "warning devices All vehicles using air or vacuum brakes must be equipped with warning devices that will warn the driver if the air-pressure or vacuum system fails.",
+    "type": "rule",
+    "chapter": 3,
+    "importance": "high"
+  },
+  {
+    "code": "DRV.WARN.130",
+    "title": "Warning: devices when they park their commercial vehicles at the Recommended sa",
+    "description": "warning devices when they park their commercial vehicles at the Recommended safety side of the road in an area that isn’t designated for parking.",
+    "type": "rule",
+    "chapter": 3,
+    "importance": "high"
+  },
+  {
+    "code": "DRV.WARN.131",
+    "title": "Warning: devices: • flags or flares • all vehicles with a seating capacity of m",
+    "description": "warning devices: • flags or flares • all vehicles with a seating capacity of more than 10 passengers • fire extinguisher • first aid kit.",
+    "type": "rule",
+    "chapter": 3,
+    "importance": "high"
+  },
+  {
+    "code": "DRV.WARN.132",
+    "title": "Warning: devices is: fast fact • two red flags that measure at least 30 cm by 3",
+    "description": "warning devices is: fast fact • two red flags that measure at least 30 cm by 30 cm, or Only approved warning • two warning devices that have been approved for daylight use — including devices should be used to flares, fuses and reflectors.",
+    "type": "rule",
+    "chapter": 3,
+    "importance": "high"
+  },
+  {
+    "code": "DRV.WARN.133",
+    "title": "Warning: devices approximately 30 m ahead and 30 m behind the disabled vehicle.",
+    "description": "warning devices approximately 30 m ahead and 30 m behind the disabled vehicle.",
+    "type": "rule",
+    "chapter": 3,
+    "importance": "high"
+  },
+  {
+    "code": "DRV.WARN.134",
+    "title": "Warning: devices further than 30 m from your vehicle.",
+    "description": "warning devices further than 30 m from your vehicle.",
+    "type": "rule",
+    "chapter": 3,
+    "importance": "high"
+  },
+  {
+    "code": "DRV.WARN.135",
+    "title": "Warning: devices 30 m ahead and 30 m behind the vehicle.",
+    "description": "warning devices 30 m ahead and 30 m behind the vehicle.",
+    "type": "rule",
+    "chapter": 3,
+    "importance": "high"
+  },
+  {
+    "code": "DRV.WARN.136",
+    "title": "Warning: on the label for any side effects that may impair your ability to driv",
+    "description": "warning on the label for any side effects that may impair your ability to drive safely.",
+    "type": "rule",
+    "chapter": 3,
+    "importance": "high"
+  },
+  {
+    "code": "DRV.SPEED.137",
+    "title": "Speed limit: 80 km/h or more, and no faster than 40 km/h if the speed limit is less",
+    "description": "speed limit is 80 km/h or more, and no faster than 40 km/h if the speed limit is less than 80 km/h.",
+    "type": "fact",
+    "chapter": 3,
+    "importance": "high"
+  },
+  {
+    "code": "DRV.DIST.138",
+    "title": "Following distance: will help give you the time needed to react in an emergency situation.",
+    "description": "following distance will help give you the time needed to react in an emergency situation.",
+    "type": "fact",
+    "chapter": 3,
+    "importance": "high"
+  },
+  {
+    "code": "DRV.DIST.139",
+    "title": "Following distance: between your vehicle and the vehicle immediately ahead.",
+    "description": "following distance between your vehicle and the vehicle immediately ahead.",
+    "type": "fact",
+    "chapter": 3,
+    "importance": "high"
+  },
+  {
+    "code": "DRV.DIST.140",
+    "title": "Following distance: when operating a taxi, ambulance or a van? 2.",
+    "description": "following distance when operating a taxi, ambulance or a van? 2.",
+    "type": "fact",
+    "chapter": 3,
+    "importance": "high"
+  },
+  {
+    "code": "DRV.DIST.141",
+    "title": "Following distance: when operating a bus, truck or truck-tractor and semi-trailer? 3.",
+    "description": "following distance when operating a bus, truck or truck-tractor and semi-trailer? 3.",
+    "type": "fact",
+    "chapter": 3,
+    "importance": "high"
+  },
+  {
+    "code": "DRV.DIST.142",
+    "title": "Stopping distance: ahead and Reduce your danger zone by slowing down.",
+    "description": "stopping distance ahead and Reduce your danger zone by slowing down.",
+    "type": "fact",
+    "chapter": 3,
+    "importance": "high"
+  },
+  {
+    "code": "DRV.WEIGHT.143",
+    "title": "Weight: 500 kg or more • h ave less than 1.",
+    "description": "500 kg or more • h ave less than 1.",
+    "type": "fact",
+    "chapter": 3,
+    "importance": "high"
+  },
+  {
+    "code": "DRV.COMP.144",
+    "title": "Brake Drum",
+    "description": "the brake drum area to see if there’s oil or grease on the brake pad.",
+    "type": "component",
+    "chapter": 3,
+    "importance": "high"
+  },
+  {
+    "code": "DRV.COMP.145",
+    "title": "Parking Brake",
+    "description": "the parking brake in the tractor.",
+    "type": "component",
+    "chapter": 3,
+    "importance": "high"
+  },
+  {
+    "code": "FUEL.DEF.146",
+    "title": "Backing Up",
+    "description": "Backing up is always dangerous because you can’t see everything behind your vehicle.",
+    "type": "definition",
+    "chapter": 4,
+    "importance": "high"
+  },
+  {
+    "code": "FUEL.DIST.147",
+    "title": "Distance rule: 105 km/h instead of 90 km/h, you’ll be travelling 15 per cent • Use th",
+    "description": "105 km/h instead of 90 km/h, you’ll be travelling 15 per cent • Use the retarder properly.",
+    "type": "rule",
+    "chapter": 4,
+    "importance": "high"
+  },
+  {
+    "code": "FUEL.DIST.148",
+    "title": "Distance rule: 100 km/h, about 50 per cent of the fuel consumed is used to overcome a",
+    "description": "100 km/h, about 50 per cent of the fuel consumed is used to overcome air resistance.",
+    "type": "rule",
+    "chapter": 4,
+    "importance": "high"
+  },
+  {
+    "code": "FUEL.COND.149",
+    "title": "Conditional rule: it isn’t you risk jackknifing your vehicle. A tractor-trailer combinat",
+    "description": "If it isn’t you risk jackknifing your vehicle. A tractor-trailer combination backing into a normal right-angle turn would follow an S-shaped curve. Towing trailers Towing trailers requires more skill and practice than operating a single-unit truck. When you’re towing, you must steer carefully.",
+    "type": "rule",
+    "chapter": 4,
+    "importance": "high"
+  },
+  {
+    "code": "FUEL.DIST.150",
+    "title": "Following distance: and allow even more time when accelerating, passing or overtaking.",
+    "description": "following distance and allow even more time when accelerating, passing or overtaking.",
+    "type": "fact",
+    "chapter": 4,
+    "importance": "high"
+  },
+  {
+    "code": "TRK.DEF.151",
+    "title": "An Aggregate Load",
+    "description": "An aggregate load is a collection of small articles.",
+    "type": "definition",
+    "chapter": 5,
+    "importance": "high"
+  },
+  {
+    "code": "TRK.REQ.152",
+    "title": "Requirement: use a cover or tarp to secure your load if: • the load is made up of a",
+    "description": "You must use a cover or tarp to secure your load if: • the load is made up of aggregate material, and • the load is likely to bounce, blow or drop from the moving vehicle.",
+    "type": "rule",
+    "chapter": 5,
+    "importance": "high"
+  },
+  {
+    "code": "TRK.REQ.153",
+    "title": "Requirement: follow the standard limits for load projections unless you have a than",
+    "description": "You must follow the standard limits for load projections unless you have a than a two metre radius permit that allows you to extend your limit.",
+    "type": "rule",
+    "chapter": 5,
+    "importance": "high"
+  },
+  {
+    "code": "TRK.REQ.154",
+    "title": "Requirement: know the weight of your vehicle and its load to ensure your Watch for ",
+    "description": "You must know the weight of your vehicle and its load to ensure your Watch for a sign that posts vehicle doesn’t exceed load limits.",
+    "type": "rule",
+    "chapter": 5,
+    "importance": "high"
+  },
+  {
+    "code": "TRK.REQ.155",
+    "title": "Requirement: have a permit you may be able to purchase an oversize permit.",
+    "description": "You must have a permit you may be able to purchase an oversize permit.",
+    "type": "rule",
+    "chapter": 5,
+    "importance": "high"
+  },
+  {
+    "code": "TRK.REQ.156",
+    "title": "Requirement: display the appropriate signs whenever you transport an oversize load.",
+    "description": "You must display the appropriate signs whenever you transport an oversize load.",
+    "type": "rule",
+    "chapter": 5,
+    "importance": "high"
+  },
+  {
+    "code": "TRK.PROH.157",
+    "title": "Never: unlock the pintle hook with the dolly still under the rear trailer.",
+    "description": "Never unlock the pintle hook with the dolly still under the rear trailer.",
+    "type": "rule",
+    "chapter": 5,
+    "importance": "high"
+  },
+  {
+    "code": "TRK.PROH.158",
+    "title": "Never: load your vehicle this way.",
+    "description": "Never load your vehicle this way.",
+    "type": "rule",
+    "chapter": 5,
+    "importance": "high"
+  },
+  {
+    "code": "TRK.PROH.159",
+    "title": "Never: load items on the tailgate.",
+    "description": "Never load items on the tailgate.",
+    "type": "rule",
+    "chapter": 5,
+    "importance": "high"
+  },
+  {
+    "code": "TRK.BEST.160",
+    "title": "Always: use great care when coupling a tractor and trailer, or it can put your",
+    "description": "Always use great care when coupling a tractor and trailer, or it can put your Parts of a fifth wheel.",
+    "type": "rule",
+    "chapter": 5,
+    "importance": "high"
+  },
+  {
+    "code": "TRK.BEST.161",
+    "title": "Always: use the correct vehicle for the job.",
+    "description": "Always use the correct vehicle for the job.",
+    "type": "rule",
+    "chapter": 5,
+    "importance": "high"
+  },
+  {
+    "code": "TRK.BEST.162",
+    "title": "Always: assume loading special cargoes.",
+    "description": "Always assume loading special cargoes.",
+    "type": "rule",
+    "chapter": 5,
+    "importance": "high"
+  },
+  {
+    "code": "TRK.BEST.163",
+    "title": "Always: carry your When transporting these goods, you must ensure all shipping",
+    "description": "Always carry your When transporting these goods, you must ensure all shipping documents are training certificate with you complete, correct and readily available in the cab.",
+    "type": "rule",
+    "chapter": 5,
+    "importance": "high"
+  },
+  {
+    "code": "TRK.BEST.164",
+    "title": "Always: be aware of your vehicle’s length and the length of your load.",
+    "description": "Always be aware of your vehicle’s length and the length of your load.",
+    "type": "rule",
+    "chapter": 5,
+    "importance": "high"
+  },
+  {
+    "code": "TRK.LIMIT.165",
+    "title": "At least: 25 per cent of the tridem axle weight — 40 per cent in the case of twi",
+    "description": "at least 25 per cent of the tridem axle weight — 40 per cent in the case of twin steering axles.",
+    "type": "rule",
+    "chapter": 5,
+    "importance": "high"
+  },
+  {
+    "code": "TRK.LIMIT.166",
+    "title": "At least: 20 per cent of the weight of the cargo.",
+    "description": "at least 20 per cent of the weight of the cargo.",
+    "type": "rule",
+    "chapter": 5,
+    "importance": "high"
+  },
+  {
+    "code": "TRK.LIMIT.167",
+    "title": "At least: 50 per cent of the cargo weight.",
+    "description": "at least 50 per cent of the cargo weight.",
+    "type": "rule",
+    "chapter": 5,
+    "importance": "high"
+  },
+  {
+    "code": "TRK.LIMIT.168",
+    "title": "At least: 50 per cent of the total cargo weight uniformly distributed over the f",
+    "description": "at least 50 per cent of the total cargo weight uniformly distributed over the front-end structure.",
+    "type": "rule",
+    "chapter": 5,
+    "importance": "high"
+  },
+  {
+    "code": "TRK.LIMIT.169",
+    "title": "At least: 22 mm in diameter • with properly welded gussets of adequate strength.",
+    "description": "at least 22 mm in diameter • with properly welded gussets of adequate strength.",
+    "type": "rule",
+    "chapter": 5,
+    "importance": "high"
+  },
+  {
+    "code": "TRK.LIMIT.170",
+    "title": "At least: 2,268 kg and must not be synthetic webbing.",
+    "description": "at least 2,268 kg and must not be synthetic webbing.",
+    "type": "rule",
+    "chapter": 5,
+    "importance": "high"
+  },
+  {
+    "code": "TRK.COND.171",
+    "title": "Conditional rule: these loads can’t be contained with sideboards or tiedowns",
+    "description": "If these loads can’t be contained with sideboards or tiedowns, you must use a cover or tarp so pieces don’t escape from the vehicle.",
+    "type": "rule",
+    "chapter": 5,
+    "importance": "high"
+  },
+  {
+    "code": "TRK.WARN.172",
+    "title": "Warning: devices are installed so you can test whether your vehicle is within t",
+    "description": "warning devices are installed so you can test whether your vehicle is within the limits.",
+    "type": "rule",
+    "chapter": 5,
+    "importance": "high"
+  },
+  {
+    "code": "TRK.WEIGHT.173",
+    "title": "Weight: 500 kg or lighter 1 1.",
+    "description": "500 kg or lighter 1 1.",
+    "type": "fact",
+    "chapter": 5,
+    "importance": "high"
+  },
+  {
+    "code": "TRK.WEIGHT.174",
+    "title": "Weight: 500 kg 2 More than 1.",
+    "description": "500 kg 2 More than 1.",
+    "type": "fact",
+    "chapter": 5,
+    "importance": "high"
+  },
+  {
+    "code": "TRK.WEIGHT.175",
+    "title": "Weight: 600 kg This article is 1.",
+    "description": "600 kg This article is 1.",
+    "type": "fact",
+    "chapter": 5,
+    "importance": "high"
+  },
+  {
+    "code": "TRK.WEIGHT.176",
+    "title": "Weight: 600 kg 600 kg arranged on a flat deck.",
+    "description": "600 kg 600 kg arranged on a flat deck.",
+    "type": "fact",
+    "chapter": 5,
+    "importance": "high"
+  },
+  {
+    "code": "TRK.WEIGHT.177",
+    "title": "Weight: 600 kg This article is 3.",
+    "description": "600 kg This article is 3.",
+    "type": "fact",
+    "chapter": 5,
+    "importance": "high"
+  },
+  {
+    "code": "TRK.WEIGHT.178",
+    "title": "Weight: 300 kg (50 per cent of 600 kg).",
+    "description": "300 kg (50 per cent of 600 kg).",
+    "type": "fact",
+    "chapter": 5,
+    "importance": "high"
+  },
+  {
+    "code": "TRK.WEIGHT.179",
+    "title": "Weight: 100 kg (300 kg ÷ 3).",
+    "description": "100 kg (300 kg ÷ 3).",
+    "type": "fact",
+    "chapter": 5,
+    "importance": "high"
+  },
+  {
+    "code": "TRK.WEIGHT.180",
+    "title": "Weight: 50 kg, use six tiedowns.",
+    "description": "50 kg, use six tiedowns.",
+    "type": "fact",
+    "chapter": 5,
+    "importance": "high"
+  },
+  {
+    "code": "TRK.WEIGHT.181",
+    "title": "Weight: 200 kg were available, use three tiedowns, since the Standard gives a ",
+    "description": "200 kg were available, use three tiedowns, since the Standard gives a minimum number required as well as the minimum strength.",
+    "type": "fact",
+    "chapter": 5,
+    "importance": "high"
+  },
+  {
+    "code": "TRK.WEIGHT.182",
+    "title": "Weight: 268 kg or more in accordance with Division 4 of Part 2 of the Standard",
+    "description": "268 kg or more in accordance with Division 4 of Part 2 of the Standard.",
+    "type": "fact",
+    "chapter": 5,
+    "importance": "high"
+  },
+  {
+    "code": "TRK.WEIGHT.183",
+    "title": "Weight: 500 kg must be secured at both the front and rear with a minimum of tw",
+    "description": "500 kg must be secured at both the front and rear with a minimum of two tiedowns.",
+    "type": "fact",
+    "chapter": 5,
+    "importance": "high"
+  },
+  {
+    "code": "TRK.WEIGHT.184",
+    "title": "Weight: 500 kg must be restrained by a minimum of four tiedowns, each with a w",
+    "description": "500 kg must be restrained by a minimum of four tiedowns, each with a working load limit of at least 2,268 kg.",
+    "type": "fact",
+    "chapter": 5,
+    "importance": "high"
+  },
+  {
+    "code": "TRK.WEIGHT.185",
+    "title": "Weight: 268 kg and must not be synthetic webbing.",
+    "description": "268 kg and must not be synthetic webbing.",
+    "type": "fact",
+    "chapter": 5,
+    "importance": "high"
+  },
+  {
+    "code": "TRK.WEIGHT.186",
+    "title": "Weight: 000 kg, or have a volume greater than two cubic metres, as outlined in",
+    "description": "000 kg, or have a volume greater than two cubic metres, as outlined in Division 9 of Part 2 of the Standard when transported on a flatbed vehicle or a vehicle that isn’t specifically designed for transporting boulders.",
+    "type": "fact",
+    "chapter": 5,
+    "importance": "high"
+  },
+  {
+    "code": "TRK.WEIGHT.187",
+    "title": "Weight: 500 kg, you must report to a scale whenever a sign, a police officer o",
+    "description": "500 kg, you must report to a scale whenever a sign, a police officer or an authorized person directs you to do so.",
+    "type": "fact",
+    "chapter": 5,
+    "importance": "high"
+  },
+  {
+    "code": "BUS.DEF.188",
+    "title": "An Ambulance",
+    "description": "An ambulance is an emergency vehicle that uses flashing red lights to get the right-of-way.",
+    "type": "definition",
+    "chapter": 6,
+    "importance": "high"
+  },
+  {
+    "code": "BUS.REQ.189",
+    "title": "Requirement: have a passenger transportation licence if you’re responsible for Act ",
+    "description": "You must have a passenger transportation licence if you’re responsible for Act specifications for type, a vehicle which transports passengers on a for-hire basis.",
+    "type": "rule",
+    "chapter": 6,
+    "importance": "high"
+  },
+  {
+    "code": "BUS.REQ.190",
+    "title": "Requirement: also be colour and size.",
+    "description": "You must also be colour and size.",
+    "type": "rule",
+    "chapter": 6,
+    "importance": "high"
+  },
+  {
+    "code": "BUS.REQ.191",
+    "title": "Requirement: be able to clearly see ahead, to the right and to the left.",
+    "description": "You must be able to clearly see ahead, to the right and to the left.",
+    "type": "rule",
+    "chapter": 6,
+    "importance": "high"
+  },
+  {
+    "code": "BUS.REQ.192",
+    "title": "Requirement: be able to move your arms and legs at all times and be ready to reach ",
+    "description": "You must be able to move your arms and legs at all times and be ready to reach for emergency equipment.",
+    "type": "rule",
+    "chapter": 6,
+    "importance": "high"
+  },
+  {
+    "code": "BUS.REQ.193",
+    "title": "Requirement: allow these animals in your vehicle with their owners.",
+    "description": "You must allow these animals in your vehicle with their owners.",
+    "type": "rule",
+    "chapter": 6,
+    "importance": "high"
+  },
+  {
+    "code": "BUS.REQ.194",
+    "title": "Requirement: end the trip if your vehicle develops a problem that could endanger th",
+    "description": "You must end the trip if your vehicle develops a problem that could endanger the safety or comfort of any of your passengers.",
+    "type": "rule",
+    "chapter": 6,
+    "importance": "high"
+  },
+  {
+    "code": "BUS.REQ.195",
+    "title": "Requirement: make immediate arrangements to have your passengers transported to the",
+    "description": "You must make immediate arrangements to have your passengers transported to their destination with as little delay as possible if a crash or breakdown makes it impossible for you to continue.",
+    "type": "rule",
+    "chapter": 6,
+    "importance": "high"
+  },
+  {
+    "code": "BUS.REQ.196",
+    "title": "Requirement: ensure it’s loaded safely.",
+    "description": "You must ensure it’s loaded safely.",
+    "type": "rule",
+    "chapter": 6,
+    "importance": "high"
+  },
+  {
+    "code": "BUS.REQ.197",
+    "title": "Requirement: report any defect or deficiency that could make your vehicle unsafe.",
+    "description": "You must report any defect or deficiency that could make your vehicle unsafe.",
+    "type": "rule",
+    "chapter": 6,
+    "importance": "high"
+  },
+  {
+    "code": "BUS.REQ.198",
+    "title": "Requirement: also notify Commercial Vehicle Safety and Enforcement about the change",
+    "description": "You must also notify Commercial Vehicle Safety and Enforcement about the change in vehicles as soon as possible.",
+    "type": "rule",
+    "chapter": 6,
+    "importance": "high"
+  },
+  {
+    "code": "BUS.REQ.199",
+    "title": "Requirement: stop their vehicles when a school bus displays flashing red lights.",
+    "description": "are required to stop their vehicles when a school bus displays flashing red lights.",
+    "type": "rule",
+    "chapter": 6,
+    "importance": "high"
+  },
+  {
+    "code": "BUS.PROH.200",
+    "title": "Never: transport passengers on a school bus that’s defective in any way.",
+    "description": "Never transport passengers on a school bus that’s defective in any way.",
+    "type": "rule",
+    "chapter": 6,
+    "importance": "high"
+  },
+  {
+    "code": "BUS.REC.201",
+    "title": "Recommendation: also save any unnecessary conversation with your passengers until you’",
+    "description": "You should also save any unnecessary conversation with your passengers until you’ve stopped your vehicle.",
+    "type": "rule",
+    "chapter": 6,
+    "importance": "high"
+  },
+  {
+    "code": "BUS.LIMIT.202",
+    "title": "Maximum: 13 hours in a day.",
+    "description": "maximum of 13 hours in a day.",
+    "type": "rule",
+    "chapter": 6,
+    "importance": "high"
+  },
+  {
+    "code": "BUS.LIMIT.203",
+    "title": "Minimum: 10 hours off duty every day.",
+    "description": "minimum of 10 hours off duty every day.",
+    "type": "rule",
+    "chapter": 6,
+    "importance": "high"
+  },
+  {
+    "code": "BUS.LIMIT.204",
+    "title": "Minimum: 10 hours of off-duty time must be taken every day.",
+    "description": "minimum of 10 hours of off-duty time must be taken every day.",
+    "type": "rule",
+    "chapter": 6,
+    "importance": "high"
+  },
+  {
+    "code": "BUS.LIMIT.205",
+    "title": "At least: 85 metres (285 ft) in front and behind • leave space to the left of yo",
+    "description": "at least 85 metres (285 ft) in front and behind • leave space to the left of your vehicle so that traffic may pass by — you should leave at least three metres (10 ft) so traffic can pass.",
+    "type": "rule",
+    "chapter": 6,
+    "importance": "high"
+  },
+  {
+    "code": "BUS.LIMIT.206",
+    "title": "At least: 20 cm high and be black on a yellow background.",
+    "description": "at least 20 cm high and be black on a yellow background.",
+    "type": "rule",
+    "chapter": 6,
+    "importance": "high"
+  },
+  {
+    "code": "BUS.LIMIT.207",
+    "title": "At least: 60 metres in either direction • passengers enter or leave your school ",
+    "description": "at least 60 metres in either direction • passengers enter or leave your school bus from the right side only.",
+    "type": "rule",
+    "chapter": 6,
+    "importance": "high"
+  },
+  {
+    "code": "BUS.TIME.208",
+    "title": "Time rule: 7 hours of service requirements This chapter provides information on t",
+    "description": "7 hours of service requirements This chapter provides information on the rules and regulations governing how many hours drivers may work, when drivers must have rest periods and the records drivers must keep to track their hours of work and rest.",
+    "type": "rule",
+    "chapter": 6,
+    "importance": "high"
+  },
+  {
+    "code": "BUS.TIME.209",
+    "title": "Time rule: 10 hours off duty every day.",
+    "description": "10 hours off duty every day.",
+    "type": "rule",
+    "chapter": 6,
+    "importance": "high"
+  },
+  {
+    "code": "BUS.TIME.210",
+    "title": "Time rule: 10 hours of off-duty time must be taken every day.",
+    "description": "10 hours of off-duty time must be taken every day.",
+    "type": "rule",
+    "chapter": 6,
+    "importance": "high"
+  },
+  {
+    "code": "BUS.TIME.211",
+    "title": "Time rule: 14 hours on duty in a day.",
+    "description": "14 hours on duty in a day.",
+    "type": "rule",
+    "chapter": 6,
+    "importance": "high"
+  },
+  {
+    "code": "BUS.DIST.212",
+    "title": "Distance rule: 85 metres (285 ft) in front and behind • leave space to the left of yo",
+    "description": "85 metres (285 ft) in front and behind • leave space to the left of your vehicle so that traffic may pass by — you should leave at least three metres (10 ft) so traffic can pass.",
+    "type": "rule",
+    "chapter": 6,
+    "importance": "high"
+  },
+  {
+    "code": "BUS.DIST.213",
+    "title": "Distance rule: 60 metres in either direction • passengers enter or leave your school ",
+    "description": "60 metres in either direction • passengers enter or leave your school bus from the right side only.",
+    "type": "rule",
+    "chapter": 6,
+    "importance": "high"
+  },
+  {
+    "code": "BUS.COND.214",
+    "title": "Conditional rule: you order a person out of your vehicle",
+    "description": "If you order a person out of your vehicle, you must ensure that the person can disembark safely and in a location where they can reasonably be expected to find alternate transportation.",
+    "type": "rule",
+    "chapter": 6,
+    "importance": "high"
+  },
+  {
+    "code": "BUS.COND.215",
+    "title": "Conditional rule: your vehicle’s licensed in British Columbia and has a passenger transp",
+    "description": "If your vehicle’s licensed in British Columbia and has a passenger transportation plate, you must ensure that it displays a valid commercial vehicle inspection decal and carry the certificate in the vehicle.",
+    "type": "rule",
+    "chapter": 6,
+    "importance": "high"
+  },
+  {
+    "code": "BUS.WARN.216",
+    "title": "Warning: clues to ensure you don’t collide with parked vehicles or the people n",
+    "description": "warning clues to ensure you don’t collide with parked vehicles or the people near them.",
+    "type": "rule",
+    "chapter": 6,
+    "importance": "high"
+  },
+  {
+    "code": "BUS.WARN.217",
+    "title": "Warning: devices such as flags and flares.",
+    "description": "warning devices such as flags and flares.",
+    "type": "rule",
+    "chapter": 6,
+    "importance": "high"
+  },
+  {
+    "code": "BUS.HRS.218",
+    "title": "Hours: 24 consecutive hours off duty every 14 days.",
+    "description": "24 consecutive hours off duty every 14 days.",
+    "type": "fact",
+    "chapter": 6,
+    "importance": "high"
+  },
+  {
+    "code": "BUS.WEIGHT.219",
+    "title": "Weight: 000 kg Enforcement website at • vehicles operating under the Passenger",
+    "description": "000 kg Enforcement website at • vehicles operating under the Passenger Transportation Act including taxis, www.",
+    "type": "fact",
+    "chapter": 6,
+    "importance": "high"
+  },
+  {
+    "code": "HOS.REQ.220",
+    "title": "Requirement: keep track of your time using one of two cycles.",
+    "description": "You must keep track of your time using one of two cycles.",
+    "type": "rule",
+    "chapter": 7,
+    "importance": "high"
+  },
+  {
+    "code": "HOS.REQ.221",
+    "title": "Requirement: “reset” a time by taking: cycle to change the start time.",
+    "description": "You must “reset” a time by taking: cycle to change the start time.",
+    "type": "rule",
+    "chapter": 7,
+    "importance": "high"
+  },
+  {
+    "code": "HOS.REQ.222",
+    "title": "Requirement: keep in your possession: • a daily log that’s updated to your last cha",
+    "description": "You must keep in your possession: • a daily log that’s updated to your last change in duty status • copies of your daily log for your cycle — that is, the previous seven- or 14-day cycle you’re using • any supporting documents you’ve been issued during your trip.",
+    "type": "rule",
+    "chapter": 7,
+    "importance": "high"
+  },
+  {
+    "code": "HOS.REQ.223",
+    "title": "Requirement: submit your logbook and all supporting documents to your carrier withi",
+    "description": "You must submit your logbook and all supporting documents to your carrier within 20 days.",
+    "type": "rule",
+    "chapter": 7,
+    "importance": "high"
+  },
+  {
+    "code": "HOS.REQ.224",
+    "title": "Requirement: present your logbook and any supporting documents when asked.",
+    "description": "You must present your logbook and any supporting documents when asked.",
+    "type": "rule",
+    "chapter": 7,
+    "importance": "high"
+  },
+  {
+    "code": "HOS.LIMIT.225",
+    "title": "Maximum: 75 km a day for personal use • the odometer readings are recorded, and",
+    "description": "maximum of 75 km a day for personal use • the odometer readings are recorded, and • you’re not subject to an out-of-service declaration.",
+    "type": "rule",
+    "chapter": 7,
+    "importance": "high"
+  },
+  {
+    "code": "HOS.LIMIT.226",
+    "title": "Maximum: 15 hours • you may not drive after 18 hours of on duty • must take at ",
+    "description": "maximum of 15 hours • you may not drive after 18 hours of on duty • must take at least eight consecutive hours of off duty after driving for 15 hours or 18 hours of on-duty time • drivers may choose one of two cycles: - Cycle 1 — 80 hours of on-duty time in seven days - Cycle 2 — 120 hours of on-duty time in 14 days, and you must take 24 consecutive hours of off duty prior to accumulating 80 hours of on-duty time.",
+    "type": "rule",
+    "chapter": 7,
+    "importance": "high"
+  },
+  {
+    "code": "HOS.LIMIT.227",
+    "title": "At least: 24 consecutive hours off duty prior to accumulating 70 hours of on-dut",
+    "description": "at least 24 consecutive hours off duty prior to accumulating 70 hours of on-duty time.",
+    "type": "rule",
+    "chapter": 7,
+    "importance": "high"
+  },
+  {
+    "code": "HOS.LIMIT.228",
+    "title": "At least: 34 consecutive hours off duty • you will have to participate in a drug",
+    "description": "at least 34 consecutive hours off duty • you will have to participate in a drug and alcohol testing program administered by your employer.",
+    "type": "rule",
+    "chapter": 7,
+    "importance": "high"
+  },
+  {
+    "code": "HOS.LIMIT.229",
+    "title": "Within: 160 km of home terminal You aren’t required to keep logbooks if: • you",
+    "description": "within 160 km of home terminal You aren’t required to keep logbooks if: • you operate a commercial vehicle within a radius of 160 km of the home terminal • you return to the home terminal each day to begin a minimum of eight consecutive hours of off-duty time • you’re not driving under a permit issued under these regulations, and • you maintain accurate and legible records for each day that: • include each duty status • state driving and on-duty time separately • indicate the cycle you’re using • note if any off-duty time is deferred and indicate if it’s ‘Day 1’ or ‘Day 2’ • record the odometer readings if you use the vehicle for personal use and • keep the records for a minimum of six months.",
+    "type": "rule",
+    "chapter": 7,
+    "importance": "high"
+  },
+  {
+    "code": "HOS.TIME.230",
+    "title": "Time rule: 10 hours off duty 10 (*) 8 hours Off duty > 10 13 Driving < 13 1 No dr",
+    "description": "10 hours off duty 10 (*) 8 hours Off duty > 10 13 Driving < 13 1 No driving after 14 hours On duty (*) 8 consecutive hours is not required in the rules for the ‘Day’ Work shift A work shift is the elapsed time between two off-duty periods of at least eight consecutive hours.",
+    "type": "rule",
+    "chapter": 7,
+    "importance": "high"
+  },
+  {
+    "code": "HOS.TIME.231",
+    "title": "Time rule: 16 hours of elapsed time until you take at least eight consecutive hou",
+    "description": "16 hours of elapsed time until you take at least eight consecutive hours of off-duty time.",
+    "type": "rule",
+    "chapter": 7,
+    "importance": "high"
+  },
+  {
+    "code": "HOS.TIME.232",
+    "title": "Time rule: 16 hours of elapse time • Driving time < 13 hours • No driving after 1",
+    "description": "16 hours of elapse time • Driving time < 13 hours • No driving after 14 hours on duty Daily hours (cycles) fast fact You must keep track of your time using one of two cycles.",
+    "type": "rule",
+    "chapter": 7,
+    "importance": "high"
+  },
+  {
+    "code": "HOS.TIME.233",
+    "title": "Time rule: 14 hours of maximum number of on-duty hours.",
+    "description": "14 hours of maximum number of on-duty hours.",
+    "type": "rule",
+    "chapter": 7,
+    "importance": "high"
+  },
+  {
+    "code": "HOS.TIME.234",
+    "title": "Time rule: 70 hours of on-duty time.",
+    "description": "70 hours of on-duty time.",
+    "type": "rule",
+    "chapter": 7,
+    "importance": "high"
+  },
+  {
+    "code": "HOS.TIME.235",
+    "title": "Time rule: 10 hours by up to two hours providing: • the two hours are not part of",
+    "description": "10 hours by up to two hours providing: • the two hours are not part of your eight consecutive off-duty hours • the two hours are added to the eight consecutive off-duty hours taken off the next day, and • you clearly indicate ‘Day 1’ and ‘Day 2’ on your logbook.",
+    "type": "rule",
+    "chapter": 7,
+    "importance": "high"
+  },
+  {
+    "code": "HOS.TIME.236",
+    "title": "Time rule: 10 hours (Sleeper Berth) 8 Hours Off Duty Off duty > 10 Driving < 13 N",
+    "description": "10 hours (Sleeper Berth) 8 Hours Off Duty Off duty > 10 Driving < 13 No driving after 14 hours On duty Driving < 13 hours No driving after 16th hour ‘Daily’ No driving after 14 hours On Duty since last sleeper period Rules Team drivers using a sleeper berth can split their required off-duty time up into two periods if: • neither period is less than four hours • the two periods total at least eight hours, and • the total off-duty time is at least 10 hours.",
+    "type": "rule",
+    "chapter": 7,
+    "importance": "high"
+  },
+  {
+    "code": "HOS.TIME.237",
+    "title": "Time rule: 8 hours (Sleeper Berth) 8 Hours Off Duty 2 8 12 2 Driving < 13 hours N",
+    "description": "8 hours (Sleeper Berth) 8 Hours Off Duty 2 8 12 2 Driving < 13 hours No driving after 16th hour No driving after 14 hours On Duty since last sleeper period 135 driving commercial vehicles Personal use exemption Driving a commercial vehicle for personal use is not considered to be on-duty time if: • the vehicle’s unloaded • the vehicle’s not towing a trailer • the vehicle’s driven a maximum of 75 km a day for personal use • the odometer readings are recorded, and • you’re not subject to an out-of-service declaration.",
+    "type": "rule",
+    "chapter": 7,
+    "importance": "high"
+  },
+  {
+    "code": "HOS.TIME.238",
+    "title": "Time rule: 24 hours • total amount of time spent in one location doing on-duty wo",
+    "description": "24 hours • total amount of time spent in one location doing on-duty work other than driving (this must be shown as a continuous line on the log) fast fact • continuous line made by drawing through each time noted on the log page (the times noted must include every time the driver’s duty status changed) A peace officer can order you out of service if you drive • name of the municipality or location on a highway, including the name of after reaching the maximum the jurisdiction, where each change in duty status took place number of on-duty hours permitted for the cycle you • declaration in the Remarks section of deferral of off-duty time, indicating are operating under.",
+    "type": "rule",
+    "chapter": 7,
+    "importance": "high"
+  },
+  {
+    "code": "HOS.TIME.239",
+    "title": "Time rule: 15 hours • you may not drive after 18 hours of on duty • must take at ",
+    "description": "15 hours • you may not drive after 18 hours of on duty • must take at least eight consecutive hours of off duty after driving for 15 hours or 18 hours of on-duty time • drivers may choose one of two cycles: - Cycle 1 — 80 hours of on-duty time in seven days - Cycle 2 — 120 hours of on-duty time in 14 days, and you must take 24 consecutive hours of off duty prior to accumulating 80 hours of on-duty time.",
+    "type": "rule",
+    "chapter": 7,
+    "importance": "high"
+  },
+  {
+    "code": "HOS.TIME.240",
+    "title": "Time rule: 11 hours after 10 hours of off-duty time not operate a commercial vehi",
+    "description": "11 hours after 10 hours of off-duty time not operate a commercial vehicle in the U.",
+    "type": "rule",
+    "chapter": 7,
+    "importance": "high"
+  },
+  {
+    "code": "HOS.TIME.241",
+    "title": "Time rule: 10 hours off duty have diabetes controlled by insulin or if you don’t ",
+    "description": "10 hours off duty have diabetes controlled by insulin or if you don’t meet • you may work a maximum of: the U.",
+    "type": "rule",
+    "chapter": 7,
+    "importance": "high"
+  },
+  {
+    "code": "HOS.TIME.242",
+    "title": "Time rule: 60 hours of on-duty time in seven days, or - 70 hours of on-duty time ",
+    "description": "60 hours of on-duty time in seven days, or - 70 hours of on-duty time in eight days, or - the on-duty cycle may be restarted after at least 34 consecutive hours off duty • you will have to participate in a drug and alcohol testing program administered by your employer.",
+    "type": "rule",
+    "chapter": 7,
+    "importance": "high"
+  },
+  {
+    "code": "HOS.DIST.243",
+    "title": "Distance rule: 75 km a day for personal use • the odometer readings are recorded, and",
+    "description": "75 km a day for personal use • the odometer readings are recorded, and • you’re not subject to an out-of-service declaration.",
+    "type": "rule",
+    "chapter": 7,
+    "importance": "high"
+  },
+  {
+    "code": "HOS.DIST.244",
+    "title": "Distance rule: 160 km of home terminal You aren’t required to keep logbooks if: • you",
+    "description": "160 km of home terminal You aren’t required to keep logbooks if: • you operate a commercial vehicle within a radius of 160 km of the home terminal • you return to the home terminal each day to begin a minimum of eight consecutive hours of off-duty time • you’re not driving under a permit issued under these regulations, and • you maintain accurate and legible records for each day that: • include each duty status • state driving and on-duty time separately • indicate the cycle you’re using • note if any off-duty time is deferred and indicate if it’s ‘Day 1’ or ‘Day 2’ • record the odometer readings if you use the vehicle for personal use and • keep the records for a minimum of six months.",
+    "type": "rule",
+    "chapter": 7,
+    "importance": "high"
+  },
+  {
+    "code": "HOS.HRS.245",
+    "title": "Hours: 14 hours on duty Daily hours (cycles) fast fact You must keep track of",
+    "description": "14 hours on duty Daily hours (cycles) fast fact You must keep track of your time using one of two cycles.",
+    "type": "fact",
+    "chapter": 7,
+    "importance": "high"
+  },
+  {
+    "code": "HOS.HRS.246",
+    "title": "Hours: 24 consecutive hours off duty prior to accumulating 70 hours of on-dut",
+    "description": "24 consecutive hours off duty prior to accumulating 70 hours of on-duty time.",
+    "type": "fact",
+    "chapter": 7,
+    "importance": "high"
+  },
+  {
+    "code": "HOS.HRS.247",
+    "title": "Hours: 36 consecutive hours off duty to reset cycle 1 Deferring off-duty time",
+    "description": "36 consecutive hours off duty to reset cycle 1 Deferring off-duty time • 72 consecutive hours off duty to reset cycle 2.",
+    "type": "fact",
+    "chapter": 7,
+    "importance": "high"
+  },
+  {
+    "code": "HOS.HRS.248",
+    "title": "Hours: 8 Hours Off Duty Off duty > 10 Driving < 13 No driving after 14 hours ",
+    "description": "8 Hours Off Duty Off duty > 10 Driving < 13 No driving after 14 hours On duty Driving < 13 hours No driving after 16th hour ‘Daily’ No driving after 14 hours On Duty since last sleeper period Rules Team drivers using a sleeper berth can split their required off-duty time up into two periods if: • neither period is less than four hours • the two periods total at least eight hours, and • the total off-duty time is at least 10 hours.",
+    "type": "fact",
+    "chapter": 7,
+    "importance": "high"
+  },
+  {
+    "code": "HOS.HRS.249",
+    "title": "Hours: 8 Hours Off Duty 2 8 12 2 Driving < 13 hours No driving after 16th hou",
+    "description": "8 Hours Off Duty 2 8 12 2 Driving < 13 hours No driving after 16th hour No driving after 14 hours On Duty since last sleeper period 135 driving commercial vehicles Personal use exemption Driving a commercial vehicle for personal use is not considered to be on-duty time if: • the vehicle’s unloaded • the vehicle’s not towing a trailer • the vehicle’s driven a maximum of 75 km a day for personal use • the odometer readings are recorded, and • you’re not subject to an out-of-service declaration.",
+    "type": "fact",
+    "chapter": 7,
+    "importance": "high"
+  },
+  {
+    "code": "HOS.HRS.250",
+    "title": "Hours: 18 hours of on duty • must take at least eight consecutive hours of of",
+    "description": "18 hours of on duty • must take at least eight consecutive hours of off duty after driving for 15 hours or 18 hours of on-duty time • drivers may choose one of two cycles: - Cycle 1 — 80 hours of on-duty time in seven days - Cycle 2 — 120 hours of on-duty time in 14 days, and you must take 24 consecutive hours of off duty prior to accumulating 80 hours of on-duty time.",
+    "type": "fact",
+    "chapter": 7,
+    "importance": "high"
+  },
+  {
+    "code": "HOS.HRS.251",
+    "title": "Hours: 10 hours of off-duty time not operate a commercial vehicle in the U.",
+    "description": "10 hours of off-duty time not operate a commercial vehicle in the U.",
+    "type": "fact",
+    "chapter": 7,
+    "importance": "high"
+  },
+  {
+    "code": "HOS.HRS.252",
+    "title": "Hours: 24 consecutive hours of off-duty time? 8.",
+    "description": "24 consecutive hours of off-duty time? 8.",
+    "type": "fact",
+    "chapter": 7,
+    "importance": "high"
+  },
+  {
+    "code": "HOS.HRS.253",
+    "title": "Hours: 24 consecutive hours of off-duty time, regardless of cycle? 11.",
+    "description": "24 consecutive hours of off-duty time, regardless of cycle? 11.",
+    "type": "fact",
+    "chapter": 7,
+    "importance": "high"
+  },
+  {
+    "code": "HOS.WEIGHT.254",
+    "title": "Weight: 10 pounds, for example, then it could be said that the force was 10 po",
+    "description": "10 pounds, for example, then it could be said that the force was 10 pounds on the one square inch surface of the plug.",
+    "type": "fact",
+    "chapter": 7,
+    "importance": "high"
+  },
+  {
+    "code": "AIR.DEF.255",
+    "title": "Slack Adjustment",
+    "description": "Slack adjustment means available stroke of three inches. adjusting the brakes to keep air chamber pushrod travel S-cam brake — applied within tolerance to ensure that the brakes are effective.",
+    "type": "definition",
+    "chapter": 8,
+    "importance": "high"
+  },
+  {
+    "code": "AIR.DEF.256",
+    "title": "Pushrod Travel",
+    "description": "Pushrod travel means the distance the pushrod extends from the air brake chamber when the brakes are applied. fast fact When correctly adjusted, the running clearance between the brake lining and drum is only a few thousandths of an inch — hardly thicker than three sheets of paper.",
+    "type": "definition",
+    "chapter": 8,
+    "importance": "high"
+  },
+  {
+    "code": "AIR.DEF.257",
+    "title": "Leverage",
+    "description": "Leverage is a form of force multiplication.",
+    "type": "definition",
+    "chapter": 8,
+    "importance": "high"
+  },
+  {
+    "code": "AIR.DEF.258",
+    "title": "This Force",
+    "description": "This force is then applied to move the lever (the slack adjuster) to apply the brakes.",
+    "type": "definition",
+    "chapter": 8,
+    "importance": "high"
+  },
+  {
+    "code": "AIR.DEF.259",
+    "title": "When Air Pressure",
+    "description": "When air pressure is applied to the brake chamber diaphragm, it causes the pushrod to move against the slack adjuster arm which rotates the s-cam to apply the brakes.",
+    "type": "definition",
+    "chapter": 8,
+    "importance": "high"
+  },
+  {
+    "code": "AIR.DEF.260",
+    "title": "The Slack Adjuster",
+    "description": "The slack adjuster is attached to a camshaft with an s-shaped head called an s-cam.",
+    "type": "definition",
+    "chapter": 8,
+    "importance": "high"
+  },
+  {
+    "code": "AIR.DEF.261",
+    "title": "The Compressed Air",
+    "description": "The compressed air is then pumped through an air line to a supply reservoir.",
+    "type": "definition",
+    "chapter": 8,
+    "importance": "high"
+  },
+  {
+    "code": "AIR.DEF.262",
+    "title": "The Service Brake",
+    "description": "The service brake is also in the released position.",
+    "type": "definition",
+    "chapter": 8,
+    "importance": "high"
+  },
+  {
+    "code": "AIR.DEF.263",
+    "title": "The Release Bolt",
+    "description": "The release bolt is then given a quarter turn to lock it in place.",
+    "type": "definition",
+    "chapter": 8,
+    "importance": "high"
+  },
+  {
+    "code": "AIR.DEF.264",
+    "title": "The Pushrod",
+    "description": "The pushrod is then held in the applied position by the locking mechanism.",
+    "type": "definition",
+    "chapter": 8,
+    "importance": "high"
+  },
+  {
+    "code": "AIR.DEF.265",
+    "title": "The Application Pressure",
+    "description": "The application pressure is also passing through both of the two-way check valves to the tractor protection valve.",
+    "type": "definition",
+    "chapter": 8,
+    "importance": "high"
+  },
+  {
+    "code": "AIR.DEF.266",
+    "title": "That Person",
+    "description": "That person is the driver.",
+    "type": "definition",
+    "chapter": 8,
+    "importance": "high"
+  },
+  {
+    "code": "AIR.DEF.267",
+    "title": "Foundation Brake",
+    "description": "Foundation brake refers to The assembly consists of the brake parts around the wheel that are operated the mechanical parts of the by the air brake system, including the brake chamber.",
+    "type": "definition",
+    "chapter": 8,
+    "importance": "high"
+  },
+  {
+    "code": "AIR.BEST.268",
+    "title": "Always: be sure that the spring parking brakes are released before making heav",
+    "description": "Always be sure that the spring parking brakes are released before making heavy service brake applications, like during a pre-trip inspection.",
+    "type": "rule",
+    "chapter": 8,
+    "importance": "high"
+  },
+  {
+    "code": "AIR.BEST.269",
+    "title": "Always: release the spring brake chamber mounting bolts, brake shoe rollers, s",
+    "description": "Always release the spring brake chamber mounting bolts, brake shoe rollers, shoes and brake drums.",
+    "type": "rule",
+    "chapter": 8,
+    "importance": "high"
+  },
+  {
+    "code": "AIR.BEST.270",
+    "title": "Always: block the wheels when caging spring parking brakes.",
+    "description": "Always block the wheels when caging spring parking brakes.",
+    "type": "rule",
+    "chapter": 8,
+    "importance": "high"
+  },
+  {
+    "code": "AIR.BEST.271",
+    "title": "Always: block the wheels of a parked trailer so it can’t roll.",
+    "description": "Always block the wheels of a parked trailer so it can’t roll.",
+    "type": "rule",
+    "chapter": 8,
+    "importance": "high"
+  },
+  {
+    "code": "AIR.BEST.272",
+    "title": "Always: perform a tug test after coupling the tractor to the trailer.",
+    "description": "Always perform a tug test after coupling the tractor to the trailer.",
+    "type": "rule",
+    "chapter": 8,
+    "importance": "high"
+  },
+  {
+    "code": "AIR.BEST.273",
+    "title": "Always: perform a tug test Trailer with spring parking brakes — service brake ",
+    "description": "Always perform a tug test Trailer with spring parking brakes — service brake application after coupling the tractor to a trailer.",
+    "type": "rule",
+    "chapter": 8,
+    "importance": "high"
+  },
+  {
+    "code": "AIR.BEST.274",
+    "title": "Always: use the foot valve for service braking.",
+    "description": "Always use the foot valve for service braking.",
+    "type": "rule",
+    "chapter": 8,
+    "importance": "high"
+  },
+  {
+    "code": "AIR.DIST.275",
+    "title": "Distance rule: 11 km/h, or light briefly then turn off.",
+    "description": "11 km/h, or light briefly then turn off.",
+    "type": "rule",
+    "chapter": 8,
+    "importance": "high"
+  },
+  {
+    "code": "AIR.WARN.276",
+    "title": "Warning: device connected to the supply reservoir as shown, while others have t",
+    "description": "warning device connected to the supply reservoir as shown, while others have two separate connections, one located on each service reservoir.",
+    "type": "rule",
+    "chapter": 8,
+    "importance": "high"
+  },
+  {
+    "code": "AIR.WARN.277",
+    "title": "Warning: device All vehicles equipped with air brakes must have a warning devic",
+    "description": "warning device All vehicles equipped with air brakes must have a warning device to indicate if the air pressure in the system drops to a dangerous level.",
+    "type": "rule",
+    "chapter": 8,
+    "importance": "high"
+  },
+  {
+    "code": "AIR.WARN.278",
+    "title": "Warning: devices — a warning indicator light on the dashboard and a buzzer.",
+    "description": "warning devices — a warning indicator light on the dashboard and a buzzer.",
+    "type": "rule",
+    "chapter": 8,
+    "importance": "high"
+  },
+  {
+    "code": "AIR.WARN.279",
+    "title": "Warning: device must come on when air pressure drops below 60 p.",
+    "description": "warning device must come on when air pressure drops below 60 p.",
+    "type": "rule",
+    "chapter": 8,
+    "importance": "high"
+  },
+  {
+    "code": "AIR.WARN.280",
+    "title": "Warning: device is a warning light on the dashboard.",
+    "description": "warning device is a warning light on the dashboard.",
+    "type": "rule",
+    "chapter": 8,
+    "importance": "high"
+  },
+  {
+    "code": "AIR.WARN.281",
+    "title": "Warning: device warning device near the top of the windshield that must activat",
+    "description": "warning device warning device near the top of the windshield that must activate when air pressure is less than 60 p.",
+    "type": "rule",
+    "chapter": 8,
+    "importance": "high"
+  },
+  {
+    "code": "AIR.WARN.282",
+    "title": "Warning: device is known as a wig-wag.",
+    "description": "warning device is known as a wig-wag.",
+    "type": "rule",
+    "chapter": 8,
+    "importance": "high"
+  },
+  {
+    "code": "AIR.WARN.283",
+    "title": "Warning: comes on, pull over and stop.",
+    "description": "warning comes on, pull over and stop.",
+    "type": "rule",
+    "chapter": 8,
+    "importance": "high"
+  },
+  {
+    "code": "AIR.WARN.284",
+    "title": "Warning: When a low-air warning device activates, stop the came on and determin",
+    "description": "warning When a low-air warning device activates, stop the came on and determine that vehicle and find the cause of the air loss.",
+    "type": "rule",
+    "chapter": 8,
+    "importance": "high"
+  },
+  {
+    "code": "AIR.WARN.285",
+    "title": "Warning: system must activate when pressure in any reservoir falls below 60 p.",
+    "description": "warning system must activate when pressure in any reservoir falls below 60 p.",
+    "type": "rule",
+    "chapter": 8,
+    "importance": "high"
+  },
+  {
+    "code": "AIR.WARN.286",
+    "title": "Warning: will come on at pressure above 60 p.",
+    "description": "warning will come on at pressure above 60 p.",
+    "type": "rule",
+    "chapter": 8,
+    "importance": "high"
+  },
+  {
+    "code": "AIR.WARN.287",
+    "title": "Warning: system activates at any time, stop immediately and don’t proceed until",
+    "description": "warning system activates at any time, stop immediately and don’t proceed until a repair has been made.",
+    "type": "rule",
+    "chapter": 8,
+    "importance": "high"
+  },
+  {
+    "code": "AIR.WARN.288",
+    "title": "Warning: system has alerted the driver to the air loss, allowing the driver to ",
+    "description": "warning system has alerted the driver to the air loss, allowing the driver to make a controlled stop using the front axle brakes.",
+    "type": "rule",
+    "chapter": 8,
+    "importance": "high"
+  },
+  {
+    "code": "AIR.WARN.289",
+    "title": "Warning: would have alerted the driver to the problem and a glance at the reser",
+    "description": "warning would have alerted the driver to the problem and a glance at the reservoir gauges would A peace officer may place confirm that only one part of the dual air system had been lost.",
+    "type": "rule",
+    "chapter": 8,
+    "importance": "high"
+  },
+  {
+    "code": "AIR.WARN.290",
+    "title": "Warning: lamp always check to see if it’s equipped with ABS.",
+    "description": "warning lamp always check to see if it’s equipped with ABS.",
+    "type": "rule",
+    "chapter": 8,
+    "importance": "high"
+  },
+  {
+    "code": "AIR.WARN.291",
+    "title": "Warning: light may be mounted on the front left side of the trailer or on the r",
+    "description": "warning light may be mounted on the front left side of the trailer or on the rear left side of the trailer.",
+    "type": "rule",
+    "chapter": 8,
+    "importance": "high"
+  },
+  {
+    "code": "AIR.WARN.292",
+    "title": "Warning: indicator on the dashboard of the tractor.",
+    "description": "warning indicator on the dashboard of the tractor.",
+    "type": "rule",
+    "chapter": 8,
+    "importance": "high"
+  },
+  {
+    "code": "AIR.WARN.293",
+    "title": "Warning: light is positioned on the side of the trailer at the rear.",
+    "description": "warning light is positioned on the side of the trailer at the rear.",
+    "type": "rule",
+    "chapter": 8,
+    "importance": "high"
+  },
+  {
+    "code": "AIR.WARN.294",
+    "title": "Warning: indicator activates? 6.",
+    "description": "warning indicator activates? 6.",
+    "type": "rule",
+    "chapter": 8,
+    "importance": "high"
+  },
+  {
+    "code": "AIR.PRESS.295",
+    "title": "Air pressure: 100 psi the other reservoir will begin to fill.",
+    "description": "100 psi the other reservoir will begin to fill.",
+    "type": "fact",
+    "chapter": 8,
+    "importance": "high"
+  },
+  {
+    "code": "AIR.DIST.296",
+    "title": "Stopping distance: on extremely slippery surfaces, you simply have to apply and maintain ",
+    "description": "stopping distance on extremely slippery surfaces, you simply have to apply and maintain firm continuous pressure on the brake pedal.",
+    "type": "fact",
+    "chapter": 8,
+    "importance": "high"
+  },
+  {
+    "code": "AIR.WEIGHT.297",
+    "title": "Weight: 000 lbs of force driving tip applied to all of the brake components.",
+    "description": "000 lbs of force driving tip applied to all of the brake components.",
+    "type": "fact",
+    "chapter": 8,
+    "importance": "high"
+  },
+  {
+    "code": "AIR.WEIGHT.298",
+    "title": "Weight: 000 lbs for a total of 5,000 lbs.",
+    "description": "000 lbs for a total of 5,000 lbs.",
+    "type": "fact",
+    "chapter": 8,
+    "importance": "high"
+  },
+  {
+    "code": "AIR.COMP.299",
+    "title": "Compressor",
+    "description": "The compressor is mounted on the engine of the bus or truck.",
+    "type": "component",
+    "chapter": 8,
+    "importance": "high"
+  },
+  {
+    "code": "AIR.COMP.300",
+    "title": "Governor",
+    "description": "the governor must be set to allow the There needs to be a way to stop compressing air once a certain air pressure compressor to resume has been reached.",
+    "type": "component",
+    "chapter": 8,
+    "importance": "high"
+  },
+  {
+    "code": "AIR.COMP.301",
+    "title": "Reservoir",
+    "description": "The reservoir pressure gauge is mounted in the dashboard so you can monitor the status of the air brake system while driving and during a pre-trip inspection.",
+    "type": "component",
+    "chapter": 8,
+    "importance": "high"
+  },
+  {
+    "code": "AIR.COMP.302",
+    "title": "Foot Valve",
+    "description": "the foot valve treadle) applies the air brakes, just like stepping on the brake pedal applies the brakes in a car.",
+    "type": "component",
+    "chapter": 8,
+    "importance": "high"
+  },
+  {
+    "code": "AIR.COMP.303",
+    "title": "Brake Chamber",
+    "description": "the brake chamber pushrod travel.",
+    "type": "component",
+    "chapter": 8,
+    "importance": "high"
+  },
+  {
+    "code": "AIR.COMP.304",
+    "title": "Slack Adjuster",
+    "description": "the slack adjuster — it’s now at about a 90-degree angle to the pushrod.",
+    "type": "component",
+    "chapter": 8,
+    "importance": "high"
+  },
+  {
+    "code": "AIR.COMP.305",
+    "title": "S-Cam",
+    "description": "the s-cam to apply the brakes.",
+    "type": "component",
+    "chapter": 8,
+    "importance": "high"
+  },
+  {
+    "code": "AIR.COMP.306",
+    "title": "Pushrod",
+    "description": "the pushrod and slack adjuster.",
+    "type": "component",
+    "chapter": 8,
+    "importance": "high"
+  },
+  {
+    "code": "AIR.COMP.307",
+    "title": "Brake Drum",
+    "description": "The brake drum on the right is mounted on the wheel and rotates with it.",
+    "type": "component",
+    "chapter": 8,
+    "importance": "high"
+  },
+  {
+    "code": "AIR.COMP.308",
+    "title": "Relay Valve",
+    "description": "The relay valve has drawn air from Before conducting a tug test, use a flashlight to visually the trailer reservoir and delivered it to the trailer service brake chambers at check that the fifth wheel approximately the same pressure as the control signal.",
+    "type": "component",
+    "chapter": 8,
+    "importance": "high"
+  },
+  {
+    "code": "AIR.COMP.309",
+    "title": "Quick Release Valve",
+    "description": "the quick release valve comes in.",
+    "type": "component",
+    "chapter": 8,
+    "importance": "high"
+  },
+  {
+    "code": "AIR.COMP.310",
+    "title": "Air Dryer",
+    "description": "the air dryer will Most new air brake systems include an air dryer.",
+    "type": "component",
+    "chapter": 8,
+    "importance": "high"
+  },
+  {
+    "code": "AIR.COMP.311",
+    "title": "Spring Brake",
+    "description": "the spring brake chamber mounting bolts, brake shoe rollers, shoes and brake drums.",
+    "type": "component",
+    "chapter": 8,
+    "importance": "high"
+  },
+  {
+    "code": "AIR.COMP.312",
+    "title": "Parking Brake",
+    "description": "the parking brake chambers are piggy-backed onto the service brake parking brake chamber that chambers and operate the foundation brakes through the same linkage).",
+    "type": "component",
+    "chapter": 8,
+    "importance": "high"
+  },
+  {
+    "code": "AIR.COMP.313",
+    "title": "Service Brake",
+    "description": "The service brake chamber contains the normal pushrod, diaphragm beneath a certain level, and return spring.",
+    "type": "component",
+    "chapter": 8,
+    "importance": "high"
+  },
+  {
+    "code": "AIR.COMP.314",
+    "title": "Tractor Protection Valve",
+    "description": "the tractor protection valve and the trailer air supply valve act together to protect the tractor air supply from being depleted to an unsafe level if the trailer separates, causing the connecting lines to rupture.",
+    "type": "component",
+    "chapter": 8,
+    "importance": "high"
+  },
+  {
+    "code": "AIR.COMP.315",
+    "title": "Glad Hands",
+    "description": "the glad hands are disconnected, or when the driver closes the trailer supply valve that is located on the tractor dashboard.",
+    "type": "component",
+    "chapter": 8,
+    "importance": "high"
+  },
+  {
+    "code": "AIR.COMP.316",
+    "title": "Safety Valve",
+    "description": "The safety valve is sometimes the compressor.",
+    "type": "component",
+    "chapter": 8,
+    "importance": "high"
+  },
+  {
+    "code": "ADJ.REQ.317",
+    "title": "Requirement: determine that your vehicle is in safe operating condition before The ",
+    "description": "You must determine that your vehicle is in safe operating condition before The NSC sets out minimum you drive it.",
+    "type": "rule",
+    "chapter": 9,
+    "importance": "high"
+  },
+  {
+    "code": "ADJ.REQ.318",
+    "title": "Requirement: inspect the vehicle prior to driving it to: You may be fined if you fa",
+    "description": "You must inspect the vehicle prior to driving it to: You may be fined if you fail to • confirm that the equipment used in the vehicle’s operations (such as carry a trip inspection report.",
+    "type": "rule",
+    "chapter": 9,
+    "importance": "high"
+  },
+  {
+    "code": "ADJ.REQ.319",
+    "title": "Requirement: also re-inspect the cargo securement system within 80 km from the poin",
+    "description": "You must also re-inspect the cargo securement system within 80 km from the point where the cargo was loaded, and on a regular basis during the trip at the earliest of: • a change in duty status of the driver • three hours of driving, or • 240 km of driving since the last inspection.",
+    "type": "rule",
+    "chapter": 9,
+    "importance": "high"
+  },
+  {
+    "code": "ADJ.BEST.320",
+    "title": "Always: block the wheels But, brakes can still be adjusted very accurately wit",
+    "description": "Always block the wheels But, brakes can still be adjusted very accurately with the wheels on the before checking any brakes.",
+    "type": "rule",
+    "chapter": 9,
+    "importance": "high"
+  },
+  {
+    "code": "ADJ.REC.321",
+    "title": "Recommendation: also wear sturdy clothing, a hard hat and eye protection.",
+    "description": "You should also wear sturdy clothing, a hard hat and eye protection.",
+    "type": "rule",
+    "chapter": 9,
+    "importance": "high"
+  },
+  {
+    "code": "ADJ.REC.322",
+    "title": "Recommendation: adjust the brakes if gear) your measurements approach these limits.",
+    "description": "You should adjust the brakes if gear) your measurements approach these limits.",
+    "type": "rule",
+    "chapter": 9,
+    "importance": "high"
+  },
+  {
+    "code": "ADJ.LIMIT.323",
+    "title": "Within: 80 km from the point where the cargo was loaded, and on a regular basi",
+    "description": "within 80 km from the point where the cargo was loaded, and on a regular basis during the trip at the earliest of: • a change in duty status of the driver • three hours of driving, or • 240 km of driving since the last inspection.",
+    "type": "rule",
+    "chapter": 9,
+    "importance": "high"
+  },
+  {
+    "code": "ADJ.DIST.324",
+    "title": "Distance rule: 000 km, or every three months, whichever comes first.",
+    "description": "000 km, or every three months, whichever comes first.",
+    "type": "rule",
+    "chapter": 9,
+    "importance": "high"
+  },
+  {
+    "code": "ADJ.DIST.325",
+    "title": "Distance rule: 80 km from the point where the cargo was loaded, and on a regular basi",
+    "description": "80 km from the point where the cargo was loaded, and on a regular basis during the trip at the earliest of: • a change in duty status of the driver • three hours of driving, or • 240 km of driving since the last inspection.",
+    "type": "rule",
+    "chapter": 9,
+    "importance": "high"
+  },
+  {
+    "code": "ADJ.COND.326",
+    "title": "Conditional rule: you drive any of these vehicles",
+    "description": "If you drive any of these vehicles, you must complete daily written inspection and at www.",
+    "type": "rule",
+    "chapter": 9,
+    "importance": "high"
+  },
+  {
+    "code": "ADJ.WEIGHT.327",
+    "title": "Weight: 600 kg • truck or truck-tractor towing a trailer that has a licensed G",
+    "description": "600 kg • truck or truck-tractor towing a trailer that has a licensed GVW greater than 8,200 kg.",
+    "type": "fact",
+    "chapter": 9,
+    "importance": "high"
+  },
+  {
+    "code": "ADJ.SIZE.328",
+    "title": "Measurement: 45 mm), the brakes need adjustment.",
+    "description": "45 mm), the brakes need adjustment.",
+    "type": "fact",
+    "chapter": 9,
+    "importance": "high"
+  },
+  {
+    "code": "ADJ.SIZE.329",
+    "title": "Measurement: 20 mm), the brakes need • chalk or other marker, and adjustment.",
+    "description": "20 mm), the brakes need • chalk or other marker, and adjustment.",
+    "type": "fact",
+    "chapter": 9,
+    "importance": "high"
+  },
+  {
+    "code": "ADJ.SIZE.330",
+    "title": "Measurement: 20 mm) using the pry method of free stroke excessive play including: m",
+    "description": "20 mm) using the pry method of free stroke excessive play including: measurement, or • s-cam bushing wear • more than 1¾ of an inch (45 mm) using the brake application — applied • s-cam spline wear stroke measurement method.",
+    "type": "fact",
+    "chapter": 9,
+    "importance": "high"
+  },
+  {
+    "code": "ADJ.SIZE.331",
+    "title": "Measurement: 20 mm) using the pry method of free stroke automatic slack adjusters m",
+    "description": "20 mm) using the pry method of free stroke automatic slack adjusters measurement, or that you are using.",
+    "type": "fact",
+    "chapter": 9,
+    "importance": "high"
+  },
+  {
+    "code": "ADJ.SIZE.332",
+    "title": "Measurement: 50 mm) using the brake application — applied stroke They contain all t",
+    "description": "50 mm) using the brake application — applied stroke They contain all the method.",
+    "type": "fact",
+    "chapter": 9,
+    "importance": "high"
+  },
+  {
+    "code": "ADJ.COMP.333",
+    "title": "Reservoir",
+    "description": "the reservoir pressure down to between 90 and 100 p.",
+    "type": "component",
+    "chapter": 9,
+    "importance": "high"
+  },
+  {
+    "code": "ADJ.COMP.334",
+    "title": "Foot Valve",
+    "description": "the foot valve when measuring slack adjustment using the applied stroke method? 8.",
+    "type": "component",
+    "chapter": 9,
+    "importance": "high"
+  },
+  {
+    "code": "ADJ.COMP.335",
+    "title": "Brake Chamber",
+    "description": "the brake chamber has stroked more than half of its maximum, fast fact which means that this air brake chamber pushrod has excessive travel and the brakes need adjustment.",
+    "type": "component",
+    "chapter": 9,
+    "importance": "high"
+  },
+  {
+    "code": "ADJ.COMP.336",
+    "title": "Slack Adjuster",
+    "description": "the slack adjuster is pulling the pushrod out of the chamber when you turn the adjusting bolt, stop.",
+    "type": "component",
+    "chapter": 9,
+    "importance": "high"
+  },
+  {
+    "code": "ADJ.COMP.337",
+    "title": "Pushrod",
+    "description": "the pushrod stroke by applying the brakes.",
+    "type": "component",
+    "chapter": 9,
+    "importance": "high"
+  },
+  {
+    "code": "ADJ.COMP.338",
+    "title": "Brake Drum",
+    "description": "the brake drum is cool and with normal brake application pressure, the slack adjusters are easy to adjust.",
+    "type": "component",
+    "chapter": 9,
+    "importance": "high"
+  },
+  {
+    "code": "ADJ.COMP.339",
+    "title": "Parking Brake",
+    "description": "the parking brake control valve is open and the trailer supply valve is open (charged), spring brakes are off and slack adjustment can be checked.",
+    "type": "component",
+    "chapter": 9,
+    "importance": "high"
+  },
+  {
+    "code": "INSP.DEF.340",
+    "title": "This Chapter",
+    "description": "This chapter is a handy reference section that gives examples of the most common signs, signals and road markings that keep traffic organized and flowing smoothly.",
+    "type": "definition",
+    "chapter": 10,
+    "importance": "high"
+  },
+  {
+    "code": "INSP.REQ.341",
+    "title": "Requirement: demonstrate your ability to set up a slack adjuster during your pre-tr",
+    "description": "You must demonstrate your ability to set up a slack adjuster during your pre-trip inspection test.",
+    "type": "rule",
+    "chapter": 10,
+    "importance": "high"
+  },
+  {
+    "code": "INSP.REQ.342",
+    "title": "Requirement: stop the vehicle in the pullout area and inspect the vehicle’s braking",
+    "description": "You must stop the vehicle in the pullout area and inspect the vehicle’s braking system before proceeding.",
+    "type": "rule",
+    "chapter": 10,
+    "importance": "high"
+  },
+  {
+    "code": "INSP.REQ.343",
+    "title": "Requirement: check pushrod travel even if your vehicle is equipped with automatic s",
+    "description": "You must check pushrod travel even if your vehicle is equipped with automatic slack adjusters.",
+    "type": "rule",
+    "chapter": 10,
+    "importance": "high"
+  },
+  {
+    "code": "INSP.REQ.344",
+    "title": "Requirement: record cargo securement on your daily log.",
+    "description": "You must record cargo securement on your daily log.",
+    "type": "rule",
+    "chapter": 10,
+    "importance": "high"
+  },
+  {
+    "code": "INSP.REQ.345",
+    "title": "Requirement: have reflective markings to the rear and sides.",
+    "description": "are required to have reflective markings to the rear and sides.",
+    "type": "rule",
+    "chapter": 10,
+    "importance": "high"
+  },
+  {
+    "code": "INSP.REC.346",
+    "title": "Recommendation: also wear sturdy Some commercial vehicle drivers are exempt from compl",
+    "description": "You should also wear sturdy Some commercial vehicle drivers are exempt from completing written trip clothing, a hard hat and eye reports.",
+    "type": "rule",
+    "chapter": 10,
+    "importance": "high"
+  },
+  {
+    "code": "INSP.REC.347",
+    "title": "Recommendation: be able to complete your inspection within that time.",
+    "description": "You should be able to complete your inspection within that time.",
+    "type": "rule",
+    "chapter": 10,
+    "importance": "high"
+  },
+  {
+    "code": "INSP.REC.348",
+    "title": "Recommendation: walk in a counter-clockwise direction when you do the circle check, so",
+    "description": "You should walk in a counter-clockwise direction when you do the circle check, so you’re facing oncoming traffic.",
+    "type": "rule",
+    "chapter": 10,
+    "importance": "high"
+  },
+  {
+    "code": "INSP.REC.349",
+    "title": "Recommendation: be able to complete this pre-trip inspection in less than 45 minutes.",
+    "description": "You should be able to complete this pre-trip inspection in less than 45 minutes.",
+    "type": "rule",
+    "chapter": 10,
+    "importance": "high"
+  },
+  {
+    "code": "INSP.REC.350",
+    "title": "Recommendation: assume that the vehicle hasn’t been operated on the day of your test a",
+    "description": "You should assume that the vehicle hasn’t been operated on the day of your test and that a pre-trip inspection hasn’t been done.",
+    "type": "rule",
+    "chapter": 10,
+    "importance": "high"
+  },
+  {
+    "code": "INSP.REC.351",
+    "title": "Recommendation: be able to complete this pre-trip inspection in less than 30 minutes.",
+    "description": "You should be able to complete this pre-trip inspection in less than 30 minutes.",
+    "type": "rule",
+    "chapter": 10,
+    "importance": "high"
+  },
+  {
+    "code": "INSP.REC.352",
+    "title": "Recommendation: be able to complete a Class 2 pre-trip inspection in less than It is o",
+    "description": "You should be able to complete a Class 2 pre-trip inspection in less than It is often easier to spot leaks 30 minutes, or a Class 4 pre-trip inspection in less than 20 minutes.",
+    "type": "rule",
+    "chapter": 10,
+    "importance": "high"
+  },
+  {
+    "code": "INSP.REC.353",
+    "title": "Recommendation: be able to complete this pre-trip inspection in less than 15 minutes.",
+    "description": "You should be able to complete this pre-trip inspection in less than 15 minutes.",
+    "type": "rule",
+    "chapter": 10,
+    "importance": "high"
+  },
+  {
+    "code": "INSP.TIME.354",
+    "title": "Time rule: 30 minutes, or a Class 4 pre-trip inspection in less than 20 minutes.",
+    "description": "30 minutes, or a Class 4 pre-trip inspection in less than 20 minutes.",
+    "type": "rule",
+    "chapter": 10,
+    "importance": "high"
+  },
+  {
+    "code": "INSP.COND.355",
+    "title": "Conditional rule: you couple to another trailer during the day",
+    "description": "If you couple to another trailer during the day, you must obtain and carry the trip inspection report completed for that trailer that day.",
+    "type": "rule",
+    "chapter": 10,
+    "importance": "high"
+  },
+  {
+    "code": "INSP.COND.356",
+    "title": "Conditional rule: a trip inspection • tire pressure gauge to report for that trailer has",
+    "description": "If a trip inspection • tire pressure gauge to report for that trailer hasn’t been done, you must complete one.",
+    "type": "rule",
+    "chapter": 10,
+    "importance": "high"
+  },
+  {
+    "code": "INSP.COND.357",
+    "title": "Conditional rule: the truck you’re using is equipped with air brakes",
+    "description": "If the truck you’re using is equipped with air brakes, you must demonstrate your ability to set up a slack adjuster during your pre-trip inspection test.",
+    "type": "rule",
+    "chapter": 10,
+    "importance": "high"
+  },
+  {
+    "code": "INSP.COND.358",
+    "title": "Conditional rule: the bus is equipped with air brakes",
+    "description": "If the bus is equipped with air brakes, you should also refer to the Class 3 pre-trip procedures to check the air brake system.",
+    "type": "rule",
+    "chapter": 10,
+    "importance": "high"
+  },
+  {
+    "code": "INSP.COND.359",
+    "title": "Conditional rule: the bus is equipped with air brakes",
+    "description": "If the bus is equipped with air brakes, you must demonstrate your ability approach your vehicle than when you’re right beside it.",
+    "type": "rule",
+    "chapter": 10,
+    "importance": "high"
+  },
+  {
+    "code": "INSP.WARN.360",
+    "title": "Warning: • check oil pressure warning light or gauge lights Depress clutch, shi",
+    "description": "warning • check oil pressure warning light or gauge lights Depress clutch, shift transmission to neutral and start engine.",
+    "type": "rule",
+    "chapter": 10,
+    "importance": "high"
+  },
+  {
+    "code": "INSP.WARN.361",
+    "title": "Warning: lights are working properly, and that they respond properly as the eng",
+    "description": "warning lights are working properly, and that they respond properly as the engine warms up: • charge rate indicator or gauge — ensure voltmeter or ammeter works properly and the charge is good • oil pressure indicator or gauge — ensure that it indicates normal pressure soon after engine starts • coolant temperature indicator or gauge — check that indicator rises to normal operating temperature — light should go off after engine starts • fuel gauge — ensure it’s working properly — indicates sufficient fuel • instrument lights — ensure they work ❏ Windshield wipers/ • ensure wipers and washers work washers ❏ Heater/defroster • ensure heater and defroster controls work including fan, in heater and defroster positions ❏ Interior lights • ensure they work ❏ Horns (air and electric) • ensure they work ❏ Emergency equipment • warning devices — ensure they’re in working condition • fire extinguisher (if required or present) — ensure the date on the label is valid ❏ Four-way flashers • check th",
+    "type": "rule",
+    "chapter": 10,
+    "importance": "high"
+  },
+  {
+    "code": "INSP.WARN.362",
+    "title": "Warning: device(s) activate at or above 60 p.",
+    "description": "warning device(s) activate at or above 60 p.",
+    "type": "rule",
+    "chapter": 10,
+    "importance": "high"
+  },
+  {
+    "code": "INSP.WARN.363",
+    "title": "Warning: lights • check oil pressure warning light or gauge Depress clutch, shi",
+    "description": "warning lights • check oil pressure warning light or gauge Depress clutch, shift transmission to neutral and start engine.",
+    "type": "rule",
+    "chapter": 10,
+    "importance": "high"
+  },
+  {
+    "code": "INSP.WARN.364",
+    "title": "Warning: device(s) activate at or pressure.",
+    "description": "warning device(s) activate at or pressure.",
+    "type": "rule",
+    "chapter": 10,
+    "importance": "high"
+  },
+  {
+    "code": "INSP.WARN.365",
+    "title": "Warning: • check oil pressure warning light or gauge lights Start engine.",
+    "description": "warning • check oil pressure warning light or gauge lights Start engine.",
+    "type": "rule",
+    "chapter": 10,
+    "importance": "high"
+  },
+  {
+    "code": "INSP.WARN.366",
+    "title": "Warning: devices — ensure they are in equipment working condition • fire exting",
+    "description": "warning devices — ensure they are in equipment working condition • fire extinguisher — ensure the date on the label is valid • first aid kit — check that the contents are adequate ❏ Engine noises • listen for unusual sounds ❏ School bus stop sign • ensure that it works and is secure (if equipped) Shut off engine.",
+    "type": "rule",
+    "chapter": 10,
+    "importance": "high"
+  },
+  {
+    "code": "INSP.WARN.367",
+    "title": "Warning: signs – object markers – construction signs Stop Yield the right-of-wa",
+    "description": "warning signs – object markers – construction signs Stop Yield the right-of-way Shows driving – information and regulations destination signs – railway signs • Signals – lane control signals – traffic lights • Road markings – yellow lines Explains lane use School zone signs Tells about motorist are fluorescent – white lines yellow-green services – reserved lane markings – other markings Shows a permitted Shows an action that Warns of hazards action is not permitted ahead Shows distance and direction Warns of Railway crossing construction zones 233 driving commercial vehicles Regulatory signs These signs tell you about driving laws and regulations.",
+    "type": "rule",
+    "chapter": 10,
+    "importance": "high"
+  },
+  {
+    "code": "INSP.COMP.368",
+    "title": "Compressor",
+    "description": "the compressor to cut in before pressure falls below 80 p.",
+    "type": "component",
+    "chapter": 10,
+    "importance": "high"
+  },
+  {
+    "code": "INSP.COMP.369",
+    "title": "Governor",
+    "description": "the governor must cause the compressor to cut in before pressure falls below 80 p.",
+    "type": "component",
+    "chapter": 10,
+    "importance": "high"
+  },
+  {
+    "code": "INSP.COMP.370",
+    "title": "Brake Chamber",
+    "description": "the brake chamber pushrod travel? 12.",
+    "type": "component",
+    "chapter": 10,
+    "importance": "high"
+  },
+  {
+    "code": "SIGN.DEF.371",
+    "title": "If There",
+    "description": "If there is a yellow line to your left, there will be traffic coming towards you on the other side of that yellow line.",
+    "type": "definition",
+    "chapter": 11,
+    "importance": "high"
+  },
+  {
+    "code": "SIGN.DEF.372",
+    "title": "An Industrial Road",
+    "description": "An industrial road is any road that exists for the transportation of natural resources, machinery, materials or personnel.",
+    "type": "definition",
+    "chapter": 11,
+    "importance": "high"
+  },
+  {
+    "code": "SIGN.DEF.373",
+    "title": "The Form",
+    "description": "The form is available at driver licensing offices.",
+    "type": "definition",
+    "chapter": 11,
+    "importance": "high"
+  },
+  {
+    "code": "SIGN.REQ.374",
+    "title": "Requirement: follow the direction of the arrow.",
+    "description": "You must follow the direction of the arrow.",
+    "type": "rule",
+    "chapter": 11,
+    "importance": "high"
+  },
+  {
+    "code": "SIGN.REQ.375",
+    "title": "Requirement: pay attention to the warnings and obey the instructions on these signs",
+    "description": "You must pay attention to the warnings and obey the instructions on these signs.",
+    "type": "rule",
+    "chapter": 11,
+    "importance": "high"
+  },
+  {
+    "code": "SIGN.REQ.376",
+    "title": "Requirement: determine that your vehicle is in safe operating condition before you ",
+    "description": "You must determine that your vehicle is in safe operating condition before you drive it.",
+    "type": "rule",
+    "chapter": 11,
+    "importance": "high"
+  },
+  {
+    "code": "SIGN.PROH.377",
+    "title": "Do not: park here Time-limited parking Parking is not during posted times allo",
+    "description": "Do not park here Time-limited parking Parking is not during posted times allowed during posted times Parking only for vehicles displaying the disabled parking sign and carrying a person with disabilities Reserved lane signs A white diamond painted on the road surface marks reserved lanes.",
+    "type": "rule",
+    "chapter": 11,
+    "importance": "high"
+  },
+  {
+    "code": "SIGN.PROH.378",
+    "title": "Do not: drive in this lane Move out of this lane and into a Drive in this lane",
+    "description": "Do not drive in this lane Move out of this lane and into a Drive in this lane lane with a green arrow.",
+    "type": "rule",
+    "chapter": 11,
+    "importance": "high"
+  },
+  {
+    "code": "SIGN.PROH.379",
+    "title": "Illegal: drive over freshly painted, wet pavement markings.",
+    "description": "It is illegal to drive over freshly painted, wet pavement markings.",
+    "type": "rule",
+    "chapter": 11,
+    "importance": "high"
+  },
+  {
+    "code": "SIGN.DIST.380",
+    "title": "Distance rule: 30 km/h limit is in 50 km/h limit is in from 8 a.",
+    "description": "30 km/h limit is in 50 km/h limit is in from 8 a.",
+    "type": "rule",
+    "chapter": 11,
+    "importance": "high"
+  },
+  {
+    "code": "SIGN.DIST.381",
+    "title": "Distance rule: 30 km/h limit days when children is in effect from are on the roadway ",
+    "description": "30 km/h limit days when children is in effect from are on the roadway 8 a.",
+    "type": "rule",
+    "chapter": 11,
+    "importance": "high"
+  },
+  {
+    "code": "SIGN.COND.382",
+    "title": "Conditional rule: you are in a designated lane",
+    "description": "If you are in a designated lane, you must follow the direction indicated by the arrows.",
+    "type": "rule",
+    "chapter": 11,
+    "importance": "high"
+  },
+  {
+    "code": "SIGN.WARN.383",
+    "title": "Warning: signs Most warning signs are yellow and diamond-shaped.",
+    "description": "Warning signs Most warning signs are yellow and diamond-shaped.",
+    "type": "rule",
+    "chapter": 11,
+    "importance": "high"
+  },
+  {
+    "code": "SIGN.WARN.384",
+    "title": "Warning: devices for your protection.",
+    "description": "warning devices for your protection.",
+    "type": "rule",
+    "chapter": 11,
+    "importance": "high"
+  },
+  {
+    "code": "SIGN.WARN.385",
+    "title": "Warning: sign • a stop sign • a yield sign • a school sign • a lane use sign • ",
+    "description": "warning sign • a stop sign • a yield sign • a school sign • a lane use sign • a construction zone sign • a railway crossing sign? 2.",
+    "type": "rule",
+    "chapter": 11,
+    "importance": "high"
+  },
+  {
+    "code": "IND.DEF.386",
+    "title": "Dangerous Goods Training",
+    "description": "Dangerous goods training is available through some colleges, driving schools and consultants who specialize in this field.",
+    "type": "definition",
+    "chapter": 12,
+    "importance": "high"
+  },
+  {
+    "code": "IND.DEF.387",
+    "title": "Goods",
+    "description": "Goods is a division of Transport Canada that promotes public safety and monitors compliance with the Transportation of Dangerous Goods Act and Regulations.",
+    "type": "definition",
+    "chapter": 12,
+    "importance": "high"
+  },
+  {
+    "code": "IND.DEF.388",
+    "title": "Canada",
+    "description": "Canada is a federal agency.",
+    "type": "definition",
+    "chapter": 12,
+    "importance": "high"
+  },
+  {
+    "code": "IND.REQ.389",
+    "title": "Requirement: hold an appropriate driver’s licence Reporting defects to operate a li",
+    "description": "You must hold an appropriate driver’s licence Reporting defects to operate a licensed vehicle or any vehicle carrying You must always be certain that the vehicle you’re about to use is in safe anything other than natural operating condition.",
+    "type": "rule",
+    "chapter": 12,
+    "importance": "high"
+  },
+  {
+    "code": "IND.REQ.390",
+    "title": "Requirement: also secure the vehicle so that it doesn’t need air or fluid pressure ",
+    "description": "You must also secure the vehicle so that it doesn’t need air or fluid pressure to hold it in place.",
+    "type": "rule",
+    "chapter": 12,
+    "importance": "high"
+  },
+  {
+    "code": "IND.REQ.391",
+    "title": "Requirement: signal your intention to turn, stop or change course on an industrial ",
+    "description": "You must signal your intention to turn, stop or change course on an industrial road in the same way that you would on any public road.",
+    "type": "rule",
+    "chapter": 12,
+    "importance": "high"
+  },
+  {
+    "code": "IND.REQ.392",
+    "title": "Requirement: stop before you cross any railway line that intersects with a public o",
+    "description": "You must stop before you cross any railway line that intersects with a public or private road when you’re driving crew cars with passengers in them.",
+    "type": "rule",
+    "chapter": 12,
+    "importance": "high"
+  },
+  {
+    "code": "IND.REQ.393",
+    "title": "Requirement: be certain that there are no trains coming from either direction befor",
+    "description": "You must be certain that there are no trains coming from either direction before you cross.",
+    "type": "rule",
+    "chapter": 12,
+    "importance": "high"
+  },
+  {
+    "code": "IND.REQ.394",
+    "title": "Requirement: follow all the rules of the road when you travel on any public highway",
+    "description": "You must follow all the rules of the road when you travel on any public highway.",
+    "type": "rule",
+    "chapter": 12,
+    "importance": "high"
+  },
+  {
+    "code": "IND.BEST.395",
+    "title": "Always: match your speed to the condition of the roadway.",
+    "description": "Always match your speed to the condition of the roadway.",
+    "type": "rule",
+    "chapter": 12,
+    "importance": "high"
+  },
+  {
+    "code": "IND.REC.396",
+    "title": "Recommendation: drive on the right side of industrial roads as a rule.",
+    "description": "You should drive on the right side of industrial roads as a rule.",
+    "type": "rule",
+    "chapter": 12,
+    "importance": "high"
+  },
+  {
+    "code": "IND.TIME.397",
+    "title": "Time rule: 24 hours a day, 365 days a year.",
+    "description": "24 hours a day, 365 days a year.",
+    "type": "rule",
+    "chapter": 12,
+    "importance": "high"
+  },
+  {
+    "code": "IND.TIME.398",
+    "title": "Time rule: 24 hours a day: 1-888-775-8785 (province-wide) Commercial vehicle perm",
+    "description": "24 hours a day: 1-888-775-8785 (province-wide) Commercial vehicle permit line Call the Provincial Commercial Vehicle Permit Line when you need information about permits and your local scale is closed.",
+    "type": "rule",
+    "chapter": 12,
+    "importance": "high"
+  },
+  {
+    "code": "IND.COND.399",
+    "title": "Conditional rule: you plan to take an unlicensed vehicle across a public highway on a re",
+    "description": "If you plan to take an unlicensed vehicle across a public highway on a regular basis, you must have a crossing permit.",
+    "type": "rule",
+    "chapter": 12,
+    "importance": "high"
+  },
+  {
+    "code": "IND.WARN.400",
+    "title": "Warning: signals You must signal your intention to turn, stop or change course ",
+    "description": "Warning signals You must signal your intention to turn, stop or change course on an industrial road in the same way that you would on any public road.",
+    "type": "rule",
+    "chapter": 12,
+    "importance": "high"
+  },
+  {
+    "code": "IND.WARN.401",
+    "title": "Warning: • have the head loader or other responsible person direct you into the",
+    "description": "warning • have the head loader or other responsible person direct you into the area after checking that no one is in your path.",
+    "type": "rule",
+    "chapter": 12,
+    "importance": "high"
+  }
+]

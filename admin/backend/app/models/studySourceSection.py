@@ -39,7 +39,7 @@ class StudySourceSection(SQLModel, table=True):
             default="",
         description="段落",
         sa_column=Column(
-            String(64),
+            String(255),
             nullable=False,
             primary_key=False,
             index=False,

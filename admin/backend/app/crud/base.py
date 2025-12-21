@@ -19,6 +19,8 @@ QUERYABLE_FIELDS = {
   "brand": "like",
   "fsa": "like",
   "city": "like",
+  "title": "like",
+  "code": "like",
 }
 
 class BaseCRUD:

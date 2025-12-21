@@ -1,0 +1,3114 @@
+[
+  {
+    "code": "GET.MAKE_SURE_THERE",
+    "title": "Make Sure There",
+    "description": "a CVIP inspection decal and report in the vehicle, if required.",
+    "chapter": 1,
+    "importance": "high",
+    "type": "definition"
+  },
+  {
+    "code": "GET.HEAT",
+    "title": "Heat",
+    "description": "a form of energy.",
+    "chapter": 1,
+    "importance": "high",
+    "type": "definition"
+  },
+  {
+    "code": "GET.THE_HEAT",
+    "title": "The Heat",
+    "description": "absorbed and dissipated into the atmosphere, primarily through the brake drums/rotors.",
+    "chapter": 1,
+    "importance": "high",
+    "type": "definition"
+  },
+  {
+    "code": "GET.REACTION_TIME",
+    "title": "Reaction Time",
+    "description": "the time it distance.",
+    "chapter": 1,
+    "importance": "high",
+    "type": "definition"
+  },
+  {
+    "code": "GET.NOTE",
+    "title": "Note",
+    "description": "You must bring the same type of identification used to apply for your air brake endorsement (see Step 3).",
+    "chapter": 1,
+    "importance": "high",
+    "type": "definition"
+  },
+  {
+    "code": "GET.KNOWLEDGE_TESTS",
+    "title": "Knowledge tests",
+    "description": "a traffic signs test.",
+    "chapter": 1,
+    "importance": "high",
+    "type": "definition"
+  },
+  {
+    "code": "GET.BRAKES_COULD_TIME",
+    "title": "Brakes could time",
+    "description": "about 3/ of a second.",
+    "chapter": 1,
+    "importance": "high",
+    "type": "definition"
+  },
+  {
+    "code": "HEA.TOTAL_STOPPING_DISTANCE",
+    "title": "Total Stopping Distance",
+    "description": "the Driver’s perception time distance your vehicle will travel from the moment you: + reaction time • see — a hazard + brake lag time • think — decide to stop + braking time • do — place your foot on the brake pedal until you stop.",
+    "chapter": 2,
+    "importance": "high",
+    "type": "definition"
+  },
+  {
+    "code": "HEA.TRAFFIC_FLOW",
+    "title": "Traffic Flow",
+    "description": "the movement of a group of Driving faster than the flow vehicles travelling on one road.",
+    "chapter": 2,
+    "importance": "high",
+    "type": "definition"
+  },
+  {
+    "code": "HEA.STATISTICS",
+    "title": "Statistics",
+    "description": "British Columbia (2007) Stopping power required to stop a vehicle Speed unchanged — weight doubled Weight unchanged — speed doubled 10,000kg 30 km/h 10,000kg 30 km/h 20,000kg 30 km/h 10,000kg 60 km/h 2 X vehicle weight requires 2 X the stopping power 2 X vehicle speed requires 4 X the stopping power Both weight and speed doubled 20,000kg 60 km/h 2 X vehicle weight + 2 X vehicle speed requires 8 X the stopping power A typical compact car weighs about 1,000 kg.",
+    "chapter": 2,
+    "importance": "high",
+    "type": "definition"
+  },
+  {
+    "code": "BAS.DOUBLE_CLUTCHING",
+    "title": "Double-Clutching",
+    "description": "depressing the clutch pedal twice in the process of to neutral, release the clutch moving from one gear to another.",
+    "chapter": 3,
+    "importance": "high",
+    "type": "definition"
+  },
+  {
+    "code": "BAS.THE_RADIUS",
+    "title": "The Radius",
+    "description": "the distance from the centre of a circle to the edge of the circle.",
+    "chapter": 3,
+    "importance": "high",
+    "type": "definition"
+  },
+  {
+    "code": "BAS.WHEELBASE",
+    "title": "Wheelbase",
+    "description": "the distance between the front wheels and the rear wheels of a vehicle, or a combination between the front wheels and of vehicles, the greater the amount of off track.",
+    "chapter": 3,
+    "importance": "high",
+    "type": "definition"
+  },
+  {
+    "code": "BAS.INERTIA",
+    "title": "Inertia",
+    "description": "the tendency for moving objects — in this case you and your vehicle — to continue to move forward in a straight line.",
+    "chapter": 3,
+    "importance": "high",
+    "type": "definition"
+  },
+  {
+    "code": "BAS.TRACTION",
+    "title": "Traction",
+    "description": "the grip created more difficult it’ll be to keep your vehicle on the path of the curve.",
+    "chapter": 3,
+    "importance": "high",
+    "type": "definition"
+  },
+  {
+    "code": "BAS.TORQUE",
+    "title": "Torque",
+    "description": "the ability of the engine to move the vehicle.",
+    "chapter": 3,
+    "importance": "high",
+    "type": "definition"
+  },
+  {
+    "code": "BAS.ANY_VEHICLE",
+    "title": "Any Vehicle",
+    "description": "a hazard when it’s parked on the side of a road.",
+    "chapter": 3,
+    "importance": "high",
+    "type": "definition"
+  },
+  {
+    "code": "BAS.CARBON_MONOXIDE_POISONING",
+    "title": "Carbon Monoxide Poisoning",
+    "description": "an ever-present danger when you operate a motor vehicle.",
+    "chapter": 3,
+    "importance": "high",
+    "type": "definition"
+  },
+  {
+    "code": "BAS.THE_OWNER",
+    "title": "The Owner",
+    "description": "then required to pay the vehicle towing and storage fees to get their vehicle back.",
+    "chapter": 3,
+    "importance": "high",
+    "type": "definition"
+  },
+  {
+    "code": "BAS.AND_THE_ENVIRONMENT",
+    "title": "And The Environment",
+    "description": "also a consideration.",
+    "chapter": 3,
+    "importance": "high",
+    "type": "definition"
+  },
+  {
+    "code": "BAS.FUEL_EFFICIENT_DRIVING",
+    "title": "Fuel-Efficient Driving",
+    "description": "also safe driving.",
+    "chapter": 3,
+    "importance": "high",
+    "type": "definition"
+  },
+  {
+    "code": "BAS.PROFESSIONAL_DRIVERS",
+    "title": "Professional Drivers",
+    "description": "As your speed increases, the length of your danger zone increases.",
+    "chapter": 3,
+    "importance": "high",
+    "type": "definition"
+  },
+  {
+    "code": "BAS.ROAD_IN_SPRING",
+    "title": "Road in spring",
+    "description": "an attractive source of forage for Transportation statistics many wildlife species, and in fall, many animal species are on the move during the mating season.",
+    "chapter": 3,
+    "importance": "high",
+    "type": "definition"
+  },
+  {
+    "code": "BAS.HEAD_RESTRAINT",
+    "title": "Head restraint",
+    "description": "at least as high as the top of your head, and the head restraint is less than 10 cm from the back of your head, you can help prevent neck injuries.",
+    "chapter": 3,
+    "importance": "high",
+    "type": "definition"
+  },
+  {
+    "code": "FUE.BACKING_UP",
+    "title": "Backing Up",
+    "description": "always dangerous because you can’t see everything behind your vehicle.",
+    "chapter": 4,
+    "importance": "high",
+    "type": "definition"
+  },
+  {
+    "code": "SKI.AN_AGGREGATE_LOAD",
+    "title": "An Aggregate Load",
+    "description": "a collection of small articles.",
+    "chapter": 5,
+    "importance": "high",
+    "type": "definition"
+  },
+  {
+    "code": "SKI.FOR_EXAMPLE",
+    "title": "For Example",
+    "description": "If there are two tiers of bundles, each over 1.",
+    "chapter": 5,
+    "importance": "high",
+    "type": "definition"
+  },
+  {
+    "code": "SKI.WAY_YOUR_LOAD",
+    "title": "Way your load",
+    "description": "arranged will be affected by your type of vehicle and by the weight, height, width, length and nature of your cargo.",
+    "chapter": 5,
+    "importance": "high",
+    "type": "definition"
+  },
+  {
+    "code": "SKI.LOAD",
+    "title": "Load",
+    "description": "also be difficult to stop because securely blocked to prevent it from the braking distribution will be sliding forward.",
+    "chapter": 5,
+    "importance": "high",
+    "type": "definition"
+  },
+  {
+    "code": "SKI.AN_AMBULANCE",
+    "title": "An Ambulance",
+    "description": "an emergency vehicle that uses flashing red lights to get the right-of-way.",
+    "chapter": 6,
+    "importance": "high",
+    "type": "definition"
+  },
+  {
+    "code": "SKI.ON_DUTY_TIME",
+    "title": "On-Duty Time",
+    "description": "the period when you begin work or when a carrier requires you to be ready to start work.",
+    "chapter": 6,
+    "importance": "high",
+    "type": "definition"
+  },
+  {
+    "code": "SKI.OFF_DUTY_TIME",
+    "title": "Off-Duty Time",
+    "description": "any time • Off-duty time includes any time you spend in a sleeper berth in a you’re not on duty.",
+    "chapter": 6,
+    "importance": "high",
+    "type": "definition"
+  },
+  {
+    "code": "SKI.CODE_PROGRAM",
+    "title": "Code Program",
+    "description": "Regulations or check the Commercial Vehicle Safety • commercial vehicles licensed with a GVW more than 5,000 kg Enforcement website at • vehicles operating under the Passenger Transportation Act including taxis, www.",
+    "chapter": 6,
+    "importance": "high",
+    "type": "definition"
+  },
+  {
+    "code": "SKI.SAFETY_EQUIPMENT",
+    "title": "Safety equipment",
+    "description": "available and in working order? 18.",
+    "chapter": 6,
+    "importance": "high",
+    "type": "definition"
+  },
+  {
+    "code": "AIR.SLACK_ADJUSTMENT",
+    "title": "Slack Adjustment",
+    "description": "available stroke of three inches.",
+    "chapter": 8,
+    "importance": "high",
+    "type": "definition"
+  },
+  {
+    "code": "AIR.PUSHROD_TRAVEL",
+    "title": "Pushrod Travel",
+    "description": "the distance the pushrod extends from the air brake chamber when the brakes are applied.",
+    "chapter": 8,
+    "importance": "high",
+    "type": "definition"
+  },
+  {
+    "code": "AIR.LEVERAGE",
+    "title": "Leverage",
+    "description": "a form of force multiplication.",
+    "chapter": 8,
+    "importance": "high",
+    "type": "definition"
+  },
+  {
+    "code": "AIR.THIS_FORCE",
+    "title": "This Force",
+    "description": "then applied to move the lever (the slack adjuster) to apply the brakes.",
+    "chapter": 8,
+    "importance": "high",
+    "type": "definition"
+  },
+  {
+    "code": "AIR.WHEN_AIR_PRESSURE",
+    "title": "When Air Pressure",
+    "description": "applied to the brake chamber diaphragm, it causes the pushrod to move against the slack adjuster arm which rotates the s-cam to apply the brakes.",
+    "chapter": 8,
+    "importance": "high",
+    "type": "definition"
+  },
+  {
+    "code": "AIR.THE_SLACK_ADJUSTER",
+    "title": "The Slack Adjuster",
+    "description": "attached to a camshaft with an s-shaped head called an s-cam.",
+    "chapter": 8,
+    "importance": "high",
+    "type": "definition"
+  },
+  {
+    "code": "AIR.THE_COMPRESSED_AIR",
+    "title": "The Compressed Air",
+    "description": "then pumped through an air line to a supply reservoir.",
+    "chapter": 8,
+    "importance": "high",
+    "type": "definition"
+  },
+  {
+    "code": "AIR.THE_SERVICE_BRAKE",
+    "title": "The Service Brake",
+    "description": "also in the released position.",
+    "chapter": 8,
+    "importance": "high",
+    "type": "definition"
+  },
+  {
+    "code": "AIR.THE_RELEASE_BOLT",
+    "title": "The Release Bolt",
+    "description": "then given a quarter turn to lock it in place.",
+    "chapter": 8,
+    "importance": "high",
+    "type": "definition"
+  },
+  {
+    "code": "AIR.THE_PUSHROD",
+    "title": "The Pushrod",
+    "description": "then held in the applied position by the locking mechanism.",
+    "chapter": 8,
+    "importance": "high",
+    "type": "definition"
+  },
+  {
+    "code": "AIR.THE_APPLICATION_PRESSURE",
+    "title": "The Application Pressure",
+    "description": "also passing through both of the two-way check valves to the tractor protection valve.",
+    "chapter": 8,
+    "importance": "high",
+    "type": "definition"
+  },
+  {
+    "code": "AIR.FOUNDATION_BRAKE",
+    "title": "Foundation Brake",
+    "description": "The assembly consists of the brake parts around the wheel that are operated the mechanical parts of the by the air brake system, including the brake chamber.",
+    "chapter": 8,
+    "importance": "high",
+    "type": "definition"
+  },
+  {
+    "code": "AIR.WHEEL_TO_STOP",
+    "title": "Wheel to stop",
+    "description": "a lot more than the force you apply when pushing down on the brake pedal.",
+    "chapter": 8,
+    "importance": "high",
+    "type": "definition"
+  },
+  {
+    "code": "AIR.COMPRESSED_AIR",
+    "title": "Compressed air",
+    "description": "the compressor, which takes in air from the atmosphere and compresses (pressurizes) it.",
+    "chapter": 8,
+    "importance": "high",
+    "type": "definition"
+  },
+  {
+    "code": "AIR.PRIMARY_TANK",
+    "title": "Primary tank",
+    "description": "applied to the rear axle brakes and air failure.",
+    "chapter": 8,
+    "importance": "high",
+    "type": "definition"
+  },
+  {
+    "code": "AIR.SECONDARY_TANK",
+    "title": "Secondary tank",
+    "description": "applied to the front axle brakes.",
+    "chapter": 8,
+    "importance": "high",
+    "type": "definition"
+  },
+  {
+    "code": "AIR.DRIVER",
+    "title": "Driver",
+    "description": "able to make a controlled stop using only the foot valve, although maximum braking power will be reduced.",
+    "chapter": 8,
+    "importance": "high",
+    "type": "definition"
+  },
+  {
+    "code": "AIR.AIR_APPLICATION",
+    "title": "Air application",
+    "description": "added to the spring force.",
+    "chapter": 8,
+    "importance": "high",
+    "type": "definition"
+  },
+  {
+    "code": "AIR.DUAL_SYSTEM",
+    "title": "Dual system",
+    "description": "arranged, or if a spring parking brake modulator is installed, the vehicle will have adequate braking force even with a partially failed air system.",
+    "chapter": 8,
+    "importance": "high",
+    "type": "definition"
+  },
+  {
+    "code": "AIR.SECONDARY_FOOT_VALVE",
+    "title": "Secondary foot valve",
+    "description": "also passing through valve is closed.",
+    "chapter": 8,
+    "importance": "high",
+    "type": "definition"
+  },
+  {
+    "code": "AIR.APPLIED_STROKE_METHOD",
+    "title": "Applied stroke method",
+    "description": "the method used by roadside inspectors, and is also a method recommended by commercial fleet maintenance supervisors.",
+    "chapter": 9,
+    "importance": "high",
+    "type": "definition"
+  },
+  {
+    "code": "AIR.BRAKES_APPLIED",
+    "title": "Brakes applied",
+    "description": "a good indication that the brake is adjusted correctly.",
+    "chapter": 9,
+    "importance": "high",
+    "type": "definition"
+  },
+  {
+    "code": "VEH.THIS_CHAPTER",
+    "title": "This Chapter",
+    "description": "a handy reference section that gives examples of the most common signs, signals and road markings that keep traffic organized and flowing smoothly.",
+    "chapter": 10,
+    "importance": "high",
+    "type": "definition"
+  },
+  {
+    "code": "VEH.REMARKS",
+    "title": "Remarks",
+    "description": "AAddjjuusstteedd lleefftt bbrraakkee oonn rreeaarr aaxxllee vehicles with low ground RReeppllaacceedd lleefftt rreeaarr ttaaiilllliigghhtt clearance or air suspension.",
+    "chapter": 10,
+    "importance": "high",
+    "type": "definition"
+  },
+  {
+    "code": "VEH.CHECK_THE_FOLLOWING",
+    "title": "Check The Following",
+    "description": "It’s often easier to spot leaks and body damage as you ❏ Licence plate • check for licence plate and valid decal approach your vehicle than when you’re right beside it.",
+    "chapter": 10,
+    "importance": "high",
+    "type": "definition"
+  },
+  {
+    "code": "VEH.PERFORM_THESE_STEPS",
+    "title": "Perform These Steps",
+    "description": "Check brake adjustment 1.",
+    "chapter": 10,
+    "importance": "high",
+    "type": "definition"
+  },
+  {
+    "code": "SIG.IF_THERE",
+    "title": "If There",
+    "description": "a yellow line to your left, there will be traffic coming towards you on the other side of that yellow line.",
+    "chapter": 11,
+    "importance": "high",
+    "type": "definition"
+  },
+  {
+    "code": "SIG.AN_INDUSTRIAL_ROAD",
+    "title": "An Industrial Road",
+    "description": "any road that exists for the transportation of natural resources, machinery, materials or personnel.",
+    "chapter": 11,
+    "importance": "high",
+    "type": "definition"
+  },
+  {
+    "code": "SIG.THE_FORM",
+    "title": "The Form",
+    "description": "available at driver licensing offices.",
+    "chapter": 11,
+    "importance": "high",
+    "type": "definition"
+  },
+  {
+    "code": "IND.DANGEROUS_GOODS_TRAINING",
+    "title": "Dangerous Goods Training",
+    "description": "available through some colleges, driving schools and consultants who specialize in this field.",
+    "chapter": 12,
+    "importance": "high",
+    "type": "definition"
+  },
+  {
+    "code": "IND.GOODS",
+    "title": "Goods",
+    "description": "a division of Transport Canada that promotes public safety and monitors compliance with the Transportation of Dangerous Goods Act and Regulations.",
+    "chapter": 12,
+    "importance": "high",
+    "type": "definition"
+  },
+  {
+    "code": "IND.CANADA",
+    "title": "Canada",
+    "description": "a federal agency.",
+    "chapter": 12,
+    "importance": "high",
+    "type": "definition"
+  },
+  {
+    "code": "FOR.INFORMATION",
+    "title": "Information",
+    "description": "also available during regular business hours from the Provincial National Safety Code office in Victoria.",
+    "chapter": 13,
+    "importance": "high",
+    "type": "definition"
+  },
+  {
+    "code": "FOR.RECORDED_INFORMATION",
+    "title": "Recorded Information",
+    "description": "available 24 hours a day.",
+    "chapter": 13,
+    "importance": "high",
+    "type": "definition"
+  },
+  {
+    "code": "FOR.THE_ONLY_EXCEPTION",
+    "title": "The Only Exception",
+    "description": "a photocopy that is certified as a true copy by the government agency that issued it.",
+    "chapter": 13,
+    "importance": "high",
+    "type": "definition"
+  },
+  {
+    "code": "GET.RULE.PROVIDE_PROOF_THAT_H",
+    "title": "Requirement: provide proof that How to apply for a Class 1, 2, 3 or 4 driver’s you have an ac",
+    "description": "You must provide proof that How to apply for a Class 1, 2, 3 or 4 driver’s you have an acceptable licence driving record before you can get a commercial class Commercial drivers must meet a high standard.",
+    "chapter": 1,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "GET.RULE.MEET_THESE_PREREQUIS",
+    "title": "Requirement: meet these prerequisites: If you have held a B.",
+    "description": "you must meet these prerequisites: If you have held a B.",
+    "chapter": 1,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "GET.RULE.DISCLOSE_ANY_KNOWN_M",
+    "title": "Requirement: disclose any known medical conditions.",
+    "description": "you must disclose any known medical conditions.",
+    "chapter": 1,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "GET.RULE.BE_ABLE_TO_COMBINATI",
+    "title": "Requirement: be able to combination).",
+    "description": "You must be able to combination).",
+    "chapter": 1,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "GET.RULE.BRING_FOR_YOUR_ROAD",
+    "title": "Requirement: bring for your road test.",
+    "description": "you must bring for your road test.",
+    "chapter": 1,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "GET.RULE.BRING_THE_SAME_TYPE",
+    "title": "Requirement: bring the same type of identification you used to apply for your learner’s licen",
+    "description": "You must bring the same type of identification you used to apply for your learner’s licence (Step 2) and the fee for your road test.",
+    "chapter": 1,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "GET.RULE.BE_ABLE_TO_COMPLETE",
+    "title": "Requirement: be able to complete these tests without assistance.",
+    "description": "You must be able to complete these tests without assistance.",
+    "chapter": 1,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "GET.RULE.BRING_FOR_YOUR_ROAD",
+    "title": "Requirement: bring for your road test and how your vehicle must be loaded.",
+    "description": "you must bring for your road test and how your vehicle must be loaded.",
+    "chapter": 1,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "GET.RULE.DEMONSTRATE_YOUR_ABI",
+    "title": "Requirement: demonstrate your ability to: icbc.",
+    "description": "you must demonstrate your ability to: icbc.",
+    "chapter": 1,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "GET.RULE.ALSO_COMPLETE_AND_SU",
+    "title": "Requirement: also complete and submit a written trip inspection report.",
+    "description": "you must also complete and submit a written trip inspection report.",
+    "chapter": 1,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "GET.RULE.COMPLETE_A_TRIP_INSP",
+    "title": "Requirement: complete a trip inspection.",
+    "description": "you must complete a trip inspection.",
+    "chapter": 1,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "GET.RULE.BE_ABLE_TO_DEMONSTRA",
+    "title": "Requirement: be able to demonstrate these skills competently during your road test: • startin",
+    "description": "You must be able to demonstrate these skills competently during your road test: • starting and stopping • shifting gears • turning • steering fast fact • backing up If you’re taking a road test • parking in an air-brake-equipped vehicle, you must have an air • merging with highway traffic brake endorsement on your • exiting from highways driver’s licence or have taken an approved air brake course • driving in traffic and passed the knowledge test.",
+    "chapter": 1,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "GET.RULE.ALSO_BE_RE_EXAMINED",
+    "title": "Requirement: also be re-examined when asked by RoadSafetyBC.",
+    "description": "You must also be re-examined when asked by RoadSafetyBC.",
+    "chapter": 1,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "GET.RULE.VISIT_A_DRIVER_LICEN",
+    "title": "Requirement: visit a driver licensing office to apply for a new licence.",
+    "description": "you must visit a driver licensing office to apply for a new licence.",
+    "chapter": 1,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "GET.RULE.MEET_THE_REQUIREMENT",
+    "title": "Requirement: meet the requirements of the lower licence classification.",
+    "description": "you must meet the requirements of the lower licence classification.",
+    "chapter": 1,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "GET.RULE.MEET_A_HIGH_STANDARD",
+    "title": "Driver requirement: meet a high standard.",
+    "description": "drivers must meet a high standard.",
+    "chapter": 1,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "GET.RULE.COMPLETE_A_DECLARATI",
+    "title": "Requirement: complete a declaration form regarding medical conditions.",
+    "description": "required to complete a declaration form regarding medical conditions.",
+    "chapter": 1,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "GET.RULE.COMPLETE_A_VISION_SC",
+    "title": "Requirement: complete a vision screening (see below for details).",
+    "description": "required to complete a vision screening (see below for details).",
+    "chapter": 1,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "GET.RULE.MEET_A_HIGHER_VISION",
+    "title": "Requirement: meet a higher vision standard than Class 5 drivers.",
+    "description": "required to meet a higher vision standard than Class 5 drivers.",
+    "chapter": 1,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "GET.RULE.HAVE_YOUR_EYES_EXAMI",
+    "title": "Requirement: have your eyes examined by an ophthalmologist or optometrist.",
+    "description": "required to have your eyes examined by an ophthalmologist or optometrist.",
+    "chapter": 1,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "GET.RULE.OPERATE_MOST_VEHICLE",
+    "title": "Requirement: operate most vehicles equipped knowledge test after three with air-over-hydrauli",
+    "description": "required to operate most vehicles equipped knowledge test after three with air-over-hydraulic brakes.",
+    "chapter": 1,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "GET.RULE.CHECK_YOUR_YOU_LL",
+    "title": "Requirement: check your - You’ll need to present one piece of primary and one piece of second",
+    "description": "required to check your - You’ll need to present one piece of primary and one piece of secondary driving record before hiring identification (see inside of back cover) you and once a year after hiring you.",
+    "chapter": 1,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "GET.RULE.SAFELY_SECURE_LARGE",
+    "title": "Requirement: safely secure large commercial vehicles to conduct a pre-trip inspection.",
+    "description": "required to safely secure large commercial vehicles to conduct a pre-trip inspection.",
+    "chapter": 1,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "GET.RULE.YOU_APPLY_FOR_A_NEW",
+    "title": "Never: you apply for a new licence.",
+    "description": "never you apply for a new licence.",
+    "chapter": 1,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "GET.RULE.BE_DONE_BEFORE_THE_F",
+    "title": "Best practice: be done before the first run of the standards for all commercial day.",
+    "description": "always be done before the first run of the standards for all commercial day.",
+    "chapter": 1,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "GET.RULE.ALSO_ASK_HOW_YOUR_VE",
+    "title": "Recommendation: also ask how your vehicle must be loaded.",
+    "description": "You should also ask how your vehicle must be loaded.",
+    "chapter": 1,
+    "importance": "medium",
+    "type": "rule"
+  },
+  {
+    "code": "GET.RULE.ALSO_WEAR_STURDY_CLO",
+    "title": "Recommendation: also wear sturdy clothing, a hard hat, eye protection, boots, and a safety vest.",
+    "description": "You should also wear sturdy clothing, a hard hat, eye protection, boots, and a safety vest.",
+    "chapter": 1,
+    "importance": "medium",
+    "type": "rule"
+  },
+  {
+    "code": "GET.RULE.7_HOURS_IN_LENGTH_TH",
+    "title": "Minimum requirement: 7 hours in length their driver’s licence within and are available at many dr...",
+    "description": "minimum of 7 hours in length their driver’s licence within and are available at many driving schools, community colleges and other one year of passing the air sites.",
+    "chapter": 1,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "GET.RULE.19_YEARS_OLD_AND_HOL",
+    "title": "Minimum: 19 years old and hold air brake endorsement the appropriate licence for the vehi",
+    "description": "at least 19 years old and hold air brake endorsement the appropriate licence for the vehicle you’re practising on (for example, is conducted entirely in hold a Class 1 driver’s licence if you’re practising on a Class 1 tractor-trailer English.",
+    "chapter": 1,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "GET.RULE.19_YEARS_OLD_HOLD_A",
+    "title": "Minimum: 19 years old, hold a Class 1, 2 or 3 driver’s licence, and must sit beside you o",
+    "description": "at least 19 years old, hold a Class 1, 2 or 3 driver’s licence, and must sit beside you or immediately behind and to the right if there’s no seat beside the driver’s seat while you’re practising.",
+    "chapter": 1,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "GET.RULE.15_MINUTES_EARLY",
+    "title": "Minimum: 15 minutes early.",
+    "description": "at least 15 minutes early.",
+    "chapter": 1,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "GET.RULE.11_ADULTS_CLASS_3",
+    "title": "Minimum: 11 adults • Class 3 — a large tandem or tridem rear axle truck such as a moving ",
+    "description": "at least 11 adults • Class 3 — a large tandem or tridem rear axle truck such as a moving van or dump truck • Class 2 — a large bus with a seating capacity of at least 36 adults • Class 2 - a bus with a seating capacity of 25-34 adults (NOT including the driver); Restriction 51 “CL2 max 34 pass.",
+    "chapter": 1,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "GET.RULE.13_METRES_LONG_7",
+    "title": "Minimum: 13 metres long (7.",
+    "description": "at least 13 metres long (7.",
+    "chapter": 1,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "GET.RULE.HEAT_IS_A_FORM_OF_EN",
+    "title": "Stopping distance: Heat is a form of energy.",
+    "description": "stopping distance Heat is a form of energy.",
+    "chapter": 1,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "GET.RULE.ENGINE_THE_HEAT_ENE",
+    "title": "Stopping distance: engine, the heat energy produced by engine ❏ explain how to brake safely in diff",
+    "description": "stopping distance engine, the heat energy produced by engine ❏ explain how to brake safely in different situations.",
+    "chapter": 1,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "HEA.RULE.CONTROL_THE_SPEED_OF",
+    "title": "Requirement: control the speed of your vehicle so it can be stopped at any time for any emerg",
+    "description": "You must control the speed of your vehicle so it can be stopped at any time for any emergency while descending a hill.",
+    "chapter": 2,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "HEA.RULE.STOP_ANY_VEHICLE_AN",
+    "title": "Requirement: stop any vehicle, and Driving without due care and how far it will travel before",
+    "description": "required to stop any vehicle, and Driving without due care and how far it will travel before it stops.",
+    "chapter": 2,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "HEA.RULE.STOP_A_VEHICLE_SPEED",
+    "title": "Requirement: stop a vehicle Speed unchanged — weight doubled Weight unchanged — speed doubled",
+    "description": "required to stop a vehicle Speed unchanged — weight doubled Weight unchanged — speed doubled 10,000kg 30 km/h 10,000kg 30 km/h 20,000kg 30 km/h 10,000kg 60 km/h 2 X vehicle weight requires 2 X the stopping power 2 X vehicle speed requires 4 X the stopping power Both weight and speed doubled 20,000kg 60 km/h 2 X vehicle weight + 2 X vehicle speed requires 8 X the stopping power A typical compact car weighs about 1,000 kg.",
+    "chapter": 2,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "HEA.RULE.BE_LESS_DRIVING_TIP",
+    "title": "Never: be less driving tip than five seconds behind the vehicle ahead at highway speeds",
+    "description": "never be less driving tip than five seconds behind the vehicle ahead at highway speeds.",
+    "chapter": 2,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "HEA.RULE.ATTENTION_AND_UNSAFE",
+    "title": "Never: attention and unsafe speed the speed you’re travelling and/or the weight of your",
+    "description": "never attention and unsafe speed the speed you’re travelling and/or the weight of your vehicle increases: are the top two factors • 2 ✕ vehicle speed requires 4 ✕ the stopping power assigned to commercial drivers involved in police- • 2 ✕ vehicle weight requires 2 ✕ the stopping power reported casualty crashes.",
+    "chapter": 2,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "HEA.RULE.SHIFT_TO_A_HIGHER_GE",
+    "title": "Never: shift to a higher gear on a downgrade unless the speed on the grade can be contr",
+    "description": "Never shift to a higher gear on a downgrade unless the speed on the grade can be controlled with a retarding device or engine compression.",
+    "chapter": 2,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "HEA.RULE.ALL_HAVE_ABS_APPLY",
+    "title": "Do not: all have ABS, apply the brakes as if you were operating a combination without AB",
+    "description": "do not all have ABS, apply the brakes as if you were operating a combination without ABS.",
+    "chapter": 2,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "HEA.RULE.ALLOW_ENOUGH_FOLLOWI",
+    "title": "Best practice: allow enough following distance or time and choose a speed that will allow you t",
+    "description": "Always allow enough following distance or time and choose a speed that will allow you to stop safely.",
+    "chapter": 2,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "HEA.RULE.OBEY_THE_REGULATORY",
+    "title": "Best practice: obey the regulatory stop and check brakes signs.",
+    "description": "Always obey the regulatory stop and check brakes signs.",
+    "chapter": 2,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "HEA.RULE.REDUCE_YOUR_VEHICLE",
+    "title": "Best practice: reduce your vehicle’s speed before driving through large pools of water on the r",
+    "description": "Always reduce your vehicle’s speed before driving through large pools of water on the roadway.",
+    "chapter": 2,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "HEA.RULE.BE_IN_A_LOWER_GEAR_T",
+    "title": "Recommendation: be in a lower gear to go down the hill than used to climb it.",
+    "description": "You should be in a lower gear to go down the hill than used to climb it.",
+    "chapter": 2,
+    "importance": "medium",
+    "type": "rule"
+  },
+  {
+    "code": "HEA.RULE.BE_ABLE_TO_GO_DOWN_T",
+    "title": "Recommendation: be able to go down the hill without using the service brakes.",
+    "description": "you should be able to go down the hill without using the service brakes.",
+    "chapter": 2,
+    "importance": "medium",
+    "type": "rule"
+  },
+  {
+    "code": "HEA.RULE.OR_TIME_AND_CHOOSE_A",
+    "title": "Following distance: or time and choose a speed that will allow you to stop safely.",
+    "description": "following distance or time and choose a speed that will allow you to stop safely.",
+    "chapter": 2,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "HEA.RULE.AND_PLAN_FOR_GRADUAL",
+    "title": "Following distance: and plan for gradual stops.",
+    "description": "following distance and plan for gradual stops.",
+    "chapter": 2,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "HEA.RULE.CANADA_ARE_PRODUCED",
+    "title": "Following distance: Canada are produced by the road transportation sector.",
+    "description": "Following distance Canada are produced by the road transportation sector.",
+    "chapter": 2,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "HEA.RULE.USING_DIFFERENT_RULE",
+    "title": "Following distance: using different rules.",
+    "description": "following distance using different rules.",
+    "chapter": 2,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "HEA.RULE.ISN_T_ENOUGH_DROP",
+    "title": "Following distance: isn’t enough — drop back, pick a new checkpoint and count again.",
+    "description": "following distance isn’t enough — drop back, pick a new checkpoint and count again.",
+    "chapter": 2,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "HEA.RULE.ON_THE_HIGHWAY_AND_W",
+    "title": "Following distance: on the highway and when road or weather conditions are poor.",
+    "description": "following distance on the highway and when road or weather conditions are poor.",
+    "chapter": 2,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "HEA.RULE.WHEN_DRIVING_A_BUS",
+    "title": "Following distance: when driving a bus, truck or heavy vehicle.",
+    "description": "following distance when driving a bus, truck or heavy vehicle.",
+    "chapter": 2,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "HEA.RULE.AND_STOPPING_TIME_DE",
+    "title": "Stopping distance: and stopping time definition To stop a vehicle, you need to see-think-do.",
+    "description": "Stopping distance and stopping time definition To stop a vehicle, you need to see-think-do.",
+    "chapter": 2,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "HEA.RULE.IS_THE_DRIVER_S_PERC",
+    "title": "Stopping distance: is the Driver’s perception time distance your vehicle will travel from the momen",
+    "description": "stopping distance is the Driver’s perception time distance your vehicle will travel from the moment you: + reaction time • see — a hazard + brake lag time • think — decide to stop + braking time • do — place your foot on the brake pedal until you stop.",
+    "chapter": 2,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "HEA.RULE.INCLUDES_PERCEPTION",
+    "title": "Stopping distance: includes perception time, reaction time, brake lag time and braking time.",
+    "description": "stopping distance includes perception time, reaction time, brake lag time and braking time.",
+    "chapter": 2,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "HEA.RULE.THAN_A_VEHICLE_TRAVE",
+    "title": "Stopping distance: than a vehicle travelling at the same speed on a level surface because of the ef",
+    "description": "stopping distance than a vehicle travelling at the same speed on a level surface because of the effect of gravity.",
+    "chapter": 2,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "BAS.RULE.TRAVEL_IN_THE_RIGHT",
+    "title": "Requirement: travel in the right lane.",
+    "description": "you must travel in the right lane.",
+    "chapter": 3,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "BAS.RULE.BE_FAMILIAR_WITH_THE",
+    "title": "Requirement: be familiar with the amount of off track your vehicle displays.",
+    "description": "You must be familiar with the amount of off track your vehicle displays.",
+    "chapter": 3,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "BAS.RULE.CROSS_INTO_THE_ONCOM",
+    "title": "Requirement: cross into the oncoming lane to make the turn, watch out for vehicles coming tow",
+    "description": "you must cross into the oncoming lane to make the turn, watch out for vehicles coming toward you.",
+    "chapter": 3,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "BAS.RULE.BACK_UP_PLAN_AHEAD",
+    "title": "Requirement: back up, plan ahead to minimize the distance.",
+    "description": "you must back up, plan ahead to minimize the distance.",
+    "chapter": 3,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "BAS.RULE.QUICKLY_LEFT_SHOULD",
+    "title": "Requirement: quickly: left shoulder.",
+    "description": "You must quickly: left shoulder.",
+    "chapter": 3,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "BAS.RULE.YIELD_THE_RIGHT_OF",
+    "title": "Requirement: yield the right-of- look for others.",
+    "description": "You must yield the right-of- look for others.",
+    "chapter": 3,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "BAS.RULE.DRIVE_NO_FASTER_THAN",
+    "title": "Requirement: drive no faster than fast fact 70 km/h if the speed limit is 80 km/h or more, an",
+    "description": "you must drive no faster than fast fact 70 km/h if the speed limit is 80 km/h or more, and no faster than 40 km/h if the speed limit is less than 80 km/h.",
+    "chapter": 3,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "BAS.RULE.ALSO_CHANGE_LANES_TO",
+    "title": "Requirement: also change lanes to provide safe space margins if it is safe to do so.",
+    "description": "you must also change lanes to provide safe space margins if it is safe to do so.",
+    "chapter": 3,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "BAS.RULE.STOP_AND_YIELD_THE_R",
+    "title": "Requirement: stop and yield the right-of-way when pulling out of an alley.",
+    "description": "You must stop and yield the right-of-way when pulling out of an alley.",
+    "chapter": 3,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "BAS.RULE.NOT_SHIFT_GEARS_WHIL",
+    "title": "Requirement: not shift gears while crossing railroad tracks.",
+    "description": "You must not shift gears while crossing railroad tracks.",
+    "chapter": 3,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "BAS.RULE.HAVE_A_PERMIT_FROM_F",
+    "title": "Requirement: have a permit from following conditions: Commercial Vehicle Safety • red flashin",
+    "description": "You must have a permit from following conditions: Commercial Vehicle Safety • red flashing lights are used only on emergency vehicles and Enforcement before you mount amber flashing lights • blue flashing lights are used only on police vehicles on a vehicle.",
+    "chapter": 3,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "BAS.RULE.WEAR_YOUR_SEATBELT",
+    "title": "Requirement: wear your seatbelt.",
+    "description": "you must wear your seatbelt.",
+    "chapter": 3,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "BAS.RULE.ALLOW_AT_LEAST_25_CM",
+    "title": "Requirement: allow at least 25 cm (10 in) between your breastbone and the airbag unit in the ",
+    "description": "You must allow at least 25 cm (10 in) between your breastbone and the airbag unit in the steering wheel.",
+    "chapter": 3,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "BAS.RULE.MOVE_THE_VEHICLE_TH",
+    "title": "Requirement: move the vehicle, the tire should be removed and replaced.",
+    "description": "you must move the vehicle, the tire should be removed and replaced.",
+    "chapter": 3,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "BAS.RULE.BE_PROPERLY_FIRE_HAZ",
+    "title": "Requirement: be properly fire hazards associated with your vehicle or with the loads you carr",
+    "description": "You must be properly fire hazards associated with your vehicle or with the loads you carry.",
+    "chapter": 3,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "BAS.RULE.SLOW_DOWN_AND_LEAVE",
+    "title": "Driver requirement: slow down and leave plenty of room when passing stopped vehicles displaying flas",
+    "description": "Drivers must slow down and leave plenty of room when passing stopped vehicles displaying flashing lights to make highways safer for law enforcement, emergency personnel and other roadside workers.",
+    "chapter": 3,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "BAS.RULE.BE_CONSTANTLY_AWARE",
+    "title": "Driver requirement: be constantly aware of the vehicles ahead, behind and beside them.",
+    "description": "Drivers must be constantly aware of the vehicles ahead, behind and beside them.",
+    "chapter": 3,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "BAS.RULE.NOT_CROSS_THE_TRACKS",
+    "title": "Driver requirement: not cross the tracks until it’s safe.",
+    "description": "driver must not cross the tracks until it’s safe.",
+    "chapter": 3,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "BAS.RULE.USE_THE_EMERGENCY_M",
+    "title": "Driver requirement: use the emergency (mechanical) brake, which requires more time and distance to s",
+    "description": "driver must use the emergency (mechanical) brake, which requires more time and distance to stop the vehicle.",
+    "chapter": 3,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "BAS.RULE.BE_CONCERNED_WITH_TH",
+    "title": "Driver requirement: be concerned with their personal safety to protect themselves and others on the ",
+    "description": "drivers must be concerned with their personal safety to protect themselves and others on the road.",
+    "chapter": 3,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "BAS.RULE.STOP_AT_ALL_UNCONTRO",
+    "title": "Requirement: stop at all uncontrolled main railway crossings are: ahead.",
+    "description": "required to stop at all uncontrolled main railway crossings are: ahead.",
+    "chapter": 3,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "BAS.RULE.PUT_OUT_APPROVED_WAR",
+    "title": "Requirement: put out approved warning devices when they park their commercial vehicles at the",
+    "description": "required to put out approved warning devices when they park their commercial vehicles at the Recommended safety side of the road in an area that isn’t designated for parking.",
+    "chapter": 3,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "BAS.RULE.PAY_THE_VEHICLE_TOWI",
+    "title": "Requirement: pay the vehicle towing and storage fees to get their vehicle back.",
+    "description": "required to pay the vehicle towing and storage fees to get their vehicle back.",
+    "chapter": 3,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "BAS.RULE.CARRY_FIREFIGHTING_E",
+    "title": "Requirement: carry firefighting equipment.",
+    "description": "required to carry firefighting equipment.",
+    "chapter": 3,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "BAS.RULE.CARRY_FIRE_EXTINGUIS",
+    "title": "Requirement: carry fire extinguishers One fire extinguisher must be carried on: • limited pas",
+    "description": "required to carry fire extinguishers One fire extinguisher must be carried on: • limited passenger vehicles that have an authorized seating capacity of more than 10 • all public passenger vehicles • all school buses — the fire extinguishers must meet Canadian Standard Association (CSA) Standard D250.",
+    "chapter": 3,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "BAS.RULE.CARRY_FIRE_EXTINGUIS",
+    "title": "Requirement: carry fire extinguishers? 65 4 fuel-efficient driving This chapter focuses on fu",
+    "description": "required to carry fire extinguishers? 65 4 fuel-efficient driving This chapter focuses on fuel-efficient driving techniques for large diesel- powered commercial vehicles.",
+    "chapter": 3,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "BAS.RULE.YOU_TRAFFIC_PATTERN",
+    "title": "Never: you traffic pattern approach an intersection).",
+    "description": "never you traffic pattern approach an intersection).",
+    "chapter": 3,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "BAS.RULE.YOU_MAKE_A_RIGHT_TUR",
+    "title": "Never: you make a right turn.",
+    "description": "never you make a right turn.",
+    "chapter": 3,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "BAS.RULE.POSSIBLE_BACK_VIEW",
+    "title": "Never: possible, back View your vehicle into the view Side side, not the blind side.",
+    "description": "never possible, back View your vehicle into the view Side side, not the blind side.",
+    "chapter": 3,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "BAS.RULE.POSSIBLE_USE_A_GUID",
+    "title": "Never: possible, use a guide — anyone who can watch carefully and warn you of hazards.",
+    "description": "never possible, use a guide — anyone who can watch carefully and warn you of hazards.",
+    "chapter": 3,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "BAS.RULE.YOU_BACK_UP_A_VEHICL",
+    "title": "Never: you back up a vehicle without help from a guide: 1.",
+    "description": "never you back up a vehicle without help from a guide: 1.",
+    "chapter": 3,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "BAS.RULE.ASSUME_THAT_THE_OTHE",
+    "title": "Never: assume that the other driver has seen you.",
+    "description": "never assume that the other driver has seen you.",
+    "chapter": 3,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "BAS.RULE.YOU_RE_ABOUT_TO_STOP",
+    "title": "Never: you’re about to stop, change directions or change lanes.",
+    "description": "never you’re about to stop, change directions or change lanes.",
+    "chapter": 3,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "BAS.RULE.YOU_SEE_FLASHING_LIG",
+    "title": "Never: you see flashing lights and/or hear sirens, be sure to pull off to the side of t",
+    "description": "never you see flashing lights and/or hear sirens, be sure to pull off to the side of the road and stop.",
+    "chapter": 3,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "BAS.RULE.USE_A_TRAILER_HAND_R",
+    "title": "Never: use a trailer hand runaway vehicle: valve to hold an unattended unit.",
+    "description": "Never use a trailer hand runaway vehicle: valve to hold an unattended unit.",
+    "chapter": 3,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "BAS.RULE.OPERATE_A_VEHICLE_TH",
+    "title": "Never: operate a vehicle that has bald or damaged tires.",
+    "description": "Never operate a vehicle that has bald or damaged tires.",
+    "chapter": 3,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "BAS.RULE.KNOW_WHEN_YOU_ALL",
+    "title": "Never: know when you • all commercial vehicles with a load width of more than 2.",
+    "description": "never know when you • all commercial vehicles with a load width of more than 2.",
+    "chapter": 3,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "BAS.RULE.RUN_YOUR_ENGINE_IN_A",
+    "title": "Never: run your engine in a closed garage.",
+    "description": "Never run your engine in a closed garage.",
+    "chapter": 3,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "BAS.RULE.START_A_VEHICLE_WITH",
+    "title": "Never: start a vehicle with a fuel leak.",
+    "description": "Never start a vehicle with a fuel leak.",
+    "chapter": 3,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "BAS.RULE.THROW_CIGARETTE_BUTT",
+    "title": "Never: throw cigarette butts out of cab windows — they could blow back Diesel fuel is t",
+    "description": "Never throw cigarette butts out of cab windows — they could blow back Diesel fuel is toxic — don’t into tarps or loads.",
+    "chapter": 3,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "BAS.RULE.BE_USED_IN_AN_2_ENCL",
+    "title": "Never: be used in an 2 enclosed space.",
+    "description": "never be used in an 2 enclosed space.",
+    "chapter": 3,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "BAS.RULE.APPLY_FOR_CALLING_9",
+    "title": "Do not: apply for calling 9-1-1 to report an emergency.",
+    "description": "do not apply for calling 9-1-1 to report an emergency.",
+    "chapter": 3,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "BAS.RULE.DRIVE_AT_NIGHT_USING",
+    "title": "Illegal action: drive at night using only parking lights.",
+    "description": "illegal to drive at night using only parking lights.",
+    "chapter": 3,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "BAS.RULE.BE_ABLE_TO_PREVENT_A",
+    "title": "Best practice: be able to prevent a rear-end collision caused by these drivers, but if stops ar",
+    "description": "always be able to prevent a rear-end collision caused by these drivers, but if stops are gradual, the impact may be much less.",
+    "chapter": 3,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "BAS.RULE.USE_THE_RIGHT_LANE_W",
+    "title": "Best practice: use the right lane when you’re travelling more slowly than other traffic and are",
+    "description": "Always use the right lane when you’re travelling more slowly than other traffic and are going up or down a hill where a passing lane is provided.",
+    "chapter": 3,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "BAS.RULE.WATCH_FOR_SIGNS_WARN",
+    "title": "Best practice: watch for signs warning of curves and turns, and adjust your speed and approach.",
+    "description": "Always watch for signs warning of curves and turns, and adjust your speed and approach.",
+    "chapter": 3,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "BAS.RULE.USE_BOTH_HANDS_TO_ST",
+    "title": "Best practice: use both hands to steer your vehicle.",
+    "description": "Always use both hands to steer your vehicle.",
+    "chapter": 3,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "BAS.RULE.BE_DONE_WITH_EXTREME",
+    "title": "Best practice: be done with extreme caution.",
+    "description": "always be done with extreme caution.",
+    "chapter": 3,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "BAS.RULE.STAY_FAR_ENOUGH_BEHI",
+    "title": "Best practice: stay far enough behind the vehicle you’re following to allow you to make your st",
+    "description": "Always stay far enough behind the vehicle you’re following to allow you to make your stops in a smooth, gradual way, even if the vehicle ahead makes a panic stop.",
+    "chapter": 3,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "BAS.RULE.SQUEEZE_THE_THROTTLE",
+    "title": "Best practice: squeeze the throttle, rather than stabbing or jabbing at it.",
+    "description": "Always squeeze the throttle, rather than stabbing or jabbing at it.",
+    "chapter": 3,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "BAS.RULE.TURN_THE_WHEELS_TO_T",
+    "title": "Best practice: turn the wheels to the left towards the centre of the road.",
+    "description": "always turn the wheels to the left towards the centre of the road.",
+    "chapter": 3,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "BAS.RULE.TURN_THE_WHEELS_TO_T",
+    "title": "Best practice: turn the wheels to the Spring brakes are effective right towards the edge of the",
+    "description": "always turn the wheels to the Spring brakes are effective right towards the edge of the roadway.",
+    "chapter": 3,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "BAS.RULE.BE_CONDITIONS_BEYOND",
+    "title": "Best practice: be conditions beyond your control.",
+    "description": "always be conditions beyond your control.",
+    "chapter": 3,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "BAS.RULE.USE_A_TORQUE_WRENCH",
+    "title": "Best practice: use a torque wrench to tighten and check wheel nuts.",
+    "description": "Always use a torque wrench to tighten and check wheel nuts.",
+    "chapter": 3,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "BAS.RULE.CHECK_YOUR_EXHAUST_S",
+    "title": "Best practice: check your exhaust system to ensure that exhaust fumes aren’t entering the drive",
+    "description": "always check your exhaust system to ensure that exhaust fumes aren’t entering the driver’s compartment of your vehicle.",
+    "chapter": 3,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "BAS.RULE.MAKES_USE_OF_A_LAP_A",
+    "title": "Best practice: makes use of a lap and shoulder sense.",
+    "description": "always makes use of a lap and shoulder sense.",
+    "chapter": 3,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "BAS.RULE.A_GOOD_IDEA_TO_KEEP",
+    "title": "Best practice: a good idea to keep a fire extinguisher in your vehicle.",
+    "description": "always a good idea to keep a fire extinguisher in your vehicle.",
+    "chapter": 3,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "BAS.RULE.KEEP_THE_REAR_OF_YOU",
+    "title": "Recommendation: keep the rear of your vehicle close to the curb.",
+    "description": "You should keep the rear of your vehicle close to the curb.",
+    "chapter": 3,
+    "importance": "medium",
+    "type": "rule"
+  },
+  {
+    "code": "BAS.RULE.TURN_FROM_THE_RIGHT",
+    "title": "Recommendation: turn from the right-hand turn lane as this lane will better accommodate your veh",
+    "description": "you should turn from the right-hand turn lane as this lane will better accommodate your vehicle’s off tracking.",
+    "chapter": 3,
+    "importance": "medium",
+    "type": "rule"
+  },
+  {
+    "code": "BAS.RULE.DEVELOP_THE_HABIT_OF",
+    "title": "Recommendation: develop the habit of watching the traffic well ahead of your driving tip vehicle",
+    "description": "You should develop the habit of watching the traffic well ahead of your driving tip vehicle.",
+    "chapter": 3,
+    "importance": "medium",
+    "type": "rule"
+  },
+  {
+    "code": "BAS.RULE.BE_USING_UPON_YOUR_V",
+    "title": "Recommendation: be using upon your vehicle’s weight and transmission gear ratios, you may be a l",
+    "description": "you should be using upon your vehicle’s weight and transmission gear ratios, you may be a lower gear.",
+    "chapter": 3,
+    "importance": "medium",
+    "type": "rule"
+  },
+  {
+    "code": "BAS.RULE.SHIFT_TO_THE_NEXT_GE",
+    "title": "Recommendation: shift to the next gear (usually when the engine begins to accelerate quickly).",
+    "description": "you should shift to the next gear (usually when the engine begins to accelerate quickly).",
+    "chapter": 3,
+    "importance": "medium",
+    "type": "rule"
+  },
+  {
+    "code": "BAS.RULE.BLOCK_THE_WHEELS_OF",
+    "title": "Recommendation: block the wheels of any large vehicle parked on even a slight grade.",
+    "description": "You should block the wheels of any large vehicle parked on even a slight grade.",
+    "chapter": 3,
+    "importance": "medium",
+    "type": "rule"
+  },
+  {
+    "code": "BAS.RULE.30_DAYS_4_MONTHS_UP",
+    "title": "Maximum limit: 30 days 4 months Up to life Jail 0–5 years Up to 10 years – 5 years – 5 years im",
+    "description": "maximum 30 days 4 months Up to life Jail 0–5 years Up to 10 years – 5 years – 5 years imprisonment Other costs of impaired driving fast fact Besides the penalties listed above, there are other costs involved if you are If you drive while prohibited, caught riding or driving while impaired: you may face significant Money — If you’re convicted of impaired driving and you cause a crash, penalties including a stiff fine your insurance claim may be denied, including claims for damage that you and jail.",
+    "chapter": 3,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "BAS.RULE.60_M_200_FT_BETWEE",
+    "title": "Minimum: 60 m (200 ft) between your vehicle and other large commercial vehicles.",
+    "description": "at least 60 m (200 ft) between your vehicle and other large commercial vehicles.",
+    "chapter": 3,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "BAS.RULE.10_SECONDS_TO_CROSS",
+    "title": "Minimum: 10 seconds to cross — more if your vehicle requires it or if you’re crossing mor",
+    "description": "at least 10 seconds to cross — more if your vehicle requires it or if you’re crossing more than one track at a time.",
+    "chapter": 3,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "BAS.RULE.150_M_AWAY_FROM_ANY",
+    "title": "Minimum: 150 m away from any vehicle you’re approaching or following to reduce glare on t",
+    "description": "at least 150 m away from any vehicle you’re approaching or following to reduce glare on the eyes of other drivers.",
+    "chapter": 3,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "BAS.RULE.30_CM_BY_30_CM_OR_O",
+    "title": "Minimum: 30 cm by 30 cm, or Only approved warning • two warning devices that have been ap",
+    "description": "at least 30 cm by 30 cm, or Only approved warning • two warning devices that have been approved for daylight use — including devices should be used to flares, fuses and reflectors.",
+    "chapter": 3,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "BAS.RULE.25_CM_10_IN_BETWEE",
+    "title": "Minimum: 25 cm (10 in) between your breastbone and the airbag unit in the steering wheel.",
+    "description": "at least 25 cm (10 in) between your breastbone and the airbag unit in the steering wheel.",
+    "chapter": 3,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "BAS.RULE.80_KM_H_OR_MORE_AND",
+    "title": "Speed limit: 80 km/h or more, and no faster than 40 km/h if the speed limit is less than 80 k",
+    "description": "speed limit is 80 km/h or more, and no faster than 40 km/h if the speed limit is less than 80 km/h.",
+    "chapter": 3,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "BAS.RULE.WILL_HELP_GIVE_YOU_T",
+    "title": "Following distance: will help give you the time needed to react in an emergency situation.",
+    "description": "following distance will help give you the time needed to react in an emergency situation.",
+    "chapter": 3,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "BAS.RULE.BETWEEN_YOUR_VEHICLE",
+    "title": "Following distance: between your vehicle and the vehicle immediately ahead.",
+    "description": "following distance between your vehicle and the vehicle immediately ahead.",
+    "chapter": 3,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "BAS.RULE.WHEN_OPERATING_A_TAX",
+    "title": "Following distance: when operating a taxi, ambulance or a van? 2.",
+    "description": "following distance when operating a taxi, ambulance or a van? 2.",
+    "chapter": 3,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "BAS.RULE.WHEN_OPERATING_A_BUS",
+    "title": "Following distance: when operating a bus, truck or truck-tractor and semi-trailer? 3.",
+    "description": "following distance when operating a bus, truck or truck-tractor and semi-trailer? 3.",
+    "chapter": 3,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "BAS.RULE.AHEAD_AND_REDUCE_YOU",
+    "title": "Stopping distance: ahead and Reduce your danger zone by slowing down.",
+    "description": "stopping distance ahead and Reduce your danger zone by slowing down.",
+    "chapter": 3,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "FUE.RULE.STEER_CAREFULLY",
+    "title": "Requirement: steer carefully.",
+    "description": "you must steer carefully.",
+    "chapter": 4,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "FUE.RULE.REPORT_TO_A_WEIGH_SC",
+    "title": "Requirement: report to a weigh scale.",
+    "description": "required to report to a weigh scale.",
+    "chapter": 4,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "FUE.RULE.BE_LESS_THAN_FIVE_SE",
+    "title": "Never: be less than five seconds behind the vehicle ahead at highway speeds.",
+    "description": "never be less than five seconds behind the vehicle ahead at highway speeds.",
+    "chapter": 4,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "FUE.RULE.USE_THE_CLUTCH",
+    "title": "Best practice: use the clutch.",
+    "description": "Always use the clutch.",
+    "chapter": 4,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "FUE.RULE.CHECK_AS_PART_OF_A_P",
+    "title": "Recommendation: check as part of a pre-trip, enroute, or post-trip inspection that affect fuel e",
+    "description": "you should check as part of a pre-trip, enroute, or post-trip inspection that affect fuel efficiency.",
+    "chapter": 4,
+    "importance": "medium",
+    "type": "rule"
+  },
+  {
+    "code": "FUE.RULE.BE_TURNING_YOUR_STEE",
+    "title": "Recommendation: be turning your steering wheel in the same This S-shaped tracking direction as y",
+    "description": "you should be turning your steering wheel in the same This S-shaped tracking direction as your trailer is pattern is the type of path travelling.",
+    "chapter": 4,
+    "importance": "medium",
+    "type": "rule"
+  },
+  {
+    "code": "FUE.RULE.AND_ALLOW_EVEN_MORE",
+    "title": "Following distance: and allow even more time when accelerating, passing or overtaking.",
+    "description": "following distance and allow even more time when accelerating, passing or overtaking.",
+    "chapter": 4,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "SKI.RULE.ALSO_USE_CHAINS_OR_M",
+    "title": "Requirement: also use chains or metal cables to connect the towed and towing vehicles.",
+    "description": "you must also use chains or metal cables to connect the towed and towing vehicles.",
+    "chapter": 5,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "SKI.RULE.USE_A_COVER_OR_TARP",
+    "title": "Requirement: use a cover or tarp so pieces don’t escape from the vehicle.",
+    "description": "you must use a cover or tarp so pieces don’t escape from the vehicle.",
+    "chapter": 5,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "SKI.RULE.USE_A_COVER_OR_TARP",
+    "title": "Requirement: use a cover or tarp to secure your load if: • the load is made up of aggregate m",
+    "description": "You must use a cover or tarp to secure your load if: • the load is made up of aggregate material, and • the load is likely to bounce, blow or drop from the moving vehicle.",
+    "chapter": 5,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "SKI.RULE.FOLLOW_THE_STANDARD",
+    "title": "Requirement: follow the standard limits for load projections unless you have a than a two met",
+    "description": "You must follow the standard limits for load projections unless you have a than a two metre radius permit that allows you to extend your limit.",
+    "chapter": 5,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "SKI.RULE.ENSURE_ALL_SHIPPING",
+    "title": "Requirement: ensure all shipping documents are training certificate with you complete, correc",
+    "description": "you must ensure all shipping documents are training certificate with you complete, correct and readily available in the cab.",
+    "chapter": 5,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "SKI.RULE.KNOW_THE_WEIGHT_OF_Y",
+    "title": "Requirement: know the weight of your vehicle and its load to ensure your Watch for a sign tha",
+    "description": "You must know the weight of your vehicle and its load to ensure your Watch for a sign that posts vehicle doesn’t exceed load limits.",
+    "chapter": 5,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "SKI.RULE.HAVE_A_PERMIT_YOU_MA",
+    "title": "Requirement: have a permit you may be able to purchase an oversize permit.",
+    "description": "You must have a permit you may be able to purchase an oversize permit.",
+    "chapter": 5,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "SKI.RULE.PROVIDE_REGISTRAT",
+    "title": "Requirement: provide: • registration and insurance papers for both the tow vehicle and the tr",
+    "description": "you must provide: • registration and insurance papers for both the tow vehicle and the trailer(s) • specifics on the load you’ll be carrying • details about your planned route and destination • a time when you plan to move your oversized load.",
+    "chapter": 5,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "SKI.RULE.HAVE_AN_OVERSIZE_PER",
+    "title": "Requirement: have an oversize permit before operating on any highway.",
+    "description": "you must have an oversize permit before operating on any highway.",
+    "chapter": 5,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "SKI.RULE.DISPLAY_THE_APPROPRI",
+    "title": "Requirement: display the appropriate signs whenever you transport an oversize load.",
+    "description": "You must display the appropriate signs whenever you transport an oversize load.",
+    "chapter": 5,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "SKI.RULE.REPORT_TO_A_SCALE_WH",
+    "title": "Requirement: report to a scale whenever a sign, a police officer or an authorized person dire",
+    "description": "you must report to a scale whenever a sign, a police officer or an authorized person directs you to do so.",
+    "chapter": 5,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "SKI.RULE.INSPECT_THE_VEHICLE",
+    "title": "Driver requirement: inspect the vehicle, the logs and the securing devices to ensure compliance with",
+    "description": "driver must inspect the vehicle, the logs and the securing devices to ensure compliance with the Standard.",
+    "chapter": 5,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "SKI.RULE.MAKE_ADJUSTMENTS_AND",
+    "title": "Driver requirement: make adjustments and add more securing devices.",
+    "description": "driver must make adjustments and add more securing devices.",
+    "chapter": 5,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "SKI.RULE.HAVE_A_COMBINED_STEE",
+    "title": "Requirement: have a combined steering axle weight, when loaded, of at least 25 per cent of th",
+    "description": "required to have a combined steering axle weight, when loaded, of at least 25 per cent of the tridem axle weight — 40 per cent in the case of twin steering axles.",
+    "chapter": 5,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "SKI.RULE.REPORT_TO_WEIGH_SCAL",
+    "title": "Requirement: report to weigh scales? 116 skills for driving buses, taxis, 6 limousines and ri",
+    "description": "required to report to weigh scales? 116 skills for driving buses, taxis, 6 limousines and ride-hailing vehicles This chapter provides information about the skills and knowledge you need to be a bus, taxi, limousine or ride-hailing vehicle operator.",
+    "chapter": 5,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "SKI.RULE.UNLOCK_THE_PINTLE_HO",
+    "title": "Never: unlock the pintle hook with the dolly still under the rear trailer.",
+    "description": "Never unlock the pintle hook with the dolly still under the rear trailer.",
+    "chapter": 5,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "SKI.RULE.YOU_TOW_A_TRAILER_T",
+    "title": "Never: you tow a trailer, there’s a danger that the trailer will begin to swerve or whi",
+    "description": "never you tow a trailer, there’s a danger that the trailer will begin to swerve or whip (that is, move quickly and independently of the tractor, back and forth across the roadway).",
+    "chapter": 5,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "SKI.RULE.LOAD_YOUR_VEHICLE_TH",
+    "title": "Never: load your vehicle this way.",
+    "description": "Never load your vehicle this way.",
+    "chapter": 5,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "SKI.RULE.LOAD_ITEMS_ON_THE_TA",
+    "title": "Never: load items on the tailgate.",
+    "description": "Never load items on the tailgate.",
+    "chapter": 5,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "SKI.RULE.YOU_SEVERAL_TERMS_AR",
+    "title": "Never: you Several terms are used to define a vehicle’s weight.",
+    "description": "never you Several terms are used to define a vehicle’s weight.",
+    "chapter": 5,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "SKI.RULE.YOU_TRANSPORT_AN_OVE",
+    "title": "Never: you transport an oversize load.",
+    "description": "never you transport an oversize load.",
+    "chapter": 5,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "SKI.RULE.A_SIGN_A_POLICE_OFF",
+    "title": "Never: a sign, a police officer or an authorized person directs you to do so.",
+    "description": "never a sign, a police officer or an authorized person directs you to do so.",
+    "chapter": 5,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "SKI.RULE.USE_GREAT_CARE_WHEN",
+    "title": "Best practice: use great care when coupling a tractor and trailer, or it can put your Parts of ",
+    "description": "Always use great care when coupling a tractor and trailer, or it can put your Parts of a fifth wheel.",
+    "chapter": 5,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "SKI.RULE.USE_THE_CORRECT_VEHI",
+    "title": "Best practice: use the correct vehicle for the job.",
+    "description": "Always use the correct vehicle for the job.",
+    "chapter": 5,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "SKI.RULE.BLOCKED_TO_PREVENT_I",
+    "title": "Best practice: blocked to prevent it from sliding ensure you load your vehicle forward.",
+    "description": "always blocked to prevent it from sliding ensure you load your vehicle forward.",
+    "chapter": 5,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "SKI.RULE.ASSUME_LOADING_SPECI",
+    "title": "Best practice: assume loading special cargoes.",
+    "description": "Always assume loading special cargoes.",
+    "chapter": 5,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "SKI.RULE.INCREASES_THE_DANGER",
+    "title": "Best practice: increases the danger of a rollover.",
+    "description": "always increases the danger of a rollover.",
+    "chapter": 5,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "SKI.RULE.CARRY_YOUR_WHEN_TRAN",
+    "title": "Best practice: carry your When transporting these goods, you must ensure all shipping documents",
+    "description": "Always carry your When transporting these goods, you must ensure all shipping documents are training certificate with you complete, correct and readily available in the cab.",
+    "chapter": 5,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "SKI.RULE.EXTEND_BEYOND_YOUR_L",
+    "title": "Best practice: extend beyond your load, even when it’s oversize, so you can see behind your veh",
+    "description": "always extend beyond your load, even when it’s oversize, so you can see behind your vehicle.",
+    "chapter": 5,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "SKI.RULE.BE_AWARE_OF_YOUR_VEH",
+    "title": "Best practice: be aware of your vehicle’s length and the length of your load.",
+    "description": "Always be aware of your vehicle’s length and the length of your load.",
+    "chapter": 5,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "SKI.RULE.MORE_IMPORTANT_THAN",
+    "title": "Best practice: more important than meeting schedules.",
+    "description": "always more important than meeting schedules.",
+    "chapter": 5,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "SKI.RULE.BE_ABLE_TO_SEE_AN_EQ",
+    "title": "Recommendation: be able to see an equal portion of each side of the trailer in each mirror 79 dr",
+    "description": "you should be able to see an equal portion of each side of the trailer in each mirror 79 driving commercial vehicles Yes No Make sure you’re aligned with the trailer before coupling to it.",
+    "chapter": 5,
+    "importance": "medium",
+    "type": "rule"
+  },
+  {
+    "code": "SKI.RULE.BE_ABLE_TO_POSITION",
+    "title": "Recommendation: be able to position see both sides of the trailer in the exterior mirrors • ensu",
+    "description": "you should be able to position see both sides of the trailer in the exterior mirrors • ensure the road or ground surface is level and will support the trailer Yes No Make sure that the tractor and trailer are lined up before uncoupling.",
+    "chapter": 5,
+    "importance": "medium",
+    "type": "rule"
+  },
+  {
+    "code": "SKI.RULE.BE_ABLE_TO_SEE_AN_EQ",
+    "title": "Recommendation: be able to see an equal portion of each side of the trailer in each mirror drivi",
+    "description": "you should be able to see an equal portion of each side of the trailer in each mirror driving tip 3.",
+    "chapter": 5,
+    "importance": "medium",
+    "type": "rule"
+  },
+  {
+    "code": "SKI.RULE.BE_ABLE_TO_IN_YOUR_M",
+    "title": "Recommendation: be able to in your mirrors to help show how close your truck is to the position ",
+    "description": "you should be able to in your mirrors to help show how close your truck is to the position see both sides of the trailer in the exterior trailer when you return later mirrors • ensure the road or ground surface to re-couple.",
+    "chapter": 5,
+    "importance": "medium",
+    "type": "rule"
+  },
+  {
+    "code": "SKI.RULE.25_PER_CENT_OF_THE_T",
+    "title": "Minimum: 25 per cent of the tridem axle weight — 40 per cent in the case of twin steering",
+    "description": "at least 25 per cent of the tridem axle weight — 40 per cent in the case of twin steering axles.",
+    "chapter": 5,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "SKI.RULE.20_PER_CENT_OF_THE_W",
+    "title": "Minimum: 20 per cent of the weight of the cargo.",
+    "description": "at least 20 per cent of the weight of the cargo.",
+    "chapter": 5,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "SKI.RULE.50_PER_CENT_OF_THE_C",
+    "title": "Minimum: 50 per cent of the cargo weight.",
+    "description": "at least 50 per cent of the cargo weight.",
+    "chapter": 5,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "SKI.RULE.50_PER_CENT_OF_THE_T",
+    "title": "Minimum: 50 per cent of the total cargo weight uniformly distributed over the front-end s",
+    "description": "at least 50 per cent of the total cargo weight uniformly distributed over the front-end structure.",
+    "chapter": 5,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "SKI.RULE.22_MM_IN_DIAMETER",
+    "title": "Minimum: 22 mm in diameter • with properly welded gussets of adequate strength.",
+    "description": "at least 22 mm in diameter • with properly welded gussets of adequate strength.",
+    "chapter": 5,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "SKI.RULE.2_268_KG_AND_MUST_NO",
+    "title": "Minimum: 2,268 kg and must not be synthetic webbing.",
+    "description": "at least 2,268 kg and must not be synthetic webbing.",
+    "chapter": 5,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "SKI.RULE.30_CM_BY_30_CM",
+    "title": "Minimum: 30 cm by 30 cm.",
+    "description": "at least 30 cm by 30 cm.",
+    "chapter": 5,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "SKI.RULE.HAVE_A_PASSENGER_TRA",
+    "title": "Requirement: have a passenger transportation licence if you’re responsible for Act specificat",
+    "description": "You must have a passenger transportation licence if you’re responsible for Act specifications for type, a vehicle which transports passengers on a for-hire basis.",
+    "chapter": 6,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "SKI.RULE.ALSO_BE_COLOUR_AND_S",
+    "title": "Requirement: also be colour and size.",
+    "description": "You must also be colour and size.",
+    "chapter": 6,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "SKI.RULE.NOT_COLLECT_FARES_M",
+    "title": "Requirement: not collect fares, make change, take on or let off passengers.",
+    "description": "you must not collect fares, make change, take on or let off passengers.",
+    "chapter": 6,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "SKI.RULE.BE_ABLE_TO_CLEARLY_S",
+    "title": "Requirement: be able to clearly see ahead, to the right and to the left.",
+    "description": "You must be able to clearly see ahead, to the right and to the left.",
+    "chapter": 6,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "SKI.RULE.BE_ABLE_TO_MOVE_YOUR",
+    "title": "Requirement: be able to move your arms and legs at all times and be ready to reach for emerge",
+    "description": "You must be able to move your arms and legs at all times and be ready to reach for emergency equipment.",
+    "chapter": 6,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "SKI.RULE.ENSURE_THAT_THE_PERS",
+    "title": "Requirement: ensure that the person can disembark safely and in a location where they can rea",
+    "description": "you must ensure that the person can disembark safely and in a location where they can reasonably be expected to find alternate transportation.",
+    "chapter": 6,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "SKI.RULE.HAVE_A_LICENCE_OR_PE",
+    "title": "Requirement: have a licence or permit before you use a let-down or jump seat in a passenger v",
+    "description": "you must have a licence or permit before you use a let-down or jump seat in a passenger vehicle.",
+    "chapter": 6,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "SKI.RULE.ALLOW_THESE_ANIMALS",
+    "title": "Requirement: allow these animals in your vehicle with their owners.",
+    "description": "You must allow these animals in your vehicle with their owners.",
+    "chapter": 6,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "SKI.RULE.ENSURE_THAT_IT_DISPL",
+    "title": "Requirement: ensure that it displays a valid commercial vehicle inspection decal and carry th",
+    "description": "you must ensure that it displays a valid commercial vehicle inspection decal and carry the certificate in the vehicle.",
+    "chapter": 6,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "SKI.RULE.END_THE_TRIP_IF_YOUR",
+    "title": "Requirement: end the trip if your vehicle develops a problem that could endanger the safety o",
+    "description": "You must end the trip if your vehicle develops a problem that could endanger the safety or comfort of any of your passengers.",
+    "chapter": 6,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "SKI.RULE.MAKE_IMMEDIATE_ARRAN",
+    "title": "Requirement: make immediate arrangements to have your passengers transported to their destina",
+    "description": "You must make immediate arrangements to have your passengers transported to their destination with as little delay as possible if a crash or breakdown makes it impossible for you to continue.",
+    "chapter": 6,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "SKI.RULE.ENSURE_IT_S_LOADED_S",
+    "title": "Requirement: ensure it’s loaded safely.",
+    "description": "You must ensure it’s loaded safely.",
+    "chapter": 6,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "SKI.RULE.REPORT_ANY_DEFECT_OR",
+    "title": "Requirement: report any defect or deficiency that could make your vehicle unsafe.",
+    "description": "You must report any defect or deficiency that could make your vehicle unsafe.",
+    "chapter": 6,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "SKI.RULE.ALSO_NOTIFY_COMMERCI",
+    "title": "Requirement: also notify Commercial Vehicle Safety and Enforcement about the change in vehicl",
+    "description": "You must also notify Commercial Vehicle Safety and Enforcement about the change in vehicles as soon as possible.",
+    "chapter": 6,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "SKI.RULE.THINK_ABOUT_THE_C",
+    "title": "Requirement: think about: • the condition and use of the highway • the amount of traffic that",
+    "description": "you must think about: • the condition and use of the highway • the amount of traffic that’s on, or is expected to be on, the highway • the seriousness of the emergency you’re responding to.",
+    "chapter": 6,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "SKI.RULE.TAKE_A_BREAK_LIST",
+    "title": "Requirement: take a break ❏ list the minimum requirements for filling in a logbook ❏ describe",
+    "description": "you must take a break ❏ list the minimum requirements for filling in a logbook ❏ describe the hours of service requirements in other jurisdictions.",
+    "chapter": 6,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "SKI.RULE.HAVE_REST_PERIODS_AN",
+    "title": "Driver requirement: have rest periods and the records drivers must keep to track their hours of work",
+    "description": "drivers must have rest periods and the records drivers must keep to track their hours of work and rest.",
+    "chapter": 6,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "SKI.RULE.TAKE_A_MINIMUM_OF_10",
+    "title": "Driver requirement: take a minimum of 10 hours off duty every day.",
+    "description": "drivers must take a minimum of 10 hours off duty every day.",
+    "chapter": 6,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "SKI.RULE.TAKE_24_CONSECUTIVE",
+    "title": "Driver requirement: take 24 consecutive hours off duty every 14 days.",
+    "description": "drivers must take 24 consecutive hours off duty every 14 days.",
+    "chapter": 6,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "SKI.RULE.ENSURE_IT_S_SAFE_BEF",
+    "title": "Requirement: ensure it’s safe before you when pulling away from the move from the side of the",
+    "description": "required to ensure it’s safe before you when pulling away from the move from the side of the road into traffic.",
+    "chapter": 6,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "SKI.RULE.STOP_THEIR_VEHICLES",
+    "title": "Requirement: stop their vehicles when a school bus displays flashing red lights.",
+    "description": "required to stop their vehicles when a school bus displays flashing red lights.",
+    "chapter": 6,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "SKI.RULE.CARRY_IN_A_COMMERCIA",
+    "title": "Requirement: carry in a commercial passenger vehicle with a seating capacity of more than 12 ",
+    "description": "required to carry in a commercial passenger vehicle with a seating capacity of more than 12 occupants, including the driver? 17.",
+    "chapter": 6,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "SKI.RULE.WASH_THE_FLOOR_OF_TH",
+    "title": "Requirement: wash the floor of the vehicle with water containing a disinfectant solution? 27.",
+    "description": "required to wash the floor of the vehicle with water containing a disinfectant solution? 27.",
+    "chapter": 6,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "SKI.RULE.IT_S_SAFE_PULL_YOUR",
+    "title": "Never: it’s safe, pull your vehicle off the travel portion of the highway while your pa",
+    "description": "never it’s safe, pull your vehicle off the travel portion of the highway while your passengers are getting on or off.",
+    "chapter": 6,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "SKI.RULE.TRANSPORT_PASSENGERS",
+    "title": "Never: transport passengers on a school bus that’s defective in any way.",
+    "description": "Never transport passengers on a school bus that’s defective in any way.",
+    "chapter": 6,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "SKI.RULE.YOUR_PASSENGERS_ARE",
+    "title": "Never: your passengers are crossing the road before they enter or after they leave your",
+    "description": "never your passengers are crossing the road before they enter or after they leave your bus.",
+    "chapter": 6,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "SKI.RULE.YOU_EXCEED_THE_SPEED",
+    "title": "Never: you exceed the speed limits or drive through stop signals, you must think about:",
+    "description": "never you exceed the speed limits or drive through stop signals, you must think about: • the condition and use of the highway • the amount of traffic that’s on, or is expected to be on, the highway • the seriousness of the emergency you’re responding to.",
+    "chapter": 6,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "SKI.RULE.YOU_DRIVE_OR_WHEN_YO",
+    "title": "Never: you drive or when you’re: • inspecting, servicing, repairing, conditioning or st",
+    "description": "never you drive or when you’re: • inspecting, servicing, repairing, conditioning or starting a commercial vehicle • travelling as one of two drivers when you’re not resting in the sleeper berth • participating in the loading or unloading of a commercial vehicle • inspecting or checking the load • waiting for the vehicle or load to be checked at a customs office, weigh scale or by a peace officer fast fact • waiting along the route because of a crash or other unanticipated event On-duty time doesn’t • travelling as a passenger to a destination where you’ll start driving — this include time spent on a ferry, qualifies as on-duty time when two conditions apply: unless you’re working (for 1.",
+    "chapter": 6,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "SKI.RULE.SMOKE_IN_ANY_MOTOR_V",
+    "title": "Illegal action: smoke in any motor vehicle when there are any passengers under 16 years old.",
+    "description": "illegal to smoke in any motor vehicle when there are any passengers under 16 years old.",
+    "chapter": 6,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "SKI.RULE.ASK_BEFORE_GIVING_HE",
+    "title": "Best practice: ask before giving help • remember that every person’s unique and people’s needs ",
+    "description": "always ask before giving help • remember that every person’s unique and people’s needs and abilities will vary greatly • be patient, flexible and creative in the way you communicate.",
+    "chapter": 6,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "SKI.RULE.LEAVE_AT_LEAST_THREE",
+    "title": "Recommendation: leave at least three metres (10 ft) so traffic can pass.",
+    "description": "you should leave at least three metres (10 ft) so traffic can pass.",
+    "chapter": 6,
+    "importance": "medium",
+    "type": "rule"
+  },
+  {
+    "code": "SKI.RULE.ALSO_SAVE_ANY_UNNECE",
+    "title": "Recommendation: also save any unnecessary conversation with your passengers until you’ve stopped",
+    "description": "You should also save any unnecessary conversation with your passengers until you’ve stopped your vehicle.",
+    "chapter": 6,
+    "importance": "medium",
+    "type": "rule"
+  },
+  {
+    "code": "SKI.RULE.13_HOURS_IN_A_DAY",
+    "title": "Maximum limit: 13 hours in a day.",
+    "description": "maximum of 13 hours in a day.",
+    "chapter": 6,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "SKI.RULE.10_HOURS_OFF_DUTY_EV",
+    "title": "Minimum requirement: 10 hours off duty every day.",
+    "description": "minimum of 10 hours off duty every day.",
+    "chapter": 6,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "SKI.RULE.10_HOURS_OF_OFF_DUTY",
+    "title": "Minimum requirement: 10 hours of off-duty time must be taken every day.",
+    "description": "minimum of 10 hours of off-duty time must be taken every day.",
+    "chapter": 6,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "SKI.RULE.85_METRES_285_FT_I",
+    "title": "Minimum: 85 metres (285 ft) in front and behind • leave space to the left of your vehicle",
+    "description": "at least 85 metres (285 ft) in front and behind • leave space to the left of your vehicle so that traffic may pass by — you should leave at least three metres (10 ft) so traffic can pass.",
+    "chapter": 6,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "SKI.RULE.20_CM_HIGH_AND_BE_BL",
+    "title": "Minimum: 20 cm high and be black on a yellow background.",
+    "description": "at least 20 cm high and be black on a yellow background.",
+    "chapter": 6,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "SKI.RULE.60_METRES_IN_EITHER",
+    "title": "Minimum: 60 metres in either direction • passengers enter or leave your school bus from t",
+    "description": "at least 60 metres in either direction • passengers enter or leave your school bus from the right side only.",
+    "chapter": 6,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "HOU.RULE.KEEP_TRACK_OF_YOUR_T",
+    "title": "Requirement: keep track of your time using one of two cycles.",
+    "description": "You must keep track of your time using one of two cycles.",
+    "chapter": 7,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "HOU.RULE.RESET_A_TIME_BY_TA",
+    "title": "Requirement: “reset” a time by taking: cycle to change the start time.",
+    "description": "You must “reset” a time by taking: cycle to change the start time.",
+    "chapter": 7,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "HOU.RULE.KEEP_IN_YOUR_POSSESS",
+    "title": "Requirement: keep in your possession: • a daily log that’s updated to your last change in dut",
+    "description": "You must keep in your possession: • a daily log that’s updated to your last change in duty status • copies of your daily log for your cycle — that is, the previous seven- or 14-day cycle you’re using • any supporting documents you’ve been issued during your trip.",
+    "chapter": 7,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "HOU.RULE.SUBMIT_YOUR_LOGBOOK",
+    "title": "Requirement: submit your logbook and all supporting documents to your carrier within 20 days.",
+    "description": "You must submit your logbook and all supporting documents to your carrier within 20 days.",
+    "chapter": 7,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "HOU.RULE.PRESENT_YOUR_LOGBOOK",
+    "title": "Requirement: present your logbook and any supporting documents when asked.",
+    "description": "You must present your logbook and any supporting documents when asked.",
+    "chapter": 7,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "HOU.RULE.TAKE_24_CONSECUTIVE",
+    "title": "Requirement: take 24 consecutive hours of off duty prior to accumulating 80 hours of on-duty ",
+    "description": "you must take 24 consecutive hours of off duty prior to accumulating 80 hours of on-duty time.",
+    "chapter": 7,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "HOU.RULE.KEEP_LOGBOOKS_IF",
+    "title": "Requirement: keep logbooks if: • you operate a commercial vehicle within a radius of 160 km o",
+    "description": "required to keep logbooks if: • you operate a commercial vehicle within a radius of 160 km of the home terminal • you return to the home terminal each day to begin a minimum of eight consecutive hours of off-duty time • you’re not driving under a permit issued under these regulations, and • you maintain accurate and legible records for each day that: • include each duty status • state driving and on-duty time separately • indicate the cycle you’re using • note if any off-duty time is deferred and indicate if it’s ‘Day 1’ or ‘Day 2’ • record the odometer readings if you use the vehicle for personal use and • keep the records for a minimum of six months.",
+    "chapter": 7,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "HOU.RULE.75_KM_A_DAY_FOR_PERS",
+    "title": "Maximum limit: 75 km a day for personal use • the odometer readings are recorded, and • you’re ",
+    "description": "maximum of 75 km a day for personal use • the odometer readings are recorded, and • you’re not subject to an out-of-service declaration.",
+    "chapter": 7,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "HOU.RULE.15_HOURS_YOU_MAY_N",
+    "title": "Maximum limit: 15 hours • you may not drive after 18 hours of on duty • must take at least eigh",
+    "description": "maximum of 15 hours • you may not drive after 18 hours of on duty • must take at least eight consecutive hours of off duty after driving for 15 hours or 18 hours of on-duty time • drivers may choose one of two cycles: - Cycle 1 — 80 hours of on-duty time in seven days - Cycle 2 — 120 hours of on-duty time in 14 days, and you must take 24 consecutive hours of off duty prior to accumulating 80 hours of on-duty time.",
+    "chapter": 7,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "HOU.RULE.24_CONSECUTIVE_HOURS",
+    "title": "Minimum: 24 consecutive hours off duty prior to accumulating 70 hours of on-duty time.",
+    "description": "at least 24 consecutive hours off duty prior to accumulating 70 hours of on-duty time.",
+    "chapter": 7,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "HOU.RULE.34_CONSECUTIVE_HOURS",
+    "title": "Minimum: 34 consecutive hours off duty • you will have to participate in a drug and alcoh",
+    "description": "at least 34 consecutive hours off duty • you will have to participate in a drug and alcohol testing program administered by your employer.",
+    "chapter": 7,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "AIR.RULE.CAUSED_BY_AN_AIR_SYS",
+    "title": "Never: caused by an air system failure.",
+    "description": "never caused by an air system failure.",
+    "chapter": 8,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "AIR.RULE.USE_THE_HAND_VALVE_F",
+    "title": "Do not: use the hand valve for parking.",
+    "description": "DO NOT use the hand valve for parking.",
+    "chapter": 8,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "AIR.RULE.TO_A_SERVICE_DEPOT_F",
+    "title": "Do not: to a service depot for repairs.",
+    "description": "do not to a service depot for repairs.",
+    "chapter": 8,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "AIR.RULE.BE_SURE_THAT_THE_SPR",
+    "title": "Best practice: be sure that the spring parking brakes are released before making heavy service ",
+    "description": "Always be sure that the spring parking brakes are released before making heavy service brake applications, like during a pre-trip inspection.",
+    "chapter": 8,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "AIR.RULE.RELEASE_THE_SPRING_B",
+    "title": "Best practice: release the spring brake chamber mounting bolts, brake shoe rollers, shoes and b",
+    "description": "Always release the spring brake chamber mounting bolts, brake shoe rollers, shoes and brake drums.",
+    "chapter": 8,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "AIR.RULE.BLOCK_THE_WHEELS_WHE",
+    "title": "Best practice: block the wheels when caging spring parking brakes.",
+    "description": "Always block the wheels when caging spring parking brakes.",
+    "chapter": 8,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "AIR.RULE.BLOCK_THE_WHEELS_OF",
+    "title": "Best practice: block the wheels of a parked trailer so it can’t roll.",
+    "description": "Always block the wheels of a parked trailer so it can’t roll.",
+    "chapter": 8,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "AIR.RULE.PERFORM_A_TUG_TEST_A",
+    "title": "Best practice: perform a tug test after coupling the tractor to the trailer.",
+    "description": "Always perform a tug test after coupling the tractor to the trailer.",
+    "chapter": 8,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "AIR.RULE.PERFORM_A_TUG_TEST_T",
+    "title": "Best practice: perform a tug test Trailer with spring parking brakes — service brake applicatio",
+    "description": "Always perform a tug test Trailer with spring parking brakes — service brake application after coupling the tractor to a trailer.",
+    "chapter": 8,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "AIR.RULE.USE_THE_FOOT_VALVE_F",
+    "title": "Best practice: use the foot valve for service braking.",
+    "description": "Always use the foot valve for service braking.",
+    "chapter": 8,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "AIR.RULE.CHECK_TO_SEE_IF_IT_S",
+    "title": "Best practice: check to see if it’s equipped with ABS.",
+    "description": "always check to see if it’s equipped with ABS.",
+    "chapter": 8,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "AIR.RULE.CRAWL_UNDERNEATH_YOU",
+    "title": "Best practice: crawl underneath your vehicle to measure air brake chamber pushrod travel, but t",
+    "description": "always crawl underneath your vehicle to measure air brake chamber pushrod travel, but there are devices available to help you visually check for brake adjustment.",
+    "chapter": 8,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "AIR.RULE.ON_EXTREMELY_SLIPPER",
+    "title": "Stopping distance: on extremely slippery surfaces, you simply have to apply and maintain firm conti",
+    "description": "stopping distance on extremely slippery surfaces, you simply have to apply and maintain firm continuous pressure on the brake pedal.",
+    "chapter": 8,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "AIR.RULE.ADJUST_THE_BRAKES_IF",
+    "title": "Requirement: adjust the brakes if While checking air brakes pushrod travel is: look for other",
+    "description": "you must adjust the brakes if While checking air brakes pushrod travel is: look for other brake component wear and • more than ¾ of an inch (20 mm) using the pry method of free stroke excessive play including: measurement, or • s-cam bushing wear • more than 1¾ of an inch (45 mm) using the brake application — applied • s-cam spline wear stroke measurement method.",
+    "chapter": 9,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "AIR.RULE.DETERMINE_THAT_YOUR",
+    "title": "Requirement: determine that your vehicle is in safe operating condition before The NSC sets o",
+    "description": "You must determine that your vehicle is in safe operating condition before The NSC sets out minimum you drive it.",
+    "chapter": 9,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "AIR.RULE.COMPLETE_DAILY_WRITT",
+    "title": "Requirement: complete daily written inspection and at www.",
+    "description": "you must complete daily written inspection and at www.",
+    "chapter": 9,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "AIR.RULE.INSPECT_THE_VEHICLE",
+    "title": "Requirement: inspect the vehicle prior to driving it to: You may be fined if you fail to • co",
+    "description": "You must inspect the vehicle prior to driving it to: You may be fined if you fail to • confirm that the equipment used in the vehicle’s operations (such as carry a trip inspection report.",
+    "chapter": 9,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "AIR.RULE.ALSO_RE_INSPECT_THE",
+    "title": "Requirement: also re-inspect the cargo securement system within 80 km from the point where th",
+    "description": "You must also re-inspect the cargo securement system within 80 km from the point where the cargo was loaded, and on a regular basis during the trip at the earliest of: • a change in duty status of the driver • three hours of driving, or • 240 km of driving since the last inspection.",
+    "chapter": 9,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "AIR.RULE.CONDUCT_A_PRE_TRIP_I",
+    "title": "Requirement: conduct a pre-trip inspection as part of your road test.",
+    "description": "required to conduct a pre-trip inspection as part of your road test.",
+    "chapter": 9,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "AIR.RULE.CONDUCT_A_PRE_TRIP_I",
+    "title": "Requirement: conduct a pre-trip inspection of the vehicle’s air brake system.",
+    "description": "required to conduct a pre-trip inspection of the vehicle’s air brake system.",
+    "chapter": 9,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "AIR.RULE.DEMONSTRATE_YOUR_ABI",
+    "title": "Requirement: demonstrate your ability to adjust a brake for proper pushrod travel.",
+    "description": "required to demonstrate your ability to adjust a brake for proper pushrod travel.",
+    "chapter": 9,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "AIR.RULE.RECORD_CARGO_SECUREM",
+    "title": "Requirement: record cargo securement inspections on your daily logs.",
+    "description": "required to record cargo securement inspections on your daily logs.",
+    "chapter": 9,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "AIR.RULE.MOVE_IN_OR_OUT_WHILE",
+    "title": "Never: move in or out while turning the adjusting bolt.",
+    "description": "never move in or out while turning the adjusting bolt.",
+    "chapter": 9,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "AIR.RULE.RETROFIT_MANUAL_SLAC",
+    "title": "Illegal action: retrofit manual slack adjusters on a vehicle manufactured with automatic slack a",
+    "description": "illegal to retrofit manual slack adjusters on a vehicle manufactured with automatic slack adjusters.",
+    "chapter": 9,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "AIR.RULE.BLOCK_THE_WHEELS_BUT",
+    "title": "Best practice: block the wheels But, brakes can still be adjusted very accurately with the whee",
+    "description": "Always block the wheels But, brakes can still be adjusted very accurately with the wheels on the before checking any brakes.",
+    "chapter": 9,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "AIR.RULE.ALSO_WEAR_STURDY_CLO",
+    "title": "Recommendation: also wear sturdy clothing, a hard hat and eye protection.",
+    "description": "You should also wear sturdy clothing, a hard hat and eye protection.",
+    "chapter": 9,
+    "importance": "medium",
+    "type": "rule"
+  },
+  {
+    "code": "AIR.RULE.ADJUST_THE_BRAKES_IF",
+    "title": "Recommendation: adjust the brakes if gear) your measurements approach these limits.",
+    "description": "You should adjust the brakes if gear) your measurements approach these limits.",
+    "chapter": 9,
+    "importance": "medium",
+    "type": "rule"
+  },
+  {
+    "code": "AIR.RULE.DO_WHEN_PREPARING_TO",
+    "title": "Recommendation: do when preparing to measure slack adjustment? 7.",
+    "description": "you should do when preparing to measure slack adjustment? 7.",
+    "chapter": 9,
+    "importance": "medium",
+    "type": "rule"
+  },
+  {
+    "code": "VEH.RULE.OBTAIN_AND_CARRY_THE",
+    "title": "Requirement: obtain and carry the trip inspection report completed for that trailer that day.",
+    "description": "you must obtain and carry the trip inspection report completed for that trailer that day.",
+    "chapter": 10,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "VEH.RULE.STATE_ON_THE_FORM_TH",
+    "title": "Requirement: state on the form that either the defect has been corrected or that free stroke ",
+    "description": "you must state on the form that either the defect has been corrected or that free stroke no correction is necessary.",
+    "chapter": 10,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "VEH.RULE.DEMONSTRATE_YOUR_ABI",
+    "title": "Requirement: demonstrate your ability to set up a slack adjuster during your pre-trip inspect",
+    "description": "You must demonstrate your ability to set up a slack adjuster during your pre-trip inspection test.",
+    "chapter": 10,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "VEH.RULE.DEMONSTRATE_YOUR_ABI",
+    "title": "Requirement: demonstrate your ability approach your vehicle than when you’re right beside it.",
+    "description": "you must demonstrate your ability approach your vehicle than when you’re right beside it.",
+    "chapter": 10,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "VEH.RULE.KNOW_HOW_TO_PERFORM",
+    "title": "Requirement: know how to perform these inspections properly, and do them frequently.",
+    "description": "you must know how to perform these inspections properly, and do them frequently.",
+    "chapter": 10,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "VEH.RULE.STOP_THE_VEHICLE_IN",
+    "title": "Requirement: stop the vehicle in the pullout area and inspect the vehicle’s braking system be",
+    "description": "You must stop the vehicle in the pullout area and inspect the vehicle’s braking system before proceeding.",
+    "chapter": 10,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "VEH.RULE.CHECK_PUSHROD_TRAVEL",
+    "title": "Requirement: check pushrod travel even if your vehicle is equipped with automatic slack adjus",
+    "description": "You must check pushrod travel even if your vehicle is equipped with automatic slack adjusters.",
+    "chapter": 10,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "VEH.RULE.RECORD_CARGO_SECUREM",
+    "title": "Requirement: record cargo securement on your daily log.",
+    "description": "You must record cargo securement on your daily log.",
+    "chapter": 10,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "VEH.RULE.INSPECT_THE_COMMERCI",
+    "title": "Requirement: inspect the commercial vehicle you’ve been driving and complete a trip inspectio",
+    "description": "you must inspect the commercial vehicle you’ve been driving and complete a trip inspection report.",
+    "chapter": 10,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "VEH.RULE.AGREE_ABOUT_WHICH_I",
+    "title": "Driver requirement: agree about which, if any, defects are to be • a wrench to adjust air reported a",
+    "description": "drivers must agree about which, if any, defects are to be • a wrench to adjust air reported and how these defects are to be reported (for example, have they brakes been repaired or whether they need immediate repair).",
+    "chapter": 10,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "VEH.RULE.SIGN_LEAKAGE_AND_BUI",
+    "title": "Driver requirement: sign leakage and buildup time.",
+    "description": "drivers must sign leakage and buildup time.",
+    "chapter": 10,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "VEH.RULE.SIGN_THE_TRIP_INSPEC",
+    "title": "Requirement: sign the trip inspection report, provided there’s no to check for free stroke di",
+    "description": "required to sign the trip inspection report, provided there’s no to check for free stroke disagreement.",
+    "chapter": 10,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "VEH.RULE.DRAIN_THE_SUPPLY_RES",
+    "title": "Requirement: drain the supply reservoir).",
+    "description": "required to drain the supply reservoir).",
+    "chapter": 10,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "VEH.RULE.HAVE_REFLECTIVE_MARK",
+    "title": "Requirement: have reflective markings to the rear and sides.",
+    "description": "required to have reflective markings to the rear and sides.",
+    "chapter": 10,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "VEH.RULE.COMPLETE_A_TRIP_INSP",
+    "title": "Requirement: complete a trip inspection report? 2.",
+    "description": "required to complete a trip inspection report? 2.",
+    "chapter": 10,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "VEH.RULE.SIGN_A_TRIP_INSPECTI",
+    "title": "Requirement: sign a trip inspection report? 3.",
+    "description": "required to sign a trip inspection report? 3.",
+    "chapter": 10,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "VEH.RULE.COMPLETE_A_PRE_HILL",
+    "title": "Requirement: complete a pre-hill inspection? 4.",
+    "description": "required to complete a pre-hill inspection? 4.",
+    "chapter": 10,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "VEH.RULE.INSPECT_YOUR_VEHICLE",
+    "title": "Requirement: inspect your vehicle during a trip? 5.",
+    "description": "required to inspect your vehicle during a trip? 5.",
+    "chapter": 10,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "VEH.RULE.POSSIBLE_HAVE_AN_AS",
+    "title": "Never: possible, have an assistant check the brake lights for you.",
+    "description": "never possible, have an assistant check the brake lights for you.",
+    "chapter": 10,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "VEH.RULE.FOLLOW_THE_INSTRUCTI",
+    "title": "Do not: follow the instructions on these signs may receive penalties.",
+    "description": "do not follow the instructions on these signs may receive penalties.",
+    "chapter": 10,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "VEH.RULE.NECESSARY_THAT_DRIVE",
+    "title": "Best practice: necessary that drivers of large trucks stop and check their brakes if a sign req",
+    "description": "always necessary that drivers of large trucks stop and check their brakes if a sign requiring drivers to stop and check their brakes is posted? 8.",
+    "chapter": 10,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "VEH.RULE.ALSO_WEAR_STURDY_SOM",
+    "title": "Recommendation: also wear sturdy Some commercial vehicle drivers are exempt from completing writ",
+    "description": "You should also wear sturdy Some commercial vehicle drivers are exempt from completing written trip clothing, a hard hat and eye reports.",
+    "chapter": 10,
+    "importance": "medium",
+    "type": "rule"
+  },
+  {
+    "code": "VEH.RULE.BE_ABLE_TO_COMPLETE",
+    "title": "Recommendation: be able to complete your inspection within that time.",
+    "description": "You should be able to complete your inspection within that time.",
+    "chapter": 10,
+    "importance": "medium",
+    "type": "rule"
+  },
+  {
+    "code": "VEH.RULE.GET_IN_THE_HABIT_OF",
+    "title": "Recommendation: get in the habit of conducting it in the same order every time to avoid missing ",
+    "description": "you should get in the habit of conducting it in the same order every time to avoid missing items.",
+    "chapter": 10,
+    "importance": "medium",
+    "type": "rule"
+  },
+  {
+    "code": "VEH.RULE.WALK_IN_A_COUNTER_CL",
+    "title": "Recommendation: walk in a counter-clockwise direction when you do the circle check, so you’re fa",
+    "description": "You should walk in a counter-clockwise direction when you do the circle check, so you’re facing oncoming traffic.",
+    "chapter": 10,
+    "importance": "medium",
+    "type": "rule"
+  },
+  {
+    "code": "VEH.RULE.BE_ABLE_TO_COMPLETE",
+    "title": "Recommendation: be able to complete this pre-trip inspection in less than 45 minutes.",
+    "description": "You should be able to complete this pre-trip inspection in less than 45 minutes.",
+    "chapter": 10,
+    "importance": "medium",
+    "type": "rule"
+  },
+  {
+    "code": "VEH.RULE.ASSUME_THAT_THE_VEHI",
+    "title": "Recommendation: assume that the vehicle hasn’t been operated on the day of your test and that a ",
+    "description": "You should assume that the vehicle hasn’t been operated on the day of your test and that a pre-trip inspection hasn’t been done.",
+    "chapter": 10,
+    "importance": "medium",
+    "type": "rule"
+  },
+  {
+    "code": "VEH.RULE.BE_ABLE_TO_COMPLETE",
+    "title": "Recommendation: be able to complete this pre-trip inspection in less than 30 minutes.",
+    "description": "You should be able to complete this pre-trip inspection in less than 30 minutes.",
+    "chapter": 10,
+    "importance": "medium",
+    "type": "rule"
+  },
+  {
+    "code": "VEH.RULE.ALSO_REFER_TO_THE_CL",
+    "title": "Recommendation: also refer to the Class 3 pre-trip procedures to check the air brake system.",
+    "description": "you should also refer to the Class 3 pre-trip procedures to check the air brake system.",
+    "chapter": 10,
+    "importance": "medium",
+    "type": "rule"
+  },
+  {
+    "code": "VEH.RULE.BE_ABLE_TO_COMPLETE",
+    "title": "Recommendation: be able to complete a Class 2 pre-trip inspection in less than It is often easie",
+    "description": "You should be able to complete a Class 2 pre-trip inspection in less than It is often easier to spot leaks 30 minutes, or a Class 4 pre-trip inspection in less than 20 minutes.",
+    "chapter": 10,
+    "importance": "medium",
+    "type": "rule"
+  },
+  {
+    "code": "VEH.RULE.BE_ABLE_TO_COMPLETE",
+    "title": "Recommendation: be able to complete this pre-trip inspection in less than 15 minutes.",
+    "description": "You should be able to complete this pre-trip inspection in less than 15 minutes.",
+    "chapter": 10,
+    "importance": "medium",
+    "type": "rule"
+  },
+  {
+    "code": "SIG.RULE.FOLLOW_THE_DIRECTION",
+    "title": "Requirement: follow the direction indicated by the arrows.",
+    "description": "you must follow the direction indicated by the arrows.",
+    "chapter": 11,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "SIG.RULE.FOLLOW_THE_DIRECTION",
+    "title": "Requirement: follow the direction of the arrow.",
+    "description": "You must follow the direction of the arrow.",
+    "chapter": 11,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "SIG.RULE.PAY_ATTENTION_TO_THE",
+    "title": "Requirement: pay attention to the warnings and obey the instructions on these signs.",
+    "description": "You must pay attention to the warnings and obey the instructions on these signs.",
+    "chapter": 11,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "SIG.RULE.ALWAYS_YIELD_TO_TRAI",
+    "title": "Requirement: always yield to trains.",
+    "description": "you must always yield to trains.",
+    "chapter": 11,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "SIG.RULE.DETERMINE_THAT_YOUR",
+    "title": "Requirement: determine that your vehicle is in safe operating condition before you drive it.",
+    "description": "You must determine that your vehicle is in safe operating condition before you drive it.",
+    "chapter": 11,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "SIG.RULE.PARK_HERE_TIME_LIMIT",
+    "title": "Do not: park here Time-limited parking Parking is not during posted times allowed during",
+    "description": "Do not park here Time-limited parking Parking is not during posted times allowed during posted times Parking only for vehicles displaying the disabled parking sign and carrying a person with disabilities Reserved lane signs A white diamond painted on the road surface marks reserved lanes.",
+    "chapter": 11,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "SIG.RULE.DRIVE_IN_THIS_LANE_M",
+    "title": "Do not: drive in this lane Move out of this lane and into a Drive in this lane lane with",
+    "description": "Do not drive in this lane Move out of this lane and into a Drive in this lane lane with a green arrow.",
+    "chapter": 11,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "SIG.RULE.CHANGE_LANES_BROKEN",
+    "title": "Do not: change lanes Broken line — lane changing Stop line — stop before this is allowed",
+    "description": "do not change lanes Broken line — lane changing Stop line — stop before this is allowed when safe line Pedestrian crosswalk — stop for Pedestrian crosswalk — stop for Pedestrian-activated pedestrians in the crosswalk pedestrians in the crosswalk crosswalk with illuminating lights in pavement — stop for pedestrians in the crosswalk 243 driving commercial vehicles Reserved lane markings These markings set off lanes for HOVs, buses and bicycles.",
+    "chapter": 11,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "SIG.RULE.DRIVE_ON_OR_OVER_244",
+    "title": "Do not: drive on or over 244 chapter 11 — signs, signals and road markings Review questi",
+    "description": "do not drive on or over 244 chapter 11 — signs, signals and road markings Review questions 1.",
+    "chapter": 11,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "SIG.RULE.DRIVE_OVER_FRESHLY_P",
+    "title": "Illegal action: drive over freshly painted, wet pavement markings.",
+    "description": "illegal to drive over freshly painted, wet pavement markings.",
+    "chapter": 11,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "SIG.RULE.YIELD_TO_TRAINS",
+    "title": "Best practice: yield to trains.",
+    "description": "always yield to trains.",
+    "chapter": 11,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "IND.RULE.HOLD_AN_APPROPRIATE",
+    "title": "Requirement: hold an appropriate driver’s licence Reporting defects to operate a licensed veh",
+    "description": "You must hold an appropriate driver’s licence Reporting defects to operate a licensed vehicle or any vehicle carrying You must always be certain that the vehicle you’re about to use is in safe anything other than natural operating condition.",
+    "chapter": 12,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "IND.RULE.HAVE_AUTHORITY",
+    "title": "Requirement: have authority.",
+    "description": "You must have authority.",
+    "chapter": 12,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "IND.RULE.SET_THE_MECHANICAL_B",
+    "title": "Requirement: set the mechanical brake.",
+    "description": "you must set the mechanical brake.",
+    "chapter": 12,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "IND.RULE.ALSO_SECURE_THE_VEHI",
+    "title": "Requirement: also secure the vehicle so that it doesn’t need air or fluid pressure to hold it",
+    "description": "You must also secure the vehicle so that it doesn’t need air or fluid pressure to hold it in place.",
+    "chapter": 12,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "IND.RULE.SIGNAL_YOUR_INTENTIO",
+    "title": "Requirement: signal your intention to turn, stop or change course on an industrial road in th",
+    "description": "You must signal your intention to turn, stop or change course on an industrial road in the same way that you would on any public road.",
+    "chapter": 12,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "IND.RULE.STOP_BEFORE_YOU_CROS",
+    "title": "Requirement: stop before you cross any railway line that intersects with a public or private ",
+    "description": "You must stop before you cross any railway line that intersects with a public or private road when you’re driving crew cars with passengers in them.",
+    "chapter": 12,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "IND.RULE.BE_CERTAIN_THAT_THER",
+    "title": "Requirement: be certain that there are no trains coming from either direction before you cros",
+    "description": "You must be certain that there are no trains coming from either direction before you cross.",
+    "chapter": 12,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "IND.RULE.FOLLOW_ALL_THE_RULES",
+    "title": "Requirement: follow all the rules of the road when you travel on any public highway.",
+    "description": "You must follow all the rules of the road when you travel on any public highway.",
+    "chapter": 12,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "IND.RULE.HAVE_A_CROSSING_PERM",
+    "title": "Requirement: have a crossing permit.",
+    "description": "you must have a crossing permit.",
+    "chapter": 12,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "IND.RULE.ALSO_NOTIFY_YOUR",
+    "title": "Requirement: also notify: • your employer • the owner of your vehicle • the consignor or owne",
+    "description": "you must also notify: • your employer • the owner of your vehicle • the consignor or owner of the goods.",
+    "chapter": 12,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "IND.RULE.NOTIFY_THESE_PEOPLE",
+    "title": "Requirement: notify these people and agencies any time you’re in control of dangerous goods a",
+    "description": "required to notify these people and agencies any time you’re in control of dangerous goods and there is a spill or other type of dangerous occurrence: • Provincial Emergency Program (PEP) Coordination Centre: 1-800-663-3456, or • local police.",
+    "chapter": 12,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "IND.RULE.THERE_S_A_DANGEROUS",
+    "title": "Never: there’s a dangerous goods incident.",
+    "description": "never there’s a dangerous goods incident.",
+    "chapter": 12,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "IND.RULE.BE_CERTAIN_THAT_THE",
+    "title": "Best practice: be certain that the vehicle you’re about to use is in safe anything other than n",
+    "description": "always be certain that the vehicle you’re about to use is in safe anything other than natural operating condition.",
+    "chapter": 12,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "IND.RULE.MATCH_YOUR_SPEED_TO",
+    "title": "Best practice: match your speed to the condition of the roadway.",
+    "description": "Always match your speed to the condition of the roadway.",
+    "chapter": 12,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "IND.RULE.DRIVE_ON_THE_RIGHT_S",
+    "title": "Recommendation: drive on the right side of industrial roads as a rule.",
+    "description": "You should drive on the right side of industrial roads as a rule.",
+    "chapter": 12,
+    "importance": "medium",
+    "type": "rule"
+  },
+  {
+    "code": "FOR.RULE.HAVE_A_VISA_MASTERC",
+    "title": "Requirement: have a Visa, MasterCard or American Express.",
+    "description": "you must have a Visa, MasterCard or American Express.",
+    "chapter": 13,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "FOR.RULE.YOU_CHANGE_LANES_OR",
+    "title": "Never: you change lanes or direction.",
+    "description": "never you change lanes or direction.",
+    "chapter": 13,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "FOR.RULE.QUALIFY_ON_THE_KNOWL",
+    "title": "Do not: qualify on the knowledge test you will need to wait seven days before another at",
+    "description": "do not qualify on the knowledge test you will need to wait seven days before another attempt can be made.",
+    "chapter": 13,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "FOR.RULE.HAVE_ANY_OF_THE_REQU",
+    "title": "Do not: have any of the required primary identification documents, please contact Citize",
+    "description": "do not have any of the required primary identification documents, please contact Citizenship and Immigration Canada at 1-888-242-2100.",
+    "chapter": 13,
+    "importance": "high",
+    "type": "rule"
+  }
+]

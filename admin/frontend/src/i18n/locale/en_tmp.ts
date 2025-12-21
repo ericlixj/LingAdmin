@@ -1,12 +1,12 @@
 #paste this code to frjonted/src/i18n_zh.ts
 
 ...
-    studySource: {
+    studyKnowledgeNode: {
         titles: {
-            list: "权威来源  List",
-            create: "Create 权威来源 ",
-            edit: "Edit 权威来源 ",
-            show: "权威来源  Details",
+            list: "知识点 List",
+            create: "Create 知识点",
+            edit: "Edit 知识点",
+            show: "知识点 Details",
         },
     },
 ...

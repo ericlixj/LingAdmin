@@ -57,6 +57,22 @@ export const StudyKnowledgeNodeList = () => {
         <Table.Column
           dataIndex="title"
           title="标题"
+          filterDropdown={(props) => (
+            <FilterDropdown {...props}>
+              <Input
+                placeholder="搜索标题"
+                value={(props.selectedKeys[0] as string) || ""}
+                onChange={(e) =>
+                  props.setSelectedKeys(e.target.value ? [e.target.value] : [])
+                }
+                onPressEnter={() => props.confirm()}
+                onBlur={() => props.confirm()}
+              />
+            </FilterDropdown>
+          )}
+          filteredValue={
+            (filters.find((f) => f.field === "title")?.value as any[]) || null
+          }
 
           render={(value) => {
             return value;

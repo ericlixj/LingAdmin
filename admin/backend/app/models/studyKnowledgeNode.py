@@ -35,7 +35,7 @@ class StudyKnowledgeNode(SQLModel, table=True):
             index=True,
             unique=True,server_default=text("''"),        )
     )
-    title:        Optional[str] = Field(
+    title:        str = Field(
             default="",
         description="标题",
         sa_column=Column(
@@ -92,9 +92,9 @@ class StudyKnowledgeNode(SQLModel, table=True):
 
 class StudyKnowledgeNodeCreate(SQLModel):
     code: str
+    title: str
     importance: str
     exam_id: Optional[int] = None
-    title: Optional[str] = None
     description: Optional[str] = None
     creator: Optional[str] = Field(default=None, max_length=64)
     dept_id: Optional[int] = None

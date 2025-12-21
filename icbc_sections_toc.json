@@ -1,0 +1,2954 @@
+[
+  {
+    "id": 1,
+    "chapter": "Chapter 1",
+    "section": "Getting your driver's licence",
+    "page_start": 20,
+    "page_end": 20,
+    "level": 1,
+    "content": ""
+  },
+  {
+    "id": 2,
+    "chapter": "Chapter 1",
+    "section": "What you'll learn",
+    "page_start": 20,
+    "page_end": 20,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 3,
+    "chapter": "Chapter 1",
+    "section": "Licence classes",
+    "page_start": 20,
+    "page_end": 20,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 4,
+    "chapter": "Chapter 1",
+    "section": "Medical fitness",
+    "page_start": 22,
+    "page_end": 22,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 5,
+    "chapter": "Chapter 1",
+    "section": "Vision",
+    "page_start": 22,
+    "page_end": 22,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 6,
+    "chapter": "Chapter 1",
+    "section": "Air brake endorsement",
+    "page_start": 22,
+    "page_end": 22,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 7,
+    "chapter": "Chapter 1",
+    "section": "How to apply for an air brake endorsement",
+    "page_start": 22,
+    "page_end": 22,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 8,
+    "chapter": "Chapter 1",
+    "section": "How to apply for a Class 1, 2, 3 or 4 driver's licence",
+    "page_start": 23,
+    "page_end": 23,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 9,
+    "chapter": "Chapter 1",
+    "section": "How to apply for a heavy trailer endorsement",
+    "page_start": 24,
+    "page_end": 24,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 10,
+    "chapter": "Chapter 1",
+    "section": "Knowledge tests",
+    "page_start": 25,
+    "page_end": 25,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 11,
+    "chapter": "Chapter 1",
+    "section": "Road testing",
+    "page_start": 25,
+    "page_end": 25,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 12,
+    "chapter": "Chapter 1",
+    "section": "Pre-trip inspection test",
+    "page_start": 26,
+    "page_end": 26,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 13,
+    "chapter": "Chapter 1",
+    "section": "Road test",
+    "page_start": 27,
+    "page_end": 27,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 14,
+    "chapter": "Chapter 1",
+    "section": "Road test vehicles",
+    "page_start": 27,
+    "page_end": 27,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 15,
+    "chapter": "Chapter 1",
+    "section": "Strategies to ensure your vehicle is safe",
+    "page_start": 28,
+    "page_end": 28,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 16,
+    "chapter": "Chapter 1",
+    "section": "Retest",
+    "page_start": 29,
+    "page_end": 29,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 17,
+    "chapter": "Chapter 1",
+    "section": "Commercial driver training",
+    "page_start": 29,
+    "page_end": 29,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 18,
+    "chapter": "Chapter 1",
+    "section": "Air brake courses",
+    "page_start": 30,
+    "page_end": 30,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 19,
+    "chapter": "Chapter 1",
+    "section": "Keeping your licence",
+    "page_start": 30,
+    "page_end": 30,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 20,
+    "chapter": "Chapter 1",
+    "section": "Review questions",
+    "page_start": 31,
+    "page_end": 31,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 21,
+    "chapter": "Chapter 2",
+    "section": "Heavy vehicle braking",
+    "page_start": 32,
+    "page_end": 32,
+    "level": 1,
+    "content": ""
+  },
+  {
+    "id": 22,
+    "chapter": "Chapter 2",
+    "section": "What you'll learn",
+    "page_start": 32,
+    "page_end": 32,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 23,
+    "chapter": "Chapter 2",
+    "section": "Heat and friction",
+    "page_start": 32,
+    "page_end": 32,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 24,
+    "chapter": "Chapter 2",
+    "section": "Stopping distance",
+    "page_start": 33,
+    "page_end": 33,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 25,
+    "chapter": "Chapter 2",
+    "section": "Total stopping distance",
+    "page_start": 34,
+    "page_end": 34,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 26,
+    "chapter": "Chapter 2",
+    "section": "Perception time",
+    "page_start": 34,
+    "page_end": 34,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 27,
+    "chapter": "Chapter 2",
+    "section": "Reaction time",
+    "page_start": 34,
+    "page_end": 34,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 28,
+    "chapter": "Chapter 2",
+    "section": "Brake lag time",
+    "page_start": 34,
+    "page_end": 34,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 29,
+    "chapter": "Chapter 2",
+    "section": "Braking distance",
+    "page_start": 35,
+    "page_end": 35,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 30,
+    "chapter": "Chapter 2",
+    "section": "Speed",
+    "page_start": 35,
+    "page_end": 35,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 31,
+    "chapter": "Chapter 2",
+    "section": "Weight",
+    "page_start": 36,
+    "page_end": 36,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 32,
+    "chapter": "Chapter 2",
+    "section": "Brake condition",
+    "page_start": 36,
+    "page_end": 36,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 33,
+    "chapter": "Chapter 2",
+    "section": "Tire condition",
+    "page_start": 37,
+    "page_end": 37,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 34,
+    "chapter": "Chapter 2",
+    "section": "Road conditions",
+    "page_start": 37,
+    "page_end": 37,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 35,
+    "chapter": "Chapter 2",
+    "section": "Braking",
+    "page_start": 38,
+    "page_end": 38,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 36,
+    "chapter": "Chapter 2",
+    "section": "Icy roads",
+    "page_start": 38,
+    "page_end": 38,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 37,
+    "chapter": "Chapter 2",
+    "section": "Downgrades",
+    "page_start": 38,
+    "page_end": 38,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 38,
+    "chapter": "Chapter 2",
+    "section": "Water on roadways",
+    "page_start": 40,
+    "page_end": 40,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 39,
+    "chapter": "Chapter 2",
+    "section": "Runaway lanes",
+    "page_start": 40,
+    "page_end": 40,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 40,
+    "chapter": "Chapter 2",
+    "section": "Combination unit braking",
+    "page_start": 40,
+    "page_end": 40,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 41,
+    "chapter": "Chapter 2",
+    "section": "Anti-lock braking systems",
+    "page_start": 40,
+    "page_end": 40,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 42,
+    "chapter": "Chapter 2",
+    "section": "Automatic traction control",
+    "page_start": 42,
+    "page_end": 42,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 43,
+    "chapter": "Chapter 2",
+    "section": "Review questions",
+    "page_start": 42,
+    "page_end": 42,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 44,
+    "chapter": "Chapter 3",
+    "section": "Basic driving skills",
+    "page_start": 44,
+    "page_end": 44,
+    "level": 1,
+    "content": ""
+  },
+  {
+    "id": 45,
+    "chapter": "Chapter 3",
+    "section": "What you'll learn",
+    "page_start": 44,
+    "page_end": 44,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 46,
+    "chapter": "Chapter 3",
+    "section": "Sharing the road",
+    "page_start": 44,
+    "page_end": 44,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 47,
+    "chapter": "Chapter 3",
+    "section": "Following distance",
+    "page_start": 44,
+    "page_end": 44,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 48,
+    "chapter": "Chapter 3",
+    "section": "Traffic flow",
+    "page_start": 45,
+    "page_end": 45,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 49,
+    "chapter": "Chapter 3",
+    "section": "Tailgaters",
+    "page_start": 46,
+    "page_end": 46,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 50,
+    "chapter": "Chapter 3",
+    "section": "Construction zones",
+    "page_start": 47,
+    "page_end": 47,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 51,
+    "chapter": "Chapter 3",
+    "section": "Danger zones",
+    "page_start": 47,
+    "page_end": 47,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 52,
+    "chapter": "Chapter 3",
+    "section": "Manoeuvring",
+    "page_start": 48,
+    "page_end": 48,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 53,
+    "chapter": "Chapter 3",
+    "section": "Steering into turns",
+    "page_start": 48,
+    "page_end": 48,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 54,
+    "chapter": "Chapter 3",
+    "section": "Wheel positions during turns",
+    "page_start": 48,
+    "page_end": 48,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 55,
+    "chapter": "Chapter 3",
+    "section": "Turning radius",
+    "page_start": 48,
+    "page_end": 48,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 56,
+    "chapter": "Chapter 3",
+    "section": "Off track",
+    "page_start": 49,
+    "page_end": 49,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 57,
+    "chapter": "Chapter 3",
+    "section": "Wide turns",
+    "page_start": 49,
+    "page_end": 49,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 58,
+    "chapter": "Chapter 3",
+    "section": "Difficult turns",
+    "page_start": 50,
+    "page_end": 50,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 59,
+    "chapter": "Chapter 3",
+    "section": "Speed",
+    "page_start": 51,
+    "page_end": 51,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 60,
+    "chapter": "Chapter 3",
+    "section": "Acceleration",
+    "page_start": 52,
+    "page_end": 52,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 61,
+    "chapter": "Chapter 3",
+    "section": "Braking",
+    "page_start": 52,
+    "page_end": 52,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 62,
+    "chapter": "Chapter 3",
+    "section": "Rollover",
+    "page_start": 53,
+    "page_end": 53,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 63,
+    "chapter": "Chapter 3",
+    "section": "Hills",
+    "page_start": 54,
+    "page_end": 54,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 64,
+    "chapter": "Chapter 3",
+    "section": "Space management",
+    "page_start": 55,
+    "page_end": 55,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 65,
+    "chapter": "Chapter 3",
+    "section": "Backing up",
+    "page_start": 57,
+    "page_end": 57,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 66,
+    "chapter": "Chapter 3",
+    "section": "Driving defensively",
+    "page_start": 58,
+    "page_end": 58,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 67,
+    "chapter": "Chapter 3",
+    "section": "Seeing and being seen",
+    "page_start": 59,
+    "page_end": 59,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 68,
+    "chapter": "Chapter 3",
+    "section": "Using your mirrors",
+    "page_start": 60,
+    "page_end": 60,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 69,
+    "chapter": "Chapter 3",
+    "section": "Looking ahead",
+    "page_start": 60,
+    "page_end": 60,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 70,
+    "chapter": "Chapter 3",
+    "section": "Which lane should you use?",
+    "page_start": 60,
+    "page_end": 60,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 71,
+    "chapter": "Chapter 3",
+    "section": "Lane use",
+    "page_start": 60,
+    "page_end": 60,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 72,
+    "chapter": "Chapter 3",
+    "section": "Emergency vehicles",
+    "page_start": 61,
+    "page_end": 61,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 73,
+    "chapter": "Chapter 3",
+    "section": "Stopped vehicles with flashing lights",
+    "page_start": 61,
+    "page_end": 61,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 74,
+    "chapter": "Chapter 3",
+    "section": "Shifting gears",
+    "page_start": 61,
+    "page_end": 61,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 75,
+    "chapter": "Chapter 3",
+    "section": "Knowing how to shift gears",
+    "page_start": 62,
+    "page_end": 62,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 76,
+    "chapter": "Chapter 3",
+    "section": "Double-clutching",
+    "page_start": 62,
+    "page_end": 62,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 77,
+    "chapter": "Chapter 3",
+    "section": "Knowing when to shift gears",
+    "page_start": 62,
+    "page_end": 62,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 78,
+    "chapter": "Chapter 3",
+    "section": "Shifting skills",
+    "page_start": 63,
+    "page_end": 63,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 79,
+    "chapter": "Chapter 3",
+    "section": "Multi-speed rear axles and auxiliary transmissions",
+    "page_start": 64,
+    "page_end": 64,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 80,
+    "chapter": "Chapter 3",
+    "section": "Entering curves",
+    "page_start": 64,
+    "page_end": 64,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 81,
+    "chapter": "Chapter 3",
+    "section": "Passing and being passed",
+    "page_start": 64,
+    "page_end": 64,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 82,
+    "chapter": "Chapter 3",
+    "section": "Parking",
+    "page_start": 65,
+    "page_end": 65,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 83,
+    "chapter": "Chapter 3",
+    "section": "Crossings",
+    "page_start": 66,
+    "page_end": 66,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 84,
+    "chapter": "Chapter 3",
+    "section": "Intersections",
+    "page_start": 66,
+    "page_end": 66,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 85,
+    "chapter": "Chapter 3",
+    "section": "Alleys, lanes and side roads",
+    "page_start": 67,
+    "page_end": 67,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 86,
+    "chapter": "Chapter 3",
+    "section": "Railway crossings",
+    "page_start": 68,
+    "page_end": 68,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 87,
+    "chapter": "Chapter 3",
+    "section": "Acts of nature",
+    "page_start": 70,
+    "page_end": 70,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 88,
+    "chapter": "Chapter 3",
+    "section": "Animals on the road",
+    "page_start": 70,
+    "page_end": 70,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 89,
+    "chapter": "Chapter 3",
+    "section": "Weather conditions",
+    "page_start": 70,
+    "page_end": 70,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 90,
+    "chapter": "Chapter 3",
+    "section": "Driving in fog",
+    "page_start": 71,
+    "page_end": 71,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 91,
+    "chapter": "Chapter 3",
+    "section": "Driving in rain",
+    "page_start": 72,
+    "page_end": 72,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 92,
+    "chapter": "Chapter 3",
+    "section": "Driving in snow",
+    "page_start": 72,
+    "page_end": 72,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 93,
+    "chapter": "Chapter 3",
+    "section": "Driving in wind",
+    "page_start": 73,
+    "page_end": 73,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 94,
+    "chapter": "Chapter 3",
+    "section": "Driving at night",
+    "page_start": 74,
+    "page_end": 74,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 95,
+    "chapter": "Chapter 3",
+    "section": "Driving in mountains",
+    "page_start": 75,
+    "page_end": 75,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 96,
+    "chapter": "Chapter 3",
+    "section": "Personal safety",
+    "page_start": 76,
+    "page_end": 76,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 97,
+    "chapter": "Chapter 3",
+    "section": "Carbon monoxide poisoning",
+    "page_start": 76,
+    "page_end": 76,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 98,
+    "chapter": "Chapter 3",
+    "section": "Seatbelts",
+    "page_start": 76,
+    "page_end": 76,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 99,
+    "chapter": "Chapter 3",
+    "section": "Airbags and head restraints",
+    "page_start": 77,
+    "page_end": 77,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 100,
+    "chapter": "Chapter 3",
+    "section": "Cellphones and other devices",
+    "page_start": 77,
+    "page_end": 77,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 101,
+    "chapter": "Chapter 3",
+    "section": "Impairment",
+    "page_start": 78,
+    "page_end": 78,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 102,
+    "chapter": "Chapter 3",
+    "section": "Fatigue",
+    "page_start": 80,
+    "page_end": 80,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 103,
+    "chapter": "Chapter 3",
+    "section": "Fire",
+    "page_start": 80,
+    "page_end": 80,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 104,
+    "chapter": "Chapter 3",
+    "section": "Firefighting",
+    "page_start": 81,
+    "page_end": 81,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 105,
+    "chapter": "Chapter 3",
+    "section": "Fire extinguishers",
+    "page_start": 81,
+    "page_end": 81,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 106,
+    "chapter": "Chapter 3",
+    "section": "Review questions",
+    "page_start": 82,
+    "page_end": 82,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 107,
+    "chapter": "Chapter 4",
+    "section": "Fuel-efficient driving",
+    "page_start": 84,
+    "page_end": 84,
+    "level": 1,
+    "content": ""
+  },
+  {
+    "id": 108,
+    "chapter": "Chapter 4",
+    "section": "What you'll learn",
+    "page_start": 84,
+    "page_end": 84,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 109,
+    "chapter": "Chapter 4",
+    "section": "Fuel efficiency — a growing priority",
+    "page_start": 84,
+    "page_end": 84,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 110,
+    "chapter": "Chapter 4",
+    "section": "Making smart choices",
+    "page_start": 84,
+    "page_end": 84,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 111,
+    "chapter": "Chapter 4",
+    "section": "Smart driving practices",
+    "page_start": 84,
+    "page_end": 84,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 112,
+    "chapter": "Chapter 4",
+    "section": "Preparation and planning",
+    "page_start": 85,
+    "page_end": 85,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 113,
+    "chapter": "Chapter 4",
+    "section": "Smart driving techniques",
+    "page_start": 86,
+    "page_end": 86,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 114,
+    "chapter": "Chapter 4",
+    "section": "Vehicle maintenance",
+    "page_start": 88,
+    "page_end": 88,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 115,
+    "chapter": "Chapter 4",
+    "section": "Review questions",
+    "page_start": 90,
+    "page_end": 90,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 116,
+    "chapter": "Chapter 5",
+    "section": "Skills for driving trucks and trailers",
+    "page_start": 92,
+    "page_end": 92,
+    "level": 1,
+    "content": ""
+  },
+  {
+    "id": 117,
+    "chapter": "Chapter 5",
+    "section": "What you'll learn",
+    "page_start": 92,
+    "page_end": 92,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 118,
+    "chapter": "Chapter 5",
+    "section": "Driving with a trailer",
+    "page_start": 92,
+    "page_end": 92,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 119,
+    "chapter": "Chapter 5",
+    "section": "Backing up",
+    "page_start": 92,
+    "page_end": 92,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 120,
+    "chapter": "Chapter 5",
+    "section": "Towing trailers",
+    "page_start": 93,
+    "page_end": 93,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 121,
+    "chapter": "Chapter 5",
+    "section": "Towing doubles",
+    "page_start": 93,
+    "page_end": 93,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 122,
+    "chapter": "Chapter 5",
+    "section": "Swerving and whipping",
+    "page_start": 94,
+    "page_end": 94,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 123,
+    "chapter": "Chapter 5",
+    "section": "Parking",
+    "page_start": 95,
+    "page_end": 95,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 124,
+    "chapter": "Chapter 5",
+    "section": "Preparing to tow",
+    "page_start": 95,
+    "page_end": 95,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 125,
+    "chapter": "Chapter 5",
+    "section": "Coupling and uncoupling",
+    "page_start": 95,
+    "page_end": 95,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 126,
+    "chapter": "Chapter 5",
+    "section": "Coupling with a fifth wheel",
+    "page_start": 95,
+    "page_end": 95,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 127,
+    "chapter": "Chapter 5",
+    "section": "Uncoupling units",
+    "page_start": 100,
+    "page_end": 100,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 128,
+    "chapter": "Chapter 5",
+    "section": "Other types of connections",
+    "page_start": 102,
+    "page_end": 102,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 129,
+    "chapter": "Chapter 5",
+    "section": "Coupling with a pintle hitch",
+    "page_start": 102,
+    "page_end": 102,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 130,
+    "chapter": "Chapter 5",
+    "section": "Uncoupling pintle hitch units",
+    "page_start": 105,
+    "page_end": 105,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 131,
+    "chapter": "Chapter 5",
+    "section": "Loading",
+    "page_start": 106,
+    "page_end": 106,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 132,
+    "chapter": "Chapter 5",
+    "section": "Loading cargo",
+    "page_start": 106,
+    "page_end": 106,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 133,
+    "chapter": "Chapter 5",
+    "section": "Arranging and distributing loads",
+    "page_start": 107,
+    "page_end": 107,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 134,
+    "chapter": "Chapter 5",
+    "section": "Securing cargo",
+    "page_start": 109,
+    "page_end": 109,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 135,
+    "chapter": "Chapter 5",
+    "section": "General cargo securement requirements",
+    "page_start": 109,
+    "page_end": 109,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 136,
+    "chapter": "Chapter 5",
+    "section": "General requirements for tiedowns",
+    "page_start": 110,
+    "page_end": 110,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 137,
+    "chapter": "Chapter 5",
+    "section": "Specific cargo types",
+    "page_start": 119,
+    "page_end": 119,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 138,
+    "chapter": "Chapter 5",
+    "section": "Logs",
+    "page_start": 119,
+    "page_end": 119,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 139,
+    "chapter": "Chapter 5",
+    "section": "Metal coils",
+    "page_start": 122,
+    "page_end": 122,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 140,
+    "chapter": "Chapter 5",
+    "section": "Paper rolls",
+    "page_start": 123,
+    "page_end": 123,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 141,
+    "chapter": "Chapter 5",
+    "section": "Concrete pipe",
+    "page_start": 124,
+    "page_end": 124,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 142,
+    "chapter": "Chapter 5",
+    "section": "Intermodal containers",
+    "page_start": 125,
+    "page_end": 125,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 143,
+    "chapter": "Chapter 5",
+    "section": "Automobiles, light trucks and vans",
+    "page_start": 126,
+    "page_end": 126,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 144,
+    "chapter": "Chapter 5",
+    "section": "Heavy vehicles, equipment and machinery",
+    "page_start": 126,
+    "page_end": 126,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 145,
+    "chapter": "Chapter 5",
+    "section": "Flattened or crushed vehicles",
+    "page_start": 127,
+    "page_end": 127,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 146,
+    "chapter": "Chapter 5",
+    "section": "Vehicle dimensions and weight",
+    "page_start": 127,
+    "page_end": 127,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 147,
+    "chapter": "Chapter 5",
+    "section": "Height",
+    "page_start": 127,
+    "page_end": 127,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 148,
+    "chapter": "Chapter 5",
+    "section": "Width",
+    "page_start": 127,
+    "page_end": 127,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 149,
+    "chapter": "Chapter 5",
+    "section": "Length",
+    "page_start": 128,
+    "page_end": 128,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 150,
+    "chapter": "Chapter 5",
+    "section": "Weight",
+    "page_start": 128,
+    "page_end": 128,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 151,
+    "chapter": "Chapter 5",
+    "section": "Oversize and overload permits",
+    "page_start": 128,
+    "page_end": 128,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 152,
+    "chapter": "Chapter 5",
+    "section": "Reporting to weigh scales",
+    "page_start": 130,
+    "page_end": 130,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 153,
+    "chapter": "Chapter 5",
+    "section": "Review questions",
+    "page_start": 132,
+    "page_end": 132,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 154,
+    "chapter": "Chapter 6",
+    "section": "Skills for driving buses, taxis, limousines and ride-hailing vehicles",
+    "page_start": 134,
+    "page_end": 134,
+    "level": 1,
+    "content": ""
+  },
+  {
+    "id": 155,
+    "chapter": "Chapter 6",
+    "section": "What you'll learn",
+    "page_start": 134,
+    "page_end": 134,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 156,
+    "chapter": "Chapter 6",
+    "section": "Passenger safety",
+    "page_start": 135,
+    "page_end": 135,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 157,
+    "chapter": "Chapter 6",
+    "section": "Manoeuvring",
+    "page_start": 136,
+    "page_end": 136,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 158,
+    "chapter": "Chapter 6",
+    "section": "Leaving the curb",
+    "page_start": 136,
+    "page_end": 136,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 159,
+    "chapter": "Chapter 6",
+    "section": "Bus right-of-way",
+    "page_start": 137,
+    "page_end": 137,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 160,
+    "chapter": "Chapter 6",
+    "section": "Passing parked cars",
+    "page_start": 137,
+    "page_end": 137,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 161,
+    "chapter": "Chapter 6",
+    "section": "Operating a bus, taxi, limousine or ride-hailing vehicle",
+    "page_start": 138,
+    "page_end": 138,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 162,
+    "chapter": "Chapter 6",
+    "section": "Taking on and letting off passengers",
+    "page_start": 138,
+    "page_end": 138,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 163,
+    "chapter": "Chapter 6",
+    "section": "Smoking",
+    "page_start": 138,
+    "page_end": 138,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 164,
+    "chapter": "Chapter 6",
+    "section": "Focus on driving",
+    "page_start": 138,
+    "page_end": 138,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 165,
+    "chapter": "Chapter 6",
+    "section": "Standing passengers",
+    "page_start": 138,
+    "page_end": 138,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 166,
+    "chapter": "Chapter 6",
+    "section": "Refusing to transport passengers",
+    "page_start": 139,
+    "page_end": 139,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 167,
+    "chapter": "Chapter 6",
+    "section": "Let-down or jump seats",
+    "page_start": 139,
+    "page_end": 139,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 168,
+    "chapter": "Chapter 6",
+    "section": "Accessibility aids and equipment",
+    "page_start": 139,
+    "page_end": 139,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 169,
+    "chapter": "Chapter 6",
+    "section": "Personal safety",
+    "page_start": 140,
+    "page_end": 140,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 170,
+    "chapter": "Chapter 6",
+    "section": "Operating a school bus",
+    "page_start": 142,
+    "page_end": 142,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 171,
+    "chapter": "Chapter 6",
+    "section": "Brake maintenance",
+    "page_start": 142,
+    "page_end": 142,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 172,
+    "chapter": "Chapter 6",
+    "section": "Mechanical defects",
+    "page_start": 142,
+    "page_end": 142,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 173,
+    "chapter": "Chapter 6",
+    "section": "Refuelling",
+    "page_start": 143,
+    "page_end": 143,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 174,
+    "chapter": "Chapter 6",
+    "section": "Emergency equipment and exits",
+    "page_start": 143,
+    "page_end": 143,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 175,
+    "chapter": "Chapter 6",
+    "section": "School bus signs",
+    "page_start": 143,
+    "page_end": 143,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 176,
+    "chapter": "Chapter 6",
+    "section": "Exterior mirrors",
+    "page_start": 143,
+    "page_end": 143,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 177,
+    "chapter": "Chapter 6",
+    "section": "Passengers must be seated",
+    "page_start": 143,
+    "page_end": 143,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 178,
+    "chapter": "Chapter 6",
+    "section": "Cleanliness",
+    "page_start": 144,
+    "page_end": 144,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 179,
+    "chapter": "Chapter 6",
+    "section": "Operating emergency vehicles",
+    "page_start": 144,
+    "page_end": 144,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 180,
+    "chapter": "Chapter 6",
+    "section": "Review questions",
+    "page_start": 146,
+    "page_end": 146,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 181,
+    "chapter": "Chapter 7",
+    "section": "Hours of service requirements",
+    "page_start": 148,
+    "page_end": 148,
+    "level": 1,
+    "content": ""
+  },
+  {
+    "id": 182,
+    "chapter": "Chapter 7",
+    "section": "What you'll learn",
+    "page_start": 148,
+    "page_end": 148,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 183,
+    "chapter": "Chapter 7",
+    "section": "National Safety Code",
+    "page_start": 148,
+    "page_end": 148,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 184,
+    "chapter": "Chapter 7",
+    "section": "Hours of service",
+    "page_start": 148,
+    "page_end": 148,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 185,
+    "chapter": "Chapter 7",
+    "section": "On-duty time",
+    "page_start": 149,
+    "page_end": 149,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 186,
+    "chapter": "Chapter 7",
+    "section": "Off-duty time",
+    "page_start": 149,
+    "page_end": 149,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 187,
+    "chapter": "Chapter 7",
+    "section": "Day",
+    "page_start": 149,
+    "page_end": 149,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 188,
+    "chapter": "Chapter 7",
+    "section": "Daily limits — a simple three-point check for compliance",
+    "page_start": 150,
+    "page_end": 150,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 189,
+    "chapter": "Chapter 7",
+    "section": "Work shift",
+    "page_start": 150,
+    "page_end": 150,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 190,
+    "chapter": "Chapter 7",
+    "section": "Daily hours (cycles)",
+    "page_start": 150,
+    "page_end": 150,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 191,
+    "chapter": "Chapter 7",
+    "section": "Deferring off-duty time",
+    "page_start": 151,
+    "page_end": 151,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 192,
+    "chapter": "Chapter 7",
+    "section": "Reset provision",
+    "page_start": 151,
+    "page_end": 151,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 193,
+    "chapter": "Chapter 7",
+    "section": "Sleeper berth",
+    "page_start": 151,
+    "page_end": 151,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 194,
+    "chapter": "Chapter 7",
+    "section": "Personal use exemption",
+    "page_start": 153,
+    "page_end": 153,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 195,
+    "chapter": "Chapter 7",
+    "section": "Logbooks",
+    "page_start": 153,
+    "page_end": 153,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 196,
+    "chapter": "Chapter 7",
+    "section": "Drivers operating within 160 km of home terminal",
+    "page_start": 155,
+    "page_end": 155,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 197,
+    "chapter": "Chapter 7",
+    "section": "Other jurisdictions",
+    "page_start": 155,
+    "page_end": 155,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 198,
+    "chapter": "Chapter 7",
+    "section": "Driving into the United States",
+    "page_start": 155,
+    "page_end": 155,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 199,
+    "chapter": "Chapter 7",
+    "section": "Review questions",
+    "page_start": 156,
+    "page_end": 156,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 200,
+    "chapter": "Chapter 8",
+    "section": "Air brakes",
+    "page_start": 158,
+    "page_end": 158,
+    "level": 1,
+    "content": ""
+  },
+  {
+    "id": 201,
+    "chapter": "Chapter 8",
+    "section": "What you'll learn",
+    "page_start": 158,
+    "page_end": 158,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 202,
+    "chapter": "Chapter 8",
+    "section": "Basic air brake components",
+    "page_start": 159,
+    "page_end": 159,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 203,
+    "chapter": "Chapter 8",
+    "section": "Force multipliers",
+    "page_start": 160,
+    "page_end": 160,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 204,
+    "chapter": "Chapter 8",
+    "section": "Air brake chamber components",
+    "page_start": 160,
+    "page_end": 160,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 205,
+    "chapter": "Chapter 8",
+    "section": "Leverage and air pressure",
+    "page_start": 161,
+    "page_end": 161,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 206,
+    "chapter": "Chapter 8",
+    "section": "Long stroke and regular stroke brake chambers",
+    "page_start": 161,
+    "page_end": 161,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 207,
+    "chapter": "Chapter 8",
+    "section": "Foundation brakes: s-cam type",
+    "page_start": 162,
+    "page_end": 162,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 208,
+    "chapter": "Chapter 8",
+    "section": "Compressor",
+    "page_start": 163,
+    "page_end": 163,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 209,
+    "chapter": "Chapter 8",
+    "section": "Governor",
+    "page_start": 165,
+    "page_end": 165,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 210,
+    "chapter": "Chapter 8",
+    "section": "Reservoirs",
+    "page_start": 166,
+    "page_end": 166,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 211,
+    "chapter": "Chapter 8",
+    "section": "Foot valve",
+    "page_start": 166,
+    "page_end": 166,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 212,
+    "chapter": "Chapter 8",
+    "section": "How air brakes work",
+    "page_start": 167,
+    "page_end": 167,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 213,
+    "chapter": "Chapter 8",
+    "section": "Brakes applied",
+    "page_start": 167,
+    "page_end": 167,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 214,
+    "chapter": "Chapter 8",
+    "section": "Brakes released",
+    "page_start": 168,
+    "page_end": 168,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 215,
+    "chapter": "Chapter 8",
+    "section": "Dual air brake systems",
+    "page_start": 168,
+    "page_end": 168,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 216,
+    "chapter": "Chapter 8",
+    "section": "Components of a dual air brake system",
+    "page_start": 169,
+    "page_end": 169,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 217,
+    "chapter": "Chapter 8",
+    "section": "Supply, primary and secondary reservoirs",
+    "page_start": 169,
+    "page_end": 169,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 218,
+    "chapter": "Chapter 8",
+    "section": "One-way check valve",
+    "page_start": 169,
+    "page_end": 169,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 219,
+    "chapter": "Chapter 8",
+    "section": "Reservoir pressure gauges",
+    "page_start": 170,
+    "page_end": 170,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 220,
+    "chapter": "Chapter 8",
+    "section": "Low-air warning device",
+    "page_start": 170,
+    "page_end": 170,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 221,
+    "chapter": "Chapter 8",
+    "section": "Quick release valve",
+    "page_start": 171,
+    "page_end": 171,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 222,
+    "chapter": "Chapter 8",
+    "section": "Relay valve",
+    "page_start": 172,
+    "page_end": 172,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 223,
+    "chapter": "Chapter 8",
+    "section": "Dual system with primary system failure",
+    "page_start": 173,
+    "page_end": 173,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 224,
+    "chapter": "Chapter 8",
+    "section": "Parking brakes",
+    "page_start": 173,
+    "page_end": 173,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 225,
+    "chapter": "Chapter 8",
+    "section": "Spring parking brakes",
+    "page_start": 174,
+    "page_end": 174,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 226,
+    "chapter": "Chapter 8",
+    "section": "Applying and releasing spring parking brakes",
+    "page_start": 175,
+    "page_end": 175,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 227,
+    "chapter": "Chapter 8",
+    "section": "Compounding",
+    "page_start": 177,
+    "page_end": 177,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 228,
+    "chapter": "Chapter 8",
+    "section": "Modulating valve",
+    "page_start": 178,
+    "page_end": 178,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 229,
+    "chapter": "Chapter 8",
+    "section": "Trailer brakes",
+    "page_start": 179,
+    "page_end": 179,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 230,
+    "chapter": "Chapter 8",
+    "section": "Trailer air supply components",
+    "page_start": 180,
+    "page_end": 180,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 231,
+    "chapter": "Chapter 8",
+    "section": "Trailer service brake",
+    "page_start": 182,
+    "page_end": 182,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 232,
+    "chapter": "Chapter 8",
+    "section": "Trailer with spring parking brakes",
+    "page_start": 183,
+    "page_end": 183,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 233,
+    "chapter": "Chapter 8",
+    "section": "Tractor protection",
+    "page_start": 185,
+    "page_end": 185,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 234,
+    "chapter": "Chapter 8",
+    "section": "Trailer air supply valve",
+    "page_start": 186,
+    "page_end": 186,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 235,
+    "chapter": "Chapter 8",
+    "section": "Hand valve",
+    "page_start": 186,
+    "page_end": 186,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 236,
+    "chapter": "Chapter 8",
+    "section": "Two-way check valve",
+    "page_start": 187,
+    "page_end": 187,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 237,
+    "chapter": "Chapter 8",
+    "section": "Bobtail tractors",
+    "page_start": 187,
+    "page_end": 187,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 238,
+    "chapter": "Chapter 8",
+    "section": "Other types of foundation brakes",
+    "page_start": 190,
+    "page_end": 190,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 239,
+    "chapter": "Chapter 8",
+    "section": "Wedge brakes",
+    "page_start": 191,
+    "page_end": 191,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 240,
+    "chapter": "Chapter 8",
+    "section": "Air disc brakes",
+    "page_start": 191,
+    "page_end": 191,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 241,
+    "chapter": "Chapter 8",
+    "section": "Air-over-hydraulic brakes",
+    "page_start": 192,
+    "page_end": 192,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 242,
+    "chapter": "Chapter 8",
+    "section": "Other air brake system components",
+    "page_start": 193,
+    "page_end": 193,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 243,
+    "chapter": "Chapter 8",
+    "section": "Air dryers",
+    "page_start": 193,
+    "page_end": 193,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 244,
+    "chapter": "Chapter 8",
+    "section": "Alcohol evaporators and alcohol injectors",
+    "page_start": 194,
+    "page_end": 194,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 245,
+    "chapter": "Chapter 8",
+    "section": "Automatic drain valves",
+    "page_start": 195,
+    "page_end": 195,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 246,
+    "chapter": "Chapter 8",
+    "section": "Front wheel limiting systems",
+    "page_start": 195,
+    "page_end": 195,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 247,
+    "chapter": "Chapter 8",
+    "section": "Spring parking brake emergency release system",
+    "page_start": 196,
+    "page_end": 196,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 248,
+    "chapter": "Chapter 8",
+    "section": "Pressure-protection valves",
+    "page_start": 197,
+    "page_end": 197,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 249,
+    "chapter": "Chapter 8",
+    "section": "Application pressure gauges",
+    "page_start": 197,
+    "page_end": 197,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 250,
+    "chapter": "Chapter 8",
+    "section": "Anti-lock braking systems",
+    "page_start": 197,
+    "page_end": 197,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 251,
+    "chapter": "Chapter 8",
+    "section": "Trailer ABS air brake systems",
+    "page_start": 199,
+    "page_end": 199,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 252,
+    "chapter": "Chapter 8",
+    "section": "Review questions",
+    "page_start": 200,
+    "page_end": 200,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 253,
+    "chapter": "Chapter 9",
+    "section": "Air brake adjustment",
+    "page_start": 202,
+    "page_end": 202,
+    "level": 1,
+    "content": ""
+  },
+  {
+    "id": 254,
+    "chapter": "Chapter 9",
+    "section": "What you'll learn",
+    "page_start": 202,
+    "page_end": 202,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 255,
+    "chapter": "Chapter 9",
+    "section": "Brake adjustment — it's critical",
+    "page_start": 202,
+    "page_end": 202,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 256,
+    "chapter": "Chapter 9",
+    "section": "Checking brake adjustment",
+    "page_start": 203,
+    "page_end": 203,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 257,
+    "chapter": "Chapter 9",
+    "section": "The pry bar/mark method",
+    "page_start": 204,
+    "page_end": 204,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 258,
+    "chapter": "Chapter 9",
+    "section": "The applied stroke method",
+    "page_start": 205,
+    "page_end": 205,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 259,
+    "chapter": "Chapter 9",
+    "section": "S-cam brakes — manual slack adjuster",
+    "page_start": 206,
+    "page_end": 206,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 260,
+    "chapter": "Chapter 9",
+    "section": "Adjusting manual slack adjusters",
+    "page_start": 206,
+    "page_end": 206,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 261,
+    "chapter": "Chapter 9",
+    "section": "S-cam brakes — automatic slack adjuster",
+    "page_start": 208,
+    "page_end": 208,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 262,
+    "chapter": "Chapter 9",
+    "section": "Checking and adjusting automatic slack adjusters",
+    "page_start": 208,
+    "page_end": 208,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 263,
+    "chapter": "Chapter 9",
+    "section": "Air brake adjustment myths",
+    "page_start": 210,
+    "page_end": 210,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 264,
+    "chapter": "Chapter 9",
+    "section": "Review questions",
+    "page_start": 211,
+    "page_end": 211,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 265,
+    "chapter": "Chapter 10",
+    "section": "Vehicle and air brake pre-trip inspections",
+    "page_start": 212,
+    "page_end": 212,
+    "level": 1,
+    "content": ""
+  },
+  {
+    "id": 266,
+    "chapter": "Chapter 10",
+    "section": "What you'll learn",
+    "page_start": 212,
+    "page_end": 212,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 267,
+    "chapter": "Chapter 10",
+    "section": "You're responsible",
+    "page_start": 212,
+    "page_end": 212,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 268,
+    "chapter": "Chapter 10",
+    "section": "Vehicle condition",
+    "page_start": 213,
+    "page_end": 213,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 269,
+    "chapter": "Chapter 10",
+    "section": "Cargo securement",
+    "page_start": 213,
+    "page_end": 213,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 270,
+    "chapter": "Chapter 10",
+    "section": "Written report requirements",
+    "page_start": 214,
+    "page_end": 214,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 271,
+    "chapter": "Chapter 10",
+    "section": "Pre-trip inspection report for your road test",
+    "page_start": 214,
+    "page_end": 214,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 272,
+    "chapter": "Chapter 10",
+    "section": "Conducting a pre-trip inspection",
+    "page_start": 216,
+    "page_end": 216,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 273,
+    "chapter": "Chapter 10",
+    "section": "Tractor-trailer combination pre-trip inspection — Class 1",
+    "page_start": 217,
+    "page_end": 217,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 274,
+    "chapter": "Chapter 10",
+    "section": "Under hood",
+    "page_start": 218,
+    "page_end": 218,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 275,
+    "chapter": "Chapter 10",
+    "section": "In cab",
+    "page_start": 219,
+    "page_end": 219,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 276,
+    "chapter": "Chapter 10",
+    "section": "Air brake system test",
+    "page_start": 221,
+    "page_end": 221,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 277,
+    "chapter": "Chapter 10",
+    "section": "Circle check for lights",
+    "page_start": 222,
+    "page_end": 222,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 278,
+    "chapter": "Chapter 10",
+    "section": "Mechanical circle check",
+    "page_start": 222,
+    "page_end": 222,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 279,
+    "chapter": "Chapter 10",
+    "section": "Brake response, tug and steering wheel slack tests",
+    "page_start": 226,
+    "page_end": 226,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 280,
+    "chapter": "Chapter 10",
+    "section": "Single unit truck pre-trip inspection — Class 3",
+    "page_start": 227,
+    "page_end": 227,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 281,
+    "chapter": "Chapter 10",
+    "section": "Bus pre-trip inspection — Class 2 or Class 4",
+    "page_start": 235,
+    "page_end": 235,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 282,
+    "chapter": "Chapter 10",
+    "section": "Pre-hill inspections",
+    "page_start": 245,
+    "page_end": 245,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 283,
+    "chapter": "Chapter 10",
+    "section": "In-service brake checks",
+    "page_start": 246,
+    "page_end": 246,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 284,
+    "chapter": "Chapter 10",
+    "section": "En route inspections",
+    "page_start": 246,
+    "page_end": 246,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 285,
+    "chapter": "Chapter 10",
+    "section": "Post-trip inspections",
+    "page_start": 247,
+    "page_end": 247,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 286,
+    "chapter": "Chapter 10",
+    "section": "Lights and reflectors",
+    "page_start": 247,
+    "page_end": 247,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 287,
+    "chapter": "Chapter 10",
+    "section": "Review questions",
+    "page_start": 249,
+    "page_end": 249,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 288,
+    "chapter": "Chapter 11",
+    "section": "Signs, signals and road markings",
+    "page_start": 250,
+    "page_end": 250,
+    "level": 1,
+    "content": ""
+  },
+  {
+    "id": 289,
+    "chapter": "Chapter 11",
+    "section": "Signs",
+    "page_start": 250,
+    "page_end": 250,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 290,
+    "chapter": "Chapter 11",
+    "section": "Regulatory signs",
+    "page_start": 251,
+    "page_end": 251,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 291,
+    "chapter": "Chapter 11",
+    "section": "School, playground and crosswalk signs",
+    "page_start": 252,
+    "page_end": 252,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 292,
+    "chapter": "Chapter 11",
+    "section": "Lane use signs",
+    "page_start": 252,
+    "page_end": 252,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 293,
+    "chapter": "Chapter 11",
+    "section": "Turn control signs",
+    "page_start": 253,
+    "page_end": 253,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 294,
+    "chapter": "Chapter 11",
+    "section": "Parking signs",
+    "page_start": 253,
+    "page_end": 253,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 295,
+    "chapter": "Chapter 11",
+    "section": "Reserved lane signs",
+    "page_start": 253,
+    "page_end": 253,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 296,
+    "chapter": "Chapter 11",
+    "section": "Warning signs",
+    "page_start": 254,
+    "page_end": 254,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 297,
+    "chapter": "Chapter 11",
+    "section": "Object markers",
+    "page_start": 255,
+    "page_end": 255,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 298,
+    "chapter": "Chapter 11",
+    "section": "Construction signs",
+    "page_start": 256,
+    "page_end": 256,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 299,
+    "chapter": "Chapter 11",
+    "section": "Information and destination signs",
+    "page_start": 256,
+    "page_end": 256,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 300,
+    "chapter": "Chapter 11",
+    "section": "Railway signs",
+    "page_start": 257,
+    "page_end": 257,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 301,
+    "chapter": "Chapter 11",
+    "section": "Signals",
+    "page_start": 257,
+    "page_end": 257,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 302,
+    "chapter": "Chapter 11",
+    "section": "Lane control signals",
+    "page_start": 257,
+    "page_end": 257,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 303,
+    "chapter": "Chapter 11",
+    "section": "Traffic lights",
+    "page_start": 258,
+    "page_end": 258,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 304,
+    "chapter": "Chapter 11",
+    "section": "Road markings",
+    "page_start": 259,
+    "page_end": 259,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 305,
+    "chapter": "Chapter 11",
+    "section": "Yellow lines",
+    "page_start": 259,
+    "page_end": 259,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 306,
+    "chapter": "Chapter 11",
+    "section": "White lines",
+    "page_start": 260,
+    "page_end": 260,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 307,
+    "chapter": "Chapter 11",
+    "section": "Reserved lane markings",
+    "page_start": 261,
+    "page_end": 261,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 308,
+    "chapter": "Chapter 11",
+    "section": "Other markings",
+    "page_start": 261,
+    "page_end": 261,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 309,
+    "chapter": "Chapter 11",
+    "section": "Review questions",
+    "page_start": 262,
+    "page_end": 262,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 310,
+    "chapter": "Chapter 12",
+    "section": "Industrial roads",
+    "page_start": 263,
+    "page_end": 263,
+    "level": 1,
+    "content": ""
+  },
+  {
+    "id": 311,
+    "chapter": "Chapter 12",
+    "section": "What you'll learn",
+    "page_start": 263,
+    "page_end": 263,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 312,
+    "chapter": "Chapter 12",
+    "section": "Operating on industrial roads",
+    "page_start": 263,
+    "page_end": 263,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 313,
+    "chapter": "Chapter 12",
+    "section": "Right-of-way",
+    "page_start": 267,
+    "page_end": 267,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 314,
+    "chapter": "Chapter 12",
+    "section": "Warning signals",
+    "page_start": 267,
+    "page_end": 267,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 315,
+    "chapter": "Chapter 12",
+    "section": "Railway crossings",
+    "page_start": 267,
+    "page_end": 267,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 316,
+    "chapter": "Chapter 12",
+    "section": "Safety tips",
+    "page_start": 267,
+    "page_end": 267,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 317,
+    "chapter": "Chapter 12",
+    "section": "Highway crossing permits",
+    "page_start": 267,
+    "page_end": 267,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 318,
+    "chapter": "Chapter 12",
+    "section": "Review questions",
+    "page_start": 268,
+    "page_end": 268,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 319,
+    "chapter": "Chapter 13",
+    "section": "For more information",
+    "page_start": 270,
+    "page_end": 270,
+    "level": 1,
+    "content": ""
+  },
+  {
+    "id": 320,
+    "chapter": "Chapter 13",
+    "section": "Dangerous goods",
+    "page_start": 270,
+    "page_end": 270,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 321,
+    "chapter": "Chapter 13",
+    "section": "Federal contacts",
+    "page_start": 270,
+    "page_end": 270,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 322,
+    "chapter": "Chapter 13",
+    "section": "Commercial vehicle information",
+    "page_start": 271,
+    "page_end": 271,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 323,
+    "chapter": "Chapter 13",
+    "section": "Passenger transportation branch",
+    "page_start": 272,
+    "page_end": 272,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 324,
+    "chapter": "Chapter 13",
+    "section": "Licensing information",
+    "page_start": 272,
+    "page_end": 272,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 325,
+    "chapter": "Chapter 13",
+    "section": "Medical qualifications",
+    "page_start": 273,
+    "page_end": 273,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 326,
+    "chapter": "Chapter 13",
+    "section": "More information",
+    "page_start": 273,
+    "page_end": 273,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 327,
+    "chapter": "Chapter 13",
+    "section": "TaxiHost",
+    "page_start": 275,
+    "page_end": 275,
+    "level": 2,
+    "content": ""
+  },
+  {
+    "id": 328,
+    "chapter": "Chapter 13",
+    "section": "Metric conversion table",
+    "page_start": 276,
+    "page_end": 276,
+    "level": 2,
+    "content": ""
+  }
+]

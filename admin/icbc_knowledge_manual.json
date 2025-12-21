@@ -1,0 +1,282 @@
+[
+  {
+    "code": "HOS.ON_DUTY",
+    "title": "On-duty time",
+    "description": "Any time a driver is working or required to be available for work, including driving time, loading/unloading, inspecting vehicle, waiting time at shipper/receiver, and any other work for the carrier.",
+    "chapter": 7,
+    "importance": "high",
+    "type": "definition"
+  },
+  {
+    "code": "HOS.OFF_DUTY",
+    "title": "Off-duty time",
+    "description": "Time when a driver is relieved of all work responsibilities and free to pursue activities of their own choosing.",
+    "chapter": 7,
+    "importance": "high",
+    "type": "definition"
+  },
+  {
+    "code": "HOS.DRIVING_TIME",
+    "title": "Driving time",
+    "description": "Time spent at the controls of a commercial vehicle while it is in motion.",
+    "chapter": 7,
+    "importance": "high",
+    "type": "definition"
+  },
+  {
+    "code": "HOS.WORK_SHIFT",
+    "title": "Work shift",
+    "description": "The elapsed time between two off-duty periods of at least eight consecutive hours. You're not permitted to drive after 16 hours of elapsed time until you take at least eight consecutive hours of off-duty time.",
+    "chapter": 7,
+    "importance": "high",
+    "type": "definition"
+  },
+  {
+    "code": "HOS.CYCLE_1",
+    "title": "Cycle 1",
+    "description": "A work cycle where drivers must not drive after completing 70 on-duty hours in seven days. Can be reset by taking 36 consecutive hours off duty.",
+    "chapter": 7,
+    "importance": "high",
+    "type": "definition"
+  },
+  {
+    "code": "HOS.CYCLE_2",
+    "title": "Cycle 2",
+    "description": "A work cycle where drivers must not drive after completing 120 hours in 14 days, and must take at least 24 consecutive hours off duty prior to accumulating 70 hours of on-duty time. Can be reset by taking 72 consecutive hours off duty.",
+    "chapter": 7,
+    "importance": "high",
+    "type": "definition"
+  },
+  {
+    "code": "HOS.SLEEPER_BERTH",
+    "title": "Sleeper berth",
+    "description": "A berth or bunk in a commercial vehicle used for sleeping. Does not include the back seat of a bus or a reclining seat.",
+    "chapter": 7,
+    "importance": "high",
+    "type": "definition"
+  },
+  {
+    "code": "HOS.MAX_DRIVING",
+    "title": "Maximum driving time",
+    "description": "You may not drive for more than 13 hours in a day. You may not drive after 14 hours of on-duty time or 16 hours of elapsed time since last 8 consecutive hours off duty.",
+    "chapter": 7,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "HOS.MIN_OFF_DUTY",
+    "title": "Minimum off-duty time",
+    "description": "You must take at least 10 hours off duty each day, including at least 8 consecutive hours.",
+    "chapter": 7,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "HOS.LOGBOOK_REQ",
+    "title": "Logbook requirements",
+    "description": "You must keep in your possession: a daily log updated to your last change in duty status, copies of your daily log for your cycle (previous 7 or 14 days), and any supporting documents issued during your trip.",
+    "chapter": 7,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "BRK.TOTAL_STOPPING",
+    "title": "Total stopping distance",
+    "description": "The total distance your vehicle will travel from the moment you see a hazard until you stop. It includes: perception distance + reaction distance + brake lag distance + braking distance.",
+    "chapter": 2,
+    "importance": "high",
+    "type": "definition"
+  },
+  {
+    "code": "BRK.PERCEPTION_TIME",
+    "title": "Perception time",
+    "description": "The time it takes for you to see and recognize a hazard. Average perception time is about 3/4 of a second.",
+    "chapter": 2,
+    "importance": "high",
+    "type": "definition"
+  },
+  {
+    "code": "BRK.REACTION_TIME",
+    "title": "Reaction time",
+    "description": "The time it takes for you to move your foot from the accelerator to the brake pedal after recognizing a hazard. Average reaction time is about 3/4 of a second.",
+    "chapter": 2,
+    "importance": "high",
+    "type": "definition"
+  },
+  {
+    "code": "BRK.BRAKE_LAG",
+    "title": "Brake lag time",
+    "description": "The time it takes for air brakes to work after you press the brake pedal. For air brakes, this can be about 4/10 of a second.",
+    "chapter": 2,
+    "importance": "high",
+    "type": "definition"
+  },
+  {
+    "code": "BRK.BRAKE_FADE",
+    "title": "Brake fade",
+    "description": "A condition where brakes lose effectiveness due to overheating. Heat reduces friction between brake shoes and drums, requiring more pressure to achieve the same braking effect.",
+    "chapter": 2,
+    "importance": "high",
+    "type": "definition"
+  },
+  {
+    "code": "BRK.FOLLOWING_DIST",
+    "title": "Following distance rule",
+    "description": "For heavy vehicles, maintain at least one second of following distance for every 3 metres (10 feet) of vehicle length, plus one second for speeds over 65 km/h. Double this in poor conditions.",
+    "chapter": 2,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "AIR.COMPRESSOR",
+    "title": "Air compressor",
+    "description": "Pumps air into the air storage tanks. Usually gear-driven from the engine and builds air pressure up to the governor cut-out pressure (typically 120-135 psi).",
+    "chapter": 8,
+    "importance": "high",
+    "type": "definition"
+  },
+  {
+    "code": "AIR.GOVERNOR",
+    "title": "Governor",
+    "description": "Controls when the air compressor pumps air into the storage tanks. Cut-in pressure is typically 100 psi, cut-out pressure is typically 120-135 psi.",
+    "chapter": 8,
+    "importance": "high",
+    "type": "definition"
+  },
+  {
+    "code": "AIR.RESERVOIRS",
+    "title": "Air reservoirs (tanks)",
+    "description": "Store compressed air for braking. Usually divided into primary and secondary systems for safety redundancy.",
+    "chapter": 8,
+    "importance": "high",
+    "type": "definition"
+  },
+  {
+    "code": "AIR.BRAKE_CHAMBER",
+    "title": "Brake chamber",
+    "description": "Converts air pressure to mechanical force. Air pressure pushes against a diaphragm, which pushes a pushrod to apply the brakes.",
+    "chapter": 8,
+    "importance": "high",
+    "type": "definition"
+  },
+  {
+    "code": "AIR.SLACK_ADJ",
+    "title": "Slack adjuster",
+    "description": "A lever that connects the pushrod to the brake camshaft. Converts the linear motion of the pushrod into rotational motion to turn the brake camshaft.",
+    "chapter": 8,
+    "importance": "high",
+    "type": "definition"
+  },
+  {
+    "code": "AIR.S_CAM",
+    "title": "S-cam",
+    "description": "An S-shaped cam that spreads the brake shoes apart and presses them against the brake drum when rotated by the slack adjuster.",
+    "chapter": 8,
+    "importance": "high",
+    "type": "definition"
+  },
+  {
+    "code": "AIR.LOW_PRESSURE",
+    "title": "Low air pressure warning",
+    "description": "A warning device must activate before air pressure drops below 55 psi. If air pressure drops below 20-45 psi, the spring brakes will automatically apply.",
+    "chapter": 8,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "AIR.SPRING_BRAKE",
+    "title": "Spring brakes",
+    "description": "Parking brakes that use powerful springs to apply braking force when air pressure is released. They provide emergency braking if air pressure is lost.",
+    "chapter": 8,
+    "importance": "high",
+    "type": "definition"
+  },
+  {
+    "code": "AIR.PUSHROD_STROKE",
+    "title": "Pushrod stroke limit",
+    "description": "The brake pushrod stroke must not exceed the adjustment limit. Typically, the applied stroke should not exceed: 38mm (1.5 in) for Type 16, 44mm (1.75 in) for Type 20, 51mm (2 in) for Type 24, 57mm (2.25 in) for Type 30.",
+    "chapter": 9,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "LIC.CLASS_4",
+    "title": "Class 4 licence",
+    "description": "Required for driving buses, school buses, special activity buses, taxis, and limousines with a seating capacity up to 25 passengers. Also permits driving ambulances.",
+    "chapter": 1,
+    "importance": "high",
+    "type": "definition"
+  },
+  {
+    "code": "LIC.CLASS_3",
+    "title": "Class 3 licence",
+    "description": "Required for driving trucks with more than two axles, such as dump trucks and large tow trucks, but not buses used for transporting passengers.",
+    "chapter": 1,
+    "importance": "high",
+    "type": "definition"
+  },
+  {
+    "code": "LIC.CLASS_2",
+    "title": "Class 2 licence",
+    "description": "Required for driving buses with a seating capacity of more than 25 passengers, including school buses carrying more than 25 passengers.",
+    "chapter": 1,
+    "importance": "high",
+    "type": "definition"
+  },
+  {
+    "code": "LIC.CLASS_1",
+    "title": "Class 1 licence",
+    "description": "Required for driving any combination of vehicles including semi-trailer trucks. This is the highest class of commercial driver's licence.",
+    "chapter": 1,
+    "importance": "high",
+    "type": "definition"
+  },
+  {
+    "code": "LIC.AIR_BRAKE_END",
+    "title": "Air brake endorsement",
+    "description": "An endorsement (Code 15) required to operate any vehicle equipped with air brakes. Obtained by passing an air brake knowledge test and demonstrating practical skills.",
+    "chapter": 1,
+    "importance": "high",
+    "type": "definition"
+  },
+  {
+    "code": "INSP.PRE_TRIP",
+    "title": "Pre-trip inspection",
+    "description": "A systematic inspection of the vehicle and its equipment performed before each trip. Required by law and helps identify problems that could lead to a crash or breakdown.",
+    "chapter": 10,
+    "importance": "high",
+    "type": "definition"
+  },
+  {
+    "code": "INSP.CVIP",
+    "title": "Commercial Vehicle Inspection Program (CVIP)",
+    "description": "A mandatory annual or semi-annual inspection program for commercial vehicles. A CVIP decal indicates the vehicle has passed inspection.",
+    "chapter": 10,
+    "importance": "high",
+    "type": "definition"
+  },
+  {
+    "code": "DRV.DOWNSHIFT",
+    "title": "Downshifting rule",
+    "description": "When going down a long, steep grade, shift to a lower gear before starting down. The gear should be low enough that you won't have to use the brakes heavily, but not so low that the engine overspeeds.",
+    "chapter": 3,
+    "importance": "high",
+    "type": "rule"
+  },
+  {
+    "code": "DRV.DOUBLE_CLUTCH",
+    "title": "Double clutching",
+    "description": "A shifting technique for non-synchronized transmissions: release clutch in neutral, match engine speed with wheel speed, then engage the new gear. Required for most heavy truck transmissions.",
+    "chapter": 3,
+    "importance": "high",
+    "type": "definition"
+  },
+  {
+    "code": "DRV.BACKING_UP",
+    "title": "Backing up safely",
+    "description": "Before backing, walk around the vehicle to check for obstacles. Use a spotter when possible. If you must back without a spotter, get out and check behind frequently.",
+    "chapter": 3,
+    "importance": "high",
+    "type": "rule"
+  }
+]

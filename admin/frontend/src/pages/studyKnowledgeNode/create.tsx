@@ -44,6 +44,7 @@ export const StudyKnowledgeNodeCreate = () => {
           name="title"
           label="标题"
           rules={[
+            { required: true, message: '请输入标题' },
             { max: 255, message: '最多输入 255 个字符' }
           ]}
         >
