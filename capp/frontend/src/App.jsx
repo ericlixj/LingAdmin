@@ -13,6 +13,26 @@ function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [user, setUser] = useState(null);
   const [checkingAuth, setCheckingAuth] = useState(true);
+  
+  // 检测移动端
+  const [isMobile, setIsMobile] = useState(() => {
+    if (typeof window !== "undefined") {
+      return window.innerWidth <= 480;
+    }
+    return false;
+  });
+
+  // 监听窗口大小变化
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 480);
+    };
+    
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
   // 从 localStorage 读取保存的邮编
   const getStoredZipCode = () => {
     try {
@@ -378,24 +398,55 @@ function App() {
   // 如果未选择页面，显示主页（功能选择）
   if (pageView === null) {
     return (
-      <div style={{ padding: "2rem", fontFamily: "system-ui, sans-serif", maxWidth: "1200px", margin: "0 auto" }}>
+      <div style={{ 
+        padding: isMobile ? "1rem" : "2rem", 
+        fontFamily: "system-ui, sans-serif", 
+        maxWidth: "1200px", 
+        margin: "0 auto" 
+      }}>
         {/* 头部：标题和登出按钮 */}
-        <div style={{ marginBottom: "2rem" }}>
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1rem" }}>
-            <h1 style={{ margin: 0 }}>
+        <div style={{ marginBottom: isMobile ? "1rem" : "2rem" }}>
+          <div style={{ 
+            display: "flex", 
+            justifyContent: "space-between", 
+            alignItems: "center", 
+            marginBottom: "1rem",
+            flexWrap: "wrap",
+            gap: "0.5rem",
+          }}>
+            <h1 style={{ 
+              margin: 0,
+              fontSize: window.innerWidth <= 480 ? "1.1rem" : "1.5rem",
+              fontWeight: "600",
+            }}>
               {lang === "cn" ? "数据查询" : lang === "en" ? "Data Query" : "數據查詢"}
             </h1>
-            <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-              <span>{user?.email}</span>
+            <div style={{ 
+              display: "flex", 
+              alignItems: "center", 
+              gap: isMobile ? "0.5rem" : "1rem",
+              flexWrap: "wrap",
+            }}>
+              <span style={{ 
+                fontSize: isMobile ? "0.8rem" : "1rem",
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+                whiteSpace: "nowrap",
+                maxWidth: isMobile ? "120px" : "none",
+              }}>
+                {user?.email}
+              </span>
               <button
                 onClick={handleLogout}
                 style={{
-                  padding: "0.5rem 1rem",
+                  padding: isMobile ? "0.4rem 0.8rem" : "0.5rem 1rem",
                   backgroundColor: "#dc3545",
                   color: "white",
                   border: "none",
                   borderRadius: "4px",
                   cursor: "pointer",
+                  fontSize: isMobile ? "0.85rem" : "1rem",
+                  whiteSpace: "nowrap",
                 }}
               >
                 {lang === "cn" ? "登出" : lang === "en" ? "Logout" : "登出"}
@@ -488,25 +539,43 @@ function App() {
 
   // 如果选择了页面，显示对应内容
   return (
-    <div style={{ padding: "2rem", fontFamily: "system-ui, sans-serif", maxWidth: "1200px", margin: "0 auto" }}>
+    <div style={{ 
+      padding: isMobile ? "1rem" : "2rem", 
+      fontFamily: "system-ui, sans-serif", 
+      maxWidth: "1200px", 
+      margin: "0 auto" 
+    }}>
       {/* 头部：标题、返回按钮和登出按钮 */}
-      <div style={{ marginBottom: "2rem" }}>
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1rem" }}>
-          <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+      <div style={{ marginBottom: isMobile ? "1rem" : "2rem" }}>
+        <div style={{ 
+          display: "flex", 
+          justifyContent: "space-between", 
+          alignItems: "center", 
+          marginBottom: "1rem",
+          flexWrap: "wrap",
+          gap: "0.5rem",
+        }}>
+          <div style={{ display: "flex", alignItems: "center", gap: isMobile ? "0.5rem" : "1rem", flex: 1, minWidth: 0 }}>
             <button
               onClick={() => setPageView(null)}
               style={{
-                padding: "0.5rem 1rem",
+                padding: isMobile ? "0.4rem 0.8rem" : "0.5rem 1rem",
                 backgroundColor: "#6c757d",
                 color: "white",
                 border: "none",
                 borderRadius: "4px",
                 cursor: "pointer",
+                fontSize: isMobile ? "0.85rem" : "1rem",
+                whiteSpace: "nowrap",
               }}
             >
               {lang === "cn" ? "← 返回" : lang === "en" ? "← Back" : "← 返回"}
             </button>
-            <h1 style={{ margin: 0 }}>
+            <h1 style={{ 
+              margin: 0,
+              fontSize: isMobile ? "1.1rem" : "1.5rem",
+              fontWeight: "600",
+            }}>
               {pageView === "flyers"
                 ? lang === "cn"
                   ? "传单详情"
@@ -526,17 +595,32 @@ function App() {
                 : "學習系統"}
             </h1>
           </div>
-          <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-            <span>{user?.email}</span>
+          <div style={{ 
+            display: "flex", 
+            alignItems: "center", 
+            gap: isMobile ? "0.5rem" : "1rem",
+            flexWrap: "wrap",
+          }}>
+            <span style={{ 
+              fontSize: isMobile ? "0.8rem" : "1rem",
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+              whiteSpace: "nowrap",
+              maxWidth: isMobile ? "120px" : "none",
+            }}>
+              {user?.email}
+            </span>
             <button
               onClick={handleLogout}
               style={{
-                padding: "0.5rem 1rem",
+                padding: isMobile ? "0.4rem 0.8rem" : "0.5rem 1rem",
                 backgroundColor: "#dc3545",
                 color: "white",
                 border: "none",
                 borderRadius: "4px",
                 cursor: "pointer",
+                fontSize: isMobile ? "0.85rem" : "1rem",
+                whiteSpace: "nowrap",
               }}
             >
               {lang === "cn" ? "登出" : lang === "en" ? "Logout" : "登出"}

@@ -76,6 +76,35 @@ const SOURCE_TYPE_ICON = {
 };
 
 function PracticePage({ sessionId, practiceMode = "all", lang, onBack }) {
+  const isMobile = typeof window !== "undefined" && window.innerWidth <= 480;
+  
+  // 检测深色模式
+  const [isDarkMode, setIsDarkMode] = useState(() => {
+    if (typeof window !== "undefined") {
+      return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+    }
+    return false;
+  });
+
+  // 监听系统主题变化
+  useEffect(() => {
+    if (typeof window === "undefined" || !window.matchMedia) return;
+    
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    const handleChange = (e) => setIsDarkMode(e.matches);
+    
+    // 现代浏览器
+    if (mediaQuery.addEventListener) {
+      mediaQuery.addEventListener("change", handleChange);
+      return () => mediaQuery.removeEventListener("change", handleChange);
+    }
+    // 旧版浏览器兼容
+    else if (mediaQuery.addListener) {
+      mediaQuery.addListener(handleChange);
+      return () => mediaQuery.removeListener(handleChange);
+    }
+  }, []);
+
   const [currentItem, setCurrentItem] = useState(null); // 当前题目的item信息
   const [currentQuestion, setCurrentQuestion] = useState(null); // 当前题目的详细信息
   const [currentIndex, setCurrentIndex] = useState(0); // 当前题目索引（从1开始显示）
@@ -314,9 +343,33 @@ function PracticePage({ sessionId, practiceMode = "all", lang, onBack }) {
     }
   };
 
+  // 主题颜色配置
+  const theme = {
+    bg: isDarkMode ? "#1a1a1a" : "#ffffff",
+    cardBg: isDarkMode ? "#2d2d2d" : "#ffffff",
+    text: isDarkMode ? "#e0e0e0" : "#333333",
+    textSecondary: isDarkMode ? "#b0b0b0" : "#666666",
+    border: isDarkMode ? "#404040" : "#ddd",
+    borderLight: isDarkMode ? "#505050" : "#e0e0e0",
+    progressBg: isDarkMode ? "#3a3a3a" : "#e0e0e0",
+    optionBg: isDarkMode ? "#2d2d2d" : "#fff",
+    optionSelectedBg: isDarkMode ? "#1e3a5f" : "#e6f7ff",
+    optionSelectedBorder: isDarkMode ? "#4a9eff" : "#1890ff",
+    correctBg: isDarkMode ? "#1a3a1a" : "#f6ffed",
+    correctBorder: isDarkMode ? "#52c41a" : "#52c41a",
+    wrongBg: isDarkMode ? "#3a1a1a" : "#fff1f0",
+    wrongBorder: isDarkMode ? "#ff6b6b" : "#ff4d4f",
+    explanationBg: isDarkMode ? "#1a2a3a" : "#f0f7ff",
+    explanationBorder: isDarkMode ? "#4a6a9a" : "#91d5ff",
+    knowledgeBg: isDarkMode ? "#2a2a1a" : "#fffbe6",
+    knowledgeBorder: isDarkMode ? "#6a6a4a" : "#ffe58f",
+    buttonDisabled: isDarkMode ? "#4a4a4a" : "#ccc",
+    shadow: isDarkMode ? "0 2px 8px rgba(0,0,0,0.3)" : "0 2px 4px rgba(0,0,0,0.1)",
+  };
+
   if (loading) {
     return (
-      <div style={{ textAlign: "center", padding: "2rem" }}>
+      <div style={{ textAlign: "center", padding: "2rem", backgroundColor: theme.bg, color: theme.text, minHeight: "100vh" }}>
         <p>{lang === "cn" ? "加载中..." : lang === "en" ? "Loading..." : "載入中..."}</p>
       </div>
     );
@@ -324,15 +377,15 @@ function PracticePage({ sessionId, practiceMode = "all", lang, onBack }) {
 
   if (error) {
     return (
-      <div>
+      <div style={{ backgroundColor: theme.bg, minHeight: "100vh", padding: "1rem", color: theme.text }}>
         <div
           style={{
             padding: "1rem",
-            backgroundColor: "#fee",
-            border: "1px solid #fcc",
+            backgroundColor: isDarkMode ? "#3a1a1a" : "#fee",
+            border: `1px solid ${isDarkMode ? "#ff6b6b" : "#fcc"}`,
             borderRadius: "4px",
             marginBottom: "1rem",
-            color: "#c00",
+            color: isDarkMode ? "#ff6b6b" : "#c00",
           }}
         >
           错误: {error}
@@ -357,15 +410,15 @@ function PracticePage({ sessionId, practiceMode = "all", lang, onBack }) {
   if (!practiceStarted || !currentQuestion) {
     if (loading) {
       return (
-        <div style={{ textAlign: "center", padding: "2rem" }}>
+        <div style={{ textAlign: "center", padding: "2rem", backgroundColor: theme.bg, color: theme.text, minHeight: "100vh" }}>
           <p>{lang === "cn" ? "加载中..." : lang === "en" ? "Loading..." : "載入中..."}</p>
         </div>
       );
     }
     if (error) {
       return (
-        <div style={{ textAlign: "center", padding: "2rem" }}>
-          <p style={{ color: "#ff4d4f" }}>{error}</p>
+        <div style={{ textAlign: "center", padding: "2rem", backgroundColor: theme.bg, color: theme.text, minHeight: "100vh" }}>
+          <p style={{ color: theme.wrongBorder }}>{error}</p>
           <button
             onClick={onBack}
             style={{
@@ -384,7 +437,7 @@ function PracticePage({ sessionId, practiceMode = "all", lang, onBack }) {
       );
     }
     return (
-      <div style={{ textAlign: "center", padding: "2rem" }}>
+      <div style={{ textAlign: "center", padding: "2rem", backgroundColor: theme.bg, color: theme.text, minHeight: "100vh" }}>
         <p>{lang === "cn" ? "准备中..." : lang === "en" ? "Preparing..." : "準備中..."}</p>
       </div>
     );
@@ -400,16 +453,27 @@ function PracticePage({ sessionId, practiceMode = "all", lang, onBack }) {
   const isCorrect = showResult && currentItem ? (Number(currentItem.is_correct) === 1) : false;
 
   return (
-    <div style={{ maxWidth: "900px", margin: "0 auto" }}>
+    <div
+      style={{
+        maxWidth: "900px",
+        margin: "0 auto",
+        padding: isMobile ? "12px" : "0 16px",
+        backgroundColor: theme.bg,
+        minHeight: "100vh",
+        color: theme.text,
+      }}
+    >
       {/* 进度条 */}
-      <div style={{ marginBottom: "1.5rem" }}>
+      <div style={{ marginBottom: "1.25rem" }}>
         <div
           style={{
             display: "flex",
             justifyContent: "space-between",
             marginBottom: "0.5rem",
-            fontSize: "0.9rem",
-            color: "#666",
+            fontSize: isMobile ? "0.85rem" : "0.9rem",
+            color: theme.textSecondary,
+            flexWrap: "wrap",
+            gap: 8,
           }}
         >
           <span>
@@ -434,7 +498,7 @@ function PracticePage({ sessionId, practiceMode = "all", lang, onBack }) {
           style={{
             width: "100%",
             height: "8px",
-            backgroundColor: "#e0e0e0",
+            backgroundColor: theme.progressBg,
             borderRadius: "4px",
             overflow: "hidden",
           }}
@@ -454,16 +518,24 @@ function PracticePage({ sessionId, practiceMode = "all", lang, onBack }) {
       {currentQuestion ? (
         <div
           style={{
-            border: "1px solid #ddd",
+            border: `1px solid ${theme.border}`,
             borderRadius: "8px",
-            padding: "1.5rem",
-            backgroundColor: "white",
-            boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
+            padding: isMobile ? "1rem" : "1.5rem",
+            backgroundColor: theme.cardBg,
+            boxShadow: theme.shadow,
             marginBottom: "1.5rem",
           }}
         >
           {/* 题干 */}
-          <h3 style={{ marginTop: 0, marginBottom: "1rem", fontSize: "1.2rem" }}>
+          <h3
+            style={{
+              marginTop: 0,
+              marginBottom: "1rem",
+              fontSize: isMobile ? "1.05rem" : "1.2rem",
+              lineHeight: 1.45,
+              wordBreak: "break-word",
+            }}
+          >
             {stemText}
           </h3>
 
@@ -475,9 +547,11 @@ function PracticePage({ sessionId, practiceMode = "all", lang, onBack }) {
                 alt="题目图片"
                 style={{
                   maxWidth: "100%",
-                  maxHeight: 300,
+                  maxHeight: isMobile ? 220 : 300,
                   borderRadius: 8,
-                  border: "1px solid #d9d9d9",
+                  border: `1px solid ${theme.border}`,
+                  objectFit: "contain",
+                  backgroundColor: isDarkMode ? "#1a1a1a" : "#f5f5f5",
                 }}
                 onError={(e) => {
                   e.target.style.display = "none";
@@ -493,33 +567,36 @@ function PracticePage({ sessionId, practiceMode = "all", lang, onBack }) {
               const isCorrectOption = correctAnswers.includes(option.label) || correctAnswers.includes(option.label.toLowerCase());
 
               let optionStyle = {
-                padding: "12px 16px",
-                marginBottom: 8,
+                padding: isMobile ? "12px" : "12px 16px",
+                marginBottom: 10,
                 borderRadius: 8,
-                border: "1px solid #d9d9d9",
-                backgroundColor: "#fff",
+                border: `1px solid ${theme.border}`,
+                backgroundColor: theme.optionBg,
+                color: theme.text,
                 cursor: showResult ? "default" : "pointer",
                 display: "flex",
                 alignItems: "flex-start",
                 transition: "all 0.2s",
+                fontSize: isMobile ? "0.95rem" : "1rem",
+                lineHeight: 1.5,
               };
 
               // 只有提交后才显示正确答案和错误答案的标记
               if (showResult) {
                 if (isCorrectOption) {
                   // 正确答案：绿色边框和背景
-                  optionStyle.border = "2px solid #52c41a";
-                  optionStyle.backgroundColor = "#f6ffed";
+                  optionStyle.border = `2px solid ${theme.correctBorder}`;
+                  optionStyle.backgroundColor = theme.correctBg;
                 }
                 if (isSelected && !isCorrectOption) {
                   // 选错了：红色边框和背景
-                  optionStyle.border = "2px solid #ff4d4f";
-                  optionStyle.backgroundColor = "#fff1f0";
+                  optionStyle.border = `2px solid ${theme.wrongBorder}`;
+                  optionStyle.backgroundColor = theme.wrongBg;
                 }
               } else if (isSelected) {
                 // 未提交时，只显示选中状态：蓝色边框
-                optionStyle.border = "2px solid #1890ff";
-                optionStyle.backgroundColor = "#e6f7ff";
+                optionStyle.border = `2px solid ${theme.optionSelectedBorder}`;
+                optionStyle.backgroundColor = theme.optionSelectedBg;
               }
 
               return (
@@ -543,13 +620,13 @@ function PracticePage({ sessionId, practiceMode = "all", lang, onBack }) {
                       borderRadius: "50%",
                       backgroundColor: showResult
                         ? isCorrectOption
-                          ? "#52c41a"
+                          ? theme.correctBorder
                           : isSelected
-                          ? "#ff4d4f"
-                          : "#d9d9d9"
+                          ? theme.wrongBorder
+                          : isDarkMode ? "#505050" : "#d9d9d9"
                         : isSelected
-                        ? "#1890ff"
-                        : "#d9d9d9",
+                        ? theme.optionSelectedBorder
+                        : isDarkMode ? "#505050" : "#d9d9d9",
                       color: "white",
                       marginRight: 12,
                       fontWeight: "bold",
@@ -557,75 +634,89 @@ function PracticePage({ sessionId, practiceMode = "all", lang, onBack }) {
                   >
                     {option.label}
                   </span>
-                  <span style={{ flex: 1 }}>{option.value}</span>
+                  <span style={{ flex: 1, wordBreak: "break-word" }}>{option.value}</span>
                   {showResult && isCorrectOption && (
-                    <span style={{ color: "#52c41a", fontSize: "18px", marginLeft: "8px" }}>✓</span>
+                    <span style={{ color: theme.correctBorder, fontSize: "18px", marginLeft: "8px" }}>✓</span>
                   )}
                 </div>
               );
             })}
           </div>
 
-          {/* 提交按钮 - 只有未提交时显示 */}
-          {!showResult && (
-            <button
-              onClick={handleSubmit}
-              disabled={!selectedAnswer || submitting}
-              style={{
-                width: "100%",
-                padding: "0.75rem",
-                backgroundColor: selectedAnswer && !submitting ? "#ff6b35" : "#ccc",
-                color: "white",
-                border: "none",
-                borderRadius: "4px",
-                cursor: selectedAnswer && !submitting ? "pointer" : "not-allowed",
-                fontSize: "1rem",
-                fontWeight: "bold",
-              }}
-            >
-              {submitting
-                ? lang === "cn"
-                  ? "提交中..."
+          <div
+            style={{
+              position: isMobile ? "sticky" : "static",
+              bottom: isMobile ? 0 : "auto",
+              background: isMobile ? theme.cardBg : "transparent",
+              paddingTop: "0.5rem",
+              paddingBottom: isMobile ? "0.5rem" : 0,
+              boxShadow: isMobile 
+                ? (isDarkMode ? "0 -4px 12px rgba(0,0,0,0.5)" : "0 -4px 12px rgba(0,0,0,0.08)")
+                : "none",
+              zIndex: 2,
+            }}
+          >
+            {/* 提交按钮 - 只有未提交时显示 */}
+            {!showResult && (
+              <button
+                onClick={handleSubmit}
+                disabled={!selectedAnswer || submitting}
+                style={{
+                  width: "100%",
+                  padding: isMobile ? "0.85rem" : "0.75rem",
+                  backgroundColor: selectedAnswer && !submitting ? "#ff6b35" : theme.buttonDisabled,
+                  color: "white",
+                  border: "none",
+                  borderRadius: "6px",
+                  cursor: selectedAnswer && !submitting ? "pointer" : "not-allowed",
+                  fontSize: "1rem",
+                  fontWeight: "bold",
+                }}
+              >
+                {submitting
+                  ? lang === "cn"
+                    ? "提交中..."
+                    : lang === "en"
+                    ? "Submitting..."
+                    : "提交中..."
+                  : lang === "cn"
+                  ? "提交答案"
                   : lang === "en"
-                  ? "Submitting..."
-                  : "提交中..."
-                : lang === "cn"
-                ? "提交答案"
-                : lang === "en"
-                ? "Submit Answer"
-                : "提交答案"}
-            </button>
-          )}
+                  ? "Submit Answer"
+                  : "提交答案"}
+              </button>
+            )}
 
-          {/* 下一题/完成练习按钮 - 提交后显示，位置与提交按钮一致 */}
-          {showResult && (
-            <button
-              onClick={handleNext}
-              style={{
-                width: "100%",
-                padding: "0.75rem",
-                backgroundColor: "#ff6b35",
-                color: "white",
-                border: "none",
-                borderRadius: "4px",
-                cursor: "pointer",
-                fontSize: "1rem",
-                fontWeight: "bold",
-              }}
-            >
-              {currentIndex < totalCount
-                ? lang === "cn"
-                  ? "下一题"
+            {/* 下一题/完成练习按钮 - 提交后显示，位置与提交按钮一致 */}
+            {showResult && (
+              <button
+                onClick={handleNext}
+                style={{
+                  width: "100%",
+                  padding: isMobile ? "0.85rem" : "0.75rem",
+                  backgroundColor: "#ff6b35",
+                  color: "white",
+                  border: "none",
+                  borderRadius: "6px",
+                  cursor: "pointer",
+                  fontSize: "1rem",
+                  fontWeight: "bold",
+                }}
+              >
+                {currentIndex < totalCount
+                  ? lang === "cn"
+                    ? "下一题"
+                    : lang === "en"
+                    ? "Next Question"
+                    : "下一題"
+                  : lang === "cn"
+                  ? "完成练习"
                   : lang === "en"
-                  ? "Next Question"
-                  : "下一題"
-                : lang === "cn"
-                ? "完成练习"
-                : lang === "en"
-                ? "Finish Practice"
-                : "完成練習"}
-            </button>
-          )}
+                  ? "Finish Practice"
+                  : "完成練習"}
+              </button>
+            )}
+          </div>
 
           {/* 结果显示 - 提交后显示所有题目详情（按钮下方） */}
           {showResult && currentQuestion && (
@@ -637,15 +728,15 @@ function PracticePage({ sessionId, practiceMode = "all", lang, onBack }) {
                   padding: "1rem",
                   borderRadius: "8px",
                   marginBottom: "1rem",
-                  backgroundColor: isCorrect ? "#f6ffed" : "#fff1f0",
-                  border: `1px solid ${isCorrect ? "#52c41a" : "#ff4d4f"}`,
+                  backgroundColor: isCorrect ? theme.correctBg : theme.wrongBg,
+                  border: `1px solid ${isCorrect ? theme.correctBorder : theme.wrongBorder}`,
                 }}
               >
                 <div
                   style={{
                     fontSize: "1.1rem",
                     fontWeight: "bold",
-                    color: isCorrect ? "#52c41a" : "#ff4d4f",
+                    color: isCorrect ? theme.correctBorder : theme.wrongBorder,
                     marginBottom: "0.5rem",
                   }}
                 >
@@ -661,7 +752,7 @@ function PracticePage({ sessionId, practiceMode = "all", lang, onBack }) {
                     ? "✗ Incorrect"
                     : "✗ 回答錯誤"}
                 </div>
-                <div style={{ color: "#666", fontSize: "0.9rem" }}>
+                <div style={{ color: theme.textSecondary, fontSize: "0.9rem" }}>
                   {lang === "cn" ? "正确答案:" : lang === "en" ? "Correct Answer:" : "正確答案:"}{" "}
                   {correctAnswers.join(", ")}
                 </div>
@@ -672,29 +763,30 @@ function PracticePage({ sessionId, practiceMode = "all", lang, onBack }) {
                 <div
                   style={{
                     padding: "1rem",
-                    backgroundColor: "#f0f7ff",
+                    backgroundColor: theme.explanationBg,
                     borderRadius: "8px",
                     marginBottom: "1rem",
-                    border: "1px solid #91d5ff",
+                    border: `1px solid ${theme.explanationBorder}`,
+                    color: theme.text,
                   }}
                 >
-                  <div style={{ fontWeight: "bold", marginBottom: "0.5rem" }}>
+                  <div style={{ fontWeight: "bold", marginBottom: "0.5rem", color: theme.text }}>
                     {lang === "cn" ? "解析:" : lang === "en" ? "Explanation:" : "解析:"}
                   </div>
                   {currentQuestion.explanation_raw && (
                     <div style={{ marginBottom: "0.5rem" }}>
-                      <div style={{ fontSize: "0.9rem", color: "#666", marginBottom: "0.25rem" }}>
+                      <div style={{ fontSize: "0.9rem", color: theme.textSecondary, marginBottom: "0.25rem" }}>
                         {lang === "cn" ? "官方解释:" : lang === "en" ? "Official:" : "官方解釋:"}
                       </div>
-                      <div style={{ whiteSpace: "pre-wrap" }}>{currentQuestion.explanation_raw}</div>
+                      <div style={{ whiteSpace: "pre-wrap", color: theme.text }}>{currentQuestion.explanation_raw}</div>
                     </div>
                   )}
                   {currentQuestion.explanation_human && (
                     <div>
-                      <div style={{ fontSize: "0.9rem", color: "#666", marginBottom: "0.25rem" }}>
+                      <div style={{ fontSize: "0.9rem", color: theme.textSecondary, marginBottom: "0.25rem" }}>
                         {lang === "cn" ? "通俗解释:" : lang === "en" ? "Simple:" : "通俗解釋:"}
                       </div>
-                      <div style={{ whiteSpace: "pre-wrap" }}>{currentQuestion.explanation_human}</div>
+                      <div style={{ whiteSpace: "pre-wrap", color: theme.text }}>{currentQuestion.explanation_human}</div>
                     </div>
                   )}
                 </div>
@@ -705,10 +797,11 @@ function PracticePage({ sessionId, practiceMode = "all", lang, onBack }) {
                 <div
                   style={{
                     padding: "1rem",
-                    backgroundColor: "#fffbe6",
+                    backgroundColor: theme.knowledgeBg,
                     borderRadius: "8px",
                     marginBottom: "1rem",
-                    border: "1px solid #ffe58f",
+                    border: `1px solid ${theme.knowledgeBorder}`,
+                    color: theme.text,
                   }}
                 >
                   <div style={{ fontWeight: "bold", marginBottom: "0.5rem" }}>
@@ -721,7 +814,7 @@ function PracticePage({ sessionId, practiceMode = "all", lang, onBack }) {
                         marginBottom: idx < currentQuestion.knowledge_nodes.length - 1 ? "0.75rem" : 0,
                         paddingBottom: idx < currentQuestion.knowledge_nodes.length - 1 ? "0.75rem" : 0,
                         borderBottom:
-                          idx < currentQuestion.knowledge_nodes.length - 1 ? "1px solid #e0e0e0" : "none",
+                          idx < currentQuestion.knowledge_nodes.length - 1 ? `1px solid ${theme.borderLight}` : "none",
                       }}
                     >
                       <div style={{ display: "flex", alignItems: "center", marginBottom: "0.25rem" }}>
@@ -770,7 +863,7 @@ function PracticePage({ sessionId, practiceMode = "all", lang, onBack }) {
                         <div
                           style={{
                             fontSize: "0.85rem",
-                            color: "#666",
+                            color: theme.textSecondary,
                             marginTop: "0.25rem",
                             marginLeft: "60px",
                           }}
@@ -779,7 +872,7 @@ function PracticePage({ sessionId, practiceMode = "all", lang, onBack }) {
                         </div>
                       )}
                       {kn.sources && kn.sources.length > 0 && (
-                        <div style={{ fontSize: "0.8rem", color: "#999", marginTop: "0.25rem", marginLeft: "60px" }}>
+                        <div style={{ fontSize: "0.8rem", color: theme.textSecondary, marginTop: "0.25rem", marginLeft: "60px" }}>
                           {kn.sources.map((source, sIdx) => (
                             <div key={sIdx} style={{ marginTop: "0.25rem" }}>
                               {source.source && (
@@ -806,7 +899,7 @@ function PracticePage({ sessionId, practiceMode = "all", lang, onBack }) {
           )}
         </div>
       ) : (
-        <div style={{ textAlign: "center", padding: "2rem" }}>
+        <div style={{ textAlign: "center", padding: "2rem", backgroundColor: theme.bg, color: theme.text }}>
           <p>{lang === "cn" ? "加载题目中..." : lang === "en" ? "Loading question..." : "載入題目中..."}</p>
         </div>
       )}
