@@ -83,6 +83,10 @@ class Settings(BaseSettings):
     IYF_CRON_EXPRESSION: str = "0 1 * * *"  # 爬取任务 Cron 表达式，默认每天凌晨1:00执行
     IYF_CATEGORIES: str = "movie,tv,variety"  # 需要爬取的分类列表（逗号分隔）
     
+    # OpenAI 配置
+    OPENAI_API_KEY: str | None = None  # OpenAI API Key
+    OPENAI_BASE_URL: str | None = None  # OpenAI API Base URL (可选，用于代理)
+    
     @computed_field  # type: ignore[prop-decorator]
     @property
     def iyf_categories_list(self) -> list[str]:

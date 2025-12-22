@@ -1,52 +1,94 @@
-import { useState, useEffect } from "react";
-import dayjs from "dayjs";
+import { useState, useEffect, useMemo } from "react";
 import { Edit, useForm } from "@refinedev/antd";
-import { Form, Input, Select, Checkbox, DatePicker, Spin, InputNumber } from "antd";
+import { useList } from "@refinedev/core";
+import { Form, Select, Spin } from "antd";
 
-const fields = [{"common": true, "default": null, "description": "pk", "form_type": "input", "index": false, "insertable": false, "listable": false, "max_length": null, "name": "id", "nullable": false, "options": [], "primary_key": true, "query_type": "eq", "queryable": false, "required": false, "sortable": false, "type": "int", "unique": false, "updatable": false}, {"common": false, "default": "", "description": "\u7c7b\u578b", "form_type": "select", "index": false, "insertable": false, "listable": false, "max_length": null, "name": "type", "nullable": false, "options": [], "primary_key": false, "query_type": "eq", "queryable": false, "required": false, "sortable": false, "type": "str", "unique": false, "updatable": false}, {"common": false, "default": "", "description": "\u5173\u8054\u5b9e\u4f53pk", "form_type": "input", "index": false, "insertable": false, "listable": false, "max_length": null, "name": "ref_id", "nullable": false, "options": [], "primary_key": false, "query_type": "eq", "queryable": false, "required": false, "sortable": false, "type": "int", "unique": false, "updatable": false}];
-
-function prepareInitialValues(record: Record<string, any>, fields: any[]) {
-  const result: Record<string, any> = {};
-  fields.forEach((field) => {
-    const value = record[field.name];
-    if (field.form_type === "date") {
-      result[field.name] = value ? dayjs(value) : null;
-    } else if (field.form_type === "checkbox" && field.options) {
-      result[field.name] = value ? value.split(",").map((v: string) => v.trim()) : [];
-    } else if (field.form_type === "select") {
-      result[field.name] = String(value);
-    } else {
-      result[field.name] = value;
-    }
-  });
-  return result;
-}
+// 类型选项
+const TYPE_OPTIONS = [
+  { label: "知识点", value: "knowledge" },
+  { label: "题目", value: "question" },
+];
 
 export const StudyLearningItemEdit = () => {
   const { formProps, saveButtonProps, queryResult } = useForm();
   const [initialized, setInitialized] = useState(false);
+  const [selectedType, setSelectedType] = useState<string>("knowledge");
 
   const record = queryResult?.data?.data;
   const form = formProps?.form;
+
+  // 获取知识点列表
+  const { data: knowledgeData, isLoading: knowledgeLoading } = useList({
+    resource: "studyKnowledgeNode",
+    pagination: { pageSize: 1000 },
+    filters: [{ field: "deleted", operator: "eq", value: false }],
+    queryOptions: {
+      enabled: selectedType === "knowledge",
+    },
+  });
+
+  // 获取题目列表
+  const { data: questionData, isLoading: questionLoading } = useList({
+    resource: "studyQuestion",
+    pagination: { pageSize: 1000 },
+    filters: [{ field: "deleted", operator: "eq", value: false }],
+    queryOptions: {
+      enabled: selectedType === "question",
+    },
+  });
+
+  // 根据类型生成选项
+  const entityOptions = useMemo(() => {
+    if (selectedType === "knowledge") {
+      return (knowledgeData?.data || []).map((item: any) => ({
+        label: `${item.code} - ${item.title}`,
+        value: item.id,
+        item: item,
+      }));
+    } else if (selectedType === "question") {
+      return (questionData?.data || []).map((item: any) => {
+        const stem = item.stem || "";
+        // 移除图片标记
+        const cleanStem = stem.replace(/\n?\[IMAGE:.*?\]/, '').trim();
+        return {
+          label: cleanStem.length > 50 ? cleanStem.substring(0, 50) + "..." : cleanStem,
+          value: item.id,
+          item: item,
+        };
+      });
+    }
+    return [];
+  }, [selectedType, knowledgeData, questionData]);
+
   useEffect(() => {
     if (!initialized && record && form && !form.isFieldsTouched()) {
-      form.setFieldsValue(prepareInitialValues(record, fields));
+      form.setFieldsValue(record);
+      setSelectedType(record.type || "knowledge");
       setInitialized(true);
     }
-  }, [initialized, queryResult?.data?.data]);
+  }, [initialized, record, form]);
+
+  const handleTypeChange = (value: string) => {
+    setSelectedType(value);
+    // 清空 ref_id
+    formProps.form?.setFieldsValue({ ref_id: undefined });
+  };
 
   const handleFinish = (values: any) => {
     const processed = {
       ...values,
+      // 确保 ref_id 是数字
+      ref_id: typeof values.ref_id === 'number' ? values.ref_id : Number(values.ref_id),
     };
     return formProps.onFinish?.(processed);
   };
 
-  // 这里判断是否加载完成，避免组件内部访问未定义数据
-
   if (queryResult?.isLoading || !record || !form || !initialized) {
     return <Spin size="large" style={{ display: "block", margin: "100px auto" }} />;
   }
+
+  const isLoading = selectedType === "knowledge" ? knowledgeLoading : questionLoading;
+
   return (
     <Edit saveButtonProps={saveButtonProps}>
       <Form {...formProps} layout="vertical" onFinish={handleFinish}>
@@ -54,22 +96,39 @@ export const StudyLearningItemEdit = () => {
           name="type"
           label="类型"
           rules={[
-            
+            { required: true, message: "请选择类型" }
           ]}
         >
-              <Input />
+          <Select
+            placeholder="选择类型"
+            options={TYPE_OPTIONS}
+            onChange={handleTypeChange}
+          />
         </Form.Item>
         <Form.Item
           name="ref_id"
-          label="关联实体pk"
+          label={selectedType === "knowledge" ? "选择知识点" : "选择题目"}
           rules={[
-            { type: "number", message: "必须是数字" }
+            { required: true, message: `请选择${selectedType === "knowledge" ? "知识点" : "题目"}` }
           ]}
         >
-              <InputNumber style={{ width: "100%" }} />
+          <Select
+            style={{ width: "100%" }}
+            placeholder={`选择${selectedType === "knowledge" ? "知识点" : "题目"}...`}
+            options={entityOptions}
+            showSearch
+            filterOption={(input, option) =>
+              (option?.label ?? "").toLowerCase().includes(input.toLowerCase())
+            }
+            loading={isLoading}
+            notFoundContent={isLoading ? <Spin size="small" /> : "暂无数据"}
+            onChange={(value) => {
+              // value 是选项的 value (ID)
+              formProps.form?.setFieldsValue({ ref_id: Number(value) });
+            }}
+          />
         </Form.Item>
       </Form>
-
     </Edit>
   );
 };

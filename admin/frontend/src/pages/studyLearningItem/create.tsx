@@ -1,22 +1,85 @@
 import { Create, useForm } from "@refinedev/antd";
-import { Form, Input, Select, Checkbox, DatePicker, InputNumber } from "antd";
-import { useEffect } from "react";
+import { useList } from "@refinedev/core";
+import { Form, Select, Spin } from "antd";
+import { useEffect, useState, useMemo } from "react";
+
+// 类型选项
+const TYPE_OPTIONS = [
+  { label: "知识点", value: "knowledge" },
+  { label: "题目", value: "question" },
+];
 
 export const StudyLearningItemCreate = () => {
   const { formProps, saveButtonProps } = useForm();
+  const [selectedType, setSelectedType] = useState<string>("knowledge");
+
+  // 获取知识点列表
+  const { data: knowledgeData, isLoading: knowledgeLoading } = useList({
+    resource: "studyKnowledgeNode",
+    pagination: { pageSize: 1000 },
+    filters: [{ field: "deleted", operator: "eq", value: false }],
+    queryOptions: {
+      enabled: selectedType === "knowledge",
+    },
+  });
+
+  // 获取题目列表
+  const { data: questionData, isLoading: questionLoading } = useList({
+    resource: "studyQuestion",
+    pagination: { pageSize: 1000 },
+    filters: [{ field: "deleted", operator: "eq", value: false }],
+    queryOptions: {
+      enabled: selectedType === "question",
+    },
+  });
+
+  // 根据类型生成选项
+  const entityOptions = useMemo(() => {
+    if (selectedType === "knowledge") {
+      return (knowledgeData?.data || []).map((item: any) => ({
+        label: `${item.code} - ${item.title}`,
+        value: item.id,
+        item: item,
+      }));
+    } else if (selectedType === "question") {
+      return (questionData?.data || []).map((item: any) => {
+        const stem = item.stem || "";
+        // 移除图片标记
+        const cleanStem = stem.replace(/\n?\[IMAGE:.*?\]/, '').trim();
+        return {
+          label: cleanStem.length > 50 ? cleanStem.substring(0, 50) + "..." : cleanStem,
+          value: item.id,
+          item: item,
+        };
+      });
+    }
+    return [];
+  }, [selectedType, knowledgeData, questionData]);
 
   useEffect(() => {
     const defaults = {
+      type: "knowledge",
     };
     formProps.form?.setFieldsValue(defaults);
-  }, [formProps.form]);  
+    setSelectedType("knowledge");
+  }, [formProps.form]);
+
+  const handleTypeChange = (value: string) => {
+    setSelectedType(value);
+    // 清空 ref_id
+    formProps.form?.setFieldsValue({ ref_id: undefined });
+  };
 
   const handleFinish = (values: any) => {
     const processed = {
       ...values,
+      // 确保 ref_id 是数字
+      ref_id: typeof values.ref_id === 'number' ? values.ref_id : Number(values.ref_id),
     };
     return formProps.onFinish?.(processed);
   };
+
+  const isLoading = selectedType === "knowledge" ? knowledgeLoading : questionLoading;
 
   return (
     <Create saveButtonProps={saveButtonProps}>
@@ -25,19 +88,37 @@ export const StudyLearningItemCreate = () => {
           name="type"
           label="类型"
           rules={[
-            
+            { required: true, message: "请选择类型" }
           ]}
         >
-              <Input />
+          <Select
+            placeholder="选择类型"
+            options={TYPE_OPTIONS}
+            onChange={handleTypeChange}
+          />
         </Form.Item>
         <Form.Item
           name="ref_id"
-          label="关联实体pk"
+          label={selectedType === "knowledge" ? "选择知识点" : "选择题目"}
           rules={[
-            { type: "number", message: "必须是数字" }
+            { required: true, message: `请选择${selectedType === "knowledge" ? "知识点" : "题目"}` }
           ]}
         >
-              <InputNumber style={{ width: "100%" }} />
+          <Select
+            style={{ width: "100%" }}
+            placeholder={`选择${selectedType === "knowledge" ? "知识点" : "题目"}...`}
+            options={entityOptions}
+            showSearch
+            filterOption={(input, option) =>
+              (option?.label ?? "").toLowerCase().includes(input.toLowerCase())
+            }
+            loading={isLoading}
+            notFoundContent={isLoading ? <Spin size="small" /> : "暂无数据"}
+            onChange={(value) => {
+              // value 是选项的 value (ID)
+              formProps.form?.setFieldsValue({ ref_id: Number(value) });
+            }}
+          />
         </Form.Item>
       </Form>
     </Create>

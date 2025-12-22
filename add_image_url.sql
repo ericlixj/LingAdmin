@@ -1,0 +1,1 @@
+ALTER TABLE study_question ADD COLUMN IF NOT EXISTS image_url VARCHAR(500);

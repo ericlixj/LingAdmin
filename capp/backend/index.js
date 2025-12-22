@@ -95,6 +95,10 @@ app.use("/api/c/postcode", postcodeRouter);
 // Gas 查询路由
 app.use("/api/c/gas", gasRouter);
 
+// 学习系统路由
+const studyRouter = require("./routes/study");
+app.use("/api/c/study", studyRouter);
+
 // 查询 flyer_details from OpenSearch（需要认证）
 app.get("/api/c/flyer_details", authenticateToken, async (req, res) => {
   const { 

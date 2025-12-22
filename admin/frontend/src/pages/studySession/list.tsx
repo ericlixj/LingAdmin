@@ -5,8 +5,10 @@ import {
   ShowButton,
   useTable,
 } from "@refinedev/antd";
+import { useMany, useList } from "@refinedev/core";
 import { Input, Select, Space, Table, DatePicker  } from "antd";
 import dayjs from "dayjs";
+import { useMemo } from "react";
 
 export const StudySessionList = () => {
   const { tableProps, filters } = useTable({
@@ -16,6 +18,46 @@ export const StudySessionList = () => {
     },
   });
 
+  // 收集所有 user_id 和 exam_id
+  const allSessions = tableProps?.dataSource || [];
+  const userIds = [...new Set(allSessions.map((item: any) => item.user_id).filter(Boolean))];
+  const examIds = [...new Set(allSessions.map((item: any) => item.exam_id).filter(Boolean))];
+
+  // 批量获取用户信息
+  const { data: usersData } = useMany({
+    resource: "user",
+    ids: userIds as number[],
+    queryOptions: {
+      enabled: userIds.length > 0,
+    },
+  });
+
+  // 批量获取考试信息
+  const { data: examsData } = useMany({
+    resource: "studyExam",
+    ids: examIds as number[],
+    queryOptions: {
+      enabled: examIds.length > 0,
+    },
+  });
+
+  // 构建映射
+  const usersMap = useMemo(() => {
+    const map = new Map();
+    (usersData?.data || []).forEach((user: any) => {
+      map.set(user.id, user);
+    });
+    return map;
+  }, [usersData]);
+
+  const examsMap = useMemo(() => {
+    const map = new Map();
+    (examsData?.data || []).forEach((exam: any) => {
+      map.set(exam.id, exam);
+    });
+    return map;
+  }, [examsData]);
+
   return (
     <List>
       <Table {...tableProps} rowKey="id">
@@ -23,11 +65,11 @@ export const StudySessionList = () => {
 
         <Table.Column
           dataIndex="user_id"
-          title="user_id"
+          title="用户"
           filterDropdown={(props) => (
             <FilterDropdown {...props}>
               <Input
-                placeholder="搜索user_id"
+                placeholder="搜索用户ID"
                 value={(props.selectedKeys[0] as string) || ""}
                 onChange={(e) =>
                   props.setSelectedKeys(e.target.value ? [e.target.value] : [])
@@ -40,18 +82,18 @@ export const StudySessionList = () => {
           filteredValue={
             (filters.find((f) => f.field === "user_id")?.value as any[]) || null
           }
-
           render={(value) => {
-            return value;
+            const user = usersMap.get(value);
+            return user ? (user.full_name || user.email || `ID: ${value}`) : `ID: ${value}`;
           }}
         />
         <Table.Column
           dataIndex="exam_id"
-          title="exam_id"
+          title="考试"
           filterDropdown={(props) => (
             <FilterDropdown {...props}>
               <Input
-                placeholder="搜索exam_id"
+                placeholder="搜索考试ID"
                 value={(props.selectedKeys[0] as string) || ""}
                 onChange={(e) =>
                   props.setSelectedKeys(e.target.value ? [e.target.value] : [])
@@ -64,9 +106,9 @@ export const StudySessionList = () => {
           filteredValue={
             (filters.find((f) => f.field === "exam_id")?.value as any[]) || null
           }
-
           render={(value) => {
-            return value;
+            const exam = examsMap.get(value);
+            return exam ? (exam.name || `ID: ${value}`) : `ID: ${value}`;
           }}
         />
         <Table.Column

@@ -1,0 +1,3712 @@
+[
+  {
+    "test_num": 1,
+    "question_num": 1,
+    "ques_id": 1875,
+    "stem": "Your vehicle should be operated at:",
+    "options": {
+      "A": "Peak torque.",
+      "B": "Peak horsepower.",
+      "C": "Above peak torque and peak horsepower.",
+      "D": "Between peak torque and peak horsepower."
+    },
+    "answer": "D",
+    "image_url": "https://aaravdrivingschool.com/fonts/innn.png"
+  },
+  {
+    "test_num": 1,
+    "question_num": 2,
+    "ques_id": 2043,
+    "stem": "How many consecutive hours of off-duty time must be taken to reset the cycle in Cycle 2?",
+    "options": {
+      "A": "48 hrs",
+      "B": "96 hrs",
+      "C": "72 hrs",
+      "D": "24hrs"
+    },
+    "answer": "C",
+    "image_url": null
+  },
+  {
+    "test_num": 1,
+    "question_num": 3,
+    "ques_id": 2040,
+    "stem": "This sign means?",
+    "options": {
+      "A": "Buses yield to traffic",
+      "B": "Yield to all buses at intersections",
+      "C": "Indicates to traffic that buses have the right-of-way when pulling away from the curb or a bus stop when the posted speed limit is below 60km/hr",
+      "D": "Yield to buses when they are turning"
+    },
+    "answer": "C",
+    "image_url": "http://aaravdrivingschool.com/apanel/org/common/images/avatar/job/busyield.jpg"
+  },
+  {
+    "test_num": 1,
+    "question_num": 4,
+    "ques_id": 2045,
+    "stem": "Which of the following is NOT a characteristic of a construction zone?",
+    "options": {
+      "A": "Traffic-control person",
+      "B": "Black lettering on orange signs; Pilot car",
+      "C": "Slow moving construction equipment",
+      "D": "Sports cars"
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 1,
+    "question_num": 5,
+    "ques_id": 1874,
+    "stem": "Torque is:",
+    "options": {
+      "A": "Used to develop speed.",
+      "B": "The ability of the engine to move the vehicle.",
+      "C": "The same as r.p.m.",
+      "D": "The same as horsepower."
+    },
+    "answer": "B",
+    "image_url": null
+  },
+  {
+    "test_num": 1,
+    "question_num": 6,
+    "ques_id": 1968,
+    "stem": "Which types of commercial vehicles are required to carry fire extinguishers?",
+    "options": {
+      "A": "School buses.",
+      "B": "Public passenger vehicles.",
+      "C": "Vehicles transporting explosives.",
+      "D": "All of the above."
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 1,
+    "question_num": 7,
+    "ques_id": 1872,
+    "stem": "Off track is:",
+    "options": {
+      "A": "Greater in combination vehicles than in cars.",
+      "B": "Something that increases as the wheelbase increases.",
+      "C": "The difference between the path of the front wheels and the path of the rear wheels when a vehicle goes around a curve.",
+      "D": "All of the above."
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 1,
+    "question_num": 8,
+    "ques_id": 2043,
+    "stem": "How many consecutive hours of off-duty time must be taken to reset the cycle in Cycle 2?",
+    "options": {
+      "A": "48 hrs",
+      "B": "96 hrs",
+      "C": "72 hrs",
+      "D": "24hrs"
+    },
+    "answer": "C",
+    "image_url": null
+  },
+  {
+    "test_num": 1,
+    "question_num": 9,
+    "ques_id": 2035,
+    "stem": "What is the best driving practice when driving through deep water?",
+    "options": {
+      "A": "Drive through at a slow speed",
+      "B": "Drive through deep water in a low gear with high rpms in order to stop the vehicle from stalling",
+      "C": "Find a route around the deep water",
+      "D": "Apply a slight drag on the brakes and maintaining brake application for a short distance to dry out the brakes – check the brakes after exiting the water"
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 1,
+    "question_num": 10,
+    "ques_id": 1989,
+    "stem": "When you see a potential hazard in your danger zone, you should:",
+    "options": {
+      "A": "Remove your foot from the accelerator and cover the brake pedal.",
+      "B": "Hit the brakes.",
+      "C": "Speed up and try to swerve around it.",
+      "D": "Come to a complete stop until the hazard is gone."
+    },
+    "answer": "A",
+    "image_url": null
+  },
+  {
+    "test_num": 1,
+    "question_num": 11,
+    "ques_id": 1864,
+    "stem": "What class of licence must you already hold to apply for a commercial driver's licence?",
+    "options": {
+      "A": "You do not need to hold a previous licence.",
+      "B": "Class 7",
+      "C": "Class 5",
+      "D": "Class 6"
+    },
+    "answer": "C",
+    "image_url": null
+  },
+  {
+    "test_num": 1,
+    "question_num": 12,
+    "ques_id": 2041,
+    "stem": "Which one of the following is NOT something that you could potentially strike or damage if the rear of your vehicle swings over the sidewalk?",
+    "options": {
+      "A": "A cyclist",
+      "B": "Pedestrians",
+      "C": "Light standard",
+      "D": "Headlights"
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 1,
+    "question_num": 13,
+    "ques_id": 1874,
+    "stem": "Torque is:",
+    "options": {
+      "A": "Used to develop speed.",
+      "B": "The ability of the engine to move the vehicle.",
+      "C": "The same as r.p.m.",
+      "D": "The same as horsepower."
+    },
+    "answer": "B",
+    "image_url": null
+  },
+  {
+    "test_num": 1,
+    "question_num": 14,
+    "ques_id": 1966,
+    "stem": "Written trip inspection reports must include:",
+    "options": {
+      "A": "All defects that may affect the safe operation of the vehicle.",
+      "B": "The licence plate or unit numbers for the vehicle and/or trailers.",
+      "C": "The signature of the person making the report.",
+      "D": "All of the above."
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 1,
+    "question_num": 15,
+    "ques_id": 2037,
+    "stem": "Regardless of maintenance policies, who is responsible for ensuring that the brakes of a vehicle are in working order before the vehicle is placed into operation?",
+    "options": {
+      "A": "The driver",
+      "B": "The employer",
+      "C": "The carrier",
+      "D": "The truck manufacturer"
+    },
+    "answer": "A",
+    "image_url": null
+  },
+  {
+    "test_num": 1,
+    "question_num": 16,
+    "ques_id": 2034,
+    "stem": "How often does a driver have to take 24 consecutive hours of off-duty time, regardless of cycle?",
+    "options": {
+      "A": "Upon reaching 70 hours in 7 days or every 14 days, whichever comes first",
+      "B": "Once every fortnight",
+      "C": "Every time the unit is refueled",
+      "D": "Once a month when the unit goes to the shop for its regular maintenance"
+    },
+    "answer": "A",
+    "image_url": null
+  },
+  {
+    "test_num": 1,
+    "question_num": 17,
+    "ques_id": 1874,
+    "stem": "Torque is:",
+    "options": {
+      "A": "Used to develop speed.",
+      "B": "The ability of the engine to move the vehicle.",
+      "C": "The same as r.p.m.",
+      "D": "The same as horsepower."
+    },
+    "answer": "B",
+    "image_url": null
+  },
+  {
+    "test_num": 1,
+    "question_num": 18,
+    "ques_id": 2037,
+    "stem": "Regardless of maintenance policies, who is responsible for ensuring that the brakes of a vehicle are in working order before the vehicle is placed into operation?",
+    "options": {
+      "A": "The driver",
+      "B": "The employer",
+      "C": "The carrier",
+      "D": "The truck manufacturer"
+    },
+    "answer": "A",
+    "image_url": null
+  },
+  {
+    "test_num": 1,
+    "question_num": 19,
+    "ques_id": 2032,
+    "stem": "A danger zone is defined as?",
+    "options": {
+      "A": "The section of road adjacent to a playground",
+      "B": "The section of road through which a vehicle must travel before it can stop",
+      "C": "The section of road a pedestrian must cross when not crossing at an intersection and no crosswalk is available",
+      "D": "The stretch of road that parallels an off- or on-ramp on freeways"
+    },
+    "answer": "B",
+    "image_url": null
+  },
+  {
+    "test_num": 1,
+    "question_num": 20,
+    "ques_id": 2038,
+    "stem": "In addition to the regular outside rear view mirrors, what type of mirror must be installed on cab-over or forward control type school bus?",
+    "options": {
+      "A": "Convex mirrors at the bottom of the side mirrors",
+      "B": "A convex mirror at the front of the vehicle so that you can view passengers crossing in front",
+      "C": "A mirror to give a view of the entrance door to the school bus so that you may observe passengers alighting and boarding the bus",
+      "D": "b and c are correct"
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 1,
+    "question_num": 21,
+    "ques_id": 2033,
+    "stem": "Passengers may alight and board a school bus?",
+    "options": {
+      "A": "By either the front or rear doors",
+      "B": "Through the emergency exits",
+      "C": "Only through the exit door located on the right side of the bus",
+      "D": "Only after receiving permission from the driver, and the vehicle has come to a complete stop"
+    },
+    "answer": "C",
+    "image_url": null
+  },
+  {
+    "test_num": 1,
+    "question_num": 22,
+    "ques_id": 1870,
+    "stem": "A red triangle Slow Moving Vehicle sign should be placed on any vehicle that travels at less than:",
+    "options": {
+      "A": "30 km/h",
+      "B": "40 km/h",
+      "C": "50 km/h",
+      "D": "60 km/h"
+    },
+    "answer": "B",
+    "image_url": "http://aaravdrivingschool.com/apanel/org/common/images/avatar/job/traingle.png"
+  },
+  {
+    "test_num": 1,
+    "question_num": 23,
+    "ques_id": 2045,
+    "stem": "Which of the following is NOT a characteristic of a construction zone?",
+    "options": {
+      "A": "Traffic-control person",
+      "B": "Black lettering on orange signs; Pilot car",
+      "C": "Slow moving construction equipment",
+      "D": "Sports cars"
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 1,
+    "question_num": 24,
+    "ques_id": 2036,
+    "stem": "When you are operating your logbook in Cycle 2, when must you take 24 consecutive hours of off-duty time?",
+    "options": {
+      "A": "After you have accumulated 140 hours of on-duty time in 14 days",
+      "B": "Prior to accumulating 70 hours of on-duty time",
+      "C": "After the 5th day working over-the-road",
+      "D": "When your carrier indicates that you are allowed down time because they are unable to get you a backhaul"
+    },
+    "answer": "B",
+    "image_url": null
+  },
+  {
+    "test_num": 1,
+    "question_num": 25,
+    "ques_id": 1869,
+    "stem": "Revolutions per minute, or R.P.M., are:",
+    "options": {
+      "A": "The number of complete turns the crankshaft makes in one minute.",
+      "B": "Measured by your tachometer.",
+      "C": "An important factor in governing how fast you can go in a given gear.",
+      "D": "All of the above."
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 1,
+    "question_num": 26,
+    "ques_id": 2036,
+    "stem": "When you are operating your logbook in Cycle 2, when must you take 24 consecutive hours of off-duty time?",
+    "options": {
+      "A": "After you have accumulated 140 hours of on-duty time in 14 days",
+      "B": "Prior to accumulating 70 hours of on-duty time",
+      "C": "After the 5th day working over-the-road",
+      "D": "When your carrier indicates that you are allowed down time because they are unable to get you a backhaul"
+    },
+    "answer": "B",
+    "image_url": null
+  },
+  {
+    "test_num": 1,
+    "question_num": 27,
+    "ques_id": 1872,
+    "stem": "Off track is:",
+    "options": {
+      "A": "Greater in combination vehicles than in cars.",
+      "B": "Something that increases as the wheelbase increases.",
+      "C": "The difference between the path of the front wheels and the path of the rear wheels when a vehicle goes around a curve.",
+      "D": "All of the above."
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 1,
+    "question_num": 28,
+    "ques_id": 1966,
+    "stem": "Written trip inspection reports must include:",
+    "options": {
+      "A": "All defects that may affect the safe operation of the vehicle.",
+      "B": "The licence plate or unit numbers for the vehicle and/or trailers.",
+      "C": "The signature of the person making the report.",
+      "D": "All of the above."
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 1,
+    "question_num": 29,
+    "ques_id": 2037,
+    "stem": "Regardless of maintenance policies, who is responsible for ensuring that the brakes of a vehicle are in working order before the vehicle is placed into operation?",
+    "options": {
+      "A": "The driver",
+      "B": "The employer",
+      "C": "The carrier",
+      "D": "The truck manufacturer"
+    },
+    "answer": "A",
+    "image_url": null
+  },
+  {
+    "test_num": 1,
+    "question_num": 30,
+    "ques_id": 2038,
+    "stem": "In addition to the regular outside rear view mirrors, what type of mirror must be installed on cab-over or forward control type school bus?",
+    "options": {
+      "A": "Convex mirrors at the bottom of the side mirrors",
+      "B": "A convex mirror at the front of the vehicle so that you can view passengers crossing in front",
+      "C": "A mirror to give a view of the entrance door to the school bus so that you may observe passengers alighting and boarding the bus",
+      "D": "b and c are correct"
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 1,
+    "question_num": 31,
+    "ques_id": 1875,
+    "stem": "Your vehicle should be operated at:",
+    "options": {
+      "A": "Peak torque.",
+      "B": "Peak horsepower.",
+      "C": "Above peak torque and peak horsepower.",
+      "D": "Between peak torque and peak horsepower."
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 1,
+    "question_num": 32,
+    "ques_id": 1869,
+    "stem": "Revolutions per minute, or R.P.M., are:",
+    "options": {
+      "A": "The number of complete turns the crankshaft makes in one minute.",
+      "B": "Measured by your tachometer.",
+      "C": "An important factor in governing how fast you can go in a given gear.",
+      "D": "All of the above."
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 1,
+    "question_num": 33,
+    "ques_id": 1873,
+    "stem": "The position of your front wheels while negotiating a curve should be:",
+    "options": {
+      "A": "In the center of the lane.",
+      "B": "Close to the center line while curving to the right.",
+      "C": "Close to the right edge of the lane while curving to the left.",
+      "D": "b. and c. are correct."
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 1,
+    "question_num": 34,
+    "ques_id": 2037,
+    "stem": "Regardless of maintenance policies, who is responsible for ensuring that the brakes of a vehicle are in working order before the vehicle is placed into operation?",
+    "options": {
+      "A": "The driver",
+      "B": "The employer",
+      "C": "The carrier",
+      "D": "The truck manufacturer"
+    },
+    "answer": "A",
+    "image_url": null
+  },
+  {
+    "test_num": 1,
+    "question_num": 35,
+    "ques_id": 1872,
+    "stem": "Off track is:",
+    "options": {
+      "A": "Greater in combination vehicles than in cars.",
+      "B": "Something that increases as the wheelbase increases.",
+      "C": "The difference between the path of the front wheels and the path of the rear wheels when a vehicle goes around a curve.",
+      "D": "All of the above."
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 1,
+    "question_num": 36,
+    "ques_id": 1864,
+    "stem": "What class of licence must you already hold to apply for a commercial driver's licence?",
+    "options": {
+      "A": "You do not need to hold a previous licence.",
+      "B": "Class 7",
+      "C": "Class 5",
+      "D": "Class 6"
+    },
+    "answer": "C",
+    "image_url": null
+  },
+  {
+    "test_num": 1,
+    "question_num": 37,
+    "ques_id": 2032,
+    "stem": "A danger zone is defined as?",
+    "options": {
+      "A": "The section of road adjacent to a playground",
+      "B": "The section of road through which a vehicle must travel before it can stop",
+      "C": "The section of road a pedestrian must cross when not crossing at an intersection and no crosswalk is available",
+      "D": "The stretch of road that parallels an off- or on-ramp on freeways"
+    },
+    "answer": "B",
+    "image_url": null
+  },
+  {
+    "test_num": 1,
+    "question_num": 38,
+    "ques_id": 1963,
+    "stem": "Passenger vehicles with a capacity of more than 12 persons should have:",
+    "options": {
+      "A": "Lights that illuminate the passenger aisle behind the driver.",
+      "B": "Inside lights that should be left on all the time.",
+      "C": "Inside lights that should be on between sunset and sunrise.",
+      "D": "a. and c. are correct."
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 1,
+    "question_num": 39,
+    "ques_id": 1965,
+    "stem": "A \"taxi\" refers to:",
+    "options": {
+      "A": "A motor vehicle with a seating capacity of not more than 10 persons, and which is available with its driver for hire.",
+      "B": "Any motor vehicle which is available with its driver for hire.",
+      "C": "Any motor vehicle with a seating capacity of not more than 10 persons.",
+      "D": "Any motor vehicle which is operated for public transportation."
+    },
+    "answer": "A",
+    "image_url": null
+  },
+  {
+    "test_num": 1,
+    "question_num": 40,
+    "ques_id": 1864,
+    "stem": "What class of licence must you already hold to apply for a commercial driver's licence?",
+    "options": {
+      "A": "You do not need to hold a previous licence.",
+      "B": "Class 7",
+      "C": "Class 5",
+      "D": "Class 6"
+    },
+    "answer": "C",
+    "image_url": null
+  },
+  {
+    "test_num": 2,
+    "question_num": 1,
+    "ques_id": 1974,
+    "stem": "When parking a single unit vehicle on an upgrade and there is no curb, you should:",
+    "options": {
+      "A": "Turn the wheels towards the edge of the roadway.",
+      "B": "Turn the wheels towards the center of the roadway.",
+      "C": "Keep your wheels facing straight ahead.",
+      "D": "Find another parking spot."
+    },
+    "answer": "A",
+    "image_url": "https://aaravdrivingschool.com/fonts/innn.png"
+  },
+  {
+    "test_num": 2,
+    "question_num": 2,
+    "ques_id": 2054,
+    "stem": "What are the top two reasons that commercial drivers are involved in a police reported casualty crash?",
+    "options": {
+      "A": "Drunk driving and fatigue",
+      "B": "Driving without due care and attention and unsafe speed",
+      "C": "Amphetamines and poor diet",
+      "D": "Old equipment and a ‘reckless’ attitude"
+    },
+    "answer": "B",
+    "image_url": null
+  },
+  {
+    "test_num": 2,
+    "question_num": 3,
+    "ques_id": 2050,
+    "stem": "A special vehicle is defined as?",
+    "options": {
+      "A": "A vehicle to transport people with disabilities",
+      "B": "A motor vehicle that has a carrying capacity of not more than 10 persons, including the driver, which is designed or modified for public transportation of persons with disabilities",
+      "C": "A vehicle with hand-controls that can be operated by drivers with disabilities",
+      "D": "A minivan with hand controls"
+    },
+    "answer": "B",
+    "image_url": null
+  },
+  {
+    "test_num": 2,
+    "question_num": 4,
+    "ques_id": 1877,
+    "stem": "A controlled railway crossing may have:",
+    "options": {
+      "A": "A stop sign.",
+      "B": "A flag person.",
+      "C": "An electrical or mechanical signaling device.",
+      "D": "Any of the above."
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 2,
+    "question_num": 5,
+    "ques_id": 1881,
+    "stem": "If you want to tow a trailer that weighs more than 4600 kg, and neither the trailer nor your towing vehicle has air brakes, which of the following do you need?",
+    "options": {
+      "A": "A Class 1, 2 or 3 driver's licence.",
+      "B": "A Class 4 driver's licence.",
+      "C": "A Class 4 or 5 driver's licence with a heavy trailer (code 20) endorsement.",
+      "D": "Both a. and c. are correct."
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 2,
+    "question_num": 6,
+    "ques_id": 1879,
+    "stem": "Stopping on icy roads requires:",
+    "options": {
+      "A": "Light pressure on the brakes.",
+      "B": "Heavy brake use.",
+      "C": "Pumping the brakes.",
+      "D": "Shifting into a lower gear."
+    },
+    "answer": "A",
+    "image_url": null
+  },
+  {
+    "test_num": 2,
+    "question_num": 7,
+    "ques_id": 1880,
+    "stem": "To get a commercial licence you must:",
+    "options": {
+      "A": "Have a driving record that shows fewer than four tickets that carry penalty points in the last two years.",
+      "B": "Not owe any motor vehicle related fines to ICBC or the province of B.C.",
+      "C": "Already hold a Class 5 or 6 driver's licence, or out-of-province equivalent.",
+      "D": "All of the above."
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 2,
+    "question_num": 8,
+    "ques_id": 2055,
+    "stem": "When descending a hill and the driver notices smoke coming from an oil-filled hub, what should she do?",
+    "options": {
+      "A": "Continue to the next rest and then stop and investigate the source of the problem",
+      "B": "Stop immediately and investigate the source of the problem",
+      "C": "Drive to the next truck stop and call dispatch",
+      "D": "Ask your co-driver why there is smoke coming from the hub and follow his instructions"
+    },
+    "answer": "B",
+    "image_url": null
+  },
+  {
+    "test_num": 2,
+    "question_num": 9,
+    "ques_id": 1974,
+    "stem": "When parking a single unit vehicle on an upgrade and there is no curb, you should:",
+    "options": {
+      "A": "Turn the wheels towards the edge of the roadway.",
+      "B": "Turn the wheels towards the center of the roadway.",
+      "C": "Keep your wheels facing straight ahead.",
+      "D": "Find another parking spot."
+    },
+    "answer": "A",
+    "image_url": null
+  },
+  {
+    "test_num": 2,
+    "question_num": 10,
+    "ques_id": 1971,
+    "stem": "Which vehicles are required to carry warning devices for use in the event that the vehicle becomes disabled?",
+    "options": {
+      "A": "All vehicles which seat more than 10 passengers",
+      "B": "All commercial vehicles with an overall width of more than 2.3 meters.",
+      "C": "All commercial vehicles with a load width of more than 2.3 meters.",
+      "D": "All of the above."
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 2,
+    "question_num": 11,
+    "ques_id": 1880,
+    "stem": "To get a commercial licence you must:",
+    "options": {
+      "A": "Have a driving record that shows fewer than four tickets that carry penalty points in the last two years.",
+      "B": "Not owe any motor vehicle related fines to ICBC or the province of B.C.",
+      "C": "Already hold a Class 5 or 6 driver's licence, or out-of-province equivalent.",
+      "D": "All of the above."
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 2,
+    "question_num": 12,
+    "ques_id": 1887,
+    "stem": "Every motor vehicle must be equipped with how many braking systems?",
+    "options": {
+      "A": "One.",
+      "B": "Two.",
+      "C": "Three.",
+      "D": "None."
+    },
+    "answer": "B",
+    "image_url": null
+  },
+  {
+    "test_num": 2,
+    "question_num": 13,
+    "ques_id": 2058,
+    "stem": "Which one of the following is NOT a restriction that applies when loading or carrying baggage on a bus?",
+    "options": {
+      "A": "It cannot fall on or against any passenger",
+      "B": "Baggage or cargo must not block or partially block any aisle or exit",
+      "C": "The baggage belonging to the other driver must be securely fastened to the rear of the bus",
+      "D": "Protect all baggage from dust and moisture"
+    },
+    "answer": "C",
+    "image_url": null
+  },
+  {
+    "test_num": 2,
+    "question_num": 14,
+    "ques_id": 2048,
+    "stem": "This sign means?",
+    "options": {
+      "A": "Indicates that an oversize load is being transported",
+      "B": "Indicates that there is a detour ahead",
+      "C": "Indicates that defensive driving is required for the next 50 meters",
+      "D": "Indicates that slower traffic should keep left"
+    },
+    "answer": "A",
+    "image_url": "http://aaravdrivingschool.com/apanel/org/common/images/avatar/job/oversizeload.jpg"
+  },
+  {
+    "test_num": 2,
+    "question_num": 15,
+    "ques_id": 2060,
+    "stem": "Why are drivers required to complete a trip inspection report?",
+    "options": {
+      "A": "It is company policy",
+      "B": "To ensure that the safety features on the vehicle are operational",
+      "C": "It is required as part of the National Safety Code regulations to ensure minimum safety standards within the commercial transportation industry",
+      "D": "‘b’ and ‘c’ are correct"
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 2,
+    "question_num": 16,
+    "ques_id": 1886,
+    "stem": "Which vehicles are required to stop at uncontrolled main railway crossings?",
+    "options": {
+      "A": "School buses carrying children and all other buses carrying passengers.",
+      "B": "Tractor/trailers.",
+      "C": "Vehicles carrying explosive substances.",
+      "D": "a. and c. are correct."
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 2,
+    "question_num": 17,
+    "ques_id": 1971,
+    "stem": "Which vehicles are required to carry warning devices for use in the event that the vehicle becomes disabled?",
+    "options": {
+      "A": "All vehicles which seat more than 10 passengers",
+      "B": "All commercial vehicles with an overall width of more than 2.3 meters.",
+      "C": "All commercial vehicles with a load width of more than 2.3 meters.",
+      "D": "All of the above."
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 2,
+    "question_num": 18,
+    "ques_id": 2057,
+    "stem": "This sign means?",
+    "options": {
+      "A": "When entering the campground, larger vehicles should stay right",
+      "B": "Only applies to commercial vehicles traveling along freeways",
+      "C": "Move into right lane if driving slower than traffic flow",
+      "D": "Move into the right lane if you are traveling less than 20km/hr below the posted speed limit and activate your four-way flashers"
+    },
+    "answer": "C",
+    "image_url": "http://aaravdrivingschool.com/apanel/org/common/images/avatar/job/slowertraffickright.png"
+  },
+  {
+    "test_num": 2,
+    "question_num": 19,
+    "ques_id": 1882,
+    "stem": "Truck drivers should:",
+    "options": {
+      "A": "Avoid steep hills altogether.",
+      "B": "Heed \"Truck Advisory\" speed limits when traveling down steep hills.",
+      "C": "Pull over and check their brakes when required.",
+      "D": "b. and c. are correct."
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 2,
+    "question_num": 20,
+    "ques_id": 1992,
+    "stem": "When backing up using a guide you should:",
+    "options": {
+      "A": "Be able to see the guide throughout the maneuver.",
+      "B": "Back into your blind side.",
+      "C": "Position your guide where there is a clear, continuous view of your backing path.",
+      "D": "a. and c. are correct."
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 2,
+    "question_num": 21,
+    "ques_id": 1971,
+    "stem": "Which vehicles are required to carry warning devices for use in the event that the vehicle becomes disabled?",
+    "options": {
+      "A": "All vehicles which seat more than 10 passengers",
+      "B": "All commercial vehicles with an overall width of more than 2.3 meters.",
+      "C": "All commercial vehicles with a load width of more than 2.3 meters.",
+      "D": "All of the above."
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 2,
+    "question_num": 22,
+    "ques_id": 1976,
+    "stem": "Which method should you use to shift gears in a large vehicle?",
+    "options": {
+      "A": "Progressive shifting.",
+      "B": "Standard r.p.m. split.",
+      "C": "It depends on the vehicle.",
+      "D": "It doesn't matter."
+    },
+    "answer": "C",
+    "image_url": null
+  },
+  {
+    "test_num": 2,
+    "question_num": 23,
+    "ques_id": 2059,
+    "stem": "When a school bus has a defect, what is the procedure followed by the driver?",
+    "options": {
+      "A": "If the defect is minor, the driver is simply required to report the defect and have the carrier make necessary repairs before the end of the week",
+      "B": "The vehicle cannot be used to transport passengers until the vehicle is repaired",
+      "C": "The vehicle can be used to transport passengers if they are notified of the said defects and consent to continuing their journey, so long as the driver is sure that they vehicle will make it to the destination",
+      "D": "The vehicle must be parked and a mechanic brought out to fix any defects"
+    },
+    "answer": "A",
+    "image_url": null
+  },
+  {
+    "test_num": 2,
+    "question_num": 24,
+    "ques_id": 2061,
+    "stem": "When are drivers required to complete a pre-hill inspection?",
+    "options": {
+      "A": "On grades of more than 8%",
+      "B": "When indicated by regulatory signs that a pre-hill inspection is required",
+      "C": "At the beginning of the day when the driver knows she will be operating in mountainous terrain",
+      "D": "Only a regulation specific to the province of BC and unless otherwise indicated it is only a suggestion"
+    },
+    "answer": "B",
+    "image_url": null
+  },
+  {
+    "test_num": 2,
+    "question_num": 25,
+    "ques_id": 2047,
+    "stem": "What steps must the driver take before refueling a school bus?",
+    "options": {
+      "A": "Check the air in the tires and wash the windshield",
+      "B": "Ensure that all passengers are off the bus and the engine is turned off",
+      "C": "Turn off the engine, ensure that the nozzle stays in contact with the filler pipe and connect the ground wire",
+      "D": "Ensure that they have the passwords and cards to operate the automatic fuel pump"
+    },
+    "answer": "B",
+    "image_url": null
+  },
+  {
+    "test_num": 2,
+    "question_num": 26,
+    "ques_id": 1975,
+    "stem": "A governor is:",
+    "options": {
+      "A": "A speed controller.",
+      "B": "A mechanism that allows you to start a vehicle without using a throttle.",
+      "C": "A mechanism which regulates the amount of fuel going to the engine.",
+      "D": "All of the above."
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 2,
+    "question_num": 27,
+    "ques_id": 2051,
+    "stem": "When operating an emergency vehicle, which of the following is NOT a condition you must consider before exceeding speed limits or driving through stop signs and traffic signal lights?",
+    "options": {
+      "A": "The road conditions and light levels available",
+      "B": "The amount of traffic or expected traffic",
+      "C": "The seriousness of the emergency",
+      "D": "The number of vehicles at the intersection"
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 2,
+    "question_num": 28,
+    "ques_id": 1884,
+    "stem": "Your danger zone increases when:",
+    "options": {
+      "A": "Your vehicle is heavy.",
+      "B": "You speed increases.",
+      "C": "It is raining.",
+      "D": "All of the above."
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 2,
+    "question_num": 29,
+    "ques_id": 1972,
+    "stem": "If your vehicle becomes disabled, you should:",
+    "options": {
+      "A": "Move it as far off the traveled portion of the highway as possible.",
+      "B": "Place warning devices approximately 30 meters ahead and 30 meters behind the vehicle.",
+      "C": "Place warning devices further than 30 meters from your vehicle.",
+      "D": "All of the above."
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 2,
+    "question_num": 30,
+    "ques_id": 2049,
+    "stem": "Which of the following is NOT a road user?",
+    "options": {
+      "A": "Pedestrian",
+      "B": "Wheeled electric scooter",
+      "C": "Bicycle",
+      "D": "Train"
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 2,
+    "question_num": 31,
+    "ques_id": 2048,
+    "stem": "This sign means?",
+    "options": {
+      "A": "Indicates that an oversize load is being transported",
+      "B": "Indicates that there is a detour ahead",
+      "C": "Indicates that defensive driving is required for the next 50 meters",
+      "D": "Indicates that slower traffic should keep left"
+    },
+    "answer": "A",
+    "image_url": "http://aaravdrivingschool.com/apanel/org/common/images/avatar/job/oversizeload.jpg"
+  },
+  {
+    "test_num": 2,
+    "question_num": 32,
+    "ques_id": 2051,
+    "stem": "When operating an emergency vehicle, which of the following is NOT a condition you must consider before exceeding speed limits or driving through stop signs and traffic signal lights?",
+    "options": {
+      "A": "The road conditions and light levels available",
+      "B": "The amount of traffic or expected traffic",
+      "C": "The seriousness of the emergency",
+      "D": "The number of vehicles at the intersection"
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 2,
+    "question_num": 33,
+    "ques_id": 1995,
+    "stem": "When approaching an intersection, you should:",
+    "options": {
+      "A": "Position your vehicle in the necessary lane well before the intersection.",
+      "B": "Signal at approximately ½ block from the intersection.",
+      "C": "Avoid changing lanes or passing other vehicles.",
+      "D": "All of the above."
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 2,
+    "question_num": 34,
+    "ques_id": 2055,
+    "stem": "When descending a hill and the driver notices smoke coming from an oil-filled hub, what should she do?",
+    "options": {
+      "A": "Continue to the next rest and then stop and investigate the source of the problem",
+      "B": "Stop immediately and investigate the source of the problem",
+      "C": "Drive to the next truck stop and call dispatch",
+      "D": "Ask your co-driver why there is smoke coming from the hub and follow his instructions"
+    },
+    "answer": "B",
+    "image_url": null
+  },
+  {
+    "test_num": 2,
+    "question_num": 35,
+    "ques_id": 2057,
+    "stem": "This sign means?",
+    "options": {
+      "A": "When entering the campground, larger vehicles should stay right",
+      "B": "Only applies to commercial vehicles traveling along freeways",
+      "C": "Move into right lane if driving slower than traffic flow",
+      "D": "Move into the right lane if you are traveling less than 20km/hr below the posted speed limit and activate your four-way flashers"
+    },
+    "answer": "C",
+    "image_url": "http://aaravdrivingschool.com/apanel/org/common/images/avatar/job/slowertraffickright.png"
+  },
+  {
+    "test_num": 2,
+    "question_num": 36,
+    "ques_id": 2050,
+    "stem": "A special vehicle is defined as?",
+    "options": {
+      "A": "A vehicle to transport people with disabilities",
+      "B": "A motor vehicle that has a carrying capacity of not more than 10 persons, including the driver, which is designed or modified for public transportation of persons with disabilities",
+      "C": "A vehicle with hand-controls that can be operated by drivers with disabilities",
+      "D": "A minivan with hand controls"
+    },
+    "answer": "B",
+    "image_url": null
+  },
+  {
+    "test_num": 2,
+    "question_num": 37,
+    "ques_id": 1886,
+    "stem": "Which vehicles are required to stop at uncontrolled main railway crossings?",
+    "options": {
+      "A": "School buses carrying children and all other buses carrying passengers.",
+      "B": "Tractor/trailers.",
+      "C": "Vehicles carrying explosive substances.",
+      "D": "a. and c. are correct."
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 2,
+    "question_num": 38,
+    "ques_id": 2052,
+    "stem": "When driving slowly up or down hills, a good practice is to?",
+    "options": {
+      "A": "Straddle the lanes so that drivers behind don’t pass on a double solid line",
+      "B": "Drive in the left lane",
+      "C": "Drive in the right lane",
+      "D": "Drive in the right lane using your four-way flashers"
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 2,
+    "question_num": 39,
+    "ques_id": 2050,
+    "stem": "A special vehicle is defined as?",
+    "options": {
+      "A": "A vehicle to transport people with disabilities",
+      "B": "A motor vehicle that has a carrying capacity of not more than 10 persons, including the driver, which is designed or modified for public transportation of persons with disabilities",
+      "C": "A vehicle with hand-controls that can be operated by drivers with disabilities",
+      "D": "A minivan with hand controls"
+    },
+    "answer": "B",
+    "image_url": null
+  },
+  {
+    "test_num": 2,
+    "question_num": 40,
+    "ques_id": 1992,
+    "stem": "When backing up using a guide you should:",
+    "options": {
+      "A": "Be able to see the guide throughout the maneuver.",
+      "B": "Back into your blind side.",
+      "C": "Position your guide where there is a clear, continuous view of your backing path.",
+      "D": "a. and c. are correct."
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 3,
+    "question_num": 1,
+    "ques_id": 2071,
+    "stem": "Which of the following does NOT decrease a danger zone?",
+    "options": {
+      "A": "Covering the brake",
+      "B": "Lower speeds",
+      "C": "Smaller vehicle",
+      "D": "Higher speeds"
+    },
+    "answer": "D",
+    "image_url": "https://aaravdrivingschool.com/fonts/innn.png"
+  },
+  {
+    "test_num": 3,
+    "question_num": 2,
+    "ques_id": 1893,
+    "stem": "When driving a large commercial vehicle on the highway, you must leave how much space between your vehicle and other large commercial vehicles?",
+    "options": {
+      "A": "40 metres.",
+      "B": "50 metres.",
+      "C": "60 metres.",
+      "D": "70 metres."
+    },
+    "answer": "C",
+    "image_url": null
+  },
+  {
+    "test_num": 3,
+    "question_num": 3,
+    "ques_id": 1899,
+    "stem": "In order to take passengers on or let them off your vehicle on the highway, you must park in a place that allows other drivers to see your vehicle from a distance of at least ____________ in front and behind.",
+    "options": {
+      "A": "30 metres.",
+      "B": "40 metres.",
+      "C": "50 metres.",
+      "D": "85 metres."
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 3,
+    "question_num": 4,
+    "ques_id": 1998,
+    "stem": "Tires which are overinflated or underinflated can cause:",
+    "options": {
+      "A": "Your tires to overheat.",
+      "B": "Your tires to burst.",
+      "C": "Your tires to flex more than they should.",
+      "D": "All of the above."
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 3,
+    "question_num": 5,
+    "ques_id": 1891,
+    "stem": "A vehicle that is twice the weight of a car and is traveling at twice the speed of that car requires how much braking power to stop in the same distance:",
+    "options": {
+      "A": "2 times the stopping power.",
+      "B": "4 times the stopping power.",
+      "C": "6 times the stopping power.",
+      "D": "8 times the stopping power."
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 3,
+    "question_num": 6,
+    "ques_id": 1899,
+    "stem": "In order to take passengers on or let them off your vehicle on the highway, you must park in a place that allows other drivers to see your vehicle from a distance of at least ____________ in front and behind.",
+    "options": {
+      "A": "30 metres.",
+      "B": "40 metres.",
+      "C": "50 metres.",
+      "D": "85 metres."
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 3,
+    "question_num": 7,
+    "ques_id": 2000,
+    "stem": "You should never run your engine in a closed garage because:",
+    "options": {
+      "A": "Your vehicle may leap forward and break through the garage door.",
+      "B": "It wastes fuel.",
+      "C": "You can get carbon monoxide poisoning.",
+      "D": "All of the above."
+    },
+    "answer": "C",
+    "image_url": null
+  },
+  {
+    "test_num": 3,
+    "question_num": 8,
+    "ques_id": 2070,
+    "stem": "Passengers are permitted to stand on a bus only if?",
+    "options": {
+      "A": "All the seats are full",
+      "B": "There are more females than males on the bus",
+      "C": "Only if the passenger transportation licence permits standing passengers and the passengers do not impede the driver’s operation of the vehicle",
+      "D": "On any bus that is not a school or highway bus"
+    },
+    "answer": "C",
+    "image_url": null
+  },
+  {
+    "test_num": 3,
+    "question_num": 9,
+    "ques_id": 2063,
+    "stem": "Which one of the following does NOT affect the driving characteristics of your unit?",
+    "options": {
+      "A": "Size",
+      "B": "Weight",
+      "C": "Single or dual rear axle",
+      "D": "Steering wheel diameter"
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 3,
+    "question_num": 10,
+    "ques_id": 1979,
+    "stem": "If you must drive more slowly than the traffic flow you should:",
+    "options": {
+      "A": "Travel in the left lane.",
+      "B": "Travel in the center lane.",
+      "C": "Travel in the right lane.",
+      "D": "Drive with your hazard lights on."
+    },
+    "answer": "C",
+    "image_url": null
+  },
+  {
+    "test_num": 3,
+    "question_num": 11,
+    "ques_id": 1897,
+    "stem": "When a tire is underinflated it:",
+    "options": {
+      "A": "Can become excessively worn on the outer edges of its tread.",
+      "B": "Can become excessively worn in the center part of its tread.",
+      "C": "Has a greater chance of hydroplaning.",
+      "D": "a. and c. are correct."
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 3,
+    "question_num": 12,
+    "ques_id": 1901,
+    "stem": "School bus signs must be:",
+    "options": {
+      "A": "Displayed prominently at the front and rear of the bus.",
+      "B": "Yellow with black lettering.",
+      "C": "Displayed at the rear either immediately above or below the window.",
+      "D": "All of the above."
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 3,
+    "question_num": 13,
+    "ques_id": 2072,
+    "stem": "Which of following ailments do NOT preclude a BC driver from operating in the United States?",
+    "options": {
+      "A": "Epilepsy",
+      "B": "The use of prescription glasses for driving",
+      "C": "Diabetes controlled by insulin",
+      "D": "You do not meet the US hearing standards"
+    },
+    "answer": "B",
+    "image_url": null
+  },
+  {
+    "test_num": 3,
+    "question_num": 14,
+    "ques_id": 1889,
+    "stem": "How do you downgrade from a commercial to a non-commercial licence?",
+    "options": {
+      "A": "Requalify for the lower licence class.",
+      "B": "Allow the licence to lapse by not submitting your Driver’s Medical Examination Report form.",
+      "C": "Apply for a downgrade at a driver licensing office.",
+      "D": "Do nothing."
+    },
+    "answer": "C",
+    "image_url": null
+  },
+  {
+    "test_num": 3,
+    "question_num": 15,
+    "ques_id": 1893,
+    "stem": "When driving a large commercial vehicle on the highway, you must leave how much space between your vehicle and other large commercial vehicles?",
+    "options": {
+      "A": "40 metres.",
+      "B": "50 metres.",
+      "C": "60 metres.",
+      "D": "70 metres."
+    },
+    "answer": "C",
+    "image_url": null
+  },
+  {
+    "test_num": 3,
+    "question_num": 16,
+    "ques_id": 1996,
+    "stem": "When crossing railroad tracks, the danger is increased if:",
+    "options": {
+      "A": "The crossing surface is rough.",
+      "B": "There is more than one track to cross.",
+      "C": "Your vehicle is extremely heavy or long.",
+      "D": "All of the above."
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 3,
+    "question_num": 17,
+    "ques_id": 2069,
+    "stem": "What are the smoking restrictions for drivers of public or limited passenger vehicles?",
+    "options": {
+      "A": "The driver may smoke if he receives permission for the passengers",
+      "B": "The driver must not smoke if passengers are in your vehicle",
+      "C": "The driver can never smoke in the vehicle in keeping with current municipal bylaws",
+      "D": "The driver may never smoke in the vehicle"
+    },
+    "answer": "B",
+    "image_url": null
+  },
+  {
+    "test_num": 3,
+    "question_num": 18,
+    "ques_id": 1997,
+    "stem": "Railway crossings can be dangerous in rural areas because:",
+    "options": {
+      "A": "There tend to be fewer automated warning systems.",
+      "B": "Brush is more prevalent.",
+      "C": "Your vehicle is more likely to be fully loaded in a rural area.",
+      "D": "a. and b. are correct."
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 3,
+    "question_num": 19,
+    "ques_id": 2068,
+    "stem": "At what times of the day are inside lights in public passenger vehicles to be illuminated?",
+    "options": {
+      "A": "Any time the vehicle is in operation",
+      "B": "½ hour before sunset and ½ hour after sunrise",
+      "C": "½ hour after sunset and ½ hour before sunrise",
+      "D": "Between sunset and sunrise"
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 3,
+    "question_num": 20,
+    "ques_id": 2063,
+    "stem": "Which one of the following does NOT affect the driving characteristics of your unit?",
+    "options": {
+      "A": "Size",
+      "B": "Weight",
+      "C": "Single or dual rear axle",
+      "D": "Steering wheel diameter"
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 3,
+    "question_num": 21,
+    "ques_id": 1978,
+    "stem": "When turning right in a bus, at what point should you start to turn the wheel?",
+    "options": {
+      "A": "When the front fender is parallel with the curb of the street you are entering.",
+      "B": "When you can see the curb line of the street you are entering through the front entrance door.",
+      "C": "When you have passed the curb line of the street you are entering and can no longer see it through the front entrance door.",
+      "D": "It depends on the width of the street you are entering."
+    },
+    "answer": "B",
+    "image_url": null
+  },
+  {
+    "test_num": 3,
+    "question_num": 22,
+    "ques_id": 1984,
+    "stem": "Braking forcefully when driving a combination-unit vehicle may cause:",
+    "options": {
+      "A": "Your wheels to lock up.",
+      "B": "Your brakes to fail entirely.",
+      "C": "Your vehicle to jack-knife or skid.",
+      "D": "a. and c. are correct."
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 3,
+    "question_num": 23,
+    "ques_id": 2065,
+    "stem": "What are the 4 types of retarders?",
+    "options": {
+      "A": "Engine, Exhaust, Hydraulic driveline and Electric driveline",
+      "B": "Engine, Exhaust, Hydraulic driveline and the Flintstone’s Foot drag",
+      "C": "Exhaust, Hydraulic driveline, Electric driveline and Pyrometer",
+      "D": "Exhaust, Hydraulic driveline, Electric driveline and automatic wheel deflater"
+    },
+    "answer": "A",
+    "image_url": null
+  },
+  {
+    "test_num": 3,
+    "question_num": 24,
+    "ques_id": 1979,
+    "stem": "If you must drive more slowly than the traffic flow you should:",
+    "options": {
+      "A": "Travel in the left lane.",
+      "B": "Travel in the center lane.",
+      "C": "Travel in the right lane.",
+      "D": "Drive with your hazard lights on."
+    },
+    "answer": "C",
+    "image_url": null
+  },
+  {
+    "test_num": 3,
+    "question_num": 25,
+    "ques_id": 1986,
+    "stem": "When stopping in an emergency with ABS brakes you should:",
+    "options": {
+      "A": "Apply firm, continuous pressure to the brake pedal.",
+      "B": "Pump the brakes.",
+      "C": "Take your foot off the brakes if you hear brake noise.",
+      "D": "Rely solely on the brakes to help you avoid obstacles."
+    },
+    "answer": "A",
+    "image_url": null
+  },
+  {
+    "test_num": 3,
+    "question_num": 26,
+    "ques_id": 1987,
+    "stem": "When driving through large amounts of water on the roadway you should:",
+    "options": {
+      "A": "Apply a slight constant pressure on the brakes.",
+      "B": "Speed up to get through it as fast as possible. Avoid brake use altogether.",
+      "C": "Avoid brake use altogether.",
+      "D": "Pump the brakes."
+    },
+    "answer": "A",
+    "image_url": null
+  },
+  {
+    "test_num": 3,
+    "question_num": 27,
+    "ques_id": 1979,
+    "stem": "If you must drive more slowly than the traffic flow you should:",
+    "options": {
+      "A": "Travel in the left lane.",
+      "B": "Travel in the center lane.",
+      "C": "Travel in the right lane.",
+      "D": "Drive with your hazard lights on."
+    },
+    "answer": "C",
+    "image_url": null
+  },
+  {
+    "test_num": 3,
+    "question_num": 28,
+    "ques_id": 2000,
+    "stem": "You should never run your engine in a closed garage because:",
+    "options": {
+      "A": "Your vehicle may leap forward and break through the garage door.",
+      "B": "It wastes fuel.",
+      "C": "You can get carbon monoxide poisoning.",
+      "D": "All of the above."
+    },
+    "answer": "C",
+    "image_url": null
+  },
+  {
+    "test_num": 3,
+    "question_num": 29,
+    "ques_id": 2068,
+    "stem": "At what times of the day are inside lights in public passenger vehicles to be illuminated?",
+    "options": {
+      "A": "Any time the vehicle is in operation",
+      "B": "½ hour before sunset and ½ hour after sunrise",
+      "C": "½ hour after sunset and ½ hour before sunrise",
+      "D": "Between sunset and sunrise"
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 3,
+    "question_num": 30,
+    "ques_id": 2064,
+    "stem": "How often is it necessary to test the brakes on a school bus?",
+    "options": {
+      "A": "Every time the bus is fueled",
+      "B": "At every pre-trip inspection or weekly, whichever occurs first",
+      "C": "Daily",
+      "D": "While the parking brake is checked"
+    },
+    "answer": "C",
+    "image_url": null
+  },
+  {
+    "test_num": 3,
+    "question_num": 31,
+    "ques_id": 1892,
+    "stem": "An engine brake retarder is:",
+    "options": {
+      "A": "More efficient at a higher engine r.p.m. and in a lower transmission gear.",
+      "B": "Often restricted in residential areas.",
+      "C": "Sufficiently powerful to replace regular brakes altogether.",
+      "D": "a. and b. are correct."
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 3,
+    "question_num": 32,
+    "ques_id": 1899,
+    "stem": "In order to take passengers on or let them off your vehicle on the highway, you must park in a place that allows other drivers to see your vehicle from a distance of at least ____________ in front and behind.",
+    "options": {
+      "A": "30 metres.",
+      "B": "40 metres.",
+      "C": "50 metres.",
+      "D": "85 metres."
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 3,
+    "question_num": 33,
+    "ques_id": 1898,
+    "stem": "If, during your pre-trip inspection, you discover a defect that does not affect the safe operation of the vehicle, you should:",
+    "options": {
+      "A": "Repair the defect anyway.",
+      "B": "Repair the defect anyway.",
+      "C": "Make a note of the defect but may wait to do repairs.",
+      "D": "Call your boss for further instructions."
+    },
+    "answer": "C",
+    "image_url": null
+  },
+  {
+    "test_num": 3,
+    "question_num": 34,
+    "ques_id": 2000,
+    "stem": "You should never run your engine in a closed garage because:",
+    "options": {
+      "A": "Your vehicle may leap forward and break through the garage door.",
+      "B": "It wastes fuel.",
+      "C": "You can get carbon monoxide poisoning.",
+      "D": "All of the above."
+    },
+    "answer": "C",
+    "image_url": null
+  },
+  {
+    "test_num": 3,
+    "question_num": 35,
+    "ques_id": 1889,
+    "stem": "How do you downgrade from a commercial to a non-commercial licence?",
+    "options": {
+      "A": "Requalify for the lower licence class.",
+      "B": "Allow the licence to lapse by not submitting your Driver’s Medical Examination Report form.",
+      "C": "Apply for a downgrade at a driver licensing office.",
+      "D": "Do nothing."
+    },
+    "answer": "C",
+    "image_url": null
+  },
+  {
+    "test_num": 3,
+    "question_num": 36,
+    "ques_id": 1981,
+    "stem": "If a crash occurs while you are backing up in a large vehicle:",
+    "options": {
+      "A": "It will not be considered your fault if you made an effort to warn others and look where you were going.",
+      "B": "It will almost always be considered the driver's fault.",
+      "C": "It will not be considered your fault if someone else was guiding your vehicle.",
+      "D": "Both you and the person attempting to guide your vehicle will be considered at fault."
+    },
+    "answer": "B",
+    "image_url": null
+  },
+  {
+    "test_num": 3,
+    "question_num": 37,
+    "ques_id": 1896,
+    "stem": "When driving in snowy or icy conditions, you should:",
+    "options": {
+      "A": "Test the steering and brakes for control when you start out.",
+      "B": "Avoid quick movements with the steering wheel.",
+      "C": "Maintain adequate ventilation in your cab, and make sure your exhaust system has no leaks.",
+      "D": "All of the above."
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 3,
+    "question_num": 38,
+    "ques_id": 1895,
+    "stem": "Large vehicles traveling at high speeds create air turbulence in which of the following areas:",
+    "options": {
+      "A": "Directly in front of the truck.",
+      "B": "Alongside the cab.",
+      "C": "By the back area of the trailer and at the immediate rear of the trailer.",
+      "D": "All of the above."
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 3,
+    "question_num": 39,
+    "ques_id": 1999,
+    "stem": "Steering control may be reduced when:",
+    "options": {
+      "A": "Tires are overinflated.",
+      "B": "The amount of contact between the tire and the road surface is reduced.",
+      "C": "Tires are underinflated.",
+      "D": "All of the above."
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 3,
+    "question_num": 40,
+    "ques_id": 2066,
+    "stem": "Total stopping distance of a commercial vehicle can be increased by?",
+    "options": {
+      "A": "Poor quality tires",
+      "B": "Brakes out of adjustment",
+      "C": "Poor traction",
+      "D": "All the above"
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 4,
+    "question_num": 1,
+    "ques_id": 2079,
+    "stem": "What is the definition of “Reaction Time”?",
+    "options": {
+      "A": "The time between when the driver applies the brakes to when the brakes actually begin to apply",
+      "B": "The time it takes between recognizing a hazard ahead and applying the brakes",
+      "C": "The time between when the brakes are applied and when the vehicle actually begins to slow down",
+      "D": "The time between a driver observing a situation and her realizing that the situation has become something that requires a change in course"
+    },
+    "answer": "B",
+    "image_url": "https://aaravdrivingschool.com/fonts/innn.png"
+  },
+  {
+    "test_num": 4,
+    "question_num": 2,
+    "ques_id": 2086,
+    "stem": "At what distance from the home terminal are you allowed to travel and not keep a logbook?",
+    "options": {
+      "A": "160km",
+      "B": "100km",
+      "C": "200km",
+      "D": "500km"
+    },
+    "answer": "A",
+    "image_url": null
+  },
+  {
+    "test_num": 4,
+    "question_num": 3,
+    "ques_id": 2080,
+    "stem": "What is the final factor that will determine if the vehicle will move?",
+    "options": {
+      "A": "Friction",
+      "B": "Traction",
+      "C": "Condition of tires",
+      "D": "Weather conditions"
+    },
+    "answer": "B",
+    "image_url": null
+  },
+  {
+    "test_num": 4,
+    "question_num": 4,
+    "ques_id": 2077,
+    "stem": "This sign means?",
+    "options": {
+      "A": "A crash is imminent",
+      "B": "Incredibly steep hill and driver should gear down to a lower gear",
+      "C": "Scenic lookout ahead",
+      "D": "18% of the trucks on this hill are single axle vehicles"
+    },
+    "answer": "B",
+    "image_url": "http://aaravdrivingschool.com/apanel/org/common/images/avatar/job/steephill.png"
+  },
+  {
+    "test_num": 4,
+    "question_num": 5,
+    "ques_id": 2088,
+    "stem": "Passengers on a moving school bus are not allowed to do what?",
+    "options": {
+      "A": "Talk",
+      "B": "Smoke",
+      "C": "Stand",
+      "D": "Consume Alcohol"
+    },
+    "answer": "C",
+    "image_url": null
+  },
+  {
+    "test_num": 4,
+    "question_num": 6,
+    "ques_id": 2086,
+    "stem": "At what distance from the home terminal are you allowed to travel and not keep a logbook?",
+    "options": {
+      "A": "160km",
+      "B": "100km",
+      "C": "200km",
+      "D": "500km"
+    },
+    "answer": "A",
+    "image_url": null
+  },
+  {
+    "test_num": 4,
+    "question_num": 7,
+    "ques_id": 1914,
+    "stem": "When traveling down a steep hill, you should:",
+    "options": {
+      "A": "Downshift before starting down the hill.",
+      "B": "Use a gear that is not higher than the gear you would use to go up that hill.",
+      "C": "Use an engine or driveline retarder in addition to your main service brakes.",
+      "D": "All of the above."
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 4,
+    "question_num": 8,
+    "ques_id": 2076,
+    "stem": "Which of the following distinguishes a professional driver?",
+    "options": {
+      "A": "Set their pace in accordance with the existing conditions and traffic flow",
+      "B": "Maintain a safe space margin ahead, behind and to the sides",
+      "C": "Allow time to read and interpret the traffic pattern",
+      "D": "All the above"
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 4,
+    "question_num": 9,
+    "ques_id": 1915,
+    "stem": "A \"special vehicle\" is:",
+    "options": {
+      "A": "A bus which seats more than 10 people.",
+      "B": "A school bus which seats no more than 10 people.",
+      "C": "A vehicle which seats no more than 10 people, and which provides public transportation for people with disabilities.",
+      "D": "A car or truck you really like."
+    },
+    "answer": "C",
+    "image_url": null
+  },
+  {
+    "test_num": 4,
+    "question_num": 10,
+    "ques_id": 1906,
+    "stem": "When driving in the Yukon or Northwest Territories, you can be on duty for no more than ____________ consecutive hours.",
+    "options": {
+      "A": "15",
+      "B": "18",
+      "C": "25",
+      "D": "30"
+    },
+    "answer": "B",
+    "image_url": null
+  },
+  {
+    "test_num": 4,
+    "question_num": 11,
+    "ques_id": 1911,
+    "stem": "Horsepower is:",
+    "options": {
+      "A": "The ability of the engine to move the vehicle.",
+      "B": "Used to develop speed.",
+      "C": "The same as r.p.m.",
+      "D": "The same as torque."
+    },
+    "answer": "B",
+    "image_url": null
+  },
+  {
+    "test_num": 4,
+    "question_num": 12,
+    "ques_id": 2075,
+    "stem": "How old must passengers be before the driver can get their permission to smoke in the vehicle?",
+    "options": {
+      "A": "19",
+      "B": "18",
+      "C": "16",
+      "D": "21"
+    },
+    "answer": "C",
+    "image_url": null
+  },
+  {
+    "test_num": 4,
+    "question_num": 13,
+    "ques_id": 2080,
+    "stem": "What is the final factor that will determine if the vehicle will move?",
+    "options": {
+      "A": "Friction",
+      "B": "Traction",
+      "C": "Condition of tires",
+      "D": "Weather conditions"
+    },
+    "answer": "B",
+    "image_url": null
+  },
+  {
+    "test_num": 4,
+    "question_num": 14,
+    "ques_id": 1911,
+    "stem": "Horsepower is:",
+    "options": {
+      "A": "The ability of the engine to move the vehicle.",
+      "B": "Used to develop speed.",
+      "C": "The same as r.p.m.",
+      "D": "The same as torque."
+    },
+    "answer": "B",
+    "image_url": null
+  },
+  {
+    "test_num": 4,
+    "question_num": 15,
+    "ques_id": 1906,
+    "stem": "When driving in the Yukon or Northwest Territories, you can be on duty for no more than ____________ consecutive hours.",
+    "options": {
+      "A": "15",
+      "B": "18",
+      "C": "25",
+      "D": "30"
+    },
+    "answer": "B",
+    "image_url": null
+  },
+  {
+    "test_num": 4,
+    "question_num": 16,
+    "ques_id": 2074,
+    "stem": "Who is responsible for ensuring that the safety equipment is available and in working order?",
+    "options": {
+      "A": "The driver",
+      "B": "The owner",
+      "C": "The carrier",
+      "D": "The last person who operated the vehicle"
+    },
+    "answer": "C",
+    "image_url": null
+  },
+  {
+    "test_num": 4,
+    "question_num": 17,
+    "ques_id": 1909,
+    "stem": "Flares, fuses, or reflectors are:",
+    "options": {
+      "A": "Devices for heating the cab of a large vehicle in an emergency.",
+      "B": "Warning devices, to be used on a disabled vehicle during the day.",
+      "C": "Warning devices, to be used on a disabled vehicle at night.",
+      "D": "B. and C. are correct."
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 4,
+    "question_num": 18,
+    "ques_id": 1912,
+    "stem": "Which forces are at work as you drive around a curve:",
+    "options": {
+      "A": "Inertia and centrifugal force.",
+      "B": "Inertia and traction.",
+      "C": "Centrifugal force and traction.",
+      "D": "Inertia, centrifugal force and traction."
+    },
+    "answer": "B",
+    "image_url": null
+  },
+  {
+    "test_num": 4,
+    "question_num": 19,
+    "ques_id": 2082,
+    "stem": "Vehicles are required to have reflective tape when they exceed what width?",
+    "options": {
+      "A": "2m",
+      "B": "2.45m",
+      "C": "2.05m",
+      "D": "1m"
+    },
+    "answer": "C",
+    "image_url": null
+  },
+  {
+    "test_num": 4,
+    "question_num": 20,
+    "ques_id": 1918,
+    "stem": "When negotiating a curve, you should:",
+    "options": {
+      "A": "Enter at a speed that does not require you to brake while in the curve.",
+      "B": "Enter at a speed that allows you to apply gradual power while in the curve.",
+      "C": "Take the road conditions into account.",
+      "D": "All of the above."
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 4,
+    "question_num": 21,
+    "ques_id": 2004,
+    "stem": "To help other drivers pass your vehicle, you should:",
+    "options": {
+      "A": "Reduce your speed and give them room.",
+      "B": "Direct them to pass when you are moving slowly.",
+      "C": "Pull over.",
+      "D": "Do not allow them to pass."
+    },
+    "answer": "A",
+    "image_url": null
+  },
+  {
+    "test_num": 4,
+    "question_num": 22,
+    "ques_id": 1908,
+    "stem": "When driving in the United States, you may drive no more than ____________ hours during your on-duty time.",
+    "options": {
+      "A": "11",
+      "B": "15",
+      "C": "20",
+      "D": "25"
+    },
+    "answer": "A",
+    "image_url": null
+  },
+  {
+    "test_num": 4,
+    "question_num": 23,
+    "ques_id": 2089,
+    "stem": "This sign means?",
+    "options": {
+      "A": "Curve ahead – slow down",
+      "B": "Road may be slippery ahead",
+      "C": "Winding road ahead",
+      "D": "Left to the truck stop"
+    },
+    "answer": "A",
+    "image_url": "http://aaravdrivingschool.com/apanel/org/common/images/avatar/job/curveleft.jpg"
+  },
+  {
+    "test_num": 4,
+    "question_num": 24,
+    "ques_id": 2081,
+    "stem": "This sign means?",
+    "options": {
+      "A": "Cars allowed in truck stop",
+      "B": "Truck turning left and the car driver is being courteous by staying back",
+      "C": "Warns to keep away from large vehicles such as trucks and buses in roundabouts",
+      "D": "The signals indicating that it is OK for vehicles behind trucks to pass"
+    },
+    "answer": "C",
+    "image_url": "http://aaravdrivingschool.com/apanel/org/common/images/avatar/job/truckinrb.png"
+  },
+  {
+    "test_num": 4,
+    "question_num": 25,
+    "ques_id": 1907,
+    "stem": "When driving in the Yukon or Northwest Territories, you may drive no more than ___________ hours during your on-duty time.",
+    "options": {
+      "A": "10",
+      "B": "15",
+      "C": "20",
+      "D": "25"
+    },
+    "answer": "B",
+    "image_url": null
+  },
+  {
+    "test_num": 4,
+    "question_num": 26,
+    "ques_id": 1916,
+    "stem": "In ideal driving conditions, passenger cars and light trucks should be at least how many seconds behind the vehicle they are following?",
+    "options": {
+      "A": "2 seconds.",
+      "B": "3 seconds.",
+      "C": "4 seconds.",
+      "D": "5 seconds."
+    },
+    "answer": "A",
+    "image_url": null
+  },
+  {
+    "test_num": 4,
+    "question_num": 27,
+    "ques_id": 2082,
+    "stem": "Vehicles are required to have reflective tape when they exceed what width?",
+    "options": {
+      "A": "2m",
+      "B": "2.45m",
+      "C": "2.05m",
+      "D": "1m"
+    },
+    "answer": "C",
+    "image_url": null
+  },
+  {
+    "test_num": 4,
+    "question_num": 28,
+    "ques_id": 1905,
+    "stem": "After working 120 hours in a 14-day cycle, drivers must take ____________ hours of off-duty time before working 70 hours of on-duty time.",
+    "options": {
+      "A": "8",
+      "B": "16",
+      "C": "24",
+      "D": "36"
+    },
+    "answer": "C",
+    "image_url": null
+  },
+  {
+    "test_num": 4,
+    "question_num": 29,
+    "ques_id": 2081,
+    "stem": "This sign means?",
+    "options": {
+      "A": "Cars allowed in truck stop",
+      "B": "Truck turning left and the car driver is being courteous by staying back",
+      "C": "Warns to keep away from large vehicles such as trucks and buses in roundabouts",
+      "D": "The signals indicating that it is OK for vehicles behind trucks to pass"
+    },
+    "answer": "C",
+    "image_url": "http://aaravdrivingschool.com/apanel/org/common/images/avatar/job/truckinrb.png"
+  },
+  {
+    "test_num": 4,
+    "question_num": 30,
+    "ques_id": 1917,
+    "stem": "The way in which a vehicle can be maneuvered is dependent on:",
+    "options": {
+      "A": "The size and weight of the vehicle.",
+      "B": "The position of the driver's seat in relation to the front axle.",
+      "C": "The length of the vehicle.",
+      "D": "All of the above."
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 4,
+    "question_num": 31,
+    "ques_id": 2001,
+    "stem": "Drivers who are exempt from wearing seatbelts are:",
+    "options": {
+      "A": "Those who are employed doing inner-city delivery.",
+      "B": "Bus and emergency vehicle drivers.",
+      "C": "Non-existent.",
+      "D": "a. and b. are correct."
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 4,
+    "question_num": 32,
+    "ques_id": 1912,
+    "stem": "Which forces are at work as you drive around a curve:",
+    "options": {
+      "A": "Inertia and centrifugal force.",
+      "B": "Inertia and traction.",
+      "C": "Centrifugal force and traction.",
+      "D": "Inertia, centrifugal force and traction."
+    },
+    "answer": "B",
+    "image_url": null
+  },
+  {
+    "test_num": 4,
+    "question_num": 33,
+    "ques_id": 1917,
+    "stem": "The way in which a vehicle can be maneuvered is dependent on:",
+    "options": {
+      "A": "The size and weight of the vehicle.",
+      "B": "The position of the driver's seat in relation to the front axle.",
+      "C": "The length of the vehicle.",
+      "D": "All of the above."
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 4,
+    "question_num": 34,
+    "ques_id": 2081,
+    "stem": "This sign means?",
+    "options": {
+      "A": "Cars allowed in truck stop",
+      "B": "Truck turning left and the car driver is being courteous by staying back",
+      "C": "Warns to keep away from large vehicles such as trucks and buses in roundabouts",
+      "D": "The signals indicating that it is OK for vehicles behind trucks to pass"
+    },
+    "answer": "C",
+    "image_url": "http://aaravdrivingschool.com/apanel/org/common/images/avatar/job/truckinrb.png"
+  },
+  {
+    "test_num": 4,
+    "question_num": 35,
+    "ques_id": 1907,
+    "stem": "When driving in the Yukon or Northwest Territories, you may drive no more than ___________ hours during your on-duty time.",
+    "options": {
+      "A": "10",
+      "B": "15",
+      "C": "20",
+      "D": "25"
+    },
+    "answer": "B",
+    "image_url": null
+  },
+  {
+    "test_num": 4,
+    "question_num": 36,
+    "ques_id": 2086,
+    "stem": "At what distance from the home terminal are you allowed to travel and not keep a logbook?",
+    "options": {
+      "A": "160km",
+      "B": "100km",
+      "C": "200km",
+      "D": "500km"
+    },
+    "answer": "A",
+    "image_url": null
+  },
+  {
+    "test_num": 4,
+    "question_num": 37,
+    "ques_id": 1915,
+    "stem": "A \"special vehicle\" is:",
+    "options": {
+      "A": "A bus which seats more than 10 people.",
+      "B": "A school bus which seats no more than 10 people.",
+      "C": "A vehicle which seats no more than 10 people, and which provides public transportation for people with disabilities.",
+      "D": "A car or truck you really like."
+    },
+    "answer": "C",
+    "image_url": null
+  },
+  {
+    "test_num": 4,
+    "question_num": 38,
+    "ques_id": 2088,
+    "stem": "Passengers on a moving school bus are not allowed to do what?",
+    "options": {
+      "A": "Talk",
+      "B": "Smoke",
+      "C": "Stand",
+      "D": "Consume Alcohol"
+    },
+    "answer": "C",
+    "image_url": null
+  },
+  {
+    "test_num": 4,
+    "question_num": 39,
+    "ques_id": 1919,
+    "stem": "Which dashboard gauge should be used to help you decide when to change gears?",
+    "options": {
+      "A": "The speedometer.",
+      "B": "The tachometer.",
+      "C": "The clock.",
+      "D": "The mileage indicator."
+    },
+    "answer": "B",
+    "image_url": null
+  },
+  {
+    "test_num": 4,
+    "question_num": 40,
+    "ques_id": 1907,
+    "stem": "When driving in the Yukon or Northwest Territories, you may drive no more than ___________ hours during your on-duty time.",
+    "options": {
+      "A": "10",
+      "B": "15",
+      "C": "20",
+      "D": "25"
+    },
+    "answer": "B",
+    "image_url": null
+  },
+  {
+    "test_num": 5,
+    "question_num": 1,
+    "ques_id": 1941,
+    "stem": "When must you complete a pre-hill inspection?",
+    "options": {
+      "A": "Whenever you are approaching a hill.",
+      "B": "Whenever you are approaching a hill with a steep grade.",
+      "C": "Whenever you are approaching a hill and you see a sign indicating that vehicles of a certain weight must check their brakes.",
+      "D": "During the pre-trip inspection."
+    },
+    "answer": "C",
+    "image_url": "https://aaravdrivingschool.com/fonts/innn.png"
+  },
+  {
+    "test_num": 5,
+    "question_num": 2,
+    "ques_id": 2098,
+    "stem": "It is important to leave yourself an escape route while driving so that?",
+    "options": {
+      "A": "You can get away if you pick up an undesirable hitch hiker",
+      "B": "You can evacuate the vehicle in the event of a fire",
+      "C": "You can steer out of an emergency situation on the road, which is faster than braking",
+      "D": "Rather than braking for a traffic hazard, you can steer around it and not be late for that important meeting"
+    },
+    "answer": "C",
+    "image_url": null
+  },
+  {
+    "test_num": 5,
+    "question_num": 3,
+    "ques_id": 1921,
+    "stem": "When pulling out from an alley, you must:",
+    "options": {
+      "A": "Stop before you drive across the sidewalk area.",
+      "B": "Yield to pedestrians.",
+      "C": "Yield to traffic on the road you are entering.",
+      "D": "All of the above."
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 5,
+    "question_num": 4,
+    "ques_id": 1933,
+    "stem": "When attempting to fight a fire in your vehicle, you should:",
+    "options": {
+      "A": "Avoid opening the hood if the fire is under it.",
+      "B": "Avoid using water on gasoline or oil fires.",
+      "C": "Use as much extinguishing fuel as you can.",
+      "D": "a. and b. are correct."
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 5,
+    "question_num": 5,
+    "ques_id": 1923,
+    "stem": "If you are convicted of impaired driving and you caused a crash, you:",
+    "options": {
+      "A": "Will face an increased cost of vehicle insurance.",
+      "B": "Will have to pay for your own repairs.",
+      "C": "May have to pay for any costs associated with the crash, including any victim’s claim.",
+      "D": "All of the above."
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 5,
+    "question_num": 6,
+    "ques_id": 1934,
+    "stem": "You can be charged under the Criminal Code of Canada or British Columbia's Motor Vehicle Act if:",
+    "options": {
+      "A": "You are driving with a Blood Alcohol Content of over .08%.",
+      "B": "You’re caught driving with a Blood Alcohol Content (BAC) between 0.05 and 0.08%",
+      "C": "You refuse a test for alcohol.",
+      "D": "All of the above."
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 5,
+    "question_num": 7,
+    "ques_id": 1925,
+    "stem": "If you are sharing a vehicle with another driver during a trip, and you disagree about which defects are to be reported, you should:",
+    "options": {
+      "A": "Defer to the driver with the most seniority.",
+      "B": "Make a note of the disagreement, and provide the signature of both drivers.",
+      "C": "Repair the defect in question, regardless of its impact on safety.",
+      "D": "All of the above."
+    },
+    "answer": "B",
+    "image_url": null
+  },
+  {
+    "test_num": 5,
+    "question_num": 8,
+    "ques_id": 2095,
+    "stem": "Pre-trip inspection reports must be given to the carrier within?",
+    "options": {
+      "A": "30 days",
+      "B": "60 days",
+      "C": "20 days",
+      "D": "7 days"
+    },
+    "answer": "C",
+    "image_url": null
+  },
+  {
+    "test_num": 5,
+    "question_num": 9,
+    "ques_id": 1924,
+    "stem": "When entering a narrow bridge from a curve, you should:",
+    "options": {
+      "A": "Be familiar with the amount of off track your vehicle displays.",
+      "B": "Adjust your speed appropriately.",
+      "C": "Put your flashers on so that other drivers get out of your way.",
+      "D": "a. and b. are correct."
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 5,
+    "question_num": 10,
+    "ques_id": 1941,
+    "stem": "When must you complete a pre-hill inspection?",
+    "options": {
+      "A": "Whenever you are approaching a hill.",
+      "B": "Whenever you are approaching a hill with a steep grade.",
+      "C": "Whenever you are approaching a hill and you see a sign indicating that vehicles of a certain weight must check their brakes.",
+      "D": "During the pre-trip inspection."
+    },
+    "answer": "C",
+    "image_url": null
+  },
+  {
+    "test_num": 5,
+    "question_num": 11,
+    "ques_id": 2008,
+    "stem": "During a pre-hill inspection on a vehicle equipped with air brakes, you should:",
+    "options": {
+      "A": "Make sure there are no hydraulic fluid leaks.",
+      "B": "Make sure there are no audible air leaks.",
+      "C": "Make sure glad hands and air lines are secure.",
+      "D": "b. and c. are correct."
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 5,
+    "question_num": 12,
+    "ques_id": 2096,
+    "stem": "When making a right hand turn how far into an intersection does a bus driver proceed before turning?",
+    "options": {
+      "A": "Far enough to compensate for off tracking",
+      "B": "Until the curb on the side street becomes visible",
+      "C": "Past any light standards or street signs that may impede her vision of pedestrians",
+      "D": "Until the front of her bus is in line with the centre line of the cross street"
+    },
+    "answer": "B",
+    "image_url": null
+  },
+  {
+    "test_num": 5,
+    "question_num": 13,
+    "ques_id": 1920,
+    "stem": "You are operating a vehicle whose peak engine torque is at 1,500 r.p.m. and whose peak horsepower is at 2,000 r.p.m. When employing the standard r.p.m. split to shift gears, you should:",
+    "options": {
+      "A": "Accelerate to 1,500 r.p.m., double-clutch, and upshift.",
+      "B": "Accelerate to 2,000 r.p.m., double-clutch, and upshift.",
+      "C": "Accelerate to 2,000 r.p.m., double-clutch, allow the engine speed to decrease to 1,500 r.p.m., and upshift.",
+      "D": "Accelerate to 1,500 r.p.m. and upshift."
+    },
+    "answer": "C",
+    "image_url": null
+  },
+  {
+    "test_num": 5,
+    "question_num": 14,
+    "ques_id": 1935,
+    "stem": "You should switch your high beams to low beams at what distance from another vehicle?",
+    "options": {
+      "A": "50 metres.",
+      "B": "100 metres.",
+      "C": "150 metres.",
+      "D": "200 metres."
+    },
+    "answer": "C",
+    "image_url": null
+  },
+  {
+    "test_num": 5,
+    "question_num": 15,
+    "ques_id": 2099,
+    "stem": "Any reports of defects or deficiencies on your school bus must be?",
+    "options": {
+      "A": "Presented to your carrier at the time you find the defect or by the end of the day in written format",
+      "B": "Verbal and pointed out to the owner",
+      "C": "In writing and submitted by the end of the work week",
+      "D": "Verbal and reported to the owner within 2 days"
+    },
+    "answer": "A",
+    "image_url": null
+  },
+  {
+    "test_num": 5,
+    "question_num": 16,
+    "ques_id": 2008,
+    "stem": "During a pre-hill inspection on a vehicle equipped with air brakes, you should:",
+    "options": {
+      "A": "Make sure there are no hydraulic fluid leaks.",
+      "B": "Make sure there are no audible air leaks.",
+      "C": "Make sure glad hands and air lines are secure.",
+      "D": "b. and c. are correct."
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 5,
+    "question_num": 17,
+    "ques_id": 1938,
+    "stem": "When parking on a downgrade, you should:",
+    "options": {
+      "A": "Turn your wheels towards the edge of the roadway.",
+      "B": "Turn your wheels towards the center of the roadway.",
+      "C": "Keep your wheels facing straight ahead.",
+      "D": "It doesn't matter."
+    },
+    "answer": "A",
+    "image_url": null
+  },
+  {
+    "test_num": 5,
+    "question_num": 18,
+    "ques_id": 2097,
+    "stem": "On-duty time includes all but which of the following?",
+    "options": {
+      "A": "Inspecting, servicing, repairing, conditioning, or starting a commercial vehicle",
+      "B": "Waiting along the route because of a crash or another unanticipated event",
+      "C": "Inspecting or checking the load",
+      "D": "Time spent on a ferry"
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 5,
+    "question_num": 19,
+    "ques_id": 2101,
+    "stem": "Which of the following is NOT a reason passengers are injured during transit?",
+    "options": {
+      "A": "Fails to check on passengers frequently enough while driving",
+      "B": "Turns too quickly or abruptly",
+      "C": "Stops too quickly or abruptly",
+      "D": "Maintains good space margins while driving"
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 5,
+    "question_num": 20,
+    "ques_id": 1939,
+    "stem": "A mixture of different-sized tires can:",
+    "options": {
+      "A": "Be dangerous if used on the same axle.",
+      "B": "Be dangerous if used on different axles.",
+      "C": "Never be used on the same vehicle.",
+      "D": "Always be used on the same vehicle."
+    },
+    "answer": "A",
+    "image_url": null
+  },
+  {
+    "test_num": 5,
+    "question_num": 21,
+    "ques_id": 1931,
+    "stem": "As the driver of a school bus, you must only let passengers off the bus when:",
+    "options": {
+      "A": "Other drivers can see your bus from at least 60 metres in either direction.",
+      "B": "There are at least three metres of road available on the left side of your vehicle.",
+      "C": "They are exiting on the right side.",
+      "D": "All of the above."
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 5,
+    "question_num": 22,
+    "ques_id": 2093,
+    "stem": "Which two factors determine the sharpness of your vehicle’s turn?",
+    "options": {
+      "A": "Corner configuration and obstacles",
+      "B": "Turning radius and off-track",
+      "C": "Tire size and wheelbase",
+      "D": "Number of axles and turning radius"
+    },
+    "answer": "B",
+    "image_url": null
+  },
+  {
+    "test_num": 5,
+    "question_num": 23,
+    "ques_id": 1939,
+    "stem": "A mixture of different-sized tires can:",
+    "options": {
+      "A": "Be dangerous if used on the same axle.",
+      "B": "Be dangerous if used on different axles.",
+      "C": "Never be used on the same vehicle.",
+      "D": "Always be used on the same vehicle."
+    },
+    "answer": "A",
+    "image_url": null
+  },
+  {
+    "test_num": 5,
+    "question_num": 24,
+    "ques_id": 1937,
+    "stem": "An appropriate gear for entering a curve is:",
+    "options": {
+      "A": "One that allows you to complete your progression around the curve while also using the brakes.",
+      "B": "One that allows you to complete your progression around the curve while using engine power throughout.",
+      "C": "One that allows you to complete your progression around the curve while using neither the gas pedal nor the brake.",
+      "D": "Second gear."
+    },
+    "answer": "B",
+    "image_url": null
+  },
+  {
+    "test_num": 5,
+    "question_num": 25,
+    "ques_id": 2096,
+    "stem": "When making a right hand turn how far into an intersection does a bus driver proceed before turning?",
+    "options": {
+      "A": "Far enough to compensate for off tracking",
+      "B": "Until the curb on the side street becomes visible",
+      "C": "Past any light standards or street signs that may impede her vision of pedestrians",
+      "D": "Until the front of her bus is in line with the centre line of the cross street"
+    },
+    "answer": "B",
+    "image_url": null
+  },
+  {
+    "test_num": 5,
+    "question_num": 26,
+    "ques_id": 1935,
+    "stem": "You should switch your high beams to low beams at what distance from another vehicle?",
+    "options": {
+      "A": "50 metres.",
+      "B": "100 metres.",
+      "C": "150 metres.",
+      "D": "200 metres."
+    },
+    "answer": "C",
+    "image_url": null
+  },
+  {
+    "test_num": 5,
+    "question_num": 27,
+    "ques_id": 1924,
+    "stem": "When entering a narrow bridge from a curve, you should:",
+    "options": {
+      "A": "Be familiar with the amount of off track your vehicle displays.",
+      "B": "Adjust your speed appropriately.",
+      "C": "Put your flashers on so that other drivers get out of your way.",
+      "D": "a. and b. are correct."
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 5,
+    "question_num": 28,
+    "ques_id": 2099,
+    "stem": "Any reports of defects or deficiencies on your school bus must be?",
+    "options": {
+      "A": "Presented to your carrier at the time you find the defect or by the end of the day in written format",
+      "B": "Verbal and pointed out to the owner",
+      "C": "In writing and submitted by the end of the work week",
+      "D": "Verbal and reported to the owner within 2 days"
+    },
+    "answer": "A",
+    "image_url": null
+  },
+  {
+    "test_num": 5,
+    "question_num": 29,
+    "ques_id": 1939,
+    "stem": "A mixture of different-sized tires can:",
+    "options": {
+      "A": "Be dangerous if used on the same axle.",
+      "B": "Be dangerous if used on different axles.",
+      "C": "Never be used on the same vehicle.",
+      "D": "Always be used on the same vehicle."
+    },
+    "answer": "A",
+    "image_url": null
+  },
+  {
+    "test_num": 5,
+    "question_num": 30,
+    "ques_id": 2098,
+    "stem": "It is important to leave yourself an escape route while driving so that?",
+    "options": {
+      "A": "You can get away if you pick up an undesirable hitch hiker",
+      "B": "You can evacuate the vehicle in the event of a fire",
+      "C": "You can steer out of an emergency situation on the road, which is faster than braking",
+      "D": "Rather than braking for a traffic hazard, you can steer around it and not be late for that important meeting"
+    },
+    "answer": "C",
+    "image_url": null
+  },
+  {
+    "test_num": 5,
+    "question_num": 31,
+    "ques_id": 2094,
+    "stem": "In addition to checking the left side mirror, where should the bus driver look before leaving the curb?",
+    "options": {
+      "A": "In front of the vehicle to ensure that the path of travel is clear",
+      "B": "Shoulder check plus look at the mirror which displays the interior of the vehicle to ensure that all passengers are sitting",
+      "C": "Shoulder check to the right of the vehicle",
+      "D": "At the hot Chippendale male walking down the street"
+    },
+    "answer": "B",
+    "image_url": null
+  },
+  {
+    "test_num": 5,
+    "question_num": 32,
+    "ques_id": 2009,
+    "stem": "During a pre-hill inspection on a vehicle equipped with hydraulic brakes, you should:",
+    "options": {
+      "A": "Make sure that the brake drums are not over-heated.",
+      "B": "Make sure that there is adequate pedal reserve.",
+      "C": "Make sure there are no hydraulic fluid leaks.",
+      "D": "All of the above."
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 5,
+    "question_num": 33,
+    "ques_id": 1935,
+    "stem": "You should switch your high beams to low beams at what distance from another vehicle?",
+    "options": {
+      "A": "50 metres.",
+      "B": "100 metres.",
+      "C": "150 metres.",
+      "D": "200 metres."
+    },
+    "answer": "C",
+    "image_url": null
+  },
+  {
+    "test_num": 5,
+    "question_num": 34,
+    "ques_id": 1923,
+    "stem": "If you are convicted of impaired driving and you caused a crash, you:",
+    "options": {
+      "A": "Will face an increased cost of vehicle insurance.",
+      "B": "Will have to pay for your own repairs.",
+      "C": "May have to pay for any costs associated with the crash, including any victim’s claim.",
+      "D": "All of the above."
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 5,
+    "question_num": 35,
+    "ques_id": 2100,
+    "stem": "How is brake heat dissipated?",
+    "options": {
+      "A": "Brake shoes",
+      "B": "Brake chamber",
+      "C": "Into the atmosphere via the brake drum",
+      "D": "Into the atmosphere via the rim and tire"
+    },
+    "answer": "C",
+    "image_url": null
+  },
+  {
+    "test_num": 5,
+    "question_num": 36,
+    "ques_id": 2006,
+    "stem": "Daily written inspection reports must be made by the drivers of which vehicles?",
+    "options": {
+      "A": "Buses and school buses.",
+      "B": "Two-axle trucks or truck-tractors with a licensed GVW greater than 14,600 kilograms.",
+      "C": "Trucks or truck-tractors towing a trailer that has a licensed GVW greater than 8,200 kilograms.",
+      "D": "All of the above."
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 5,
+    "question_num": 37,
+    "ques_id": 1922,
+    "stem": "Amber flashing lights can be mounted on a vehicle if:",
+    "options": {
+      "A": "It is a disabled vehicle.",
+      "B": "It is a commercial vehicle.",
+      "C": "It is a police car.",
+      "D": "You have a Commercial Vehicle Safety & Enforcement permit from ICBC."
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 5,
+    "question_num": 38,
+    "ques_id": 2010,
+    "stem": "What items related to the vehicle should a driver check periodically during a trip?",
+    "options": {
+      "A": "Wheels, tires, and lights.",
+      "B": "Brakes and hubs.",
+      "C": "Trailer coupling and cargo.",
+      "D": "All of the above."
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 5,
+    "question_num": 39,
+    "ques_id": 1931,
+    "stem": "As the driver of a school bus, you must only let passengers off the bus when:",
+    "options": {
+      "A": "Other drivers can see your bus from at least 60 metres in either direction.",
+      "B": "There are at least three metres of road available on the left side of your vehicle.",
+      "C": "They are exiting on the right side.",
+      "D": "All of the above."
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 5,
+    "question_num": 40,
+    "ques_id": 2010,
+    "stem": "What items related to the vehicle should a driver check periodically during a trip?",
+    "options": {
+      "A": "Wheels, tires, and lights.",
+      "B": "Brakes and hubs.",
+      "C": "Trailer coupling and cargo.",
+      "D": "All of the above."
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 6,
+    "question_num": 1,
+    "ques_id": 1943,
+    "stem": "To prevent your vehicle from jerking back after it is fully stopped, you should:",
+    "options": {
+      "A": "Always hit the brakes as hard as you can.",
+      "B": "Just before your vehicle comes to a full stop, reduce the pressure you are putting on the brake pedal.",
+      "C": "Pump the brakes.",
+      "D": "All of the above."
+    },
+    "answer": "B",
+    "image_url": "https://aaravdrivingschool.com/fonts/innn.png"
+  },
+  {
+    "test_num": 6,
+    "question_num": 2,
+    "ques_id": 2017,
+    "stem": "Who is responsible for making sure the emergency equipment is in working order:",
+    "options": {
+      "A": "You.",
+      "B": "The carrier.",
+      "C": "Your passengers.",
+      "D": "All of the above."
+    },
+    "answer": "B",
+    "image_url": null
+  },
+  {
+    "test_num": 6,
+    "question_num": 3,
+    "ques_id": 2018,
+    "stem": "You must test the brakes on a school bus:",
+    "options": {
+      "A": "Daily.",
+      "B": "Weekly.",
+      "C": "Monthly.",
+      "D": "Yearly."
+    },
+    "answer": "A",
+    "image_url": null
+  },
+  {
+    "test_num": 6,
+    "question_num": 4,
+    "ques_id": 1944,
+    "stem": "The brakes, tires and suspension of a combination vehicle work best when:",
+    "options": {
+      "A": "The cargo unit is empty.",
+      "B": "Roads are wet.",
+      "C": "The vehicle is loaded.",
+      "D": "The vehicle is traveling at a high rate of speed."
+    },
+    "answer": "C",
+    "image_url": null
+  },
+  {
+    "test_num": 6,
+    "question_num": 5,
+    "ques_id": 1959,
+    "stem": "Why are hours of service regulations in place?",
+    "options": {
+      "A": "So that carriers don't have to pay overtime wages to drivers.",
+      "B": "The drivers' union requires it.",
+      "C": "Because fatigued drivers are more likely to be involved in a crash.",
+      "D": "So that drivers don't have to spend too much time away from their families."
+    },
+    "answer": "C",
+    "image_url": null
+  },
+  {
+    "test_num": 6,
+    "question_num": 6,
+    "ques_id": 1961,
+    "stem": "What two factors determine the sharpness of your large vehicle's turn?",
+    "options": {
+      "A": "Turning radius of the front wheels.",
+      "B": "The amount of off track of the rear wheels.",
+      "C": "The size of the load you are carrying.",
+      "D": "a and b"
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 6,
+    "question_num": 7,
+    "ques_id": 2102,
+    "stem": "When negotiating a curve in the road, the proper procedure is to?",
+    "options": {
+      "A": "If you determine that the vehicle’s speed is too high, then you should slow down",
+      "B": "Slow down before entering the curve, accelerate gently as you turn, and then accelerate back to highway speed as you exit the curve",
+      "C": "Go as fast as you can through the curve as this technique will give your passengers a better ride",
+      "D": "Drive at the recommended speed for the curve"
+    },
+    "answer": "B",
+    "image_url": null
+  },
+  {
+    "test_num": 6,
+    "question_num": 8,
+    "ques_id": 2021,
+    "stem": "What kinds of documents might you have to present to verify logbook entries?",
+    "options": {
+      "A": "Bills of lading.",
+      "B": "Shipping documents.",
+      "C": "Fuel and accommodation receipts.",
+      "D": "All of the above."
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 6,
+    "question_num": 9,
+    "ques_id": 1959,
+    "stem": "Why are hours of service regulations in place?",
+    "options": {
+      "A": "So that carriers don't have to pay overtime wages to drivers.",
+      "B": "The drivers' union requires it.",
+      "C": "Because fatigued drivers are more likely to be involved in a crash.",
+      "D": "So that drivers don't have to spend too much time away from their families."
+    },
+    "answer": "C",
+    "image_url": null
+  },
+  {
+    "test_num": 6,
+    "question_num": 10,
+    "ques_id": 2024,
+    "stem": "Whenever you exceed the speed limit or drive through stop signals while driving an emergency vehicle, you must consider:",
+    "options": {
+      "A": "The condition and use of the roadway.",
+      "B": "The amount of traffic that is on, or expected to be on the highway.",
+      "C": "The seriousness of the emergency you are responding to.",
+      "D": "All of the above."
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 6,
+    "question_num": 11,
+    "ques_id": 2014,
+    "stem": "In a sedan-type vehicle, how many passengers may be seated on your right side?",
+    "options": {
+      "A": "None.",
+      "B": "One.",
+      "C": "Two.",
+      "D": "Three."
+    },
+    "answer": "C",
+    "image_url": null
+  },
+  {
+    "test_num": 6,
+    "question_num": 12,
+    "ques_id": 1951,
+    "stem": "A \"bus\" refers to:",
+    "options": {
+      "A": "A motor vehicle which is operated for hire.",
+      "B": "A motor vehicle with a seating capacity of more than 10 persons, including the driver, and which is operated for hire or for public transportation.",
+      "C": "A motor vehicle which is operated for public transportation.",
+      "D": ". A motor vehicle with a seating capacity of no more than 10 persons, including the driver."
+    },
+    "answer": "B",
+    "image_url": null
+  },
+  {
+    "test_num": 6,
+    "question_num": 13,
+    "ques_id": 1947,
+    "stem": "If you reduce a tire's air pressure when it is warm, you:",
+    "options": {
+      "A": "Will reduce the possibility of having that tire burst.",
+      "B": "May upset the cooling balance and cause the tire to generate more heat.",
+      "C": "Reduce the amount of contact between that tire and the road surface",
+      "D": "a. and c. are correct."
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 6,
+    "question_num": 14,
+    "ques_id": 1956,
+    "stem": "Passengers on a school bus are:",
+    "options": {
+      "A": "Allowed to stand if they wish.",
+      "B": "Allowed to move from seat to seat.",
+      "C": "Required to be seated.",
+      "D": "Required to be under twelve years old."
+    },
+    "answer": "C",
+    "image_url": null
+  },
+  {
+    "test_num": 6,
+    "question_num": 15,
+    "ques_id": 2020,
+    "stem": "Idling for longer than five minutes can:",
+    "options": {
+      "A": "Waste fuel.",
+      "B": "Increase Emissions.",
+      "C": "Clog the fuel injector.",
+      "D": "All of the above."
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 6,
+    "question_num": 16,
+    "ques_id": 2022,
+    "stem": "Time spent riding on a ferry is considered off-duty time unless:",
+    "options": {
+      "A": "You must take a ferry in order to reach your destination.",
+      "B": "You are a bus driver selling tickets while on the ferry.",
+      "C": "The ferry ride is less than one hour.",
+      "D": "All of the above."
+    },
+    "answer": "B",
+    "image_url": null
+  },
+  {
+    "test_num": 6,
+    "question_num": 17,
+    "ques_id": 2024,
+    "stem": "Whenever you exceed the speed limit or drive through stop signals while driving an emergency vehicle, you must consider:",
+    "options": {
+      "A": "The condition and use of the roadway.",
+      "B": "The amount of traffic that is on, or expected to be on the highway.",
+      "C": "The seriousness of the emergency you are responding to.",
+      "D": "All of the above."
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 6,
+    "question_num": 18,
+    "ques_id": 1961,
+    "stem": "What two factors determine the sharpness of your large vehicle's turn?",
+    "options": {
+      "A": "Turning radius of the front wheels.",
+      "B": "The amount of off track of the rear wheels.",
+      "C": "The size of the load you are carrying.",
+      "D": "a and b"
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 6,
+    "question_num": 19,
+    "ques_id": 2016,
+    "stem": "If your passenger vehicle breaks down and you cannot continue the trip, you should:",
+    "options": {
+      "A": "Ask your passengers to assist you in attempting to fix the vehicle.",
+      "B": "Make immediate arrangements to have your passengers transported to their destination with as little delay as possible.",
+      "C": "Try to make it to the nearest gas station.",
+      "D": "Tell your passengers they're out of luck."
+    },
+    "answer": "B",
+    "image_url": null
+  },
+  {
+    "test_num": 6,
+    "question_num": 20,
+    "ques_id": 1948,
+    "stem": "To avoid fires, you should:",
+    "options": {
+      "A": "Never start a vehicle with a fuel leak.",
+      "B": "Maintain proper tire pressure.",
+      "C": "Make sure your vehicle's brakes are fully released while the vehicle is moving.",
+      "D": "All of the above."
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 6,
+    "question_num": 21,
+    "ques_id": 2103,
+    "stem": "This sign means?",
+    "options": {
+      "A": "Roundabout ahead",
+      "B": "Park vehicles in a circle",
+      "C": "Detour ahead",
+      "D": "Sharp corner ahead with risk of doing a 180 degree spin-out"
+    },
+    "answer": "A",
+    "image_url": "http://aaravdrivingschool.com/apanel/org/common/images/avatar/job/rounda.png"
+  },
+  {
+    "test_num": 6,
+    "question_num": 22,
+    "ques_id": 1955,
+    "stem": "When refueling, you should:",
+    "options": {
+      "A": "Keep the radio on.",
+      "B": "Keep the vehicle running.",
+      "C": "Keep the nozzle of the fuel hose in contact with the intake to the fuel tank.",
+      "D": "Smoke a cigarette."
+    },
+    "answer": "C",
+    "image_url": null
+  },
+  {
+    "test_num": 6,
+    "question_num": 23,
+    "ques_id": 2025,
+    "stem": "When operating an ambulance, when are you permitted to use flashing red lights and sirens?",
+    "options": {
+      "A": "When you are responding to an emergency call or transporting a patient.",
+      "B": "When you want to get to Tim Horton’s quickly for your break.",
+      "C": "Whenever there is a lot of traffic.",
+      "D": "All of the above."
+    },
+    "answer": "A",
+    "image_url": null
+  },
+  {
+    "test_num": 6,
+    "question_num": 24,
+    "ques_id": 1943,
+    "stem": "To prevent your vehicle from jerking back after it is fully stopped, you should:",
+    "options": {
+      "A": "Always hit the brakes as hard as you can.",
+      "B": "Just before your vehicle comes to a full stop, reduce the pressure you are putting on the brake pedal.",
+      "C": "Pump the brakes.",
+      "D": "All of the above."
+    },
+    "answer": "B",
+    "image_url": null
+  },
+  {
+    "test_num": 6,
+    "question_num": 25,
+    "ques_id": 1948,
+    "stem": "To avoid fires, you should:",
+    "options": {
+      "A": "Never start a vehicle with a fuel leak.",
+      "B": "Maintain proper tire pressure.",
+      "C": "Make sure your vehicle's brakes are fully released while the vehicle is moving.",
+      "D": "All of the above."
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 6,
+    "question_num": 26,
+    "ques_id": 2023,
+    "stem": "On-duty time includes:",
+    "options": {
+      "A": "The time spent inspecting or servicing your vehicle.",
+      "B": "Waiting along the route because of an unanticipated event.",
+      "C": "Traveling as one of two drivers when you are not resting in the sleeper berth.",
+      "D": "All of the above"
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 6,
+    "question_num": 27,
+    "ques_id": 2020,
+    "stem": "Idling for longer than five minutes can:",
+    "options": {
+      "A": "Waste fuel.",
+      "B": "Increase Emissions.",
+      "C": "Clog the fuel injector.",
+      "D": "All of the above."
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 6,
+    "question_num": 28,
+    "ques_id": 2026,
+    "stem": "The floor of your school bus must be washed with a disinfectant solution at least:",
+    "options": {
+      "A": "Once a day.",
+      "B": "Once a week.",
+      "C": "Once a month.",
+      "D": "Once a year."
+    },
+    "answer": "B",
+    "image_url": null
+  },
+  {
+    "test_num": 6,
+    "question_num": 29,
+    "ques_id": 1943,
+    "stem": "To prevent your vehicle from jerking back after it is fully stopped, you should:",
+    "options": {
+      "A": "Always hit the brakes as hard as you can.",
+      "B": "Just before your vehicle comes to a full stop, reduce the pressure you are putting on the brake pedal.",
+      "C": "Pump the brakes.",
+      "D": "All of the above."
+    },
+    "answer": "B",
+    "image_url": null
+  },
+  {
+    "test_num": 6,
+    "question_num": 30,
+    "ques_id": 1959,
+    "stem": "Why are hours of service regulations in place?",
+    "options": {
+      "A": "So that carriers don't have to pay overtime wages to drivers.",
+      "B": "The drivers' union requires it.",
+      "C": "Because fatigued drivers are more likely to be involved in a crash.",
+      "D": "So that drivers don't have to spend too much time away from their families."
+    },
+    "answer": "C",
+    "image_url": null
+  },
+  {
+    "test_num": 6,
+    "question_num": 31,
+    "ques_id": 2021,
+    "stem": "What kinds of documents might you have to present to verify logbook entries?",
+    "options": {
+      "A": "Bills of lading.",
+      "B": "Shipping documents.",
+      "C": "Fuel and accommodation receipts.",
+      "D": "All of the above."
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 6,
+    "question_num": 32,
+    "ques_id": 2020,
+    "stem": "Idling for longer than five minutes can:",
+    "options": {
+      "A": "Waste fuel.",
+      "B": "Increase Emissions.",
+      "C": "Clog the fuel injector.",
+      "D": "All of the above."
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 6,
+    "question_num": 33,
+    "ques_id": 2104,
+    "stem": "Which of the following is NOT mandated by the National Safety Code (NSC)?",
+    "options": {
+      "A": "Commercial vehicles licensed with a gross vehicle weight more than 5,000kg",
+      "B": "Commercial vehicles that have a seating capacity of 10 or more passengers plus the driver",
+      "C": "Big vehicles",
+      "D": "Vehicles operating under the Passenger Transportation Act including taxis, buses and limousines"
+    },
+    "answer": "C",
+    "image_url": null
+  },
+  {
+    "test_num": 6,
+    "question_num": 34,
+    "ques_id": 1947,
+    "stem": "If you reduce a tire's air pressure when it is warm, you:",
+    "options": {
+      "A": "Will reduce the possibility of having that tire burst.",
+      "B": "May upset the cooling balance and cause the tire to generate more heat.",
+      "C": "Reduce the amount of contact between that tire and the road surface",
+      "D": "a. and c. are correct."
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 6,
+    "question_num": 35,
+    "ques_id": 1942,
+    "stem": "To ensure smooth braking in any size vehicle, you should:",
+    "options": {
+      "A": "Brake early to spread out the braking load.",
+      "B": "Maintain a safe following distance of 3 to 5 seconds minimum.",
+      "C": "Travel at a speed that allows you to see a safe distance ahead.",
+      "D": "All of the above."
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 6,
+    "question_num": 36,
+    "ques_id": 1949,
+    "stem": "Impaired driving can be caused by:",
+    "options": {
+      "A": "Drinking alcohol.",
+      "B": "Taking illegal drugs.",
+      "C": "Taking prescribed drugs.",
+      "D": "All of the above."
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 6,
+    "question_num": 37,
+    "ques_id": 1961,
+    "stem": "What two factors determine the sharpness of your large vehicle's turn?",
+    "options": {
+      "A": "Turning radius of the front wheels.",
+      "B": "The amount of off track of the rear wheels.",
+      "C": "The size of the load you are carrying.",
+      "D": "a and b"
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 6,
+    "question_num": 38,
+    "ques_id": 2024,
+    "stem": "Whenever you exceed the speed limit or drive through stop signals while driving an emergency vehicle, you must consider:",
+    "options": {
+      "A": "The condition and use of the roadway.",
+      "B": "The amount of traffic that is on, or expected to be on the highway.",
+      "C": "The seriousness of the emergency you are responding to.",
+      "D": "All of the above."
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 6,
+    "question_num": 39,
+    "ques_id": 1944,
+    "stem": "The brakes, tires and suspension of a combination vehicle work best when:",
+    "options": {
+      "A": "The cargo unit is empty.",
+      "B": "Roads are wet.",
+      "C": "The vehicle is loaded.",
+      "D": "The vehicle is traveling at a high rate of speed."
+    },
+    "answer": "C",
+    "image_url": null
+  },
+  {
+    "test_num": 6,
+    "question_num": 40,
+    "ques_id": 2015,
+    "stem": "You may refuse to transport a passenger if:",
+    "options": {
+      "A": "He or she is acting in a disorderly manner or being offensive to other patrons.",
+      "B": "He or she is dangerous to others.",
+      "C": "Your vehicle is already carrying the maximum allowed number of passengers.",
+      "D": "All of the above."
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 7,
+    "question_num": 1,
+    "ques_id": 2117,
+    "stem": "Which of the following hand signals is the correct one for indicating that you are going to stop?",
+    "options": {
+      "A": "Arm bent and pointed up",
+      "B": "Arm straight out to the left",
+      "C": "Arm bent and pointing down",
+      "D": "Arm waving frantically in the air"
+    },
+    "answer": "C",
+    "image_url": "https://aaravdrivingschool.com/fonts/innn.png"
+  },
+  {
+    "test_num": 7,
+    "question_num": 2,
+    "ques_id": 2121,
+    "stem": "When being passed by other vehicles you should?",
+    "options": {
+      "A": "Speed up because they are passing on a solid line and passing is not permitted",
+      "B": "Slow down and move to the right as far as safely possible",
+      "C": "Pull over and stop",
+      "D": "Honk your horn"
+    },
+    "answer": "B",
+    "image_url": null
+  },
+  {
+    "test_num": 7,
+    "question_num": 3,
+    "ques_id": 2113,
+    "stem": "When conducting a Class 4 pre-trip inspection, it should be completed in what amount of time?",
+    "options": {
+      "A": "30 minutes or less",
+      "B": "45 minutes or less",
+      "C": "20 minutes or less",
+      "D": "Not more than 15 minutes"
+    },
+    "answer": "C",
+    "image_url": null
+  },
+  {
+    "test_num": 7,
+    "question_num": 4,
+    "ques_id": 2129,
+    "stem": "In some municipalities what kind of permit is required before being certified to operate a taxi or a limousine?",
+    "options": {
+      "A": "Heavy Operators",
+      "B": "Passenger",
+      "C": "Chauffeur",
+      "D": "Multi-Passenger"
+    },
+    "answer": "C",
+    "image_url": null
+  },
+  {
+    "test_num": 7,
+    "question_num": 5,
+    "ques_id": 2117,
+    "stem": "Which of the following hand signals is the correct one for indicating that you are going to stop?",
+    "options": {
+      "A": "Arm bent and pointed up",
+      "B": "Arm straight out to the left",
+      "C": "Arm bent and pointing down",
+      "D": "Arm waving frantically in the air"
+    },
+    "answer": "C",
+    "image_url": null
+  },
+  {
+    "test_num": 7,
+    "question_num": 6,
+    "ques_id": 2111,
+    "stem": "As a bus driver, what is your ultimate priority?",
+    "options": {
+      "A": "Safety of the passengers",
+      "B": "Safety of the vehicle",
+      "C": "Correct navigation",
+      "D": "Keeping a schedule"
+    },
+    "answer": "A",
+    "image_url": null
+  },
+  {
+    "test_num": 7,
+    "question_num": 7,
+    "ques_id": 2124,
+    "stem": "When stopping to take on or alight passengers how far must your vehicle be visible to other vehicles?",
+    "options": {
+      "A": "20 m",
+      "B": "85 m",
+      "C": "60 m",
+      "D": "45 m"
+    },
+    "answer": "B",
+    "image_url": null
+  },
+  {
+    "test_num": 7,
+    "question_num": 8,
+    "ques_id": 2105,
+    "stem": "How high must the “SCHOOL BUS” lettering be on a bus?",
+    "options": {
+      "A": "40 cm",
+      "B": "10 cm",
+      "C": "20 cm",
+      "D": "60 cm"
+    },
+    "answer": "C",
+    "image_url": null
+  },
+  {
+    "test_num": 7,
+    "question_num": 9,
+    "ques_id": 2111,
+    "stem": "As a bus driver, what is your ultimate priority?",
+    "options": {
+      "A": "Safety of the passengers",
+      "B": "Safety of the vehicle",
+      "C": "Correct navigation",
+      "D": "Keeping a schedule"
+    },
+    "answer": "A",
+    "image_url": null
+  },
+  {
+    "test_num": 7,
+    "question_num": 10,
+    "ques_id": 2106,
+    "stem": "When entering a roundabout or traffic circle, you must yield to?",
+    "options": {
+      "A": "Traffic on the right",
+      "B": "Any traffic in the traffic circle",
+      "C": "If another vehicle arrives at the traffic circle at the same time as you do, yield to the vehicle on the right",
+      "D": "b and c are correct"
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 7,
+    "question_num": 11,
+    "ques_id": 2124,
+    "stem": "When stopping to take on or alight passengers how far must your vehicle be visible to other vehicles?",
+    "options": {
+      "A": "20 m",
+      "B": "85 m",
+      "C": "60 m",
+      "D": "45 m"
+    },
+    "answer": "B",
+    "image_url": null
+  },
+  {
+    "test_num": 7,
+    "question_num": 12,
+    "ques_id": 2125,
+    "stem": "If there is a collision between a bus that pulled out in front of traffic displaying the above sign and another vehicle in a 50km/hr speed zone – who is responsible?",
+    "options": {
+      "A": "The motorist that hit the bus",
+      "B": "Bus company",
+      "C": "Bus Driver",
+      "D": "Car driver’s insurance company"
+    },
+    "answer": "C",
+    "image_url": "http://aaravdrivingschool.com/apanel/org/common/images/avatar/job/busyield1.jpg"
+  },
+  {
+    "test_num": 7,
+    "question_num": 13,
+    "ques_id": 2116,
+    "stem": "What causes brake fade?",
+    "options": {
+      "A": "Excessive use of the brakes causing the brakes to overheat – thus the drums expand beyond the reach of the brake shoes",
+      "B": "The amount of distance that air must travel in the system and the numerous valves through which it should travel",
+      "C": "Driver negligence",
+      "D": "Equipment failure"
+    },
+    "answer": "A",
+    "image_url": null
+  },
+  {
+    "test_num": 7,
+    "question_num": 14,
+    "ques_id": 2118,
+    "stem": "Baggage must be stowed in the vehicle so that?",
+    "options": {
+      "A": "It is accessible to passengers",
+      "B": "It cannot fall on or against any passenger",
+      "C": "It is laid flat and secured from movement",
+      "D": "It is not stacked more than 2 high"
+    },
+    "answer": "B",
+    "image_url": null
+  },
+  {
+    "test_num": 7,
+    "question_num": 15,
+    "ques_id": 2127,
+    "stem": "Which of the following can you do if your taxi is moving?",
+    "options": {
+      "A": "Make change",
+      "B": "Accept fares",
+      "C": "Allow 2 passengers to sit on the right if it does not interfere with the driver",
+      "D": "Talk on your cell phone"
+    },
+    "answer": "C",
+    "image_url": null
+  },
+  {
+    "test_num": 7,
+    "question_num": 16,
+    "ques_id": 2115,
+    "stem": "What is the danger of stopping in an acceleration or merging lane?",
+    "options": {
+      "A": "Impeding traffic",
+      "B": "Travelling slower than the speed of traffic",
+      "C": "Being rear-ended",
+      "D": "Blocking the migratory path of the red-billed Coon bird"
+    },
+    "answer": "C",
+    "image_url": null
+  },
+  {
+    "test_num": 7,
+    "question_num": 17,
+    "ques_id": 2122,
+    "stem": "When communicating with people with disabilities you should?",
+    "options": {
+      "A": "Speak to her escort",
+      "B": "Provide help immediately",
+      "C": "Hurry the person on your vehicle so as to keep your schedule",
+      "D": "Speak to the person directly and only give assistance after asking and receiving clear instructions"
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 7,
+    "question_num": 18,
+    "ques_id": 2117,
+    "stem": "Which of the following hand signals is the correct one for indicating that you are going to stop?",
+    "options": {
+      "A": "Arm bent and pointed up",
+      "B": "Arm straight out to the left",
+      "C": "Arm bent and pointing down",
+      "D": "Arm waving frantically in the air"
+    },
+    "answer": "C",
+    "image_url": null
+  },
+  {
+    "test_num": 7,
+    "question_num": 19,
+    "ques_id": 2116,
+    "stem": "What causes brake fade?",
+    "options": {
+      "A": "Excessive use of the brakes causing the brakes to overheat – thus the drums expand beyond the reach of the brake shoes",
+      "B": "The amount of distance that air must travel in the system and the numerous valves through which it should travel",
+      "C": "Driver negligence",
+      "D": "Equipment failure"
+    },
+    "answer": "A",
+    "image_url": null
+  },
+  {
+    "test_num": 7,
+    "question_num": 20,
+    "ques_id": 2114,
+    "stem": "In the event of a crash what is the driver of a passenger vehicle’s first priority?",
+    "options": {
+      "A": "Giving insurance information to the other parties",
+      "B": "Getting herself to the hospital in the event of a suspected or known injury",
+      "C": "Calling 911",
+      "D": "The safety and well-being of your passengers"
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 7,
+    "question_num": 21,
+    "ques_id": 2128,
+    "stem": "Which of the following is NOT a reason that a vehicle may spin out of control?",
+    "options": {
+      "A": "Over-steering",
+      "B": "Over-braking",
+      "C": "Over-accelerating",
+      "D": "Playing the stereo too loud and getting \"jiggly\" with the passengers"
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 7,
+    "question_num": 22,
+    "ques_id": 2107,
+    "stem": "Idling…?",
+    "options": {
+      "A": "Keeps the interior of the vehicle warm",
+      "B": "Allows you to be prepared to go in a split second",
+      "C": "Wastes fuel",
+      "D": "Keeps the oil companies in business"
+    },
+    "answer": "C",
+    "image_url": null
+  },
+  {
+    "test_num": 7,
+    "question_num": 23,
+    "ques_id": 2111,
+    "stem": "As a bus driver, what is your ultimate priority?",
+    "options": {
+      "A": "Safety of the passengers",
+      "B": "Safety of the vehicle",
+      "C": "Correct navigation",
+      "D": "Keeping a schedule"
+    },
+    "answer": "A",
+    "image_url": null
+  },
+  {
+    "test_num": 7,
+    "question_num": 24,
+    "ques_id": 2123,
+    "stem": "Which of the following is NOT a clue that you could potentially collide with parked vehicles or pedestrians near the curb?",
+    "options": {
+      "A": "A driver sitting behind the steering wheel",
+      "B": "Exhaust escaping from a tail pipe",
+      "C": "Brake lights, back-up lights and turn signals",
+      "D": "An unusual number of green cars"
+    },
+    "answer": "D",
+    "image_url": null
+  },
+  {
+    "test_num": 7,
+    "question_num": 25,
+    "ques_id": 2112,
+    "stem": "What is the purpose of the National Safety Code?",
+    "options": {
+      "A": "To annoy drivers by putting in regulations that curtail the number of hours that they can operate a commercial vehicle",
+      "B": "To protect the driving public from bad taxi and limo drivers",
+      "C": "To set out minimum safety standards for commercial vehicles, drivers and carriers operating in Canada",
+      "D": "Does not apply in British Columbia as it has been deemed ultra vires under the Highway Traffic Act"
+    },
+    "answer": "C",
+    "image_url": null
+  }
+]

@@ -85,6 +85,16 @@ class StudyQuestion(SQLModel, table=True):
             index=False,
             unique=False,server_default=text("''"),        )
     )
+    image_url:        Optional[str] = Field(
+            default=None,
+        description="题目图片URL",
+        sa_column=Column(
+            String(500),
+            nullable=True,
+            primary_key=False,
+            index=False,
+            unique=False,        )
+    )
     status:        int = Field(
             default=None,
         description="状态",
@@ -129,6 +139,7 @@ class StudyQuestionCreate(SQLModel):
     type: Optional[str] = None
     explanation_raw: Optional[str] = None
     explanation_human: Optional[str] = None
+    image_url: Optional[str] = None
     creator: Optional[str] = Field(default=None, max_length=64)
     dept_id: Optional[int] = None
 
@@ -140,6 +151,7 @@ class StudyQuestionUpdate(SQLModel):
     answer: Optional[str] = None
     explanation_raw: Optional[str] = None
     explanation_human: Optional[str] = None
+    image_url: Optional[str] = None
     status: Optional[int] = None
     updater: Optional[str] = Field(default=None, max_length=64)
     dept_id: Optional[int] = None

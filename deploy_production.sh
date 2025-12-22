@@ -79,9 +79,8 @@ backup_current() {
             cd - > /dev/null
         fi
         
-        # 移动当前目录到备份
-        mv "$CURRENT_DIR" "$BACKUP_PATH"
-        mkdir -p "$CURRENT_DIR"
+        # 复制当前目录到备份（保留 current 用于 git pull）
+        cp -a "$CURRENT_DIR" "$BACKUP_PATH"
         
         log_success "备份完成: $BACKUP_NAME"
     else
@@ -119,18 +118,28 @@ pull_latest_code() {
     cd "$CURRENT_DIR"
     
     if [ -d ".git" ]; then
-        # 已存在 git 仓库，直接拉取
+        # 已存在 git 仓库，使用 git pull（保留本地 .env 等配置文件）
         log_info "更新现有仓库..."
-        git fetch origin
-        git reset --hard "origin/$GIT_BRANCH"
-        git clean -fd
+        OLD_COMMIT=$(git rev-parse HEAD 2>/dev/null || echo "")
+        
+        if git pull origin "$GIT_BRANCH"; then
+            NEW_COMMIT=$(git rev-parse HEAD 2>/dev/null || echo "")
+            if [ "$OLD_COMMIT" != "$NEW_COMMIT" ]; then
+                log_success "代码更新成功"
+            else
+                log_info "代码已是最新版本"
+            fi
+        else
+            log_error "git pull 失败"
+            exit 1
+        fi
     else
-        # 克隆新仓库
-        log_info "克隆仓库: $GIT_REPO (分支: $GIT_BRANCH)"
+        # 首次部署：克隆仓库
+        log_info "首次部署，克隆仓库: $GIT_REPO (分支: $GIT_BRANCH)"
         cd "$DEPLOY_BASE"
-        rm -rf "$CURRENT_DIR"
         git clone -b "$GIT_BRANCH" "$GIT_REPO" current
         cd "$CURRENT_DIR"
+        log_warning "首次部署完成，请检查并配置 .env 文件"
     fi
     
     # 显示当前版本信息
@@ -147,6 +156,52 @@ pull_latest_code() {
     echo "     作者: $COMMIT_AUTHOR"
     echo "     时间: $COMMIT_DATE"
     echo ""
+}
+
+# 从备份恢复本地配置文件（不在 Git 中的文件）
+restore_local_configs() {
+    log_info "恢复本地配置文件..."
+    
+    # 获取最新的备份目录
+    LATEST_BACKUP=$(ls -1dt "$RELEASES_DIR"/release_* 2>/dev/null | head -1)
+    
+    if [ -z "$LATEST_BACKUP" ]; then
+        log_warning "没有备份可用，跳过配置恢复"
+        log_warning "请手动创建以下配置文件："
+        echo "     - traefik/config_env_production.sh"
+        echo "     - .env (如需要)"
+        return
+    fi
+    
+    log_info "从备份恢复: $(basename $LATEST_BACKUP)"
+    
+    # 恢复 traefik 配置
+    if [ -f "$LATEST_BACKUP/traefik/config_env_production.sh" ]; then
+        mkdir -p "$CURRENT_DIR/traefik"
+        cp "$LATEST_BACKUP/traefik/config_env_production.sh" "$CURRENT_DIR/traefik/"
+        log_success "已恢复: traefik/config_env_production.sh"
+    fi
+    
+    # 恢复 .env 文件（如果存在）
+    if [ -f "$LATEST_BACKUP/.env" ]; then
+        cp "$LATEST_BACKUP/.env" "$CURRENT_DIR/"
+        log_success "已恢复: .env"
+    fi
+    
+    # 恢复 admin/backend/.env（如果存在）
+    if [ -f "$LATEST_BACKUP/admin/backend/.env" ]; then
+        mkdir -p "$CURRENT_DIR/admin/backend"
+        cp "$LATEST_BACKUP/admin/backend/.env" "$CURRENT_DIR/admin/backend/"
+        log_success "已恢复: admin/backend/.env"
+    fi
+    
+    # 恢复其他 config_env_*.sh 文件
+    for config_file in "$LATEST_BACKUP"/traefik/config_env_*.sh; do
+        if [ -f "$config_file" ]; then
+            cp "$config_file" "$CURRENT_DIR/traefik/"
+            log_success "已恢复: traefik/$(basename $config_file)"
+        fi
+    done
 }
 
 # 加载环境变量
@@ -324,7 +379,7 @@ main() {
     # 3. 清理旧备份
     cleanup_old_releases
     
-    # 4. 拉取最新代码
+    # 4. 拉取最新代码（git pull，保留本地 .env）
     pull_latest_code
     
     # 5. 加载环境变量

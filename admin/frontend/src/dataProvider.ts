@@ -106,11 +106,17 @@ const axiosDataProvider: DataProvider = {
   },
 
   // 可按需添加其他方法，例如 getMany、deleteMany 等
-  custom: async ({ url, method, config }) => {
+  custom: async (params: any) => {
+    const { url, method, payload, config, meta } = params;
     try {
+      // payload 来自 useCustomMutation 的 values 参数
+      // meta.payload 也可能包含数据
+      const requestData = payload || meta?.payload || config?.data;
+      
       const response = await axiosInstance.request({
         url,
         method,
+        data: requestData,
         ...config,
       });
       return {

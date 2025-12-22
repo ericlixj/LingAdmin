@@ -1,39 +1,66 @@
 import { useState, useEffect } from "react";
-import dayjs from "dayjs";
 import { Edit, useForm } from "@refinedev/antd";
-import { Form, Input, Select, Checkbox, DatePicker, Spin, InputNumber } from "antd";
+import { useList } from "@refinedev/core";
+import { Form, Select, Spin, InputNumber, Space, Tag, Card, Typography } from "antd";
+import { QuestionCircleOutlined, BookOutlined } from "@ant-design/icons";
 
-const fields = [{"common": true, "default": null, "description": "pk", "form_type": "input", "index": false, "insertable": false, "listable": false, "max_length": null, "name": "id", "nullable": false, "options": [], "primary_key": true, "query_type": "eq", "queryable": false, "required": false, "sortable": false, "type": "int", "unique": false, "updatable": false}, {"common": false, "default": "", "description": "question_id", "form_type": "input", "index": false, "insertable": false, "listable": false, "max_length": null, "name": "question_id", "nullable": false, "options": [], "primary_key": false, "query_type": "eq", "queryable": false, "required": false, "sortable": false, "type": "int", "unique": false, "updatable": false}, {"common": false, "default": "", "description": "knowledge_node_id", "form_type": "input", "index": false, "insertable": false, "listable": false, "max_length": null, "name": "knowledge_node_id", "nullable": false, "options": [], "primary_key": false, "query_type": "eq", "queryable": false, "required": false, "sortable": false, "type": "int", "unique": false, "updatable": false}, {"common": false, "default": "", "description": "\u6743\u91cdbase100", "form_type": "input", "index": false, "insertable": false, "listable": false, "max_length": null, "name": "weight", "nullable": false, "options": [], "primary_key": false, "query_type": "eq", "queryable": false, "required": false, "sortable": false, "type": "int", "unique": false, "updatable": false}];
+const { Text } = Typography;
 
-function prepareInitialValues(record: Record<string, any>, fields: any[]) {
-  const result: Record<string, any> = {};
-  fields.forEach((field) => {
-    const value = record[field.name];
-    if (field.form_type === "date") {
-      result[field.name] = value ? dayjs(value) : null;
-    } else if (field.form_type === "checkbox" && field.options) {
-      result[field.name] = value ? value.split(",").map((v: string) => v.trim()) : [];
-    } else if (field.form_type === "select") {
-      result[field.name] = String(value);
-    } else {
-      result[field.name] = value;
-    }
-  });
-  return result;
-}
+// 重要性颜色
+const IMPORTANCE_COLOR: Record<string, string> = {
+  high: "red",
+  medium: "orange",
+  low: "blue",
+};
+
+// 题目类型
+const TYPE_MAP: Record<string, { label: string; color: string }> = {
+  single: { label: "单选", color: "blue" },
+  multi: { label: "多选", color: "purple" },
+  judge: { label: "判断", color: "orange" },
+};
 
 export const StudyQuestionKnowledgeEdit = () => {
   const { formProps, saveButtonProps, queryResult } = useForm();
   const [initialized, setInitialized] = useState(false);
+  const [selectedExamId, setSelectedExamId] = useState<number | null>(null);
 
   const record = queryResult?.data?.data;
   const form = formProps?.form;
+
+  // 获取考试列表
+  const { data: examData } = useList({
+    resource: "studyExam",
+    pagination: { pageSize: 100 },
+  });
+
+  // 获取题目列表
+  const { data: questionsData, isLoading: questionsLoading } = useList({
+    resource: "studyQuestion",
+    pagination: { pageSize: 500 },
+    filters: selectedExamId ? [{ field: "exam_id", operator: "eq", value: selectedExamId }] : [],
+  });
+
+  // 获取知识点列表
+  const { data: knowledgeData, isLoading: knowledgeLoading } = useList({
+    resource: "studyKnowledgeNode",
+    pagination: { pageSize: 500 },
+    filters: selectedExamId ? [{ field: "exam_id", operator: "eq", value: selectedExamId }] : [],
+  });
+
+  // 初始化表单数据
   useEffect(() => {
     if (!initialized && record && form && !form.isFieldsTouched()) {
-      form.setFieldsValue(prepareInitialValues(record, fields));
+      form.setFieldsValue(record);
       setInitialized(true);
+
+      // 根据已选题目获取 exam_id
+      const question = questionsData?.data?.find((q: any) => q.id === record.question_id);
+      if (question) {
+        setSelectedExamId(question.exam_id);
+      }
     }
-  }, [initialized, queryResult?.data?.data]);
+  }, [initialized, record, form, questionsData]);
 
   const handleFinish = (values: any) => {
     const processed = {
@@ -42,43 +69,138 @@ export const StudyQuestionKnowledgeEdit = () => {
     return formProps.onFinish?.(processed);
   };
 
-  // 这里判断是否加载完成，避免组件内部访问未定义数据
+  // 选中的题目和知识点信息
+  const selectedQuestion = questionsData?.data?.find((q: any) => q.id === form?.getFieldValue("question_id"));
+  const selectedKnowledge = knowledgeData?.data?.find((k: any) => k.id === form?.getFieldValue("knowledge_node_id"));
 
   if (queryResult?.isLoading || !record || !form || !initialized) {
     return <Spin size="large" style={{ display: "block", margin: "100px auto" }} />;
   }
+
+  // 题目选项
+  const questionOptions = (questionsData?.data || []).map((q: any) => {
+    const typeInfo = TYPE_MAP[q.type] || { label: q.type, color: "default" };
+    return {
+      label: (
+        <Space>
+          <Tag color={typeInfo.color} style={{ marginRight: 4 }}>
+            {typeInfo.label}
+          </Tag>
+          <span style={{ maxWidth: 400, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", display: "inline-block" }}>
+            {q.stem.slice(0, 60)}{q.stem.length > 60 ? "..." : ""}
+          </span>
+        </Space>
+      ),
+      value: q.id,
+      searchText: `${q.id} ${q.stem}`,
+    };
+  });
+
+  // 知识点选项
+  const knowledgeOptions = (knowledgeData?.data || []).map((k: any) => ({
+    label: (
+      <Space>
+        <Tag color={IMPORTANCE_COLOR[k.importance] || "default"} style={{ marginRight: 4 }}>
+          {k.code}
+        </Tag>
+        <span style={{ maxWidth: 350, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", display: "inline-block" }}>
+          {k.title.slice(0, 50)}{k.title.length > 50 ? "..." : ""}
+        </span>
+      </Space>
+    ),
+    value: k.id,
+    searchText: `${k.code} ${k.title}`,
+  }));
+
   return (
     <Edit saveButtonProps={saveButtonProps}>
       <Form {...formProps} layout="vertical" onFinish={handleFinish}>
+        {/* 考试筛选器（不是表单字段） */}
+        <Form.Item label="按考试筛选（可选）">
+          <Select
+            placeholder="选择考试以筛选题目和知识点"
+            allowClear
+            value={selectedExamId}
+            onChange={(value) => setSelectedExamId(value)}
+            options={examData?.data?.map((exam: any) => ({
+              label: exam.name,
+              value: exam.id,
+            }))}
+            style={{ width: 300 }}
+          />
+        </Form.Item>
+
         <Form.Item
           name="question_id"
-          label="question_id"
-          rules={[
-            { type: "number", message: "必须是数字" }
-          ]}
+          label={
+            <Space>
+              <QuestionCircleOutlined />
+              <span>题目</span>
+            </Space>
+          }
+          rules={[{ required: true, message: "请选择题目" }]}
         >
-              <InputNumber style={{ width: "100%" }} />
+          <Select
+            showSearch
+            placeholder="搜索并选择题目..."
+            loading={questionsLoading}
+            options={questionOptions}
+            optionFilterProp="searchText"
+            filterOption={(input, option) => {
+              const searchText = option?.searchText || "";
+              return searchText.toLowerCase().includes(input.toLowerCase());
+            }}
+          />
         </Form.Item>
+
+        {/* 显示选中的题目详情 */}
+        {selectedQuestion && (
+          <Card size="small" style={{ marginBottom: 24, marginTop: -16 }}>
+            <Text strong>题干: </Text>
+            <Text>{selectedQuestion.stem}</Text>
+          </Card>
+        )}
+
         <Form.Item
           name="knowledge_node_id"
-          label="knowledge_node_id"
-          rules={[
-            { type: "number", message: "必须是数字" }
-          ]}
+          label={
+            <Space>
+              <BookOutlined />
+              <span>知识点</span>
+            </Space>
+          }
+          rules={[{ required: true, message: "请选择知识点" }]}
         >
-              <InputNumber style={{ width: "100%" }} />
+          <Select
+            showSearch
+            placeholder="搜索并选择知识点..."
+            loading={knowledgeLoading}
+            options={knowledgeOptions}
+            optionFilterProp="searchText"
+            filterOption={(input, option) => {
+              const searchText = option?.searchText || "";
+              return searchText.toLowerCase().includes(input.toLowerCase());
+            }}
+          />
         </Form.Item>
+
+        {/* 显示选中的知识点详情 */}
+        {selectedKnowledge && (
+          <Card size="small" style={{ marginBottom: 24, marginTop: -16 }}>
+            <Text strong>描述: </Text>
+            <Text>{selectedKnowledge.description || selectedKnowledge.title}</Text>
+          </Card>
+        )}
+
         <Form.Item
           name="weight"
-          label="权重base100"
-          rules={[
-            { type: "number", message: "必须是数字" }
-          ]}
+          label="关联权重"
+          rules={[{ required: true, message: "请输入权重" }]}
+          extra="0-100，越高表示关联越强"
         >
-              <InputNumber style={{ width: "100%" }} />
+          <InputNumber min={0} max={100} style={{ width: 200 }} addonAfter="%" />
         </Form.Item>
       </Form>
-
     </Edit>
   );
 };

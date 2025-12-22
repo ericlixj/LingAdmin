@@ -21,6 +21,7 @@ QUERYABLE_FIELDS = {
   "city": "like",
   "title": "like",
   "code": "like",
+  "stem": "like",  # 题干模糊查询
 }
 
 class BaseCRUD:
@@ -73,10 +74,21 @@ class BaseCRUD:
 
             # 类型转换，避免字符串类型与数据库字段类型不匹配
             if python_type == int and isinstance(value, str) and not isinstance(value, int):
-                value = int(value)
+                try:
+                    value = int(value)
+                except (ValueError, TypeError):
+                    pass
+            
+            # Boolean 类型转换
+            if python_type == bool:
+                if isinstance(value, str):
+                    value = value.lower() in ('true', '1', 'yes', 'on')
+                elif value is None:
+                    value = False
+                # 转换后，value 是布尔值，会在下面的 else 分支处理
 
             # 字符串类型处理
-            if isinstance(value, str):
+            if isinstance(value, str) and python_type != bool:
                 if operator == "contains" or operator == "like":
                     query = query.where(column.contains(value))
                 elif operator == "eq" or operator == "equals" or operator == "equal":
@@ -93,9 +105,9 @@ class BaseCRUD:
                 if end:
                     query = query.where(column <= end)
 
-            # 其他类型按 eq 处理
+            # 其他类型按 eq 处理（包括 boolean、int、float 等）
             else:
-                if operator == "eq":
+                if operator == "eq" or operator == "equals" or operator == "equal":
                     query = query.where(column == value)
         query = self._apply_data_permission_filter(query)
 

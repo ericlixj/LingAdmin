@@ -4,8 +4,11 @@ from app.core.db import get_session
 from app.core.deps import get_current_user_id, has_permission, get_current_dept_id
 from app.crud.studyKnowledgeNode_crud import StudyKnowledgeNodeCRUD
 from app.models.studyKnowledgeNode import StudyKnowledgeNode, StudyKnowledgeNodeCreate, StudyKnowledgeNodeListResponse, StudyKnowledgeNodeUpdate
+from app.models.studyKnowledgeSourceSection import StudyKnowledgeSourceSection
+from app.models.studySourceSection import StudySourceSection
+from app.models.studySource import StudySource
 from fastapi import APIRouter, Depends, HTTPException, Query, Request
-from sqlmodel import Session
+from sqlmodel import Session, select
 from datetime import datetime
 from app.core.utils import parse_refine_filters
 
@@ -100,3 +103,67 @@ def delete_item(
         raise HTTPException(status_code=404, detail="StudyKnowledgeNode not found")
     db_item.updater = str(current_user_id)
     return crud.soft_delete(db_item)
+
+
+@router.get("/{item_id}/sources", dependencies=[Depends(has_permission("studyKnowledgeNode:show"))])
+def get_knowledge_sources(
+    item_id: int,
+    session: Session = Depends(get_session),
+    current_user_id: int = Depends(get_current_user_id),
+):
+    """获取知识点的来源信息（章节和教材）"""
+    # 获取知识点与章节的关联
+    links = session.exec(
+        select(StudyKnowledgeSourceSection).where(
+            StudyKnowledgeSourceSection.knowledge_node_id == item_id,
+            StudyKnowledgeSourceSection.deleted == False
+        )
+    ).all()
+    
+    if not links:
+        return {"sources": []}
+    
+    # 获取章节信息
+    section_ids = [link.source_section_id for link in links]
+    sections = session.exec(
+        select(StudySourceSection).where(
+            StudySourceSection.id.in_(section_ids),
+            StudySourceSection.deleted == False
+        )
+    ).all()
+    
+    if not sections:
+        return {"sources": []}
+    
+    # 获取来源（教材）信息
+    source_ids = list(set(s.source_id for s in sections if s.source_id))
+    sources = {}
+    if source_ids:
+        source_list = session.exec(
+            select(StudySource).where(
+                StudySource.id.in_(source_ids),
+                StudySource.deleted == False
+            )
+        ).all()
+        sources = {s.id: s for s in source_list}
+    
+    # 构建响应
+    result = []
+    for section in sections:
+        source = sources.get(section.source_id) if section.source_id else None
+        result.append({
+            "section_id": section.id,
+            "chapter": section.chapter,
+            "section": section.section,
+            "page_start": section.page_start,
+            "page_end": section.page_end,
+            "anchor_text": section.anchor_text,
+            "source": {
+                "id": source.id,
+                "type": source.type,
+                "title": source.title,
+                "version": source.version,
+            } if source else None
+        })
+    
+    return {"sources": result}

@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { Show, useTable, CreateButton, FilterDropdown } from "@refinedev/antd";
-import { useShow, useDelete } from "@refinedev/core";
+import { useShow, useDelete, useList, useMany } from "@refinedev/core";
 import {
   Typography,
   Divider,
@@ -13,6 +13,7 @@ import {
   Button,
   Popconfirm,
   message,
+  Tag,
 } from "antd";
 import { EditOutlined } from "@ant-design/icons";
 import dayjs from "dayjs";
@@ -74,6 +75,92 @@ export const StudySessionShow = () => {
     }
   };
 
+  // 获取学习项目列表
+  const allItems = tableProps?.dataSource || [];
+  const learningItemIds = [...new Set(allItems.map((item: any) => item.learning_item_id).filter(Boolean))];
+  
+  const { data: learningItemsData } = useMany({
+    resource: "studyLearningItem",
+    ids: learningItemIds as number[],
+    queryOptions: {
+      enabled: learningItemIds.length > 0,
+    },
+  });
+
+  // 收集所有关联的实体ID
+  const learningItems = learningItemsData?.data || [];
+  const knowledgeIds = learningItems
+    .filter((item: any) => item.type === "knowledge")
+    .map((item: any) => item.ref_id)
+    .filter(Boolean);
+  const questionIds = learningItems
+    .filter((item: any) => item.type === "question")
+    .map((item: any) => item.ref_id)
+    .filter(Boolean);
+
+  // 批量获取知识点
+  const { data: knowledgeData } = useMany({
+    resource: "studyKnowledgeNode",
+    ids: knowledgeIds as number[],
+    queryOptions: {
+      enabled: knowledgeIds.length > 0,
+    },
+  });
+
+  // 批量获取题目
+  const { data: questionData } = useMany({
+    resource: "studyQuestion",
+    ids: questionIds as number[],
+    queryOptions: {
+      enabled: questionIds.length > 0,
+    },
+  });
+
+  // 构建映射
+  const learningItemMap = useMemo(() => {
+    const map = new Map();
+    learningItems.forEach((item: any) => {
+      map.set(item.id, item);
+    });
+    return map;
+  }, [learningItems]);
+
+  const knowledgeMap = useMemo(() => {
+    const map = new Map();
+    (knowledgeData?.data || []).forEach((kn: any) => {
+      map.set(kn.id, kn);
+    });
+    return map;
+  }, [knowledgeData]);
+
+  const questionMap = useMemo(() => {
+    const map = new Map();
+    (questionData?.data || []).forEach((q: any) => {
+      map.set(q.id, q);
+    });
+    return map;
+  }, [questionData]);
+
+  // 获取学习内容显示文本
+  const getLearningItemLabel = (learningItemId: number) => {
+    const item = learningItemMap.get(learningItemId);
+    if (!item) return `ID: ${learningItemId}`;
+    
+    if (item.type === "knowledge") {
+      const kn = knowledgeMap.get(item.ref_id);
+      return kn ? kn.title : `知识点 #${item.ref_id}`;
+    } else if (item.type === "question") {
+      const q = questionMap.get(item.ref_id);
+      if (q) {
+        const stem = q.stem || "";
+        const cleanStem = stem.replace(/\n?\[IMAGE:.*?\]/, '').trim();
+        return cleanStem.length > 50 ? cleanStem.substring(0, 50) + "..." : cleanStem;
+      }
+      return `题目 #${item.ref_id}`;
+    }
+    return `ID: ${learningItemId}`;
+  };
+
   return (
     <Show isLoading={isLoading}>
       {/* 主表字段渲染 */}
@@ -133,6 +220,33 @@ export const StudySessionShow = () => {
 
       {/* 子表表格 */}
       <Table {...tableProps} rowKey="id" pagination={tableProps.pagination}>
+        <Table.Column
+          dataIndex="learning_item_id"
+          title="学习内容"
+          render={(value) => getLearningItemLabel(value)}
+        />
+        <Table.Column
+          dataIndex="is_correct"
+          title="是否正确"
+          render={(value) => {
+            const isCorrect = value === 1 || value === true;
+            return (
+              <Tag color={isCorrect ? "success" : "default"}>
+                {isCorrect ? "是" : "否"}
+              </Tag>
+            );
+          }}
+        />
+        <Table.Column
+          dataIndex="response"
+          title="用户做答内容"
+          render={(value) => value || "-"}
+        />
+        <Table.Column
+          dataIndex="time_spent_second"
+          title="耗时(秒)"
+          render={(value) => value || "-"}
+        />
 
         {/* 操作列 */}
         <Table.Column

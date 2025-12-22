@@ -42,21 +42,10 @@ class StudySessionItemCRUD(BaseCRUD):
         return db_obj
 
     def soft_delete(self, db_obj: StudySessionItem) -> StudySessionItem:
-        # 软删主表
+        # 软删除学习记录明细
         db_obj.deleted = True
         db_obj.update_time = datetime.utcnow()
         self.session.add(db_obj)
-
-        # 同时软删关联的子表数据
-        self.session.execute(
-            update(StudySession)
-            .where(StudySession.session_id == db_obj.id)
-            .values(
-                deleted=True,
-                update_time=datetime.utcnow()
-            )
-        )
-
         self.session.commit()
         self.session.refresh(db_obj)
         return db_obj

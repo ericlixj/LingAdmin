@@ -2,6 +2,7 @@
 import { useEffect, useState, useRef, useCallback } from "react";
 import Login from "./Login";
 import GasBuddy from "./GasBuddy";
+import StudySystem from "./StudySystem";
 
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:4000";
 const PAGE_SIZE = 10; // 每页数量
@@ -404,7 +405,7 @@ function App() {
         </div>
 
         {/* 功能选择按钮 */}
-        <div style={{ display: "flex", gap: "2rem", justifyContent: "center", marginTop: "4rem" }}>
+        <div style={{ display: "flex", gap: "2rem", justifyContent: "center", marginTop: "4rem", flexWrap: "wrap" }}>
           <button
             onClick={() => setPageView("flyers")}
             style={{
@@ -455,6 +456,31 @@ function App() {
           >
             {lang === "cn" ? "加油站查询" : lang === "en" ? "Gas Stations" : "加油站查詢"}
           </button>
+          <button
+            onClick={() => setPageView("study")}
+            style={{
+              padding: "2rem 4rem",
+              fontSize: "1.5rem",
+              backgroundColor: "#ff6b35",
+              color: "white",
+              border: "none",
+              borderRadius: "8px",
+              cursor: "pointer",
+              fontWeight: "bold",
+              boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
+              transition: "all 0.2s",
+            }}
+            onMouseEnter={(e) => {
+              e.target.style.backgroundColor = "#e55a2b";
+              e.target.style.transform = "translateY(-2px)";
+            }}
+            onMouseLeave={(e) => {
+              e.target.style.backgroundColor = "#ff6b35";
+              e.target.style.transform = "translateY(0)";
+            }}
+          >
+            {lang === "cn" ? "学习系统" : lang === "en" ? "Study System" : "學習系統"}
+          </button>
         </div>
       </div>
     );
@@ -487,11 +513,17 @@ function App() {
                   : lang === "en"
                   ? "Flyer Details"
                   : "傳單詳情"
+                : pageView === "gas"
+                ? lang === "cn"
+                  ? "加油站查询"
+                  : lang === "en"
+                  ? "Gas Stations"
+                  : "加油站查詢"
                 : lang === "cn"
-                ? "加油站查询"
+                ? "学习系统"
                 : lang === "en"
-                ? "Gas Stations"
-                : "加油站查詢"}
+                ? "Study System"
+                : "學習系統"}
             </h1>
           </div>
           <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
@@ -516,6 +548,8 @@ function App() {
       {/* 根据当前页面显示内容 */}
       {pageView === "gas" ? (
         <GasBuddy lang={lang} />
+      ) : pageView === "study" ? (
+        <StudySystem lang={lang} user={user} />
       ) : (
         <>
       

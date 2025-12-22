@@ -1,0 +1,1264 @@
+Importing module: app.models.app
+Importing module: app.models.brand
+Importing module: app.models.common
+Importing module: app.models.crudDefineFileds
+Importing module: app.models.crudDefineModuel
+Importing module: app.models.demoOrder01
+Importing module: app.models.dept
+Importing module: app.models.flippMerchant
+Importing module: app.models.flyerDetails
+Importing module: app.models.flyerMain
+Importing module: app.models.fsaFlyerLink
+Importing module: app.models.fsaManage
+Importing module: app.models.gasEmailHistory
+Importing module: app.models.gasPostcode
+Importing module: app.models.gasPrice
+Importing module: app.models.gasStation
+Importing module: app.models.gasTrends
+Importing module: app.models.iyfEmailHistory
+Importing module: app.models.iyfVideo
+Importing module: app.models.main002
+Importing module: app.models.masterDetailRel
+Importing module: app.models.menu
+Importing module: app.models.permission
+Importing module: app.models.product4Sephora
+Importing module: app.models.quotesToScrape
+Importing module: app.models.role
+Importing module: app.models.salePredict
+Importing module: app.models.shop
+Importing module: app.models.shop_daily_stat
+Importing module: app.models.studyExam
+Importing module: app.models.studyKnowledgeNode
+Importing module: app.models.studyKnowledgeSourceSection
+Importing module: app.models.studyLearningItem
+Importing module: app.models.studyQuestion
+Importing module: app.models.studyQuestionKnowledge
+Importing module: app.models.studySession
+Importing module: app.models.studySessionItem
+Importing module: app.models.studySource
+Importing module: app.models.studySourceSection
+Importing module: app.models.sub002
+Importing module: app.models.sysDic
+Importing module: app.models.sysDicData
+Importing module: app.models.user
+Importing module: app.models.userPostcode
+============================================================
+自动关联题目与知识点
+============================================================
+✅ OpenAI 客户端初始化成功
+   使用模型: gpt-4o-mini
+📚 加载 322 个知识点 (exam_id=1)
+📂 找到 265 道题目 (exam_id=1)
+
+🔗 开始关联...
+
+[1/265] ID=494: Your vehicle should be operated at:...
+[32mINFO     | 2025-12-21 19:34:37,045 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ✅ 关联 3 个知识点
+[2/265] ID=495: How many consecutive hours of off-duty t...
+[32mINFO     | 2025-12-21 19:34:38,616 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ✅ 关联 3 个知识点
+[3/265] ID=496: This sign means?...
+[32mINFO     | 2025-12-21 19:34:40,125 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ✅ 关联 3 个知识点
+[4/265] ID=497: Which of the following is NOT a characte...
+[32mINFO     | 2025-12-21 19:34:45,450 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⚠️ 无效知识点ID: 299
+    ✅ 关联 3 个知识点
+[5/265] ID=498: Torque is:...
+[32mINFO     | 2025-12-21 19:34:46,833 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ✅ 关联 2 个知识点
+[6/265] ID=499: Which types of commercial vehicles are r...
+[32mINFO     | 2025-12-21 19:34:48,964 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ✅ 关联 3 个知识点
+[7/265] ID=500: Off track is:...
+[32mINFO     | 2025-12-21 19:34:50,645 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ✅ 关联 2 个知识点
+[8/265] ID=501: How many consecutive hours of off-duty t...
+[32mINFO     | 2025-12-21 19:34:52,435 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⚠️ 无效知识点ID: 369
+    ✅ 关联 2 个知识点
+[9/265] ID=502: What is the best driving practice when d...
+[32mINFO     | 2025-12-21 19:34:53,962 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ✅ 关联 3 个知识点
+[10/265] ID=503: When you see a potential hazard in your ...
+[32mINFO     | 2025-12-21 19:34:55,507 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ✅ 关联 3 个知识点
+[11/265] ID=504: What class of licence must you already h...
+[32mINFO     | 2025-12-21 19:34:57,400 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ✅ 关联 3 个知识点
+[12/265] ID=505: Which one of the following is NOT someth...
+[32mINFO     | 2025-12-21 19:34:59,160 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ✅ 关联 3 个知识点
+[13/265] ID=506: Torque is:...
+[32mINFO     | 2025-12-21 19:35:00,841 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ✅ 关联 3 个知识点
+[14/265] ID=507: Written trip inspection reports must inc...
+[32mINFO     | 2025-12-21 19:35:02,779 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ✅ 关联 3 个知识点
+[15/265] ID=508: Regardless of maintenance policies, who ...
+[32mINFO     | 2025-12-21 19:35:04,936 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ✅ 关联 3 个知识点
+[16/265] ID=509: How often does a driver have to take 24 ...
+[32mINFO     | 2025-12-21 19:35:06,669 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⚠️ 无效知识点ID: 369
+    ✅ 关联 3 个知识点
+[17/265] ID=510: Torque is:...
+[32mINFO     | 2025-12-21 19:35:08,025 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ✅ 关联 2 个知识点
+[18/265] ID=511: Regardless of maintenance policies, who ...
+[32mINFO     | 2025-12-21 19:35:09,957 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ✅ 关联 3 个知识点
+[19/265] ID=512: A danger zone is defined as?...
+[32mINFO     | 2025-12-21 19:35:11,847 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ✅ 关联 3 个知识点
+[20/265] ID=513: In addition to the regular outside rear ...
+[32mINFO     | 2025-12-21 19:35:13,857 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ✅ 关联 3 个知识点
+[21/265] ID=514: Passengers may alight and board a school...
+[32mINFO     | 2025-12-21 19:35:15,973 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ✅ 关联 3 个知识点
+[22/265] ID=515: A red triangle Slow Moving Vehicle sign ...
+[32mINFO     | 2025-12-21 19:35:17,636 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ✅ 关联 2 个知识点
+[23/265] ID=516: Which of the following is NOT a characte...
+[32mINFO     | 2025-12-21 19:35:19,500 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⚠️ 无效知识点ID: 299
+    ✅ 关联 3 个知识点
+[24/265] ID=517: When you are operating your logbook in C...
+[32mINFO     | 2025-12-21 19:35:21,477 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⚠️ 无效知识点ID: 369
+    ✅ 关联 3 个知识点
+[25/265] ID=518: Revolutions per minute, or R.P.M., are:...
+[32mINFO     | 2025-12-21 19:35:23,041 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ✅ 关联 2 个知识点
+[26/265] ID=519: When you are operating your logbook in C...
+[32mINFO     | 2025-12-21 19:35:24,610 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⚠️ 无效知识点ID: 369
+    ✅ 关联 3 个知识点
+[27/265] ID=520: Off track is:...
+[32mINFO     | 2025-12-21 19:35:26,542 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ✅ 关联 3 个知识点
+[28/265] ID=521: Written trip inspection reports must inc...
+[32mINFO     | 2025-12-21 19:35:28,345 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ✅ 关联 3 个知识点
+[29/265] ID=522: Regardless of maintenance policies, who ...
+[32mINFO     | 2025-12-21 19:35:31,085 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ✅ 关联 3 个知识点
+[30/265] ID=523: In addition to the regular outside rear ...
+[32mINFO     | 2025-12-21 19:35:33,137 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ✅ 关联 3 个知识点
+[31/265] ID=524: Your vehicle should be operated at:...
+[32mINFO     | 2025-12-21 19:35:34,875 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ✅ 关联 3 个知识点
+[32/265] ID=525: Revolutions per minute, or R.P.M., are:...
+[32mINFO     | 2025-12-21 19:35:36,915 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ✅ 关联 2 个知识点
+[33/265] ID=526: The position of your front wheels while ...
+[32mINFO     | 2025-12-21 19:35:38,420 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ✅ 关联 3 个知识点
+[34/265] ID=527: Regardless of maintenance policies, who ...
+[32mINFO     | 2025-12-21 19:35:39,921 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ✅ 关联 3 个知识点
+[35/265] ID=528: Off track is:...
+[32mINFO     | 2025-12-21 19:35:42,158 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ✅ 关联 2 个知识点
+[36/265] ID=529: What class of licence must you already h...
+[32mINFO     | 2025-12-21 19:35:43,992 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ✅ 关联 3 个知识点
+[37/265] ID=530: A danger zone is defined as?...
+[32mINFO     | 2025-12-21 19:35:45,762 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ✅ 关联 3 个知识点
+[38/265] ID=531: Passenger vehicles with a capacity of mo...
+[32mINFO     | 2025-12-21 19:35:47,306 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ✅ 关联 3 个知识点
+[39/265] ID=532: A "taxi" refers to:...
+[32mINFO     | 2025-12-21 19:35:49,186 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ✅ 关联 3 个知识点
+[40/265] ID=533: What class of licence must you already h...
+[32mINFO     | 2025-12-21 19:35:51,778 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ✅ 关联 3 个知识点
+[41/265] ID=534: When parking a single unit vehicle on an...
+[32mINFO     | 2025-12-21 19:35:53,707 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ✅ 关联 3 个知识点
+[42/265] ID=535: What are the top two reasons that commer...
+[32mINFO     | 2025-12-21 19:35:55,157 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ✅ 关联 3 个知识点
+[43/265] ID=536: A special vehicle is defined as?...
+[32mINFO     | 2025-12-21 19:35:57,458 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ✅ 关联 3 个知识点
+[44/265] ID=537: A controlled railway crossing may have:...
+[32mINFO     | 2025-12-21 19:35:59,046 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ✅ 关联 2 个知识点
+[45/265] ID=538: If you want to tow a trailer that weighs...
+[32mINFO     | 2025-12-21 19:36:00,963 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ✅ 关联 3 个知识点
+[46/265] ID=539: Stopping on icy roads requires:...
+[32mINFO     | 2025-12-21 19:36:02,699 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⚠️ 无效知识点ID: 339
+    ✅ 关联 3 个知识点
+[47/265] ID=540: To get a commercial licence you must:...
+[32mINFO     | 2025-12-21 19:36:04,342 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ✅ 关联 3 个知识点
+[48/265] ID=541: When descending a hill and the driver no...
+[32mINFO     | 2025-12-21 19:36:05,906 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ✅ 关联 3 个知识点
+[49/265] ID=542: When parking a single unit vehicle on an...
+[32mINFO     | 2025-12-21 19:36:07,800 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ✅ 关联 3 个知识点
+[50/265] ID=543: Which vehicles are required to carry war...
+[32mINFO     | 2025-12-21 19:36:10,281 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⚠️ 无效知识点ID: 3222
+    ✅ 关联 3 个知识点
+[51/265] ID=544: To get a commercial licence you must:...
+[32mINFO     | 2025-12-21 19:36:11,875 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ✅ 关联 3 个知识点
+[52/265] ID=545: Every motor vehicle must be equipped wit...
+[32mINFO     | 2025-12-21 19:36:13,706 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ✅ 关联 3 个知识点
+[53/265] ID=546: Which one of the following is NOT a rest...
+[32mINFO     | 2025-12-21 19:36:15,112 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ✅ 关联 3 个知识点
+[54/265] ID=547: This sign means?...
+[32mINFO     | 2025-12-21 19:36:16,674 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ✅ 关联 3 个知识点
+[55/265] ID=548: Why are drivers required to complete a t...
+[32mINFO     | 2025-12-21 19:36:18,480 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⚠️ 无效知识点ID: 290
+    ✅ 关联 3 个知识点
+[56/265] ID=549: Which vehicles are required to stop at u...
+[32mINFO     | 2025-12-21 19:36:20,289 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ✅ 关联 3 个知识点
+[57/265] ID=550: Which vehicles are required to carry war...
+[32mINFO     | 2025-12-21 19:36:22,397 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⚠️ 无效知识点ID: 3222
+    ✅ 关联 3 个知识点
+[58/265] ID=551: This sign means?...
+[32mINFO     | 2025-12-21 19:36:23,912 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ✅ 关联 3 个知识点
+[59/265] ID=552: Truck drivers should:...
+[32mINFO     | 2025-12-21 19:36:25,384 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ✅ 关联 3 个知识点
+[60/265] ID=553: When backing up using a guide you should...
+[32mINFO     | 2025-12-21 19:36:27,263 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ✅ 关联 3 个知识点
+[61/265] ID=554: Which vehicles are required to carry war...
+[32mINFO     | 2025-12-21 19:36:28,988 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⚠️ 无效知识点ID: 3222
+    ✅ 关联 3 个知识点
+[62/265] ID=555: Which method should you use to shift gea...
+[32mINFO     | 2025-12-21 19:36:30,526 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ✅ 关联 3 个知识点
+[63/265] ID=556: When a school bus has a defect, what is ...
+[32mINFO     | 2025-12-21 19:36:32,229 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⚠️ 无效知识点ID: 458
+    ✅ 关联 3 个知识点
+[64/265] ID=557: When are drivers required to complete a ...
+[32mINFO     | 2025-12-21 19:36:35,119 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ✅ 关联 3 个知识点
+[65/265] ID=558: What steps must the driver take before r...
+[32mINFO     | 2025-12-21 19:36:36,981 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ✅ 关联 3 个知识点
+[66/265] ID=559: A governor is:...
+[32mINFO     | 2025-12-21 19:36:38,719 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ✅ 关联 2 个知识点
+[67/265] ID=560: When operating an emergency vehicle, whi...
+[32mINFO     | 2025-12-21 19:36:40,541 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ✅ 关联 3 个知识点
+[68/265] ID=561: Your danger zone increases when:...
+[32mINFO     | 2025-12-21 19:36:42,286 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ✅ 关联 3 个知识点
+[69/265] ID=562: If your vehicle becomes disabled, you sh...
+[32mINFO     | 2025-12-21 19:36:44,325 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⚠️ 无效知识点ID: 3222
+    ✅ 关联 3 个知识点
+[70/265] ID=563: Which of the following is NOT a road use...
+[32mINFO     | 2025-12-21 19:36:45,749 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ✅ 关联 2 个知识点
+[71/265] ID=564: This sign means?...
+[32mINFO     | 2025-12-21 19:36:47,795 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ✅ 关联 3 个知识点
+[72/265] ID=565: When operating an emergency vehicle, whi...
+[32mINFO     | 2025-12-21 19:36:49,590 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ✅ 关联 3 个知识点
+[73/265] ID=566: When approaching an intersection, you sh...
+[32mINFO     | 2025-12-21 19:36:52,475 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ✅ 关联 3 个知识点
+[74/265] ID=567: When descending a hill and the driver no...
+[32mINFO     | 2025-12-21 19:36:54,951 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ✅ 关联 3 个知识点
+[75/265] ID=568: This sign means?...
+[32mINFO     | 2025-12-21 19:36:56,569 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ✅ 关联 3 个知识点
+[76/265] ID=569: A special vehicle is defined as?...
+[32mINFO     | 2025-12-21 19:36:59,226 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ✅ 关联 3 个知识点
+[77/265] ID=570: Which vehicles are required to stop at u...
+[32mINFO     | 2025-12-21 19:37:01,641 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ✅ 关联 3 个知识点
+[78/265] ID=571: When driving slowly up or down hills, a ...
+[32mINFO     | 2025-12-21 19:37:03,511 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ✅ 关联 3 个知识点
+[79/265] ID=572: A special vehicle is defined as?...
+[32mINFO     | 2025-12-21 19:37:07,824 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ✅ 关联 3 个知识点
+[80/265] ID=573: When backing up using a guide you should...
+[32mINFO     | 2025-12-21 19:37:10,014 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ✅ 关联 3 个知识点
+[81/265] ID=574: Which of the following does NOT decrease...
+[32mINFO     | 2025-12-21 19:37:12,203 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ✅ 关联 3 个知识点
+[82/265] ID=575: When driving a large commercial vehicle ...
+[32mINFO     | 2025-12-21 19:37:13,894 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⚠️ 无效知识点ID: 370
+    ⚠️ 无效知识点ID: 290
+    ✅ 关联 3 个知识点
+[83/265] ID=576: In order to take passengers on or let th...
+[32mINFO     | 2025-12-21 19:37:15,985 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ✅ 关联 3 个知识点
+[84/265] ID=577: Tires which are overinflated or underinf...
+[32mINFO     | 2025-12-21 19:37:18,070 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ✅ 关联 3 个知识点
+[85/265] ID=578: A vehicle that is twice the weight of a ...
+[32mINFO     | 2025-12-21 19:37:20,010 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ✅ 关联 3 个知识点
+[86/265] ID=579: In order to take passengers on or let th...
+[32mINFO     | 2025-12-21 19:37:21,560 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ✅ 关联 3 个知识点
+[87/265] ID=580: You should never run your engine in a cl...
+[32mINFO     | 2025-12-21 19:37:22,957 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ✅ 关联 2 个知识点
+[88/265] ID=581: Passengers are permitted to stand on a b...
+[32mINFO     | 2025-12-21 19:37:24,772 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ✅ 关联 3 个知识点
+[89/265] ID=582: Which one of the following does NOT affe...
+[32mINFO     | 2025-12-21 19:37:26,497 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ✅ 关联 3 个知识点
+[90/265] ID=583: If you must drive more slowly than the t...
+[32mINFO     | 2025-12-21 19:37:28,299 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ✅ 关联 3 个知识点
+[91/265] ID=584: When a tire is underinflated it:...
+[32mINFO     | 2025-12-21 19:37:30,091 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ✅ 关联 3 个知识点
+[92/265] ID=585: School bus signs must be:...
+[32mINFO     | 2025-12-21 19:37:32,127 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ✅ 关联 3 个知识点
+[93/265] ID=586: Which of following ailments do NOT precl...
+[32mINFO     | 2025-12-21 19:37:33,768 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ✅ 关联 3 个知识点
+[94/265] ID=587: How do you downgrade from a commercial t...
+[32mINFO     | 2025-12-21 19:37:35,394 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ✅ 关联 3 个知识点
+[95/265] ID=588: When driving a large commercial vehicle ...
+[32mINFO     | 2025-12-21 19:37:38,111 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⚠️ 无效知识点ID: 370
+    ✅ 关联 3 个知识点
+[96/265] ID=589: When crossing railroad tracks, the dange...
+[32mINFO     | 2025-12-21 19:37:40,072 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ✅ 关联 3 个知识点
+[97/265] ID=590: What are the smoking restrictions for dr...
+[32mINFO     | 2025-12-21 19:37:42,050 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ✅ 关联 3 个知识点
+[98/265] ID=591: Railway crossings can be dangerous in ru...
+[32mINFO     | 2025-12-21 19:37:44,392 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ✅ 关联 3 个知识点
+[99/265] ID=592: At what times of the day are inside ligh...
+[32mINFO     | 2025-12-21 19:37:46,363 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ✅ 关联 3 个知识点
+[100/265] ID=593: Which one of the following does NOT affe...
+[32mINFO     | 2025-12-21 19:37:48,218 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ✅ 关联 3 个知识点
+[101/265] ID=594: When turning right in a bus, at what poi...
+[32mINFO     | 2025-12-21 19:37:50,198 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ✅ 关联 3 个知识点
+[102/265] ID=595: Braking forcefully when driving a combin...
+[32mINFO     | 2025-12-21 19:37:52,000 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ✅ 关联 3 个知识点
+[103/265] ID=596: What are the 4 types of retarders?...
+[32mINFO     | 2025-12-21 19:37:53,998 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ✅ 关联 3 个知识点
+[104/265] ID=597: If you must drive more slowly than the t...
+[32mINFO     | 2025-12-21 19:37:55,967 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ✅ 关联 3 个知识点
+[105/265] ID=598: When stopping in an emergency with ABS b...
+[32mINFO     | 2025-12-21 19:37:57,678 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ✅ 关联 3 个知识点
+[106/265] ID=599: When driving through large amounts of wa...
+[32mINFO     | 2025-12-21 19:37:59,177 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3280
+    ⏭️ 已存在关联: knowledge_id=3281
+    ⏭️ 已存在关联: knowledge_id=3379
+    ✅ 关联 3 个知识点
+[107/265] ID=600: If you must drive more slowly than the t...
+[32mINFO     | 2025-12-21 19:38:01,044 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3402
+    ⏭️ 已存在关联: knowledge_id=3472
+    ✅ 关联 3 个知识点
+[108/265] ID=601: You should never run your engine in a cl...
+[32mINFO     | 2025-12-21 19:38:02,247 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3297
+    ⏭️ 已存在关联: knowledge_id=3351
+    ✅ 关联 2 个知识点
+[109/265] ID=602: At what times of the day are inside ligh...
+[32mINFO     | 2025-12-21 19:38:03,966 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3400
+    ⏭️ 已存在关联: knowledge_id=3401
+    ✅ 关联 3 个知识点
+[110/265] ID=603: How often is it necessary to test the br...
+[32mINFO     | 2025-12-21 19:38:05,931 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3347
+    ⏭️ 已存在关联: knowledge_id=3271
+    ⚠️ 无效知识点ID: 287
+    ✅ 关联 3 个知识点
+[111/265] ID=604: An engine brake retarder is:...
+[32mINFO     | 2025-12-21 19:38:08,205 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3465
+    ⏭️ 已存在关联: knowledge_id=3300
+    ⏭️ 已存在关联: knowledge_id=3301
+    ✅ 关联 3 个知识点
+[112/265] ID=605: In order to take passengers on or let th...
+[32mINFO     | 2025-12-21 19:38:09,652 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3358
+    ⏭️ 已存在关联: knowledge_id=3355
+    ✅ 关联 3 个知识点
+[113/265] ID=606: If, during your pre-trip inspection, you...
+[32mINFO     | 2025-12-21 19:38:12,115 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3460
+    ⏭️ 已存在关联: knowledge_id=3467
+    ⏭️ 已存在关联: knowledge_id=3384
+    ✅ 关联 3 个知识点
+[114/265] ID=607: You should never run your engine in a cl...
+[32mINFO     | 2025-12-21 19:38:13,346 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3297
+    ⏭️ 已存在关联: knowledge_id=3351
+    ✅ 关联 2 个知识点
+[115/265] ID=608: How do you downgrade from a commercial t...
+[32mINFO     | 2025-12-21 19:38:15,580 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3300
+    ⏭️ 已存在关联: knowledge_id=3407
+    ⏭️ 已存在关联: knowledge_id=3330
+    ✅ 关联 3 个知识点
+[116/265] ID=609: If a crash occurs while you are backing ...
+[32mINFO     | 2025-12-21 19:38:17,405 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3371
+    ⏭️ 已存在关联: knowledge_id=3372
+    ⏭️ 已存在关联: knowledge_id=3378
+    ✅ 关联 3 个知识点
+[117/265] ID=610: When driving in snowy or icy conditions,...
+[32mINFO     | 2025-12-21 19:38:19,261 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3377
+    ⏭️ 已存在关联: knowledge_id=3391
+    ⏭️ 已存在关联: knowledge_id=3399
+    ✅ 关联 3 个知识点
+[118/265] ID=611: Large vehicles traveling at high speeds ...
+[32mINFO     | 2025-12-21 19:38:20,911 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3432
+    ⏭️ 已存在关联: knowledge_id=3260
+    ✅ 关联 3 个知识点
+[119/265] ID=612: Steering control may be reduced when:...
+[32mINFO     | 2025-12-21 19:38:22,760 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3522
+    ⏭️ 已存在关联: knowledge_id=3280
+    ✅ 关联 3 个知识点
+[120/265] ID=613: Total stopping distance of a commercial ...
+[32mINFO     | 2025-12-21 19:38:24,457 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3524
+    ⏭️ 已存在关联: knowledge_id=3475
+    ✅ 关联 3 个知识点
+[121/265] ID=614: What is the definition of “Reaction Time...
+[32mINFO     | 2025-12-21 19:38:25,071 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 429 Too Many Requests"[0m
+[32mINFO     | 2025-12-21 19:38:25,071 | openai._base_client | _base_client.py:1071 | Retrying request to /chat/completions in 0.214000 seconds[0m
+[32mINFO     | 2025-12-21 19:38:25,392 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 429 Too Many Requests"[0m
+[32mINFO     | 2025-12-21 19:38:25,392 | openai._base_client | _base_client.py:1071 | Retrying request to /chat/completions in 0.045000 seconds[0m
+[32mINFO     | 2025-12-21 19:38:27,316 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3377
+    ⏭️ 已存在关联: knowledge_id=3378
+    ✅ 关联 3 个知识点
+[122/265] ID=615: At what distance from the home terminal ...
+[32mINFO     | 2025-12-21 19:38:27,942 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 429 Too Many Requests"[0m
+[32mINFO     | 2025-12-21 19:38:27,942 | openai._base_client | _base_client.py:1071 | Retrying request to /chat/completions in 0.290000 seconds[0m
+[32mINFO     | 2025-12-21 19:38:29,353 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3421
+    ⚠️ 无效知识点ID: 369
+    ✅ 关联 2 个知识点
+[123/265] ID=616: What is the final factor that will deter...
+[32mINFO     | 2025-12-21 19:38:29,981 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 429 Too Many Requests"[0m
+[32mINFO     | 2025-12-21 19:38:29,981 | openai._base_client | _base_client.py:1071 | Retrying request to /chat/completions in 0.149000 seconds[0m
+[32mINFO     | 2025-12-21 19:38:30,222 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 429 Too Many Requests"[0m
+[32mINFO     | 2025-12-21 19:38:30,222 | openai._base_client | _base_client.py:1071 | Retrying request to /chat/completions in 0.326000 seconds[0m
+[32mINFO     | 2025-12-21 19:38:31,599 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3528
+    ⏭️ 已存在关联: knowledge_id=3522
+    ⏭️ 已存在关联: knowledge_id=3537
+    ✅ 关联 3 个知识点
+[124/265] ID=617: This sign means?...
+[32mINFO     | 2025-12-21 19:38:33,344 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⚠️ 无效知识点ID: 330
+    ⏭️ 已存在关联: knowledge_id=3300
+    ✅ 关联 3 个知识点
+[125/265] ID=618: Passengers on a moving school bus are no...
+[32mINFO     | 2025-12-21 19:38:33,945 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 429 Too Many Requests"[0m
+[32mINFO     | 2025-12-21 19:38:33,945 | openai._base_client | _base_client.py:1071 | Retrying request to /chat/completions in 0.777000 seconds[0m
+[32mINFO     | 2025-12-21 19:38:34,814 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 429 Too Many Requests"[0m
+[32mINFO     | 2025-12-21 19:38:34,814 | openai._base_client | _base_client.py:1071 | Retrying request to /chat/completions in 0.179000 seconds[0m
+[32mINFO     | 2025-12-21 19:38:36,215 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3347
+    ⏭️ 已存在关联: knowledge_id=3488
+    ⏭️ 已存在关联: knowledge_id=3521
+    ✅ 关联 3 个知识点
+[126/265] ID=619: At what distance from the home terminal ...
+[32mINFO     | 2025-12-21 19:38:36,814 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 429 Too Many Requests"[0m
+[32mINFO     | 2025-12-21 19:38:36,815 | openai._base_client | _base_client.py:1071 | Retrying request to /chat/completions in 0.250000 seconds[0m
+[32mINFO     | 2025-12-21 19:38:37,162 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 429 Too Many Requests"[0m
+[32mINFO     | 2025-12-21 19:38:37,162 | openai._base_client | _base_client.py:1071 | Retrying request to /chat/completions in 0.016000 seconds[0m
+[32mINFO     | 2025-12-21 19:38:38,183 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3421
+    ⚠️ 无效知识点ID: 290
+    ✅ 关联 3 个知识点
+[127/265] ID=620: When traveling down a steep hill, you sh...
+[32mINFO     | 2025-12-21 19:38:39,841 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3300
+    ✅ 关联 3 个知识点
+[128/265] ID=621: Which of the following distinguishes a p...
+[32mINFO     | 2025-12-21 19:38:41,499 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3400
+    ⏭️ 已存在关联: knowledge_id=3370
+    ⏭️ 已存在关联: knowledge_id=3401
+    ✅ 关联 3 个知识点
+[129/265] ID=622: A "special vehicle" is:...
+[32mINFO     | 2025-12-21 19:38:42,122 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 429 Too Many Requests"[0m
+[32mINFO     | 2025-12-21 19:38:42,122 | openai._base_client | _base_client.py:1071 | Retrying request to /chat/completions in 0.253000 seconds[0m
+[32mINFO     | 2025-12-21 19:38:42,478 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 429 Too Many Requests"[0m
+[32mINFO     | 2025-12-21 19:38:42,478 | openai._base_client | _base_client.py:1071 | Retrying request to /chat/completions in 0.179000 seconds[0m
+[32mINFO     | 2025-12-21 19:38:43,940 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3490
+    ⏭️ 已存在关联: knowledge_id=3400
+    ✅ 关联 3 个知识点
+[130/265] ID=623: When driving in the Yukon or Northwest T...
+[32mINFO     | 2025-12-21 19:38:45,711 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3369
+    ⏭️ 已存在关联: knowledge_id=3422
+    ⏭️ 已存在关联: knowledge_id=3428
+    ✅ 关联 3 个知识点
+[131/265] ID=624: Horsepower is:...
+[32mINFO     | 2025-12-21 19:38:46,326 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 429 Too Many Requests"[0m
+[32mINFO     | 2025-12-21 19:38:46,326 | openai._base_client | _base_client.py:1071 | Retrying request to /chat/completions in 0.867000 seconds[0m
+[32mINFO     | 2025-12-21 19:38:47,300 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 429 Too Many Requests"[0m
+[32mINFO     | 2025-12-21 19:38:47,300 | openai._base_client | _base_client.py:1071 | Retrying request to /chat/completions in 0.464000 seconds[0m
+[32mINFO     | 2025-12-21 19:38:48,646 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3540
+    ✅ 关联 2 个知识点
+[132/265] ID=625: How old must passengers be before the dr...
+[32mINFO     | 2025-12-21 19:38:49,266 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 429 Too Many Requests"[0m
+[32mINFO     | 2025-12-21 19:38:49,266 | openai._base_client | _base_client.py:1071 | Retrying request to /chat/completions in 0.062000 seconds[0m
+[32mINFO     | 2025-12-21 19:38:49,420 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 429 Too Many Requests"[0m
+[32mINFO     | 2025-12-21 19:38:49,420 | openai._base_client | _base_client.py:1071 | Retrying request to /chat/completions in 0.755000 seconds[0m
+[32mINFO     | 2025-12-21 19:38:52,099 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3488
+    ✅ 关联 2 个知识点
+[133/265] ID=626: What is the final factor that will deter...
+[32mINFO     | 2025-12-21 19:38:53,943 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3528
+    ⏭️ 已存在关联: knowledge_id=3522
+    ⏭️ 已存在关联: knowledge_id=3537
+    ✅ 关联 3 个知识点
+[134/265] ID=627: Horsepower is:...
+[32mINFO     | 2025-12-21 19:38:54,553 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 429 Too Many Requests"[0m
+[32mINFO     | 2025-12-21 19:38:54,554 | openai._base_client | _base_client.py:1071 | Retrying request to /chat/completions in 0.009000 seconds[0m
+[32mINFO     | 2025-12-21 19:38:55,712 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3540
+    ⏭️ 已存在关联: knowledge_id=3548
+    ✅ 关联 2 个知识点
+[135/265] ID=628: When driving in the Yukon or Northwest T...
+[32mINFO     | 2025-12-21 19:38:57,221 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3369
+    ⏭️ 已存在关联: knowledge_id=3428
+    ⏭️ 已存在关联: knowledge_id=3422
+    ✅ 关联 3 个知识点
+[136/265] ID=629: Who is responsible for ensuring that the...
+[32mINFO     | 2025-12-21 19:38:57,819 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 429 Too Many Requests"[0m
+[32mINFO     | 2025-12-21 19:38:57,819 | openai._base_client | _base_client.py:1071 | Retrying request to /chat/completions in 0.529000 seconds[0m
+[32mINFO     | 2025-12-21 19:38:58,437 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 429 Too Many Requests"[0m
+[32mINFO     | 2025-12-21 19:38:58,437 | openai._base_client | _base_client.py:1071 | Retrying request to /chat/completions in 0.870000 seconds[0m
+[32mINFO     | 2025-12-21 19:38:59,402 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 429 Too Many Requests"[0m
+    API调用错误: Error code: 429 - {'error': {'message': 'Rate limit reached for gpt-4o-mini in organization org-HwUchTfcYmNJrE6rAKsCY6ot on tokens per min (TPM): Limit 200000, Used 198342, Requested 2900. Please try again in 372ms. Visit https://platform.openai.com/account/rate-limits to learn more.', 'type': 'tokens', 'param': None, 'code': 'rate_limit_exceeded'}}
+    ⚠️ 未匹配到知识点
+[137/265] ID=630: Flares, fuses, or reflectors are:...
+[32mINFO     | 2025-12-21 19:39:00,004 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 429 Too Many Requests"[0m
+[32mINFO     | 2025-12-21 19:39:00,004 | openai._base_client | _base_client.py:1071 | Retrying request to /chat/completions in 0.791000 seconds[0m
+[32mINFO     | 2025-12-21 19:39:02,357 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3322
+    ⏭️ 已存在关联: knowledge_id=3513
+    ⏭️ 已存在关联: knowledge_id=3518
+    ✅ 关联 3 个知识点
+[138/265] ID=631: Which forces are at work as you drive ar...
+[32mINFO     | 2025-12-21 19:39:05,786 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3528
+    ⏭️ 已存在关联: knowledge_id=3375
+    ⏭️ 已存在关联: knowledge_id=3400
+    ✅ 关联 3 个知识点
+[139/265] ID=632: Vehicles are required to have reflective...
+[32mINFO     | 2025-12-21 19:39:07,293 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3534
+    ⏭️ 已存在关联: knowledge_id=3433
+    ✅ 关联 2 个知识点
+[140/265] ID=633: When negotiating a curve, you should:...
+[32mINFO     | 2025-12-21 19:39:08,705 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3537
+    ⏭️ 已存在关联: knowledge_id=3400
+    ✅ 关联 3 个知识点
+[141/265] ID=634: To help other drivers pass your vehicle,...
+[32mINFO     | 2025-12-21 19:39:10,902 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3447
+    ⚠️ 无效知识点ID: 288
+    ⏭️ 已存在关联: knowledge_id=3402
+    ✅ 关联 3 个知识点
+[142/265] ID=635: When driving in the United States, you m...
+[32mINFO     | 2025-12-21 19:39:13,311 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3369
+    ⏭️ 已存在关联: knowledge_id=3428
+    ⏭️ 已存在关联: knowledge_id=3430
+    ✅ 关联 3 个知识点
+[143/265] ID=636: This sign means?
+[IMAGE:http://aaravdriv...
+[32mINFO     | 2025-12-21 19:39:15,088 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ✅ 关联 3 个知识点
+[144/265] ID=637: This sign means?
+[IMAGE:http://aaravdriv...
+[32mINFO     | 2025-12-21 19:39:15,750 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 429 Too Many Requests"[0m
+[32mINFO     | 2025-12-21 19:39:15,751 | openai._base_client | _base_client.py:1071 | Retrying request to /chat/completions in 0.884000 seconds[0m
+[32mINFO     | 2025-12-21 19:39:16,727 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 429 Too Many Requests"[0m
+[32mINFO     | 2025-12-21 19:39:16,727 | openai._base_client | _base_client.py:1071 | Retrying request to /chat/completions in 0.307000 seconds[0m
+[32mINFO     | 2025-12-21 19:39:19,177 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3484
+    ⏭️ 已存在关联: knowledge_id=3432
+    ⏭️ 已存在关联: knowledge_id=3447
+    ✅ 关联 3 个知识点
+[145/265] ID=638: When driving in the Yukon or Northwest T...
+[32mINFO     | 2025-12-21 19:39:20,895 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3369
+    ⏭️ 已存在关联: knowledge_id=3430
+    ✅ 关联 3 个知识点
+[146/265] ID=639: In ideal driving conditions, passenger c...
+[32mINFO     | 2025-12-21 19:39:22,702 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⚠️ 无效知识点ID: 370
+    ⚠️ 无效知识点ID: 370
+    ⚠️ 无效知识点ID: 370
+    ✅ 关联 3 个知识点
+[147/265] ID=640: Vehicles are required to have reflective...
+[32mINFO     | 2025-12-21 19:39:23,329 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 429 Too Many Requests"[0m
+[32mINFO     | 2025-12-21 19:39:23,329 | openai._base_client | _base_client.py:1071 | Retrying request to /chat/completions in 0.700000 seconds[0m
+[32mINFO     | 2025-12-21 19:39:24,123 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 429 Too Many Requests"[0m
+[32mINFO     | 2025-12-21 19:39:24,123 | openai._base_client | _base_client.py:1071 | Retrying request to /chat/completions in 0.725000 seconds[0m
+[32mINFO     | 2025-12-21 19:39:28,071 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3534
+    ⏭️ 已存在关联: knowledge_id=3433
+    ⏭️ 已存在关联: knowledge_id=3521
+    ✅ 关联 3 个知识点
+[148/265] ID=641: After working 120 hours in a 14-day cycl...
+[32mINFO     | 2025-12-21 19:39:30,068 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3422
+    ⏭️ 已存在关联: knowledge_id=3428
+    ⏭️ 已存在关联: knowledge_id=3361
+    ✅ 关联 3 个知识点
+[149/265] ID=642: This sign means?
+[IMAGE:http://aaravdriv...
+[32mINFO     | 2025-12-21 19:39:30,668 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 429 Too Many Requests"[0m
+[32mINFO     | 2025-12-21 19:39:30,669 | openai._base_client | _base_client.py:1071 | Retrying request to /chat/completions in 0.378000 seconds[0m
+[32mINFO     | 2025-12-21 19:39:31,152 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 429 Too Many Requests"[0m
+[32mINFO     | 2025-12-21 19:39:31,152 | openai._base_client | _base_client.py:1071 | Retrying request to /chat/completions in 0.219000 seconds[0m
+[32mINFO     | 2025-12-21 19:39:33,536 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3484
+    ⏭️ 已存在关联: knowledge_id=3432
+    ✅ 关联 3 个知识点
+[150/265] ID=643: The way in which a vehicle can be maneuv...
+[32mINFO     | 2025-12-21 19:39:35,227 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3511
+    ⏭️ 已存在关联: knowledge_id=3538
+    ✅ 关联 3 个知识点
+[151/265] ID=644: Drivers who are exempt from wearing seat...
+[32mINFO     | 2025-12-21 19:39:36,842 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3352
+    ✅ 关联 3 个知识点
+[152/265] ID=645: Which forces are at work as you drive ar...
+[32mINFO     | 2025-12-21 19:39:38,275 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3528
+    ⏭️ 已存在关联: knowledge_id=3406
+    ✅ 关联 3 个知识点
+[153/265] ID=646: The way in which a vehicle can be maneuv...
+[32mINFO     | 2025-12-21 19:39:38,895 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 429 Too Many Requests"[0m
+[32mINFO     | 2025-12-21 19:39:38,895 | openai._base_client | _base_client.py:1071 | Retrying request to /chat/completions in 0.597000 seconds[0m
+[32mINFO     | 2025-12-21 19:39:39,609 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 429 Too Many Requests"[0m
+[32mINFO     | 2025-12-21 19:39:39,609 | openai._base_client | _base_client.py:1071 | Retrying request to /chat/completions in 0.162000 seconds[0m
+[32mINFO     | 2025-12-21 19:39:39,889 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 429 Too Many Requests"[0m
+    API调用错误: Error code: 429 - {'error': {'message': 'Rate limit reached for gpt-4o-mini in organization org-HwUchTfcYmNJrE6rAKsCY6ot on tokens per min (TPM): Limit 200000, Used 198409, Requested 2911. Please try again in 396ms. Visit https://platform.openai.com/account/rate-limits to learn more.', 'type': 'tokens', 'param': None, 'code': 'rate_limit_exceeded'}}
+    ⚠️ 未匹配到知识点
+[154/265] ID=647: This sign means?
+[IMAGE:http://aaravdriv...
+[32mINFO     | 2025-12-21 19:39:41,837 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3484
+    ⏭️ 已存在关联: knowledge_id=3432
+    ✅ 关联 3 个知识点
+[155/265] ID=648: When driving in the Yukon or Northwest T...
+[32mINFO     | 2025-12-21 19:39:42,440 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 429 Too Many Requests"[0m
+[32mINFO     | 2025-12-21 19:39:42,441 | openai._base_client | _base_client.py:1071 | Retrying request to /chat/completions in 0.637000 seconds[0m
+[32mINFO     | 2025-12-21 19:39:43,223 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 429 Too Many Requests"[0m
+[32mINFO     | 2025-12-21 19:39:43,224 | openai._base_client | _base_client.py:1071 | Retrying request to /chat/completions in 0.024000 seconds[0m
+[32mINFO     | 2025-12-21 19:39:43,342 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 429 Too Many Requests"[0m
+    API调用错误: Error code: 429 - {'error': {'message': 'Rate limit reached for gpt-4o-mini in organization org-HwUchTfcYmNJrE6rAKsCY6ot on tokens per min (TPM): Limit 200000, Used 197922, Requested 2892. Please try again in 244ms. Visit https://platform.openai.com/account/rate-limits to learn more.', 'type': 'tokens', 'param': None, 'code': 'rate_limit_exceeded'}}
+    ⚠️ 未匹配到知识点
+[156/265] ID=649: At what distance from the home terminal ...
+[32mINFO     | 2025-12-21 19:39:44,814 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3421
+    ⚠️ 无效知识点ID: 369
+    ✅ 关联 3 个知识点
+[157/265] ID=650: A "special vehicle" is:...
+[32mINFO     | 2025-12-21 19:39:45,423 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 429 Too Many Requests"[0m
+[32mINFO     | 2025-12-21 19:39:45,423 | openai._base_client | _base_client.py:1071 | Retrying request to /chat/completions in 0.671000 seconds[0m
+[32mINFO     | 2025-12-21 19:39:46,951 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3490
+    ⏭️ 已存在关联: knowledge_id=3400
+    ✅ 关联 3 个知识点
+[158/265] ID=651: Passengers on a moving school bus are no...
+[32mINFO     | 2025-12-21 19:39:49,351 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3347
+    ⏭️ 已存在关联: knowledge_id=3488
+    ⏭️ 已存在关联: knowledge_id=3521
+    ✅ 关联 3 个知识点
+[159/265] ID=652: Which dashboard gauge should be used to ...
+[32mINFO     | 2025-12-21 19:39:50,773 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3510
+    ⏭️ 已存在关联: knowledge_id=3264
+    ✅ 关联 2 个知识点
+[160/265] ID=653: When driving in the Yukon or Northwest T...
+[32mINFO     | 2025-12-21 19:39:52,655 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3369
+    ⏭️ 已存在关联: knowledge_id=3428
+    ⏭️ 已存在关联: knowledge_id=3430
+    ✅ 关联 3 个知识点
+[161/265] ID=654: When must you complete a pre-hill inspec...
+[32mINFO     | 2025-12-21 19:39:54,269 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3464
+    ⏭️ 已存在关联: knowledge_id=3473
+    ✅ 关联 3 个知识点
+[162/265] ID=655: It is important to leave yourself an esc...
+[32mINFO     | 2025-12-21 19:39:56,538 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3280
+    ⏭️ 已存在关联: knowledge_id=3486
+    ✅ 关联 3 个知识点
+[163/265] ID=656: When pulling out from an alley, you must...
+[32mINFO     | 2025-12-21 19:39:58,136 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3274
+    ⚠️ 无效知识点ID: 288
+    ⚠️ 无效知识点ID: 288
+    ✅ 关联 3 个知识点
+[164/265] ID=657: When attempting to fight a fire in your ...
+[32mINFO     | 2025-12-21 19:40:00,058 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3364
+    ⏭️ 已存在关联: knowledge_id=3366
+    ✅ 关联 3 个知识点
+[165/265] ID=658: If you are convicted of impaired driving...
+[32mINFO     | 2025-12-21 19:40:02,331 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3524
+    ⏭️ 已存在关联: knowledge_id=3552
+    ✅ 关联 3 个知识点
+[166/265] ID=659: You can be charged under the Criminal Co...
+[32mINFO     | 2025-12-21 19:40:03,920 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3306
+    ⏭️ 已存在关联: knowledge_id=3488
+    ⏭️ 已存在关联: knowledge_id=3360
+    ✅ 关联 3 个知识点
+[167/265] ID=660: If you are sharing a vehicle with anothe...
+[32mINFO     | 2025-12-21 19:40:05,818 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3460
+    ⏭️ 已存在关联: knowledge_id=3461
+    ⏭️ 已存在关联: knowledge_id=3468
+    ✅ 关联 3 个知识点
+[168/265] ID=661: Pre-trip inspection reports must be give...
+[32mINFO     | 2025-12-21 19:40:07,539 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3473
+    ⏭️ 已存在关联: knowledge_id=3384
+    ✅ 关联 3 个知识点
+[169/265] ID=662: When entering a narrow bridge from a cur...
+[32mINFO     | 2025-12-21 19:40:10,108 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3416
+    ✅ 关联 3 个知识点
+[170/265] ID=663: When must you complete a pre-hill inspec...
+[32mINFO     | 2025-12-21 19:40:11,981 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3464
+    ⏭️ 已存在关联: knowledge_id=3460
+    ⏭️ 已存在关联: knowledge_id=3473
+    ✅ 关联 3 个知识点
+[171/265] ID=664: During a pre-hill inspection on a vehicl...
+[32mINFO     | 2025-12-21 19:40:13,883 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3464
+    ✅ 关联 3 个知识点
+[172/265] ID=665: When making a right hand turn how far in...
+[32mINFO     | 2025-12-21 19:40:15,544 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3400
+    ⏭️ 已存在关联: knowledge_id=3521
+    ✅ 关联 3 个知识点
+[173/265] ID=666: You are operating a vehicle whose peak e...
+[32mINFO     | 2025-12-21 19:40:17,907 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3510
+    ⏭️ 已存在关联: knowledge_id=3266
+    ⏭️ 已存在关联: knowledge_id=3264
+    ✅ 关联 3 个知识点
+[174/265] ID=667: You should switch your high beams to low...
+[32mINFO     | 2025-12-21 19:40:19,446 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3418
+    ⏭️ 已存在关联: knowledge_id=3447
+    ✅ 关联 3 个知识点
+[175/265] ID=668: Any reports of defects or deficiencies o...
+[32mINFO     | 2025-12-21 19:40:21,422 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3458
+    ⏭️ 已存在关联: knowledge_id=3470
+    ✅ 关联 3 个知识点
+[176/265] ID=669: During a pre-hill inspection on a vehicl...
+[32mINFO     | 2025-12-21 19:40:23,233 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3464
+    ✅ 关联 3 个知识点
+[177/265] ID=670: When parking on a downgrade, you should:...
+[32mINFO     | 2025-12-21 19:40:27,116 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3330
+    ⏭️ 已存在关联: knowledge_id=3435
+    ✅ 关联 3 个知识点
+[178/265] ID=671: On-duty time includes all but which of t...
+[32mINFO     | 2025-12-21 19:40:28,954 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3428
+    ⏭️ 已存在关联: knowledge_id=3422
+    ⏭️ 已存在关联: knowledge_id=3369
+    ✅ 关联 3 个知识点
+[179/265] ID=672: Which of the following is NOT a reason p...
+[32mINFO     | 2025-12-21 19:40:30,802 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3345
+    ⏭️ 已存在关联: knowledge_id=3400
+    ⏭️ 已存在关联: knowledge_id=3401
+    ✅ 关联 3 个知识点
+[180/265] ID=673: A mixture of different-sized tires can:...
+[32mINFO     | 2025-12-21 19:40:31,981 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3522
+    ✅ 关联 2 个知识点
+[181/265] ID=674: As the driver of a school bus, you must ...
+[32mINFO     | 2025-12-21 19:40:33,850 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3521
+    ⏭️ 已存在关联: knowledge_id=3470
+    ⏭️ 已存在关联: knowledge_id=3523
+    ✅ 关联 3 个知识点
+[182/265] ID=675: Which two factors determine the sharpnes...
+[32mINFO     | 2025-12-21 19:40:35,584 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3538
+    ✅ 关联 3 个知识点
+[183/265] ID=676: A mixture of different-sized tires can:...
+[32mINFO     | 2025-12-21 19:40:39,187 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3522
+    ✅ 关联 3 个知识点
+[184/265] ID=677: An appropriate gear for entering a curve...
+[32mINFO     | 2025-12-21 19:40:40,936 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3400
+    ⏭️ 已存在关联: knowledge_id=3406
+    ✅ 关联 3 个知识点
+[185/265] ID=678: When making a right hand turn how far in...
+[32mINFO     | 2025-12-21 19:40:44,061 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3400
+    ⏭️ 已存在关联: knowledge_id=3521
+    ✅ 关联 3 个知识点
+[186/265] ID=679: You should switch your high beams to low...
+[32mINFO     | 2025-12-21 19:40:46,370 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3418
+    ✅ 关联 3 个知识点
+[187/265] ID=680: When entering a narrow bridge from a cur...
+[32mINFO     | 2025-12-21 19:40:49,354 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3416
+    ⏭️ 已存在关联: knowledge_id=3281
+    ✅ 关联 3 个知识点
+[188/265] ID=681: Any reports of defects or deficiencies o...
+[32mINFO     | 2025-12-21 19:40:52,331 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3458
+    ⏭️ 已存在关联: knowledge_id=3470
+    ✅ 关联 3 个知识点
+[189/265] ID=682: A mixture of different-sized tires can:...
+[32mINFO     | 2025-12-21 19:40:54,061 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3522
+    ✅ 关联 2 个知识点
+[190/265] ID=683: It is important to leave yourself an esc...
+[32mINFO     | 2025-12-21 19:40:55,811 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3280
+    ⏭️ 已存在关联: knowledge_id=3281
+    ✅ 关联 3 个知识点
+[191/265] ID=684: In addition to checking the left side mi...
+[32mINFO     | 2025-12-21 19:40:57,777 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ✅ 关联 3 个知识点
+[192/265] ID=685: During a pre-hill inspection on a vehicl...
+[32mINFO     | 2025-12-21 19:40:59,394 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3464
+    ⏭️ 已存在关联: knowledge_id=3473
+    ✅ 关联 3 个知识点
+[193/265] ID=686: You should switch your high beams to low...
+[32mINFO     | 2025-12-21 19:41:01,280 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3418
+    ⏭️ 已存在关联: knowledge_id=3447
+    ✅ 关联 3 个知识点
+[194/265] ID=687: If you are convicted of impaired driving...
+[32mINFO     | 2025-12-21 19:41:03,233 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3552
+    ✅ 关联 3 个知识点
+[195/265] ID=688: How is brake heat dissipated?...
+[32mINFO     | 2025-12-21 19:41:04,888 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3410
+    ✅ 关联 3 个知识点
+[196/265] ID=689: Daily written inspection reports must be...
+[32mINFO     | 2025-12-21 19:41:06,983 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3261
+    ✅ 关联 3 个知识点
+[197/265] ID=690: Amber flashing lights can be mounted on ...
+[32mINFO     | 2025-12-21 19:41:08,863 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3450
+    ⏭️ 已存在关联: knowledge_id=3377
+    ⚠️ 无效知识点ID: 3222
+    ✅ 关联 3 个知识点
+[198/265] ID=691: What items related to the vehicle should...
+[32mINFO     | 2025-12-21 19:41:10,479 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3522
+    ⏭️ 已存在关联: knowledge_id=3411
+    ✅ 关联 3 个知识点
+[199/265] ID=692: As the driver of a school bus, you must ...
+[32mINFO     | 2025-12-21 19:41:13,617 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3521
+    ⏭️ 已存在关联: knowledge_id=3470
+    ⏭️ 已存在关联: knowledge_id=3523
+    ✅ 关联 3 个知识点
+[200/265] ID=693: What items related to the vehicle should...
+[32mINFO     | 2025-12-21 19:41:15,754 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3522
+    ⏭️ 已存在关联: knowledge_id=3411
+    ✅ 关联 3 个知识点
+[201/265] ID=694: To prevent your vehicle from jerking bac...
+[32mINFO     | 2025-12-21 19:41:17,814 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3400
+    ✅ 关联 3 个知识点
+[202/265] ID=695: Who is responsible for making sure the e...
+[32mINFO     | 2025-12-21 19:41:19,818 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3351
+    ⏭️ 已存在关联: knowledge_id=3460
+    ✅ 关联 3 个知识点
+[203/265] ID=696: You must test the brakes on a school bus...
+[32mINFO     | 2025-12-21 19:41:21,940 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3271
+    ⏭️ 已存在关联: knowledge_id=3460
+    ✅ 关联 3 个知识点
+[204/265] ID=697: The brakes, tires and suspension of a co...
+[32mINFO     | 2025-12-21 19:41:23,897 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3334
+    ⏭️ 已存在关联: knowledge_id=3522
+    ⏭️ 已存在关联: knowledge_id=3281
+    ✅ 关联 3 个知识点
+[205/265] ID=698: Why are hours of service regulations in ...
+[32mINFO     | 2025-12-21 19:41:26,097 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3361
+    ⏭️ 已存在关联: knowledge_id=3369
+    ✅ 关联 3 个知识点
+[206/265] ID=699: What two factors determine the sharpness...
+[32mINFO     | 2025-12-21 19:41:28,121 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3538
+    ✅ 关联 3 个知识点
+[207/265] ID=700: When negotiating a curve in the road, th...
+[32mINFO     | 2025-12-21 19:41:30,259 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3400
+    ⏭️ 已存在关联: knowledge_id=3401
+    ✅ 关联 3 个知识点
+[208/265] ID=701: What kinds of documents might you have t...
+[32mINFO     | 2025-12-21 19:41:31,632 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3421
+    ⚠️ 无效知识点ID: 290
+    ✅ 关联 2 个知识点
+[209/265] ID=702: Why are hours of service regulations in ...
+[32mINFO     | 2025-12-21 19:41:33,410 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3361
+    ⏭️ 已存在关联: knowledge_id=3369
+    ⏭️ 已存在关联: knowledge_id=3422
+    ✅ 关联 3 个知识点
+[210/265] ID=703: Whenever you exceed the speed limit or d...
+[32mINFO     | 2025-12-21 19:41:35,488 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3352
+    ⏭️ 已存在关联: knowledge_id=3288
+    ✅ 关联 3 个知识点
+[211/265] ID=704: In a sedan-type vehicle, how many passen...
+[32mINFO     | 2025-12-21 19:41:37,351 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3345
+    ⏭️ 已存在关联: knowledge_id=3524
+    ✅ 关联 3 个知识点
+[212/265] ID=705: A "bus" refers to:...
+[32mINFO     | 2025-12-21 19:41:41,395 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3261
+    ⏭️ 已存在关联: knowledge_id=3400
+    ✅ 关联 3 个知识点
+[213/265] ID=706: If you reduce a tire's air pressure when...
+[32mINFO     | 2025-12-21 19:41:43,041 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3522
+    ⏭️ 已存在关联: knowledge_id=3280
+    ✅ 关联 3 个知识点
+[214/265] ID=707: Passengers on a school bus are:...
+[32mINFO     | 2025-12-21 19:41:44,803 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3347
+    ⏭️ 已存在关联: knowledge_id=3521
+    ⏭️ 已存在关联: knowledge_id=3400
+    ✅ 关联 3 个知识点
+[215/265] ID=708: Idling for longer than five minutes can:...
+[32mINFO     | 2025-12-21 19:41:47,181 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3400
+    ⏭️ 已存在关联: knowledge_id=3359
+    ✅ 关联 3 个知识点
+[216/265] ID=709: Time spent riding on a ferry is consider...
+[32mINFO     | 2025-12-21 19:41:48,612 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3422
+    ⚠️ 无效知识点ID: 369
+    ✅ 关联 2 个知识点
+[217/265] ID=710: Whenever you exceed the speed limit or d...
+[32mINFO     | 2025-12-21 19:41:50,639 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3352
+    ⏭️ 已存在关联: knowledge_id=3288
+    ⏭️ 已存在关联: knowledge_id=3378
+    ✅ 关联 3 个知识点
+[218/265] ID=711: What two factors determine the sharpness...
+[32mINFO     | 2025-12-21 19:41:52,940 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3538
+    ⏭️ 已存在关联: knowledge_id=3260
+    ⏭️ 已存在关联: knowledge_id=3261
+    ✅ 关联 3 个知识点
+[219/265] ID=712: If your passenger vehicle breaks down an...
+[32mINFO     | 2025-12-21 19:41:54,641 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3345
+    ⚠️ 无效知识点ID: 3222
+    ✅ 关联 3 个知识点
+[220/265] ID=713: To avoid fires, you should:...
+[32mINFO     | 2025-12-21 19:41:56,421 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3366
+    ⏭️ 已存在关联: knowledge_id=3364
+    ✅ 关联 3 个知识点
+[221/265] ID=714: This sign means?
+[IMAGE:http://aaravdriv...
+[32mINFO     | 2025-12-21 19:41:58,547 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3484
+    ⏭️ 已存在关联: knowledge_id=3530
+    ✅ 关联 2 个知识点
+[222/265] ID=715: When refueling, you should:...
+[32mINFO     | 2025-12-21 19:42:00,233 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3488
+    ⏭️ 已存在关联: knowledge_id=3400
+    ✅ 关联 2 个知识点
+[223/265] ID=716: When operating an ambulance, when are yo...
+[32mINFO     | 2025-12-21 19:42:02,508 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3351
+    ⏭️ 已存在关联: knowledge_id=3522
+    ✅ 关联 3 个知识点
+[224/265] ID=717: To prevent your vehicle from jerking bac...
+[32mINFO     | 2025-12-21 19:42:04,597 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3504
+    ⏭️ 已存在关联: knowledge_id=3507
+    ⏭️ 已存在关联: knowledge_id=3400
+    ✅ 关联 3 个知识点
+[225/265] ID=718: To avoid fires, you should:...
+[32mINFO     | 2025-12-21 19:42:06,899 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3366
+    ⏭️ 已存在关联: knowledge_id=3364
+    ✅ 关联 3 个知识点
+[226/265] ID=719: On-duty time includes:...
+[32mINFO     | 2025-12-21 19:42:08,549 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3288
+    ⏭️ 已存在关联: knowledge_id=3422
+    ✅ 关联 3 个知识点
+[227/265] ID=720: Idling for longer than five minutes can:...
+[32mINFO     | 2025-12-21 19:42:10,348 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3400
+    ⏭️ 已存在关联: knowledge_id=3359
+    ✅ 关联 3 个知识点
+[228/265] ID=721: The floor of your school bus must be was...
+[32mINFO     | 2025-12-21 19:42:12,086 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3347
+    ⏭️ 已存在关联: knowledge_id=3524
+    ⏭️ 已存在关联: knowledge_id=3521
+    ✅ 关联 3 个知识点
+[229/265] ID=722: To prevent your vehicle from jerking bac...
+[32mINFO     | 2025-12-21 19:42:14,009 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ✅ 关联 3 个知识点
+[230/265] ID=723: Why are hours of service regulations in ...
+[32mINFO     | 2025-12-21 19:42:16,107 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3361
+    ⚠️ 无效知识点ID: 369
+    ⏭️ 已存在关联: knowledge_id=3422
+    ✅ 关联 3 个知识点
+[231/265] ID=724: What kinds of documents might you have t...
+[32mINFO     | 2025-12-21 19:42:19,051 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3421
+    ⚠️ 无效知识点ID: 290
+    ✅ 关联 2 个知识点
+[232/265] ID=725: Idling for longer than five minutes can:...
+[32mINFO     | 2025-12-21 19:42:22,029 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3400
+    ⏭️ 已存在关联: knowledge_id=3359
+    ✅ 关联 3 个知识点
+[233/265] ID=726: Which of the following is NOT mandated b...
+[32mINFO     | 2025-12-21 19:42:24,436 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ✅ 关联 3 个知识点
+[234/265] ID=727: If you reduce a tire's air pressure when...
+[32mINFO     | 2025-12-21 19:42:26,179 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ✅ 关联 3 个知识点
+[235/265] ID=728: To ensure smooth braking in any size veh...
+[32mINFO     | 2025-12-21 19:42:27,605 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3300
+    ⚠️ 无效知识点ID: 370
+    ✅ 关联 3 个知识点
+[236/265] ID=729: Impaired driving can be caused by:...
+[32mINFO     | 2025-12-21 19:42:29,100 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ✅ 关联 2 个知识点
+[237/265] ID=730: What two factors determine the sharpness...
+[32mINFO     | 2025-12-21 19:42:30,819 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3538
+    ⏭️ 已存在关联: knowledge_id=3260
+    ✅ 关联 3 个知识点
+[238/265] ID=731: Whenever you exceed the speed limit or d...
+[32mINFO     | 2025-12-21 19:42:33,369 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3352
+    ⏭️ 已存在关联: knowledge_id=3288
+    ⏭️ 已存在关联: knowledge_id=3378
+    ✅ 关联 3 个知识点
+[239/265] ID=732: The brakes, tires and suspension of a co...
+[32mINFO     | 2025-12-21 19:42:36,166 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3334
+    ⏭️ 已存在关联: knowledge_id=3522
+    ✅ 关联 3 个知识点
+[240/265] ID=733: You may refuse to transport a passenger ...
+[32mINFO     | 2025-12-21 19:42:38,187 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ✅ 关联 3 个知识点
+[241/265] ID=734: Which of the following hand signals is t...
+[32mINFO     | 2025-12-21 19:42:40,290 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3512
+    ⏭️ 已存在关联: knowledge_id=3521
+    ✅ 关联 3 个知识点
+[242/265] ID=735: When being passed by other vehicles you ...
+[32mINFO     | 2025-12-21 19:42:43,426 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3447
+    ⏭️ 已存在关联: knowledge_id=3288
+    ✅ 关联 2 个知识点
+[243/265] ID=736: When conducting a Class 4 pre-trip inspe...
+[32mINFO     | 2025-12-21 19:42:45,458 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ✅ 关联 3 个知识点
+[244/265] ID=737: In some municipalities what kind of perm...
+[32mINFO     | 2025-12-21 19:42:47,764 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3535
+    ⏭️ 已存在关联: knowledge_id=3407
+    ✅ 关联 3 个知识点
+[245/265] ID=738: Which of the following hand signals is t...
+[32mINFO     | 2025-12-21 19:42:49,411 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3512
+    ⏭️ 已存在关联: knowledge_id=3521
+    ✅ 关联 2 个知识点
+[246/265] ID=739: As a bus driver, what is your ultimate p...
+[32mINFO     | 2025-12-21 19:42:51,731 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3400
+    ⏭️ 已存在关联: knowledge_id=3524
+    ✅ 关联 3 个知识点
+[247/265] ID=740: When stopping to take on or alight passe...
+[32mINFO     | 2025-12-21 19:42:54,056 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3521
+    ✅ 关联 3 个知识点
+[248/265] ID=741: How high must the “SCHOOL BUS” lettering...
+[32mINFO     | 2025-12-21 19:42:56,487 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3267
+    ⏭️ 已存在关联: knowledge_id=3347
+    ⏭️ 已存在关联: knowledge_id=3521
+    ✅ 关联 3 个知识点
+[249/265] ID=742: As a bus driver, what is your ultimate p...
+[32mINFO     | 2025-12-21 19:42:58,215 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3400
+    ✅ 关联 3 个知识点
+[250/265] ID=743: When entering a roundabout or traffic ci...
+[32mINFO     | 2025-12-21 19:43:00,215 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3530
+    ⏭️ 已存在关联: knowledge_id=3288
+    ⏭️ 已存在关联: knowledge_id=3484
+    ✅ 关联 3 个知识点
+[251/265] ID=744: When stopping to take on or alight passe...
+[32mINFO     | 2025-12-21 19:43:02,243 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3521
+    ⏭️ 已存在关联: knowledge_id=3520
+    ✅ 关联 3 个知识点
+[252/265] ID=745: If there is a collision between a bus th...
+[32mINFO     | 2025-12-21 19:43:03,909 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3522
+    ⏭️ 已存在关联: knowledge_id=3523
+    ⏭️ 已存在关联: knowledge_id=3521
+    ✅ 关联 3 个知识点
+[253/265] ID=746: What causes brake fade?...
+[32mINFO     | 2025-12-21 19:43:05,518 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3249
+    ⏭️ 已存在关联: knowledge_id=3251
+    ⏭️ 已存在关联: knowledge_id=3475
+    ✅ 关联 3 个知识点
+[254/265] ID=747: Baggage must be stowed in the vehicle so...
+[32mINFO     | 2025-12-21 19:43:07,539 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3411
+    ⏭️ 已存在关联: knowledge_id=3345
+    ✅ 关联 3 个知识点
+[255/265] ID=748: Which of the following can you do if you...
+[32mINFO     | 2025-12-21 19:43:09,562 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3514
+    ⏭️ 已存在关联: knowledge_id=3533
+    ⏭️ 已存在关联: knowledge_id=3400
+    ✅ 关联 3 个知识点
+[256/265] ID=749: What is the danger of stopping in an acc...
+[32mINFO     | 2025-12-21 19:43:11,800 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3288
+    ✅ 关联 3 个知识点
+[257/265] ID=750: When communicating with people with disa...
+[32mINFO     | 2025-12-21 19:43:13,604 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3444
+    ⏭️ 已存在关联: knowledge_id=3406
+    ✅ 关联 2 个知识点
+[258/265] ID=751: Which of the following hand signals is t...
+[32mINFO     | 2025-12-21 19:43:15,247 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3512
+    ⏭️ 已存在关联: knowledge_id=3400
+    ✅ 关联 2 个知识点
+[259/265] ID=752: What causes brake fade?...
+[32mINFO     | 2025-12-21 19:43:17,199 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3249
+    ⏭️ 已存在关联: knowledge_id=3251
+    ⏭️ 已存在关联: knowledge_id=3475
+    ✅ 关联 3 个知识点
+[260/265] ID=753: In the event of a crash what is the driv...
+[32mINFO     | 2025-12-21 19:43:18,792 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3345
+    ⏭️ 已存在关联: knowledge_id=3511
+    ⏭️ 已存在关联: knowledge_id=3552
+    ✅ 关联 3 个知识点
+[261/265] ID=754: Which of the following is NOT a reason t...
+[32mINFO     | 2025-12-21 19:43:20,410 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3280
+    ⏭️ 已存在关联: knowledge_id=3281
+    ✅ 关联 3 个知识点
+[262/265] ID=755: Idling…?...
+[32mINFO     | 2025-12-21 19:43:22,032 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3400
+    ⏭️ 已存在关联: knowledge_id=3401
+    ⏭️ 已存在关联: knowledge_id=3402
+    ✅ 关联 3 个知识点
+[263/265] ID=756: As a bus driver, what is your ultimate p...
+[32mINFO     | 2025-12-21 19:43:23,755 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3400
+    ✅ 关联 3 个知识点
+[264/265] ID=757: Which of the following is NOT a clue tha...
+[32mINFO     | 2025-12-21 19:43:25,079 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⏭️ 已存在关联: knowledge_id=3521
+    ⏭️ 已存在关联: knowledge_id=3520
+    ✅ 关联 2 个知识点
+[265/265] ID=758: What is the purpose of the National Safe...
+[32mINFO     | 2025-12-21 19:43:27,018 | httpx | _client.py:1025 | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"[0m
+    ⚠️ 无效知识点ID: 290
+    ⏭️ 已存在关联: knowledge_id=3477
+    ✅ 关联 3 个知识点
+
+============================================================
+✅ 完成! 成功: 262, 失败: 3, 新建关联: 410
+============================================================
