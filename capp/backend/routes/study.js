@@ -64,7 +64,8 @@ router.get('/sessions', authenticateToken, async (req, res) => {
              AND ssi.deleted = false 
              AND sli.deleted = false
              AND sli.type = 'question'
-             AND sq.id IS NOT NULL`,
+             AND sq.id IS NOT NULL
+             AND sq.status = 1`,
           [session.id]
         );
         
@@ -79,6 +80,7 @@ router.get('/sessions', authenticateToken, async (req, res) => {
              AND sli.deleted = false
              AND sli.type = 'question'
              AND sq.id IS NOT NULL
+             AND sq.status = 1
              AND ssi.is_correct = 0`,
           [session.id]
         );
@@ -136,7 +138,8 @@ router.post('/sessions/:id/start', authenticateToken, async (req, res) => {
       AND ssi.deleted = false 
       AND sli.deleted = false
       AND sli.type = 'question'
-      AND sq.id IS NOT NULL`;
+      AND sq.id IS NOT NULL
+      AND sq.status = 1`;
     
     const queryParams = [sessionId];
     
@@ -440,7 +443,7 @@ router.get('/questions/:id', authenticateToken, async (req, res) => {
         explanation_human,
         status
       FROM study_question
-      WHERE id = $1 AND deleted = false`,
+      WHERE id = $1 AND status = 1`,
       [questionId]
     );
     
@@ -594,7 +597,9 @@ router.post('/sessions/:id/items/:itemId/submit', authenticateToken, async (req,
       FROM study_session_item ssi
       INNER JOIN study_learning_item sli ON ssi.learning_item_id = sli.id
       LEFT JOIN study_question sq ON sli.type = 'question' AND sli.ref_id = sq.id
-      WHERE ssi.id = $1 AND ssi.session_id = $2 AND ssi.deleted = false`,
+      WHERE ssi.id = $1 AND ssi.session_id = $2 
+        AND ssi.deleted = false
+        AND (sq.id IS NULL OR sq.status = 1)`,
       [itemId, sessionId]
     );
     
