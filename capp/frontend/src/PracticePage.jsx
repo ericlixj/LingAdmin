@@ -116,6 +116,8 @@ function PracticePage({ sessionId, practiceMode = "all", lang, onBack }) {
   const [error, setError] = useState("");
   const [startTime, setStartTime] = useState(null);
   const [practiceStarted, setPracticeStarted] = useState(false); // 是否已开始练习
+  const [learningItemId, setLearningItemId] = useState(null); // 当前题目的 learning_item_id
+  const [isFavoriting, setIsFavoriting] = useState(false); // 收藏操作中
 
   // 初始化：开始练习
   useEffect(() => {
@@ -149,6 +151,12 @@ function PracticePage({ sessionId, practiceMode = "all", lang, onBack }) {
         // 如果是错题模式但没有错题，显示友好提示并返回
         if (practiceMode === "wrong" && (result.message && result.message.includes("没有错题") || result.code === 1)) {
           alert(lang === "cn" ? "该学习记录中没有错题" : lang === "en" ? "No wrong questions in this session" : "該學習記錄中沒有錯題");
+          onBack();
+          return;
+        }
+        // 如果是收藏模式但没有收藏题目，显示友好提示并返回
+        if (practiceMode === "favorite" && (result.message && result.message.includes("没有收藏题目") || result.code === 1)) {
+          alert(lang === "cn" ? "该学习记录中没有收藏题目" : lang === "en" ? "No favorite questions in this session" : "該學習記錄中沒有收藏題目");
           onBack();
           return;
         }
@@ -208,6 +216,7 @@ function PracticePage({ sessionId, practiceMode = "all", lang, onBack }) {
         setCurrentQuestion(result.data.question);
         setCurrentIndex(result.data.currentIndex);
         setTotalCount(result.data.totalCount);
+        setLearningItemId(result.data.learningItemId);
         // 重置状态
         setStartTime(Date.now());
         setSelectedAnswer(null);
@@ -298,6 +307,57 @@ function PracticePage({ sessionId, practiceMode = "all", lang, onBack }) {
       console.error("提交答案失败:", err);
       alert("提交答案失败: " + String(err));
       setSubmitting(false);
+    }
+  };
+
+  // 收藏/取消收藏题目
+  const handleToggleFavorite = async () => {
+    if (!learningItemId || isFavoriting) {
+      return;
+    }
+
+    setIsFavoriting(true);
+    try {
+      const token = localStorage.getItem("access_token");
+      if (!token) {
+        throw new Error("未登录");
+      }
+
+      const newFavoriteStatus = !currentQuestion.is_favorited;
+      const response = await fetch(
+        `${API_URL}/api/c/study/learning-items/${learningItemId}/favorite`,
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            is_favorited: newFavoriteStatus,
+          }),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(`收藏操作失败: ${response.status}`);
+      }
+
+      const result = await response.json();
+      if (result.code === 0) {
+        // 更新当前题目的收藏状态
+        setCurrentQuestion({
+          ...currentQuestion,
+          is_favorited: result.data.is_favorited,
+        });
+        console.log('✅ 收藏状态已更新:', result.data);
+      } else {
+        throw new Error(result.message || "收藏操作失败");
+      }
+    } catch (err) {
+      console.error("收藏操作失败:", err);
+      alert("收藏操作失败: " + String(err));
+    } finally {
+      setIsFavoriting(false);
     }
   };
 
@@ -526,18 +586,70 @@ function PracticePage({ sessionId, practiceMode = "all", lang, onBack }) {
             marginBottom: "1.5rem",
           }}
         >
-          {/* 题干 */}
-          <h3
-            style={{
-              marginTop: 0,
-              marginBottom: "1rem",
-              fontSize: isMobile ? "1.05rem" : "1.2rem",
-              lineHeight: 1.45,
-              wordBreak: "break-word",
-            }}
-          >
-            {stemText}
-          </h3>
+          {/* 题干和收藏按钮 */}
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "1rem", gap: "12px" }}>
+            <h3
+              style={{
+                marginTop: 0,
+                marginBottom: 0,
+                fontSize: isMobile ? "1.05rem" : "1.2rem",
+                lineHeight: 1.45,
+                wordBreak: "break-word",
+                flex: 1,
+              }}
+            >
+              {stemText}
+            </h3>
+            {/* 收藏按钮 */}
+            {learningItemId && (
+              <button
+                onClick={handleToggleFavorite}
+                disabled={isFavoriting}
+                style={{
+                  padding: isMobile ? "6px 10px" : "8px 12px",
+                  backgroundColor: "transparent",
+                  border: `1px solid ${currentQuestion.is_favorited ? "#ff6b35" : theme.border}`,
+                  borderRadius: "6px",
+                  cursor: isFavoriting ? "not-allowed" : "pointer",
+                  fontSize: isMobile ? "0.85rem" : "0.9rem",
+                  color: currentQuestion.is_favorited ? "#ff6b35" : theme.textSecondary,
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "4px",
+                  minWidth: "fit-content",
+                  flexShrink: 0,
+                  transition: "all 0.2s",
+                }}
+                onMouseEnter={(e) => {
+                  if (!isFavoriting) {
+                    e.currentTarget.style.backgroundColor = isDarkMode ? "#3a3a3a" : "#f5f5f5";
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = "transparent";
+                }}
+              >
+                <span style={{ fontSize: isMobile ? "16px" : "18px" }}>
+                  {currentQuestion.is_favorited ? "★" : "☆"}
+                </span>
+                {!isMobile && (
+                  <span>
+                    {currentQuestion.is_favorited
+                      ? lang === "cn"
+                        ? "已收藏"
+                        : lang === "en"
+                        ? "Favorited"
+                        : "已收藏"
+                      : lang === "cn"
+                      ? "收藏"
+                      : lang === "en"
+                      ? "Favorite"
+                      : "收藏"}
+                  </span>
+                )}
+              </button>
+            )}
+          </div>
 
           {/* 题干图片 */}
           {stemImageUrl && (

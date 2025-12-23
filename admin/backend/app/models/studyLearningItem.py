@@ -1,7 +1,7 @@
 from datetime import datetime
 from typing import Optional, List
 
-from sqlalchemy import Column, DateTime, text, String, Integer
+from sqlalchemy import Column, DateTime, text, String, Integer, Boolean
 from sqlmodel import Field, SQLModel
 
 class StudyLearningItem(SQLModel, table=True):
@@ -49,6 +49,15 @@ class StudyLearningItem(SQLModel, table=True):
     )    
     updater: Optional[str] = Field(default=None, max_length=64, description="更新人")
     deleted: bool = Field(default=False)
+    is_favorited: bool = Field(
+        default=False,
+        description="是否被收藏",
+        sa_column=Column(
+            Boolean,
+            nullable=False,
+            server_default=text("false"),
+        )
+    )
     create_time: datetime = Field(
         default_factory=datetime.utcnow,
         sa_column=Column(DateTime, nullable=False, server_default=text("CURRENT_TIMESTAMP")),
@@ -71,6 +80,7 @@ class StudyLearningItemUpdate(SQLModel):
     ref_id: Optional[int] = None
     updater: Optional[str] = Field(default=None, max_length=64)
     dept_id: Optional[int] = None
+    is_favorited: Optional[bool] = None
 
 class StudyLearningItemListResponse(SQLModel):
     data: List[StudyLearningItem]

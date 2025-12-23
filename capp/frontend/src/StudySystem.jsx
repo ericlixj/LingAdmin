@@ -8,7 +8,7 @@ const API_URL = import.meta.env.VITE_API_URL || "http://localhost:4000";
 function StudySystem({ lang, user }) {
   const [view, setView] = useState("list"); // "list" 或 "practice"
   const [selectedSessionId, setSelectedSessionId] = useState(null);
-  const [practiceMode, setPracticeMode] = useState("all"); // "all" 或 "wrong"
+  const [practiceMode, setPracticeMode] = useState("all"); // "all"、"wrong" 或 "favorite"
 
   const handleStartPractice = (sessionId, mode = "all") => {
     setSelectedSessionId(sessionId);

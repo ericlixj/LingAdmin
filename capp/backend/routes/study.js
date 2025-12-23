@@ -85,10 +85,27 @@ router.get('/sessions', authenticateToken, async (req, res) => {
           [session.id]
         );
         
+        // 获取收藏题目数量
+        const favoriteResult = await query(
+          `SELECT COUNT(*) as favorite_count
+           FROM study_session_item ssi
+           INNER JOIN study_learning_item sli ON ssi.learning_item_id = sli.id
+           LEFT JOIN study_question sq ON sli.type = 'question' AND sli.ref_id = sq.id
+           WHERE ssi.session_id = $1 
+             AND ssi.deleted = false 
+             AND sli.deleted = false
+             AND sli.type = 'question'
+             AND sq.id IS NOT NULL
+             AND sq.status = 1
+             AND sli.is_favorited = true`,
+          [session.id]
+        );
+        
         return {
           ...session,
           total_count: parseInt(totalResult.rows[0]?.total_count || 0),
-          wrong_count: parseInt(wrongResult.rows[0]?.wrong_count || 0)
+          wrong_count: parseInt(wrongResult.rows[0]?.wrong_count || 0),
+          favorite_count: parseInt(favoriteResult.rows[0]?.favorite_count || 0)
         };
       })
     );
@@ -143,16 +160,21 @@ router.post('/sessions/:id/start', authenticateToken, async (req, res) => {
     
     const queryParams = [sessionId];
     
-    // 如果是错题模式，只获取 is_correct = 0 的题目
+    // 根据模式过滤题目
     if (mode === "wrong") {
+      // 错题模式：只获取 is_correct = 0 的题目
       whereCondition += ` AND ssi.is_correct = 0`;
+    } else if (mode === "favorite") {
+      // 收藏模式：只获取 is_favorited = true 的题目
+      whereCondition += ` AND sli.is_favorited = true`;
     }
     
-    // 获取学习记录明细中的题目ID列表
+    // 获取学习记录明细中的题目ID列表（包含 learning_item_id）
     const result = await query(
       `SELECT 
         ssi.id as item_id,
         ssi.learning_item_id,
+        sli.is_favorited,
         sq.id as question_id
       FROM study_session_item ssi
       INNER JOIN study_learning_item sli ON ssi.learning_item_id = sli.id
@@ -163,19 +185,25 @@ router.post('/sessions/:id/start', authenticateToken, async (req, res) => {
     );
     
     if (result.rows.length === 0) {
+      let message = '该学习记录中没有题目';
+      if (mode === "wrong") {
+        message = '该学习记录中没有错题';
+      } else if (mode === "favorite") {
+        message = '该学习记录中没有收藏题目';
+      }
       return res.json({
         code: 1,
-        message: mode === "wrong" 
-          ? '该学习记录中没有错题' 
-          : '该学习记录中没有题目',
+        message: message,
         data: null
       });
     }
     
-    // 提取题目ID和item_id的映射
+    // 提取题目ID和item_id的映射（包含 learning_item_id 和收藏状态）
     const questionData = result.rows.map(row => ({
       itemId: row.item_id,
-      questionId: row.question_id
+      questionId: row.question_id,
+      learningItemId: row.learning_item_id,
+      isFavorited: row.is_favorited || false
     }));
     
     // 打乱题目顺序
@@ -251,22 +279,26 @@ router.get('/sessions/:id/next', authenticateToken, async (req, res) => {
     const currentQuestion = questionData[currentIndex];
     const questionId = currentQuestion.questionId;
     const itemId = currentQuestion.itemId;
+    const learningItemId = currentQuestion.learningItemId;
+    const isFavorited = currentQuestion.isFavorited || false;
     
-    // 获取题目详细信息
+    // 获取题目详细信息，同时获取收藏状态
     const questionResult = await query(
       `SELECT 
-        id,
-        exam_id,
-        stem,
-        options,
-        answer,
-        type,
-        explanation_raw,
-        explanation_human,
-        image_url,
-        status
-      FROM study_question
-      WHERE id = $1 AND deleted = false`,
+        sq.id,
+        sq.exam_id,
+        sq.stem,
+        sq.options,
+        sq.answer,
+        sq.type,
+        sq.explanation_raw,
+        sq.explanation_human,
+        sq.image_url,
+        sq.status,
+        COALESCE(sli.is_favorited, false) as is_favorited
+      FROM study_question sq
+      LEFT JOIN study_learning_item sli ON sli.type = 'question' AND sli.ref_id = sq.id AND sli.deleted = false
+      WHERE sq.id = $1 AND sq.status = 1`,
       [questionId]
     );
     
@@ -360,8 +392,10 @@ router.get('/sessions/:id/next', authenticateToken, async (req, res) => {
       message: 'ok',
       data: {
         itemId: itemId,
+        learningItemId: learningItemId,
         question: {
           ...question,
+          is_favorited: isFavorited,
           knowledge_nodes: knowledgeNodes
         },
         currentIndex: currentIndex + 1, // 从1开始显示
@@ -430,20 +464,22 @@ router.get('/questions/:id', authenticateToken, async (req, res) => {
   try {
     const questionId = parseInt(req.params.id);
     
-    // 获取题目基本信息
+    // 获取题目基本信息，同时获取收藏状态
     const questionResult = await query(
       `SELECT 
-        id,
-        exam_id,
-        stem,
-        options,
-        answer,
-        type,
-        explanation_raw,
-        explanation_human,
-        status
-      FROM study_question
-      WHERE id = $1 AND status = 1`,
+        sq.id,
+        sq.exam_id,
+        sq.stem,
+        sq.options,
+        sq.answer,
+        sq.type,
+        sq.explanation_raw,
+        sq.explanation_human,
+        sq.status,
+        COALESCE(sli.is_favorited, false) as is_favorited
+      FROM study_question sq
+      LEFT JOIN study_learning_item sli ON sli.type = 'question' AND sli.ref_id = sq.id AND sli.deleted = false
+      WHERE sq.id = $1 AND sq.status = 1`,
       [questionId]
     );
     
@@ -534,11 +570,25 @@ router.get('/questions/:id', authenticateToken, async (req, res) => {
       sources: sourcesMap[kn.id] || []
     }));
     
+    // 获取 learning_item_id 用于收藏功能
+    const learningItemResult = await query(
+      `SELECT id, is_favorited 
+       FROM study_learning_item 
+       WHERE type = 'question' AND ref_id = $1 AND deleted = false 
+       LIMIT 1`,
+      [questionId]
+    );
+    
+    const learningItemId = learningItemResult.rows[0]?.id || null;
+    const isFavorited = learningItemResult.rows[0]?.is_favorited || false;
+    
     res.json({
       code: 0,
       message: 'ok',
       data: {
         ...question,
+        is_favorited: isFavorited,
+        learning_item_id: learningItemId,
         knowledge_nodes: knowledgeNodes
       }
     });
@@ -697,6 +747,85 @@ router.post('/sessions/:id/items/:itemId/submit', authenticateToken, async (req,
     res.status(500).json({
       code: 1,
       message: '提交答案失败: ' + error.message,
+      data: null
+    });
+  }
+});
+
+/**
+ * 收藏/取消收藏题目
+ * POST /api/c/study/learning-items/:id/favorite
+ * body: { is_favorited: true/false }
+ */
+router.post('/learning-items/:id/favorite', authenticateToken, async (req, res) => {
+  try {
+    const learningItemId = parseInt(req.params.id);
+    const userId = req.userId;
+    const { is_favorited } = req.body;
+    
+    if (typeof is_favorited !== 'boolean') {
+      return res.status(400).json({
+        code: 1,
+        message: 'is_favorited 必须是布尔值',
+        data: null
+      });
+    }
+    
+    // 验证 learning_item 是否存在且属于当前用户（通过关联的 session）
+    const itemCheck = await query(
+      `SELECT sli.id, sli.type, sli.ref_id
+       FROM study_learning_item sli
+       INNER JOIN study_session_item ssi ON ssi.learning_item_id = sli.id
+       INNER JOIN study_session ss ON ssi.session_id = ss.id
+       WHERE sli.id = $1 
+         AND ss.user_id = $2 
+         AND sli.deleted = false
+         AND ssi.deleted = false
+         AND ss.deleted = false
+       LIMIT 1`,
+      [learningItemId, userId]
+    );
+    
+    if (itemCheck.rows.length === 0) {
+      return res.status(404).json({
+        code: 1,
+        message: '学习项不存在或无权访问',
+        data: null
+      });
+    }
+    
+    // 更新收藏状态
+    const updateResult = await query(
+      `UPDATE study_learning_item
+       SET is_favorited = $1,
+           updater = $2,
+           update_time = CURRENT_TIMESTAMP
+       WHERE id = $3
+       RETURNING id, is_favorited`,
+      [is_favorited, String(userId), learningItemId]
+    );
+    
+    if (updateResult.rows.length === 0) {
+      return res.status(500).json({
+        code: 1,
+        message: '更新收藏状态失败',
+        data: null
+      });
+    }
+    
+    res.json({
+      code: 0,
+      message: 'ok',
+      data: {
+        learning_item_id: updateResult.rows[0].id,
+        is_favorited: updateResult.rows[0].is_favorited
+      }
+    });
+  } catch (error) {
+    console.error('[ERROR] Toggle favorite failed:', error);
+    res.status(500).json({
+      code: 1,
+      message: '收藏操作失败: ' + error.message,
       data: null
     });
   }
