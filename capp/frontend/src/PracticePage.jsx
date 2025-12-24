@@ -443,6 +443,66 @@ function PracticePage({ sessionId, practiceMode = "all", lang, onBack }) {
     setIsEditingNote(false);
   };
 
+  // 删除笔记
+  const handleDeleteNote = async () => {
+    if (!currentItem?.id || savingNote) {
+      return;
+    }
+
+    // 确认删除
+    if (!confirm(lang === "cn" ? "确定要删除笔记吗？" : lang === "en" ? "Are you sure you want to delete this note?" : "確定要刪除筆記嗎？")) {
+      return;
+    }
+
+    setSavingNote(true);
+    try {
+      const token = localStorage.getItem("access_token");
+      if (!token) {
+        throw new Error("未登录");
+      }
+
+      // 计算耗时
+      const timeSpent = startTime ? Math.max(0, Math.floor((Date.now() - startTime) / 1000)) : 0;
+
+      // 清空笔记（传递空字符串）
+      const response = await fetch(`${API_URL}/api/c/study/sessions/${sessionId}/next`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          mode: practiceMode,
+          itemId: currentItem.id,
+          note: "", // 清空笔记
+          isCorrect: currentItem ? (Number(currentItem.is_correct) === 1) : undefined,
+          response: currentItem?.response || "",
+          timeSpent: timeSpent
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`删除笔记失败: ${response.status}`);
+      }
+
+      const result = await response.json();
+      if (result.code === 0) {
+        // 更新笔记状态为空
+        setNote("");
+        setEditingNote("");
+        setIsEditingNote(false);
+        console.log('✅ 笔记已删除');
+      } else {
+        throw new Error(result.message || "删除笔记失败");
+      }
+    } catch (err) {
+      console.error("删除笔记失败:", err);
+      alert("删除笔记失败: " + String(err));
+    } finally {
+      setSavingNote(false);
+    }
+  };
+
   const handleNext = async () => {
     try {
       const token = localStorage.getItem("access_token");
@@ -1264,39 +1324,6 @@ function PracticePage({ sessionId, practiceMode = "all", lang, onBack }) {
                 </div>
               )}
 
-              {/* 5. 用户笔记 */}
-              <div
-                style={{
-                  padding: "1rem",
-                  backgroundColor: theme.cardBg,
-                  borderRadius: "8px",
-                  marginBottom: "1rem",
-                  border: `1px solid ${theme.border}`,
-                  color: theme.text,
-                }}
-              >
-                <div style={{ fontWeight: "bold", marginBottom: "0.5rem", color: theme.text }}>
-                  {lang === "cn" ? "我的笔记:" : lang === "en" ? "My Notes:" : "我的筆記:"}
-                </div>
-                <textarea
-                  value={note}
-                  onChange={(e) => setNote(e.target.value)}
-                  placeholder={lang === "cn" ? "记录你的答题心得、易错点、知识点总结等..." : lang === "en" ? "Record your thoughts, common mistakes, knowledge summary, etc..." : "記錄你的答題心得、易錯點、知識點總結等..."}
-                  style={{
-                    width: "100%",
-                    minHeight: "100px",
-                    padding: "0.75rem",
-                    borderRadius: "6px",
-                    border: `1px solid ${theme.border}`,
-                    backgroundColor: theme.bg,
-                    color: theme.text,
-                    fontSize: "0.9rem",
-                    fontFamily: "inherit",
-                    resize: "vertical",
-                    boxSizing: "border-box",
-                  }}
-                />
-              </div>
 
               </>
             </div>
