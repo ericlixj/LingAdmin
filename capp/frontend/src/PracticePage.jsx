@@ -609,10 +609,9 @@ function PracticePage({ sessionId, practiceMode = "all", lang, onBack }) {
         margin: "0 auto",
         padding: isMobile ? "12px" : "0 16px",
         paddingBottom: isMobile ? "80px" : "20px", // 为移动端底部按钮留出空间
-        backgroundColor: theme.bg,
-        minHeight: "100vh",
-        minHeight: isMobile ? "-webkit-fill-available" : "100vh", // iOS Safari支持
-        color: theme.text,
+          backgroundColor: theme.bg,
+          minHeight: isMobile ? "-webkit-fill-available" : "100vh", // iOS Safari支持
+          color: theme.text,
         WebkitOverflowScrolling: "touch", // iOS平滑滚动
         overflowX: "hidden", // 防止横向滚动
       }}
@@ -811,7 +810,6 @@ function PracticePage({ sessionId, practiceMode = "all", lang, onBack }) {
                 </button>
               )}
             </div>
-          </div>
 
           {/* 笔记编辑区域 */}
           {isEditingNote && (

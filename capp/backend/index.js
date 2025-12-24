@@ -149,6 +149,6 @@ app.get("/api/c/flyer_details", authenticateToken, async (req, res) => {
   }
 });
 
-app.listen(PORT, () => {
-  console.log(`[INFO] c-backend listening on port ${PORT}`);
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`[INFO] c-backend listening on 0.0.0.0:${PORT}`);
 });
