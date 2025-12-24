@@ -170,6 +170,8 @@ router.post('/sessions/:id/start', authenticateToken, async (req, res) => {
     }
     
     // 获取学习记录明细中的题目ID列表（包含 learning_item_id）
+    // 对于"全部题库"模式，按question ID排序；对于"错题"和"收藏"模式，按ssi.id排序（后续会打乱）
+    const orderBy = mode === "all" ? "sq.id" : "ssi.id";
     const result = await query(
       `SELECT 
         ssi.id as item_id,
@@ -180,7 +182,7 @@ router.post('/sessions/:id/start', authenticateToken, async (req, res) => {
       INNER JOIN study_learning_item sli ON ssi.learning_item_id = sli.id
       LEFT JOIN study_question sq ON sli.type = 'question' AND sli.ref_id = sq.id
       WHERE ${whereCondition}
-      ORDER BY ssi.id`,
+      ORDER BY ${orderBy}`,
       queryParams
     );
     
@@ -206,26 +208,51 @@ router.post('/sessions/:id/start', authenticateToken, async (req, res) => {
       isFavorited: row.is_favorited || false
     }));
     
-    // 打乱题目顺序
-    const shuffled = shuffleArray(questionData);
+    let finalQuestionData = questionData;
+    let currentIndex = 0;
+    
+    // 对于"全部题库"模式，按ID排序，读取进度
+    if (mode === "all") {
+      // 从数据库读取当前进度
+      const progressResult = await query(
+        'SELECT progress_question_id FROM study_session WHERE id = $1 AND user_id = $2',
+        [sessionId, userId]
+      );
+      
+      const progressQuestionId = progressResult.rows[0]?.progress_question_id;
+      
+      if (progressQuestionId) {
+        // 找到进度对应的题目索引
+        const progressIndex = questionData.findIndex(q => q.questionId === progressQuestionId);
+        if (progressIndex >= 0) {
+          currentIndex = progressIndex;
+        } else {
+          // 如果进度题目不在列表中，从头开始
+          currentIndex = 0;
+        }
+      }
+    } else {
+      // 对于"错题"和"收藏"模式，打乱题目顺序
+      finalQuestionData = shuffleArray(questionData);
+    }
     
     // 存储到内存中
     const sessionKey = `${userId}_${sessionId}_${mode}`;
     practiceSessions.set(sessionKey, {
-      questionData: shuffled,
-      currentIndex: 0,
-      totalCount: shuffled.length,
+      questionData: finalQuestionData,
+      currentIndex: currentIndex,
+      totalCount: finalQuestionData.length,
       mode: mode
     });
     
-    console.log(`[INFO] Practice session started: ${sessionKey}, mode: ${mode}, total questions: ${shuffled.length}`);
+    console.log(`[INFO] Practice session started: ${sessionKey}, mode: ${mode}, total questions: ${finalQuestionData.length}, currentIndex: ${currentIndex}`);
     
     res.json({
       code: 0,
       message: 'ok',
       data: {
-        totalCount: shuffled.length,
-        currentIndex: 0,
+        totalCount: finalQuestionData.length,
+        currentIndex: currentIndex,
         mode: mode
       }
     });
@@ -282,7 +309,7 @@ router.get('/sessions/:id/next', authenticateToken, async (req, res) => {
     const learningItemId = currentQuestion.learningItemId;
     const isFavorited = currentQuestion.isFavorited || false;
     
-    // 获取题目详细信息，同时获取收藏状态
+    // 获取题目详细信息，同时获取收藏状态和笔记
     const questionResult = await query(
       `SELECT 
         sq.id,
@@ -295,11 +322,13 @@ router.get('/sessions/:id/next', authenticateToken, async (req, res) => {
         sq.explanation_human,
         sq.image_url,
         sq.status,
-        COALESCE(sli.is_favorited, false) as is_favorited
+        COALESCE(sli.is_favorited, false) as is_favorited,
+        COALESCE(ssi.note, '') as note
       FROM study_question sq
       LEFT JOIN study_learning_item sli ON sli.type = 'question' AND sli.ref_id = sq.id AND sli.deleted = false
+      LEFT JOIN study_session_item ssi ON ssi.id = $2 AND ssi.session_id = $3 AND ssi.deleted = false
       WHERE sq.id = $1 AND sq.status = 1`,
-      [questionId]
+      [questionId, itemId, sessionId]
     );
     
     if (questionResult.rows.length === 0) {
@@ -396,6 +425,7 @@ router.get('/sessions/:id/next', authenticateToken, async (req, res) => {
         question: {
           ...question,
           is_favorited: isFavorited,
+          note: question.note || '',
           knowledge_nodes: knowledgeNodes
         },
         currentIndex: currentIndex + 1, // 从1开始显示
@@ -414,14 +444,15 @@ router.get('/sessions/:id/next', authenticateToken, async (req, res) => {
 });
 
 /**
- * 移动到下一题：更新当前索引
+ * 移动到下一题：更新当前索引，保存进度和笔记
  * POST /api/c/study/sessions/:id/next
+ * body: { mode, itemId, note, isCorrect, response, timeSpent }
  */
 router.post('/sessions/:id/next', authenticateToken, async (req, res) => {
   try {
     const sessionId = parseInt(req.params.id);
     const userId = req.userId;
-    const { mode = "all" } = req.body; // 从请求体获取模式
+    const { mode = "all", itemId, note, isCorrect, response, timeSpent } = req.body;
     const sessionKey = `${userId}_${sessionId}_${mode}`;
     
     // 从内存中获取练习会话
@@ -434,8 +465,61 @@ router.post('/sessions/:id/next', authenticateToken, async (req, res) => {
       });
     }
     
+    // 保存笔记和答题结果（如果提供了）
+    if (itemId) {
+      const updateFields = [];
+      const updateValues = [];
+      let paramIndex = 1;
+      
+      if (note !== undefined) {
+        updateFields.push(`note = $${paramIndex++}`);
+        updateValues.push(note || '');
+      }
+      if (isCorrect !== undefined) {
+        updateFields.push(`is_correct = $${paramIndex++}`);
+        updateValues.push(isCorrect ? 1 : 0);
+      }
+      if (response !== undefined) {
+        updateFields.push(`response = $${paramIndex++}`);
+        updateValues.push(response || '');
+      }
+      if (timeSpent !== undefined) {
+        updateFields.push(`time_spent_second = $${paramIndex++}`);
+        updateValues.push(timeSpent || 0);
+      }
+      
+      if (updateFields.length > 0) {
+        updateValues.push(itemId);
+        await query(
+          `UPDATE study_session_item 
+           SET ${updateFields.join(', ')}, update_time = CURRENT_TIMESTAMP
+           WHERE id = $${paramIndex} AND session_id = $${paramIndex + 1} AND deleted = false`,
+          [...updateValues, sessionId]
+        );
+      }
+    }
+    
     // 更新索引
     practiceSession.currentIndex += 1;
+    
+    // 对于"全部题库"模式，保存进度到数据库
+    if (mode === "all" && practiceSession.questionData && practiceSession.currentIndex < practiceSession.questionData.length) {
+      const currentQuestion = practiceSession.questionData[practiceSession.currentIndex];
+      if (currentQuestion && currentQuestion.questionId) {
+        await query(
+          'UPDATE study_session SET progress_question_id = $1 WHERE id = $2 AND user_id = $3',
+          [currentQuestion.questionId, sessionId, userId]
+        );
+      }
+    } else if (mode === "all" && practiceSession.currentIndex >= practiceSession.totalCount) {
+      // 全部完成后，重置进度
+      await query(
+        'UPDATE study_session SET progress_question_id = NULL WHERE id = $1 AND user_id = $2',
+        [sessionId, userId]
+      );
+    }
+    
+    const finished = practiceSession.currentIndex >= practiceSession.totalCount;
     
     res.json({
       code: 0,
@@ -443,7 +527,7 @@ router.post('/sessions/:id/next', authenticateToken, async (req, res) => {
       data: {
         currentIndex: practiceSession.currentIndex,
         totalCount: practiceSession.totalCount,
-        finished: practiceSession.currentIndex >= practiceSession.totalCount
+        finished: finished
       }
     });
   } catch (error) {

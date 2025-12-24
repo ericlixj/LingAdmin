@@ -93,8 +93,6 @@ class UserCRUD:
         return db_user
 
     def get_all_permission_codes(self, user_id: int) -> Set[str]:
-        if user_id == 1: 
-            return {"super_admin"}
         # 查询用户绑定的所有未删除角色 ID
         role_ids_query = (
             select(UserRoleLink.role_id)
@@ -107,6 +105,9 @@ class UserCRUD:
         role_ids = list(self.session.exec(role_ids_query).all())
 
         if not role_ids:
+            # 如果用户ID是1，即使没有角色也返回super_admin
+            if user_id == 1:
+                return {"super_admin"}
             return set()
 
         # 查询这些角色绑定的所有未删除权限的 code
@@ -121,7 +122,17 @@ class UserCRUD:
             )
         )
         permission_codes = self.session.exec(permission_query).all()
-        return set(permission_codes)
+        permission_set = set(permission_codes)
+        
+        # 如果用户ID是1，确保包含super_admin
+        if user_id == 1:
+            permission_set.add("super_admin")
+        
+        # 如果权限列表中包含super_admin，也确保包含
+        if "super_admin" in permission_set:
+            return permission_set
+        
+        return permission_set
 
     # 获取用户的所有角色
     def get_roles(self, user_id: int) -> List[Role]:

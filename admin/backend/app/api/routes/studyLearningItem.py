@@ -100,3 +100,90 @@ def delete_item(
         raise HTTPException(status_code=404, detail="StudyLearningItem not found")
     db_item.updater = str(current_user_id)
     return crud.soft_delete(db_item)
+
+@router.post("/sync_questions", dependencies=[Depends(has_permission("studyLearningItem:create"))])
+def sync_questions(
+    session: Session = Depends(get_session),
+    current_user_id: int = Depends(get_current_user_id),
+    current_dept_id: int = Depends(get_current_dept_id),
+):
+    """
+    同步题库：将未加入 learning_item 的题目（status=1）自动加入
+    """
+    from app.models.studyQuestion import StudyQuestion
+    from sqlmodel import select
+    from datetime import datetime, timezone
+    
+    logger.info(f"开始同步题库，用户ID: {current_user_id}")
+    
+    try:
+        # 1. 获取所有启用状态的题目（status=1）
+        questions_stmt = select(StudyQuestion).where(
+            StudyQuestion.status == 1,
+            StudyQuestion.deleted == False
+        )
+        questions = session.exec(questions_stmt).all()
+        
+        logger.info(f"找到 {len(questions)} 道启用状态的题目")
+        
+        # 2. 获取所有已存在的 learning_item（type='question'）
+        existing_items_stmt = select(StudyLearningItem).where(
+            StudyLearningItem.type == "question",
+            StudyLearningItem.deleted == False
+        )
+        existing_items = session.exec(existing_items_stmt).all()
+        existing_ref_ids = {item.ref_id for item in existing_items if item.ref_id is not None}
+        
+        logger.info(f"已存在 {len(existing_ref_ids)} 个题目的 learning_item")
+        
+        # 3. 筛选出需要插入的题目
+        to_insert = [q for q in questions if q.id not in existing_ref_ids]
+        
+        logger.info(f"需要新增 {len(to_insert)} 道题目到 learning_item")
+        
+        if not to_insert:
+            return {
+                "success": True,
+                "message": "所有题目已同步，无需新增",
+                "total_questions": len(questions),
+                "existing_items": len(existing_ref_ids),
+                "new_items": 0
+            }
+        
+        # 4. 批量插入新的 learning_item
+        crud = StudyLearningItemCRUD(session, user_id=current_user_id, dept_id=current_dept_id)
+        inserted_count = 0
+        
+        for question in to_insert:
+            new_item = StudyLearningItemCreate(
+                type="question",
+                ref_id=question.id,
+                creator=str(current_user_id),
+                dept_id=current_dept_id,
+                deleted=False,
+                is_favorited=False,
+            )
+            crud.create(new_item)
+            inserted_count += 1
+            
+            # 每50条提交一次
+            if inserted_count % 50 == 0:
+                session.commit()
+                logger.info(f"已插入 {inserted_count}/{len(to_insert)} 条记录...")
+        
+        session.commit()
+        
+        logger.info(f"同步完成，新增 {inserted_count} 道题目到 learning_item")
+        
+        return {
+            "success": True,
+            "message": f"同步成功，新增 {inserted_count} 道题目到学习资源",
+            "total_questions": len(questions),
+            "existing_items": len(existing_ref_ids),
+            "new_items": inserted_count
+        }
+        
+    except Exception as e:
+        logger.error(f"同步题库失败: {e}", exc_info=True)
+        session.rollback()
+        raise HTTPException(status_code=500, detail=f"同步题库失败: {str(e)}")

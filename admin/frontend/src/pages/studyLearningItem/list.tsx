@@ -6,8 +6,10 @@ import {
   useTable,
 } from "@refinedev/antd";
 import { useList } from "@refinedev/core";
-import { Select, Space, Table, Tag, Tooltip } from "antd";
-import { useMemo } from "react";
+import { Button, notification, Select, Space, Spin, Table, Tag, Tooltip } from "antd";
+import { useState, useMemo } from "react";
+import axiosInstance from "../../utils/axiosInstance";
+import { LoadingOutlined } from "@ant-design/icons";
 
 // 类型选项
 const TYPE_OPTIONS = [
@@ -22,12 +24,47 @@ const TYPE_COLOR: Record<string, string> = {
 };
 
 export const StudyLearningItemList = () => {
-  const { tableProps, filters } = useTable({
+  const [loading, setLoading] = useState(false);
+  const { tableProps, filters, tableQuery } = useTable({
     syncWithLocation: true,
     filters: {
       mode: "server",
     },
   });
+
+  const antIcon = <LoadingOutlined style={{ fontSize: 48 }} spin />;
+
+  // 同步题库操作
+  const syncQuestions = async () => {
+    setLoading(true);
+    try {
+      const response = await axiosInstance.post('/studyLearningItem/sync_questions');
+      if (response?.data?.success) {
+        notification.success({
+          message: "同步成功",
+          description: response.data.message || `新增 ${response.data.new_items || 0} 道题目到学习资源`,
+          duration: 5,
+        });
+      } else {
+        notification.error({
+          message: "同步失败",
+          description: response?.data?.message || "同步失败",
+          duration: 3,
+        });
+      }
+      // 刷新表格
+      tableQuery.refetch();
+    } catch (error: any) {
+      console.error(error);
+      notification.error({
+        message: "同步失败",
+        description: error.response?.data?.detail || error.message || "同步失败",
+        duration: 5,
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
 
   // 获取知识点列表
   const { data: knowledgeData } = useList({
@@ -80,8 +117,36 @@ export const StudyLearningItemList = () => {
   };
 
   return (
-    <List>
-      <Table {...tableProps} rowKey="id">
+    <Spin
+      spinning={loading}
+      tip="同步题库中，请稍候..."
+      indicator={antIcon}
+      size="large"
+      style={{
+        position: "fixed",
+        top: 0,
+        left: 0,
+        width: "100vw",
+        height: "100vh",
+        display: loading ? "flex" : "none",
+        justifyContent: "center",
+        alignItems: "center",
+        background: "rgba(255, 255, 255, 0.6)",
+        zIndex: 9999,
+        flexDirection: "column",
+      }}
+    >
+      <List
+        headerButtons={({ defaultButtons }) => (
+          <>
+            {defaultButtons}
+            <Button type="primary" onClick={syncQuestions} style={{ marginLeft: 8 }}>
+              同步题库
+            </Button>
+          </>
+        )}
+      >
+        <Table {...tableProps} rowKey="id">
         <Table.Column dataIndex="id" title="ID" sorter />
 
         <Table.Column
@@ -136,5 +201,6 @@ export const StudyLearningItemList = () => {
         />
       </Table>
     </List>
+    </Spin>
   );
 };

@@ -118,6 +118,10 @@ function PracticePage({ sessionId, practiceMode = "all", lang, onBack }) {
   const [practiceStarted, setPracticeStarted] = useState(false); // 是否已开始练习
   const [learningItemId, setLearningItemId] = useState(null); // 当前题目的 learning_item_id
   const [isFavoriting, setIsFavoriting] = useState(false); // 收藏操作中
+  const [note, setNote] = useState(""); // 用户笔记
+  const [isEditingNote, setIsEditingNote] = useState(false); // 是否正在编辑笔记
+  const [editingNote, setEditingNote] = useState(""); // 正在编辑的笔记内容
+  const [savingNote, setSavingNote] = useState(false); // 是否正在保存笔记
 
   // 初始化：开始练习
   useEffect(() => {
@@ -217,6 +221,11 @@ function PracticePage({ sessionId, practiceMode = "all", lang, onBack }) {
         setCurrentIndex(result.data.currentIndex);
         setTotalCount(result.data.totalCount);
         setLearningItemId(result.data.learningItemId);
+        // 设置笔记（如果有）
+        const savedNote = result.data.question.note || "";
+        setNote(savedNote);
+        setIsEditingNote(false); // 重置编辑状态
+        setEditingNote(""); // 清空编辑内容
         // 重置状态
         setStartTime(Date.now());
         setSelectedAnswer(null);
@@ -361,14 +370,23 @@ function PracticePage({ sessionId, practiceMode = "all", lang, onBack }) {
     }
   };
 
-  const handleNext = async () => {
+  // 保存笔记
+  const handleSaveNote = async () => {
+    if (!currentItem?.id || savingNote) {
+      return;
+    }
+
+    setSavingNote(true);
     try {
       const token = localStorage.getItem("access_token");
       if (!token) {
         throw new Error("未登录");
       }
 
-      // 通知后端移动到下一题
+      // 计算耗时
+      const timeSpent = startTime ? Math.max(0, Math.floor((Date.now() - startTime) / 1000)) : 0;
+
+      // 保存笔记到后端
       const response = await fetch(`${API_URL}/api/c/study/sessions/${sessionId}/next`, {
         method: "POST",
         headers: {
@@ -376,7 +394,79 @@ function PracticePage({ sessionId, practiceMode = "all", lang, onBack }) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          mode: practiceMode
+          mode: practiceMode,
+          itemId: currentItem.id,
+          note: editingNote || "",
+          isCorrect: currentItem ? (Number(currentItem.is_correct) === 1) : undefined,
+          response: currentItem?.response || "",
+          timeSpent: timeSpent
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`保存笔记失败: ${response.status}`);
+      }
+
+      const result = await response.json();
+      if (result.code === 0) {
+        // 更新笔记状态
+        setNote(editingNote);
+        setIsEditingNote(false);
+        console.log('✅ 笔记已保存');
+      } else {
+        throw new Error(result.message || "保存笔记失败");
+      }
+    } catch (err) {
+      console.error("保存笔记失败:", err);
+      alert("保存笔记失败: " + String(err));
+    } finally {
+      setSavingNote(false);
+    }
+  };
+
+  // 切换笔记编辑状态
+  const handleToggleNote = () => {
+    if (isEditingNote) {
+      // 如果正在编辑，关闭编辑区域
+      setIsEditingNote(false);
+      setEditingNote("");
+    } else {
+      // 如果未编辑，打开编辑区域并加载当前笔记
+      setEditingNote(note);
+      setIsEditingNote(true);
+    }
+  };
+
+  // 取消编辑笔记
+  const handleCancelEditNote = () => {
+    setEditingNote("");
+    setIsEditingNote(false);
+  };
+
+  const handleNext = async () => {
+    try {
+      const token = localStorage.getItem("access_token");
+      if (!token) {
+        throw new Error("未登录");
+      }
+
+      // 计算耗时
+      const timeSpent = startTime ? Math.max(0, Math.floor((Date.now() - startTime) / 1000)) : 0;
+
+      // 通知后端移动到下一题，同时保存笔记和答题结果
+      const response = await fetch(`${API_URL}/api/c/study/sessions/${sessionId}/next`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          mode: practiceMode,
+          itemId: currentItem?.id,
+          note: note || "",
+          isCorrect: currentItem ? (Number(currentItem.is_correct) === 1) : undefined,
+          response: currentItem?.response || "",
+          timeSpent: timeSpent
         }),
       });
 
@@ -518,9 +608,13 @@ function PracticePage({ sessionId, practiceMode = "all", lang, onBack }) {
         maxWidth: "900px",
         margin: "0 auto",
         padding: isMobile ? "12px" : "0 16px",
+        paddingBottom: isMobile ? "80px" : "20px", // 为移动端底部按钮留出空间
         backgroundColor: theme.bg,
         minHeight: "100vh",
+        minHeight: isMobile ? "-webkit-fill-available" : "100vh", // iOS Safari支持
         color: theme.text,
+        WebkitOverflowScrolling: "touch", // iOS平滑滚动
+        overflowX: "hidden", // 防止横向滚动
       }}
     >
       {/* 进度条 */}
@@ -586,8 +680,8 @@ function PracticePage({ sessionId, practiceMode = "all", lang, onBack }) {
             marginBottom: "1.5rem",
           }}
         >
-          {/* 题干和收藏按钮 */}
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "1rem", gap: "12px" }}>
+          {/* 题干 */}
+          <div style={{ marginBottom: isMobile ? "0.75rem" : "1rem" }}>
             <h3
               style={{
                 marginTop: 0,
@@ -595,61 +689,227 @@ function PracticePage({ sessionId, practiceMode = "all", lang, onBack }) {
                 fontSize: isMobile ? "1.05rem" : "1.2rem",
                 lineHeight: 1.45,
                 wordBreak: "break-word",
-                flex: 1,
               }}
             >
               {stemText}
             </h3>
-            {/* 收藏按钮 */}
-            {learningItemId && (
+          </div>
+
+          {/* 操作按钮组 */}
+          <div style={{ 
+            display: "flex", 
+            gap: isMobile ? "6px" : "8px", 
+            marginBottom: isMobile ? "0.75rem" : "1rem",
+            flexWrap: "wrap",
+            justifyContent: isMobile ? "flex-start" : "flex-end",
+          }}>
+              {/* 笔记按钮 */}
               <button
-                onClick={handleToggleFavorite}
-                disabled={isFavoriting}
+                onClick={handleToggleNote}
                 style={{
                   padding: isMobile ? "6px 10px" : "8px 12px",
-                  backgroundColor: "transparent",
-                  border: `1px solid ${currentQuestion.is_favorited ? "#ff6b35" : theme.border}`,
+                  backgroundColor: isEditingNote ? (isDarkMode ? "#3a2a1a" : "#fff7e6") : "transparent",
+                  border: `1px solid ${isEditingNote ? "#faad14" : theme.border}`,
                   borderRadius: "6px",
-                  cursor: isFavoriting ? "not-allowed" : "pointer",
-                  fontSize: isMobile ? "0.85rem" : "0.9rem",
-                  color: currentQuestion.is_favorited ? "#ff6b35" : theme.textSecondary,
+                  cursor: "pointer",
+                  fontSize: isMobile ? "0.8rem" : "0.9rem",
+                  color: isEditingNote ? "#faad14" : theme.textSecondary,
                   display: "flex",
                   alignItems: "center",
-                  gap: "4px",
+                  gap: isMobile ? "3px" : "4px",
                   minWidth: "fit-content",
-                  flexShrink: 0,
                   transition: "all 0.2s",
+                  WebkitTapHighlightColor: "transparent",
+                  touchAction: "manipulation",
+                  userSelect: "none",
+                }}
+                onTouchStart={(e) => {
+                  if (!isEditingNote) {
+                    e.currentTarget.style.transform = "scale(0.95)";
+                  }
+                }}
+                onTouchEnd={(e) => {
+                  e.currentTarget.style.transform = "scale(1)";
                 }}
                 onMouseEnter={(e) => {
-                  if (!isFavoriting) {
+                  if (!isEditingNote && !isMobile) {
                     e.currentTarget.style.backgroundColor = isDarkMode ? "#3a3a3a" : "#f5f5f5";
                   }
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = "transparent";
+                  if (!isEditingNote) {
+                    e.currentTarget.style.backgroundColor = "transparent";
+                  }
                 }}
               >
-                <span style={{ fontSize: isMobile ? "16px" : "18px" }}>
-                  {currentQuestion.is_favorited ? "★" : "☆"}
+                <span style={{ fontSize: isMobile ? "14px" : "16px" }}>
+                  {isEditingNote ? "✕" : "📝"}
                 </span>
                 {!isMobile && (
                   <span>
-                    {currentQuestion.is_favorited
-                      ? lang === "cn"
-                        ? "已收藏"
-                        : lang === "en"
-                        ? "Favorited"
-                        : "已收藏"
-                      : lang === "cn"
-                      ? "收藏"
-                      : lang === "en"
-                      ? "Favorite"
-                      : "收藏"}
+                    {lang === "cn" ? "笔记" : lang === "en" ? "Note" : "筆記"}
                   </span>
                 )}
               </button>
-            )}
+              {/* 收藏按钮 */}
+              {learningItemId && (
+                <button
+                  onClick={handleToggleFavorite}
+                  disabled={isFavoriting}
+                  style={{
+                    padding: isMobile ? "6px 10px" : "8px 12px",
+                    backgroundColor: "transparent",
+                    border: `1px solid ${currentQuestion.is_favorited ? "#ff6b35" : theme.border}`,
+                    borderRadius: "6px",
+                    cursor: isFavoriting ? "not-allowed" : "pointer",
+                    fontSize: isMobile ? "0.8rem" : "0.9rem",
+                    color: currentQuestion.is_favorited ? "#ff6b35" : theme.textSecondary,
+                    display: "flex",
+                    alignItems: "center",
+                    gap: isMobile ? "3px" : "4px",
+                    minWidth: "fit-content",
+                    transition: "all 0.2s",
+                    WebkitTapHighlightColor: "transparent",
+                    touchAction: "manipulation",
+                    userSelect: "none",
+                  }}
+                  onTouchStart={(e) => {
+                    if (!isFavoriting) {
+                      e.currentTarget.style.transform = "scale(0.95)";
+                    }
+                  }}
+                  onTouchEnd={(e) => {
+                    e.currentTarget.style.transform = "scale(1)";
+                  }}
+                  onMouseEnter={(e) => {
+                    if (!isFavoriting && !isMobile) {
+                      e.currentTarget.style.backgroundColor = isDarkMode ? "#3a3a3a" : "#f5f5f5";
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = "transparent";
+                  }}
+                >
+                  <span style={{ fontSize: isMobile ? "16px" : "18px" }}>
+                    {currentQuestion.is_favorited ? "★" : "☆"}
+                  </span>
+                  {!isMobile && (
+                    <span>
+                      {currentQuestion.is_favorited
+                        ? lang === "cn"
+                          ? "已收藏"
+                          : lang === "en"
+                          ? "Favorited"
+                          : "已收藏"
+                        : lang === "cn"
+                        ? "收藏"
+                        : lang === "en"
+                        ? "Favorite"
+                        : "收藏"}
+                    </span>
+                  )}
+                </button>
+              )}
+            </div>
           </div>
+
+          {/* 笔记编辑区域 */}
+          {isEditingNote && (
+            <div
+              style={{
+                padding: isMobile ? "0.75rem" : "1rem",
+                backgroundColor: theme.cardBg,
+                borderRadius: "8px",
+                marginBottom: "1rem",
+                border: `1px solid ${theme.border}`,
+                color: theme.text,
+              }}
+            >
+              <div style={{ 
+                fontWeight: "bold", 
+                marginBottom: isMobile ? "0.5rem" : "0.5rem", 
+                color: theme.text, 
+                fontSize: isMobile ? "0.85rem" : "0.9rem" 
+              }}>
+                {lang === "cn" ? "📝 我的笔记:" : lang === "en" ? "📝 My Note:" : "📝 我的筆記:"}
+              </div>
+              <textarea
+                value={editingNote}
+                onChange={(e) => setEditingNote(e.target.value)}
+                placeholder={lang === "cn" ? "记录你的答题心得、易错点、知识点总结等..." : lang === "en" ? "Record your thoughts, common mistakes, knowledge summary, etc..." : "記錄你的答題心得、易錯點、知識點總結等..."}
+                style={{
+                  width: "100%",
+                  minHeight: isMobile ? "80px" : "100px",
+                  padding: isMobile ? "0.6rem" : "0.75rem",
+                  borderRadius: "6px",
+                  border: `1px solid ${theme.border}`,
+                  backgroundColor: theme.bg,
+                  color: theme.text,
+                  fontSize: isMobile ? "0.85rem" : "0.9rem",
+                  fontFamily: "inherit",
+                  resize: "vertical",
+                  boxSizing: "border-box",
+                  marginBottom: isMobile ? "0.6rem" : "0.75rem",
+                  lineHeight: 1.5,
+                  WebkitTapHighlightColor: "transparent",
+                }}
+              />
+              <div style={{ 
+                display: "flex", 
+                gap: isMobile ? "6px" : "8px", 
+                justifyContent: "flex-end",
+                flexWrap: "wrap",
+              }}>
+                <button
+                  onClick={handleCancelEditNote}
+                  disabled={savingNote}
+                  style={{
+                    padding: isMobile ? "0.4rem 0.8rem" : "0.5rem 1rem",
+                    backgroundColor: "transparent",
+                    border: `1px solid ${theme.border}`,
+                    borderRadius: "6px",
+                    cursor: savingNote ? "not-allowed" : "pointer",
+                    fontSize: isMobile ? "0.85rem" : "0.9rem",
+                    color: theme.textSecondary,
+                    WebkitTapHighlightColor: "transparent",
+                    touchAction: "manipulation",
+                    userSelect: "none",
+                  }}
+                >
+                  {lang === "cn" ? "取消" : lang === "en" ? "Cancel" : "取消"}
+                </button>
+                <button
+                  onClick={handleSaveNote}
+                  disabled={savingNote}
+                  style={{
+                    padding: isMobile ? "0.4rem 0.8rem" : "0.5rem 1rem",
+                    backgroundColor: savingNote ? theme.buttonDisabled : "#52c41a",
+                    border: "none",
+                    borderRadius: "6px",
+                    cursor: savingNote ? "not-allowed" : "pointer",
+                    fontSize: isMobile ? "0.85rem" : "0.9rem",
+                    color: "white",
+                    fontWeight: "bold",
+                    WebkitTapHighlightColor: "transparent",
+                    touchAction: "manipulation",
+                    userSelect: "none",
+                  }}
+                >
+                  {savingNote
+                    ? lang === "cn"
+                      ? "保存中..."
+                      : lang === "en"
+                      ? "Saving..."
+                      : "保存中..."
+                    : lang === "cn"
+                    ? "确定"
+                    : lang === "en"
+                    ? "Save"
+                    : "確定"}
+                </button>
+              </div>
+            </div>
+          )}
 
           {/* 题干图片 */}
           {stemImageUrl && (
@@ -1005,6 +1265,40 @@ function PracticePage({ sessionId, practiceMode = "all", lang, onBack }) {
                   ))}
                 </div>
               )}
+
+              {/* 5. 用户笔记 */}
+              <div
+                style={{
+                  padding: "1rem",
+                  backgroundColor: theme.cardBg,
+                  borderRadius: "8px",
+                  marginBottom: "1rem",
+                  border: `1px solid ${theme.border}`,
+                  color: theme.text,
+                }}
+              >
+                <div style={{ fontWeight: "bold", marginBottom: "0.5rem", color: theme.text }}>
+                  {lang === "cn" ? "我的笔记:" : lang === "en" ? "My Notes:" : "我的筆記:"}
+                </div>
+                <textarea
+                  value={note}
+                  onChange={(e) => setNote(e.target.value)}
+                  placeholder={lang === "cn" ? "记录你的答题心得、易错点、知识点总结等..." : lang === "en" ? "Record your thoughts, common mistakes, knowledge summary, etc..." : "記錄你的答題心得、易錯點、知識點總結等..."}
+                  style={{
+                    width: "100%",
+                    minHeight: "100px",
+                    padding: "0.75rem",
+                    borderRadius: "6px",
+                    border: `1px solid ${theme.border}`,
+                    backgroundColor: theme.bg,
+                    color: theme.text,
+                    fontSize: "0.9rem",
+                    fontFamily: "inherit",
+                    resize: "vertical",
+                    boxSizing: "border-box",
+                  }}
+                />
+              </div>
 
               </>
             </div>

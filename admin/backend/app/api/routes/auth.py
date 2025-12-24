@@ -41,6 +41,20 @@ def login(data: LoginRequest, db: Session = Depends(get_session)):
         raise HTTPException(status_code=401, detail=_("Invalid credentials"))
     if not user.is_active:
         raise HTTPException(status_code=403, detail=_("Inactive user"))
+    
+    # 获取用户角色和权限信息
+    crud = UserCRUD(db)
+    permission_codes = crud.get_all_permission_codes(user.id)
+    roles = crud.get_roles(user.id)
+    
+    # 输出到console
+    logger.info("=" * 60)
+    logger.info(f"用户登录: {user.email} (ID: {user.id})")
+    logger.info(f"角色列表: {[role.name for role in roles]}")
+    logger.info(f"权限列表: {sorted(permission_codes)}")
+    logger.info(f"是否为超级管理员: {'super_admin' in permission_codes}")
+    logger.info("=" * 60)
+    
     access_token = create_access_token(subject=user.id)
     refresh_token = create_refresh_token(subject=user.id)
     return {
@@ -63,6 +77,20 @@ def access_token(
         raise HTTPException(status_code=401, detail=_("Invalid credentials"))
     if not user.is_active:
         raise HTTPException(status_code=403, detail=_("Inactive user"))
+    
+    # 获取用户角色和权限信息
+    crud = UserCRUD(db)
+    permission_codes = crud.get_all_permission_codes(user.id)
+    roles = crud.get_roles(user.id)
+    
+    # 输出到console
+    logger.info("=" * 60)
+    logger.info(f"用户登录: {user.email} (ID: {user.id})")
+    logger.info(f"角色列表: {[role.name for role in roles]}")
+    logger.info(f"权限列表: {sorted(permission_codes)}")
+    logger.info(f"是否为超级管理员: {'super_admin' in permission_codes}")
+    logger.info("=" * 60)
+    
     access_token = create_access_token(subject=user.id)
     refresh_token = create_refresh_token(subject=user.id)
     return {

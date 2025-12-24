@@ -75,6 +75,16 @@ class StudySession(SQLModel, table=True):
             index=False,
             unique=False,        )
     )
+    progress_question_id:        Optional[int] = Field(
+            default=None,
+        description="全部题库模式的当前进度题目ID",
+        sa_column=Column(
+            Integer,
+            nullable=True,
+            primary_key=False,
+            index=False,
+            unique=False,        )
+    )
     # 默认加入通用字段
     creator: Optional[str] = Field(default=None, max_length=64, description="创建人")
     dept_id: Optional[int] = Field(
@@ -117,6 +127,7 @@ class StudySessionUpdate(SQLModel):
     start_time: Optional[str] = None
     end_time: Optional[str] = None
     score: Optional[int] = None
+    progress_question_id: Optional[int] = None
     updater: Optional[str] = Field(default=None, max_length=64)
     dept_id: Optional[int] = None
 

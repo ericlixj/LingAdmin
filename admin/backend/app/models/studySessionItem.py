@@ -1,7 +1,7 @@
 from datetime import datetime
 from typing import Optional, List
 
-from sqlalchemy import Column, DateTime, text, String, Integer
+from sqlalchemy import Column, DateTime, text, String, Integer, Text
 from sqlmodel import Field, SQLModel
 
 class StudySessionItem(SQLModel, table=True):
@@ -105,6 +105,7 @@ class StudySessionItemUpdate(SQLModel):
     is_correct: Optional[int] = None
     response: Optional[str] = None
     time_spent_second: Optional[int] = None
+    note: Optional[str] = None
     updater: Optional[str] = Field(default=None, max_length=64)
     dept_id: Optional[int] = None
 

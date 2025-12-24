@@ -227,7 +227,12 @@ function StudySessionList({ lang, onStartPractice }) {
                   {new Date(session.create_time).toLocaleString()}
                 </div>
               </div>
-              <div style={{ display: "flex", gap: "0.5rem", marginTop: "1rem", flexWrap: "wrap" }}>
+              <div style={{ 
+                display: "flex", 
+                gap: isMobile ? "0.5rem" : "0.75rem", 
+                marginTop: isMobile ? "0.75rem" : "1rem", 
+                flexWrap: "wrap" 
+              }}>
                 <button
                   onClick={() => {
                     if (session.total_count === 0) {
@@ -237,22 +242,38 @@ function StudySessionList({ lang, onStartPractice }) {
                     onStartPractice(session.id, "all");
                   }}
                   style={{
-                    flex: 1,
-                    minWidth: "100px",
-                    padding: "0.75rem",
+                    flex: isMobile ? "1 1 calc(50% - 0.25rem)" : 1,
+                    minWidth: isMobile ? "calc(50% - 0.25rem)" : "100px",
+                    padding: isMobile ? "0.85rem 0.5rem" : "0.75rem",
                     backgroundColor: "#ff6b35",
                     color: "white",
                     border: "none",
-                    borderRadius: "4px",
+                    borderRadius: "8px",
                     cursor: "pointer",
-                    fontSize: "1rem",
-                    fontWeight: "bold",
+                    fontSize: isMobile ? "0.9rem" : "1rem",
+                    fontWeight: "600",
+                    WebkitTapHighlightColor: "transparent", // iOS点击高亮
+                    touchAction: "manipulation", // 优化触摸响应
+                    userSelect: "none", // 防止文本选择
+                    transition: "background-color 0.2s, transform 0.1s",
                   }}
                   onMouseEnter={(e) => {
-                    e.target.style.backgroundColor = "#e55a2b";
+                    if (!isMobile) {
+                      e.target.style.backgroundColor = "#e55a2b";
+                    }
                   }}
                   onMouseLeave={(e) => {
-                    e.target.style.backgroundColor = "#ff6b35";
+                    if (!isMobile) {
+                      e.target.style.backgroundColor = "#ff6b35";
+                    }
+                  }}
+                  onTouchStart={(e) => {
+                    e.currentTarget.style.backgroundColor = "#e55a2b";
+                    e.currentTarget.style.transform = "scale(0.97)";
+                  }}
+                  onTouchEnd={(e) => {
+                    e.currentTarget.style.backgroundColor = "#ff6b35";
+                    e.currentTarget.style.transform = "scale(1)";
                   }}
                 >
                   {lang === "cn" ? "全部" : lang === "en" ? "All" : "全部"}
@@ -267,22 +288,38 @@ function StudySessionList({ lang, onStartPractice }) {
                     onStartPractice(session.id, "wrong");
                   }}
                   style={{
-                    flex: 1,
-                    minWidth: "100px",
-                    padding: "0.75rem",
+                    flex: isMobile ? "1 1 calc(50% - 0.25rem)" : 1,
+                    minWidth: isMobile ? "calc(50% - 0.25rem)" : "100px",
+                    padding: isMobile ? "0.85rem 0.5rem" : "0.75rem",
                     backgroundColor: "#52c41a",
                     color: "white",
                     border: "none",
-                    borderRadius: "4px",
+                    borderRadius: "8px",
                     cursor: "pointer",
-                    fontSize: "1rem",
-                    fontWeight: "bold",
+                    fontSize: isMobile ? "0.9rem" : "1rem",
+                    fontWeight: "600",
+                    WebkitTapHighlightColor: "transparent",
+                    touchAction: "manipulation",
+                    userSelect: "none",
+                    transition: "background-color 0.2s, transform 0.1s",
                   }}
                   onMouseEnter={(e) => {
-                    e.target.style.backgroundColor = "#389e0d";
+                    if (!isMobile) {
+                      e.target.style.backgroundColor = "#389e0d";
+                    }
                   }}
                   onMouseLeave={(e) => {
-                    e.target.style.backgroundColor = "#52c41a";
+                    if (!isMobile) {
+                      e.target.style.backgroundColor = "#52c41a";
+                    }
+                  }}
+                  onTouchStart={(e) => {
+                    e.currentTarget.style.backgroundColor = "#389e0d";
+                    e.currentTarget.style.transform = "scale(0.97)";
+                  }}
+                  onTouchEnd={(e) => {
+                    e.currentTarget.style.backgroundColor = "#52c41a";
+                    e.currentTarget.style.transform = "scale(1)";
                   }}
                 >
                   {lang === "cn" ? "错题" : lang === "en" ? "Wrong" : "錯題"}
@@ -297,22 +334,38 @@ function StudySessionList({ lang, onStartPractice }) {
                     onStartPractice(session.id, "favorite");
                   }}
                   style={{
-                    flex: 1,
-                    minWidth: "100px",
-                    padding: "0.75rem",
+                    flex: isMobile ? "1 1 100%" : 1,
+                    minWidth: isMobile ? "100%" : "100px",
+                    padding: isMobile ? "0.85rem 0.5rem" : "0.75rem",
                     backgroundColor: "#faad14",
                     color: "white",
                     border: "none",
-                    borderRadius: "4px",
+                    borderRadius: "8px",
                     cursor: "pointer",
-                    fontSize: "1rem",
-                    fontWeight: "bold",
+                    fontSize: isMobile ? "0.9rem" : "1rem",
+                    fontWeight: "600",
+                    WebkitTapHighlightColor: "transparent",
+                    touchAction: "manipulation",
+                    userSelect: "none",
+                    transition: "background-color 0.2s, transform 0.1s",
                   }}
                   onMouseEnter={(e) => {
-                    e.target.style.backgroundColor = "#d48806";
+                    if (!isMobile) {
+                      e.target.style.backgroundColor = "#d48806";
+                    }
                   }}
                   onMouseLeave={(e) => {
-                    e.target.style.backgroundColor = "#faad14";
+                    if (!isMobile) {
+                      e.target.style.backgroundColor = "#faad14";
+                    }
+                  }}
+                  onTouchStart={(e) => {
+                    e.currentTarget.style.backgroundColor = "#d48806";
+                    e.currentTarget.style.transform = "scale(0.97)";
+                  }}
+                  onTouchEnd={(e) => {
+                    e.currentTarget.style.backgroundColor = "#faad14";
+                    e.currentTarget.style.transform = "scale(1)";
                   }}
                 >
                   {lang === "cn" ? "收藏" : lang === "en" ? "Favorite" : "收藏"}

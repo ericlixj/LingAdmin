@@ -122,15 +122,29 @@ def get_user_permissions(
     session: Session = Depends(get_session)
 ) -> set[str]:
     crud = UserCRUD(session)
-    return crud.get_all_permission_codes(user_id) 
+    permissions = crud.get_all_permission_codes(user_id)
+    logger.info(f"[PERMISSION DEBUG] User ID: {user_id}, Permissions: {sorted(permissions)}")
+    return permissions
 
 #has menu permission
 def has_permission(required: str):
     def permission_dependency(permissions: set[str] = Depends(get_user_permissions)):
-        if "super_admin" in permissions:
-            return
-        if required not in permissions:
-            raise HTTPException(status_code=403, detail=_("Forbidden"))
+        try:
+            logger.info(f"[PERMISSION CHECK] Required: {required}, User Permissions: {sorted(permissions)}, Is Super Admin: {'super_admin' in permissions}")
+            if "super_admin" in permissions:
+                logger.info(f"[PERMISSION CHECK] Super admin detected, allowing access")
+                return
+            if required not in permissions:
+                logger.warning(f"[PERMISSION CHECK] Access denied: {required} not in {sorted(permissions)}")
+                raise HTTPException(status_code=403, detail=_("Forbidden"))
+            logger.info(f"[PERMISSION CHECK] Access granted: {required} found in permissions")
+        except HTTPException:
+            # 重新抛出HTTP异常
+            raise
+        except Exception as e:
+            # 捕获其他异常并记录
+            logger.error(f"[PERMISSION CHECK] Unexpected error: {e}", exc_info=True)
+            raise HTTPException(status_code=500, detail=f"Permission check failed: {str(e)}")
     return permission_dependency
 
 #data permission

@@ -14,10 +14,13 @@ import {
   Popconfirm,
   message,
   Tag,
+  notification,
+  Spin,
 } from "antd";
-import { EditOutlined } from "@ant-design/icons";
+import { EditOutlined, LoadingOutlined } from "@ant-design/icons";
 import dayjs from "dayjs";
 import { StudySessionItem } from "./components/studySessionItem";
+import axiosInstance from "../../utils/axiosInstance";
 
 const { Text, Title } = Typography;
 
@@ -29,6 +32,9 @@ export const StudySessionShow = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [editModalVisible, setEditModalVisible] = useState(false);
   const [editRecord, setEditRecord] = useState(null);
+  const [syncLoading, setSyncLoading] = useState(false);
+
+  const antIcon = <LoadingOutlined style={{ fontSize: 48 }} spin />;
 
   const { tableProps, filters, setFilters } = useTable({
     resource: "studySessionItem",
@@ -72,6 +78,51 @@ export const StudySessionShow = () => {
       );
     } catch (error) {
       message.error("删除失败");
+    }
+  };
+
+  // 同步题库操作
+  const syncQuestions = async () => {
+    if (!record?.id) {
+      message.error("无法获取学习记录ID");
+      return;
+    }
+
+    setSyncLoading(true);
+    try {
+      const response = await axiosInstance.post('/studySessionItem/sync_questions', null, {
+        params: {
+          session_id: record.id
+        }
+      });
+      
+      if (response?.data?.success) {
+        notification.success({
+          message: "同步成功",
+          description: response.data.message || `新增 ${response.data.new_items || 0} 道题目到学习记录明细`,
+          duration: 5,
+        });
+        // 刷新表格
+        tableProps.pagination?.onChange?.(
+          tableProps.pagination?.current || 1,
+          tableProps.pagination?.pageSize || 10
+        );
+      } else {
+        notification.error({
+          message: "同步失败",
+          description: response?.data?.message || "同步失败",
+          duration: 3,
+        });
+      }
+    } catch (error: any) {
+      console.error(error);
+      notification.error({
+        message: "同步失败",
+        description: error.response?.data?.detail || error.message || "同步失败",
+        duration: 5,
+      });
+    } finally {
+      setSyncLoading(false);
     }
   };
 
@@ -162,7 +213,26 @@ export const StudySessionShow = () => {
   };
 
   return (
-    <Show isLoading={isLoading}>
+    <Spin
+      spinning={syncLoading}
+      tip="同步题库中，请稍候..."
+      indicator={antIcon}
+      size="large"
+      style={{
+        position: "fixed",
+        top: 0,
+        left: 0,
+        width: "100vw",
+        height: "100vh",
+        display: syncLoading ? "flex" : "none",
+        justifyContent: "center",
+        alignItems: "center",
+        background: "rgba(255, 255, 255, 0.6)",
+        zIndex: 9999,
+        flexDirection: "column",
+      }}
+    >
+      <Show isLoading={isLoading}>
       {/* 主表字段渲染 */}
       <Text strong>user_id:</Text>
       <Text>
@@ -213,9 +283,18 @@ export const StudySessionShow = () => {
 
       <Title level={5} style={{ marginBottom: 16 }}>
         学习记录明细
-        <CreateButton style={{ float: "right" }} onClick={() => setModalVisible(true)}>
-          新增学习记录明细
-        </CreateButton>
+        <Space style={{ float: "right" }}>
+          <Button 
+            type="primary" 
+            onClick={syncQuestions}
+            loading={syncLoading}
+          >
+            同步题库
+          </Button>
+          <CreateButton onClick={() => setModalVisible(true)}>
+            新增学习记录明细
+          </CreateButton>
+        </Space>
       </Title>
 
       {/* 子表表格 */}
@@ -323,5 +402,6 @@ export const StudySessionShow = () => {
         )}
       </Modal>
     </Show>
+    </Spin>
   );
 };
