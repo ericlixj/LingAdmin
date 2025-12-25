@@ -15,6 +15,8 @@
       },
       "env": {
         "API_BASE_URL": "http://10.0.2.2:4000",
+        "API_BASE_URL_IOS": "http://localhost:4000",
+        "API_BASE_URL_ANDROID": "http://10.0.2.2:4000",
         "API_TIMEOUT": "30000"
       }
     },
@@ -28,6 +30,8 @@
       },
       "env": {
         "API_BASE_URL": "https://c-api-staging.kxf.ca",
+        "API_BASE_URL_IOS": "https://c-api-staging.kxf.ca",
+        "API_BASE_URL_ANDROID": "https://c-api-staging.kxf.ca",
         "API_TIMEOUT": "30000"
       }
     },
@@ -41,6 +45,8 @@
       },
       "env": {
         "API_BASE_URL": "https://c-api.kxf.ca",
+        "API_BASE_URL_IOS": "https://c-api.kxf.ca",
+        "API_BASE_URL_ANDROID": "https://c-api.kxf.ca",
         "API_TIMEOUT": "30000"
       }
     }

@@ -1,4 +1,4 @@
-import {API_BASE_URL, API_TIMEOUT} from '@env';
+import {API_BASE_URL, API_BASE_URL_IOS, API_BASE_URL_ANDROID, API_TIMEOUT} from '@env';
 import {Platform} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {Environment, getEnvironmentConfig, ENVIRONMENTS, getAllEnvironments} from './environments';
@@ -7,6 +7,15 @@ const ENVIRONMENT_STORAGE_KEY = 'app_environment';
 
 // 根据平台智能选择默认 API 地址
 const getDefaultBaseURL = () => {
+  // 优先使用平台特定的环境变量
+  if (Platform.OS === 'ios' && API_BASE_URL_IOS) {
+    return API_BASE_URL_IOS;
+  }
+  if (Platform.OS === 'android' && API_BASE_URL_ANDROID) {
+    return API_BASE_URL_ANDROID;
+  }
+  
+  // 其次使用通用的 API_BASE_URL
   if (API_BASE_URL) {
     return API_BASE_URL;
   }
@@ -23,7 +32,8 @@ const getDefaultBaseURL = () => {
     return 'http://localhost:4000';
   }
   
-  // 生产环境
+  // 生产环境：默认使用生产 API
+  // 如果需要在生产环境也使用平台特定的地址，可以在 EAS 构建配置中设置
   return 'https://c-api.kxf.ca';
 };
 

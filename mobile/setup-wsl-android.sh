@@ -128,3 +128,5 @@ echo "   已创建别名方便使用：adb 和 emulator"
 
 
 
+
+

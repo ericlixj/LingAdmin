@@ -102,3 +102,5 @@ SELECT
     COUNT(*) as disabled_count
 FROM study_question
 WHERE status = 0;
+
+

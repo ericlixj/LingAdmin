@@ -9,6 +9,50 @@ echo ""
 # 加载环境变量
 source ~/.bashrc 2>/dev/null || true
 
+# 检查并设置 JAVA_HOME
+if [ -z "$JAVA_HOME" ]; then
+    # 尝试自动检测 Java
+    if command -v java &> /dev/null; then
+        JAVA_PATH=$(which java)
+        JAVA_HOME_CANDIDATE=$(readlink -f "$JAVA_PATH" 2>/dev/null | sed "s|/bin/java||" || echo "")
+        if [ -n "$JAVA_HOME_CANDIDATE" ] && [ -d "$JAVA_HOME_CANDIDATE" ]; then
+            export JAVA_HOME="$JAVA_HOME_CANDIDATE"
+        fi
+    fi
+    
+    # 如果仍未设置，尝试常见路径
+    if [ -z "$JAVA_HOME" ]; then
+        POSSIBLE_PATHS=(
+            "/usr/lib/jvm/java-17-openjdk-amd64"
+            "/usr/lib/jvm/java-17-openjdk"
+            "/usr/lib/jvm/default-java"
+        )
+        for path in "${POSSIBLE_PATHS[@]}"; do
+            if [ -d "$path" ]; then
+                export JAVA_HOME="$path"
+                break
+            fi
+        done
+    fi
+fi
+
+# 检查 Java 是否可用
+if [ -z "$JAVA_HOME" ] || [ ! -f "$JAVA_HOME/bin/java" ]; then
+    echo "❌ 错误: JAVA_HOME 未设置或 Java 未安装"
+    echo ""
+    echo "请运行以下命令安装 Java："
+    echo "  ./setup-java.sh"
+    echo ""
+    echo "或手动安装："
+    echo "  sudo apt install openjdk-17-jdk"
+    echo "  export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64"
+    exit 1
+fi
+
+export PATH="$JAVA_HOME/bin:$PATH"
+echo "☕ Java: $JAVA_HOME"
+echo ""
+
 # 确保 ANDROID_HOME 已设置
 if [ -z "$ANDROID_HOME" ]; then
     export ANDROID_HOME=/mnt/c/Users/ericl/AppData/Local/Android/Sdk

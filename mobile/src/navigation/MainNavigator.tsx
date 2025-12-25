@@ -2,25 +2,30 @@ import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import HomeScreen from '../screens/main/HomeScreen';
+import LifeInfoScreen from '../screens/main/LifeInfoScreen';
 import FlyerDetailsScreen from '../screens/main/FlyerDetailsScreen';
 import GasStationsScreen from '../screens/main/GasStationsScreen';
 import PostcodeManagerScreen from '../screens/main/PostcodeManagerScreen';
-import SettingsScreen from '../screens/main/SettingsScreen';
+import StudySystemScreen from '../screens/main/StudySystemScreen';
+import AccountScreen from '../screens/main/AccountScreen';
+import PracticeScreen from '../screens/main/PracticeScreen';
 
 export type MainTabParamList = {
   Home: undefined;
-  Flyers: undefined;
-  Gas: undefined;
-  Postcodes: undefined;
-  Settings: undefined;
+  LifeInfo: undefined;
+  Study: undefined;
+  Account: undefined;
 };
 
 export type MainStackParamList = {
   MainTabs: undefined;
-  FlyerDetails: undefined;
-  GasStations: undefined;
-  PostcodeManager: undefined;
-  Settings: undefined;
+  Flyers: undefined;
+  Gas: undefined;
+  Postcodes: undefined;
+  Practice: {
+    sessionId: number;
+    practiceMode: 'all' | 'wrong' | 'favorite';
+  };
 };
 
 const Tab = createBottomTabNavigator<MainTabParamList>();
@@ -40,24 +45,19 @@ const MainTabs: React.FC = () => {
         options={{title: '首页', tabBarLabel: '首页'}}
       />
       <Tab.Screen
-        name="Flyers"
-        component={FlyerDetailsScreen}
-        options={{title: '传单详情', tabBarLabel: '传单'}}
+        name="LifeInfo"
+        component={LifeInfoScreen}
+        options={{title: '生活资讯', tabBarLabel: '生活资讯'}}
       />
       <Tab.Screen
-        name="Gas"
-        component={GasStationsScreen}
-        options={{title: '加油站', tabBarLabel: '加油站'}}
+        name="Study"
+        component={StudySystemScreen}
+        options={{title: '学习系统', tabBarLabel: '学习系统'}}
       />
       <Tab.Screen
-        name="Postcodes"
-        component={PostcodeManagerScreen}
-        options={{title: '邮编管理', tabBarLabel: '邮编'}}
-      />
-      <Tab.Screen
-        name="Settings"
-        component={SettingsScreen}
-        options={{title: '设置', tabBarLabel: '设置'}}
+        name="Account"
+        component={AccountScreen}
+        options={{title: '账户信息', tabBarLabel: '账户'}}
       />
     </Tab.Navigator>
   );
@@ -72,9 +72,24 @@ const MainNavigator: React.FC = () => {
         options={{headerShown: false}}
       />
       <Stack.Screen
-        name="Settings"
-        component={SettingsScreen}
-        options={{title: '设置'}}
+        name="Flyers"
+        component={FlyerDetailsScreen}
+        options={{title: '传单详情'}}
+      />
+      <Stack.Screen
+        name="Gas"
+        component={GasStationsScreen}
+        options={{title: '加油站'}}
+      />
+      <Stack.Screen
+        name="Postcodes"
+        component={PostcodeManagerScreen}
+        options={{title: '邮编管理'}}
+      />
+      <Stack.Screen
+        name="Practice"
+        component={PracticeScreen}
+        options={{title: '练习'}}
       />
     </Stack.Navigator>
   );
