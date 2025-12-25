@@ -20,6 +20,7 @@ interface StudySession {
   total_count?: number;
   wrong_count?: number;
   favorite_count?: number;
+  completed_count?: number; // 已完成题目数量（仅对"全部"模式有效）
 }
 
 interface StudySessionListScreenProps {
@@ -63,7 +64,7 @@ const StudySessionListScreen: React.FC<StudySessionListScreenProps> = ({
     }
   };
 
-  const handleStartPractice = (sessionId: number, mode: 'all' | 'wrong' | 'favorite') => {
+  const handleStartPractice = async (sessionId: number, mode: 'all' | 'wrong' | 'favorite') => {
     const session = sessions.find(s => s.id === sessionId);
     if (!session) return;
 
@@ -81,7 +82,41 @@ const StudySessionListScreen: React.FC<StudySessionListScreenProps> = ({
       return;
     }
 
-    onStartPractice(sessionId, mode);
+    // 在选择题库时就建立会话，确保会话在内存中
+    try {
+      setLoading(true);
+      console.log(`🔄 [StudySessionList] 开始初始化练习会话: sessionId=${sessionId}, mode=${mode}`);
+      
+      const response = await api.post<{
+        code: number;
+        data: {totalCount: number};
+        message?: string;
+      }>(`/api/c/study/sessions/${sessionId}/start`, {
+        mode: mode,
+      });
+
+      if (response.code !== 0) {
+        if (mode === 'wrong' && response.message?.includes('没有错题')) {
+          Alert.alert('提示', '该学习记录中没有错题');
+          return;
+        }
+        if (mode === 'favorite' && response.message?.includes('没有收藏题目')) {
+          Alert.alert('提示', '该学习记录中没有收藏题目');
+          return;
+        }
+        throw new Error(response.message || '初始化练习会话失败');
+      }
+
+      console.log(`✅ [StudySessionList] 练习会话已建立: sessionId=${sessionId}, mode=${mode}, totalCount=${response.data.totalCount}`);
+      
+      // 会话已建立，导航到练习页面
+      onStartPractice(sessionId, mode);
+    } catch (err: any) {
+      console.error('❌ [StudySessionList] 初始化练习会话失败:', err);
+      Alert.alert('错误', '初始化练习会话失败: ' + String(err.message || err));
+    } finally {
+      setLoading(false);
+    }
   };
 
   if (loading) {
@@ -140,7 +175,13 @@ const StudySessionListScreen: React.FC<StudySessionListScreenProps> = ({
                   onPress={() => handleStartPractice(session.id, 'all')}
                   activeOpacity={0.7}>
                   <Text style={styles.buttonText}>
-                    全部 {session.total_count !== undefined && `(${session.total_count})`}
+                    全部 {session.total_count !== undefined && session.total_count > 0 ? (
+                      session.completed_count !== undefined && session.completed_count !== null
+                        ? `${session.completed_count}/${session.total_count}`
+                        : `0/${session.total_count}`
+                    ) : (
+                      session.total_count !== undefined ? `(${session.total_count})` : ''
+                    )}
                   </Text>
                 </TouchableOpacity>
 

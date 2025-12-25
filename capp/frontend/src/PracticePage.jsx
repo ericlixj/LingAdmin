@@ -124,11 +124,25 @@ function PracticePage({ sessionId, practiceMode = "all", lang, onBack }) {
   const [savingNote, setSavingNote] = useState(false); // 是否正在保存笔记
 
   // 初始化：开始练习
+  // 注意：当 sessionId 或 practiceMode 变化时，会重新初始化练习会话
+  // 错题模式每次进入都会从第一题开始，按顺序显示（不打乱）
   useEffect(() => {
-    startPractice();
+    let isMounted = true;
+    const initPractice = async () => {
+      if (isMounted) {
+        await startPractice();
+      }
+    };
+    initPractice();
+    return () => {
+      isMounted = false;
+    };
   }, [sessionId, practiceMode]);
 
   // 开始练习：初始化练习会话
+  // 错题模式：按顺序显示，每次进入从第一题开始
+  // 全部模式：按顺序显示，支持进度保存
+  // 收藏模式：打乱顺序显示
   const startPractice = async () => {
     try {
       setLoading(true);
@@ -138,6 +152,7 @@ function PracticePage({ sessionId, practiceMode = "all", lang, onBack }) {
         throw new Error("未登录");
       }
 
+      // 错题模式每次进入都重新初始化，确保从第一题开始
       const response = await fetch(`${API_URL}/api/c/study/sessions/${sessionId}/start`, {
         method: "POST",
         headers: {
@@ -145,7 +160,7 @@ function PracticePage({ sessionId, practiceMode = "all", lang, onBack }) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          mode: practiceMode // "all" 或 "wrong"
+          mode: practiceMode // "all"、"wrong" 或 "favorite"
         }),
       });
 
@@ -187,6 +202,9 @@ function PracticePage({ sessionId, practiceMode = "all", lang, onBack }) {
   };
 
   // 获取下一题
+  // 错题模式：按顺序获取下一题（不打乱）
+  // 全部模式：按顺序获取下一题，支持进度保存
+  // 收藏模式：按打乱后的顺序获取下一题
   const fetchNextQuestion = async () => {
     try {
       setLoading(true);
@@ -370,7 +388,7 @@ function PracticePage({ sessionId, practiceMode = "all", lang, onBack }) {
     }
   };
 
-  // 保存笔记
+  // 保存笔记（不推进索引）
   const handleSaveNote = async () => {
     if (!currentItem?.id || savingNote) {
       return;
@@ -383,23 +401,15 @@ function PracticePage({ sessionId, practiceMode = "all", lang, onBack }) {
         throw new Error("未登录");
       }
 
-      // 计算耗时
-      const timeSpent = startTime ? Math.max(0, Math.floor((Date.now() - startTime) / 1000)) : 0;
-
-      // 保存笔记到后端
-      const response = await fetch(`${API_URL}/api/c/study/sessions/${sessionId}/next`, {
-        method: "POST",
+      // 使用专门的保存笔记接口，不会推进索引
+      const response = await fetch(`${API_URL}/api/c/study/sessions/${sessionId}/items/${currentItem.id}/note`, {
+        method: "PATCH",
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          mode: practiceMode,
-          itemId: currentItem.id,
           note: editingNote || "",
-          isCorrect: currentItem ? (Number(currentItem.is_correct) === 1) : undefined,
-          response: currentItem?.response || "",
-          timeSpent: timeSpent
         }),
       });
 
@@ -443,7 +453,7 @@ function PracticePage({ sessionId, practiceMode = "all", lang, onBack }) {
     setIsEditingNote(false);
   };
 
-  // 删除笔记
+  // 删除笔记（不推进索引）
   const handleDeleteNote = async () => {
     if (!currentItem?.id || savingNote) {
       return;
@@ -461,23 +471,15 @@ function PracticePage({ sessionId, practiceMode = "all", lang, onBack }) {
         throw new Error("未登录");
       }
 
-      // 计算耗时
-      const timeSpent = startTime ? Math.max(0, Math.floor((Date.now() - startTime) / 1000)) : 0;
-
-      // 清空笔记（传递空字符串）
-      const response = await fetch(`${API_URL}/api/c/study/sessions/${sessionId}/next`, {
-        method: "POST",
+      // 使用专门的保存笔记接口，传递空字符串来删除笔记，不会推进索引
+      const response = await fetch(`${API_URL}/api/c/study/sessions/${sessionId}/items/${currentItem.id}/note`, {
+        method: "PATCH",
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          mode: practiceMode,
-          itemId: currentItem.id,
           note: "", // 清空笔记
-          isCorrect: currentItem ? (Number(currentItem.is_correct) === 1) : undefined,
-          response: currentItem?.response || "",
-          timeSpent: timeSpent
         }),
       });
 
@@ -505,48 +507,10 @@ function PracticePage({ sessionId, practiceMode = "all", lang, onBack }) {
 
   const handleNext = async () => {
     try {
-      const token = localStorage.getItem("access_token");
-      if (!token) {
-        throw new Error("未登录");
-      }
-
-      // 计算耗时
-      const timeSpent = startTime ? Math.max(0, Math.floor((Date.now() - startTime) / 1000)) : 0;
-
-      // 通知后端移动到下一题，同时保存笔记和答题结果
-      const response = await fetch(`${API_URL}/api/c/study/sessions/${sessionId}/next`, {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          mode: practiceMode,
-          itemId: currentItem?.id,
-          note: note || "",
-          isCorrect: currentItem ? (Number(currentItem.is_correct) === 1) : undefined,
-          response: currentItem?.response || "",
-          timeSpent: timeSpent
-        }),
-      });
-
-      if (!response.ok) {
-        throw new Error(`移动到下一题失败: ${response.status}`);
-      }
-
-      const result = await response.json();
-      if (result.code === 0) {
-        if (result.data.finished) {
-          // 练习完成
-          alert(lang === "cn" ? "练习完成！" : lang === "en" ? "Practice completed!" : "練習完成！");
-          onBack();
-        } else {
-          // 获取下一题
-          await fetchNextQuestion();
-        }
-      } else {
-        throw new Error(result.message || "移动到下一题失败");
-      }
+      // 答案已经在 handleSubmit 时通过 /submit 接口保存了
+      // 笔记可以通过 handleSaveNote 单独保存
+      // 这里只需要调用 GET /next 获取下一题即可（后端会自动推进索引）
+      await fetchNextQuestion();
     } catch (err) {
       console.error("移动到下一题失败:", err);
       alert("移动到下一题失败: " + String(err));
@@ -1339,5 +1303,6 @@ function PracticePage({ sessionId, practiceMode = "all", lang, onBack }) {
 }
 
 export default PracticePage;
+
 
 

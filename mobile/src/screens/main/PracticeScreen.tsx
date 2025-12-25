@@ -121,15 +121,29 @@ const PracticeScreen: React.FC<PracticeScreenProps> = ({route, navigation}) => {
     }
   };
 
-  // 开始练习
+  // 开始练习（会话已在 StudySessionListScreen 中建立，这里只需要获取第一题）
   useEffect(() => {
-    startPractice();
+    // 会话已经在选择题库时建立，这里直接获取第一题
+    // 后端逻辑：
+    // - 全部模式：读取进度，从上次完成的位置继续（返回下一题），首次调用不推进索引
+    // - 错题模式：从第一题开始，首次调用不推进索引
+    // - 收藏模式：从第一题开始，首次调用不推进索引
+    // 如果会话不存在，fetchNextQuestion 会自动触发恢复
+    fetchNextQuestion();
   }, [sessionId, practiceMode]);
 
+  // 保留 startPractice 函数以备需要时使用（比如手动刷新）
+  // 注意：这个函数会重新初始化会话，清除之前的进度
+  // 后端逻辑：
+  // - 全部模式：读取进度，从上次完成的位置继续（如果有进度）
+  // - 错题模式：从第一题开始
+  // - 收藏模式：从第一题开始
   const startPractice = async () => {
     try {
       setLoading(true);
       setError('');
+
+      console.log(`🔄 [PracticeScreen] 重新初始化练习会话: sessionId=${sessionId}, mode=${practiceMode}`);
 
       const response = await api.post<{
         code: number;
@@ -169,26 +183,83 @@ const PracticeScreen: React.FC<PracticeScreenProps> = ({route, navigation}) => {
   };
 
   // 获取下一题
+  // 后端逻辑：
+  // - 首次调用：返回题目，不推进索引（currentIndex 保持为已完成题目的索引或 -1）
+  // - 后续调用（点击下一题）：推进索引，返回下一题
   const fetchNextQuestion = async () => {
     try {
       setLoading(true);
       setError('');
 
-      const response = await api.get<{
-        code: number;
-        data: {
-          finished?: boolean;
-          itemId: number;
-          question: Question;
-          currentIndex: number;
-          totalCount: number;
-          learningItemId: number;
-        };
-        message?: string;
-      }>(`/api/c/study/sessions/${sessionId}/next?mode=${practiceMode}`);
+      // 添加时间戳参数避免缓存（304 Not Modified）
+      const timestamp = Date.now();
+      
+      console.log('🔄 [fetchNextQuestion] 获取题目:', {
+        sessionId,
+        practiceMode,
+        timestamp,
+        currentIndex,
+        totalCount,
+      });
 
-      if (response.code !== 0) {
-        throw new Error(response.message || '获取题目失败');
+      let response;
+      let retryCount = 0;
+      const maxRetries = 3;
+
+      // 构建查询参数
+      const params: any = {
+        mode: practiceMode,
+        _t: Date.now(), // 时间戳避免缓存
+      };
+
+      // 重试逻辑：如果遇到 304，增加时间戳重试
+      while (retryCount < maxRetries) {
+        try {
+          // 更新时间戳
+          params._t = Date.now();
+          
+          response = await api.get<{
+            code: number;
+            data: {
+              finished?: boolean;
+              itemId: number;
+              question: Question;
+              currentIndex: number;
+              totalCount: number;
+              learningItemId: number;
+            };
+            message?: string;
+          }>(`/api/c/study/sessions/${sessionId}/next`, params);
+
+          console.log('✅ [fetchNextQuestion] 获取题目响应:', {
+            code: response.code,
+            finished: response.data?.finished,
+            currentIndex: response.data?.currentIndex,
+            totalCount: response.data?.totalCount,
+            questionId: response.data?.question?.id,
+            retryCount,
+          });
+
+          if (response.code !== 0) {
+            throw new Error(response.message || '获取题目失败');
+          }
+
+          // 成功获取，跳出循环
+          break;
+        } catch (err: any) {
+          retryCount++;
+          if (err.response?.status === 304 && retryCount < maxRetries) {
+            console.warn(`⚠️ [fetchNextQuestion] 304 响应，重试 ${retryCount}/${maxRetries}`);
+            // 等待一小段时间后重试
+            await new Promise(resolve => setTimeout(resolve, 100 * retryCount));
+            continue;
+          }
+          throw err;
+        }
+      }
+
+      if (!response) {
+        throw new Error('获取题目失败：重试次数用尽');
       }
 
       if (response.data.finished) {
@@ -197,8 +268,11 @@ const PracticeScreen: React.FC<PracticeScreenProps> = ({route, navigation}) => {
       }
 
       setCurrentQuestion(response.data.question);
-      setCurrentIndex(response.data.currentIndex);
+      setCurrentIndex(response.data.currentIndex); // 从1开始显示
       setTotalCount(response.data.totalCount);
+      
+      // 如果是最后一题，currentIndex 应该等于 totalCount
+      // 此时不应该显示"下一题"按钮
       setCurrentItemId(response.data.itemId);
       setLearningItemId(response.data.learningItemId);
       setNote(response.data.question.note || '');
@@ -212,6 +286,31 @@ const PracticeScreen: React.FC<PracticeScreenProps> = ({route, navigation}) => {
       console.error('获取题目失败:', err);
       setError('获取题目失败: ' + String(err.message || err));
     } finally {
+      setLoading(false);
+    }
+  };
+
+  // 移动到下一题（直接调用 GET /next，后端会自动推进索引）
+  const handleNext = async () => {
+    try {
+      setLoading(true);
+
+      console.log('🔄 [handleNext] 开始移动到下一题', {
+        sessionId,
+        currentIndex,
+        totalCount,
+        practiceMode,
+      });
+
+      // 直接调用 GET /next，后端会自动推进索引并返回下一题
+      // 后端逻辑：
+      // - 全部模式：保存当前题目进度，推进索引，返回下一题
+      // - 错题/收藏模式：推进索引，返回下一题
+      // 不需要传递数据，因为数据已在提交答案时保存
+      await fetchNextQuestion();
+    } catch (err: any) {
+      console.error('❌ [handleNext] 移动到下一题失败:', err);
+      Alert.alert('错误', '移动到下一题失败: ' + String(err.message || err));
       setLoading(false);
     }
   };
@@ -287,7 +386,7 @@ const PracticeScreen: React.FC<PracticeScreenProps> = ({route, navigation}) => {
     }
   };
 
-  // 保存笔记
+  // 保存笔记（不推进索引）
   const handleSaveNote = async () => {
     if (!currentItemId || savingNote) {
       return;
@@ -295,19 +394,16 @@ const PracticeScreen: React.FC<PracticeScreenProps> = ({route, navigation}) => {
 
     setSavingNote(true);
     try {
-      const timeSpent = startTime ? Math.max(0, Math.floor((Date.now() - startTime) / 1000)) : 0;
-
-      const response = await api.post<{
+      // 调用专门的保存笔记接口，不推进索引
+      const response = await api.patch<{
         code: number;
-        data: any;
+        data: {
+          id: number;
+          note: string;
+        };
         message?: string;
-      }>(`/api/c/study/sessions/${sessionId}/next`, {
-        mode: practiceMode,
-        itemId: currentItemId,
+      }>(`/api/c/study/sessions/${sessionId}/items/${currentItemId}/note`, {
         note: editingNote || '',
-        isCorrect: isCorrect,
-        response: '',
-        timeSpent: timeSpent,
       });
 
       if (response.code !== 0) {
@@ -316,8 +412,11 @@ const PracticeScreen: React.FC<PracticeScreenProps> = ({route, navigation}) => {
 
       setNote(editingNote);
       setIsEditingNote(false);
+      setEditingNote('');
+      
+      console.log('✅ [handleSaveNote] 笔记已保存');
     } catch (err: any) {
-      console.error('保存笔记失败:', err);
+      console.error('❌ [handleSaveNote] 保存笔记失败:', err);
       Alert.alert('错误', '保存笔记失败: ' + String(err.message || err));
     } finally {
       setSavingNote(false);
@@ -512,18 +611,48 @@ const PracticeScreen: React.FC<PracticeScreenProps> = ({route, navigation}) => {
               )}
             </TouchableOpacity>
           ) : (
-            <TouchableOpacity
-              style={styles.submitButton}
-              onPress={fetchNextQuestion}
-              disabled={loading}>
-              {loading ? (
-                <ActivityIndicator color="#fff" />
-              ) : (
-                <Text style={styles.submitButtonText}>
-                  {currentIndex < totalCount ? '下一题' : '完成练习'}
-                </Text>
-              )}
-            </TouchableOpacity>
+            // 如果是最后一题（currentIndex === totalCount），不显示"下一题"按钮
+            // 因为已经是最后一题了，点击"完成练习"会直接完成
+            currentIndex >= totalCount ? (
+              <TouchableOpacity
+                style={styles.submitButton}
+                onPress={async () => {
+                  // 最后一题，直接完成练习
+                  try {
+                    setLoading(true);
+                    const timeSpent = startTime ? Math.max(0, Math.floor((Date.now() - startTime) / 1000)) : 0;
+                    
+                    // 最后一题，直接完成（不需要推进索引）
+                    Alert.alert('提示', '练习完成！', [{text: '确定', onPress: () => navigation.goBack()}]);
+                  } catch (err: any) {
+                    console.error('完成练习失败:', err);
+                    Alert.alert('错误', '完成练习失败: ' + String(err.message || err));
+                  } finally {
+                    setLoading(false);
+                  }
+                }}
+                disabled={loading}>
+                {loading ? (
+                  <ActivityIndicator color="#fff" />
+                ) : (
+                  <Text style={styles.submitButtonText}>完成练习</Text>
+                )}
+              </TouchableOpacity>
+            ) : (
+              <TouchableOpacity
+                style={styles.submitButton}
+                onPress={() => {
+                  console.log('🔘 [Button] "下一题" 按钮被点击');
+                  handleNext();
+                }}
+                disabled={loading}>
+                {loading ? (
+                  <ActivityIndicator color="#fff" />
+                ) : (
+                  <Text style={styles.submitButtonText}>下一题</Text>
+                )}
+              </TouchableOpacity>
+            )
           )}
         </View>
       </View>
@@ -983,3 +1112,4 @@ const styles = StyleSheet.create({
 });
 
 export default PracticeScreen;
+

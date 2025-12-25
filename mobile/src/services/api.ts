@@ -23,7 +23,12 @@ class ApiService {
       timeout: API_CONFIG.TIMEOUT,
       headers: {
         'Content-Type': 'application/json',
+        'Cache-Control': 'no-cache, no-store, must-revalidate',
+        'Pragma': 'no-cache',
+        'Expires': '0',
       },
+      // 禁用 axios 的缓存
+      validateStatus: (status) => status < 500, // 允许 304 等状态码，但我们会处理
     });
 
     this.setupInterceptors();
@@ -138,6 +143,24 @@ class ApiService {
     // 响应拦截器 - 处理错误和调试日志
     this.api.interceptors.response.use(
       response => {
+        // 处理 304 Not Modified - 强制重新请求
+        if (response.status === 304) {
+          if (DEBUG) {
+            console.warn('⚠️ [API] 收到 304 响应，强制重新请求:', response.config.url);
+          }
+          // 304 响应通常没有 data，需要重新请求
+          // 这里我们返回一个错误，让调用方处理
+          return Promise.reject({
+            response: {
+              status: 304,
+              statusText: 'Not Modified',
+              data: null,
+            },
+            config: response.config,
+            message: '缓存响应，需要重新请求',
+          });
+        }
+        
         // 调试日志：记录成功响应
         if (DEBUG) {
           console.log('✅ [API Response Raw]', {
@@ -305,12 +328,34 @@ class ApiService {
     }
 
     try {
+      // 调试日志：记录 POST 请求（始终记录，不只在 DEBUG 模式）
+      console.log('📤 [API POST Request]', {
+        url,
+        baseURL: this.api.defaults.baseURL,
+        fullURL: `${this.api.defaults.baseURL}${url}`,
+        method: 'POST',
+        data: data ? JSON.stringify(data, null, 2) : undefined,
+      });
+
       const response = await this.api.post(url, data);
+      
+      // 调试日志：记录 POST 响应（始终记录，不只在 DEBUG 模式）
+      console.log('✅ [API POST Response]', {
+        url,
+        status: response.status,
+        statusText: response.statusText,
+        data: response.data ? JSON.stringify(response.data, null, 2) : undefined,
+      });
+      
       // 标准化响应格式
       return normalizeApiResponse(response.data) as T;
     } catch (error: any) {
       if (DEBUG) {
-        console.error(`[API POST Error] ${url}`, error);
+        console.error(`❌ [API POST Error] ${url}`, {
+          error: error.message,
+          response: error.response?.data,
+          status: error.response?.status,
+        });
       }
       throw this.enhanceError(error, 'POST', url);
     }

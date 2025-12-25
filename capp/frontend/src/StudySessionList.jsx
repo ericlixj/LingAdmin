@@ -277,7 +277,13 @@ function StudySessionList({ lang, onStartPractice }) {
                   }}
                 >
                   {lang === "cn" ? "全部" : lang === "en" ? "All" : "全部"}
-                  {session.total_count !== undefined && `（${session.total_count}）`}
+                  {session.total_count !== undefined && session.total_count > 0 ? (
+                    session.completed_count !== undefined && session.completed_count !== null
+                      ? ` ${session.completed_count}/${session.total_count}`
+                      : ` 0/${session.total_count}`
+                  ) : (
+                    session.total_count !== undefined ? `（${session.total_count}）` : ''
+                  )}
                 </button>
                 <button
                   onClick={() => {

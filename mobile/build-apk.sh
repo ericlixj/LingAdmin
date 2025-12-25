@@ -13,9 +13,9 @@ if ! eas whoami &> /dev/null; then
 fi
 echo "👤 当前用户: $(eas whoami)"
 echo ""
-read -p "选择构建环境 (1=production, 2=preview, 3=development, 默认=1): " choice
+read -p "选择构建环境 (1=production, 2=staging, 3=development, 默认=1): " choice
 case $choice in
-    2) PROFILE="preview" ;;
+    2) PROFILE="staging" ;;
     3) PROFILE="development" ;;
     *) PROFILE="production" ;;
 esac
