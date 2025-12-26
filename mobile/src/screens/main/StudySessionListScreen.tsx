@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useCallback} from 'react';
 import {
   View,
   Text,
@@ -8,6 +8,7 @@ import {
   ActivityIndicator,
   Alert,
 } from 'react-native';
+import {useFocusEffect} from '@react-navigation/native';
 import api from '../../services/api';
 
 interface StudySession {
@@ -36,9 +37,13 @@ const StudySessionListScreen: React.FC<StudySessionListScreenProps> = ({
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
-  useEffect(() => {
-    fetchSessions();
-  }, []);
+  // 页面获得焦点时刷新数据
+  useFocusEffect(
+    useCallback(() => {
+      console.log('🔄 [StudySessionList] 页面获得焦点，刷新学习记录');
+      fetchSessions();
+    }, [])
+  );
 
   const fetchSessions = async () => {
     try {
@@ -325,3 +330,4 @@ const styles = StyleSheet.create({
 });
 
 export default StudySessionListScreen;
+
