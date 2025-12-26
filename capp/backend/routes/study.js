@@ -1306,6 +1306,63 @@ router.patch('/sessions/:id/items/:itemId/note', authenticateToken, async (req, 
 });
 
 /**
+ * 重置练习进度（全部模式）
+ * POST /api/c/study/sessions/:id/reset-progress
+ * query: { mode: 'all' | 'wrong' | 'favorite' }
+ */
+router.post('/sessions/:id/reset-progress', authenticateToken, async (req, res) => {
+  try {
+    const sessionId = parseInt(req.params.id);
+    const userId = req.userId;
+    const mode = req.query.mode || 'all';
+    
+    // 验证session是否属于当前用户
+    const sessionCheck = await query(
+      'SELECT id FROM study_session WHERE id = $1 AND user_id = $2 AND deleted = false',
+      [sessionId, userId]
+    );
+    
+    if (sessionCheck.rows.length === 0) {
+      return res.status(404).json({
+        code: 1,
+        message: '学习记录不存在',
+        data: null
+      });
+    }
+    
+    // 重置进度（仅对全部模式有效）
+    if (mode === 'all') {
+      await query(
+        'UPDATE study_session SET progress_question_id = NULL WHERE id = $1 AND user_id = $2',
+        [sessionId, userId]
+      );
+    }
+    
+    // 清除内存中的会话状态（如果存在）
+    const sessionKey = `${userId}_${sessionId}_${mode}`;
+    practiceSessions.delete(sessionKey);
+    
+    console.log(`[POST /reset-progress] 进度已重置: sessionId=${sessionId}, userId=${userId}, mode=${mode}`);
+    
+    res.json({
+      code: 0,
+      message: 'ok',
+      data: {
+        sessionId: sessionId,
+        reset: true
+      }
+    });
+  } catch (error) {
+    console.error('[ERROR] Reset progress failed:', error);
+    res.status(500).json({
+      code: 1,
+      message: '重置进度失败: ' + error.message,
+      data: null
+    });
+  }
+});
+
+/**
  * 收藏/取消收藏题目
  * POST /api/c/study/learning-items/:id/favorite
  * body: { is_favorited: true/false }

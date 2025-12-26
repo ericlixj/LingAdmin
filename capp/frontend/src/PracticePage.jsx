@@ -1,5 +1,5 @@
 // PracticePage.jsx
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:4000";
 
@@ -122,12 +122,23 @@ function PracticePage({ sessionId, practiceMode = "all", lang, onBack }) {
   const [isEditingNote, setIsEditingNote] = useState(false); // 是否正在编辑笔记
   const [editingNote, setEditingNote] = useState(""); // 正在编辑的笔记内容
   const [savingNote, setSavingNote] = useState(false); // 是否正在保存笔记
+  const [isHandlingFinished, setIsHandlingFinished] = useState(false); // 是否正在处理完成状态，防止重复弹出
+  const [userRejectedRestart, setUserRejectedRestart] = useState(false); // 用户是否拒绝了重新开始
+  const [finishedHandled, setFinishedHandled] = useState(false); // 完成状态是否已被处理（无论用户选择是或否）
+  const finishedHandledRef = useRef(false); // 使用 ref 来同步检查，防止竞态条件
+  const fetchingRef = useRef(false); // 防止 fetchNextQuestion 被并发调用
 
   // 初始化：开始练习
   // 注意：当 sessionId 或 practiceMode 变化时，会重新初始化练习会话
   // 错题模式每次进入都会从第一题开始，按顺序显示（不打乱）
   useEffect(() => {
     let isMounted = true;
+    // 重置完成状态处理标志和拒绝标志
+    setIsHandlingFinished(false);
+    setUserRejectedRestart(false);
+    setFinishedHandled(false);
+    finishedHandledRef.current = false; // 重置 ref
+    fetchingRef.current = false; // 重置获取标志
     const initPractice = async () => {
       if (isMounted) {
         await startPractice();
@@ -136,6 +147,11 @@ function PracticePage({ sessionId, practiceMode = "all", lang, onBack }) {
     initPractice();
     return () => {
       isMounted = false;
+      setIsHandlingFinished(false);
+      setUserRejectedRestart(false);
+      setFinishedHandled(false);
+      finishedHandledRef.current = false; // 重置 ref
+      fetchingRef.current = false; // 重置获取标志
     };
   }, [sessionId, practiceMode]);
 
@@ -206,6 +222,21 @@ function PracticePage({ sessionId, practiceMode = "all", lang, onBack }) {
   // 全部模式：按顺序获取下一题，支持进度保存
   // 收藏模式：按打乱后的顺序获取下一题
   const fetchNextQuestion = async () => {
+    // 防止并发调用：如果正在获取题目，直接返回
+    if (fetchingRef.current) {
+      console.log('⚠️ [fetchNextQuestion] 正在获取题目，跳过重复调用');
+      return;
+    }
+    
+    // 如果完成状态已经被处理过，直接返回，不再调用 API
+    if (finishedHandledRef.current) {
+      console.log('⚠️ [fetchNextQuestion] 完成状态已处理过（ref检查），跳过 API 调用');
+      return;
+    }
+    
+    // 标记正在获取题目
+    fetchingRef.current = true;
+    
     try {
       setLoading(true);
       setError("");
@@ -227,11 +258,121 @@ function PracticePage({ sessionId, practiceMode = "all", lang, onBack }) {
       const result = await response.json();
       if (result.code === 0) {
         if (result.data.finished) {
-          // 练习完成
-          alert(lang === "cn" ? "练习完成！" : lang === "en" ? "Practice completed!" : "練習完成！");
-          onBack();
+          console.log('🔍 [fetchNextQuestion] 检测到 finished=true, practiceMode=', practiceMode, 'finishedHandledRef.current=', finishedHandledRef.current, 'finishedHandled=', finishedHandled);
+          
+          // 使用 ref 同步检查，防止竞态条件（React 状态更新是异步的）
+          if (finishedHandledRef.current) {
+            console.log('⚠️ 完成状态已处理过（ref检查），直接返回');
+            onBack();
+            return;
+          }
+          
+          // 如果完成状态已经被处理过（无论用户选择是或否），直接返回，不再弹出 confirm 框
+          if (finishedHandled) {
+            console.log('⚠️ 完成状态已处理过，直接返回');
+            onBack();
+            return;
+          }
+          
+          // 如果用户已经拒绝了重新开始，直接返回，不再弹出 confirm 框
+          if (userRejectedRestart) {
+            console.log('⚠️ 用户已拒绝重新开始，直接返回');
+            onBack();
+            return;
+          }
+          
+          // 防止重复弹出 confirm 框
+          if (isHandlingFinished) {
+            console.log('⚠️ 正在处理完成状态，跳过重复弹出');
+            return;
+          }
+          
+          // 立即设置 ref 和状态，防止重复调用（在弹出 confirm 之前就设置）
+          finishedHandledRef.current = true; // 立即设置 ref（同步操作）
+          setIsHandlingFinished(true);
+          setFinishedHandled(true); // 标记完成状态正在被处理
+          
+          console.log('✅ [fetchNextQuestion] 准备弹出 confirm 框, practiceMode=', practiceMode);
+          
+          // 练习完成，询问是否重新开始（仅对全部模式）
+          if (practiceMode === "all") {
+            const confirmMessage = lang === "cn" 
+              ? "练习完成，是否重新开始？" 
+              : lang === "en" 
+              ? "Practice completed! Do you want to start over?" 
+              : "練習完成，是否重新開始？";
+            
+            console.log('🔔 [fetchNextQuestion] 弹出 confirm 框:', confirmMessage);
+            const userChoice = window.confirm(confirmMessage);
+            console.log('🔔 [fetchNextQuestion] 用户选择:', userChoice);
+            
+            // 无论用户选择什么，都立即标记为已处理，防止重复弹出
+            // 必须在调用 onBack() 之前设置，确保后续的 fetchNextQuestion 调用会被阻止
+            // 注意：ref 已经在弹出 confirm 之前就设置了，这里再次确认
+            finishedHandledRef.current = true; // 再次确认 ref 已设置（同步操作）
+            setIsHandlingFinished(false);
+            setFinishedHandled(true); // 标记完成状态已被处理
+            
+            if (userChoice) {
+              // 用户选择"是"：重置进度，然后重新开始练习（不返回，继续在当前页面）
+              try {
+                const resetResponse = await fetch(`${API_URL}/api/c/study/sessions/${sessionId}/reset-progress?mode=${practiceMode}`, {
+                  method: "POST",
+                  headers: {
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "application/json",
+                  },
+                });
+                
+                const resetResult = await resetResponse.json();
+                if (resetResult.code === 0) {
+                  console.log('✅ 进度已重置，重新开始练习');
+                  // 重置进度后，重新获取第一题（不返回，继续在当前页面练习）
+                  // 重置标志，允许重新获取题目
+                  finishedHandledRef.current = false;
+                  setFinishedHandled(false);
+                  setIsHandlingFinished(false);
+                  setUserRejectedRestart(false);
+                  // 重新获取第一题
+                  await fetchNextQuestion();
+                } else {
+                  throw new Error(resetResult.message || '重置进度失败');
+                }
+              } catch (err) {
+                console.error("重置进度失败:", err);
+                // 确保 ref 已设置
+                finishedHandledRef.current = true;
+                alert(lang === "cn" ? "重置进度失败: " + String(err) : lang === "en" ? "Failed to reset progress: " + String(err) : "重置進度失敗: " + String(err));
+                onBack();
+              }
+            } else {
+              // 用户选择"否"：保持当前状态，返回学习记录列表
+              console.log('⚠️ 用户选择保持当前状态，返回学习记录列表');
+              // 立即设置 ref，防止任何后续的 fetchNextQuestion 调用
+              finishedHandledRef.current = true;
+              setUserRejectedRestart(true);
+              setFinishedHandled(true);
+              // 使用 setTimeout 确保 ref 设置后再调用 onBack，避免竞态条件
+              setTimeout(() => {
+                onBack();
+              }, 0);
+            }
+            return; // 立即返回，不执行后续代码
+          } else {
+            // 错题或收藏模式，直接返回
+            setIsHandlingFinished(false);
+            setFinishedHandled(true); // 标记完成状态已被处理
+            alert(lang === "cn" ? "练习完成！" : lang === "en" ? "Practice completed!" : "練習完成！");
+            onBack();
+          }
           return;
         }
+        
+        // 如果获取到题目，重置完成状态处理标志和拒绝标志
+        setIsHandlingFinished(false);
+        setUserRejectedRestart(false);
+        setFinishedHandled(false); // 重置完成状态处理标志
+        finishedHandledRef.current = false; // 重置 ref
         
         console.log('✅ 获取题目成功:', result.data);
         setCurrentItem({ id: result.data.itemId });
@@ -253,9 +394,17 @@ function PracticePage({ sessionId, practiceMode = "all", lang, onBack }) {
       }
     } catch (err) {
       console.error("❌ 获取题目失败:", err);
-      setError("获取题目失败: " + String(err));
+      // 如果完成状态已经被处理过，不再设置错误信息
+      if (!finishedHandledRef.current) {
+        setError("获取题目失败: " + String(err));
+      }
     } finally {
-      setLoading(false);
+      // 重置获取标志
+      fetchingRef.current = false;
+      // 如果完成状态已经被处理过，不再设置 loading 状态
+      if (!finishedHandledRef.current) {
+        setLoading(false);
+      }
     }
   };
 

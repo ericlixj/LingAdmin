@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import {
   View,
   Text,
@@ -79,6 +79,9 @@ const PracticeScreen: React.FC<PracticeScreenProps> = ({route, navigation}) => {
   const [isEditingNote, setIsEditingNote] = useState(false);
   const [editingNote, setEditingNote] = useState('');
   const [savingNote, setSavingNote] = useState(false);
+  const [finishedHandled, setFinishedHandled] = useState(false); // 完成状态是否已被处理（无论用户选择是或否）
+  const finishedHandledRef = useRef(false); // 使用 ref 来同步检查，防止竞态条件
+  const fetchingRef = useRef(false); // 防止 fetchNextQuestion 被并发调用
 
   // 解析选项
   const parseOptions = (optionsStr: string): Array<{label: string; value: string}> => {
@@ -123,6 +126,10 @@ const PracticeScreen: React.FC<PracticeScreenProps> = ({route, navigation}) => {
 
   // 开始练习（会话已在 StudySessionListScreen 中建立，这里只需要获取第一题）
   useEffect(() => {
+    // 重置完成状态处理标志和获取标志
+    setFinishedHandled(false);
+    finishedHandledRef.current = false; // 重置 ref
+    fetchingRef.current = false; // 重置获取标志
     // 会话已经在选择题库时建立，这里直接获取第一题
     // 后端逻辑：
     // - 全部模式：读取进度，从上次完成的位置继续（返回下一题），首次调用不推进索引
@@ -187,6 +194,21 @@ const PracticeScreen: React.FC<PracticeScreenProps> = ({route, navigation}) => {
   // - 首次调用：返回题目，不推进索引（currentIndex 保持为已完成题目的索引或 -1）
   // - 后续调用（点击下一题）：推进索引，返回下一题
   const fetchNextQuestion = async () => {
+    // 防止并发调用：如果正在获取题目，直接返回
+    if (fetchingRef.current) {
+      console.log('⚠️ [fetchNextQuestion] 正在获取题目，跳过重复调用');
+      return;
+    }
+    
+    // 如果完成状态已经被处理过，直接返回，不再调用 API
+    if (finishedHandledRef.current) {
+      console.log('⚠️ [fetchNextQuestion] 完成状态已处理过（ref检查），跳过 API 调用');
+      return;
+    }
+    
+    // 标记正在获取题目
+    fetchingRef.current = true;
+    
     try {
       setLoading(true);
       setError('');
@@ -263,9 +285,95 @@ const PracticeScreen: React.FC<PracticeScreenProps> = ({route, navigation}) => {
       }
 
       if (response.data.finished) {
-        Alert.alert('提示', '练习完成！', [{text: '确定', onPress: () => navigation.goBack()}]);
+        // 使用 ref 同步检查，防止竞态条件（React 状态更新是异步的）
+        if (finishedHandledRef.current) {
+          console.log('⚠️ [PracticeScreen] 完成状态已处理过（ref检查），直接返回');
+          navigation.goBack();
+          return;
+        }
+        
+        // 如果完成状态已经被处理过（无论用户选择是或否），直接返回，不再弹出 Alert
+        if (finishedHandled) {
+          console.log('⚠️ [PracticeScreen] 完成状态已处理过，直接返回');
+          navigation.goBack();
+          return;
+        }
+        
+        // 立即设置 ref，防止重复调用（在弹出 Alert 之前就设置）
+        finishedHandledRef.current = true;
+        // 标记完成状态正在被处理
+        setFinishedHandled(true);
+        
+        // 练习完成，询问是否重新开始（仅对全部模式）
+        if (practiceMode === 'all') {
+          Alert.alert(
+            '提示',
+            '练习完成，是否重新开始？',
+            [
+              {
+                text: '保持当前状态',
+                style: 'cancel',
+                onPress: () => {
+                  // 用户选择"否"：保持当前状态，返回学习记录列表
+                  console.log('⚠️ [PracticeScreen] 用户选择保持当前状态，返回学习记录列表');
+                  // 再次确认 ref 已设置
+                  finishedHandledRef.current = true;
+                  setFinishedHandled(true);
+                  // 使用 setTimeout 确保 ref 设置后再调用 navigation.goBack
+                  setTimeout(() => {
+                    navigation.goBack();
+                  }, 0);
+                },
+              },
+              {
+                text: '重新开始',
+                onPress: async () => {
+                  // 用户选择"是"：重置进度，然后重新开始练习（不返回，继续在当前页面）
+                  try {
+                    setLoading(true);
+                    // 重置进度
+                    const resetResponse = await api.post<{
+                      code: number;
+                      data: {reset: boolean};
+                      message?: string;
+                    }>(`/api/c/study/sessions/${sessionId}/reset-progress?mode=${practiceMode}`);
+
+                    if (resetResponse.code !== 0) {
+                      throw new Error(resetResponse.message || '重置进度失败');
+                    }
+
+                    console.log('✅ [PracticeScreen] 进度已重置，重新开始练习');
+                    // 重置进度后，重新获取第一题（不返回，继续在当前页面练习）
+                    // 重置标志，允许重新获取题目
+                    finishedHandledRef.current = false;
+                    setFinishedHandled(false);
+                    // 重新获取第一题
+                    await fetchNextQuestion();
+                  } catch (err: any) {
+                    console.error('❌ [PracticeScreen] 重置进度失败:', err);
+                    // 确保 ref 已设置
+                    finishedHandledRef.current = true;
+                    Alert.alert('错误', '重置进度失败: ' + String(err.message || err));
+                    navigation.goBack();
+                  } finally {
+                    setLoading(false);
+                  }
+                },
+              },
+            ],
+            {cancelable: false}
+          );
+        } else {
+          // 错题或收藏模式，直接返回
+          finishedHandledRef.current = true;
+          Alert.alert('提示', '练习完成！', [{text: '确定', onPress: () => navigation.goBack()}]);
+        }
         return;
       }
+      
+      // 如果获取到题目，重置完成状态处理标志
+      setFinishedHandled(false);
+      finishedHandledRef.current = false; // 重置 ref
 
       setCurrentQuestion(response.data.question);
       setCurrentIndex(response.data.currentIndex); // 从1开始显示
@@ -284,9 +392,17 @@ const PracticeScreen: React.FC<PracticeScreenProps> = ({route, navigation}) => {
       setIsCorrect(null);
     } catch (err: any) {
       console.error('获取题目失败:', err);
-      setError('获取题目失败: ' + String(err.message || err));
+      // 如果完成状态已经被处理过，不再设置错误信息
+      if (!finishedHandledRef.current) {
+        setError('获取题目失败: ' + String(err.message || err));
+      }
     } finally {
-      setLoading(false);
+      // 重置获取标志
+      fetchingRef.current = false;
+      // 如果完成状态已经被处理过，不再设置 loading 状态
+      if (!finishedHandledRef.current) {
+        setLoading(false);
+      }
     }
   };
 
@@ -344,6 +460,13 @@ const PracticeScreen: React.FC<PracticeScreenProps> = ({route, navigation}) => {
 
       setIsCorrect(response.data.is_correct);
       setSubmitted(true);
+      
+      // 如果是最后一题，提交答案后更新序号（currentIndex + 1）
+      // 这样用户可以看到序号从 10/10 变成 11/10，表示已完成
+      if (currentIndex >= totalCount && totalCount > 0) {
+        console.log(`✅ [handleSubmit] 最后一题已提交，更新序号: ${currentIndex} -> ${currentIndex + 1}`);
+        setCurrentIndex(currentIndex + 1);
+      }
     } catch (err: any) {
       console.error('提交答案失败:', err);
       Alert.alert('错误', '提交答案失败: ' + String(err.message || err));
@@ -611,25 +734,16 @@ const PracticeScreen: React.FC<PracticeScreenProps> = ({route, navigation}) => {
               )}
             </TouchableOpacity>
           ) : (
-            // 如果是最后一题（currentIndex === totalCount），不显示"下一题"按钮
-            // 因为已经是最后一题了，点击"完成练习"会直接完成
+            // 如果是最后一题（currentIndex >= totalCount），显示"完成练习"按钮
+            // 点击后会调用 handleNext，后端会返回 finished: true，然后弹出 confirm 框
             currentIndex >= totalCount ? (
               <TouchableOpacity
                 style={styles.submitButton}
-                onPress={async () => {
-                  // 最后一题，直接完成练习
-                  try {
-                    setLoading(true);
-                    const timeSpent = startTime ? Math.max(0, Math.floor((Date.now() - startTime) / 1000)) : 0;
-                    
-                    // 最后一题，直接完成（不需要推进索引）
-                    Alert.alert('提示', '练习完成！', [{text: '确定', onPress: () => navigation.goBack()}]);
-                  } catch (err: any) {
-                    console.error('完成练习失败:', err);
-                    Alert.alert('错误', '完成练习失败: ' + String(err.message || err));
-                  } finally {
-                    setLoading(false);
-                  }
+                onPress={() => {
+                  console.log('🔘 [Button] "完成练习" 按钮被点击');
+                  // 调用 handleNext，后端会检测到已完成，返回 finished: true
+                  // 然后 fetchNextQuestion 会弹出 confirm 框
+                  handleNext();
                 }}
                 disabled={loading}>
                 {loading ? (
