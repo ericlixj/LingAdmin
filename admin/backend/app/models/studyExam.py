@@ -55,6 +55,16 @@ class StudyExam(SQLModel, table=True):
             index=False,
             unique=False,        )
     )
+    exam_duration:        Optional[int] = Field(
+            default=60,
+        description="考试时长（分钟）",
+        sa_column=Column(
+            Integer,
+            nullable=False,
+            primary_key=False,
+            index=False,
+            unique=False,server_default=text("60"),        )
+    )
     # 默认加入通用字段
     creator: Optional[str] = Field(default=None, max_length=64, description="创建人")
     dept_id: Optional[int] = Field(
@@ -85,6 +95,7 @@ class StudyExamCreate(SQLModel):
     name: str
     description: Optional[str] = None
     staus: Optional[int] = None
+    exam_duration: Optional[int] = 60
     creator: Optional[str] = Field(default=None, max_length=64)
     dept_id: Optional[int] = None
 
@@ -93,6 +104,7 @@ class StudyExamUpdate(SQLModel):
     name: Optional[str] = None
     description: Optional[str] = None
     staus: Optional[int] = None
+    exam_duration: Optional[int] = None
     updater: Optional[str] = Field(default=None, max_length=64)
     dept_id: Optional[int] = None
 

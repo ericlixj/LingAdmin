@@ -39,11 +39,12 @@ router.get('/sessions', authenticateToken, async (req, res) => {
         ss.user_id,
         ss.exam_id,
         ss.mode,
-        ss.start_time,
-        ss.end_time,
+        ss.exam_duration,
+        ss.question_count,
         ss.score,
         ss.create_time,
-        se.name as exam_name
+        se.name as exam_name,
+        COALESCE(ss.exam_duration, se.exam_duration, 60) as exam_duration_minutes
       FROM study_session ss
       LEFT JOIN study_exam se ON ss.exam_id = se.id
       WHERE ss.user_id = $1 AND ss.deleted = false
@@ -147,8 +148,23 @@ router.get('/sessions', authenticateToken, async (req, res) => {
         
         console.log(`[GET /sessions] Session ${session.id} (mode: ${session.mode}): completed_count=${completed_count}, total_count=${parseInt(totalResult.rows[0]?.total_count || 0)}`);
         
+        // 如果是考试模式，生成格式化的名称：exam_name[yyyyMMdd HH:mm:ss]
+        let displayName = session.exam_name || `Exam #${session.exam_id}`;
+        if (session.mode === 'exam' && session.create_time) {
+          const createTime = new Date(session.create_time);
+          const year = createTime.getFullYear();
+          const month = String(createTime.getMonth() + 1).padStart(2, '0');
+          const day = String(createTime.getDate()).padStart(2, '0');
+          const hours = String(createTime.getHours()).padStart(2, '0');
+          const minutes = String(createTime.getMinutes()).padStart(2, '0');
+          const seconds = String(createTime.getSeconds()).padStart(2, '0');
+          const timestamp = `${year}${month}${day} ${hours}:${minutes}:${seconds}`;
+          displayName = `${session.exam_name || '考试'}[${timestamp}]`;
+        }
+        
         return {
           ...session,
+          exam_name: displayName, // 使用格式化后的名称
           total_count: parseInt(totalResult.rows[0]?.total_count || 0),
           wrong_count: parseInt(wrongResult.rows[0]?.wrong_count || 0),
           favorite_count: parseInt(favoriteResult.rows[0]?.favorite_count || 0),
@@ -175,18 +191,18 @@ router.get('/sessions', authenticateToken, async (req, res) => {
 /**
  * 开始练习：初始化练习会话，将所有题目加载到内存
  * POST /api/c/study/sessions/:id/start
- * body: { mode: "all" | "wrong" | "favorite" } - 练习模式：全部题目、仅错题或仅收藏
- * 注意：错题模式按顺序显示，每次进入从第一题开始；收藏模式会打乱顺序
+ * body: { mode: "all" | "wrong" | "favorite" | "exam" } - 练习模式：全部题目、仅错题、仅收藏或考试模式
+ * 注意：错题模式按顺序显示，每次进入从第一题开始；收藏模式会打乱顺序；考试模式会打乱顺序
  */
 router.post('/sessions/:id/start', authenticateToken, async (req, res) => {
   try {
     const sessionId = parseInt(req.params.id);
     const userId = req.userId;
-    const { mode = "all" } = req.body; // 默认为"all"，可选"wrong"
+    const { mode = "all" } = req.body; // 默认为"all"，可选"wrong"、"favorite"、"exam"
     
     // 验证session是否属于当前用户
     const sessionCheck = await query(
-      'SELECT id FROM study_session WHERE id = $1 AND user_id = $2 AND deleted = false',
+      'SELECT id, mode FROM study_session WHERE id = $1 AND user_id = $2 AND deleted = false',
       [sessionId, userId]
     );
     
@@ -197,6 +213,19 @@ router.post('/sessions/:id/start', authenticateToken, async (req, res) => {
         data: null
       });
     }
+    
+    // 如果请求的是考试模式，验证session的mode字段必须是"exam"
+    if (mode === "exam") {
+      const sessionMode = sessionCheck.rows[0].mode;
+      if (sessionMode !== "exam") {
+        return res.status(400).json({
+          code: 1,
+          message: '该学习记录不是考试模式，不能使用考试模式',
+          data: null
+        });
+      }
+    }
+    // 练习模式（"all"、"wrong"、"favorite"）不需要验证session的mode字段，保持与github版本一致
     
     // 构建查询条件：根据模式过滤题目
     let whereCondition = `ssi.session_id = $1 
@@ -297,6 +326,11 @@ router.post('/sessions/:id/start', authenticateToken, async (req, res) => {
       finalQuestionData = shuffleArray(questionData);
       // 初始化为 -1，第一次 GET /next 时推进到 0，返回第一题
       currentIndex = -1;
+    } else if (mode === "exam") {
+      // 考试模式：打乱题目顺序，从第一题开始
+      finalQuestionData = shuffleArray(questionData);
+      // 初始化为 -1，第一次 GET /next 时推进到 0，返回第一题
+      currentIndex = -1;
     }
     
     // 存储到内存中
@@ -349,6 +383,7 @@ router.get('/sessions/:id/next', authenticateToken, async (req, res) => {
     const sessionId = parseInt(req.params.id);
     const userId = req.userId;
     const mode = req.query.mode || "all"; // 从查询参数获取模式
+    const requestedIndex = req.query.index ? parseInt(req.query.index) : null; // 考试模式可以通过 index 参数获取指定索引的题目
     const sessionKey = `${userId}_${sessionId}_${mode}`;
     
     console.log(`[GET /next] 请求参数:`, {
@@ -356,6 +391,7 @@ router.get('/sessions/:id/next', authenticateToken, async (req, res) => {
       userId,
       mode,
       sessionKey,
+      requestedIndex,
     });
     
     // 从内存中获取练习会话
@@ -463,6 +499,10 @@ router.get('/sessions/:id/next', authenticateToken, async (req, res) => {
           // 收藏模式：打乱题目顺序
           finalQuestionData = shuffleArray(questionData);
           currentIndex = -1; // 初始化为 -1，第一次 GET /next 时推进到 0
+        } else if (mode === "exam") {
+          // 考试模式：打乱题目顺序
+          finalQuestionData = shuffleArray(questionData);
+          currentIndex = -1; // 初始化为 -1，第一次 GET /next 时推进到 0
         }
         
         // 重新存储到内存中
@@ -489,7 +529,83 @@ router.get('/sessions/:id/next', authenticateToken, async (req, res) => {
     const { questionData, currentIndex, totalCount } = practiceSession;
     const isFirstCall = practiceSession.isFirstCall || false;
     
-    console.log(`[GET /next] 当前索引: ${currentIndex} (内部索引，从0开始), 总题目数: ${totalCount}, 题目数据长度: ${questionData.length}, 是否首次调用: ${isFirstCall}`);
+    console.log(`[GET /next] 当前索引: ${currentIndex} (内部索引，从0开始), 总题目数: ${totalCount}, 题目数据长度: ${questionData.length}, 是否首次调用: ${isFirstCall}, 请求索引: ${requestedIndex}`);
+    
+    // 考试模式：可以通过 index 参数获取指定索引的题目
+    if (mode === "exam") {
+      let targetIndex;
+      
+      if (requestedIndex !== null && requestedIndex !== undefined) {
+        // 如果提供了 index 参数，使用该索引
+        targetIndex = requestedIndex;
+      } else if (isFirstCall) {
+        // 第一次调用，返回第一题（索引0）
+        targetIndex = 0;
+        practiceSession.isFirstCall = false;
+      } else {
+        // 没有提供 index，使用当前索引
+        targetIndex = currentIndex >= 0 ? currentIndex : 0;
+      }
+      
+      // 验证索引范围
+      if (targetIndex < 0 || targetIndex >= questionData.length) {
+        return res.status(404).json({
+          code: 1,
+          message: `题目索引无效: ${targetIndex}, 总题目数: ${totalCount}`,
+          data: null
+        });
+      }
+      
+      // 更新当前索引（但不保存进度，考试模式不保存进度）
+      practiceSession.currentIndex = targetIndex;
+      
+      const currentQuestion = questionData[targetIndex];
+      const questionId = currentQuestion.questionId;
+      const itemId = currentQuestion.itemId;
+      const learningItemId = currentQuestion.learningItemId;
+      
+      // 获取题目详细信息
+      const questionResult = await query(
+        `SELECT 
+          sq.id,
+          sq.exam_id,
+          sq.stem,
+          sq.options,
+          sq.answer,
+          sq.type,
+          sq.explanation_raw,
+          sq.explanation_human,
+          sq.image_url,
+          sq.status
+        FROM study_question sq
+        WHERE sq.id = $1 AND sq.status = 1`,
+        [questionId]
+      );
+      
+      if (questionResult.rows.length === 0) {
+        return res.status(404).json({
+          code: 1,
+          message: '题目不存在',
+          data: null
+        });
+      }
+      
+      const question = questionResult.rows[0];
+      
+      res.json({
+        code: 0,
+        message: 'ok',
+        data: {
+          itemId: itemId,
+          learningItemId: learningItemId,
+          question: question,
+          currentIndex: targetIndex + 1, // 从1开始显示
+          totalCount,
+          finished: false
+        }
+      });
+      return; // 提前返回
+    }
     
     // 全部题库模式的逻辑：
     // currentIndex 表示已完成题目的索引（已完成到第几题）
@@ -525,13 +641,35 @@ router.get('/sessions/:id/next', authenticateToken, async (req, res) => {
             });
           }
         }
+        // 第一次调用时，更新 currentIndex 为 targetIndex，这样下次调用时能正确推进
+        // 但这是"显示"的题目索引，不是"已完成"的索引
+        // 对于全部模式，currentIndex 表示已完成题目的索引，所以这里应该设置为 targetIndex - 1
+        // 但如果 targetIndex = 0，则 currentIndex 应该保持为 -1（表示还没完成任何题目）
+        if (targetIndex > 0) {
+          practiceSession.currentIndex = targetIndex - 1; // 已完成到 targetIndex - 1
+        } else {
+          practiceSession.currentIndex = -1; // 还没完成任何题目
+        }
         practiceSession.isFirstCall = false;
-        console.log(`[GET /next] 全部模式首次调用，返回索引 ${targetIndex} 的题目（currentIndex 保持为 ${currentIndex}，不推进）`);
+        console.log(`[GET /next] 全部模式首次调用，返回索引 ${targetIndex} 的题目（currentIndex 更新为 ${practiceSession.currentIndex}）`);
       } else {
         // 点击下一题：保存当前题目进度，然后推进索引
-        // 当前显示的题目索引是 currentIndex，保存这一题的进度
-        if (currentIndex >= 0 && currentIndex < questionData.length) {
-          const currentQuestion = questionData[currentIndex];
+        // 当前显示的题目索引需要根据 currentIndex 计算
+        // 如果 currentIndex < 0，说明当前显示的是第一题（索引0），需要保存第一题的进度
+        // 如果 currentIndex >= 0，说明当前显示的是 currentIndex + 1 的题目，需要保存这一题的进度
+        
+        let currentDisplayIndex; // 当前显示的题目索引
+        if (currentIndex < 0) {
+          // currentIndex = -1 表示还没完成任何题目，当前显示的是第一题（索引0）
+          currentDisplayIndex = 0;
+        } else {
+          // currentIndex 是已完成题目的索引，当前显示的是 currentIndex + 1
+          currentDisplayIndex = currentIndex + 1;
+        }
+        
+        // 保存当前显示题目的进度
+        if (currentDisplayIndex >= 0 && currentDisplayIndex < questionData.length) {
+          const currentQuestion = questionData[currentDisplayIndex];
           if (currentQuestion && currentQuestion.questionId) {
             // 保存当前题目的ID作为进度（表示已完成到这一题）
             query(
@@ -540,20 +678,16 @@ router.get('/sessions/:id/next', authenticateToken, async (req, res) => {
             ).catch(err => {
               console.error(`[GET /next] 保存进度失败:`, err);
             });
-            console.log(`[GET /next] 保存进度: 已完成到索引 ${currentIndex}，题目ID=${currentQuestion.questionId}`);
+            console.log(`[GET /next] 保存进度: 已完成到索引 ${currentDisplayIndex}，题目ID=${currentQuestion.questionId}`);
           }
         }
         
         // 推进索引，返回下一题
-        if (currentIndex < 0) {
-          // 如果 currentIndex 还是 -1（不应该发生），推进到 0
-          practiceSession.currentIndex = 0;
-        } else {
-          // 正常推进
-          practiceSession.currentIndex += 1;
-        }
-        targetIndex = practiceSession.currentIndex;
-        console.log(`[GET /next] 全部模式点击下一题，索引从 ${currentIndex} 推进到 ${practiceSession.currentIndex}`);
+        // 将 currentIndex 更新为 currentDisplayIndex（表示已完成到这一题）
+        practiceSession.currentIndex = currentDisplayIndex;
+        // 下一题是 currentDisplayIndex + 1
+        targetIndex = currentDisplayIndex + 1;
+        console.log(`[GET /next] 全部模式点击下一题，索引从 ${currentIndex} 推进到 ${targetIndex}（已完成到 ${currentDisplayIndex}）`);
       }
       
       // 检查是否还有题目
@@ -648,11 +782,13 @@ router.get('/sessions/:id/next', authenticateToken, async (req, res) => {
       let targetIndex; // 要返回的题目索引
       
       if (isFirstCall) {
-        // 第一次调用：返回第一题（索引0），不推进索引
-        // currentIndex 保持为 -1，不改变
+        // 第一次调用：返回第一题（索引0）
         targetIndex = 0;
+        // 第一次调用时，更新 currentIndex 为 0（表示当前显示的是第一题）
+        // 这样下次调用时能正确推进到第二题
+        practiceSession.currentIndex = 0;
         practiceSession.isFirstCall = false;
-        console.log(`[GET /next] ${mode}模式首次调用，返回索引 0 的题目（第一题），currentIndex 保持为 ${currentIndex}（不推进）, totalCount=${totalCount}, questionData.length=${questionData.length}`);
+        console.log(`[GET /next] ${mode}模式首次调用，返回索引 0 的题目（第一题），currentIndex 更新为 0, totalCount=${totalCount}, questionData.length=${questionData.length}`);
         
         // 检查是否还有题目（在首次调用时也要检查）
         // 如果只有1题，targetIndex = 0，应该返回第一题，不应该返回 finished
@@ -670,16 +806,10 @@ router.get('/sessions/:id/next', authenticateToken, async (req, res) => {
         }
       } else {
         // 点击下一题：推进索引
-        // currentIndex 从 -1 推进到 0，或从 0 推进到 1，等等
-        if (currentIndex < 0) {
-          // 如果 currentIndex 还是 -1（不应该发生，因为首次调用后应该已经显示过题目了），推进到 0
-          practiceSession.currentIndex = 0;
-        } else {
-          // 正常推进
-          practiceSession.currentIndex += 1;
-        }
+        // currentIndex 表示当前显示的题目索引，推进到下一题
+        practiceSession.currentIndex += 1;
         targetIndex = practiceSession.currentIndex;
-        console.log(`[GET /next] ${mode}模式点击下一题，索引从 ${currentIndex} 推进到 ${practiceSession.currentIndex}, totalCount=${totalCount}, questionData.length=${questionData.length}`);
+        console.log(`[GET /next] ${mode}模式点击下一题，索引推进到 ${practiceSession.currentIndex}, totalCount=${totalCount}, questionData.length=${questionData.length}`);
         
         // 检查是否还有题目（在推进索引后检查）
         if (targetIndex >= questionData.length || targetIndex >= totalCount) {
@@ -1245,6 +1375,139 @@ router.post('/sessions/:id/items/:itemId/submit', authenticateToken, async (req,
 });
 
 /**
+ * 创建新的考试session并拉取题目
+ * POST /api/c/study/exams/:examId/create-session
+ * body: { question_count?: number } - 考试题目数量，默认20
+ */
+router.post('/exams/:examId/create-session', authenticateToken, async (req, res) => {
+  try {
+    const examId = parseInt(req.params.examId);
+    const userId = req.userId;
+    const { question_count = 20, restart = false } = req.body;
+    
+    // 验证exam是否存在
+    const examCheck = await query(
+      'SELECT id, name, exam_duration FROM study_exam WHERE id = $1 AND deleted = false',
+      [examId]
+    );
+    
+    if (examCheck.rows.length === 0) {
+      return res.status(404).json({
+        code: 1,
+        message: '考试不存在',
+        data: null
+      });
+    }
+    
+    const exam = examCheck.rows[0];
+    const examDuration = exam.exam_duration || 60;
+    
+    // 重新开始考试：先将所有相同exam_id的study_session进行逻辑删除
+    // 只删除当前用户的相同exam_id且mode='exam'的session，其他模式（如practice）保留
+    // 且只在restart=true时执行
+    if (restart) {
+      await query(
+        `UPDATE study_session 
+         SET deleted = true, update_time = CURRENT_TIMESTAMP 
+         WHERE exam_id = $1 AND user_id = $2 AND mode = 'exam' AND deleted = false`,
+        [examId, userId]
+      );
+    }
+    
+    // 生成格式化的时间戳：yyyyMMdd HH:mm:ss
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const day = String(now.getDate()).padStart(2, '0');
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    const seconds = String(now.getSeconds()).padStart(2, '0');
+    const timestamp = `${year}${month}${day} ${hours}:${minutes}:${seconds}`;
+    
+    // 生成考试session名称：exam_name[yyyyMMdd HH:mm:ss]
+    const sessionName = `${exam.name || '考试'}[${timestamp}]`;
+    
+    // 从study_question中拉取指定数量的题目（status=1，deleted=false，exam_id匹配）
+    const questionsResult = await query(
+      `SELECT id 
+       FROM study_question 
+       WHERE exam_id = $1 AND status = 1 AND deleted = false 
+       ORDER BY RANDOM() 
+       LIMIT $2`,
+      [examId, question_count]
+    );
+    
+    if (questionsResult.rows.length === 0) {
+      return res.status(400).json({
+        code: 1,
+        message: '该考试中没有可用题目',
+        data: null
+      });
+    }
+    
+    const questionIds = questionsResult.rows.map(row => row.id);
+    
+    // 创建新的study_session
+    const sessionResult = await query(
+      `INSERT INTO study_session (user_id, exam_id, mode, exam_duration, question_count, score, creator, deleted, create_time, update_time)
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+       RETURNING id`,
+      [userId, examId, 'exam', examDuration, questionIds.length, -1, String(userId), false]
+    );
+    
+    const sessionId = sessionResult.rows[0].id;
+    
+    // 为每个题目创建study_learning_item和study_session_item
+    for (const questionId of questionIds) {
+      // 创建或获取study_learning_item
+      let learningItemResult = await query(
+        `SELECT id FROM study_learning_item 
+         WHERE type = 'question' AND ref_id = $1 AND deleted = false 
+         LIMIT 1`,
+        [questionId]
+      );
+      
+      let learningItemId;
+      if (learningItemResult.rows.length > 0) {
+        learningItemId = learningItemResult.rows[0].id;
+      } else {
+        // 创建新的learning_item
+        const newLearningItemResult = await query(
+          `INSERT INTO study_learning_item (type, ref_id, creator, deleted, create_time, update_time)
+           VALUES ($1, $2, $3, $4, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+           RETURNING id`,
+          ['question', questionId, String(userId), false]
+        );
+        learningItemId = newLearningItemResult.rows[0].id;
+      }
+      
+      // 创建study_session_item
+      await query(
+        `INSERT INTO study_session_item (session_id, learning_item_id, is_correct, response, time_spent_second, creator, deleted, create_time, update_time)
+         VALUES ($1, $2, $3, $4, $5, $6, $7, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)`,
+        [sessionId, learningItemId, 0, '', 0, String(userId), false]
+      );
+    }
+    
+    res.json({
+      code: 0,
+      message: 'ok',
+      data: {
+        session_id: sessionId,
+        question_count: questionIds.length
+      }
+    });
+  } catch (error) {
+    console.error('[ERROR] Create exam session failed:', error);
+    res.status(500).json({
+      code: 1,
+      message: '创建考试session失败: ' + error.message,
+      data: null
+    });
+  }
+});
+
+/**
  * 保存笔记（不推进索引）
  * PATCH /api/c/study/sessions/:id/items/:itemId/note
  * body: { note: string }
@@ -1330,11 +1593,31 @@ router.post('/sessions/:id/reset-progress', authenticateToken, async (req, res) 
       });
     }
     
-    // 重置进度（仅对全部模式有效）
+    // 重置进度
     if (mode === 'all') {
+      // 全部模式：重置进度题目ID
       await query(
         'UPDATE study_session SET progress_question_id = NULL WHERE id = $1 AND user_id = $2',
         [sessionId, userId]
+      );
+    } else if (mode === 'exam') {
+      // 考试模式：重置分数为-1（表示未完成），允许重新开始考试
+      // 注意：exam_duration 是考试设置的时长，不需要重置
+      // 注意：score 字段可能有 NOT NULL 约束，使用 -1 表示未完成，0-100 表示已完成
+      await query(
+        'UPDATE study_session SET score = -1 WHERE id = $1 AND user_id = $2',
+        [sessionId, userId]
+      );
+      
+      // 重置所有题目的答案和正确性（清空答案，重置为未答题状态）
+      // 注意：is_correct 字段可能有 NOT NULL 约束，使用 0 表示未答题/错误（重新开始时所有题目都视为未答题）
+      await query(
+        `UPDATE study_session_item 
+         SET response = '', 
+             is_correct = 0,
+             update_time = CURRENT_TIMESTAMP
+         WHERE session_id = $1 AND deleted = false`,
+        [sessionId]
       );
     }
     
@@ -1436,6 +1719,207 @@ router.post('/learning-items/:id/favorite', authenticateToken, async (req, res) 
     res.status(500).json({
       code: 1,
       message: '收藏操作失败: ' + error.message,
+      data: null
+    });
+  }
+});
+
+/**
+ * 获取单个学习记录的详细信息
+ * GET /api/c/study/sessions/:id
+ */
+router.get('/sessions/:id', authenticateToken, async (req, res) => {
+  try {
+    const sessionId = parseInt(req.params.id);
+    const userId = req.userId;
+
+    const result = await query(
+      `SELECT 
+        ss.id,
+        ss.user_id,
+        ss.exam_id,
+        ss.mode,
+        ss.exam_duration,
+        ss.question_count,
+        ss.score,
+        ss.create_time,
+        se.name as exam_name,
+        COALESCE(ss.exam_duration, se.exam_duration, 60) as exam_duration_minutes
+      FROM study_session ss
+      LEFT JOIN study_exam se ON ss.exam_id = se.id
+      WHERE ss.id = $1 AND ss.user_id = $2 AND ss.deleted = false`,
+      [sessionId, userId]
+    );
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({
+        code: 1,
+        message: '学习记录不存在',
+        data: null
+      });
+    }
+
+    let session = result.rows[0];
+    
+    // 如果是考试模式，生成格式化的名称：exam_name[yyyyMMdd HH:mm:ss]
+    if (session.mode === 'exam' && session.create_time) {
+      const createTime = new Date(session.create_time);
+      const year = createTime.getFullYear();
+      const month = String(createTime.getMonth() + 1).padStart(2, '0');
+      const day = String(createTime.getDate()).padStart(2, '0');
+      const hours = String(createTime.getHours()).padStart(2, '0');
+      const minutes = String(createTime.getMinutes()).padStart(2, '0');
+      const seconds = String(createTime.getSeconds()).padStart(2, '0');
+      const timestamp = `${year}${month}${day} ${hours}:${minutes}:${seconds}`;
+      session.exam_name = `${session.exam_name || '考试'}[${timestamp}]`;
+    }
+
+    res.json({
+      code: 0,
+      message: 'ok',
+      data: session
+    });
+  } catch (error) {
+    console.error('[ERROR] Get session failed:', error);
+    res.status(500).json({
+      code: 1,
+      message: '获取学习记录失败: ' + error.message,
+      data: null
+    });
+  }
+});
+
+/**
+ * 提交考试并评分
+ * POST /api/c/study/sessions/:id/submit-exam
+ * body: { answers: { questionId: answer }, submit_time: ISO string }
+ */
+router.post('/sessions/:id/submit-exam', authenticateToken, async (req, res) => {
+  try {
+    const sessionId = parseInt(req.params.id);
+    const userId = req.userId;
+    const { answers, submit_time } = req.body;
+
+    // 验证session是否属于当前用户
+    const sessionCheck = await query(
+      'SELECT id, exam_id FROM study_session WHERE id = $1 AND user_id = $2 AND deleted = false',
+      [sessionId, userId]
+    );
+
+    if (sessionCheck.rows.length === 0) {
+      return res.status(404).json({
+        code: 1,
+        message: '学习记录不存在',
+        data: null
+      });
+    }
+
+    // 获取所有题目和正确答案
+    const questionsResult = await query(
+      `SELECT 
+        sq.id as question_id,
+        sq.answer as correct_answer,
+        ssi.id as item_id,
+        ssi.learning_item_id
+      FROM study_session_item ssi
+      INNER JOIN study_learning_item sli ON ssi.learning_item_id = sli.id
+      LEFT JOIN study_question sq ON sli.type = 'question' AND sli.ref_id = sq.id
+      WHERE ssi.session_id = $1 
+        AND ssi.deleted = false 
+        AND sli.deleted = false
+        AND sli.type = 'question'
+        AND sq.id IS NOT NULL
+        AND sq.status = 1
+      ORDER BY ssi.id`,
+      [sessionId]
+    );
+
+    const questions = questionsResult.rows;
+    let correctCount = 0;
+    let totalCount = questions.length;
+
+    // 比对答案并更新数据库
+    // 注意：未答题（userAnswer 为 null 或 undefined）应该被标记为错题（is_correct = 0）
+    for (const question of questions) {
+      const userAnswerRaw = answers[question.question_id];
+      
+      // 确保 userAnswer 永远不为 null 或 undefined
+      // 如果 userAnswerRaw 为 null、undefined、空字符串或其他 falsy 值，都使用空字符串
+      let userAnswer = '';
+      if (userAnswerRaw !== null && userAnswerRaw !== undefined && userAnswerRaw !== '') {
+        userAnswer = String(userAnswerRaw);
+      }
+      
+      // 双重检查：确保 userAnswer 不是 null 或 undefined
+      if (userAnswer === null || userAnswer === undefined) {
+        console.warn(`[submit-exam] 警告：userAnswer 仍为 null/undefined，question_id=${question.question_id}, 强制设置为空字符串`);
+        userAnswer = '';
+      }
+      
+      const correctAnswer = question.correct_answer;
+      
+      // 解析正确答案（可能是 JSON 数组或字符串）
+      let correctAnswers = [];
+      try {
+        const parsed = JSON.parse(correctAnswer);
+        if (Array.isArray(parsed)) {
+          correctAnswers = parsed.map(a => String(a).toUpperCase().trim());
+        } else {
+          correctAnswers = [String(parsed).toUpperCase().trim()];
+        }
+      } catch {
+        correctAnswers = [String(correctAnswer).toUpperCase().trim()];
+      }
+
+      // 判断是否正确
+      // 如果 userAnswer 为空字符串，说明未答题，应该标记为错题（is_correct = 0）
+      const isCorrect = userAnswer && correctAnswers.includes(String(userAnswer).toUpperCase().trim()) ? 1 : 0;
+      
+      if (isCorrect) {
+        correctCount++;
+      }
+
+      // 更新答案和正确性
+      // 注意：未答题也会被更新，response 为空字符串，is_correct 为 0（错题）
+      // 再次确保 userAnswer 不为 null
+      const finalAnswer = userAnswer || '';
+      await query(
+        `UPDATE study_session_item
+         SET response = $1,
+             is_correct = $2,
+             update_time = CURRENT_TIMESTAMP
+         WHERE id = $3 AND session_id = $4`,
+        [finalAnswer, isCorrect, question.item_id, sessionId]
+      );
+    }
+
+    // 计算分数（百分比）
+    const score = totalCount > 0 ? Math.round((correctCount / totalCount) * 100) : 0;
+
+    // 更新session的分数（exam_duration 是考试设置的时长，不需要修改）
+    await query(
+      `UPDATE study_session
+       SET score = $1,
+           update_time = CURRENT_TIMESTAMP
+       WHERE id = $2 AND user_id = $3`,
+      [score, sessionId, userId]
+    );
+
+    res.json({
+      code: 0,
+      message: 'ok',
+      data: {
+        score: score,
+        correctCount: correctCount,
+        totalCount: totalCount,
+        correctRate: totalCount > 0 ? Math.round((correctCount / totalCount) * 100) : 0
+      }
+    });
+  } catch (error) {
+    console.error('[ERROR] Submit exam failed:', error);
+    res.status(500).json({
+      code: 1,
+      message: '提交考试失败: ' + error.message,
       data: null
     });
   }

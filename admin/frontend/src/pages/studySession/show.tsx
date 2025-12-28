@@ -36,7 +36,7 @@ export const StudySessionShow = () => {
 
   const antIcon = <LoadingOutlined style={{ fontSize: 48 }} spin />;
 
-  const { tableProps, filters, setFilters } = useTable({
+  const { tableProps, filters, setFilters, tableQuery } = useTable({
     resource: "studySessionItem",
     syncWithLocation: false,
     pagination: { pageSize: 10 },
@@ -103,10 +103,7 @@ export const StudySessionShow = () => {
           duration: 5,
         });
         // 刷新表格
-        tableProps.pagination?.onChange?.(
-          tableProps.pagination?.current || 1,
-          tableProps.pagination?.pageSize || 10
-        );
+        tableQuery.refetch();
       } else {
         notification.error({
           message: "同步失败",
@@ -255,20 +252,24 @@ export const StudySessionShow = () => {
         }
       </Text>
       <br />
-      <Text strong>start_time:</Text>
-      <Text>
-        {
-          record?.start_time
-        }
-      </Text>
-      <br />
-      <Text strong>end_time:</Text>
-      <Text>
-        {
-          record?.end_time
-        }
-      </Text>
-      <br />
+      {record?.mode === "exam" && (
+        <>
+          <Text strong>考试时长（分钟）:</Text>
+          <Text>
+            {
+              record?.exam_duration ? `${record.exam_duration} 分钟` : "-"
+            }
+          </Text>
+          <br />
+          <Text strong>考试题目数量:</Text>
+          <Text>
+            {
+              record?.question_count ? `${record.question_count} 题` : "-"
+            }
+          </Text>
+          <br />
+        </>
+      )}
       <Text strong>score:</Text>
       <Text>
         {

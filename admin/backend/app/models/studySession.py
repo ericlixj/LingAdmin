@@ -45,25 +45,25 @@ class StudySession(SQLModel, table=True):
             index=False,
             unique=False,server_default=text("''"),        )
     )
-    start_time:        Optional[str] = Field(
-            default="",
-        description="start_time",
+    exam_duration:        Optional[int] = Field(
+            default=None,
+        description="考试时长（分钟）",
         sa_column=Column(
-            String,
-            nullable=False,
+            Integer,
+            nullable=True,
             primary_key=False,
             index=False,
-            unique=False,server_default=text("''"),        )
+            unique=False,        )
     )
-    end_time:        Optional[str] = Field(
-            default="",
-        description="end_time",
+    question_count:        Optional[int] = Field(
+            default=20,
+        description="考试题目数量",
         sa_column=Column(
-            String,
-            nullable=False,
+            Integer,
+            nullable=True,
             primary_key=False,
             index=False,
-            unique=False,server_default=text("''"),        )
+            unique=False,server_default=text("20"),        )
     )
     score:        Optional[int] = Field(
             default=None,
@@ -114,8 +114,8 @@ class StudySessionCreate(SQLModel):
     mode: str
     user_id: Optional[int] = None
     exam_id: Optional[int] = None
-    start_time: Optional[str] = None
-    end_time: Optional[str] = None
+    exam_duration: Optional[int] = None
+    question_count: Optional[int] = 20
     score: Optional[int] = None
     creator: Optional[str] = Field(default=None, max_length=64)
     dept_id: Optional[int] = None
@@ -124,8 +124,8 @@ class StudySessionUpdate(SQLModel):
     user_id: Optional[int] = None
     exam_id: Optional[int] = None
     mode: Optional[str] = None
-    start_time: Optional[str] = None
-    end_time: Optional[str] = None
+    exam_duration: Optional[int] = None
+    question_count: Optional[int] = None
     score: Optional[int] = None
     progress_question_id: Optional[int] = None
     updater: Optional[str] = Field(default=None, max_length=64)

@@ -141,19 +141,27 @@ export const StudySessionList = () => {
           }}
         />
         <Table.Column
-          dataIndex="start_time"
-          title="start_time"
-
-          render={(value) => {
-            return value;
+          dataIndex="exam_duration"
+          title="考试时长（分钟）"
+          sorter
+          render={(value, record: any) => {
+            // 只在考试模式时显示
+            if (record.mode === "exam") {
+              return value ? `${value} 分钟` : "-";
+            }
+            return "-";
           }}
         />
         <Table.Column
-          dataIndex="end_time"
-          title="end_time"
-
-          render={(value) => {
-            return value;
+          dataIndex="question_count"
+          title="考试题目数量"
+          sorter
+          render={(value, record: any) => {
+            // 只在考试模式时显示
+            if (record.mode === "exam") {
+              return value ? `${value} 题` : "-";
+            }
+            return "-";
           }}
         />
         <Table.Column

@@ -26,6 +26,7 @@ function prepareInitialValues(record: Record<string, any>, fields: any[]) {
 export const StudySessionEdit = () => {
   const { formProps, saveButtonProps, queryResult } = useForm();
   const [initialized, setInitialized] = useState(false);
+  const [selectedMode, setSelectedMode] = useState<string>("");
 
   const record = queryResult?.data?.data;
   const form = formProps?.form;
@@ -64,7 +65,21 @@ export const StudySessionEdit = () => {
 
   useEffect(() => {
     if (!initialized && record && form && !form.isFieldsTouched()) {
-      form.setFieldsValue(prepareInitialValues(record, fields));
+      const initialValues = prepareInitialValues(record, fields);
+      // 如果 score 为 null 或 undefined，设置为 0
+      if (initialValues.score === null || initialValues.score === undefined) {
+        initialValues.score = 0;
+      }
+      // 如果 exam_duration 为 null 或 undefined，设置为 30
+      if (initialValues.exam_duration === null || initialValues.exam_duration === undefined) {
+        initialValues.exam_duration = 30;
+      }
+      // 如果 mode 为空，设置为 "practice"
+      if (!initialValues.mode || initialValues.mode === "") {
+        initialValues.mode = "practice";
+      }
+      form.setFieldsValue(initialValues);
+      setSelectedMode(record.mode || "practice");
       setInitialized(true);
     }
   }, [initialized, record, form]);
@@ -75,6 +90,8 @@ export const StudySessionEdit = () => {
       // 确保 user_id 和 exam_id 是数字
       user_id: typeof values.user_id === 'number' ? values.user_id : Number(values.user_id),
       exam_id: typeof values.exam_id === 'number' ? values.exam_id : Number(values.exam_id),
+      // 如果 score 为空或未定义，默认为 0
+      score: values.score !== null && values.score !== undefined ? values.score : 0,
     };
     return formProps.onFinish?.(processed);
   };
@@ -138,40 +155,50 @@ export const StudySessionEdit = () => {
             { required: true, message: '请输入学习模式' },
             { max: 32, message: '最多输入 32 个字符' }
           ]}
+          initialValue="practice"
         >
-            <Select>
+            <Select onChange={(value) => setSelectedMode(value)}>
                 <Select.Option value="exam">考试</Select.Option>
                 <Select.Option value="practice">练习</Select.Option>
                 <Select.Option value="review">复习</Select.Option>
                 <Select.Option value="flashcard">FlashCard</Select.Option>
             </Select>
         </Form.Item>
-        <Form.Item
-          name="start_time"
-          label="start_time"
-          rules={[
-            
-          ]}
-        >
-              <Input />
-        </Form.Item>
-        <Form.Item
-          name="end_time"
-          label="end_time"
-          rules={[
-            
-          ]}
-        >
-              <Input />
-        </Form.Item>
+        {selectedMode === "exam" && (
+          <>
+            <Form.Item
+              name="exam_duration"
+              label="考试时长（分钟）"
+              rules={[
+                { required: true, message: "请输入考试时长" },
+                { type: "number", message: "必须是数字" }
+              ]}
+              initialValue={30}
+            >
+                  <InputNumber style={{ width: "100%" }} min={1} placeholder="考试时长（分钟），默认30" />
+            </Form.Item>
+            <Form.Item
+              name="question_count"
+              label="考试题目数量"
+              rules={[
+                { type: "number", message: "必须是数字" },
+                { required: true, message: "请输入考试题目数量" }
+              ]}
+            >
+                  <InputNumber style={{ width: "100%" }} min={1} placeholder="考试题目数量" />
+            </Form.Item>
+          </>
+        )}
         <Form.Item
           name="score"
           label="score"
           rules={[
+            { required: true, message: "请输入分数" },
             { type: "number", message: "必须是数字" }
           ]}
+          initialValue={0}
         >
-              <InputNumber style={{ width: "100%" }} />
+              <InputNumber style={{ width: "100%" }} min={0} placeholder="分数，默认0" />
         </Form.Item>
       </Form>
 

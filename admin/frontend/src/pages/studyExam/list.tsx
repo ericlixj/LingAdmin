@@ -107,6 +107,14 @@ export const StudyExamList = () => {
             return option ? option.label : value;
           }}
         />
+        <Table.Column
+          dataIndex="exam_duration"
+          title="考试时长（分钟）"
+          sorter
+          render={(value) => {
+            return value ? `${value} 分钟` : "-";
+          }}
+        />
 
         <Table.Column
           title="操作"

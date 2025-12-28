@@ -65,6 +65,16 @@ class StudySessionItem(SQLModel, table=True):
             index=False,
             unique=False,        )
     )
+    note:        Optional[str] = Field(
+            default=None,
+        description="笔记",
+        sa_column=Column(
+            Text,
+            nullable=True,
+            primary_key=False,
+            index=False,
+            unique=False,        )
+    )
     # 默认加入通用字段
     creator: Optional[str] = Field(default=None, max_length=64, description="创建人")
     dept_id: Optional[int] = Field(
@@ -96,6 +106,7 @@ class StudySessionItemCreate(SQLModel):
     is_correct: Optional[int] = None
     response: Optional[str] = None
     time_spent_second: Optional[int] = None
+    note: Optional[str] = None
     creator: Optional[str] = Field(default=None, max_length=64)
     dept_id: Optional[int] = None
 

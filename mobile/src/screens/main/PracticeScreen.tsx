@@ -82,6 +82,7 @@ const PracticeScreen: React.FC<PracticeScreenProps> = ({route, navigation}) => {
   const [finishedHandled, setFinishedHandled] = useState(false); // 完成状态是否已被处理（无论用户选择是或否）
   const finishedHandledRef = useRef(false); // 使用 ref 来同步检查，防止竞态条件
   const fetchingRef = useRef(false); // 防止 fetchNextQuestion 被并发调用
+  const isResettingRef = useRef(false); // 标记是否正在重置进度
 
   // 解析选项
   const parseOptions = (optionsStr: string): Array<{label: string; value: string}> => {
@@ -299,6 +300,17 @@ const PracticeScreen: React.FC<PracticeScreenProps> = ({route, navigation}) => {
           return;
         }
         
+        // 检查是否正在重置进度（防止重置进度后立即弹出 confirm）
+        // 如果正在重置进度，说明用户刚刚点击了"重新开始"，不应该再次弹出 confirm
+        // 注意：重置进度后，后端应该返回第一题，而不是 finished: true
+        // 如果后端仍然返回 finished: true，说明重置没有生效，我们应该跳过它
+        if (isResettingRef.current) {
+          console.log('⚠️ [PracticeScreen] 正在重置进度，跳过完成状态处理（后端应该返回第一题，而不是 finished: true）');
+          // 不设置 finishedHandledRef，因为重置后应该能正常获取题目
+          // 如果后端返回 finished: true，说明重置没有生效，我们跳过它，但不阻止后续的正常流程
+          return;
+        }
+        
         // 立即设置 ref，防止重复调用（在弹出 Alert 之前就设置）
         finishedHandledRef.current = true;
         // 标记完成状态正在被处理
@@ -330,6 +342,8 @@ const PracticeScreen: React.FC<PracticeScreenProps> = ({route, navigation}) => {
                 onPress: async () => {
                   // 用户选择"是"：重置进度，然后重新开始练习（不返回，继续在当前页面）
                   try {
+                    // 标记正在重置进度
+                    isResettingRef.current = true;
                     setLoading(true);
                     // 重置进度
                     const resetResponse = await api.post<{
@@ -345,10 +359,19 @@ const PracticeScreen: React.FC<PracticeScreenProps> = ({route, navigation}) => {
                     console.log('✅ [PracticeScreen] 进度已重置，重新开始练习');
                     // 重置进度后，重新获取第一题（不返回，继续在当前页面练习）
                     // 重置标志，允许重新获取题目
+                    // 注意：必须在调用 fetchNextQuestion 之前重置，确保能正常获取题目
                     finishedHandledRef.current = false;
                     setFinishedHandled(false);
-                    // 重新获取第一题
+                    // 重置获取标志，确保可以重新获取题目
+                    fetchingRef.current = false;
+                    // 等待一小段时间，确保后端状态已更新（包括清除内存中的会话状态）
+                    await new Promise(resolve => setTimeout(resolve, 200));
+                    // 重新获取第一题（此时 loading 仍为 true，如果后端返回 finished: true，fetchNextQuestion 中的 finished 检查会跳过）
+                    // 但正常情况下，重置进度后，后端应该返回第一题，而不是 finished: true
                     await fetchNextQuestion();
+                    // 等待 fetchNextQuestion 完成后再清除重置标志
+                    // 这样即使后端仍然返回 finished: true，也不会再次弹出 confirm
+                    await new Promise(resolve => setTimeout(resolve, 100));
                   } catch (err: any) {
                     console.error('❌ [PracticeScreen] 重置进度失败:', err);
                     // 确保 ref 已设置
@@ -356,6 +379,8 @@ const PracticeScreen: React.FC<PracticeScreenProps> = ({route, navigation}) => {
                     Alert.alert('错误', '重置进度失败: ' + String(err.message || err));
                     navigation.goBack();
                   } finally {
+                    // 清除重置标志
+                    isResettingRef.current = false;
                     setLoading(false);
                   }
                 },

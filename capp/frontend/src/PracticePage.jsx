@@ -122,11 +122,39 @@ function PracticePage({ sessionId, practiceMode = "all", lang, onBack }) {
   const [isEditingNote, setIsEditingNote] = useState(false); // 是否正在编辑笔记
   const [editingNote, setEditingNote] = useState(""); // 正在编辑的笔记内容
   const [savingNote, setSavingNote] = useState(false); // 是否正在保存笔记
+  const [sessionMode, setSessionMode] = useState(null); // session的模式，用于判断是否显示笔记
   const [isHandlingFinished, setIsHandlingFinished] = useState(false); // 是否正在处理完成状态，防止重复弹出
   const [userRejectedRestart, setUserRejectedRestart] = useState(false); // 用户是否拒绝了重新开始
   const [finishedHandled, setFinishedHandled] = useState(false); // 完成状态是否已被处理（无论用户选择是或否）
   const finishedHandledRef = useRef(false); // 使用 ref 来同步检查，防止竞态条件
   const fetchingRef = useRef(false); // 防止 fetchNextQuestion 被并发调用
+
+  // 获取session信息，检查是否是考试模式
+  useEffect(() => {
+    const fetchSessionInfo = async () => {
+      try {
+        const token = localStorage.getItem("access_token");
+        if (!token || !sessionId) return;
+        
+        const response = await fetch(`${API_URL}/api/c/study/sessions/${sessionId}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        
+        if (response.ok) {
+          const result = await response.json();
+          if (result.code === 0 && result.data) {
+            setSessionMode(result.data.mode || null);
+          }
+        }
+      } catch (err) {
+        console.error("获取session信息失败:", err);
+      }
+    };
+    
+    fetchSessionInfo();
+  }, [sessionId]);
 
   // 初始化：开始练习
   // 注意：当 sessionId 或 practiceMode 变化时，会重新初始化练习会话
@@ -198,6 +226,12 @@ function PracticePage({ sessionId, practiceMode = "all", lang, onBack }) {
         // 如果是全部模式但没有题目
         if (practiceMode === "all" && (result.message && result.message.includes("没有题目") || result.code === 1)) {
           alert(lang === "cn" ? "该学习记录中没有题目" : lang === "en" ? "No questions in this session" : "該學習記錄中沒有題目");
+          onBack();
+          return;
+        }
+        // 如果是模式不匹配的错误，显示友好提示并返回
+        if (result.message && (result.message.includes("练习模式") || result.message.includes("考试模式"))) {
+          alert(result.message);
           onBack();
           return;
         }
@@ -316,6 +350,16 @@ function PracticePage({ sessionId, practiceMode = "all", lang, onBack }) {
             if (userChoice) {
               // 用户选择"是"：重置进度，然后重新开始练习（不返回，继续在当前页面）
               try {
+                setLoading(true); // 显示加载状态
+                
+                // 先重置所有相关状态，确保能正常重新开始
+                finishedHandledRef.current = false;
+                setFinishedHandled(false);
+                setIsHandlingFinished(false);
+                setUserRejectedRestart(false);
+                fetchingRef.current = false; // 重置获取标志，允许重新获取题目
+                
+                // 重置进度
                 const resetResponse = await fetch(`${API_URL}/api/c/study/sessions/${sessionId}/reset-progress?mode=${practiceMode}`, {
                   method: "POST",
                   headers: {
@@ -325,24 +369,85 @@ function PracticePage({ sessionId, practiceMode = "all", lang, onBack }) {
                 });
                 
                 const resetResult = await resetResponse.json();
-                if (resetResult.code === 0) {
-                  console.log('✅ 进度已重置，重新开始练习');
-                  // 重置进度后，重新获取第一题（不返回，继续在当前页面练习）
-                  // 重置标志，允许重新获取题目
-                  finishedHandledRef.current = false;
-                  setFinishedHandled(false);
-                  setIsHandlingFinished(false);
-                  setUserRejectedRestart(false);
-                  // 重新获取第一题
-                  await fetchNextQuestion();
-                } else {
+                if (resetResult.code !== 0) {
                   throw new Error(resetResult.message || '重置进度失败');
                 }
+                
+                console.log('✅ 进度已重置，重新开始练习');
+                
+                // 重新初始化会话（调用 /start API）
+                const startResponse = await fetch(`${API_URL}/api/c/study/sessions/${sessionId}/start`, {
+                  method: "POST",
+                  headers: {
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify({
+                    mode: practiceMode
+                  }),
+                });
+                
+                const startResult = await startResponse.json();
+                if (!startResponse.ok || startResult.code !== 0) {
+                  throw new Error(startResult.message || '重新初始化会话失败');
+                }
+                
+                console.log('✅ 会话已重新初始化:', startResult.data);
+                
+                // 重置所有状态，准备显示第一题
+                setTotalCount(startResult.data.totalCount);
+                setPracticeStarted(true);
+                setCurrentQuestion(null); // 清空当前题目，确保重新加载
+                setCurrentItem(null);
+                setCurrentIndex(0);
+                setSelectedAnswer(null);
+                setSubmitted(false);
+                setNote("");
+                setIsEditingNote(false);
+                setEditingNote("");
+                
+                // 确保 ref 和状态都已重置，然后获取第一题
+                finishedHandledRef.current = false;
+                setFinishedHandled(false);
+                fetchingRef.current = false;
+                
+                // 重新获取第一题（不通过fetchNextQuestion，直接调用API避免检查）
+                const nextResponse = await fetch(`${API_URL}/api/c/study/sessions/${sessionId}/next?mode=${practiceMode}`, {
+                  headers: {
+                    Authorization: `Bearer ${token}`,
+                  },
+                });
+                
+                if (!nextResponse.ok) {
+                  throw new Error(`获取题目失败: ${nextResponse.status}`);
+                }
+                
+                const nextResult = await nextResponse.json();
+                if (nextResult.code === 0 && !nextResult.data.finished) {
+                  // 成功获取题目，更新状态
+                  console.log('✅ 获取第一题成功:', nextResult.data);
+                  setCurrentItem({ id: nextResult.data.itemId });
+                  setCurrentQuestion(nextResult.data.question);
+                  setCurrentIndex(nextResult.data.currentIndex);
+                  setTotalCount(nextResult.data.totalCount);
+                  setLearningItemId(nextResult.data.learningItemId);
+                  const savedNote = nextResult.data.question.note || "";
+                  setNote(savedNote);
+                  setIsEditingNote(false);
+                  setEditingNote("");
+                  setStartTime(Date.now());
+                  setSelectedAnswer(null);
+                  setSubmitted(false);
+                  setLoading(false); // 隐藏加载状态
+                } else {
+                  throw new Error(nextResult.message || "获取题目失败");
+                }
               } catch (err) {
-                console.error("重置进度失败:", err);
+                console.error("重新开始失败:", err);
                 // 确保 ref 已设置
                 finishedHandledRef.current = true;
-                alert(lang === "cn" ? "重置进度失败: " + String(err) : lang === "en" ? "Failed to reset progress: " + String(err) : "重置進度失敗: " + String(err));
+                setLoading(false);
+                alert(lang === "cn" ? "重新开始失败: " + String(err) : lang === "en" ? "Failed to restart: " + String(err) : "重新開始失敗: " + String(err));
                 onBack();
               }
             } else {
@@ -875,7 +980,8 @@ function PracticePage({ sessionId, practiceMode = "all", lang, onBack }) {
             flexWrap: "wrap",
             justifyContent: isMobile ? "flex-start" : "flex-end",
           }}>
-              {/* 笔记按钮 */}
+              {/* 笔记按钮 - 考试模式下不显示 */}
+              {sessionMode !== "exam" && (
               <button
                 onClick={handleToggleNote}
                 style={{
@@ -923,6 +1029,7 @@ function PracticePage({ sessionId, practiceMode = "all", lang, onBack }) {
                   </span>
                 )}
               </button>
+              )}
               {/* 收藏按钮 */}
               {learningItemId && (
                 <button
@@ -984,8 +1091,8 @@ function PracticePage({ sessionId, practiceMode = "all", lang, onBack }) {
               )}
             </div>
 
-          {/* 笔记编辑区域 */}
-          {isEditingNote && (
+          {/* 笔记编辑区域 - 考试模式下不显示 */}
+          {sessionMode !== "exam" && isEditingNote && (
             <div
               style={{
                 padding: isMobile ? "0.75rem" : "1rem",

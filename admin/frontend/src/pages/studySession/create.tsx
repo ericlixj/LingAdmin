@@ -1,10 +1,11 @@
 import { Create, useForm } from "@refinedev/antd";
 import { useList } from "@refinedev/core";
 import { Form, Input, Select, Checkbox, DatePicker, InputNumber, Spin } from "antd";
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 export const StudySessionCreate = () => {
   const { formProps, saveButtonProps } = useForm();
+  const [selectedMode, setSelectedMode] = useState<string>("practice");
 
   // 获取用户列表
   const { data: usersData, isLoading: usersLoading } = useList({
@@ -40,6 +41,7 @@ export const StudySessionCreate = () => {
 
   useEffect(() => {
     const defaults = {
+      mode: "practice",
     };
     formProps.form?.setFieldsValue(defaults);
   }, [formProps.form]);  
@@ -50,6 +52,8 @@ export const StudySessionCreate = () => {
       // 确保 user_id 和 exam_id 是数字
       user_id: typeof values.user_id === 'number' ? values.user_id : Number(values.user_id),
       exam_id: typeof values.exam_id === 'number' ? values.exam_id : Number(values.exam_id),
+      // 如果 score 为空或未定义，默认为 0
+      score: values.score !== null && values.score !== undefined ? values.score : 0,
     };
     return formProps.onFinish?.(processed);
   };
@@ -108,39 +112,51 @@ export const StudySessionCreate = () => {
             { required: true, message: '请输入学习模式' },
             { max: 32, message: '最多输入 32 个字符' }
           ]}
+          initialValue="practice"
         >
           <Select
             options={[
                 { label: "考试", value: "exam" },                { label: "练习", value: "practice" },                { label: "复习", value: "review" },                { label: "FlashCard", value: "flashcard" }            ]}
+            onChange={(value) => setSelectedMode(value)}
           />
 
         </Form.Item>
-        <Form.Item
-          name="start_time"
-          label="start_time"
-          rules={[
-            
-          ]}
-        >
-              <Input />
-        </Form.Item>
-        <Form.Item
-          name="end_time"
-          label="end_time"
-          rules={[
-            
-          ]}
-        >
-              <Input />
-        </Form.Item>
+        {selectedMode === "exam" && (
+          <>
+            <Form.Item
+              name="exam_duration"
+              label="考试时长（分钟）"
+              rules={[
+                { required: true, message: "请输入考试时长" },
+                { type: "number", message: "必须是数字" }
+              ]}
+              initialValue={30}
+            >
+                  <InputNumber style={{ width: "100%" }} min={1} placeholder="考试时长（分钟），默认30" />
+            </Form.Item>
+            <Form.Item
+              name="question_count"
+              label="考试题目数量"
+              rules={[
+                { type: "number", message: "必须是数字" },
+                { required: true, message: "请输入考试题目数量" }
+              ]}
+              initialValue={20}
+            >
+                  <InputNumber style={{ width: "100%" }} min={1} placeholder="考试题目数量" />
+            </Form.Item>
+          </>
+        )}
         <Form.Item
           name="score"
           label="score"
           rules={[
+            { required: true, message: "请输入分数" },
             { type: "number", message: "必须是数字" }
           ]}
+          initialValue={0}
         >
-              <InputNumber style={{ width: "100%" }} />
+              <InputNumber style={{ width: "100%" }} min={0} placeholder="分数，默认0" />
         </Form.Item>
       </Form>
     </Create>

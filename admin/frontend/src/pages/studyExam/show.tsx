@@ -47,6 +47,13 @@ export const StudyExamShow = () => {
         }
       </Text>
       <br />
+      <Text strong>考试时长（分钟）:</Text>
+      <Text>
+        {
+          record?.exam_duration ? `${record.exam_duration} 分钟` : "-"
+        }
+      </Text>
+      <br />
     </Show>
   );
 };

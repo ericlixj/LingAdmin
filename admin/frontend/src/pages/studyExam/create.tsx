@@ -63,6 +63,17 @@ export const StudyExamCreate = () => {
           />
 
         </Form.Item>
+        <Form.Item
+          name="exam_duration"
+          label="考试时长（分钟）"
+          rules={[
+            { type: "number", message: "必须是数字" },
+            { required: true, message: "请输入考试时长" }
+          ]}
+          initialValue={60}
+        >
+              <InputNumber style={{ width: "100%" }} min={1} placeholder="考试时长（分钟）" />
+        </Form.Item>
       </Form>
     </Create>
   );
