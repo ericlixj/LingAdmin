@@ -28,7 +28,10 @@ def create_item(
     crud = StudySessionCRUD(session, user_id=current_user_id, dept_id=current_dept_id)
     item_in.creator = str(current_user_id)
     item_in.dept_id = current_dept_id
-    return crud.create(item_in)
+    try:
+        return crud.create(item_in)
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
 
 @router.get("", dependencies=[Depends(has_permission("studySession:list"))], response_model=StudySessionListResponse)
 def list_items(

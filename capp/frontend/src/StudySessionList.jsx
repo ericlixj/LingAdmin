@@ -1,5 +1,5 @@
 // StudySessionList.jsx
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:4000";
 
@@ -110,6 +110,25 @@ function StudySessionList({ lang, onStartPractice, onStartExam }) {
     border: isDarkMode ? "#404040" : "#ddd",
     shadow: isDarkMode ? "0 4px 12px rgba(0,0,0,0.4)" : "0 4px 12px rgba(0,0,0,0.15)",
   };
+
+  // 在考试模式下，找出每个exam_id最近一次的session（按create_time排序）
+  const isPracticeListView = currentView === "practice-list";
+  const latestSessionByExam = useMemo(() => {
+    const map = new Map();
+    if (!isPracticeListView) {
+      // 找出每个exam_id最近一次的session（有分数的）
+      sessions.forEach(session => {
+        if (session.score !== null && session.score !== undefined && session.score >= 0) {
+          const examId = session.exam_id;
+          const existing = map.get(examId);
+          if (!existing || new Date(session.create_time) > new Date(existing.create_time)) {
+            map.set(examId, session);
+          }
+        }
+      });
+    }
+    return map;
+  }, [sessions, isPracticeListView]);
 
   // 获取sessions列表
   const fetchSessions = async (mode) => {
@@ -515,7 +534,16 @@ function StudySessionList({ lang, onStartPractice, onStartExam }) {
           gridTemplateColumns: isMobile ? "1fr" : "repeat(auto-fill, minmax(300px, 1fr))",
           gap: isMobile ? "0.75rem" : "1rem",
         }}>
-          {sessions.map((session) => (
+          {sessions.map((session) => {
+            // 判断是否是最近一次的session（考试模式）
+            const isLatestScore = !isPracticeList && 
+              latestSessionByExam.has(session.exam_id) && 
+              latestSessionByExam.get(session.exam_id).id === session.id &&
+              session.score !== null && 
+              session.score !== undefined && 
+              session.score >= 0;
+            
+            return (
             <div
               key={session.id}
               style={{
@@ -548,7 +576,26 @@ function StudySessionList({ lang, onStartPractice, onStartExam }) {
                     <strong>
                       {lang === "cn" ? "分数:" : lang === "en" ? "Score:" : "分數:"}
                     </strong>{" "}
-                    {session.score}
+                    <span style={{
+                      fontWeight: isLatestScore ? "700" : "400",
+                      fontSize: isLatestScore ? (isMobile ? "1rem" : "1.1rem") : "inherit",
+                      color: isLatestScore ? "#1890ff" : "inherit",
+                      backgroundColor: isLatestScore ? "rgba(24, 144, 255, 0.1)" : "transparent",
+                      padding: isLatestScore ? "0.2rem 0.5rem" : "0",
+                      borderRadius: isLatestScore ? "4px" : "0",
+                      display: isLatestScore ? "inline-block" : "inline",
+                    }}>
+                      {session.score}
+                      {isLatestScore && (
+                        <span style={{ 
+                          marginLeft: "0.5rem", 
+                          fontSize: "0.85em",
+                          color: "#1890ff",
+                        }}>
+                          {lang === "cn" ? "（最近）" : lang === "en" ? "(Latest)" : "（最近）"}
+                        </span>
+                      )}
+                    </span>
                   </div>
                 )}
                 {!isPracticeList && session.exam_duration_minutes && (
@@ -682,16 +729,64 @@ function StudySessionList({ lang, onStartPractice, onStartExam }) {
                       {lang === "cn" ? "错题" : lang === "en" ? "Wrong" : "錯題"}
                       {session.wrong_count !== undefined && `（${session.wrong_count}）`}
                     </button>
+                    <button
+                      onClick={() => {
+                        if (session.favorite_count === 0 || session.favorite_count === undefined) {
+                          alert(lang === "cn" ? "该学习记录中没有收藏题目" : lang === "en" ? "No favorite questions in this session" : "該學習記錄中沒有收藏題目");
+                          return;
+                        }
+                        onStartPractice(session.id, "favorite");
+                      }}
+                      style={{
+                        flex: isMobile ? "1 1 calc(50% - 0.25rem)" : 1,
+                        minWidth: isMobile ? "calc(50% - 0.25rem)" : "100px",
+                        padding: isMobile ? "0.85rem 0.5rem" : "0.75rem",
+                        backgroundColor: "#ff6b35",
+                        color: "white",
+                        border: "none",
+                        borderRadius: "8px",
+                        cursor: "pointer",
+                        fontSize: isMobile ? "0.9rem" : "1rem",
+                        fontWeight: "600",
+                        WebkitTapHighlightColor: "transparent",
+                        touchAction: "manipulation",
+                        userSelect: "none",
+                        transition: "background-color 0.2s, transform 0.1s",
+                      }}
+                      onMouseEnter={(e) => {
+                        if (!isMobile) {
+                          e.target.style.backgroundColor = "#e55a2b";
+                        }
+                      }}
+                      onMouseLeave={(e) => {
+                        if (!isMobile) {
+                          e.target.style.backgroundColor = "#ff6b35";
+                        }
+                      }}
+                      onTouchStart={(e) => {
+                        e.currentTarget.style.backgroundColor = "#e55a2b";
+                        e.currentTarget.style.transform = "scale(0.97)";
+                      }}
+                      onTouchEnd={(e) => {
+                        e.currentTarget.style.backgroundColor = "#ff6b35";
+                        e.currentTarget.style.transform = "scale(1)";
+                      }}
+                    >
+                      {lang === "cn" ? "收藏" : lang === "en" ? "Favorite" : "收藏"}
+                      {session.favorite_count !== undefined && `（${session.favorite_count}）`}
+                    </button>
                   </>
                 ) : (
                   <>
                     <button
                       onClick={() => {
-                        if (session.total_count === 0) {
+                        // 对于考试模式，不需要检查total_count，因为item会在点击"开始考试"时由后端自动创建
+                        // 对于练习模式，需要检查是否有题目
+                        if (session.mode !== "exam" && session.total_count === 0) {
                           alert(lang === "cn" ? "该学习记录中没有题目" : lang === "en" ? "No questions in this session" : "該學習記錄中沒有題目");
                           return;
                         }
-                        // 点击按钮自动生成新的study_session
+                        // 点击按钮自动生成新的study_session（考试模式）或开始练习
                         onStartExam(session.id, true);
                       }}
                       style={{
@@ -781,7 +876,8 @@ function StudySessionList({ lang, onStartPractice, onStartExam }) {
                 )}
               </div>
             </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     );

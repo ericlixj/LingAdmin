@@ -13,6 +13,16 @@ import logging
 init_logger()
 logger = logging.getLogger(__name__) 
 
+def mode_label(mode: str) -> str:
+    """获取mode的中文标签"""
+    mode_map = {
+        "exam": "考试",
+        "practice": "练习",
+        "review": "复习",
+        "flashcard": "FlashCard"
+    }
+    return mode_map.get(mode, mode)
+
 class StudySessionCRUD(BaseCRUD):
     model = StudySession
 
@@ -25,6 +35,20 @@ class StudySessionCRUD(BaseCRUD):
         return result
 
     def create(self, obj_in: StudySessionCreate) -> StudySession:
+        # 验证：同一个用户，同一种类型（mode）下相同exam的session仅能创建一个
+        existing_session = self.session.exec(
+            select(StudySession).where(
+                StudySession.user_id == obj_in.user_id,
+                StudySession.exam_id == obj_in.exam_id,
+                StudySession.mode == obj_in.mode,
+                StudySession.deleted == False
+            )
+        ).first()
+        
+        if existing_session:
+            logger.warning(f"Session already exists for user_id={obj_in.user_id}, exam_id={obj_in.exam_id}, mode={obj_in.mode}")
+            raise ValueError(f"该用户在此考试下已存在{mode_label(obj_in.mode)}类型的session，请使用现有session或先删除后再创建")
+        
         db_obj = StudySession(**obj_in.dict())
         self.session.add(db_obj)
         self.session.commit()

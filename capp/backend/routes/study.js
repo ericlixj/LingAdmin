@@ -1444,37 +1444,33 @@ router.post('/exams/:examId/create-session', authenticateToken, async (req, res)
     let sessionQuestionCount = null;
     
     if (session_id) {
+      // 尝试查询session的参数（可能已经被物理删除，所以查询可能为空）
       const sessionCheck = await query(
         `SELECT exam_id, exam_duration, question_count FROM study_session 
-         WHERE id = $1 AND user_id = $2 AND mode = 'exam' AND deleted = false`,
+         WHERE id = $1 AND user_id = $2 AND mode = 'exam'`,
         [session_id, userId]
       );
       
-      if (sessionCheck.rows.length === 0) {
-        console.log(`[WARN] Session不存在或不属于当前用户 - session_id: ${session_id}, userId: ${userId}`);
-        return res.status(404).json({
-          code: 1,
-          message: 'Session不存在或不属于当前用户',
-          data: null
-        });
+      if (sessionCheck.rows.length > 0) {
+        const sessionData = sessionCheck.rows[0];
+        const sessionExamId = sessionData.exam_id;
+        
+        if (sessionExamId !== examId) {
+          console.log(`[WARN] Session的exam_id与请求的exam_id不匹配 - session_exam_id: ${sessionExamId}, request_exam_id: ${examId}`);
+          return res.status(400).json({
+            code: 1,
+            message: 'Session的exam_id与请求的exam_id不匹配',
+            data: null
+          });
+        }
+        
+        // 获取session的参数
+        sessionExamDuration = sessionData.exam_duration;
+        sessionQuestionCount = sessionData.question_count;
+        console.log(`[INFO] Session参数 - exam_duration: ${sessionExamDuration}, question_count: ${sessionQuestionCount}`);
+      } else {
+        console.log(`[INFO] Session不存在或已被删除，将使用exam的默认参数 - session_id: ${session_id}, userId: ${userId}`);
       }
-      
-      const sessionData = sessionCheck.rows[0];
-      const sessionExamId = sessionData.exam_id;
-      
-      if (sessionExamId !== examId) {
-        console.log(`[WARN] Session的exam_id与请求的exam_id不匹配 - session_exam_id: ${sessionExamId}, request_exam_id: ${examId}`);
-        return res.status(400).json({
-          code: 1,
-          message: 'Session的exam_id与请求的exam_id不匹配',
-          data: null
-        });
-      }
-      
-      // 获取session的参数
-      sessionExamDuration = sessionData.exam_duration;
-      sessionQuestionCount = sessionData.question_count;
-      console.log(`[INFO] Session参数 - exam_duration: ${sessionExamDuration}, question_count: ${sessionQuestionCount}`);
     }
     
     // 验证exam是否存在，并获取exam的参数
@@ -1521,27 +1517,79 @@ router.post('/exams/:examId/create-session', authenticateToken, async (req, res)
       console.log(`[INFO] 使用session或请求的question_count: ${finalQuestionCount}`);
     }
     
-    // 删除所有已有考试（同一个用户，同一个exam）
-    // 只删除当前用户的相同exam_id且mode='exam'的session，其他模式（如practice）保留
-    await query(
-      `UPDATE study_session 
-       SET deleted = true, update_time = CURRENT_TIMESTAMP 
-       WHERE exam_id = $1 AND user_id = $2 AND mode = 'exam' AND deleted = false`,
-      [examId, userId]
+    // 确定使用哪个session：如果传递了session_id，使用它；否则查找或创建
+    let targetSessionId = null;
+    
+    if (session_id) {
+      // 检查session是否存在且属于当前用户和exam
+      const existingSession = await query(
+        `SELECT id FROM study_session 
+         WHERE id = $1 AND user_id = $2 AND exam_id = $3 AND mode = 'exam'`,
+        [session_id, userId, examId]
+      );
+      
+      if (existingSession.rows.length > 0) {
+        targetSessionId = session_id;
+        console.log(`[INFO] 使用现有session: ${targetSessionId}`);
+      }
+    }
+    
+    // 如果session不存在，查找该用户该exam的考试session，如果也没有则创建新的
+    if (!targetSessionId) {
+      const existingSessions = await query(
+        `SELECT id FROM study_session 
+         WHERE exam_id = $1 AND user_id = $2 AND mode = 'exam' 
+         ORDER BY create_time DESC 
+         LIMIT 1`,
+        [examId, userId]
+      );
+      
+      if (existingSessions.rows.length > 0) {
+        targetSessionId = existingSessions.rows[0].id;
+        console.log(`[INFO] 找到现有session: ${targetSessionId}`);
+      } else {
+        // 再次验证：确保不会创建重复的session（防止并发问题）
+        const duplicateCheck = await query(
+          `SELECT id FROM study_session 
+           WHERE exam_id = $1 AND user_id = $2 AND mode = 'exam' AND deleted = false
+           LIMIT 1`,
+          [examId, userId]
+        );
+        
+        if (duplicateCheck.rows.length > 0) {
+          targetSessionId = duplicateCheck.rows[0].id;
+          console.log(`[INFO] 检测到并发创建的session，使用现有session: ${targetSessionId}`);
+        } else {
+          // 创建新的session（同一个用户，同一种类型下相同exam的session仅能创建一个）
+          const newSessionResult = await query(
+            `INSERT INTO study_session (user_id, exam_id, mode, exam_duration, question_count, score, creator, deleted, create_time, update_time)
+             VALUES ($1, $2, $3, $4, $5, $6, $7, $8, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+             RETURNING id`,
+            [userId, examId, 'exam', examDuration, finalQuestionCount, -1, String(userId), false]
+          );
+          targetSessionId = newSessionResult.rows[0].id;
+          console.log(`[INFO] 创建新session: ${targetSessionId}`);
+        }
+      }
+    }
+    
+    // 删除该session关联的所有item（不删除session本身）
+    const deletedItems = await query(
+      `DELETE FROM study_session_item 
+       WHERE session_id = $1 
+       RETURNING id`,
+      [targetSessionId]
     );
     
-    // 生成格式化的时间戳：yyyyMMdd HH:mm:ss
-    const now = new Date();
-    const year = now.getFullYear();
-    const month = String(now.getMonth() + 1).padStart(2, '0');
-    const day = String(now.getDate()).padStart(2, '0');
-    const hours = String(now.getHours()).padStart(2, '0');
-    const minutes = String(now.getMinutes()).padStart(2, '0');
-    const seconds = String(now.getSeconds()).padStart(2, '0');
-    const timestamp = `${year}${month}${day} ${hours}:${minutes}:${seconds}`;
+    console.log(`[INFO] 已删除 ${deletedItems.rows.length} 个session关联的item，session保留: ${targetSessionId}`);
     
-    // 生成考试session名称：exam_name[yyyyMMdd HH:mm:ss]
-    const sessionName = `${exam.name || '考试'}[${timestamp}]`;
+    // 更新session的参数（exam_duration, question_count）
+    await query(
+      `UPDATE study_session 
+       SET exam_duration = $1, question_count = $2, score = -1, update_time = CURRENT_TIMESTAMP 
+       WHERE id = $3`,
+      [examDuration, finalQuestionCount, targetSessionId]
+    );
     
     // 从study_question中拉取指定数量的题目（status=1，deleted=false，exam_id匹配）
     // 题目来自当前考试题库中所有题目中随机的数量题目
@@ -1564,15 +1612,7 @@ router.post('/exams/:examId/create-session', authenticateToken, async (req, res)
     
     const questionIds = questionsResult.rows.map(row => row.id);
     
-    // 创建新的study_session
-    const sessionResult = await query(
-      `INSERT INTO study_session (user_id, exam_id, mode, exam_duration, question_count, score, creator, deleted, create_time, update_time)
-       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
-       RETURNING id`,
-      [userId, examId, 'exam', examDuration, questionIds.length, -1, String(userId), false]
-    );
-    
-    const newSessionId = sessionResult.rows[0].id;
+    const newSessionId = targetSessionId;
     
     // 为每个题目创建study_learning_item和study_session_item
     for (const questionId of questionIds) {
