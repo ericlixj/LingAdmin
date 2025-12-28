@@ -691,14 +691,8 @@ function StudySessionList({ lang, onStartPractice, onStartExam }) {
                           alert(lang === "cn" ? "该学习记录中没有题目" : lang === "en" ? "No questions in this session" : "該學習記錄中沒有題目");
                           return;
                         }
-                        // 如果已经有分数且分数 >= 0，说明已经考过，询问是否重新开始
-                        if (session.score !== null && session.score !== undefined && session.score >= 0) {
-                          if (confirm(lang === "cn" ? "该考试已完成，是否重新开始？" : lang === "en" ? "This exam is completed. Restart?" : "該考試已完成，是否重新開始？")) {
-                            onStartExam(session.id, true);
-                          }
-                        } else {
-                          onStartExam(session.id, false);
-                        }
+                        // 点击按钮自动生成新的study_session
+                        onStartExam(session.id, true);
                       }}
                       style={{
                         flex: isMobile ? "1 1 calc(50% - 0.25rem)" : 1,
@@ -735,9 +729,7 @@ function StudySessionList({ lang, onStartPractice, onStartExam }) {
                         e.currentTarget.style.transform = "scale(1)";
                       }}
                     >
-                      {session.score !== null && session.score !== undefined && session.score >= 0
-                        ? (lang === "cn" ? "重新开始" : lang === "en" ? "Restart" : "重新開始")
-                        : (lang === "cn" ? "开始" : lang === "en" ? "Start" : "開始")}
+                      {lang === "cn" ? "开始考试" : lang === "en" ? "Start Exam" : "開始考試"}
                     </button>
                     <button
                       onClick={() => {
