@@ -50,9 +50,52 @@ function StudySystem({ lang, user }) {
 
       const session = sessionResult.data;
       const examId = session.exam_id;
-      const questionCount = session.question_count || 20;
+      
+      console.log('[INFO] Session数据:', {
+        sessionId: sessionId,
+        examId: session.exam_id,
+        exam_duration: session.exam_duration,
+        question_count: session.question_count
+      });
+      
+      // 重新查询当前考试的基本信息，包括时长、题目数目等，不使用内存中的数据
+      const examResponse = await fetch(
+        `${API_URL}/api/c/study/exams/${examId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (!examResponse.ok) {
+        throw new Error("获取考试详情失败");
+      }
+
+      const examResult = await examResponse.json();
+      if (examResult.code !== 0) {
+        throw new Error(examResult.message || "获取考试详情失败");
+      }
+
+      const exam = examResult.data;
+      
+      console.log('[INFO] Exam数据:', {
+        examId: exam.id,
+        exam_duration: exam.exam_duration,
+        available_question_count: exam.available_question_count
+      });
+      
+      // 使用从数据库查询的最新exam参数创建新的study_session
+      // 传递session_id，后端会优先使用session的参数（exam_duration, question_count）
+      const requestBody = {
+        session_id: sessionId // 传递当前session_id，用于查询session的参数
+      };
+      
+      // 注意：不再传递question_count，让后端使用session的question_count
+      // 如果session没有question_count，后端会使用exam的可用题目数量或默认值
 
       // 创建新的study_session
+      // 后端会先删除该用户该exam的所有已有考试，然后创建新的考试session
       const createResponse = await fetch(
         `${API_URL}/api/c/study/exams/${examId}/create-session`,
         {
@@ -61,10 +104,7 @@ function StudySystem({ lang, user }) {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ 
-            question_count: questionCount,
-            restart: restart // 传递restart参数，标识是否是重新开始
-          }),
+          body: JSON.stringify(requestBody),
         }
       );
 
@@ -77,7 +117,7 @@ function StudySystem({ lang, user }) {
         throw new Error(createResult.message || "创建考试session失败");
       }
 
-      // 使用新创建的sessionId
+      // 使用返回的sessionId（可能是当前session或新创建的session）
       setSelectedSessionId(createResult.data.session_id);
       setView("exam");
     } catch (err) {

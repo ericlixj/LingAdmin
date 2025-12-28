@@ -1375,23 +1375,116 @@ router.post('/sessions/:id/items/:itemId/submit', authenticateToken, async (req,
 });
 
 /**
+ * 获取考试详情
+ * GET /api/c/study/exams/:examId
+ */
+router.get('/exams/:examId', authenticateToken, async (req, res) => {
+  try {
+    const examId = parseInt(req.params.examId);
+    
+    // 查询exam详情，包括题库中的可用题目数量
+    const examResult = await query(
+      `SELECT 
+        se.id, 
+        se.name, 
+        se.exam_duration,
+        COUNT(DISTINCT sq.id) as available_question_count
+       FROM study_exam se
+       LEFT JOIN study_question sq ON sq.exam_id = se.id AND sq.status = 1 AND sq.deleted = false
+       WHERE se.id = $1 AND se.deleted = false
+       GROUP BY se.id, se.name, se.exam_duration`,
+      [examId]
+    );
+    
+    if (examResult.rows.length === 0) {
+      return res.status(404).json({
+        code: 1,
+        message: '考试不存在',
+        data: null
+      });
+    }
+    
+    const exam = examResult.rows[0];
+    
+    res.json({
+      code: 0,
+      message: 'ok',
+      data: {
+        id: exam.id,
+        name: exam.name,
+        exam_duration: exam.exam_duration || 60,
+        available_question_count: parseInt(exam.available_question_count) || 0
+      }
+    });
+  } catch (error) {
+    console.error('[ERROR] Get exam details failed:', error);
+    res.status(500).json({
+      code: 1,
+      message: '获取考试详情失败: ' + error.message,
+      data: null
+    });
+  }
+});
+
+/**
  * 创建新的考试session并拉取题目
  * POST /api/c/study/exams/:examId/create-session
- * body: { question_count?: number } - 考试题目数量，默认20
+ * body: { question_count?: number, session_id?: number } - 考试题目数量，默认20；可选的session_id用于查询exam_id
  */
 router.post('/exams/:examId/create-session', authenticateToken, async (req, res) => {
   try {
     const examId = parseInt(req.params.examId);
     const userId = req.userId;
-    const { question_count = 20, restart = false } = req.body;
+    const { question_count, session_id } = req.body;
     
-    // 验证exam是否存在
+    console.log(`[INFO] Create exam session - examId: ${examId}, userId: ${userId}, session_id: ${session_id}, question_count from request: ${question_count}`);
+    
+    // 如果传递了session_id，先基于session_id查询session的参数（exam_duration, question_count）
+    let sessionExamDuration = null;
+    let sessionQuestionCount = null;
+    
+    if (session_id) {
+      const sessionCheck = await query(
+        `SELECT exam_id, exam_duration, question_count FROM study_session 
+         WHERE id = $1 AND user_id = $2 AND mode = 'exam' AND deleted = false`,
+        [session_id, userId]
+      );
+      
+      if (sessionCheck.rows.length === 0) {
+        console.log(`[WARN] Session不存在或不属于当前用户 - session_id: ${session_id}, userId: ${userId}`);
+        return res.status(404).json({
+          code: 1,
+          message: 'Session不存在或不属于当前用户',
+          data: null
+        });
+      }
+      
+      const sessionData = sessionCheck.rows[0];
+      const sessionExamId = sessionData.exam_id;
+      
+      if (sessionExamId !== examId) {
+        console.log(`[WARN] Session的exam_id与请求的exam_id不匹配 - session_exam_id: ${sessionExamId}, request_exam_id: ${examId}`);
+        return res.status(400).json({
+          code: 1,
+          message: 'Session的exam_id与请求的exam_id不匹配',
+          data: null
+        });
+      }
+      
+      // 获取session的参数
+      sessionExamDuration = sessionData.exam_duration;
+      sessionQuestionCount = sessionData.question_count;
+      console.log(`[INFO] Session参数 - exam_duration: ${sessionExamDuration}, question_count: ${sessionQuestionCount}`);
+    }
+    
+    // 验证exam是否存在，并获取exam的参数
     const examCheck = await query(
       'SELECT id, name, exam_duration FROM study_exam WHERE id = $1 AND deleted = false',
       [examId]
     );
     
     if (examCheck.rows.length === 0) {
+      console.log(`[WARN] 考试不存在 - examId: ${examId}`);
       return res.status(404).json({
         code: 1,
         message: '考试不存在',
@@ -1400,19 +1493,42 @@ router.post('/exams/:examId/create-session', authenticateToken, async (req, res)
     }
     
     const exam = examCheck.rows[0];
-    const examDuration = exam.exam_duration || 60;
     
-    // 重新开始考试：先将所有相同exam_id的study_session进行逻辑删除
-    // 只删除当前用户的相同exam_id且mode='exam'的session，其他模式（如practice）保留
-    // 且只在restart=true时执行
-    if (restart) {
-      await query(
-        `UPDATE study_session 
-         SET deleted = true, update_time = CURRENT_TIMESTAMP 
-         WHERE exam_id = $1 AND user_id = $2 AND mode = 'exam' AND deleted = false`,
-        [examId, userId]
+    // 优先使用session的参数，如果没有则使用exam的参数，最后使用默认值
+    const examDuration = sessionExamDuration !== null && sessionExamDuration !== undefined 
+      ? sessionExamDuration 
+      : (exam.exam_duration || 60);
+    
+    console.log(`[INFO] 最终使用的exam_duration: ${examDuration} (session: ${sessionExamDuration}, exam: ${exam.exam_duration}, default: 60)`);
+    
+    // 优先使用session的question_count，如果没有则使用请求中的question_count，最后查询题库
+    let finalQuestionCount = sessionQuestionCount !== null && sessionQuestionCount !== undefined 
+      ? sessionQuestionCount 
+      : question_count;
+    
+    if (!finalQuestionCount) {
+      const availableQuestionsResult = await query(
+        `SELECT COUNT(*) as count 
+         FROM study_question 
+         WHERE exam_id = $1 AND status = 1 AND deleted = false`,
+        [examId]
       );
+      const availableCount = parseInt(availableQuestionsResult.rows[0].count) || 0;
+      // 如果题库中有题目，使用默认值20；如果题目数量少于20，使用实际数量
+      finalQuestionCount = availableCount > 0 ? Math.min(20, availableCount) : 20;
+      console.log(`[INFO] 从题库查询题目数量 - availableCount: ${availableCount}, finalQuestionCount: ${finalQuestionCount}`);
+    } else {
+      console.log(`[INFO] 使用session或请求的question_count: ${finalQuestionCount}`);
     }
+    
+    // 删除所有已有考试（同一个用户，同一个exam）
+    // 只删除当前用户的相同exam_id且mode='exam'的session，其他模式（如practice）保留
+    await query(
+      `UPDATE study_session 
+       SET deleted = true, update_time = CURRENT_TIMESTAMP 
+       WHERE exam_id = $1 AND user_id = $2 AND mode = 'exam' AND deleted = false`,
+      [examId, userId]
+    );
     
     // 生成格式化的时间戳：yyyyMMdd HH:mm:ss
     const now = new Date();
@@ -1428,13 +1544,14 @@ router.post('/exams/:examId/create-session', authenticateToken, async (req, res)
     const sessionName = `${exam.name || '考试'}[${timestamp}]`;
     
     // 从study_question中拉取指定数量的题目（status=1，deleted=false，exam_id匹配）
+    // 题目来自当前考试题库中所有题目中随机的数量题目
     const questionsResult = await query(
       `SELECT id 
        FROM study_question 
        WHERE exam_id = $1 AND status = 1 AND deleted = false 
        ORDER BY RANDOM() 
        LIMIT $2`,
-      [examId, question_count]
+      [examId, finalQuestionCount]
     );
     
     if (questionsResult.rows.length === 0) {
@@ -1455,7 +1572,7 @@ router.post('/exams/:examId/create-session', authenticateToken, async (req, res)
       [userId, examId, 'exam', examDuration, questionIds.length, -1, String(userId), false]
     );
     
-    const sessionId = sessionResult.rows[0].id;
+    const newSessionId = sessionResult.rows[0].id;
     
     // 为每个题目创建study_learning_item和study_session_item
     for (const questionId of questionIds) {
@@ -1485,7 +1602,7 @@ router.post('/exams/:examId/create-session', authenticateToken, async (req, res)
       await query(
         `INSERT INTO study_session_item (session_id, learning_item_id, is_correct, response, time_spent_second, creator, deleted, create_time, update_time)
          VALUES ($1, $2, $3, $4, $5, $6, $7, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)`,
-        [sessionId, learningItemId, 0, '', 0, String(userId), false]
+        [newSessionId, learningItemId, 0, '', 0, String(userId), false]
       );
     }
     
@@ -1493,7 +1610,7 @@ router.post('/exams/:examId/create-session', authenticateToken, async (req, res)
       code: 0,
       message: 'ok',
       data: {
-        session_id: sessionId,
+        session_id: newSessionId,
         question_count: questionIds.length
       }
     });

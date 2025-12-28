@@ -66,13 +66,18 @@ export const StudySessionEdit = () => {
   useEffect(() => {
     if (!initialized && record && form && !form.isFieldsTouched()) {
       const initialValues = prepareInitialValues(record, fields);
+      // 手动添加exam_duration和question_count字段（因为fields数组中可能没有这些字段）
+      if (record.exam_duration !== null && record.exam_duration !== undefined) {
+        initialValues.exam_duration = record.exam_duration;
+      } else {
+        initialValues.exam_duration = 30;
+      }
+      if (record.question_count !== null && record.question_count !== undefined) {
+        initialValues.question_count = record.question_count;
+      }
       // 如果 score 为 null 或 undefined，设置为 0
       if (initialValues.score === null || initialValues.score === undefined) {
         initialValues.score = 0;
-      }
-      // 如果 exam_duration 为 null 或 undefined，设置为 30
-      if (initialValues.exam_duration === null || initialValues.exam_duration === undefined) {
-        initialValues.exam_duration = 30;
       }
       // 如果 mode 为空，设置为 "practice"
       if (!initialValues.mode || initialValues.mode === "") {
@@ -92,6 +97,13 @@ export const StudySessionEdit = () => {
       exam_id: typeof values.exam_id === 'number' ? values.exam_id : Number(values.exam_id),
       // 如果 score 为空或未定义，默认为 0
       score: values.score !== null && values.score !== undefined ? values.score : 0,
+      // 确保 exam_duration 和 question_count 被正确传递（仅在考试模式下）
+      exam_duration: selectedMode === "exam" && values.exam_duration !== null && values.exam_duration !== undefined 
+        ? values.exam_duration 
+        : (selectedMode === "exam" ? 30 : null),
+      question_count: selectedMode === "exam" && values.question_count !== null && values.question_count !== undefined 
+        ? values.question_count 
+        : null,
     };
     return formProps.onFinish?.(processed);
   };
