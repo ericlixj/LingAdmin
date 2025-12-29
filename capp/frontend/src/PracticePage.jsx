@@ -3,6 +3,54 @@ import { useState, useEffect, useCallback, useRef } from "react";
 
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:4000";
 
+// 音效播放函数
+const playSound = (type) => {
+  try {
+    // 使用 Web Audio API 生成音效
+    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    
+    if (type === 'correct') {
+      // 答对音效：上升音调
+      const oscillator = audioContext.createOscillator();
+      const gainNode = audioContext.createGain();
+      
+      oscillator.connect(gainNode);
+      gainNode.connect(audioContext.destination);
+      
+      oscillator.frequency.setValueAtTime(523.25, audioContext.currentTime); // C5
+      oscillator.frequency.setValueAtTime(659.25, audioContext.currentTime + 0.1); // E5
+      oscillator.frequency.setValueAtTime(783.99, audioContext.currentTime + 0.2); // G5
+      
+      gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+      gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
+      
+      oscillator.start(audioContext.currentTime);
+      oscillator.stop(audioContext.currentTime + 0.3);
+    } else if (type === 'wrong') {
+      // 答错音效：下降音调
+      const oscillator = audioContext.createOscillator();
+      const gainNode = audioContext.createGain();
+      
+      oscillator.connect(gainNode);
+      gainNode.connect(audioContext.destination);
+      
+      oscillator.frequency.setValueAtTime(392.00, audioContext.currentTime); // G4
+      oscillator.frequency.setValueAtTime(311.13, audioContext.currentTime + 0.15); // D#4
+      oscillator.frequency.setValueAtTime(261.63, audioContext.currentTime + 0.3); // C4
+      
+      gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+      gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.4);
+      
+      oscillator.type = 'sawtooth';
+      oscillator.start(audioContext.currentTime);
+      oscillator.stop(audioContext.currentTime + 0.4);
+    }
+  } catch (error) {
+    // 如果 Web Audio API 不可用，静默失败
+    console.log('Audio not available:', error);
+  }
+};
+
 // 解析题干中的图片 URL - 格式: [IMAGE:url]
 // 不再需要从 stem 中解析图片，直接使用 image_url 字段
 
@@ -128,6 +176,8 @@ function PracticePage({ sessionId, practiceMode = "all", lang, onBack }) {
   const [finishedHandled, setFinishedHandled] = useState(false); // 完成状态是否已被处理（无论用户选择是或否）
   const finishedHandledRef = useRef(false); // 使用 ref 来同步检查，防止竞态条件
   const fetchingRef = useRef(false); // 防止 fetchNextQuestion 被并发调用
+  const [showAnimation, setShowAnimation] = useState(false); // 控制动画显示
+  const [animationType, setAnimationType] = useState(null); // 动画类型：'correct' 或 'wrong'
 
   // 获取session信息，检查是否是考试模式
   useEffect(() => {
@@ -494,6 +544,8 @@ function PracticePage({ sessionId, practiceMode = "all", lang, onBack }) {
         setStartTime(Date.now());
         setSelectedAnswer(null);
         setSubmitted(false);
+        setShowAnimation(false); // 重置动画状态
+        setAnimationType(null); // 重置动画类型
       } else {
         throw new Error(result.message || "获取题目失败");
       }
@@ -565,6 +617,8 @@ function PracticePage({ sessionId, practiceMode = "all", lang, onBack }) {
       const result = await response.json();
       if (result.code === 0) {
         // 更新当前item的状态
+        const isCorrect = Number(result.data.is_correct) === 1;
+        
         setCurrentItem({
           ...currentItem,
           is_correct: result.data.is_correct,
@@ -574,6 +628,16 @@ function PracticePage({ sessionId, practiceMode = "all", lang, onBack }) {
         
         setSubmitting(false);
         setSubmitted(true);
+        
+        // 触发动画和音效
+        setAnimationType(isCorrect ? 'correct' : 'wrong');
+        setShowAnimation(true);
+        playSound(isCorrect ? 'correct' : 'wrong');
+        
+        // 3秒后隐藏动画
+        setTimeout(() => {
+          setShowAnimation(false);
+        }, 2000);
         
         console.log('✅ 答案已提交并保存:', {
           is_correct: result.data.is_correct,
@@ -771,6 +835,156 @@ function PracticePage({ sessionId, practiceMode = "all", lang, onBack }) {
     }
   };
 
+  // 动画组件
+  const AnswerAnimation = ({ type, show }) => {
+    if (!show) return null;
+    
+    const isCorrect = type === 'correct';
+    
+    return (
+      <>
+        <div
+          style={{
+            position: 'fixed',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            zIndex: 9999,
+            pointerEvents: 'none',
+            animation: isCorrect ? 'correctPulse 0.6s ease-out' : 'wrongShake 0.6s ease-out',
+          }}
+        >
+          <div
+            style={{
+              fontSize: '120px',
+              color: isCorrect ? '#52c41a' : '#ff4d4f',
+              textShadow: `0 0 20px ${isCorrect ? 'rgba(82, 196, 26, 0.5)' : 'rgba(255, 77, 79, 0.5)'}`,
+              animation: isCorrect ? 'correctScale 0.6s ease-out' : 'wrongScale 0.6s ease-out',
+            }}
+          >
+            {isCorrect ? '✓' : '✗'}
+          </div>
+          {isCorrect && (
+            <div
+              style={{
+                position: 'absolute',
+                top: '50%',
+                left: '50%',
+                transform: 'translate(-50%, -50%)',
+                width: '200px',
+                height: '200px',
+                borderRadius: '50%',
+                border: `3px solid #52c41a`,
+                animation: 'correctRipple 0.6s ease-out',
+                opacity: 0,
+              }}
+            />
+          )}
+        </div>
+        <style>{`
+          @keyframes correctPulse {
+            0% {
+              transform: translate(-50%, -50%) scale(0);
+              opacity: 0;
+            }
+            50% {
+              transform: translate(-50%, -50%) scale(1.2);
+              opacity: 1;
+            }
+            100% {
+              transform: translate(-50%, -50%) scale(1);
+              opacity: 0.9;
+            }
+          }
+          @keyframes correctScale {
+            0% {
+              transform: scale(0) rotate(0deg);
+            }
+            50% {
+              transform: scale(1.3) rotate(180deg);
+            }
+            100% {
+              transform: scale(1) rotate(360deg);
+            }
+          }
+          @keyframes correctRipple {
+            0% {
+              transform: translate(-50%, -50%) scale(0.8);
+              opacity: 0.8;
+            }
+            100% {
+              transform: translate(-50%, -50%) scale(2);
+              opacity: 0;
+            }
+          }
+          @keyframes wrongShake {
+            0%, 100% {
+              transform: translate(-50%, -50%) translateX(0);
+            }
+            10%, 30%, 50%, 70%, 90% {
+              transform: translate(-50%, -50%) translateX(-10px);
+            }
+            20%, 40%, 60%, 80% {
+              transform: translate(-50%, -50%) translateX(10px);
+            }
+          }
+          @keyframes wrongScale {
+            0% {
+              transform: scale(0);
+              opacity: 0;
+            }
+            50% {
+              transform: scale(1.3);
+              opacity: 1;
+            }
+            100% {
+              transform: scale(1);
+              opacity: 0.9;
+            }
+          }
+          @keyframes resultFadeIn {
+            0% {
+              opacity: 0;
+              transform: translateY(-10px);
+            }
+            100% {
+              opacity: 1;
+              transform: translateY(0);
+            }
+          }
+          @keyframes optionCorrect {
+            0% {
+              transform: scale(1);
+              box-shadow: 0 0 0 0 rgba(82, 196, 26, 0.4);
+            }
+            50% {
+              transform: scale(1.02);
+              box-shadow: 0 0 0 8px rgba(82, 196, 26, 0);
+            }
+            100% {
+              transform: scale(1);
+              box-shadow: 0 0 0 0 rgba(82, 196, 26, 0);
+            }
+          }
+          @keyframes optionWrong {
+            0% {
+              transform: translateX(0);
+            }
+            10%, 30%, 50%, 70%, 90% {
+              transform: translateX(-5px);
+            }
+            20%, 40%, 60%, 80% {
+              transform: translateX(5px);
+            }
+            100% {
+              transform: translateX(0);
+            }
+          }
+        `}</style>
+      </>
+    );
+  };
+
   // 主题颜色配置
   const theme = {
     bg: isDarkMode ? "#1a1a1a" : "#ffffff",
@@ -885,15 +1099,23 @@ function PracticePage({ sessionId, practiceMode = "all", lang, onBack }) {
       style={{
         maxWidth: "900px",
         margin: "0 auto",
-        padding: isMobile ? "12px" : "0 16px",
-        paddingBottom: isMobile ? "80px" : "20px", // 为移动端底部按钮留出空间
+        position: 'relative',
+      }}
+    >
+      {/* 答题动画 */}
+      <AnswerAnimation type={animationType} show={showAnimation} />
+      
+      <div
+        style={{
+          padding: isMobile ? "12px" : "0 16px",
+          paddingBottom: isMobile ? "80px" : "20px", // 为移动端底部按钮留出空间
           backgroundColor: theme.bg,
           minHeight: isMobile ? "-webkit-fill-available" : "100vh", // iOS Safari支持
           color: theme.text,
-        WebkitOverflowScrolling: "touch", // iOS平滑滚动
-        overflowX: "hidden", // 防止横向滚动
-      }}
-    >
+          WebkitOverflowScrolling: "touch", // iOS平滑滚动
+          overflowX: "hidden", // 防止横向滚动
+        }}
+      >
       {/* 进度条 */}
       <div style={{ marginBottom: "1.25rem" }}>
         <div
@@ -1226,9 +1448,11 @@ function PracticePage({ sessionId, practiceMode = "all", lang, onBack }) {
                 cursor: showResult ? "default" : "pointer",
                 display: "flex",
                 alignItems: "flex-start",
-                transition: "all 0.2s",
+                transition: "all 0.3s ease",
                 fontSize: isMobile ? "0.95rem" : "1rem",
                 lineHeight: 1.5,
+                animation: showResult && isCorrectOption ? 'optionCorrect 0.5s ease-out' : 
+                          showResult && isSelected && !isCorrectOption ? 'optionWrong 0.5s ease-out' : 'none',
               };
 
               // 只有提交后才显示正确答案和错误答案的标记
@@ -1380,6 +1604,7 @@ function PracticePage({ sessionId, practiceMode = "all", lang, onBack }) {
                   marginBottom: "1rem",
                   backgroundColor: isCorrect ? theme.correctBg : theme.wrongBg,
                   border: `1px solid ${isCorrect ? theme.correctBorder : theme.wrongBorder}`,
+                  animation: 'resultFadeIn 0.5s ease-out',
                 }}
               >
                 <div
@@ -1554,6 +1779,7 @@ function PracticePage({ sessionId, practiceMode = "all", lang, onBack }) {
           <p>{lang === "cn" ? "加载题目中..." : lang === "en" ? "Loading question..." : "載入題目中..."}</p>
         </div>
       )}
+      </div>
     </div>
   );
 }
