@@ -26,6 +26,184 @@ setInterval(() => {
 }, 60 * 60 * 1000); // 每小时检查一次
 
 /**
+ * 奖励考试积分
+ * 每次完成考试都奖励积分，根据分数给予不同积分：
+ * - 基础积分：每次完成考试2积分
+ * - 额外积分：根据分数给予
+ *   - 60分以下：0额外积分
+ *   - 60-79分：+3积分
+ *   - 80-89分：+5积分
+ *   - 90-99分：+10积分
+ *   - 100分：+20积分
+ */
+async function awardExamPoints(userId, score, sessionId) {
+  try {
+    console.log(`[DEBUG] ========== awardExamPoints 开始 ==========`);
+    console.log(`[DEBUG] 参数 - userId: ${userId} (${typeof userId}), score: ${score} (${typeof score}), sessionId: ${sessionId} (${typeof sessionId})`);
+    
+    // 确保score是数字类型
+    let numericScore = typeof score === 'number' ? score : parseFloat(score);
+    
+    // 如果转换失败，尝试从字符串转换
+    if (isNaN(numericScore)) {
+      numericScore = parseInt(score) || 0;
+    }
+    
+    // 确保是有效数字
+    if (isNaN(numericScore) || numericScore < 0 || numericScore > 100) {
+      console.error(`[ERROR] Invalid score: ${score} (type: ${typeof score}), numericScore: ${numericScore}`);
+      numericScore = 0;
+    }
+    
+    // 添加调试日志
+    console.log(`[DEBUG] awardExamPoints - userId: ${userId}, score: ${score} (type: ${typeof score}), numericScore: ${numericScore}`);
+    
+    // 基础积分：每次完成考试都奖励
+    let basePoints = 2;
+    let bonusPoints = 0;
+    
+    // 根据分数给予额外积分
+    if (numericScore >= 100) {
+      bonusPoints = 20;
+    } else if (numericScore >= 90) {
+      bonusPoints = 10;
+    } else if (numericScore >= 80) {
+      bonusPoints = 5;
+    } else if (numericScore >= 60) {
+      bonusPoints = 3;
+    }
+    // 60分以下只有基础积分，无额外积分
+    
+    const pointsAmount = basePoints + bonusPoints;
+    
+    console.log(`[DEBUG] awardExamPoints - basePoints: ${basePoints}, bonusPoints: ${bonusPoints}, pointsAmount: ${pointsAmount}, score: ${numericScore}`);
+    
+    // 确保sessionId是整数类型
+    const sessionIdInt = parseInt(sessionId) || sessionId;
+    console.log(`[DEBUG] 准备奖励积分 - userId: ${userId}, sessionId: ${sessionId} (type: ${typeof sessionId}), sessionIdInt: ${sessionIdInt}`);
+    
+    // 注意：每次考试完成都奖励积分，不检查是否已奖励过
+    // 这样可以确保每次提交考试都能获得积分
+    
+    // 获取或创建用户积分记录
+    console.log(`[DEBUG] 获取或创建用户积分记录 - userId: ${userId}`);
+    let pointsResult;
+    try {
+      pointsResult = await query(
+        `SELECT * FROM user_points 
+         WHERE user_id = $1 AND deleted = false`,
+        [userId]
+      );
+      console.log(`[DEBUG] 查询用户积分记录结果: ${pointsResult.rows.length} 条`);
+    } catch (queryError) {
+      console.error(`[ERROR] 查询用户积分记录失败:`, queryError);
+      console.error(`[ERROR] 错误信息:`, queryError.message);
+      console.error(`[ERROR] 错误堆栈:`, queryError.stack);
+      throw new Error(`查询用户积分记录失败: ${queryError.message}`);
+    }
+    
+    if (pointsResult.rows.length === 0) {
+      // 创建新积分记录
+      console.log(`[DEBUG] 用户积分记录不存在，创建新记录`);
+      try {
+        await query(
+          `INSERT INTO user_points (user_id, balance, total_earned, total_spent, total_adjusted, deleted)
+           VALUES ($1, 0, 0, 0, 0, false)`,
+          [userId]
+        );
+        console.log(`[DEBUG] 用户积分记录创建成功`);
+        
+        pointsResult = await query(
+          `SELECT * FROM user_points 
+           WHERE user_id = $1 AND deleted = false`,
+          [userId]
+        );
+        console.log(`[DEBUG] 重新查询用户积分记录: ${pointsResult.rows.length} 条`);
+      } catch (insertError) {
+        console.error(`[ERROR] 创建用户积分记录失败:`, insertError);
+        console.error(`[ERROR] 错误信息:`, insertError.message);
+        console.error(`[ERROR] 错误堆栈:`, insertError.stack);
+        throw new Error(`创建用户积分记录失败: ${insertError.message}`);
+      }
+    }
+    
+    const points = pointsResult.rows[0];
+    const balanceBefore = parseFloat(points.balance || 0);
+    const balanceAfter = balanceBefore + pointsAmount;
+    
+    console.log(`[DEBUG] 积分更新前 - balanceBefore: ${balanceBefore}, pointsAmount: ${pointsAmount}, balanceAfter: ${balanceAfter}`);
+    
+    // 更新积分总值（确保有记录）
+    let updateResult;
+    try {
+      updateResult = await query(
+        `UPDATE user_points 
+         SET balance = $1, 
+             total_earned = total_earned + $2,
+             update_time = CURRENT_TIMESTAMP
+         WHERE user_id = $3
+         RETURNING balance, total_earned`,
+        [balanceAfter, pointsAmount, userId]
+      );
+      console.log(`[DEBUG] 积分更新查询结果: ${updateResult.rows.length} 条`);
+    } catch (updateError) {
+      console.error(`[ERROR] 更新用户积分失败:`, updateError);
+      console.error(`[ERROR] 错误信息:`, updateError.message);
+      throw new Error(`更新用户积分失败: ${updateError.message}`);
+    }
+    
+    if (updateResult.rows.length === 0) {
+      throw new Error(`更新用户积分失败: userId=${userId}, 没有返回结果`);
+    }
+    
+    console.log(`[DEBUG] 积分更新后 - balance: ${updateResult.rows[0].balance}, total_earned: ${updateResult.rows[0].total_earned}`);
+    
+    // 创建积分明细记录（确保有记录）
+    let description = `考试完成 (得分: ${numericScore})`;
+    if (bonusPoints > 0) {
+      description += `，获得基础积分${basePoints}分，额外奖励${bonusPoints}分`;
+    } else {
+      description += `，获得基础积分${basePoints}分`;
+    }
+    
+    let transactionResult;
+    try {
+      transactionResult = await query(
+        `INSERT INTO points_transaction 
+         (user_id, transaction_type, amount, balance_before, balance_after, 
+          source_type, source_id, source_table, description, deleted, create_time)
+         VALUES ($1, 'earn', $2, $3, $4, 'exam', $5, 'study_session', $6, false, CURRENT_TIMESTAMP)
+         RETURNING id`,
+        [userId, pointsAmount, balanceBefore, balanceAfter, sessionIdInt, description]
+      );
+      console.log(`[DEBUG] 积分交易记录插入结果: ${transactionResult.rows.length} 条`);
+    } catch (insertError) {
+      console.error(`[ERROR] 创建积分交易记录失败:`, insertError);
+      console.error(`[ERROR] 错误信息:`, insertError.message);
+      console.error(`[ERROR] SQL参数: userId=${userId}, pointsAmount=${pointsAmount}, sessionIdInt=${sessionIdInt}`);
+      throw new Error(`创建积分交易记录失败: ${insertError.message}`);
+    }
+    
+    if (transactionResult.rows.length === 0) {
+      throw new Error(`创建积分交易记录失败: userId=${userId}, sessionId=${sessionIdInt}, 没有返回结果`);
+    }
+    
+    console.log(`[INFO] ✅ 用户 ${userId} 考试 ${sessionIdInt} 获得 ${pointsAmount} 积分 (基础: ${basePoints}, 额外: ${bonusPoints}, 得分: ${numericScore})`);
+    console.log(`[INFO] ✅ 积分明细记录已创建 - transaction_id: ${transactionResult.rows[0].id}`);
+    console.log(`[INFO] ✅ 积分总值已更新 - balance: ${updateResult.rows[0].balance}, total_earned: ${updateResult.rows[0].total_earned}`);
+    console.log(`[DEBUG] ========== awardExamPoints 成功完成 ==========`);
+    
+    return pointsAmount; // 返回奖励的积分数量
+  } catch (error) {
+    console.error('[ERROR] ❌ Award exam points error:', error);
+    console.error('[ERROR] ❌ Error message:', error.message);
+    console.error('[ERROR] ❌ Error stack:', error.stack);
+    console.error(`[DEBUG] ========== awardExamPoints 失败 ==========`);
+    throw error;
+  }
+}
+
+/**
  * 获取用户的学习记录列表
  * GET /api/c/study/sessions
  */
@@ -44,7 +222,7 @@ router.get('/sessions', authenticateToken, async (req, res) => {
         ss.score,
         ss.create_time,
         se.name as exam_name,
-        COALESCE(ss.exam_duration, se.exam_duration, 60) as exam_duration_minutes
+        COALESCE(ss.exam_duration, 60) as exam_duration_minutes
       FROM study_session ss
       LEFT JOIN study_exam se ON ss.exam_id = se.id
       WHERE ss.user_id = $1 AND ss.deleted = false
@@ -1490,31 +1668,41 @@ router.post('/exams/:examId/create-session', authenticateToken, async (req, res)
     
     const exam = examCheck.rows[0];
     
-    // 优先使用session的参数，如果没有则使用exam的参数，最后使用默认值
+    // 优先使用session的参数（以session配置为主）
+    // 如果session没有配置，则使用exam的参数，最后使用默认值
     const examDuration = sessionExamDuration !== null && sessionExamDuration !== undefined 
       ? sessionExamDuration 
-      : (exam.exam_duration || 60);
+      : (exam.exam_duration !== null && exam.exam_duration !== undefined 
+          ? exam.exam_duration 
+          : 60);
     
     console.log(`[INFO] 最终使用的exam_duration: ${examDuration} (session: ${sessionExamDuration}, exam: ${exam.exam_duration}, default: 60)`);
     
-    // 优先使用session的question_count，如果没有则使用请求中的question_count，最后查询题库
-    let finalQuestionCount = sessionQuestionCount !== null && sessionQuestionCount !== undefined 
-      ? sessionQuestionCount 
-      : question_count;
+    // 优先使用session的question_count（以session配置为主）
+    // 如果session没有，则使用请求中的question_count，如果还没有，则查询题库，最后使用默认值
+    let finalQuestionCount = sessionQuestionCount;
     
     if (!finalQuestionCount) {
-      const availableQuestionsResult = await query(
-        `SELECT COUNT(*) as count 
-         FROM study_question 
-         WHERE exam_id = $1 AND status = 1 AND deleted = false`,
-        [examId]
-      );
-      const availableCount = parseInt(availableQuestionsResult.rows[0].count) || 0;
-      // 如果题库中有题目，使用默认值20；如果题目数量少于20，使用实际数量
-      finalQuestionCount = availableCount > 0 ? Math.min(20, availableCount) : 20;
-      console.log(`[INFO] 从题库查询题目数量 - availableCount: ${availableCount}, finalQuestionCount: ${finalQuestionCount}`);
+      // 如果session没有question_count，使用请求中的question_count
+      finalQuestionCount = question_count;
+      
+      if (!finalQuestionCount) {
+        // 如果请求中也没有，查询题库
+        const availableQuestionsResult = await query(
+          `SELECT COUNT(*) as count 
+           FROM study_question 
+           WHERE exam_id = $1 AND status = 1 AND deleted = false`,
+          [examId]
+        );
+        const availableCount = parseInt(availableQuestionsResult.rows[0].count) || 0;
+        // 如果题库中有题目，使用默认值20；如果题目数量少于20，使用实际数量
+        finalQuestionCount = availableCount > 0 ? Math.min(20, availableCount) : 20;
+        console.log(`[INFO] 从题库查询题目数量 - availableCount: ${availableCount}, finalQuestionCount: ${finalQuestionCount}`);
+      } else {
+        console.log(`[INFO] 使用请求中的question_count: ${finalQuestionCount}`);
+      }
     } else {
-      console.log(`[INFO] 使用session或请求的question_count: ${finalQuestionCount}`);
+      console.log(`[INFO] 使用session的question_count: ${finalQuestionCount}`);
     }
     
     // 确定使用哪个session：如果传递了session_id，使用它；否则查找或创建
@@ -1901,7 +2089,7 @@ router.get('/sessions/:id', authenticateToken, async (req, res) => {
         ss.score,
         ss.create_time,
         se.name as exam_name,
-        COALESCE(ss.exam_duration, se.exam_duration, 60) as exam_duration_minutes
+        COALESCE(ss.exam_duration, 60) as exam_duration_minutes
       FROM study_session ss
       LEFT JOIN study_exam se ON ss.exam_id = se.id
       WHERE ss.id = $1 AND ss.user_id = $2 AND ss.deleted = false`,
@@ -1957,9 +2145,9 @@ router.post('/sessions/:id/submit-exam', authenticateToken, async (req, res) => 
     const userId = req.userId;
     const { answers, submit_time } = req.body;
 
-    // 验证session是否属于当前用户
+    // 验证session是否属于当前用户，并检查是否已经提交过
     const sessionCheck = await query(
-      'SELECT id, exam_id FROM study_session WHERE id = $1 AND user_id = $2 AND deleted = false',
+      'SELECT id, exam_id, score FROM study_session WHERE id = $1 AND user_id = $2 AND deleted = false',
       [sessionId, userId]
     );
 
@@ -1968,6 +2156,19 @@ router.post('/sessions/:id/submit-exam', authenticateToken, async (req, res) => 
         code: 1,
         message: '学习记录不存在',
         data: null
+      });
+    }
+
+    // 检查是否已经提交过（score 不为 null 且 >= 0 表示已提交）
+    const existingScore = sessionCheck.rows[0].score;
+    if (existingScore !== null && existingScore >= 0) {
+      console.log(`[WARN] 考试 ${sessionId} 已经提交过，当前分数: ${existingScore}，跳过重复提交`);
+      return res.status(400).json({
+        code: 1,
+        message: '该考试已经提交过，不能重复提交',
+        data: {
+          score: existingScore
+        }
       });
     }
 
@@ -2061,6 +2262,29 @@ router.post('/sessions/:id/submit-exam', authenticateToken, async (req, res) => 
        WHERE id = $2 AND user_id = $3`,
       [score, sessionId, userId]
     );
+
+    // 奖励积分（根据分数）- 每次考试完成都奖励积分
+    try {
+      console.log(`[INFO] ========== 开始奖励积分 ==========`);
+      console.log(`[INFO] userId: ${userId}, score: ${score}, sessionId: ${sessionId}`);
+      console.log(`[INFO] score type: ${typeof score}, sessionId type: ${typeof sessionId}`);
+      
+      const pointsAwarded = await awardExamPoints(userId, score, sessionId);
+      
+      if (pointsAwarded && pointsAwarded > 0) {
+        console.log(`[INFO] ✅ 积分奖励成功 - 奖励了 ${pointsAwarded} 积分`);
+      } else if (pointsAwarded === null || pointsAwarded === 0) {
+        console.log(`[WARN] ⚠️ 积分奖励返回 ${pointsAwarded}，可能已经奖励过或分数为0`);
+      } else {
+        console.log(`[WARN] ⚠️ 积分奖励返回异常值: ${pointsAwarded}`);
+      }
+      console.log(`[INFO] ========== 积分奖励流程结束 ==========`);
+    } catch (pointsError) {
+      console.error('[ERROR] ❌ Award points failed:', pointsError);
+      console.error('[ERROR] Error message:', pointsError.message);
+      console.error('[ERROR] Error stack:', pointsError.stack);
+      // 积分奖励失败不影响考试提交，但记录错误
+    }
 
     res.json({
       code: 0,

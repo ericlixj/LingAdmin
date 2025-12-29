@@ -84,6 +84,7 @@ app.get("/api/c/hello", (req, res) => {
 const authRouter = require("./routes/auth");
 const postcodeRouter = require("./routes/postcode");
 const gasRouter = require("./routes/gas");
+const pointsRouter = require("./routes/points");
 const { authenticateToken } = require("./utils/jwt");
 
 // 认证路由
@@ -98,6 +99,9 @@ app.use("/api/c/gas", gasRouter);
 // 学习系统路由
 const studyRouter = require("./routes/study");
 app.use("/api/c/study", studyRouter);
+
+// 积分系统路由
+app.use("/api/c/points", pointsRouter);
 
 // 查询 flyer_details from OpenSearch（需要认证）
 app.get("/api/c/flyer_details", authenticateToken, async (req, res) => {

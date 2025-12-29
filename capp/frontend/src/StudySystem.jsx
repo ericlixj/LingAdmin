@@ -58,7 +58,7 @@ function StudySystem({ lang, user }) {
         question_count: session.question_count
       });
       
-      // 重新查询当前考试的基本信息，包括时长、题目数目等，不使用内存中的数据
+      // 查询exam信息（仅用于验证和日志，实际配置以session为主）
       const examResponse = await fetch(
         `${API_URL}/api/c/study/exams/${examId}`,
         {
@@ -85,14 +85,13 @@ function StudySystem({ lang, user }) {
         available_question_count: exam.available_question_count
       });
       
-      // 使用从数据库查询的最新exam参数创建新的study_session
+      // 创建新的study_session，以session配置为主，忽略exam配置
       // 传递session_id，后端会优先使用session的参数（exam_duration, question_count）
       const requestBody = {
-        session_id: sessionId // 传递当前session_id，用于查询session的参数
+        session_id: sessionId // 传递当前session_id，后端会使用session的配置
       };
       
-      // 注意：不再传递question_count，让后端使用session的question_count
-      // 如果session没有question_count，后端会使用exam的可用题目数量或默认值
+      // 注意：以session配置为主，如果session没有配置，后端才会使用exam的配置或默认值
 
       // 创建新的study_session
       // 后端会先删除该用户该exam的所有已有考试，然后创建新的考试session
