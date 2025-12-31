@@ -38,6 +38,9 @@ setInterval(() => {
  */
 /**
  * 检查并奖励连续三次满分
+ * 逻辑：同一个用户，对同一个考试（exam），连续3次都得了100分
+ * 注意：这里检查的是同一个exam_id的最近三次考试session，不是同一个session（一个session只有一次成绩）
+ * 
  * @param {number} userId - 用户ID
  * @param {number} sessionId - 当前考试session ID
  * @param {string} examName - 考试名称
@@ -45,32 +48,76 @@ setInterval(() => {
  */
 async function checkAndAwardConsecutivePerfectScore(userId, sessionId, examName) {
   try {
-    console.log(`[DEBUG] 检查连续三次满分奖励 - userId: ${userId}, sessionId: ${sessionId}`);
+    console.log(`[DEBUG] ========== 开始检查连续三次满分奖励 ==========`);
+    console.log(`[DEBUG] userId: ${userId}, sessionId: ${sessionId}, examName: ${examName}`);
     
-    // 查询用户最近三次已完成的考试（按时间倒序，包括当前这次）
-    const recentExamsResult = await query(
-      `SELECT ss.id, ss.score, ss.create_time, se.name as exam_name
-       FROM study_session ss
-       LEFT JOIN study_exam se ON ss.exam_id = se.id
-       WHERE ss.user_id = $1 
-         AND ss.score IS NOT NULL
-         AND ss.deleted = false
-       ORDER BY ss.create_time DESC
-       LIMIT 3`,
-      [userId]
+    // 首先获取当前考试的 exam_id
+    const currentSessionResult = await query(
+      `SELECT exam_id FROM study_session WHERE id = $1 AND deleted = false`,
+      [sessionId]
     );
     
-    const recentExams = recentExamsResult.rows;
-    console.log(`[DEBUG] 最近三次考试: ${recentExams.length} 条记录`);
+    if (currentSessionResult.rows.length === 0) {
+      console.log(`[DEBUG] 无法找到当前考试session，跳过连续三次满分检查`);
+      return 0;
+    }
+    
+    const examId = currentSessionResult.rows[0].exam_id;
+    console.log(`[DEBUG] 当前考试的 exam_id: ${examId}`);
+    console.log(`[DEBUG] 检查逻辑：同一个用户（userId=${userId}），同一个考试（exam_id=${examId}），连续3次100分`);
+    console.log(`[DEBUG] 注意：由于同一个exam只有一个session，需要通过points_transaction表查询历史记录`);
+    
+    // 由于同一个用户、同一个exam只有一个session，每次考试都会更新同一个session的score
+    // 所以我们需要通过points_transaction表来查询历史记录
+    // 查询同一个session（同一个exam）的最近三次积分交易记录（按时间倒序，包括当前这次）
+    const recentTransactionsResult = await query(
+      `SELECT pt.id, pt.source_id, pt.description, pt.create_time, pt.remark
+       FROM points_transaction pt
+       JOIN study_session ss ON pt.source_id = ss.id
+       WHERE pt.user_id = $1
+         AND pt.source_type = 'exam'
+         AND pt.source_id = $2
+         AND pt.description LIKE '%考试完成%'
+         AND pt.deleted = false
+         AND ss.exam_id = $3
+         AND ss.deleted = false
+       ORDER BY pt.create_time DESC
+       LIMIT 3`,
+      [userId, sessionId, examId]
+    );
+    
+    const recentTransactions = recentTransactionsResult.rows;
+    console.log(`[DEBUG] 同一个考试（exam_id: ${examId}）的最近三次考试记录: ${recentTransactions.length} 条记录`);
+    console.log(`[DEBUG] 最近三次考试详情:`, recentTransactions.map(tx => ({
+      id: tx.id,
+      source_id: tx.source_id,
+      description: tx.description,
+      create_time: tx.create_time
+    })));
     
     // 检查是否有三次考试
-    if (recentExams.length < 3) {
+    if (recentTransactions.length < 3) {
       console.log(`[DEBUG] 考试次数不足3次，不满足连续三次满分条件`);
       return 0;
     }
     
+    // 从description中提取分数，格式： "考试完成 (得分: X)"
+    const extractScore = (description) => {
+      const match = description.match(/得分:\s*(\d+)/);
+      if (match) {
+        return parseInt(match[1], 10);
+      }
+      return null;
+    };
+    
     // 检查最近三次是否都是100分
-    const allPerfect = recentExams.every(exam => exam.score === 100);
+    const allPerfect = recentTransactions.every(tx => {
+      const score = extractScore(tx.description);
+      const isPerfect = score !== null && score === 100;
+      console.log(`[DEBUG] 考试记录 ${tx.id}: description="${tx.description}", extracted_score=${score}, isPerfect=${isPerfect}`);
+      return isPerfect;
+    });
+    
     if (!allPerfect) {
       console.log(`[DEBUG] 最近三次考试不全是满分，不满足连续三次满分条件`);
       return 0;
@@ -79,84 +126,64 @@ async function checkAndAwardConsecutivePerfectScore(userId, sessionId, examName)
     console.log(`[DEBUG] ✅ 检测到连续三次满分！`);
     
     // 检查最近三次考试中是否已经有连续三次满分的奖励记录
-    // 获取最近三次考试的 sessionId 列表
-    const recentSessionIds = recentExams.map(exam => exam.id);
-    console.log(`[DEBUG] 最近三次考试的 sessionId: ${recentSessionIds.join(', ')}`);
+    // 获取最近三次考试的 transaction id 列表
+    const recentTransactionIds = recentTransactions.map(tx => tx.id);
+    console.log(`[DEBUG] 最近三次考试的 transaction id: ${recentTransactionIds.join(', ')}`);
     
     // 检查这三次考试中是否有任何一次已经因为连续三次满分而获得奖励
     // 如果已经奖励过，说明这三次中的某一次已经触发过奖励，不应该重复奖励
+    console.log(`[DEBUG] 检查最近三次考试中是否有奖励记录，transactionIds: ${recentTransactionIds.join(', ')}`);
+    
+    // 由于同一个exam只有一个session，所以source_id都是相同的
+    // 我们需要检查是否有连续三次满分奖励记录，并且检查是否与当前这三次有重叠
     const checkResult = await query(
-      `SELECT id, source_id FROM points_transaction
+      `SELECT id, source_id, description, create_time FROM points_transaction
        WHERE user_id = $1
          AND source_type = 'exam'
-         AND source_id = ANY($2::int[])
+         AND source_id = $2
          AND description LIKE '%连续三次满分%'
          AND deleted = false
        ORDER BY create_time DESC
        LIMIT 1`,
-      [userId, recentSessionIds]
+      [userId, sessionId]
     );
+    
+    console.log(`[DEBUG] 检查结果: ${checkResult.rows.length} 条记录`, checkResult.rows.length > 0 ? {
+      id: checkResult.rows[0].id,
+      source_id: checkResult.rows[0].source_id,
+      description: checkResult.rows[0].description,
+      create_time: checkResult.rows[0].create_time
+    } : '无记录');
     
     if (checkResult.rows.length > 0) {
-      console.log(`[DEBUG] 最近三次考试中已经有连续三次满分奖励记录（source_id: ${checkResult.rows[0].source_id}），不再重复奖励`);
-      return 0;
-    }
-    
-    // 进一步检查：确保这三次考试是"新的一组"连续三次满分
-    // 检查这三次考试之前是否有连续三次满分的奖励记录
-    // 如果之前有奖励记录，且最近三次考试包含了之前奖励时的那次考试，说明是同一组，不应该重复奖励
-    const earliestSessionId = recentSessionIds[recentSessionIds.length - 1]; // 最早的那次考试
-    const beforeCheckResult = await query(
-      `SELECT pt.source_id, pt.create_time, ss.create_time as session_time
-       FROM points_transaction pt
-       JOIN study_session ss ON pt.source_id = ss.id
-       WHERE pt.user_id = $1
-         AND pt.source_type = 'exam'
-         AND pt.description LIKE '%连续三次满分%'
-         AND pt.deleted = false
-         AND ss.deleted = false
-         AND ss.create_time <= (SELECT create_time FROM study_session WHERE id = $2)
-       ORDER BY pt.create_time DESC
-       LIMIT 1`,
-      [userId, earliestSessionId]
-    );
-    
-    if (beforeCheckResult.rows.length > 0) {
       // 检查之前的奖励是否与当前这三次考试有重叠
-      // 查询之前奖励时对应的那次考试，以及那次考试的前两次考试（共三次）
-      const lastRewardedSessionId = beforeCheckResult.rows[0].source_id;
-      const lastRewardedSessionResult = await query(
-        `SELECT ss.id, ss.create_time
-         FROM study_session ss
-         WHERE ss.id = $1 AND ss.deleted = false`,
-        [lastRewardedSessionId]
+      // 查询之前奖励时对应的最近三次考试记录
+      const lastRewardedTime = checkResult.rows[0].create_time;
+      const lastRewardedGroupResult = await query(
+        `SELECT pt.id, pt.create_time, pt.description
+         FROM points_transaction pt
+         JOIN study_session ss ON pt.source_id = ss.id
+         WHERE pt.user_id = $1
+           AND pt.source_type = 'exam'
+           AND pt.source_id = $2
+           AND pt.description LIKE '%考试完成%'
+           AND pt.deleted = false
+           AND ss.exam_id = $3
+           AND ss.deleted = false
+           AND pt.create_time <= $4
+         ORDER BY pt.create_time DESC
+         LIMIT 3`,
+        [userId, sessionId, examId, lastRewardedTime]
       );
       
-      if (lastRewardedSessionResult.rows.length > 0) {
-        const lastRewardedTime = lastRewardedSessionResult.rows[0].create_time;
-        // 查询那次奖励时对应的最近三次考试（包括那次考试本身）
-        const lastRewardedGroupResult = await query(
-          `SELECT ss.id
-           FROM study_session ss
-           WHERE ss.user_id = $1
-             AND ss.score = 100
-             AND ss.score IS NOT NULL
-             AND ss.deleted = false
-             AND ss.create_time <= $2
-           ORDER BY ss.create_time DESC
-           LIMIT 3`,
-          [userId, lastRewardedTime]
-        );
-        
-        const lastRewardedGroupIds = lastRewardedGroupResult.rows.map(row => row.id);
-        console.log(`[DEBUG] 之前奖励时对应的三次考试 sessionId: ${lastRewardedGroupIds.join(', ')}`);
-        
-        // 检查是否有重叠
-        const hasOverlap = recentSessionIds.some(id => lastRewardedGroupIds.includes(id));
-        if (hasOverlap) {
-          console.log(`[DEBUG] 最近三次考试与之前奖励的连续三次满分有重叠，不再重复奖励`);
-          return 0;
-        }
+      const lastRewardedGroupIds = lastRewardedGroupResult.rows.map(row => row.id);
+      console.log(`[DEBUG] 之前奖励时对应的三次考试 transaction id: ${lastRewardedGroupIds.join(', ')}`);
+      
+      // 检查是否有重叠（如果最近三次中有任何一次在之前奖励的那三次中，说明有重叠）
+      const hasOverlap = recentTransactionIds.some(id => lastRewardedGroupIds.includes(id));
+      if (hasOverlap) {
+        console.log(`[DEBUG] 最近三次考试与之前奖励的连续三次满分有重叠，不再重复奖励`);
+        return 0;
       }
     }
     
@@ -390,15 +417,24 @@ async function awardExamPoints(userId, score, sessionId) {
     // 检查连续三次满分奖励
     let consecutiveBonus = 0;
     if (numericScore === 100) {
+      console.log(`[DEBUG] ========== 开始检查连续三次满分奖励 ==========`);
+      console.log(`[DEBUG] numericScore: ${numericScore}, userId: ${userId}, sessionIdInt: ${sessionIdInt}, examName: ${examName}`);
       try {
         consecutiveBonus = await checkAndAwardConsecutivePerfectScore(userId, sessionIdInt, examName);
+        console.log(`[DEBUG] 连续三次满分奖励检查完成，返回积分: ${consecutiveBonus}`);
         if (consecutiveBonus > 0) {
           console.log(`[INFO] ✅ 连续三次满分奖励 - 额外奖励 ${consecutiveBonus} 积分`);
+        } else {
+          console.log(`[DEBUG] 连续三次满分奖励检查完成，但未满足奖励条件（返回0）`);
         }
       } catch (consecutiveError) {
         console.error(`[ERROR] 检查连续满分奖励失败: ${consecutiveError.message}`);
+        console.error(`[ERROR] 错误堆栈:`, consecutiveError.stack);
         // 不影响主流程，继续执行
       }
+      console.log(`[DEBUG] ========== 连续三次满分奖励检查结束 ==========`);
+    } else {
+      console.log(`[DEBUG] 当前考试得分不是100分（${numericScore}），跳过连续三次满分奖励检查`);
     }
     
     console.log(`[DEBUG] ========== awardExamPoints 成功完成 ==========`);
