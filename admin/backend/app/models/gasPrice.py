@@ -65,7 +65,7 @@ class GasPrice(SQLModel, table=True):
             index=False,
             unique=False,server_default=text("''"),        )
     )
-    crawl_time:        Optional[datetime] = Field(
+    crawl_time:        Optional[str] = Field(
             default=None,
         description="爬取时间",
         sa_column=Column(
@@ -75,7 +75,7 @@ class GasPrice(SQLModel, table=True):
             index=False,
             unique=False,        )
     )
-    posted_time:        Optional[datetime] = Field(
+    posted_time:        Optional[str] = Field(
             default=None,
         description="价格提交时间（postedTime from API）",
         sa_column=Column(
@@ -84,6 +84,16 @@ class GasPrice(SQLModel, table=True):
             primary_key=False,
             index=False,
             unique=False,        )
+    )
+    distance:        Optional[str] = Field(
+            default="",
+        description="从搜索postcode到station距离,km",
+        sa_column=Column(
+            String(10),
+            nullable=True,
+            primary_key=False,
+            index=False,
+            unique=False,server_default=text("''"),        )
     )
     # 默认加入通用字段
     creator: Optional[str] = Field(default=None, max_length=64, description="创建人")
@@ -116,8 +126,9 @@ class GasPriceCreate(SQLModel):
     fuel_product: Optional[int] = None
     cash_price: Optional[str] = None
     cash_formatted_price: Optional[str] = None
-    crawl_time: Optional[datetime] = None
-    posted_time: Optional[datetime] = None
+    crawl_time: Optional[str] = None
+    posted_time: Optional[str] = None
+    distance: Optional[str] = None
     creator: Optional[str] = Field(default=None, max_length=64)
     dept_id: Optional[int] = None
 
@@ -127,8 +138,9 @@ class GasPriceUpdate(SQLModel):
     fuel_product: Optional[int] = None
     cash_price: Optional[str] = None
     cash_formatted_price: Optional[str] = None
-    crawl_time: Optional[datetime] = None
-    posted_time: Optional[datetime] = None
+    crawl_time: Optional[str] = None
+    posted_time: Optional[str] = None
+    distance: Optional[str] = None
     updater: Optional[str] = Field(default=None, max_length=64)
     dept_id: Optional[int] = None
 

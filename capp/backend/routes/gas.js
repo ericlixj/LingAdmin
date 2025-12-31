@@ -2,6 +2,7 @@
 const express = require('express');
 const { query } = require('../utils/db');
 const { authenticateToken } = require('../utils/jwt');
+const { formatDateTime, getTimezoneByPostcode } = require('../utils/timezone');
 
 const router = express.Router();
 
@@ -51,15 +52,13 @@ router.get('/', authenticateToken, async (req, res) => {
     }
 
     // 2. 查询该 postcode 下的所有加油站
-    // 获取每个加油站的最新价格（按 crawl_time 排序）
+    // 获取每个加油站的最新价格（按 crawl_time 排序），距离从价格表获取
     const stationsResult = await query(
       `SELECT 
          gs.id,
          gs.station_id,
          gs.name,
-         gs.distance,
          gs.address,
-         gs.postcode,
          gp.latitude as postcode_lat,
          gp.longitude as postcode_lng,
          (
@@ -81,28 +80,76 @@ router.get('/', authenticateToken, async (req, res) => {
              AND gp2.deleted = false
            ORDER BY gp2.crawl_time DESC
            LIMIT 1
-         ) as latest_formatted_price
+         ) as latest_formatted_price,
+         (
+           SELECT gp2.crawl_time
+           FROM gas_price gp2
+           WHERE gp2.station_id = gs.station_id
+             AND gp2.postcode = $1
+             AND gp2.fuel_product = 1
+             AND gp2.deleted = false
+           ORDER BY gp2.crawl_time DESC
+           LIMIT 1
+         ) as latest_crawl_time,
+         (
+           SELECT gp2.distance
+           FROM gas_price gp2
+           WHERE gp2.station_id = gs.station_id
+             AND gp2.postcode = $1
+             AND gp2.fuel_product = 1
+             AND gp2.deleted = false
+           ORDER BY gp2.crawl_time DESC
+           LIMIT 1
+         ) as distance
        FROM gas_station gs
        LEFT JOIN gas_postcode gp ON gp.postcode = $1 AND gp.deleted = false
-       WHERE gs.postcode = $1
+       WHERE EXISTS (
+         SELECT 1
+         FROM gas_price gp3
+         WHERE gp3.station_id = gs.station_id
+           AND gp3.postcode = $1
+           AND gp3.deleted = false
+       )
          AND gs.deleted = false
-       GROUP BY gs.id, gs.station_id, gs.name, gs.distance, gs.address, gs.postcode, gp.latitude, gp.longitude
+       GROUP BY gs.id, gs.station_id, gs.name, gs.address, gp.latitude, gp.longitude
        ORDER BY gs.station_id`,
       [cleanPostcode]
     );
+
+    // 获取时区
+    const timezone = await getTimezoneByPostcode(cleanPostcode);
 
     // 3. 处理距离计算和过滤
     const stations = stationsResult.rows.map(station => {
       let distance = null;
       
-      // 如果 station 有 distance 字段且不为空，使用它
-      if (station.distance && station.distance !== '0' && station.distance !== '') {
+      // 调试：打印原始 distance 值
+      console.log(`[DEBUG] Station ${station.station_id}: distance=${station.distance} (type: ${typeof station.distance})`);
+      
+      // 如果 station 有 distance 字段且不为空且不为 '0'，使用它
+      if (station.distance && station.distance !== '0' && station.distance !== '' && station.distance !== 0) {
         distance = parseFloat(station.distance);
-      } else if (postcodeLat && postcodeLng && station.postcode_lat && station.postcode_lng) {
-        // 否则计算距离（Haversine 公式）
-        const stationLat = parseFloat(station.postcode_lat);
-        const stationLng = parseFloat(station.postcode_lng);
-        distance = calculateDistance(postcodeLat, postcodeLng, stationLat, stationLng);
+        // 如果解析失败或结果为 NaN，设置为 null
+        if (isNaN(distance) || distance === 0) {
+          distance = null;
+          console.log(`[DEBUG] Station ${station.station_id}: parsed distance is NaN or 0, setting to null`);
+        } else {
+          console.log(`[DEBUG] Station ${station.station_id}: using distance from database: ${distance}`);
+        }
+      } else {
+        console.log(`[DEBUG] Station ${station.station_id}: distance is '0', empty, or null, setting to null`);
+        distance = null;
+      }
+
+      // 格式化爬取时间（转换为目标时区，只显示时间，不显示时区名）
+      let crawlTimeFormatted = null;
+      if (station.latest_crawl_time) {
+        try {
+          crawlTimeFormatted = formatDateTime(station.latest_crawl_time, timezone);
+          console.log(`[DEBUG] Formatting crawl_time: ${station.latest_crawl_time} (timezone: ${timezone}) => ${crawlTimeFormatted}`);
+        } catch (error) {
+          console.error(`[ERROR] Failed to format crawl_time: ${station.latest_crawl_time}`, error);
+        }
       }
 
       return {
@@ -112,7 +159,8 @@ router.get('/', authenticateToken, async (req, res) => {
         distance: distance,
         price: station.latest_price ? parseFloat(station.latest_price) : null,
         formatted_price: station.latest_formatted_price,
-        postcode: station.postcode
+        crawl_time: crawlTimeFormatted || station.latest_crawl_time, // 已转换为目标时区的本地时间（格式：yyyy-MM-dd HH:mm:ss）
+        postcode: cleanPostcode
       };
     });
 

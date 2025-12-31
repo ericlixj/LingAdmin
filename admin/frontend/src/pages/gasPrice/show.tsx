@@ -54,10 +54,17 @@ export const GasPriceShow = () => {
         }
       </Text>
       <br />
+      <Text strong>距离(km):</Text>
+      <Text>
+        {
+          (record?.distance && record.distance !== "0" && record.distance !== "") ? record.distance : "-"
+        }
+      </Text>
+      <br />
       <Text strong>爬取时间:</Text>
       <Text>
         {
-          record?.crawl_time ? dayjs(record.crawl_time).format("YYYY-MM-DD") : ""
+          record?.crawl_time_formatted || (record?.crawl_time ? dayjs(record.crawl_time).format("YYYY-MM-DD HH:mm:ss") : "")
         }
       </Text>
       <br />

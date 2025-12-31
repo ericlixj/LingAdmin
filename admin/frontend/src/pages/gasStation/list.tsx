@@ -70,43 +70,27 @@ export const GasStationList = () => {
           }}
         />
         <Table.Column
-          dataIndex="distance"
-          title="从搜索postcode到station距离,km"
-
-          render={(value) => {
-            return value;
-          }}
-        />
-        <Table.Column
-          dataIndex="postcode"
-          title="基准postcode"
-          filterDropdown={(props) => (
-            <FilterDropdown {...props}>
-              <Input
-                placeholder="搜索基准postcode"
-                value={(props.selectedKeys[0] as string) || ""}
-                onChange={(e) =>
-                  props.setSelectedKeys(e.target.value ? [e.target.value] : [])
-                }
-                onPressEnter={() => props.confirm()}
-                onBlur={() => props.confirm()}
-              />
-            </FilterDropdown>
-          )}
-          filteredValue={
-            (filters.find((f) => f.field === "postcode")?.value as any[]) || null
-          }
-
-          render={(value) => {
-            return value;
-          }}
-        />
-        <Table.Column
           dataIndex="address"
           title="地址"
 
           render={(value) => {
             return value;
+          }}
+        />
+        <Table.Column
+          dataIndex="latitude"
+          title="纬度"
+
+          render={(value) => {
+            return value || "-";
+          }}
+        />
+        <Table.Column
+          dataIndex="longitude"
+          title="经度"
+
+          render={(value) => {
+            return value || "-";
           }}
         />
 

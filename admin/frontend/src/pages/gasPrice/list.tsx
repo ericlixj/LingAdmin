@@ -62,11 +62,34 @@ export const GasPriceList = () => {
           }}
         />
         <Table.Column
-          dataIndex="crawl_time"
-          title="爬取时间"
+          dataIndex="distance"
+          title="距离(km)"
 
           render={(value) => {
-            return value ? dayjs(value).format("YYYY-MM-DD") : "";
+            if (value && value !== "0" && value !== "") {
+              return value;
+            }
+            return "-";
+          }}
+        />
+        <Table.Column
+          dataIndex="crawl_time"
+          title="爬取时间"
+          render={(value, record) => {
+            // 优先使用格式化后的时间，如果没有则使用原始时间格式化
+            console.log('[DEBUG] GasPrice list render crawl_time:', { value, record, crawl_time_formatted: record?.crawl_time_formatted });
+            if (record?.crawl_time_formatted) {
+              return record.crawl_time_formatted;
+            }
+            if (value) {
+              try {
+                return dayjs(value).format("YYYY-MM-DD HH:mm:ss");
+              } catch (e) {
+                console.error('[DEBUG] Failed to format crawl_time:', e, value);
+                return String(value || "");
+              }
+            }
+            return "";
           }}
         />
 

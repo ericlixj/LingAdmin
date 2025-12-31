@@ -33,24 +33,24 @@ export const GasStationShow = () => {
         }
       </Text>
       <br />
-      <Text strong>从搜索postcode到station距离,km:</Text>
-      <Text>
-        {
-          record?.distance
-        }
-      </Text>
-      <br />
-      <Text strong>基准postcode:</Text>
-      <Text>
-        {
-          record?.postcode
-        }
-      </Text>
-      <br />
       <Text strong>地址:</Text>
       <Text>
         {
           record?.address
+        }
+      </Text>
+      <br />
+      <Text strong>纬度:</Text>
+      <Text>
+        {
+          record?.latitude || "-"
+        }
+      </Text>
+      <br />
+      <Text strong>经度:</Text>
+      <Text>
+        {
+          record?.longitude || "-"
         }
       </Text>
       <br />

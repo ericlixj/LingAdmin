@@ -35,32 +35,32 @@ class GasStation(SQLModel, table=True):
             index=False,
             unique=False,server_default=text("''"),        )
     )
-    distance:        Optional[str] = Field(
-            default="",
-        description="从搜索postcode到station距离,km",
-        sa_column=Column(
-            String(10),
-            nullable=False,
-            primary_key=False,
-            index=False,
-            unique=False,server_default=text("''"),        )
-    )
-    postcode:        str = Field(
-            default="",
-        description="基准postcode",
-        sa_column=Column(
-            String(64),
-            nullable=False,
-            primary_key=False,
-            index=False,
-            unique=False,server_default=text("''"),        )
-    )
     address:        Optional[str] = Field(
             default="",
         description="地址",
         sa_column=Column(
             String(100),
             nullable=False,
+            primary_key=False,
+            index=False,
+            unique=False,server_default=text("''"),        )
+    )
+    latitude:        Optional[str] = Field(
+            default="",
+        description="纬度",
+        sa_column=Column(
+            String(64),
+            nullable=True,
+            primary_key=False,
+            index=False,
+            unique=False,server_default=text("''"),        )
+    )
+    longitude:        Optional[str] = Field(
+            default="",
+        description="经度",
+        sa_column=Column(
+            String(64),
+            nullable=True,
             primary_key=False,
             index=False,
             unique=False,server_default=text("''"),        )
@@ -91,20 +91,20 @@ class GasStation(SQLModel, table=True):
     )
 
 class GasStationCreate(SQLModel):
-    postcode: str
     station_id: Optional[str] = None
     name: Optional[str] = None
-    distance: Optional[str] = None
     address: Optional[str] = None
+    latitude: Optional[str] = None
+    longitude: Optional[str] = None
     creator: Optional[str] = Field(default=None, max_length=64)
     dept_id: Optional[int] = None
 
 class GasStationUpdate(SQLModel):
     station_id: Optional[str] = None
     name: Optional[str] = None
-    distance: Optional[str] = None
-    postcode: Optional[str] = None
     address: Optional[str] = None
+    latitude: Optional[str] = None
+    longitude: Optional[str] = None
     updater: Optional[str] = Field(default=None, max_length=64)
     dept_id: Optional[int] = None
 

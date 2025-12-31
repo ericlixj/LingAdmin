@@ -310,10 +310,18 @@ function GasBuddy({ lang = "cn" }) {
                   )}
 
                   {/* 距离 */}
-                  {station.distance !== null && station.distance !== undefined && (
+                  {station.distance !== null && station.distance !== undefined && station.distance > 0 && (
                     <p style={{ margin: "0.25rem 0", color: "#666", fontSize: "0.9rem" }}>
                       <strong>{lang === "cn" ? "距离:" : lang === "en" ? "Distance:" : "距離:"}</strong>{" "}
-                      {station.distance.toFixed(2)} km
+                      {typeof station.distance === 'number' ? station.distance.toFixed(2) : parseFloat(station.distance).toFixed(2)} km
+                    </p>
+                  )}
+
+                  {/* 爬取时间 */}
+                  {station.crawl_time && (
+                    <p style={{ margin: "0.25rem 0", color: "#666", fontSize: "0.85rem" }}>
+                      <strong>{lang === "cn" ? "爬取时间:" : lang === "en" ? "Crawl Time:" : "爬取時間:"}</strong>{" "}
+                      {station.crawl_time}
                     </p>
                   )}
                 </div>

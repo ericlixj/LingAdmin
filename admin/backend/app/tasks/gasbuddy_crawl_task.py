@@ -131,7 +131,7 @@ class GasBuddyDataProcessor:
             self.postcode_crud.create(postcode_data)
     
     def _upsert_station(self, postcode: str, station_data: dict):
-        """更新或创建 station 记录"""
+        """更新或创建 station 记录（只存储加油站基础信息，不存储postcode和distance）"""
         station_id = station_data.get("id")
         if not station_id:
             logger.warning(f"No station ID in station data")
@@ -156,47 +156,131 @@ class GasBuddyDataProcessor:
         ]
         address = ", ".join(filter(None, address_parts))
         
-        # 处理 distance
-        # 注意：API 返回的 distance 可能为 null（当只提供 search 而不提供 lat/lng 时）
-        # 如果需要距离信息，需要在请求时提供 lat 和 lng 参数
-        distance_value = station_data.get("distance")
-        if distance_value is None or distance_value == "":
-            # 如果没有距离信息，设置为 "0" 或空字符串（根据数据库约束）
-            # 由于数据库要求非空，设置为 "0"
-            distance_str = "0"
-            logger.debug(f"[Processor] Station {station_id_str} has no distance data, setting to '0'")
-        else:
-            distance_str = str(distance_value)
+        # 获取station的坐标（从API数据中）
+        station_lat = station_data.get("latitude")
+        station_lng = station_data.get("longitude")
+        station_lat_str = str(station_lat) if station_lat is not None else ""
+        station_lng_str = str(station_lng) if station_lng is not None else ""
         
         station_create = GasStationCreate(
-            postcode=postcode,
             station_id=station_id_str,
             name=station_data.get("name") or "",
-            distance=distance_str,
             address=address if address else None,
+            latitude=station_lat_str,
+            longitude=station_lng_str,
             creator=str(self.user_id),
             dept_id=self.dept_id,
         )
         
         if existing:
-            # 更新距离和地址（如果变化）
-            if existing.postcode != postcode or existing.distance != station_create.distance or existing.address != station_create.address:
+            # 更新名称、地址和坐标（如果变化）
+            if (existing.name != station_create.name or 
+                existing.address != station_create.address or
+                existing.latitude != station_create.latitude or
+                existing.longitude != station_create.longitude):
                 from app.models.gasStation import GasStationUpdate
                 update_data = GasStationUpdate(
-                    postcode=station_create.postcode,
-                    distance=station_create.distance,
+                    name=station_create.name,
                     address=station_create.address,
+                    latitude=station_create.latitude,
+                    longitude=station_create.longitude,
                     updater=str(self.user_id),
                 )
                 self.station_crud.update(existing, update_data)
         else:
             self.station_crud.create(station_create)
         
+        # 处理价格数据（距离会在价格表中计算和存储）
         prices = station_data.get("prices", [])
         for price_data in prices:
-            self._upsert_price(postcode, station_id_str, price_data)
+            self._upsert_price(postcode, station_id_str, station_data, price_data)
     
-    def _upsert_price(self, postcode: str, station_id: str, price_data: dict):
+    def _calculate_distance(self, postcode: str, station_id: str, station_data: dict) -> str:
+        """计算从postcode到station的距离"""
+        # 如果 API 返回了距离，直接使用
+        distance_value = station_data.get("distance")
+        if distance_value is not None and distance_value != "":
+            try:
+                distance_float = float(distance_value)
+                if distance_float > 0:
+                    distance_str = f"{distance_float:.2f}"
+                    logger.debug(f"[Processor] Using API distance for station {station_id}: {distance_str} km")
+                    return distance_str
+            except (ValueError, TypeError):
+                pass
+        
+        # 如果距离仍然为空，尝试根据postcode和station坐标计算距离
+        try:
+            # 获取postcode的坐标
+            from app.models.gasPostcode import GasPostcode
+            postcode_record = self.session.exec(
+                select(GasPostcode).where(
+                    GasPostcode.postcode == postcode.replace(" ", "").upper(),
+                    GasPostcode.deleted == False
+                )
+            ).first()
+            
+            # 获取station的坐标（优先从API数据中获取，如果不存在则从数据库获取）
+            station_lat = station_data.get("latitude")
+            station_lng = station_data.get("longitude")
+            
+            # 如果API没有返回坐标，尝试从数据库获取
+            if (not station_lat or not station_lng):
+                existing_station = self.session.exec(
+                    select(GasStation).where(
+                        GasStation.station_id == station_id,
+                        GasStation.deleted == False
+                    )
+                ).first()
+                if existing_station:
+                    station_lat = existing_station.latitude if existing_station.latitude else None
+                    station_lng = existing_station.longitude if existing_station.longitude else None
+            
+            logger.debug(f"[Processor] Station {station_id}: postcode_record={postcode_record is not None}, "
+                       f"postcode_lat={postcode_record.latitude if postcode_record else None}, "
+                       f"postcode_lng={postcode_record.longitude if postcode_record else None}, "
+                       f"station_lat={station_lat}, station_lng={station_lng}")
+            
+            if postcode_record and postcode_record.latitude and postcode_record.longitude and station_lat and station_lng:
+                # 计算距离（Haversine公式）
+                from math import radians, sin, cos, sqrt, atan2
+                R = 6371  # 地球半径（公里）
+                
+                lat1 = radians(float(postcode_record.latitude))
+                lon1 = radians(float(postcode_record.longitude))
+                lat2 = radians(float(station_lat))
+                lon2 = radians(float(station_lng))
+                
+                dlat = lat2 - lat1
+                dlon = lon2 - lon1
+                
+                a = sin(dlat / 2)**2 + cos(lat1) * cos(lat2) * sin(dlon / 2)**2
+                c = 2 * atan2(sqrt(a), sqrt(1 - a))
+                
+                distance_km = R * c
+                distance_str = f"{distance_km:.2f}"
+                logger.info(f"[Processor] Calculated distance for station {station_id}: {distance_str} km "
+                          f"(postcode: {postcode}, station: {station_id})")
+                return distance_str
+            else:
+                # 如果无法计算，设置为 "0"
+                missing_info = []
+                if not postcode_record:
+                    missing_info.append("postcode_record")
+                elif not postcode_record.latitude or not postcode_record.longitude:
+                    missing_info.append("postcode_coordinates")
+                if not station_lat or not station_lng:
+                    missing_info.append("station_coordinates")
+                logger.warning(f"[Processor] Station {station_id} cannot calculate distance, missing: {', '.join(missing_info)}, setting to '0'")
+                return "0"
+        except Exception as e:
+            logger.error(f"[Processor] Failed to calculate distance for station {station_id}: {e}", exc_info=True)
+            return "0"
+        
+        # 如果仍然为空，设置为 "0"
+        return "0"
+    
+    def _upsert_price(self, postcode: str, station_id: str, station_data: dict, price_data: dict):
         """创建价格记录（历史数据）"""
         fuel_product_str = price_data.get("fuelProduct")
         
@@ -272,6 +356,13 @@ class GasBuddyDataProcessor:
                 logger.warning(f"[Processor] Failed to parse postedTime {posted_time_str}: {e}")
                 posted_time = None
         
+        # 计算距离（从postcode到station）
+        distance_str = self._calculate_distance(postcode, station_id, station_data)
+        
+        # 将 datetime 对象转换为字符串
+        crawl_time_str = self.crawl_time.strftime("%Y-%m-%d %H:%M:%S") if isinstance(self.crawl_time, datetime) else str(self.crawl_time)
+        posted_time_str = posted_time.strftime("%Y-%m-%d %H:%M:%S") if isinstance(posted_time, datetime) else (str(posted_time) if posted_time else None)
+        
         # 注意：即使使用的是 credit 价格，也存储在 cash_price 字段中
         # 因为模型设计时可能只考虑了 cash 价格
         # 如果需要区分，可以后续扩展模型添加 credit_price 字段
@@ -281,8 +372,9 @@ class GasBuddyDataProcessor:
             fuel_product=fuel_product,  # 现在是整数
             cash_price=str(price_value),
             cash_formatted_price=formatted_price,
-            crawl_time=self.crawl_time,
-            posted_time=posted_time,  # 添加价格提交时间
+            crawl_time=crawl_time_str,
+            posted_time=posted_time_str,  # 添加价格提交时间
+            distance=distance_str,  # 添加距离
             creator=str(self.user_id),
             dept_id=self.dept_id,
         )

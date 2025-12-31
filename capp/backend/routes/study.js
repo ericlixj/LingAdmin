@@ -158,6 +158,24 @@ async function awardExamPoints(userId, score, sessionId) {
     
     console.log(`[DEBUG] 积分更新后 - balance: ${updateResult.rows[0].balance}, total_earned: ${updateResult.rows[0].total_earned}`);
     
+    // 查询考试名称
+    let examName = null;
+    try {
+      const examResult = await query(
+        `SELECT se.name as exam_name
+         FROM study_session ss
+         JOIN study_exam se ON ss.exam_id = se.id
+         WHERE ss.id = $1 AND ss.deleted = false`,
+        [sessionIdInt]
+      );
+      if (examResult.rows.length > 0 && examResult.rows[0].exam_name) {
+        examName = examResult.rows[0].exam_name;
+        console.log(`[DEBUG] 查询到考试名称: ${examName}`);
+      }
+    } catch (examQueryError) {
+      console.warn(`[WARN] 查询考试名称失败: ${examQueryError.message}，继续执行`);
+    }
+    
     // 创建积分明细记录（确保有记录）
     let description = `考试完成 (得分: ${numericScore})`;
     if (bonusPoints > 0) {
@@ -166,15 +184,18 @@ async function awardExamPoints(userId, score, sessionId) {
       description += `，获得基础积分${basePoints}分`;
     }
     
+    // 将考试名称添加到备注字段
+    let remark = examName ? `考试: ${examName}` : null;
+    
     let transactionResult;
     try {
       transactionResult = await query(
         `INSERT INTO points_transaction 
          (user_id, transaction_type, amount, balance_before, balance_after, 
-          source_type, source_id, source_table, description, deleted, create_time)
-         VALUES ($1, 'earn', $2, $3, $4, 'exam', $5, 'study_session', $6, false, CURRENT_TIMESTAMP)
+          source_type, source_id, source_table, description, remark, deleted, create_time)
+         VALUES ($1, 'earn', $2, $3, $4, 'exam', $5, 'study_session', $6, $7, false, CURRENT_TIMESTAMP)
          RETURNING id`,
-        [userId, pointsAmount, balanceBefore, balanceAfter, sessionIdInt, description]
+        [userId, pointsAmount, balanceBefore, balanceAfter, sessionIdInt, description, remark]
       );
       console.log(`[DEBUG] 积分交易记录插入结果: ${transactionResult.rows.length} 条`);
     } catch (insertError) {

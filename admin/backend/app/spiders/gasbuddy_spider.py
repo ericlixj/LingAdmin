@@ -112,6 +112,8 @@ class GasBuddySpider(scrapy.Spider):
               __typename
             }
             distance
+            latitude
+            longitude
             emergencyStatus {
               hasDiesel {
                 nickname

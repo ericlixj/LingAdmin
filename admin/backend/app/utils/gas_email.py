@@ -56,11 +56,13 @@ def get_timezone_by_postcode(postcode: str, session: Optional[Session] = None) -
         对应的时区对象，默认为东部时区（America/Toronto）
     """
     try:
+        clean_postcode = postcode.replace(" ", "").upper()
+        
         # 如果有session，尝试从数据库查询region_code
         if session:
             postcode_record = session.exec(
                 select(GasPostcode).where(
-                    GasPostcode.postcode == postcode.replace(" ", "").upper(),
+                    GasPostcode.postcode == clean_postcode,
                     GasPostcode.deleted == False
                 )
             ).first()
@@ -69,6 +71,7 @@ def get_timezone_by_postcode(postcode: str, session: Optional[Session] = None) -
                 region_code = postcode_record.region_code.upper()
                 timezone_name = CANADA_PROVINCE_TIMEZONE_MAP.get(region_code)
                 if timezone_name:
+                    logger.debug(f"Found timezone from database for postcode {postcode}: region_code={region_code}, timezone={timezone_name}")
                     return ZoneInfo(timezone_name)
         
         # 如果没有找到，尝试根据邮编前缀判断（加拿大邮编格式：A0A 0A0）
@@ -77,12 +80,12 @@ def get_timezone_by_postcode(postcode: str, session: Optional[Session] = None) -
         # G, H, J: 魁北克省 (东部时区)
         # A, B, C, E: 大西洋省份 (大西洋时区)
         # R, S, T: 西部省份 (山地/太平洋时区)
-        # V: 不列颠哥伦比亚省 (太平洋时区)
+        # V: 不列颠哥伦比亚省 (太平洋时区) - America/Vancouver
         # Y: 育空地区 (山地时区)
-        clean_postcode = postcode.replace(" ", "").upper()
         if clean_postcode:
             first_char = clean_postcode[0]
             if first_char in ['V']:
+                logger.debug(f"Using timezone from postcode prefix for {postcode}: V -> America/Vancouver")
                 return ZoneInfo("America/Vancouver")  # BC
             elif first_char in ['T', 'S', 'R']:
                 return ZoneInfo("America/Edmonton")  # AB/SK/MB
@@ -94,9 +97,14 @@ def get_timezone_by_postcode(postcode: str, session: Optional[Session] = None) -
                 return ZoneInfo("America/Whitehorse")  # YT
         
         # 默认返回东部时区
+        logger.warning(f"Using default timezone for postcode {postcode}")
         return ZoneInfo(CANADA_PROVINCE_TIMEZONE_MAP["DEFAULT"])
     except Exception as e:
         logger.warning(f"Failed to determine timezone for postcode {postcode}: {e}")
+        # 如果出错，对于V开头的邮编，默认返回America/Vancouver
+        clean_postcode = postcode.replace(" ", "").upper()
+        if clean_postcode and clean_postcode[0] == 'V':
+            return ZoneInfo("America/Vancouver")
         return ZoneInfo(CANADA_PROVINCE_TIMEZONE_MAP["DEFAULT"])
 
 
@@ -238,19 +246,21 @@ def format_datetime(dt, timezone: Optional[ZoneInfo] = None) -> str:
         # 如果是字符串，尝试解析为UTC时间
         dt_obj = None
         if isinstance(dt, str):
-            # 尝试多种格式
+            logger.debug(f"Parsing datetime string: {dt}")
+            # 尝试多种格式（注意顺序：更具体的格式先匹配）
             for fmt in [
-                "%Y-%m-%d %H:%M:%S",
-                "%Y-%m-%d %H:%M:%S.%f",
-                "%Y-%m-%dT%H:%M:%S",
-                "%Y-%m-%dT%H:%M:%S.%f",
-                "%Y-%m-%dT%H:%M:%SZ",
+                "%Y-%m-%d %H:%M:%S.%f",  # 2025-12-30 02:02:43.56105
+                "%Y-%m-%d %H:%M:%S",     # 2025-12-30 02:02:43
+                "%Y-%m-%dT%H:%M:%S.%f",  # 2025-12-30T02:02:43.56105
+                "%Y-%m-%dT%H:%M:%S",     # 2025-12-30T02:02:43
+                "%Y-%m-%dT%H:%M:%SZ",   # 2025-12-30T02:02:43Z
             ]:
                 try:
                     dt_obj = datetime.strptime(dt, fmt)
                     # 假设是UTC时间
                     if dt_obj.tzinfo is None:
                         dt_obj = dt_obj.replace(tzinfo=dt_timezone.utc)
+                    logger.debug(f"Parsed datetime string with format {fmt}: {dt_obj} (UTC)")
                     break
                 except ValueError:
                     continue
@@ -261,27 +271,38 @@ def format_datetime(dt, timezone: Optional[ZoneInfo] = None) -> str:
                     dt_obj = datetime.fromisoformat(dt.replace('Z', '+00:00'))
                     if dt_obj.tzinfo is None:
                         dt_obj = dt_obj.replace(tzinfo=dt_timezone.utc)
-                except:
+                    logger.debug(f"Parsed datetime string with fromisoformat: {dt_obj}")
+                except Exception as e:
+                    logger.warning(f"Failed to parse datetime string: {dt}, error: {e}")
                     return dt  # 返回原字符串
         elif isinstance(dt, datetime):
             dt_obj = dt
             # 如果没有时区信息，假设是UTC
             if dt_obj.tzinfo is None:
                 dt_obj = dt_obj.replace(tzinfo=dt_timezone.utc)
+                logger.debug(f"Assumed UTC timezone for datetime: {dt_obj}")
         
         if dt_obj is None:
+            logger.warning(f"Could not parse datetime: {dt}")
             return str(dt)
         
         # 转换时区
         if timezone:
-            # 确保dt_obj有时区信息
+            # 确保dt_obj有时区信息（假设是UTC）
             if dt_obj.tzinfo is None:
                 dt_obj = dt_obj.replace(tzinfo=dt_timezone.utc)
-            # 转换为目标时区
+                logger.debug(f"Added UTC timezone: {dt_obj}")
+            # 转换为目标时区（例如：America/Vancouver）
+            original_time = dt_obj
             dt_obj = dt_obj.astimezone(timezone)
+            logger.debug(f"Converted datetime from {original_time} (UTC) to {dt_obj} ({timezone})")
+        else:
+            logger.debug(f"No timezone specified, using original time: {dt_obj}")
         
-        # 格式化时间
-        return dt_obj.strftime("%Y-%m-%d %H:%M:%S")
+        # 格式化时间：yyyy-MM-dd HH:mm:ss（显示为本地时区时间）
+        formatted = dt_obj.strftime("%Y-%m-%d %H:%M:%S")
+        logger.debug(f"Formatted datetime: {formatted}")
+        return formatted
     
     except Exception as e:
         logger.warning(f"Failed to format datetime {dt}: {e}")
@@ -376,46 +397,46 @@ def get_gas_prices_within_5km(postcode: str, fuel_product: int = 1, session: Opt
         session = Session(engine)
     
     try:
-        # 查询该邮编的所有加油站（暂时不考虑距离限制）
-        all_stations = session.exec(
-            select(GasStation).where(
-                GasStation.postcode == postcode,
+        # 查询该邮编的所有价格记录（从 gas_price 表查询，不再使用 gas_station 表的 postcode）
+        # 获取每个加油站的最新价格（仅Regular类型，fuel_product=1）
+        latest_prices = session.exec(
+            select(GasPrice, GasStation).join(
+                GasStation, GasPrice.station_id == GasStation.station_id
+            ).where(
+                GasPrice.postcode == postcode,
+                GasPrice.fuel_product == fuel_product,
+                GasPrice.deleted == False,
                 GasStation.deleted == False
-            )
+            ).order_by(desc(GasPrice.crawl_time))
         ).all()
         
-        logger.info(f"[GasEmail] Found {len(all_stations)} stations for postcode {postcode}")
+        # 按 station_id 分组，只保留每个加油站的最新价格
+        station_price_map = {}
+        for price, station in latest_prices:
+            station_id = price.station_id
+            if station_id not in station_price_map:
+                station_price_map[station_id] = (price, station)
         
-        if not all_stations:
-            logger.warning(f"[GasEmail] No stations found for postcode {postcode}")
+        logger.info(f"[GasEmail] Found {len(station_price_map)} stations with prices for postcode {postcode}")
+        
+        if not station_price_map:
+            logger.warning(f"[GasEmail] No stations with prices found for postcode {postcode}")
             return []
         
-        # 暂时不使用距离过滤，直接使用所有加油站
-        filtered_stations = all_stations
-        
-        # 获取每个加油站的最新价格（仅Regular类型，fuel_product=1）
+        # 构建价格列表
         prices = []
         stations_without_price = []
         
-        for station in filtered_stations:
-            # 获取距离信息（如果可用）
+        for station_id, (latest_price, station) in station_price_map.items():
+            # 获取距离信息（从价格表中获取）
             try:
-                if station.distance and station.distance != "" and station.distance != "0":
-                    distance_float = float(station.distance)
+                if latest_price.distance and latest_price.distance != "" and latest_price.distance != "0":
+                    distance_float = float(latest_price.distance)
                 else:
                     distance_float = None  # 距离信息不可用
             except (ValueError, TypeError):
                 distance_float = None
                 
-            # 获取该加油站最新价格（仅Regular类型，fuel_product=1）
-            latest_price = session.exec(
-                select(GasPrice).where(
-                    GasPrice.station_id == station.station_id,
-                    GasPrice.fuel_product == 1,  # 固定使用Regular类型
-                    GasPrice.deleted == False
-                ).order_by(desc(GasPrice.crawl_time)).limit(1)
-            ).first()
-            
             if latest_price and latest_price.cash_price:
                 try:
                     price_float = float(latest_price.cash_price)
@@ -429,17 +450,17 @@ def get_gas_prices_within_5km(postcode: str, fuel_product: int = 1, session: Opt
                         'posted_time': latest_price.posted_time  # 添加价格提交时间
                     })
                 except (ValueError, TypeError) as e:
-                    logger.warning(f"[GasEmail] Failed to parse price for station {station.station_id}: {latest_price.cash_price}, error: {e}")
-                    stations_without_price.append(station.station_id)
+                    logger.warning(f"[GasEmail] Failed to parse price for station {station_id}: {latest_price.cash_price}, error: {e}")
+                    stations_without_price.append(station_id)
                     continue
             else:
-                stations_without_price.append(station.station_id)
-                logger.debug(f"[GasEmail] No Regular price found for station {station.station_id} ({station.name})")
+                stations_without_price.append(station_id)
+                logger.debug(f"[GasEmail] No Regular price found for station {station_id} ({station.name})")
         
         if stations_without_price:
             logger.warning(f"[GasEmail] {len(stations_without_price)} stations have no Regular price: {stations_without_price[:5]}")
         
-        logger.info(f"[GasEmail] Found {len(prices)} prices for postcode {postcode} (out of {len(filtered_stations)} stations)")
+        logger.info(f"[GasEmail] Found {len(prices)} prices for postcode {postcode} (out of {len(station_price_map)} stations)")
         
         # 按价格排序（升序，最便宜的在前），不考虑距离
         prices.sort(key=lambda x: x['price'])
