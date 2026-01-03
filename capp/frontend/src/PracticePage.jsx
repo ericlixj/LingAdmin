@@ -1,5 +1,6 @@
 // PracticePage.jsx
 import { useState, useEffect, useCallback, useRef } from "react";
+import { getProxyImageUrl } from "./utils/imageProxy";
 
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:4000";
 
@@ -604,6 +605,14 @@ function PracticePage({ sessionId, practiceMode = "all", lang, onBack }) {
     }
   }, [submitted, currentQuestion, currentIndex, currentItem]);
 
+  // 调试：打印图片URL信息 - 必须在所有早期返回之前
+  useEffect(() => {
+    if (currentQuestion?.image_url) {
+      console.log('[PracticePage] 原始图片URL:', currentQuestion.image_url);
+      console.log('[PracticePage] 代理后URL:', getProxyImageUrl(currentQuestion.image_url));
+    }
+  }, [currentQuestion?.image_url]);
+
 
   const handleSubmit = async () => {
     if (!selectedAnswer || submitted) {
@@ -1111,6 +1120,7 @@ function PracticePage({ sessionId, practiceMode = "all", lang, onBack }) {
   const correctAnswers = parseAnswer(currentQuestion.answer);
   const stemText = currentQuestion.stem || "";
   const stemImageUrl = currentQuestion.image_url || null;
+  
   // 只有提交后才显示结果
   const showResult = submitted;
   // 提交后从当前item获取是否正确（确保是数字比较）
@@ -1437,7 +1447,7 @@ function PracticePage({ sessionId, practiceMode = "all", lang, onBack }) {
           {stemImageUrl && (
             <div style={{ marginBottom: "1rem" }}>
               <img
-                src={stemImageUrl}
+                src={getProxyImageUrl(stemImageUrl)}
                 alt="题目图片"
                 style={{
                   maxWidth: "100%",
@@ -1447,8 +1457,23 @@ function PracticePage({ sessionId, practiceMode = "all", lang, onBack }) {
                   objectFit: "contain",
                   backgroundColor: isDarkMode ? "#1a1a1a" : "#f5f5f5",
                 }}
+                onLoad={() => {
+                  console.log('[PracticePage] 图片加载成功:', stemImageUrl);
+                }}
                 onError={(e) => {
-                  e.target.style.display = "none";
+                  console.error('[PracticePage] 图片加载失败:', {
+                    src: e.target.src,
+                    originalUrl: stemImageUrl,
+                    error: '图片加载失败'
+                  });
+                  // 如果代理失败，尝试使用原始URL
+                  if (e.target.src.includes("/api/v1/imageProxy/proxy")) {
+                    console.log('[PracticePage] 尝试使用原始URL:', stemImageUrl);
+                    e.target.src = stemImageUrl;
+                  } else {
+                    console.log('[PracticePage] 隐藏图片');
+                    e.target.style.display = "none";
+                  }
                 }}
               />
             </div>

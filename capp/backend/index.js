@@ -103,6 +103,10 @@ app.use("/api/c/study", studyRouter);
 // 积分系统路由
 app.use("/api/c/points", pointsRouter);
 
+// 图片代理路由（用于绕过防盗链）
+const imageProxyRouter = require("./routes/imageProxy");
+app.use("/api/v1/imageProxy", imageProxyRouter);
+
 // 查询 flyer_details from OpenSearch（需要认证）
 app.get("/api/c/flyer_details", authenticateToken, async (req, res) => {
   const { 

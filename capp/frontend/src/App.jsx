@@ -5,6 +5,7 @@ import GasBuddy from "./GasBuddy";
 import StudySystem from "./StudySystem";
 import PointsDisplay from "./PointsDisplay";
 import PointsHistory from "./PointsHistory";
+import { getProxyImageUrl } from "./utils/imageProxy";
 
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:4000";
 const PAGE_SIZE = 10; // 每页数量
@@ -1118,7 +1119,7 @@ function App() {
                 >
                   {item.cutout_image_url && (
                     <img
-                      src={item.cutout_image_url}
+                      src={getProxyImageUrl(item.cutout_image_url)}
                       alt={item.title || item.name}
                       style={{
                         width: "100%",
@@ -1129,7 +1130,12 @@ function App() {
                         marginBottom: "0.5rem"
                       }}
                       onError={(e) => {
-                        e.target.style.display = "none";
+                        // 如果代理失败，尝试使用原始URL
+                        if (e.target.src.includes("/api/v1/imageProxy/proxy")) {
+                          e.target.src = item.cutout_image_url;
+                        } else {
+                          e.target.style.display = "none";
+                        }
                       }}
                     />
                   )}

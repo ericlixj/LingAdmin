@@ -1,6 +1,7 @@
 // ExamPage.jsx
 // 考试模式页面：倒计时、题目乱序、前进后退、完成考试、中途退出
 import { useState, useEffect, useRef, useCallback } from "react";
+import { getProxyImageUrl } from "./utils/imageProxy";
 
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:4000";
 
@@ -655,6 +656,14 @@ function ExamPage({ sessionId, lang, onBack }) {
     }
   }, [isLastQuestion, submitted, selectedAnswer]);
 
+  // 调试：打印图片URL信息 - 必须在所有早期返回之前
+  useEffect(() => {
+    if (currentQuestion?.image_url) {
+      console.log('[ExamPage] 原始图片URL:', currentQuestion.image_url);
+      console.log('[ExamPage] 代理后URL:', getProxyImageUrl(currentQuestion.image_url));
+    }
+  }, [currentQuestion?.image_url]);
+
   if (loading && !currentQuestion) {
     return (
       <div style={{
@@ -766,13 +775,31 @@ function ExamPage({ sessionId, lang, onBack }) {
 
         {currentQuestion.image_url && (
           <img
-            src={currentQuestion.image_url}
+            src={getProxyImageUrl(currentQuestion.image_url)}
             alt="Question"
             style={{
               maxWidth: "100%",
               height: "auto",
               marginBottom: "1rem",
               borderRadius: "8px",
+            }}
+            onLoad={() => {
+              console.log('[ExamPage] 图片加载成功:', currentQuestion.image_url);
+            }}
+            onError={(e) => {
+              console.error('[ExamPage] 图片加载失败:', {
+                src: e.target.src,
+                originalUrl: currentQuestion.image_url,
+                error: '图片加载失败'
+              });
+              // 如果代理失败，尝试使用原始URL
+              if (e.target.src.includes("/api/v1/imageProxy/proxy")) {
+                console.log('[ExamPage] 尝试使用原始URL:', currentQuestion.image_url);
+                e.target.src = currentQuestion.image_url;
+              } else {
+                console.log('[ExamPage] 隐藏图片');
+                e.target.style.display = "none";
+              }
             }}
           />
         )}
