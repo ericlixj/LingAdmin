@@ -92,15 +92,37 @@ const parseOptions = (optionsStr) => {
 };
 
 // 解析答案
+// 解析答案 - 支持多种格式：
+// 1. 对象格式: {"correct": ["A"]} 或 {"correct": ["A", "B"]}
+// 2. 数组格式: ["A"] 或 ["A", "B"]
+// 3. 字符串格式: "A"
 const parseAnswer = (answerStr) => {
   if (!answerStr) return [];
   try {
     const parsed = JSON.parse(answerStr);
+    
+    // 如果是对象格式，提取 correct 字段
+    if (typeof parsed === 'object' && parsed !== null && !Array.isArray(parsed)) {
+      if (parsed.correct && Array.isArray(parsed.correct)) {
+        return parsed.correct.map((item) => String(item));
+      }
+      // 如果对象没有 correct 字段，尝试其他可能的字段
+      if (parsed.answer && Array.isArray(parsed.answer)) {
+        return parsed.answer.map((item) => String(item));
+      }
+      // 如果都不是，返回空数组
+      return [];
+    }
+    
+    // 如果是数组格式
     if (Array.isArray(parsed)) {
       return parsed.map((item) => String(item));
     }
+    
+    // 如果是字符串或其他类型
     return [String(parsed)];
   } catch {
+    // 不是 JSON，直接返回原字符串（如 "A"）
     return [answerStr];
   }
 };

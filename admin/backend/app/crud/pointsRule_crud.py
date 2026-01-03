@@ -34,3 +34,11 @@ class PointsRuleCRUD(BaseCRUD):
 
 
 
+
+
+
+
+
+
+
+

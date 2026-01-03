@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { Edit, useForm } from "@refinedev/antd";
 import { useList, useCustom, useCustomMutation } from "@refinedev/core";
-import { Form, Input, Select, Spin, Card, Tag, Space, message, Divider } from "antd";
+import { Form, Input, Select, Spin, Card, Tag, Space, message, Divider, Image } from "antd";
 import { BookOutlined } from "@ant-design/icons";
+import { getProxyImageUrl } from "../../utils/imageProxy";
 
 // 状态选项
 const STATUS_OPTIONS = [
@@ -212,10 +213,28 @@ export const StudyQuestionEdit = () => {
         <Form.Item
           name="image_url"
           label="题目图片URL"
-          rules={[{ max: 500, message: "最多输入 500 个字符" }]}
+          rules={[
+            { max: 500, message: "最多输入 500 个字符" },
+            { type: "url", message: "请输入有效的URL" }
+          ]}
         >
           <Input placeholder="https://example.com/image.jpg" />
         </Form.Item>
+        {record?.image_url && (
+          <Form.Item label="图片预览">
+            <Image
+              src={getProxyImageUrl(record.image_url)}
+              alt="题目图片"
+              style={{ maxWidth: "300px", maxHeight: "300px" }}
+              fallback="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMIAAADDCAYAAADQvc6UAAABRWlDQ1BJQ0MgUHJvZmlsZQAAKJFjYGASSSwoyGFhYGDIzSspCnJ3UoiIjFJgf8LAwSDCIMogwMCcmFxc4BgQ4ANUwgCjUcG3awyMIPqyLsis7PPOq3QdDFcvqVx1emZM3FeB9T4llBQV4nFictyt5PwDxepNyUV4MwHjCy0pElBsVe8dA1HfRg8I7HhCwB3IewG5QfEaInALkOgB3QL2FyBYiBkD6AqwiwG3gQ6AKhFhCfC7MQk3MQk7aHhTeBB4X3haDPCcUZBYlq3q2DxLBUktUKHpvKXpJaBYnfxGrFwM0t7cyFXJTspXUO+HYwrspjJChgOGEpVaxSYWHQKA4L1damfM9LwygU9bKwg+pX1PAcfeh4nB2BiQWHRFgMD0eEDPXcGYFjzJwPBYLWhNPjBxTrtwsFNgUFi5LbWD8UxPSlGRoY9hTgPDvYJACxK1Gu8pvAsv0jwB/yzE4Ftgf8aQ4MAbvW4Bx75jMPjKe78b28H///fHMzA/v+u499gPzfmYH5+B3n4HpD4jQH8Kvz3YW5joR8B8O9E8P8I8L//+xf4//9PzQwM/w4A8fwJ7XqjjskdY2IAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAwqADAAQAAAABAAAAwwAAAAD9b/HnAAAHlklEQVR4Ae3dP3Ik1RnG4W+FgYxN"
+            />
+            <div style={{ marginTop: "8px" }}>
+              <a href={record.image_url} target="_blank" rel="noopener noreferrer" style={{ fontSize: "12px" }}>
+                在新窗口打开原图
+              </a>
+            </div>
+          </Form.Item>
+        )}
 
         <Form.Item
           name="status"

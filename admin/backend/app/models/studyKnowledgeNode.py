@@ -65,6 +65,16 @@ class StudyKnowledgeNode(SQLModel, table=True):
             index=False,
             unique=False,server_default=text("''"),        )
     )
+    image_url:        Optional[str] = Field(
+            default="",
+        description="图片URL",
+        sa_column=Column(
+            String(500),
+            nullable=False,
+            primary_key=False,
+            index=False,
+            unique=False,server_default=text("''"),        )
+    )
     # 默认加入通用字段
     creator: Optional[str] = Field(default=None, max_length=64, description="创建人")
     dept_id: Optional[int] = Field(
@@ -96,6 +106,7 @@ class StudyKnowledgeNodeCreate(SQLModel):
     importance: str
     exam_id: Optional[int] = None
     description: Optional[str] = None
+    image_url: Optional[str] = None
     creator: Optional[str] = Field(default=None, max_length=64)
     dept_id: Optional[int] = None
 
@@ -105,6 +116,7 @@ class StudyKnowledgeNodeUpdate(SQLModel):
     title: Optional[str] = None
     description: Optional[str] = None
     importance: Optional[str] = None
+    image_url: Optional[str] = None
     updater: Optional[str] = Field(default=None, max_length=64)
     dept_id: Optional[int] = None
 

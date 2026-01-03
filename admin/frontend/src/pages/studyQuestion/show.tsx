@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { Show } from "@refinedev/antd";
 import { useShow, useOne, useCustom } from "@refinedev/core";
-import { Typography, Card, Tag, Space, Divider, Alert, Spin, Modal, Tooltip, Collapse } from "antd";
+import { Typography, Card, Tag, Space, Divider, Alert, Spin, Modal, Tooltip, Collapse, Image } from "antd";
 import { CheckCircleOutlined, BookOutlined, FileTextOutlined, EnvironmentOutlined } from "@ant-design/icons";
+import { getProxyImageUrl } from "../../utils/imageProxy";
 
 const { Title, Text, Paragraph } = Typography;
 
@@ -84,14 +85,34 @@ const parseOptions = (optionsStr: string): ParsedOption[] => {
   }
 };
 
-// 解析答案 - 支持 "A" 或 ["A", "B"] 格式
+// 解析答案 - 支持多种格式：
+// 1. 对象格式: {"correct": ["A"]} 或 {"correct": ["A", "B"]}
+// 2. 数组格式: ["A"] 或 ["A", "B"]
+// 3. 字符串格式: "A"
 const parseAnswer = (answerStr: string): string[] => {
   if (!answerStr) return [];
   try {
     const parsed = JSON.parse(answerStr);
+    
+    // 如果是对象格式，提取 correct 字段
+    if (typeof parsed === 'object' && parsed !== null && !Array.isArray(parsed)) {
+      if (parsed.correct && Array.isArray(parsed.correct)) {
+        return parsed.correct.map((item: any) => String(item));
+      }
+      // 如果对象没有 correct 字段，尝试其他可能的字段
+      if (parsed.answer && Array.isArray(parsed.answer)) {
+        return parsed.answer.map((item: any) => String(item));
+      }
+      // 如果都不是，返回空数组
+      return [];
+    }
+    
+    // 如果是数组格式
     if (Array.isArray(parsed)) {
       return parsed.map((item: any) => String(item));
     }
+    
+    // 如果是字符串或其他类型
     return [String(parsed)];
   } catch {
     // 不是 JSON，直接返回原字符串（如 "A"）
@@ -339,19 +360,22 @@ export const StudyQuestionShow = () => {
           {/* 题干图片 */}
           {stemImageUrl && (
             <div style={{ marginTop: 16, marginBottom: 16 }}>
-              <img 
-                src={stemImageUrl} 
-                alt="题目图片" 
-                style={{ 
-                  maxWidth: '100%', 
+              <Image
+                src={getProxyImageUrl(stemImageUrl)}
+                alt="题目图片"
+                style={{
+                  maxWidth: '100%',
                   maxHeight: 300,
                   borderRadius: 8,
                   border: '1px solid #d9d9d9',
                 }}
-                onError={(e) => {
-                  (e.target as HTMLImageElement).style.display = 'none';
-                }}
+                fallback="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMIAAADDCAYAAADQvc6UAAABRWlDQ1BJQ0MgUHJvZmlsZQAAKJFjYGASSSwoyGFhYGDIzSspCnJ3UoiIjFJgf8LAwSDCIMogwMCcmFxc4BgQ4ANUwgCjUcG3awyMIPqyLsis7PPOq3QdDFcvqVx1emZM3FeB9T4llBQV4nFictyt5PwDxepNyUV4MwHjCy0pElBsVe8dA1HfRg8I7HhCwB3IewG5QfEaInALkOgB3QL2FyBYiBkD6AqwiwG3gQ6AKhFhCfC7MQk3MQk7aHhTeBB4X3haDPCcUZBYlq3q2DxLBUktUKHpvKXpJaBYnfxGrFwM0t7cyFXJTspXUO+HYwrspjJChgOGEpVaxSYWHQKA4L1damfM9LwygU9bKwg+pX1PAcfeh4nB2BiQWHRFgMD0eEDPXcGYFjzJwPBYLWhNPjBxTrtwsFNgUFi5LbWD8UxPSlGRoY9hTgPDvYJACxK1Gu8pvAsv0jwB/yzE4Ftgf8aQ4MAbvW4Bx75jMPjKe78b28H///fHMzA/v+u499gPzfmYH5+B3n4HpD4jQH8Kvz3YW5joR8B8O9E8P8I8L//+xf4//9PzQwM/w4A8fwJ7XqjjskdY2IAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAwqADAAQAAAABAAAAwwAAAAD9b/HnAAAHlklEQVR4Ae3dP3Ik1RnG4W+FgYxN"
               />
+              <div style={{ marginTop: "8px" }}>
+                <a href={stemImageUrl} target="_blank" rel="noopener noreferrer" style={{ fontSize: "12px" }}>
+                  查看原图
+                </a>
+              </div>
             </div>
           )}
 

@@ -5,8 +5,9 @@ import {
   ShowButton,
   useTable,
 } from "@refinedev/antd";
-import { Input, Select, Space, Table, DatePicker  } from "antd";
+import { Input, Select, Space, Table, DatePicker, Image  } from "antd";
 import dayjs from "dayjs";
+import { getProxyImageUrl } from "../../utils/imageProxy";
 
 export const StudyKnowledgeNodeList = () => {
   const { tableProps, filters } = useTable({
@@ -114,6 +115,24 @@ export const StudyKnowledgeNodeList = () => {
           render={(value) => {
             const option = [{"label": "\u9ad8", "value": "high"}, {"label": "\u4e2d", "value": "mid"}, {"label": "\u4f4e", "value": "low"}].find(opt => opt.value === value);
             return option ? option.label : value;
+          }}
+        />
+        <Table.Column
+          dataIndex="image_url"
+          title="图片"
+          render={(value) => {
+            return value ? (
+              <Image
+                src={getProxyImageUrl(value)}
+                alt="知识点图片"
+                width={80}
+                height={80}
+                style={{ objectFit: "cover" }}
+                fallback="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMIAAADDCAYAAADQvc6UAAABRWlDQ1BJQ0MgUHJvZmlsZQAAKJFjYGASSSwoyGFhYGDIzSspCnJ3UoiIjFJgf8LAwSDCIMogwMCcmFxc4BgQ4ANUwgCjUcG3awyMIPqyLsis7PPOq3QdDFcvqVx1emZM3FeB9T4llBQV4nFictyt5PwDxepNyUV4MwHjCy0pElBsVe8dA1HfRg8I7HhCwB3IewG5QfEaInALkOgB3QL2FyBYiBkD6AqwiwG3gQ6AKhFhCfC7MQk3MQk7aHhTeBB4X3haDPCcUZBYlq3q2DxLBUktUKHpvKXpJaBYnfxGrFwM0t7cyFXJTspXUO+HYwrspjJChgOGEpVaxSYWHQKA4L1damfM9LwygU9bKwg+pX1PAcfeh4nB2BiQWHRFgMD0eEDPXcGYFjzJwPBYLWhNPjBxTrtwsFNgUFi5LbWD8UxPSlGRoY9hTgPDvYJACxK1Gu8pvAsv0jwB/yzE4Ftgf8aQ4MAbvW4Bx75jMPjKe78b28H///fHMzA/v+u499gPzfmYH5+B3n4HpD4jQH8Kvz3YW5joR8B8O9E8P8I8L//+xf4//9PzQwM/w4A8fwJ7XqjjskdY2IAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAwqADAAQAAAABAAAAwwAAAAD9b/HnAAAHlklEQVR4Ae3dP3Ik1RnG4W+FgYxN"
+              />
+            ) : (
+              <span style={{ color: "#999" }}>暂无图片</span>
+            );
           }}
         />
 
