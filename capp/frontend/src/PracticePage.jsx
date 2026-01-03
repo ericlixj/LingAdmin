@@ -1,6 +1,7 @@
 // PracticePage.jsx
 import { useState, useEffect, useCallback, useRef } from "react";
 import { getProxyImageUrl } from "./utils/imageProxy";
+import { parseAnswer, normalizeUserAnswer, compareAnswers, isCorrectOption } from "./utils/answerValidator";
 
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:4000";
 
@@ -97,36 +98,7 @@ const parseOptions = (optionsStr) => {
 // 1. 对象格式: {"correct": ["A"]} 或 {"correct": ["A", "B"]}
 // 2. 数组格式: ["A"] 或 ["A", "B"]
 // 3. 字符串格式: "A"
-const parseAnswer = (answerStr) => {
-  if (!answerStr) return [];
-  try {
-    const parsed = JSON.parse(answerStr);
-    
-    // 如果是对象格式，提取 correct 字段
-    if (typeof parsed === 'object' && parsed !== null && !Array.isArray(parsed)) {
-      if (parsed.correct && Array.isArray(parsed.correct)) {
-        return parsed.correct.map((item) => String(item));
-      }
-      // 如果对象没有 correct 字段，尝试其他可能的字段
-      if (parsed.answer && Array.isArray(parsed.answer)) {
-        return parsed.answer.map((item) => String(item));
-      }
-      // 如果都不是，返回空数组
-      return [];
-    }
-    
-    // 如果是数组格式
-    if (Array.isArray(parsed)) {
-      return parsed.map((item) => String(item));
-    }
-    
-    // 如果是字符串或其他类型
-    return [String(parsed)];
-  } catch {
-    // 不是 JSON，直接返回原字符串（如 "A"）
-    return [answerStr];
-  }
-};
+// parseAnswer 函数已移至 utils/answerValidator.js，使用统一的验证逻辑
 
 // 随机打乱数组
 // shuffleArray 函数已移到后端，不再需要
@@ -647,7 +619,7 @@ function PracticePage({ sessionId, practiceMode = "all", lang, onBack }) {
 
       const result = await response.json();
       if (result.code === 0) {
-        // 更新当前item的状态
+        // 更新当前item的状态（完全依赖后端返回的数据）
         const isCorrect = Number(result.data.is_correct) === 1;
         
         setCurrentItem({
@@ -655,6 +627,7 @@ function PracticePage({ sessionId, practiceMode = "all", lang, onBack }) {
           is_correct: result.data.is_correct,
           response: result.data.response,
           time_spent_second: result.data.time_spent_second,
+          correct_answers: result.data.correct_answers || [], // 后端返回的正确答案列表
         });
         
         setSubmitting(false);
@@ -1117,14 +1090,28 @@ function PracticePage({ sessionId, practiceMode = "all", lang, onBack }) {
   }
 
   const options = parseOptions(currentQuestion.options);
-  const correctAnswers = parseAnswer(currentQuestion.answer);
   const stemText = currentQuestion.stem || "";
   const stemImageUrl = currentQuestion.image_url || null;
   
+  // 解析正确答案（前后端使用相同的逻辑）
+  const correctAnswers = parseAnswer(currentQuestion.answer);
+  
+  // 标准化用户答案（前后端使用相同的逻辑）
+  const selectedAnswersArray = normalizeUserAnswer(selectedAnswer);
+  
+  // 前端验证（用于即时反馈，但最终结果以后端为准）
+  const frontendIsCorrect = submitted && currentQuestion.answer 
+    ? compareAnswers(selectedAnswer, currentQuestion.answer)
+    : false;
+  
   // 只有提交后才显示结果
   const showResult = submitted;
-  // 提交后从当前item获取是否正确（确保是数字比较）
-  const isCorrect = showResult && currentItem ? (Number(currentItem.is_correct) === 1) : false;
+  
+  // 优先使用后端返回的结果，如果没有则使用前端验证结果
+  // 注意：后端验证是最终权威，前端验证仅用于即时反馈
+  const isCorrect = showResult && currentItem 
+    ? (Number(currentItem.is_correct) === 1) 
+    : frontendIsCorrect;
 
   return (
     <div
@@ -1482,8 +1469,12 @@ function PracticePage({ sessionId, practiceMode = "all", lang, onBack }) {
           {/* 选项 */}
           <div style={{ marginBottom: "1.5rem" }}>
             {options.map((option, index) => {
-              const isSelected = selectedAnswer === option.label || (Array.isArray(selectedAnswer) && selectedAnswer.includes(option.label));
-              const isCorrectOption = correctAnswers.includes(option.label) || correctAnswers.includes(option.label.toLowerCase());
+              // 使用统一的验证逻辑判断选项是否被选中
+              const normalizedLabel = String(option.label).toUpperCase().trim();
+              const isSelected = selectedAnswersArray.includes(normalizedLabel);
+              
+              // 使用统一的验证逻辑判断选项是否为正确答案
+              const isCorrectOptionValue = isCorrectOption(option.label, currentQuestion.answer);
 
               let optionStyle = {
                 padding: isMobile ? "12px" : "12px 16px",
@@ -1498,18 +1489,18 @@ function PracticePage({ sessionId, practiceMode = "all", lang, onBack }) {
                 transition: "all 0.3s ease",
                 fontSize: isMobile ? "0.95rem" : "1rem",
                 lineHeight: 1.5,
-                animation: showResult && isCorrectOption ? 'optionCorrect 0.5s ease-out' : 
-                          showResult && isSelected && !isCorrectOption ? 'optionWrong 0.5s ease-out' : 'none',
+                animation: showResult && isCorrectOptionValue ? 'optionCorrect 0.5s ease-out' : 
+                          showResult && isSelected && !isCorrectOptionValue ? 'optionWrong 0.5s ease-out' : 'none',
               };
 
               // 只有提交后才显示正确答案和错误答案的标记
               if (showResult) {
-                if (isCorrectOption) {
+                if (isCorrectOptionValue) {
                   // 正确答案：绿色边框和背景
                   optionStyle.border = `2px solid ${theme.correctBorder}`;
                   optionStyle.backgroundColor = theme.correctBg;
                 }
-                if (isSelected && !isCorrectOption) {
+                if (isSelected && !isCorrectOptionValue) {
                   // 选错了：红色边框和背景
                   optionStyle.border = `2px solid ${theme.wrongBorder}`;
                   optionStyle.backgroundColor = theme.wrongBg;

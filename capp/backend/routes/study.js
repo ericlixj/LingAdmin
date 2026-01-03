@@ -2,6 +2,7 @@
 const express = require('express');
 const { query } = require('../utils/db');
 const { authenticateToken } = require('../utils/jwt');
+const { parseAnswer, normalizeUserAnswer, compareAnswers } = require('../utils/answerValidator');
 
 const router = express.Router();
 
@@ -1709,26 +1710,18 @@ router.post('/sessions/:id/items/:itemId/submit', authenticateToken, async (req,
     
     const item = itemResult.rows[0];
     
-    // 判断答案是否正确
+    // 判断答案是否正确（使用统一的验证逻辑，与前端保持一致）
     let isCorrect = 0;
     if (item.correct_answer) {
       try {
-        // 解析正确答案（可能是 "A" 或 ["A", "B"]）
-        const correctAnswers = JSON.parse(item.correct_answer);
-        const correctAnswerArray = Array.isArray(correctAnswers) ? correctAnswers : [correctAnswers];
-        
-        // 用户答案也转换为数组
-        const userAnswerArray = Array.isArray(answer) ? answer : [answer];
-        
-        // 比较答案（忽略大小写和顺序）
-        const correctSet = new Set(correctAnswerArray.map(a => String(a).toUpperCase()));
-        const userSet = new Set(userAnswerArray.map(a => String(a).toUpperCase()));
-        
-        isCorrect = correctSet.size === userSet.size && 
-                   [...correctSet].every(a => userSet.has(a)) ? 1 : 0;
+        // 使用统一的验证函数进行比较（与前端逻辑完全一致）
+        isCorrect = compareAnswers(answer, item.correct_answer) ? 1 : 0;
       } catch (e) {
-        // 如果解析失败，直接比较字符串
-        isCorrect = String(item.correct_answer).toUpperCase() === String(answer).toUpperCase() ? 1 : 0;
+        // 如果验证失败，记录错误并使用字符串比较（向后兼容）
+        console.warn(`[Submit Answer] 答案验证失败，使用字符串比较: ${e.message}`);
+        const correctAnswerStr = String(item.correct_answer).toUpperCase().trim();
+        const userAnswerStr = String(answer).toUpperCase().trim();
+        isCorrect = correctAnswerStr === userAnswerStr ? 1 : 0;
       }
     }
     
@@ -1771,6 +1764,9 @@ router.post('/sessions/:id/items/:itemId/submit', authenticateToken, async (req,
       });
     }
     
+    // 解析正确答案，用于返回给前端（使用统一的解析逻辑）
+    const correctAnswerArray = item.correct_answer ? parseAnswer(item.correct_answer) : [];
+    
     // 返回更新后的完整数据
     const updatedItem = updateResult.rows[0];
     res.json({
@@ -1780,9 +1776,10 @@ router.post('/sessions/:id/items/:itemId/submit', authenticateToken, async (req,
         id: updatedItem.id,
         session_id: updatedItem.session_id,
         learning_item_id: updatedItem.learning_item_id,
-        is_correct: updatedItem.is_correct, // 是否正确（0或1）
+        is_correct: updatedItem.is_correct, // 是否正确（0或1）- 后端验证结果
         response: updatedItem.response, // 用户作答内容
         time_spent_second: updatedItem.time_spent_second, // 耗时（秒）
+        correct_answers: correctAnswerArray, // 正确答案列表（用于UI显示，由后端解析）
         updater: updatedItem.updater, // 更新人
         create_time: updatedItem.create_time,
         update_time: updatedItem.update_time
