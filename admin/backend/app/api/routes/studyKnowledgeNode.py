@@ -44,6 +44,10 @@ def list_items(
 ):
     query_params = dict(request.query_params)
     filters = parse_refine_filters(query_params)
+    
+    # 调试日志：查看接收到的过滤参数
+    logger.info(f"Query params: {query_params}")
+    logger.info(f"Parsed filters: {filters}")
 
     crud = StudyKnowledgeNodeCRUD(session, user_id=current_user_id, dept_id=current_dept_id)
     skip = _start

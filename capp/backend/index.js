@@ -100,6 +100,10 @@ app.use("/api/c/gas", gasRouter);
 const studyRouter = require("./routes/study");
 app.use("/api/c/study", studyRouter);
 
+// Flashcard 学习路由
+const flashcardRouter = require("./routes/flashcard");
+app.use("/api/c/study/flashcard", flashcardRouter);
+
 // 积分系统路由
 app.use("/api/c/points", pointsRouter);
 

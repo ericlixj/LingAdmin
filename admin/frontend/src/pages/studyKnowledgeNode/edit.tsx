@@ -1,7 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import dayjs from "dayjs";
 import { Edit, useForm } from "@refinedev/antd";
 import { Form, Input, Select, Checkbox, DatePicker, Spin, InputNumber, Image } from "antd";
+import { useList } from "@refinedev/core";
 import { getProxyImageUrl } from "../../utils/imageProxy";
 
 const fields = [{"common": true, "default": null, "description": "pk", "form_type": "input", "index": false, "insertable": false, "listable": false, "max_length": null, "name": "id", "nullable": false, "options": [], "primary_key": true, "query_type": "eq", "queryable": false, "required": false, "sortable": false, "type": "int", "unique": false, "updatable": false}, {"common": false, "default": "", "description": "\u5173\u8054exam\u7684id", "form_type": "input", "index": false, "insertable": false, "listable": false, "max_length": null, "name": "exam_id", "nullable": false, "options": [], "primary_key": false, "query_type": "eq", "queryable": false, "required": false, "sortable": false, "type": "int", "unique": false, "updatable": false}, {"common": false, "default": "", "description": "code", "form_type": "input", "index": true, "insertable": true, "listable": true, "max_length": 64, "name": "code", "nullable": false, "options": [], "primary_key": false, "query_type": "like", "queryable": true, "required": true, "sortable": true, "type": "str", "unique": true, "updatable": true}, {"common": false, "default": "", "description": "\u6807\u9898", "form_type": "input", "index": false, "insertable": true, "listable": true, "max_length": 255, "name": "title", "nullable": false, "options": [], "primary_key": false, "query_type": "like", "queryable": true, "required": true, "sortable": false, "type": "str", "unique": false, "updatable": true}, {"common": false, "default": "", "description": "\u63cf\u8ff0", "form_type": "textarea", "index": false, "insertable": false, "listable": false, "max_length": 9999, "name": "description", "nullable": false, "options": [], "primary_key": false, "query_type": "eq", "queryable": false, "required": false, "sortable": false, "type": "str", "unique": false, "updatable": false}, {"common": false, "default": "", "description": "importance", "form_type": "select", "index": false, "insertable": true, "listable": true, "max_length": 32, "name": "importance", "nullable": false, "options": [{"label": "\u9ad8", "value": "high"}, {"label": "\u4e2d", "value": "mid"}, {"label": "\u4f4e", "value": "low"}], "primary_key": false, "query_type": "eq", "queryable": true, "required": true, "sortable": true, "type": "str", "unique": false, "updatable": true}];
@@ -29,6 +30,23 @@ export const StudyKnowledgeNodeEdit = () => {
 
   const record = queryResult?.data?.data;
   const form = formProps?.form;
+
+  // 获取考试列表
+  const { data: examsData, isLoading: examsLoading } = useList({
+    resource: "studyExam",
+    pagination: { pageSize: 1000 },
+    filters: [{ field: "deleted", operator: "eq", value: false }],
+  });
+
+  // 考试选项
+  const examOptions = useMemo(() => {
+    return (examsData?.data || []).map((exam: any) => ({
+      label: exam.name || `ID: ${exam.id}`,
+      value: exam.id,
+      searchText: `${exam.name || ''} ${exam.code || ''} ${exam.id}`,
+    }));
+  }, [examsData]);
+
   useEffect(() => {
     if (!initialized && record && form && !form.isFieldsTouched()) {
       form.setFieldsValue(prepareInitialValues(record, fields));
@@ -39,6 +57,8 @@ export const StudyKnowledgeNodeEdit = () => {
   const handleFinish = (values: any) => {
     const processed = {
       ...values,
+      // 确保 exam_id 是数字
+      exam_id: typeof values.exam_id === 'number' ? values.exam_id : (values.exam_id ? Number(values.exam_id) : null),
     };
     return formProps.onFinish?.(processed);
   };
@@ -53,12 +73,25 @@ export const StudyKnowledgeNodeEdit = () => {
       <Form {...formProps} layout="vertical" onFinish={handleFinish}>
         <Form.Item
           name="exam_id"
-          label="关联exam的id"
+          label="关联exam"
           rules={[
             { type: "number", message: "必须是数字" }
           ]}
         >
-              <InputNumber style={{ width: "100%" }} />
+          <Select
+            style={{ width: "100%" }}
+            placeholder="选择考试..."
+            options={examOptions}
+            showSearch
+            filterOption={(input, option) =>
+              (option?.searchText ?? "").toLowerCase().includes(input.toLowerCase())
+            }
+            loading={examsLoading}
+            notFoundContent={examsLoading ? <Spin size="small" /> : "暂无数据"}
+            onChange={(value) => {
+              formProps.form?.setFieldsValue({ exam_id: value ? Number(value) : null });
+            }}
+          />
         </Form.Item>
         <Form.Item
           name="code"

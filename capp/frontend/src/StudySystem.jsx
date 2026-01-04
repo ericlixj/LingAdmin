@@ -3,11 +3,12 @@ import { useState, useEffect } from "react";
 import StudySessionList from "./StudySessionList";
 import PracticePage from "./PracticePage";
 import ExamPage from "./ExamPage";
+import FlashcardPage from "./FlashcardPage";
 
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:4000";
 
 function StudySystem({ lang, user }) {
-  const [view, setView] = useState("list"); // "list"、"practice" 或 "exam"
+  const [view, setView] = useState("list"); // "list"、"practice"、"exam" 或 "flashcard"
   const [selectedSessionId, setSelectedSessionId] = useState(null);
   const [practiceMode, setPracticeMode] = useState("all"); // "all"、"wrong" 或 "favorite"
 
@@ -125,6 +126,12 @@ function StudySystem({ lang, user }) {
     }
   };
 
+  // 开始 Flashcard 学习
+  const handleStartFlashcard = (sessionId) => {
+    setSelectedSessionId(sessionId);
+    setView("flashcard");
+  };
+
   const handleBackToList = () => {
     setView("list");
     setSelectedSessionId(null);
@@ -152,11 +159,22 @@ function StudySystem({ lang, user }) {
     );
   }
 
+  if (view === "flashcard") {
+    return (
+      <FlashcardPage
+        sessionId={selectedSessionId}
+        lang={lang}
+        onBack={handleBackToList}
+      />
+    );
+  }
+
   return (
     <StudySessionList
       lang={lang}
       onStartPractice={handleStartPractice}
       onStartExam={handleStartExam}
+      onStartFlashcard={handleStartFlashcard}
     />
   );
 }

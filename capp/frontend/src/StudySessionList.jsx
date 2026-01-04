@@ -50,7 +50,27 @@ const ExamIcon = ({ size = 120, color = "#1890ff" }) => (
   </svg>
 );
 
-function StudySessionList({ lang, onStartPractice, onStartExam }) {
+// Flashcard 模式大图标组件
+const FlashcardIcon = ({ size = 120, color = "#722ed1" }) => (
+  <svg 
+    width={size} 
+    height={size} 
+    viewBox="0 0 24 24" 
+    fill="none" 
+    stroke={color} 
+    strokeWidth="2" 
+    strokeLinecap="round" 
+    strokeLinejoin="round"
+    style={{ display: "block" }}
+  >
+    <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+    <line x1="9" y1="3" x2="9" y2="21" />
+    <line x1="12" y1="9" x2="21" y2="9" />
+    <line x1="12" y1="15" x2="21" y2="15" />
+  </svg>
+);
+
+function StudySessionList({ lang, onStartPractice, onStartExam, onStartFlashcard }) {
   // 检测移动端
   const [isMobile, setIsMobile] = useState(() => {
     if (typeof window !== "undefined") {
@@ -67,7 +87,7 @@ function StudySessionList({ lang, onStartPractice, onStartExam }) {
     return false;
   });
 
-  // 视图状态：'main' | 'practice-list' | 'exam-list'
+  // 视图状态：'main' | 'practice-list' | 'exam-list' | 'flashcard-list'
   const [currentView, setCurrentView] = useState('main');
   const [sessions, setSessions] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -141,7 +161,15 @@ function StudySessionList({ lang, onStartPractice, onStartExam }) {
         return;
       }
 
-      const response = await fetch(`${API_URL}/api/c/study/sessions`, {
+      // 检查是否有测试日期（从 localStorage 读取，用于模拟不同日期）
+      const testDate = localStorage.getItem("flashcard_test_date");
+      let url = `${API_URL}/api/c/study/sessions`;
+      if (testDate) {
+        url += `?test_date=${testDate}`;
+        console.log(`[StudySessionList] 使用测试日期: ${testDate}`);
+      }
+      
+      const response = await fetch(url, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -157,12 +185,20 @@ function StudySessionList({ lang, onStartPractice, onStartExam }) {
         const filteredSessions = allSessions.filter(s => {
           if (mode === "exam") {
             return s.mode === "exam";
+          } else if (mode === "flashcard") {
+            return s.mode && s.mode.toLowerCase() === "flashcard";
           } else {
             return s.mode === "practice" || !s.mode || s.mode === "";
           }
         });
         setSessions(filteredSessions);
-        setCurrentView(mode === "exam" ? "exam-list" : "practice-list");
+        if (mode === "exam") {
+          setCurrentView("exam-list");
+        } else if (mode === "flashcard") {
+          setCurrentView("flashcard-list");
+        } else {
+          setCurrentView("practice-list");
+        }
       } else {
         throw new Error(result.message || "获取学习记录失败");
       }
@@ -182,6 +218,11 @@ function StudySessionList({ lang, onStartPractice, onStartExam }) {
   // 处理考试入口点击
   const handleExamClick = () => {
     fetchSessions("exam");
+  };
+
+  // 处理 Flashcard 入口点击
+  const handleFlashcardClick = () => {
+    fetchSessions("flashcard");
   };
 
   // 返回主入口
@@ -215,10 +256,10 @@ function StudySessionList({ lang, onStartPractice, onStartExam }) {
 
       <div style={{
         display: "grid",
-        gridTemplateColumns: isMobile ? "1fr" : "repeat(2, 1fr)",
+        gridTemplateColumns: isMobile ? "1fr" : "repeat(3, 1fr)",
         gap: isMobile ? "2rem" : "3rem",
         width: "100%",
-        maxWidth: isMobile ? "100%" : "800px",
+        maxWidth: isMobile ? "100%" : "1200px",
       }}>
         {/* 练习模式入口 */}
         <button
@@ -365,6 +406,79 @@ function StudySessionList({ lang, onStartPractice, onStartExam }) {
               : "限時考試，自動評分，查看成績"}
           </div>
         </button>
+
+        {/* Flashcard 模式入口 */}
+        <button
+          onClick={handleFlashcardClick}
+          style={{
+            backgroundColor: theme.cardBg,
+            border: `2px solid #722ed1`,
+            borderRadius: "20px",
+            padding: isMobile ? "2.5rem 1.5rem" : "3rem 2rem",
+            cursor: "pointer",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: isMobile ? "1rem" : "1.5rem",
+            boxShadow: theme.shadow,
+            transition: "all 0.3s ease",
+            WebkitTapHighlightColor: "transparent",
+            touchAction: "manipulation",
+            userSelect: "none",
+            minHeight: isMobile ? "200px" : "280px",
+          }}
+          onMouseEnter={(e) => {
+            if (!isMobile) {
+              e.currentTarget.style.transform = "translateY(-8px)";
+              e.currentTarget.style.boxShadow = isDarkMode 
+                ? "0 8px 20px rgba(114, 46, 209, 0.3)" 
+                : "0 8px 20px rgba(114, 46, 209, 0.2)";
+            }
+          }}
+          onMouseLeave={(e) => {
+            if (!isMobile) {
+              e.currentTarget.style.transform = "translateY(0)";
+              e.currentTarget.style.boxShadow = theme.shadow;
+            }
+          }}
+          onTouchStart={(e) => {
+            e.currentTarget.style.transform = "scale(0.98)";
+          }}
+          onTouchEnd={(e) => {
+            e.currentTarget.style.transform = "scale(1)";
+          }}
+        >
+          <div style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            width: isMobile ? "100px" : "120px",
+            height: isMobile ? "100px" : "120px",
+          }}>
+            <FlashcardIcon size={isMobile ? 100 : 120} color="#722ed1" />
+          </div>
+          <div style={{
+            fontSize: isMobile ? "1.2rem" : "1.5rem",
+            fontWeight: "600",
+            color: theme.text,
+            textAlign: "center",
+          }}>
+            {lang === "cn" ? "FlashCard" : lang === "en" ? "FlashCard" : "FlashCard"}
+          </div>
+          <div style={{
+            fontSize: isMobile ? "0.85rem" : "1rem",
+            color: theme.textSecondary,
+            textAlign: "center",
+            lineHeight: 1.5,
+          }}>
+            {lang === "cn" 
+              ? "记忆曲线学习，每日复习，科学记忆" 
+              : lang === "en"
+              ? "Spaced repetition, daily review, scientific memory"
+              : "記憶曲線學習，每日複習，科學記憶"}
+          </div>
+        </button>
       </div>
     </div>
   );
@@ -372,8 +486,11 @@ function StudySessionList({ lang, onStartPractice, onStartExam }) {
   // 渲染列表页面
   const renderListView = () => {
     const isPracticeList = currentView === "practice-list";
+    const isFlashcardList = currentView === "flashcard-list";
     const title = isPracticeList 
       ? (lang === "cn" ? "练习记录" : lang === "en" ? "Practice Records" : "練習記錄")
+      : isFlashcardList
+      ? (lang === "cn" ? "FlashCard 学习记录" : lang === "en" ? "FlashCard Records" : "FlashCard 學習記錄")
       : (lang === "cn" ? "考试记录" : lang === "en" ? "Exam Records" : "考試記錄");
 
     if (loading) {
@@ -474,6 +591,8 @@ function StudySessionList({ lang, onStartPractice, onStartExam }) {
             <p>
               {isPracticeList
                 ? (lang === "cn" ? "暂无练习记录" : lang === "en" ? "No practice records" : "暫無練習記錄")
+                : isFlashcardList
+                ? (lang === "cn" ? "暂无 FlashCard 学习记录" : lang === "en" ? "No FlashCard records" : "暫無 FlashCard 學習記錄")
                 : (lang === "cn" ? "暂无考试记录" : lang === "en" ? "No exam records" : "暫無考試記錄")}
             </p>
           </div>
@@ -571,7 +690,7 @@ function StudySessionList({ lang, onStartPractice, onStartExam }) {
                 fontSize: isMobile ? "0.85rem" : "0.9rem",
                 lineHeight: 1.6,
               }}>
-                {!isPracticeList && session.score !== null && session.score !== undefined && session.score >= 0 && (
+                {!isPracticeList && !isFlashcardList && session.score !== null && session.score !== undefined && session.score >= 0 && (
                   <div>
                     <strong>
                       {lang === "cn" ? "分数:" : lang === "en" ? "Score:" : "分數:"}
@@ -598,7 +717,7 @@ function StudySessionList({ lang, onStartPractice, onStartExam }) {
                     </span>
                   </div>
                 )}
-                {!isPracticeList && session.exam_duration_minutes && (
+                {!isPracticeList && !isFlashcardList && session.exam_duration_minutes && (
                   <div>
                     <strong>
                       {lang === "cn" ? "考试时长（分钟）:" : lang === "en" ? "Exam Duration (minutes):" : "考試時長（分鐘）:"}
@@ -606,12 +725,14 @@ function StudySessionList({ lang, onStartPractice, onStartExam }) {
                     {session.exam_duration_minutes}
                   </div>
                 )}
-                {!isPracticeList && session.question_count && (
+                {(isFlashcardList || (!isPracticeList && (session.question_count || session.total_count))) && (
                   <div>
                     <strong>
-                      {lang === "cn" ? "考试题目数量:" : lang === "en" ? "Question Count:" : "考試題目數量:"}
+                      {isFlashcardList 
+                        ? (lang === "cn" ? "题目数量:" : lang === "en" ? "Question Count:" : "題目數量:")
+                        : (lang === "cn" ? "考试题目数量:" : lang === "en" ? "Question Count:" : "考試題目數量:")}
                     </strong>{" "}
-                    {session.question_count}
+                    {isFlashcardList ? (session.total_count || 0) : (session.question_count || session.total_count || 0)}
                   </div>
                 )}
                 <div>
@@ -629,7 +750,51 @@ function StudySessionList({ lang, onStartPractice, onStartExam }) {
                 marginTop: isMobile ? "0.75rem" : "1rem", 
                 flexWrap: "wrap" 
               }}>
-                {isPracticeList ? (
+                {isFlashcardList ? (
+                  <>
+                    <button
+                      onClick={() => {
+                        onStartFlashcard(session.id);
+                      }}
+                      style={{
+                        flex: isMobile ? "1 1 100%" : 1,
+                        minWidth: isMobile ? "100%" : "100px",
+                        padding: isMobile ? "0.85rem 0.5rem" : "0.75rem",
+                        backgroundColor: "#722ed1",
+                        color: "white",
+                        border: "none",
+                        borderRadius: "8px",
+                        cursor: "pointer",
+                        fontSize: isMobile ? "0.9rem" : "1rem",
+                        fontWeight: "600",
+                        WebkitTapHighlightColor: "transparent",
+                        touchAction: "manipulation",
+                        userSelect: "none",
+                        transition: "background-color 0.2s, transform 0.1s",
+                      }}
+                      onMouseEnter={(e) => {
+                        if (!isMobile) {
+                          e.target.style.backgroundColor = "#531dab";
+                        }
+                      }}
+                      onMouseLeave={(e) => {
+                        if (!isMobile) {
+                          e.target.style.backgroundColor = "#722ed1";
+                        }
+                      }}
+                      onTouchStart={(e) => {
+                        e.currentTarget.style.backgroundColor = "#531dab";
+                        e.currentTarget.style.transform = "scale(0.97)";
+                      }}
+                      onTouchEnd={(e) => {
+                        e.currentTarget.style.backgroundColor = "#722ed1";
+                        e.currentTarget.style.transform = "scale(1)";
+                      }}
+                    >
+                      {lang === "cn" ? "开始学习" : lang === "en" ? "Start Learning" : "開始學習"}
+                    </button>
+                  </>
+                ) : isPracticeList ? (
                   <>
                     <button
                       onClick={() => {

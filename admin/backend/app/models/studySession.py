@@ -66,24 +66,34 @@ class StudySession(SQLModel, table=True):
             unique=False,server_default=text("20"),        )
     )
     score:        Optional[int] = Field(
-            default=None,
-        description="score",
-        sa_column=Column(
-            Integer,
-            nullable=False,
-            primary_key=False,
-            index=False,
-            unique=False,        )
+            default=0,
+            description="score",
+            sa_column=Column(
+                Integer,
+                nullable=False,
+                primary_key=False,
+                index=False,
+                unique=False,        )
     )
     progress_question_id:        Optional[int] = Field(
             default=None,
-        description="全部题库模式的当前进度题目ID",
-        sa_column=Column(
-            Integer,
-            nullable=True,
-            primary_key=False,
-            index=False,
-            unique=False,        )
+            description="全部题库模式的当前进度题目ID",
+            sa_column=Column(
+                Integer,
+                nullable=True,
+                primary_key=False,
+                index=False,
+                unique=False,        )
+    )
+    daily_new_limit:        Optional[int] = Field(
+            default=None,
+            description="每日学习数量（FlashCard模式）",
+            sa_column=Column(
+                Integer,
+                nullable=True,
+                primary_key=False,
+                index=False,
+                unique=False,        )
     )
     # 默认加入通用字段
     creator: Optional[str] = Field(default=None, max_length=64, description="创建人")
@@ -117,6 +127,7 @@ class StudySessionCreate(SQLModel):
     exam_duration: Optional[int] = None
     question_count: Optional[int] = 20
     score: Optional[int] = None
+    daily_new_limit: Optional[int] = None
     creator: Optional[str] = Field(default=None, max_length=64)
     dept_id: Optional[int] = None
 
@@ -127,6 +138,7 @@ class StudySessionUpdate(SQLModel):
     exam_duration: Optional[int] = None
     question_count: Optional[int] = None
     score: Optional[int] = None
+    daily_new_limit: Optional[int] = None
     progress_question_id: Optional[int] = None
     updater: Optional[str] = Field(default=None, max_length=64)
     dept_id: Optional[int] = None

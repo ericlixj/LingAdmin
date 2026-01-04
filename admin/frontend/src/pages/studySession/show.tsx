@@ -1,6 +1,6 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import { Show, useTable, CreateButton, FilterDropdown } from "@refinedev/antd";
-import { useShow, useDelete, useList, useMany } from "@refinedev/core";
+import { useShow, useDelete, useList, useMany, useGetIdentity } from "@refinedev/core";
 import {
   Typography,
   Divider,
@@ -33,6 +33,13 @@ export const StudySessionShow = () => {
   const [editModalVisible, setEditModalVisible] = useState(false);
   const [editRecord, setEditRecord] = useState(null);
   const [syncLoading, setSyncLoading] = useState(false);
+  const [flashcardSyncModalVisible, setFlashcardSyncModalVisible] = useState(false);
+  const [selectedDate, setSelectedDate] = useState<dayjs.Dayjs | null>(dayjs());
+  const [flashcardSyncLoading, setFlashcardSyncLoading] = useState(false);
+  const [flashcardProgressModalVisible, setFlashcardProgressModalVisible] = useState(false);
+  
+  // 获取当前用户信息
+  const { data: currentUser } = useGetIdentity();
 
   const antIcon = <LoadingOutlined style={{ fontSize: 48 }} spin />;
 
@@ -123,6 +130,175 @@ export const StudySessionShow = () => {
     }
   };
 
+  // Flashcard 每日同步任务
+  const triggerFlashcardSync = async () => {
+    if (!selectedDate) {
+      message.error("请选择日期");
+      return;
+    }
+
+    setFlashcardSyncLoading(true);
+    try {
+      const dateStr = selectedDate.format("YYYY-MM-DD");
+      const response = await axiosInstance.post('/flashcardTasks/sync', null, {
+        params: {
+          practice_date: dateStr
+        }
+      });
+
+      if (response?.data?.success) {
+        notification.success({
+          message: "任务已启动",
+          description: response.data.message || "Flashcard 同步任务已在后台执行",
+          duration: 5,
+        });
+        setFlashcardSyncModalVisible(false);
+        // 可以刷新表格，但任务在后台执行，可能需要等待
+        setTimeout(() => {
+          tableQuery.refetch();
+        }, 2000);
+      } else {
+        notification.error({
+          message: "启动任务失败",
+          description: response?.data?.message || "启动任务失败",
+          duration: 3,
+        });
+      }
+    } catch (error: any) {
+      console.error(error);
+      notification.error({
+        message: "启动任务失败",
+        description: error.response?.data?.detail || error.message || "启动任务失败",
+        duration: 5,
+      });
+    } finally {
+      setFlashcardSyncLoading(false);
+    }
+  };
+
+  // 同步知识点操作（仅用于 FlashCard 模式）
+  // 做两件事：
+  // 1. 同步知识点到学习抽象对象（learning_item）
+  // 2. 同步学习抽象对象中exam中knowledge类型item关联到当前session
+  const syncKnowledge = async () => {
+    if (!record?.exam_id) {
+      message.error("无法获取考试ID");
+      return;
+    }
+    if (!record?.id) {
+      message.error("无法获取学习记录ID");
+      return;
+    }
+
+    setSyncLoading(true);
+    try {
+      // 第一步：同步知识点到学习抽象对象（learning_item）
+      const syncLearningItemResponse = await axiosInstance.post('/studyLearningItem/sync_knowledge', null, {
+        params: {
+          exam_id: record.exam_id
+        }
+      });
+      
+      if (!syncLearningItemResponse?.data?.success) {
+        notification.error({
+          message: "同步知识点到学习资源失败",
+          description: syncLearningItemResponse?.data?.message || "同步失败",
+          duration: 5,
+        });
+        return;
+      }
+      
+      // 第二步：同步knowledge类型的learning_item到当前session
+      const syncSessionItemResponse = await axiosInstance.post('/studySessionItem/sync_knowledge', null, {
+        params: {
+          session_id: record.id
+        }
+      });
+      
+      if (syncSessionItemResponse?.data?.success) {
+        const learningItemMsg = syncLearningItemResponse.data.message || 
+          `更新 ${syncLearningItemResponse.data.updated_items || 0} 个，新增 ${syncLearningItemResponse.data.new_items || 0} 个，删除 ${syncLearningItemResponse.data.deleted_items || 0} 个知识点到学习资源`;
+        const sessionItemMsg = syncSessionItemResponse.data.message || 
+          `新增 ${syncSessionItemResponse.data.new_items || 0} 个知识点到学习记录明细`;
+        
+        notification.success({
+          message: "同步成功",
+          description: `${learningItemMsg}；${sessionItemMsg}`,
+          duration: 5,
+        });
+        // 刷新表格
+        tableQuery.refetch();
+      } else {
+        notification.warning({
+          message: "部分同步成功",
+          description: `知识点已同步到学习资源，但同步到学习记录明细失败：${syncSessionItemResponse?.data?.message || "同步失败"}`,
+          duration: 5,
+        });
+        // 即使第二步失败，也刷新表格，因为第一步成功了
+        tableQuery.refetch();
+      }
+    } catch (error: any) {
+      console.error(error);
+      notification.error({
+        message: "同步失败",
+        description: error.response?.data?.detail || error.message || "同步失败",
+        duration: 5,
+      });
+    } finally {
+      setSyncLoading(false);
+    }
+  };
+
+  // 获取 flashcard_progress 数据（当弹窗打开时）
+  // 构建过滤条件，使用学习记录的 user_id 和 exam_id
+  const flashcardProgressFilters = useMemo(() => {
+    const filters: any[] = [];
+    // 使用学习记录的 user_id，而不是当前登录用户的 user_id
+    if (record?.user_id !== null && record?.user_id !== undefined) {
+      filters.push({
+        field: "user_id",
+        operator: "eq",
+        value: Number(record.user_id), // 确保是数字类型
+      });
+    }
+    if (record?.exam_id !== null && record?.exam_id !== undefined) {
+      filters.push({
+        field: "exam_id",
+        operator: "eq",
+        value: Number(record.exam_id), // 确保是数字类型
+      });
+    }
+    return filters;
+  }, [record?.user_id, record?.exam_id]);
+
+  const { data: flashcardProgressData, isLoading: flashcardProgressLoading } = useList({
+    resource: "flashcardProgress",
+    filters: flashcardProgressFilters,
+    queryOptions: {
+      enabled: flashcardProgressModalVisible && 
+               record?.user_id !== null && 
+               record?.user_id !== undefined && 
+               record?.exam_id !== null && 
+               record?.exam_id !== undefined,
+    },
+    pagination: {
+      pageSize: 100,
+    },
+  });
+
+  // 调试信息（开发环境）
+  useEffect(() => {
+    if (flashcardProgressModalVisible) {
+      console.log("Flashcard Progress Query Debug:", {
+        filters: flashcardProgressFilters,
+        recordUserId: record?.user_id,
+        examId: record?.exam_id,
+        data: flashcardProgressData,
+        loading: flashcardProgressLoading,
+      });
+    }
+  }, [flashcardProgressModalVisible, flashcardProgressFilters, record?.user_id, record?.exam_id, flashcardProgressData, flashcardProgressLoading]);
+
   // 获取学习项目列表
   const allItems = tableProps?.dataSource || [];
   const learningItemIds = [...new Set(allItems.map((item: any) => item.learning_item_id).filter(Boolean))];
@@ -210,9 +386,9 @@ export const StudySessionShow = () => {
   };
 
   return (
-    <Spin
+      <Spin
       spinning={syncLoading}
-      tip="同步题库中，请稍候..."
+      tip={record?.mode && record.mode.toLowerCase() === "flashcard" ? "同步知识点中，请稍候..." : "同步题库中，请稍候..."}
       indicator={antIcon}
       size="large"
       style={{
@@ -248,7 +424,7 @@ export const StudySessionShow = () => {
       <Text strong>学习模式:</Text>
       <Text>
         {
-          [{"label": "\u8003\u8bd5", "value": "exam"}, {"label": "\u7ec3\u4e60", "value": "practice"}, {"label": "\u590d\u4e60", "value": "review"}, {"label": "FlashCard", "value": "flashcard"}].find(opt => opt.value === record?.mode)?.label || record?.mode
+          [{"label": "\u8003\u8bd5", "value": "exam"}, {"label": "\u7ec3\u4e60", "value": "practice"}, {"label": "FlashCard", "value": "flashcard"}].find(opt => opt.value === record?.mode)?.label || record?.mode
         }
       </Text>
       <br />
@@ -270,13 +446,23 @@ export const StudySessionShow = () => {
           <br />
         </>
       )}
-      <Text strong>score:</Text>
-      <Text>
-        {
-          record?.score
-        }
-      </Text>
-      <br />
+      {record?.mode && record.mode.toLowerCase() === "flashcard" ? (
+        <>
+          <Text strong>每日学习数量:</Text>
+          <Text>
+            {record?.daily_new_limit ? `${record.daily_new_limit} 题` : "-"}
+          </Text>
+          <br />
+        </>
+      ) : (
+        <>
+          <Text strong>score:</Text>
+          <Text>
+            {record?.score}
+          </Text>
+          <br />
+        </>
+      )}
 
       <Divider />
 
@@ -285,13 +471,37 @@ export const StudySessionShow = () => {
       <Title level={5} style={{ marginBottom: 16 }}>
         学习记录明细
         <Space style={{ float: "right" }}>
-          <Button 
-            type="primary" 
-            onClick={syncQuestions}
-            loading={syncLoading}
-          >
-            同步题库
-          </Button>
+          {record?.mode && record.mode.toLowerCase() === "flashcard" ? (
+            <>
+              <Button 
+                type="default" 
+                onClick={() => setFlashcardSyncModalVisible(true)}
+              >
+                每日同步任务
+              </Button>
+              <Button 
+                type="default" 
+                onClick={() => setFlashcardProgressModalVisible(true)}
+              >
+                查看学习进度
+              </Button>
+              <Button 
+                type="primary" 
+                onClick={syncKnowledge}
+                loading={syncLoading}
+              >
+                同步知识点
+              </Button>
+            </>
+          ) : (
+            <Button 
+              type="primary" 
+              onClick={syncQuestions}
+              loading={syncLoading}
+            >
+              同步题库
+            </Button>
+          )}
           <CreateButton onClick={() => setModalVisible(true)}>
             新增学习记录明细
           </CreateButton>
@@ -401,6 +611,140 @@ export const StudySessionShow = () => {
             }}
           />
         )}
+      </Modal>
+
+      {/* Flashcard 每日同步任务弹窗 */}
+      <Modal
+        title="Flashcard 每日同步任务"
+        open={flashcardSyncModalVisible}
+        onOk={triggerFlashcardSync}
+        onCancel={() => {
+          setFlashcardSyncModalVisible(false);
+          setSelectedDate(dayjs());
+        }}
+        confirmLoading={flashcardSyncLoading}
+        okText="执行任务"
+        cancelText="取消"
+        width={500}
+      >
+        <div style={{ padding: "20px 0" }}>
+          <p style={{ marginBottom: 16 }}>
+            该任务会为所有 Flashcard 类型的学习记录补充新的知识点到 flashcard_progress。
+          </p>
+          <div>
+            <label style={{ display: "block", marginBottom: 8, fontWeight: 500 }}>
+              选择练习日期：
+            </label>
+            <DatePicker
+              style={{ width: "100%" }}
+              value={selectedDate}
+              onChange={(date) => setSelectedDate(date)}
+              format="YYYY-MM-DD"
+              placeholder="选择日期（默认为今天）"
+            />
+            <p style={{ marginTop: 8, color: "#999", fontSize: 12 }}>
+              提示：选择的日期将用于计算 next_review_date（练习日期 + 1天）
+            </p>
+          </div>
+        </div>
+      </Modal>
+
+      {/* Flashcard 学习进度弹窗 */}
+      <Modal
+        title="Flashcard 学习进度"
+        open={flashcardProgressModalVisible}
+        onCancel={() => setFlashcardProgressModalVisible(false)}
+        footer={[
+          <Button key="close" onClick={() => setFlashcardProgressModalVisible(false)}>
+            关闭
+          </Button>
+        ]}
+        width={1000}
+      >
+        <Table
+          dataSource={flashcardProgressData?.data || []}
+          loading={flashcardProgressLoading}
+          rowKey="id"
+          pagination={{
+            pageSize: 10,
+            total: flashcardProgressData?.total || 0,
+          }}
+          scroll={{ x: 800 }}
+        >
+          <Table.Column
+            dataIndex="session_item_id"
+            title="Session Item ID"
+            width={120}
+          />
+          <Table.Column
+            dataIndex="interval_days"
+            title="复习间隔（天）"
+            width={120}
+            render={(value) => value || "-"}
+          />
+          <Table.Column
+            dataIndex="next_review_date"
+            title="下次复习日期"
+            width={150}
+            render={(value) => {
+              if (!value) return "-";
+              return dayjs(value).format("YYYY-MM-DD");
+            }}
+          />
+          <Table.Column
+            dataIndex="last_rating"
+            title="上次评分"
+            width={100}
+            render={(value) => {
+              if (!value) return "-";
+              const ratingMap: Record<string, { text: string; color: string }> = {
+                again: { text: "重来", color: "red" },
+                good: { text: "良好", color: "green" },
+                easy: { text: "简单", color: "blue" },
+              };
+              const rating = ratingMap[value] || { text: value, color: "default" };
+              return <Tag color={rating.color}>{rating.text}</Tag>;
+            }}
+          />
+          <Table.Column
+            dataIndex="state"
+            title="状态"
+            width={100}
+            render={(value) => {
+              if (!value) return "-";
+              const stateMap: Record<string, { text: string; color: string }> = {
+                learning: { text: "学习中", color: "orange" },
+                review: { text: "复习中", color: "blue" },
+              };
+              const state = stateMap[value] || { text: value, color: "default" };
+              return <Tag color={state.color}>{state.text}</Tag>;
+            }}
+          />
+          <Table.Column
+            dataIndex="review_count"
+            title="复习次数"
+            width={100}
+            render={(value) => value || 0}
+          />
+          <Table.Column
+            dataIndex="last_reviewed_at"
+            title="上次复习时间"
+            width={180}
+            render={(value) => {
+              if (!value) return "-";
+              return dayjs(value).format("YYYY-MM-DD HH:mm:ss");
+            }}
+          />
+          <Table.Column
+            dataIndex="create_time"
+            title="创建时间"
+            width={180}
+            render={(value) => {
+              if (!value) return "-";
+              return dayjs(value).format("YYYY-MM-DD HH:mm:ss");
+            }}
+          />
+        </Table>
       </Modal>
     </Show>
     </Spin>

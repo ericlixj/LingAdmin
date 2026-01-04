@@ -7,15 +7,44 @@ import {
 } from "@refinedev/antd";
 import { Input, Select, Space, Table, DatePicker, Image  } from "antd";
 import dayjs from "dayjs";
+import { useList } from "@refinedev/core";
+import { useMemo } from "react";
 import { getProxyImageUrl } from "../../utils/imageProxy";
 
 export const StudyKnowledgeNodeList = () => {
-  const { tableProps, filters } = useTable({
+  const { tableProps, filters, setFilters } = useTable({
     syncWithLocation: true,
     filters: {
       mode: "server",
     },
   });
+
+  // 调试：打印过滤条件
+  console.log("Current filters:", filters);
+
+  // 获取考试列表
+  const { data: examsData, isLoading: examsLoading } = useList({
+    resource: "studyExam",
+    pagination: { pageSize: 1000 },
+    filters: [{ field: "deleted", operator: "eq", value: false }],
+  });
+
+  // 创建 exam_id 到 exam 名称的映射
+  const examIdToNameMap = useMemo(() => {
+    const map = new Map<number, string>();
+    (examsData?.data || []).forEach((exam: any) => {
+      map.set(exam.id, exam.name || `ID: ${exam.id}`);
+    });
+    return map;
+  }, [examsData?.data]);
+
+  // 考试选项（用于过滤）
+  const examOptions = useMemo(() => {
+    return (examsData?.data || []).map((exam: any) => ({
+      label: exam.name || `ID: ${exam.id}`,
+      value: exam.id,
+    }));
+  }, [examsData?.data]);
 
   return (
     <List>
@@ -24,10 +53,67 @@ export const StudyKnowledgeNodeList = () => {
 
         <Table.Column
           dataIndex="exam_id"
-          title="关联exam的id"
-
+          title="关联exam"
+          filterDropdown={(props) => {
+            // 获取当前选中的值
+            const selectedValue = props.selectedKeys?.[0];
+            
+            // 转换为数字类型，确保与 examOptions 中的 value 类型一致
+            let numericValue: number | undefined = undefined;
+            if (selectedValue !== null && selectedValue !== undefined) {
+              if (typeof selectedValue === 'number') {
+                numericValue = selectedValue;
+              } else if (typeof selectedValue === 'string') {
+                const parsed = Number(selectedValue);
+                numericValue = isNaN(parsed) ? undefined : parsed;
+              }
+            }
+            
+            // 检查值是否在选项中存在
+            const matchingOption = examOptions.find(opt => opt.value === numericValue);
+            const valueExists = !examsLoading && numericValue !== undefined && matchingOption !== undefined;
+            
+            // 调试日志
+            console.log("FilterDropdown Debug:", {
+              selectedValue,
+              numericValue,
+              valueExists,
+              matchingOption,
+              examOptionsLength: examOptions.length,
+              examOptionsSample: examOptions.slice(0, 3),
+            });
+            
+            // 如果值存在，使用该值；否则设为 undefined（这样 Select 会显示 placeholder 而不是原始值）
+            const displayValue = valueExists ? numericValue : undefined;
+            
+            return (
+              <FilterDropdown {...props}>
+                <Select
+                  allowClear
+                  showSearch
+                  placeholder="请选择考试"
+                  style={{ minWidth: 200 }}
+                  options={examOptions}
+                  value={displayValue}
+                  loading={examsLoading}
+                  onChange={(value) => {
+                    // 只设置选中的值，不自动确认查询
+                    props.setSelectedKeys(value !== null && value !== undefined ? [value] : []);
+                  }}
+                  filterOption={(input, option) => {
+                    const label = typeof option?.label === 'string' ? option.label : String(option?.label || '');
+                    return label.toLowerCase().includes(input.toLowerCase());
+                  }}
+                  optionFilterProp="label"
+                />
+              </FilterDropdown>
+            );
+          }}
+          filteredValue={
+            (filters.find((f: any) => f.field === "exam_id")?.value as any[]) || null
+          }       
           render={(value) => {
-            return value;
+            return examIdToNameMap.get(value) || value || "-";
           }}
         />
         <Table.Column
@@ -48,7 +134,7 @@ export const StudyKnowledgeNodeList = () => {
             </FilterDropdown>
           )}
           filteredValue={
-            (filters.find((f) => f.field === "code")?.value as any[]) || null
+            (filters.find((f: any) => f.field === "code")?.value as any[]) || null
           }
 
           render={(value) => {
@@ -72,7 +158,7 @@ export const StudyKnowledgeNodeList = () => {
             </FilterDropdown>
           )}
           filteredValue={
-            (filters.find((f) => f.field === "title")?.value as any[]) || null
+            (filters.find((f: any) => f.field === "title")?.value as any[]) || null
           }
 
           render={(value) => {
@@ -109,7 +195,7 @@ export const StudyKnowledgeNodeList = () => {
             </FilterDropdown>
           )}
           filteredValue={
-            (filters.find((f) => f.field === "importance")?.value as any[]) || null
+            (filters.find((f: any) => f.field === "importance")?.value as any[]) || null
           }
 
           render={(value) => {

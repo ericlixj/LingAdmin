@@ -75,7 +75,13 @@ export const StudySessionEdit = () => {
       if (record.question_count !== null && record.question_count !== undefined) {
         initialValues.question_count = record.question_count;
       }
-      // 如果 score 为 null 或 undefined，设置为 0
+      // 添加 daily_new_limit 字段
+      if (record.daily_new_limit !== null && record.daily_new_limit !== undefined) {
+        initialValues.daily_new_limit = record.daily_new_limit;
+      } else if (record.mode && record.mode.toLowerCase() === "flashcard") {
+        initialValues.daily_new_limit = 10; // flashcard 模式默认值
+      }
+      // 如果 score 为 null 或 undefined，设置为 0（但某些模式不需要）
       if (initialValues.score === null || initialValues.score === undefined) {
         initialValues.score = 0;
       }
@@ -95,7 +101,7 @@ export const StudySessionEdit = () => {
       // 确保 user_id 和 exam_id 是数字
       user_id: typeof values.user_id === 'number' ? values.user_id : Number(values.user_id),
       exam_id: typeof values.exam_id === 'number' ? values.exam_id : Number(values.exam_id),
-      // 如果 score 为空或未定义，默认为 0
+      // score 默认传 0（所有模式都传 0，即使不显示该字段）
       score: values.score !== null && values.score !== undefined ? values.score : 0,
       // 确保 exam_duration 和 question_count 被正确传递（仅在考试模式下）
       exam_duration: selectedMode === "exam" && values.exam_duration !== null && values.exam_duration !== undefined 
@@ -103,6 +109,10 @@ export const StudySessionEdit = () => {
         : (selectedMode === "exam" ? 30 : null),
       question_count: selectedMode === "exam" && values.question_count !== null && values.question_count !== undefined 
         ? values.question_count 
+        : null,
+      // flashcard 模式需要 daily_new_limit
+      daily_new_limit: selectedMode === "flashcard" 
+        ? (values.daily_new_limit !== null && values.daily_new_limit !== undefined ? values.daily_new_limit : 10)
         : null,
     };
     return formProps.onFinish?.(processed);
@@ -172,7 +182,6 @@ export const StudySessionEdit = () => {
             <Select onChange={(value) => setSelectedMode(value)}>
                 <Select.Option value="exam">考试</Select.Option>
                 <Select.Option value="practice">练习</Select.Option>
-                <Select.Option value="review">复习</Select.Option>
                 <Select.Option value="flashcard">FlashCard</Select.Option>
             </Select>
         </Form.Item>
@@ -201,17 +210,44 @@ export const StudySessionEdit = () => {
             </Form.Item>
           </>
         )}
-        <Form.Item
-          name="score"
-          label="score"
-          rules={[
-            { required: true, message: "请输入分数" },
-            { type: "number", message: "必须是数字" }
-          ]}
-          initialValue={0}
-        >
-              <InputNumber style={{ width: "100%" }} min={0} placeholder="分数，默认0" />
-        </Form.Item>
+        {selectedMode === "flashcard" && (
+          <Form.Item
+            name="daily_new_limit"
+            label="每日学习数量"
+            rules={[
+              { required: true, message: "请输入每日学习数量" },
+              { type: "number", message: "必须是数字" },
+              {
+                validator: (_, value) => {
+                  if (value === null || value === undefined) {
+                    return Promise.reject(new Error("请输入每日学习数量"));
+                  }
+                  if (typeof value !== 'number' || value < 1) {
+                    return Promise.reject(new Error("每日学习数量至少为1"));
+                  }
+                  return Promise.resolve();
+                }
+              }
+            ]}
+            initialValue={10}
+          >
+            <InputNumber style={{ width: "100%" }} min={1} placeholder="每天新增学习的FlashCard数量，默认10" />
+          </Form.Item>
+        )}
+        {/* score字段：只在非flashcard、非practice、非exam模式下显示（实际上所有模式都不需要） */}
+        {selectedMode !== "flashcard" && selectedMode !== "practice" && selectedMode !== "exam" && (
+          <Form.Item
+            name="score"
+            label="score"
+            rules={[
+              { required: true, message: "请输入分数" },
+              { type: "number", message: "必须是数字" }
+            ]}
+            initialValue={0}
+          >
+            <InputNumber style={{ width: "100%" }} min={0} placeholder="分数，默认0" />
+          </Form.Item>
+        )}
       </Form>
 
     </Edit>

@@ -457,6 +457,7 @@ async function awardExamPoints(userId, score, sessionId) {
 router.get('/sessions', authenticateToken, async (req, res) => {
   try {
     const userId = req.userId; // 从JWT中获取用户ID
+    const { test_date } = req.query; // 添加 test_date 参数用于测试
     
     const result = await query(
       `SELECT 
@@ -481,19 +482,59 @@ router.get('/sessions', authenticateToken, async (req, res) => {
     const sessionsWithStats = await Promise.all(
       result.rows.map(async (session) => {
         // 获取题目总数
-        const totalResult = await query(
-          `SELECT COUNT(*) as total_count
-           FROM study_session_item ssi
-           INNER JOIN study_learning_item sli ON ssi.learning_item_id = sli.id
-           LEFT JOIN study_question sq ON sli.type = 'question' AND sli.ref_id = sq.id
-           WHERE ssi.session_id = $1 
-             AND ssi.deleted = false 
-             AND sli.deleted = false
-             AND sli.type = 'question'
-             AND sq.id IS NOT NULL
-             AND sq.status = 1`,
-          [session.id]
-        );
+        let totalQuery;
+        if (session.mode && session.mode.toLowerCase() === 'flashcard') {
+          // Flashcard 类型：基于 next_review_date 计算题目数量
+          // 只统计 next_review_date <= today 的记录数量（今天需要学习的内容）
+          // 用于测试时可以传入 test_date，否则使用系统当前日期
+          let today;
+          if (test_date) {
+            today = new Date(test_date);
+            if (isNaN(today.getTime())) {
+              today = new Date(); // 如果 test_date 格式无效，使用系统日期
+            }
+          } else {
+            today = new Date();
+          }
+          today.setHours(0, 0, 0, 0);
+          const todayStr = today.toISOString().split('T')[0]; // 格式：YYYY-MM-DD
+          
+          totalQuery = `
+            SELECT COUNT(*) as total_count
+            FROM study_flashcard_progress sfp
+            WHERE sfp.user_id = $1
+              AND sfp.exam_id = $2
+              AND sfp.deleted = false
+              AND sfp.next_review_date <= $3::date
+          `;
+        } else {
+          // 其他类型：只统计 question 类型
+          totalQuery = `
+            SELECT COUNT(*) as total_count
+            FROM study_session_item ssi
+            INNER JOIN study_learning_item sli ON ssi.learning_item_id = sli.id
+            LEFT JOIN study_question sq ON sli.type = 'question' AND sli.ref_id = sq.id
+            WHERE ssi.session_id = $1 
+              AND ssi.deleted = false 
+              AND sli.deleted = false
+              AND sli.type = 'question'
+              AND sq.id IS NOT NULL
+              AND sq.status = 1
+          `;
+        }
+        
+        // 对于 Flashcard 类型，需要传入 user_id、exam_id 和 today；对于其他类型，传入 session_id
+        let totalParams;
+        if (session.mode && session.mode.toLowerCase() === 'flashcard') {
+          const today = new Date();
+          today.setHours(0, 0, 0, 0);
+          const todayStr = today.toISOString().split('T')[0]; // 格式：YYYY-MM-DD
+          totalParams = [userId, session.exam_id, todayStr];
+        } else {
+          totalParams = [session.id];
+        }
+        
+        const totalResult = await query(totalQuery, totalParams);
         
         // 获取错题数量（只统计已提交且答错的题目，is_correct = 0）
         // 注意：未答题目（is_correct IS NULL）不算错题，重新答对的题目（is_correct = 1）也不算错题

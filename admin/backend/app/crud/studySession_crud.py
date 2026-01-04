@@ -53,7 +53,96 @@ class StudySessionCRUD(BaseCRUD):
         self.session.add(db_obj)
         self.session.commit()
         self.session.refresh(db_obj)
+        
+        # 如果是 FlashCard 模式，自动创建 session_items（不区分大小写）
+        if obj_in.mode and obj_in.mode.lower() == "flashcard" and obj_in.exam_id:
+            self._create_flashcard_session_items(db_obj, obj_in.exam_id)
+        
         return db_obj
+    
+    def _create_flashcard_session_items(self, session_obj: StudySession, exam_id: int):
+        """为 FlashCard 模式的 session 自动创建 session_items，数据来自该 exam 的知识点对应的 learning_item"""
+        from app.models.studyKnowledgeNode import StudyKnowledgeNode
+        from app.models.studyLearningItem import StudyLearningItem
+        from app.models.studySessionItem import StudySessionItem, StudySessionItemCreate
+        from app.crud.studySessionItem_crud import StudySessionItemCRUD
+        
+        logger.info(f"为 FlashCard session 创建 session_items，session_id={session_obj.id}, exam_id={exam_id}")
+        
+        try:
+            # 1. 获取该 exam 下所有有效的知识点
+            knowledge_nodes_stmt = select(StudyKnowledgeNode).where(
+                StudyKnowledgeNode.exam_id == exam_id,
+                StudyKnowledgeNode.deleted == False
+            )
+            knowledge_nodes = self.session.exec(knowledge_nodes_stmt).all()
+            
+            if not knowledge_nodes:
+                logger.warning(f"Exam {exam_id} 下没有找到知识点")
+                return
+            
+            logger.info(f"找到 {len(knowledge_nodes)} 个知识点")
+            
+            # 2. 获取这些知识点对应的 learning_item（type='knowledge'）
+            knowledge_ids = [kn.id for kn in knowledge_nodes]
+            learning_items_stmt = select(StudyLearningItem).where(
+                StudyLearningItem.type == "knowledge",
+                StudyLearningItem.ref_id.in_(knowledge_ids),
+                StudyLearningItem.deleted == False
+            )
+            learning_items = self.session.exec(learning_items_stmt).all()
+            
+            if not learning_items:
+                logger.warning(f"没有找到知识点对应的 learning_item")
+                return
+            
+            logger.info(f"找到 {len(learning_items)} 个知识点对应的 learning_item")
+            
+            # 3. 为每个 learning_item 创建 session_item
+            session_item_crud = StudySessionItemCRUD(self.session, user_id=self.user_id, dept_id=self.dept_id)
+            created_count = 0
+            
+            for learning_item in learning_items:
+                # 检查是否已存在相同的 session_item（避免重复创建）
+                existing_item = self.session.exec(
+                    select(StudySessionItem).where(
+                        StudySessionItem.session_id == session_obj.id,
+                        StudySessionItem.learning_item_id == learning_item.id,
+                        StudySessionItem.deleted == False
+                    )
+                ).first()
+                
+                if existing_item:
+                    logger.debug(f"Session item 已存在: session_id={session_obj.id}, learning_item_id={learning_item.id}")
+                    continue
+                
+                # 创建新的 session_item
+                # 对于 FlashCard 模式，初始创建时设置所有非空字段的默认值
+                session_item_create = StudySessionItemCreate(
+                    session_id=session_obj.id,
+                    learning_item_id=learning_item.id,
+                    is_correct=0,  # 初始状态：未答题
+                    response="",  # 初始状态：未答题，空字符串
+                    time_spent_second=0,  # 初始状态：未开始学习，耗时0秒
+                    creator=str(self.user_id),
+                    dept_id=self.dept_id,
+                )
+                session_item_crud.create(session_item_create)
+                created_count += 1
+                
+                # 每50条提交一次
+                if created_count % 50 == 0:
+                    self.session.commit()
+                    logger.info(f"已创建 {created_count} 个 session_item...")
+            
+            self.session.commit()
+            logger.info(f"FlashCard session_items 创建完成，共创建 {created_count} 个")
+            
+        except Exception as e:
+            logger.error(f"创建 FlashCard session_items 失败: {e}", exc_info=True)
+            self.session.rollback()
+            # 不抛出异常，避免影响 session 的创建
+            logger.warning(f"创建 session_items 失败，但 session 已创建成功")
 
     def update(self, db_obj: StudySession, obj_in: StudySessionUpdate) -> StudySession:
         update_data = obj_in.dict(exclude_unset=True)

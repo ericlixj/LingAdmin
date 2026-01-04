@@ -122,7 +122,7 @@ export const StudySessionList = () => {
                 placeholder="请选择学习模式"
 
                 style={{ minWidth: 150 }}
-                options={ [{"label": "\u8003\u8bd5", "value": "exam"}, {"label": "\u7ec3\u4e60", "value": "practice"}, {"label": "\u590d\u4e60", "value": "review"}, {"label": "FlashCard", "value": "flashcard"}] }
+                options={ [{"label": "\u8003\u8bd5", "value": "exam"}, {"label": "\u7ec3\u4e60", "value": "practice"}, {"label": "FlashCard", "value": "flashcard"}] }
                 value={props.selectedKeys[0]}
                 onChange={(value) =>
                   props.setSelectedKeys(value ? [value] : [])
@@ -136,7 +136,7 @@ export const StudySessionList = () => {
           }
 
           render={(value) => {
-            const option = [{"label": "\u8003\u8bd5", "value": "exam"}, {"label": "\u7ec3\u4e60", "value": "practice"}, {"label": "\u590d\u4e60", "value": "review"}, {"label": "FlashCard", "value": "flashcard"}].find(opt => opt.value === value);
+            const option = [{"label": "\u8003\u8bd5", "value": "exam"}, {"label": "\u7ec3\u4e60", "value": "practice"}, {"label": "FlashCard", "value": "flashcard"}].find(opt => opt.value === value);
             return option ? option.label : value;
           }}
         />
@@ -159,6 +159,18 @@ export const StudySessionList = () => {
           render={(value, record: any) => {
             // 只在考试模式时显示
             if (record.mode === "exam") {
+              return value ? `${value} 题` : "-";
+            }
+            return "-";
+          }}
+        />
+        <Table.Column
+          dataIndex="daily_new_limit"
+          title="每日学习数量"
+          sorter
+          render={(value, record: any) => {
+            // 只在 Flashcard 模式时显示
+            if (record.mode && record.mode.toLowerCase() === "flashcard") {
               return value ? `${value} 题` : "-";
             }
             return "-";

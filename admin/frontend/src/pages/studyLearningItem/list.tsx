@@ -66,6 +66,38 @@ export const StudyLearningItemList = () => {
     }
   };
 
+  // 同步知识点操作
+  const syncKnowledge = async () => {
+    setLoading(true);
+    try {
+      const response = await axiosInstance.post('/studyLearningItem/sync_knowledge');
+      if (response?.data?.success) {
+        notification.success({
+          message: "同步成功",
+          description: response.data.message || `更新 ${response.data.updated_items || 0} 个，新增 ${response.data.new_items || 0} 个，删除 ${response.data.deleted_items || 0} 个知识点到学习资源`,
+          duration: 5,
+        });
+      } else {
+        notification.error({
+          message: "同步失败",
+          description: response?.data?.message || "同步失败",
+          duration: 3,
+        });
+      }
+      // 刷新表格
+      tableQuery.refetch();
+    } catch (error: any) {
+      console.error(error);
+      notification.error({
+        message: "同步失败",
+        description: error.response?.data?.detail || error.message || "同步失败",
+        duration: 5,
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
   // 获取知识点列表
   const { data: knowledgeData } = useList({
     resource: "studyKnowledgeNode",
@@ -119,7 +151,7 @@ export const StudyLearningItemList = () => {
   return (
     <Spin
       spinning={loading}
-      tip="同步题库中，请稍候..."
+      tip="同步中，请稍候..."
       indicator={antIcon}
       size="large"
       style={{
@@ -142,6 +174,9 @@ export const StudyLearningItemList = () => {
             {defaultButtons}
             <Button type="primary" onClick={syncQuestions} style={{ marginLeft: 8 }}>
               同步题库
+            </Button>
+            <Button type="primary" onClick={syncKnowledge} style={{ marginLeft: 8 }}>
+              同步知识点
             </Button>
           </>
         )}

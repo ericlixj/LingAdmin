@@ -59,18 +59,66 @@ class BaseCRUD:
             operator = self._get_query_type(field) or f.get("operator") or "eq"
             value = f.get("value")
 
-            logger.debug(f"Applying filter: {field} {operator} {value}")
+            logger.info(f"Applying filter: field={field}, operator={operator}, value={value}, value_type={type(value)}")
 
             if not hasattr(self.model, field):
                 continue
 
             column = getattr(self.model, field)
 
-            # 尝试获取字段对应Python类型
+            # 尝试获取字段对应Python类型（在处理数组之前）
             try:
                 python_type = column.type.python_type
             except (AttributeError, NotImplementedError):
                 python_type = None
+
+            # 处理数组类型的 value（如 Select 过滤返回的数组）
+            # 如果是单个元素的数组，提取第一个元素
+            if isinstance(value, (list, tuple)):
+                if len(value) == 1:
+                    value = value[0]
+                    # 提取后立即进行类型转换
+                    if python_type == int and not isinstance(value, int):
+                        try:
+                            value = int(value)
+                        except (ValueError, TypeError):
+                            pass
+                elif len(value) == 2:
+                    # 可能是日期范围，先尝试解析
+                    try:
+                        start = self._parse_dayjs_obj(value[0])
+                        end = self._parse_dayjs_obj(value[1])
+                        # 如果两个值都能解析为日期，则作为日期范围处理
+                        if isinstance(start, datetime) and isinstance(end, datetime):
+                            if start:
+                                query = query.where(column >= start)
+                            if end:
+                                query = query.where(column <= end)
+                            continue
+                    except (ValueError, TypeError, AttributeError):
+                        pass
+                    # 如果不是日期范围，则作为 in 查询处理
+                    # 对数组中的值进行类型转换
+                    if python_type == int:
+                        try:
+                            value = [int(v) for v in value]
+                        except (ValueError, TypeError):
+                            pass
+                    query = query.where(column.in_(value))
+                    continue
+                elif len(value) > 2:
+                    # 多个值，使用 in 查询
+                    # 对数组中的值进行类型转换
+                    if python_type == int:
+                        try:
+                            value = [int(v) for v in value]
+                        except (ValueError, TypeError):
+                            pass
+                    query = query.where(column.in_(value))
+                    continue
+                else:
+                    # 空数组，跳过
+                    continue
 
             # 类型转换，避免字符串类型与数据库字段类型不匹配
             if python_type == int and isinstance(value, str) and not isinstance(value, int):
@@ -94,16 +142,6 @@ class BaseCRUD:
                 elif operator == "eq" or operator == "equals" or operator == "equal":
                     query = query.where(column == value)
                 # 你可以按需支持更多operator，如startswith、endswith等
-
-            # 日期范围处理
-            elif isinstance(value, (list, tuple)) and len(value) == 2:
-                start, end = value
-                start = self._parse_dayjs_obj(start)
-                end = self._parse_dayjs_obj(end)
-                if start:
-                    query = query.where(column >= start)
-                if end:
-                    query = query.where(column <= end)
 
             # 其他类型按 eq 处理（包括 boolean、int、float 等）
             else:
