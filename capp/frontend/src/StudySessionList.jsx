@@ -3,6 +3,32 @@ import { useState, useEffect, useMemo } from "react";
 
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:4000";
 
+// Flashcard 状态文字映射函数
+const getFlashcardStateText = (state, lang = "cn") => {
+  if (!state) return "";
+  
+  const stateMap = {
+    cn: {
+      new: "新增",
+      learning: "学习中",
+      review: "复习中"
+    },
+    en: {
+      new: "New",
+      learning: "Learning",
+      review: "Reviewing"
+    },
+    hk: {
+      new: "新增",
+      learning: "學習中",
+      review: "複習中"
+    }
+  };
+  
+  const stateLower = state.toLowerCase();
+  return stateMap[lang]?.[stateLower] || state;
+};
+
 // 练习模式大图标组件
 const PracticeIcon = ({ size = 120, color = "#52c41a" }) => (
   <svg 

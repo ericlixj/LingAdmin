@@ -33,27 +33,34 @@ router.post('/get_today_items', authenticateToken, async (req, res) => {
       });
     }
     
-    // 获取查询日期（用于测试时可以传入 test_date，否则使用系统当前日期）
-    let today;
+    // 获取查询日期：默认使用服务器时间（PST时区），仅在测试时使用 test_date
+    let todayStr;
     if (test_date) {
-      // 如果提供了 test_date，使用该日期（格式：YYYY-MM-DD）
-      today = new Date(test_date);
-      if (isNaN(today.getTime())) {
+      // 测试模式：如果提供了 test_date，直接使用该日期字符串（格式：YYYY-MM-DD）
+      // 验证格式
+      if (!/^\d{4}-\d{2}-\d{2}$/.test(test_date)) {
         return res.status(400).json({
           code: 1,
           message: 'test_date 格式无效，请使用 YYYY-MM-DD 格式',
           data: null
         });
       }
+      todayStr = test_date;
     } else {
-      // 否则使用系统当前日期
-      today = new Date();
+      // 正常模式：使用服务器当前时间（PST时区，UTC-8）
+      // 获取 PST 时区的当前日期
+      const now = new Date();
+      // PST 是 UTC-8，计算 PST 时区的日期
+      // 方法：获取 UTC 时间，减去 8 小时，然后取日期部分
+      const pstOffsetMs = -8 * 60 * 60 * 1000; // PST 是 UTC-8，转换为毫秒
+      const pstTime = new Date(now.getTime() + pstOffsetMs);
+      
+      // 使用 UTC 方法获取日期部分，避免时区转换问题
+      const year = pstTime.getUTCFullYear();
+      const month = String(pstTime.getUTCMonth() + 1).padStart(2, '0');
+      const day = String(pstTime.getUTCDate()).padStart(2, '0');
+      todayStr = `${year}-${month}-${day}`;
     }
-    
-    const year = today.getFullYear();
-    const month = String(today.getMonth() + 1).padStart(2, '0');
-    const day = String(today.getDate()).padStart(2, '0');
-    const todayStr = `${year}-${month}-${day}`;
     const examIdInt = parseInt(exam_id);
     
     console.log(`[Flashcard] 查询日期: ${todayStr}${test_date ? ' (测试模式)' : ''}, 用户ID: ${userId}, Exam ID: ${examIdInt}`);
@@ -218,9 +225,16 @@ router.post('/update_rating/:progress_id', authenticateToken, async (req, res) =
     let newIntervalDays;
     let newState;
     
+    // 状态转换逻辑：
+    // - new（新增，尚未开始学习）-> learning（学习中）
+    // - learning（学习中）-> learning 或 review（根据 interval_days）
+    // - review（复习中）-> learning 或 review（根据 interval_days）
+    // - interval_days >= 7 时，状态为 review（复习中）
+    // - interval_days < 7 时，状态为 learning（学习中）
+    
     if (rating === 'again') {
       newIntervalDays = 1;
-      newState = 'learning';
+      newState = 'learning';  // again 时，interval_days = 1 < 7，所以是 learning
     } else if (rating === 'good') {
       newIntervalDays = progress.interval_days * 2;
       newState = newIntervalDays >= 7 ? 'review' : 'learning';
@@ -228,6 +242,9 @@ router.post('/update_rating/:progress_id', authenticateToken, async (req, res) =
       newIntervalDays = progress.interval_days * 3;
       newState = newIntervalDays >= 7 ? 'review' : 'learning';
     }
+    
+    // 如果当前状态是 "new"（新增，尚未开始学习），用户学习后应该变为 "learning" 或 "review"
+    // 但上面的逻辑已经根据 interval_days 设置了正确的状态，所以这里不需要特殊处理
     
     const nextReviewDate = new Date(today);
     nextReviewDate.setDate(nextReviewDate.getDate() + newIntervalDays);

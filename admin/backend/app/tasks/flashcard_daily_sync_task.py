@@ -50,7 +50,7 @@ def flashcard_daily_sync_task(practice_date: date = None):
        - 获取该用户已创建 progress 的 session_item_id 集合（针对该 exam_id）
        - 从该 session 的 session_item 中，找出未学习的（不在已创建 progress 集合中的）
        - 按照 daily_new_limit 限制，创建新的 flashcard_progress 记录
-       - 新记录的初始值：interval_days = 1, next_review_date = practice_date（传入的日期），state = "learning"
+       - 新记录的初始值：interval_days = 1, next_review_date = practice_date（传入的日期），state = "new"（新增，尚未开始学习）
     
     重要说明：
     - 定时任务只检查「是否已存在 progress」，不检查 next_review_date 或 create_time
@@ -143,36 +143,38 @@ def flashcard_daily_sync_task(practice_date: date = None):
                     # - 不改已有 progress
                     # - 只看「是否已存在 progress」
                     # 但是需要检查每日数量限制：不能超过session中设定的每日学习数量
+                    # 限制条件：next_review_date == practice_date 且 state='new'（新增）的数量不能超过 daily_new_limit
                     
-                    # 检查今天（基于practice_date）已经创建了多少个progress
+                    # 检查今天（基于practice_date）且 state='new'（新增）的记录数量
                     # 用于限制每日创建数量，不能超过daily_new_limit
-                    today_created_count = session.exec(
+                    new_state_count = session.exec(
                         select(func.count(StudyFlashcardProgress.id)).where(
                             and_(
                                 StudyFlashcardProgress.user_id == user_id,
                                 StudyFlashcardProgress.exam_id == exam_id,
                                 StudyFlashcardProgress.deleted == False,
-                                StudyFlashcardProgress.next_review_date == practice_date
+                                StudyFlashcardProgress.next_review_date == practice_date,  # 日期条件
+                                StudyFlashcardProgress.state == "new"  # 只统计 state='new'（新增）的数量
                             )
                         )
                     ).one()
                     
                     logger.info(
-                        f"User {user_id}, Exam {exam_id}: Today ({practice_date}) already created {today_created_count} progress records, "
+                        f"User {user_id}, Exam {exam_id}: Today ({practice_date}) state='new' (新增) count: {new_state_count}, "
                         f"daily limit: {daily_new_limit}"
                     )
                     
-                    # 如果今天已经创建的数量 >= daily_new_limit，不再创建新的
-                    if today_created_count >= daily_new_limit:
+                    # 如果 state='new'（新增）的数量 >= daily_new_limit，不再创建新的
+                    if new_state_count >= daily_new_limit:
                         logger.info(
-                            f"Skipping session {session_obj.id}: Already reached daily limit "
-                            f"({today_created_count}/{daily_new_limit}) for {practice_date}"
+                            f"Skipping session {session_obj.id}: Already reached daily limit for state='new' "
+                            f"({new_state_count}/{daily_new_limit}) on {practice_date}"
                         )
                         total_sessions_processed += 1
                         continue
                     
                     # 计算还可以创建的数量
-                    remaining_limit = daily_new_limit - today_created_count
+                    remaining_limit = daily_new_limit - new_state_count
                     logger.info(
                         f"Session {session_obj.id}: Can create {remaining_limit} more progress records today "
                         f"(remaining: {remaining_limit}/{daily_new_limit})"
@@ -236,22 +238,23 @@ def flashcard_daily_sync_task(practice_date: date = None):
                     created_count = 0
                     skipped_count = 0
                     for session_item in session_items:
-                        # 在循环中再次检查今天已创建的数量，确保不超过每日限制
-                        current_today_count = session.exec(
+                        # 在循环中再次检查今天且 state='new'（新增）的数量，确保不超过每日限制
+                        current_new_state_count = session.exec(
                             select(func.count(StudyFlashcardProgress.id)).where(
                                 and_(
                                     StudyFlashcardProgress.user_id == user_id,
                                     StudyFlashcardProgress.exam_id == exam_id,
                                     StudyFlashcardProgress.deleted == False,
-                                    StudyFlashcardProgress.next_review_date == practice_date
+                                    StudyFlashcardProgress.next_review_date == practice_date,  # 日期条件
+                                    StudyFlashcardProgress.state == "new"  # 只统计 state='new'（新增）的数量
                                 )
                             )
                         ).one()
                         
-                        if current_today_count >= daily_new_limit:
+                        if current_new_state_count >= daily_new_limit:
                             logger.info(
-                                f"Reached daily limit ({current_today_count}/{daily_new_limit}) for user {user_id}, exam {exam_id} "
-                                f"on {practice_date}, stopping creation"
+                                f"Reached daily limit for state='new' ({current_new_state_count}/{daily_new_limit}) "
+                                f"for user {user_id}, exam {exam_id} on {practice_date}, stopping creation"
                             )
                             break  # 跳出循环，不再创建
                         
@@ -270,13 +273,14 @@ def flashcard_daily_sync_task(practice_date: date = None):
                             # 创建新的 progress 记录
                             # next_review_date 设置为传入的 practice_date（当天），而不是 practice_date + 1
                             # 这样新创建的记录会在当天就可以被学习
+                            # state 设置为 "new"，代表新增，尚未开始学习
                             progress_create = StudyFlashcardProgressCreate(
                                 user_id=user_id,
                                 session_item_id=session_item.id,
                                 exam_id=exam_id,
                                 interval_days=1,
                                 next_review_date=practice_date,  # 设置为当天，而不是 practice_date + 1
-                                state="learning",
+                                state="new",  # 新增状态，尚未开始学习
                                 creator=str(user_id),
                                 dept_id=session_obj.dept_id or 0,
                             )

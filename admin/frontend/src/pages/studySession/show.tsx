@@ -738,16 +738,17 @@ export const StudySessionShow = () => {
             render={(value) => {
               if (!value) return "-";
               const stateMap: Record<string, { text: string; color: string }> = {
+                new: { text: "新增", color: "green" },
                 learning: { text: "学习中", color: "orange" },
                 review: { text: "复习中", color: "blue" },
               };
-              const state = stateMap[value] || { text: value, color: "default" };
+              const state = stateMap[value.toLowerCase()] || { text: value, color: "default" };
               return <Tag color={state.color}>{state.text}</Tag>;
             }}
           />
           <Table.Column
             dataIndex="review_count"
-            title="复习次数"
+            title="学习次数"
             width={100}
             render={(value) => value || 0}
           />
