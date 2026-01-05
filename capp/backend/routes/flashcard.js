@@ -115,7 +115,7 @@ router.post('/get_today_items', authenticateToken, async (req, res) => {
       if (learningItem.type === 'knowledge') {
         // 知识点
         const knowledgeResult = await query(
-          `SELECT id, title, description, code
+          `SELECT id, title, description, code, image_url
            FROM study_knowledge_node
            WHERE id = $1 AND deleted = false`,
           [learningItem.ref_id]
@@ -128,12 +128,13 @@ router.post('/get_today_items', authenticateToken, async (req, res) => {
             title: knowledge.title,
             description: knowledge.description,
             code: knowledge.code,
+            image_url: knowledge.image_url,
           };
         }
       } else if (learningItem.type === 'question') {
         // 题目
         const questionResult = await query(
-          `SELECT id, stem, options
+          `SELECT id, stem, options, image_url
            FROM study_question
            WHERE id = $1 AND status = 1 AND deleted = false`,
           [learningItem.ref_id]
@@ -145,6 +146,7 @@ router.post('/get_today_items', authenticateToken, async (req, res) => {
             id: question.id,
             stem: question.stem,
             options: question.options,
+            image_url: question.image_url,
           };
         }
       }

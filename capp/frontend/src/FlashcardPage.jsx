@@ -343,6 +343,28 @@ function FlashcardPage({ sessionId, lang, onBack }) {
             }}>
               {content.title || content.code || ""}
             </h2>
+            {/* 显示图片（front text 部分） */}
+            {content.image_url && (
+              <div style={{
+                marginBottom: "1rem",
+                textAlign: "center",
+              }}>
+                <img
+                  src={getProxyImageUrl(content.image_url)}
+                  alt={content.title || content.code || ""}
+                  style={{
+                    maxWidth: "100%",
+                    maxHeight: isMobile ? "200px" : "300px",
+                    objectFit: "contain",
+                    borderRadius: "8px",
+                    boxShadow: theme.shadow,
+                  }}
+                  onError={(e) => {
+                    e.target.style.display = "none";
+                  }}
+                />
+              </div>
+            )}
             {showAnswer && (
               <div style={{
                 marginTop: "1rem",
@@ -365,6 +387,29 @@ function FlashcardPage({ sessionId, lang, onBack }) {
             whiteSpace: "pre-wrap",
           }}>
             {content.stem || ""}
+            {/* 显示图片（front text 部分） */}
+            {content.image_url && (
+              <div style={{
+                marginTop: "1rem",
+                marginBottom: "1rem",
+                textAlign: "center",
+              }}>
+                <img
+                  src={getProxyImageUrl(content.image_url)}
+                  alt="题目图片"
+                  style={{
+                    maxWidth: "100%",
+                    maxHeight: isMobile ? "200px" : "300px",
+                    objectFit: "contain",
+                    borderRadius: "8px",
+                    boxShadow: theme.shadow,
+                  }}
+                  onError={(e) => {
+                    e.target.style.display = "none";
+                  }}
+                />
+              </div>
+            )}
             {showAnswer && content.options && (
               <div style={{
                 marginTop: "1rem",
