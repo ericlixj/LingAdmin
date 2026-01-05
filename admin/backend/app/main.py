@@ -127,10 +127,15 @@ def start_scheduler():
             logger.info("IYF cron jobs disabled")
         
         # ==================== Flashcard 学习任务 ====================
-        # 每日凌晨 0:10 执行，为所有 Flashcard 类型的学习记录补充新的知识点
+        # 每日凌晨 1:00 执行，为所有 Flashcard 类型的学习记录补充新的知识点
+        def run_flashcard_sync_task():
+            """包装函数，在任务执行时传递当前日期"""
+            from datetime import date
+            flashcard_daily_sync_task(date.today())
+        
         scheduler.add_job(
-            flashcard_daily_sync_task,
-            trigger=CronTrigger.from_crontab("10 0 * * *"),  # 每日 0:10 执行
+            run_flashcard_sync_task,
+            trigger=CronTrigger.from_crontab("0 1 * * *"),  # 每日 1:00 执行
             id='flashcard_daily_sync_task',
             name='Flashcard Daily Sync Task',
             replace_existing=True,
@@ -139,7 +144,7 @@ def start_scheduler():
             misfire_grace_time=300,
         )
         logger.info("Flashcard daily sync task enabled:")
-        logger.info("  - Cron: 10 0 * * * (daily at 00:10)")
+        logger.info("  - Cron: 0 1 * * * (daily at 01:00)")
         
         scheduler.start()
         logger.info(f"Scheduler started (timezone: {settings.GASBUDDY_SCHEDULER_TIMEZONE})")

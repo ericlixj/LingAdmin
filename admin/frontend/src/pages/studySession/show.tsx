@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useEffect } from "react";
 import { Show, useTable, CreateButton, FilterDropdown } from "@refinedev/antd";
-import { useShow, useDelete, useList, useMany, useGetIdentity } from "@refinedev/core";
+import { useShow, useDelete, useList, useMany, useGetIdentity, useOne } from "@refinedev/core";
 import {
   Typography,
   Divider,
@@ -40,6 +40,31 @@ export const StudySessionShow = () => {
   
   // 获取当前用户信息
   const { data: currentUser } = useGetIdentity();
+
+  // 获取用户信息（通过 user_id）
+  const { data: userData } = useOne({
+    resource: "user",
+    id: record?.user_id,
+    queryOptions: {
+      enabled: !!record?.user_id,
+    },
+  });
+  const user = userData?.data;
+  console.log("user data:", user);
+  console.log("userData:", userData);
+  console.log("record?.user_id:", record?.user_id);
+
+  // 获取考试信息（通过 exam_id）
+  const { data: examData } = useOne({
+    resource: "studyExam",
+    id: record?.exam_id,
+    queryOptions: {
+      enabled: !!record?.exam_id,
+    },
+  });
+  const exam = examData?.data;
+  console.log("exam data:", exam);
+  console.log("examData:", examData);
 
   const antIcon = <LoadingOutlined style={{ fontSize: 48 }} spin />;
 
@@ -407,17 +432,17 @@ export const StudySessionShow = () => {
     >
       <Show isLoading={isLoading}>
       {/* 主表字段渲染 */}
-      <Text strong>user_id:</Text>
+      <Text strong>用户:</Text>
       <Text>
         {
-          record?.user_id
+          user?.full_name || user?.email || record?.user_id || "-"
         }
       </Text>
       <br />
-      <Text strong>exam_id:</Text>
+      <Text strong>考试:</Text>
       <Text>
         {
-          record?.exam_id
+          exam?.name || record?.exam_id || "-"
         }
       </Text>
       <br />
@@ -454,7 +479,7 @@ export const StudySessionShow = () => {
           </Text>
           <br />
         </>
-      ) : (
+      ) : record?.mode === "exam" ? (
         <>
           <Text strong>score:</Text>
           <Text>
@@ -462,7 +487,7 @@ export const StudySessionShow = () => {
           </Text>
           <br />
         </>
-      )}
+      ) : null}
 
       <Divider />
 

@@ -1,6 +1,6 @@
 """
 Flashcard 每日定时同步任务
-每日凌晨 0:10 执行，为所有 Flashcard 类型的学习记录补充新的知识点到 flashcard_progress
+每日凌晨 1:00 执行，为所有 Flashcard 类型的学习记录补充新的知识点到 flashcard_progress
 """
 import logging
 from datetime import date, timedelta
