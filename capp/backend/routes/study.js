@@ -2479,11 +2479,30 @@ router.post('/sessions/:id/submit-exam', authenticateToken, async (req, res) => 
     const questions = questionsResult.rows;
     let correctCount = 0;
     let totalCount = questions.length;
+    
+    console.log(`[submit-exam] 查询到 ${totalCount} 道题目`);
+    if (totalCount === 0) {
+      console.error(`[submit-exam] 警告：没有找到任何题目！session_id=${sessionId}`);
+      return res.status(400).json({
+        code: 1,
+        message: '没有找到任何题目，无法评分',
+        data: null
+      });
+    }
+
+    console.log(`[submit-exam] 开始评分：totalCount=${totalCount}`);
+    console.log(`[submit-exam] 提交的 answers 对象 keys (类型):`, Object.keys(answers || {}).map(k => `${k} (${typeof k})`));
+    console.log(`[submit-exam] 题目列表 question_ids (类型):`, questions.map(q => `${q.question_id} (${typeof q.question_id})`));
 
     // 比对答案并更新数据库
     // 注意：未答题（userAnswer 为 null 或 undefined）应该被标记为错题（is_correct = 0）
     for (const question of questions) {
-      const userAnswerRaw = answers[question.question_id];
+      // 确保 question_id 的类型匹配：尝试数字和字符串两种形式
+      const questionIdNum = question.question_id;
+      const questionIdStr = String(question.question_id);
+      const userAnswerRaw = answers[questionIdNum] !== undefined ? answers[questionIdNum] : 
+                            answers[questionIdStr] !== undefined ? answers[questionIdStr] : 
+                            undefined;
       
       // 确保 userAnswer 永远不为 null 或 undefined
       // 如果 userAnswerRaw 为 null、undefined、空字符串或其他 falsy 值，都使用空字符串
@@ -2494,9 +2513,11 @@ router.post('/sessions/:id/submit-exam', authenticateToken, async (req, res) => 
       
       // 双重检查：确保 userAnswer 不是 null 或 undefined
       if (userAnswer === null || userAnswer === undefined) {
-        console.warn(`[submit-exam] 警告：userAnswer 仍为 null/undefined，question_id=${question.question_id}, 强制设置为空字符串`);
+        console.warn(`[submit-exam] 警告：userAnswer 仍为 null/undefined，question_id=${question.question_id} (num: ${questionIdNum}, str: ${questionIdStr}), 强制设置为空字符串`);
         userAnswer = '';
       }
+      
+      console.log(`[submit-exam] 题目 ${question.question_id}: userAnswerRaw=${userAnswerRaw}, userAnswer="${userAnswer}", answers中是否有该key: num=${questionIdNum in (answers || {})}, str=${questionIdStr in (answers || {})}`);
       
       const correctAnswer = question.correct_answer;
       
@@ -2515,7 +2536,10 @@ router.post('/sessions/:id/submit-exam', authenticateToken, async (req, res) => 
 
       // 判断是否正确
       // 如果 userAnswer 为空字符串，说明未答题，应该标记为错题（is_correct = 0）
-      const isCorrect = userAnswer && correctAnswers.includes(String(userAnswer).toUpperCase().trim()) ? 1 : 0;
+      const userAnswerUpper = userAnswer ? String(userAnswer).toUpperCase().trim() : '';
+      const isCorrect = userAnswerUpper && correctAnswers.includes(userAnswerUpper) ? 1 : 0;
+      
+      console.log(`[submit-exam] 题目 ${question.question_id}: correctAnswers=${JSON.stringify(correctAnswers)}, userAnswerUpper="${userAnswerUpper}", isCorrect=${isCorrect}`);
       
       if (isCorrect) {
         correctCount++;
@@ -2537,6 +2561,8 @@ router.post('/sessions/:id/submit-exam', authenticateToken, async (req, res) => 
 
     // 计算分数（百分比）
     const score = totalCount > 0 ? Math.round((correctCount / totalCount) * 100) : 0;
+    
+    console.log(`[submit-exam] 评分完成：correctCount=${correctCount}, totalCount=${totalCount}, score=${score}`);
 
     // 更新session的分数（exam_duration 是考试设置的时长，不需要修改）
     await query(

@@ -4,6 +4,105 @@ import { getProxyImageUrl } from "./utils/imageProxy";
 
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:4000";
 
+// HTML清理函数：保留安全的HTML标签，移除危险的脚本和事件
+const sanitizeHtml = (html) => {
+  if (!html) return "";
+  
+  // 创建一个临时div来解析HTML
+  const tempDiv = document.createElement("div");
+  tempDiv.innerHTML = html;
+  
+  // 允许的标签列表
+  const allowedTags = [
+    'p', 'br', 'strong', 'em', 'u', 'b', 'i', 'span', 'div',
+    'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
+    'ul', 'ol', 'li',
+    'blockquote', 'pre', 'code',
+    'a', 'img',
+    'table', 'thead', 'tbody', 'tr', 'th', 'td'
+  ];
+  
+  // 允许的属性
+  const allowedAttributes = ['href', 'src', 'alt', 'title', 'class', 'style'];
+  
+  // 递归清理节点
+  const cleanNode = (node) => {
+    if (node.nodeType === Node.TEXT_NODE) {
+      return node.cloneNode(true);
+    }
+    
+    if (node.nodeType === Node.ELEMENT_NODE) {
+      const tagName = node.tagName.toLowerCase();
+      
+      // 如果是不允许的标签，只保留文本内容
+      if (!allowedTags.includes(tagName)) {
+        const textNode = document.createTextNode(node.textContent || '');
+        return textNode;
+      }
+      
+      // 创建新节点
+      const newNode = document.createElement(tagName);
+      
+      // 复制允许的属性
+      Array.from(node.attributes).forEach(attr => {
+        const attrName = attr.name.toLowerCase();
+        if (allowedAttributes.includes(attrName)) {
+          // 对于style属性，进行额外清理
+          if (attrName === 'style') {
+            // 只保留安全的CSS属性
+            const safeStyles = ['color', 'font-size', 'font-weight', 'text-align', 
+                              'margin', 'padding', 'line-height', 'background-color'];
+            const styleValue = attr.value;
+            const cleanedStyles = styleValue.split(';')
+              .filter(style => {
+                const prop = style.split(':')[0].trim().toLowerCase();
+                return safeStyles.some(safe => prop.includes(safe));
+              })
+              .join(';');
+            if (cleanedStyles) {
+              newNode.setAttribute('style', cleanedStyles);
+            }
+          } else if (attrName === 'href' || attrName === 'src') {
+            // 确保链接是安全的（只允许http/https）
+            const url = attr.value;
+            if (url.startsWith('http://') || url.startsWith('https://') || url.startsWith('/')) {
+              newNode.setAttribute(attrName, url);
+            }
+          } else {
+            newNode.setAttribute(attrName, attr.value);
+          }
+        }
+      });
+      
+      // 递归清理子节点
+      Array.from(node.childNodes).forEach(child => {
+        const cleanedChild = cleanNode(child);
+        if (cleanedChild) {
+          newNode.appendChild(cleanedChild);
+        }
+      });
+      
+      return newNode;
+    }
+    
+    return null;
+  };
+  
+  // 清理所有节点
+  const fragment = document.createDocumentFragment();
+  Array.from(tempDiv.childNodes).forEach(node => {
+    const cleaned = cleanNode(node);
+    if (cleaned) {
+      fragment.appendChild(cleaned);
+    }
+  });
+  
+  // 将清理后的内容转换为HTML字符串
+  const cleanedDiv = document.createElement("div");
+  cleanedDiv.appendChild(fragment);
+  return cleanedDiv.innerHTML;
+};
+
 // Flashcard 状态文字映射函数
 const getFlashcardStateText = (state, lang = "cn") => {
   if (!state) return "";
@@ -300,12 +399,100 @@ function FlashcardPage({ sessionId, lang, onBack }) {
   const isKnowledge = currentItem?.type === "knowledge";
 
   return (
-    <div style={{
-      backgroundColor: theme.bg,
-      minHeight: "100vh",
-      padding: isMobile ? "1rem 0.75rem" : "1.5rem",
-      color: theme.text,
-    }}>
+    <>
+      {/* 添加富文本样式 */}
+      <style>{`
+        .flashcard-description {
+          word-wrap: break-word;
+          overflow-wrap: break-word;
+        }
+        .flashcard-description p {
+          margin: 0.5rem 0;
+        }
+        .flashcard-description p:first-child {
+          margin-top: 0;
+        }
+        .flashcard-description p:last-child {
+          margin-bottom: 0;
+        }
+        .flashcard-description ul,
+        .flashcard-description ol {
+          margin: 0.5rem 0;
+          padding-left: 1.5rem;
+        }
+        .flashcard-description li {
+          margin: 0.25rem 0;
+        }
+        .flashcard-description h1,
+        .flashcard-description h2,
+        .flashcard-description h3,
+        .flashcard-description h4,
+        .flashcard-description h5,
+        .flashcard-description h6 {
+          margin: 0.75rem 0 0.5rem 0;
+          font-weight: 600;
+        }
+        .flashcard-description h1:first-child,
+        .flashcard-description h2:first-child,
+        .flashcard-description h3:first-child,
+        .flashcard-description h4:first-child,
+        .flashcard-description h5:first-child,
+        .flashcard-description h6:first-child {
+          margin-top: 0;
+        }
+        .flashcard-description img {
+          max-width: 100%;
+          height: auto;
+          border-radius: 8px;
+          margin: 0.5rem 0;
+        }
+        .flashcard-description a {
+          color: ${isDarkMode ? "#7c3aed" : "#722ed1"};
+          text-decoration: underline;
+        }
+        .flashcard-description a:hover {
+          opacity: 0.8;
+        }
+        .flashcard-description table {
+          width: 100%;
+          border-collapse: collapse;
+          margin: 0.5rem 0;
+        }
+        .flashcard-description th,
+        .flashcard-description td {
+          padding: 0.5rem;
+          border: 1px solid ${theme.border};
+        }
+        .flashcard-description blockquote {
+          margin: 0.5rem 0;
+          padding-left: 1rem;
+          border-left: 3px solid ${theme.border};
+          font-style: italic;
+        }
+        .flashcard-description code {
+          background-color: ${isDarkMode ? "#3a3a3a" : "#f5f5f5"};
+          padding: 0.2rem 0.4rem;
+          border-radius: 4px;
+          font-family: monospace;
+          font-size: 0.9em;
+        }
+        .flashcard-description pre {
+          background-color: ${isDarkMode ? "#3a3a3a" : "#f5f5f5"};
+          padding: 1rem;
+          border-radius: 8px;
+          overflow-x: auto;
+        }
+        .flashcard-description pre code {
+          background-color: transparent;
+          padding: 0;
+        }
+      `}</style>
+      <div style={{
+        backgroundColor: theme.bg,
+        minHeight: "100vh",
+        padding: isMobile ? "1rem 0.75rem" : "1.5rem",
+        color: theme.text,
+      }}>
       {/* 头部 */}
       <div style={{
         display: "flex",
@@ -392,17 +579,20 @@ function FlashcardPage({ sessionId, lang, onBack }) {
               </div>
             )}
             {showAnswer && (
-              <div style={{
-                marginTop: "1rem",
-                paddingTop: "1rem",
-                borderTop: `1px solid ${theme.border}`,
-                fontSize: isMobile ? "0.95rem" : "1rem",
-                lineHeight: 1.6,
-                color: theme.text,
-                whiteSpace: "pre-wrap",
-              }}>
-                {content.description || ""}
-              </div>
+              <div 
+                style={{
+                  marginTop: "1rem",
+                  paddingTop: "1rem",
+                  borderTop: `1px solid ${theme.border}`,
+                  fontSize: isMobile ? "0.95rem" : "1rem",
+                  lineHeight: 1.6,
+                  color: theme.text,
+                }}
+                className="flashcard-description"
+                dangerouslySetInnerHTML={{ 
+                  __html: sanitizeHtml(content.description || "") 
+                }}
+              />
             )}
           </>
         ) : (
@@ -531,7 +721,8 @@ function FlashcardPage({ sessionId, lang, onBack }) {
           </button>
         </div>
       )}
-    </div>
+      </div>
+    </>
   );
 }
 
