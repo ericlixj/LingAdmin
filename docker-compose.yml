@@ -111,7 +111,10 @@ services:
       - SENTRY_DSN=${SENTRY_DSN}
       # 禁用调度器，由专门的 admin-scheduler 容器运行
       - RUN_SCHEDULER=false
-
+    ulimits:
+      nofile:
+        soft: 65536
+        hard: 65536
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8000/api/v1/health_check/"]
       interval: 10s
@@ -173,6 +176,10 @@ services:
       # GasBuddy 配置
       - GASBUDDY_CRON_ENABLED=${GASBUDDY_CRON_ENABLED:-true}
       - GASBUDDY_CRON_EXPRESSION=${GASBUDDY_CRON_EXPRESSION:-0 17 * * *}
+    ulimits:
+      nofile:
+        soft: 65536
+        hard: 65536
 
   # 2Admin frontend (Refine React, admin/frontend)
   admin-frontend:

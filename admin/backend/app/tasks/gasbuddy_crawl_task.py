@@ -476,6 +476,9 @@ def _run_crawl_in_thread(postcodes, collected_items_ref):
     
     logger.info(f"[Task] Starting crawl in thread for {len(postcodes)} postcodes")
     
+    process = None
+    session = None
+    
     try:
         # 设置全局引用，让 Pipeline 可以访问
         global _collected_items
@@ -513,7 +516,8 @@ def _run_crawl_in_thread(postcodes, collected_items_ref):
             return
         
         # 创建 session 和 processor
-        with Session(engine) as session:
+        session = Session(engine)
+        try:
             processor = GasBuddyDataProcessor(session, user_id=1, dept_id=0)
             
             # 处理每个 item
@@ -524,6 +528,10 @@ def _run_crawl_in_thread(postcodes, collected_items_ref):
                 except Exception as e:
                     logger.error(f"[Task] Error processing item {idx}: {e}", exc_info=True)
                     session.rollback()
+        finally:
+            # 确保 session 正确关闭
+            if session:
+                session.close()
         
         # 数据入库完成
         logger.info("=" * 60)
@@ -552,6 +560,34 @@ def _run_crawl_in_thread(postcodes, collected_items_ref):
     except Exception as e:
         logger.error(f"Error in crawl thread: {e}", exc_info=True)
         raise
+    finally:
+        # 确保所有资源都被正确关闭
+        try:
+            # 关闭 CrawlerProcess（如果存在）
+            if process is not None:
+                try:
+                    # 尝试停止 reactor（如果还在运行）
+                    from twisted.internet import reactor
+                    if reactor.running:
+                        logger.info("[Task] Stopping reactor...")
+                        reactor.stop()
+                except Exception as e:
+                    logger.debug(f"[Task] Reactor already stopped or error stopping: {e}")
+            
+            # 确保数据库连接池中的连接被关闭
+            try:
+                engine.dispose()
+                logger.debug("[Task] Database engine disposed")
+            except Exception as e:
+                logger.debug(f"[Task] Error disposing engine: {e}")
+            
+            # 清理 Scrapy 和 Twisted 的资源
+            import gc
+            gc.collect()
+            logger.debug("[Task] Garbage collection completed")
+            
+        except Exception as cleanup_error:
+            logger.error(f"[Task] Error during cleanup: {cleanup_error}", exc_info=True)
 
 
 def gasbuddy_crawl_task():
